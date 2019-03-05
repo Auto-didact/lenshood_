@@ -29,8 +29,7 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            theme="dark"
-            style={{ lineHeight: '64px' }}
+            style={{ lineHeight: '60px' }}
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
@@ -45,8 +44,7 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            theme="dark"
-            style={{ lineHeight: '64px', float: 'right' }}
+            style={{ lineHeight: '60px', float: 'right' }}
           >
             {ref.modules.navItemsRight}
             {__DEV__ && (
