@@ -1,13 +1,36 @@
 @import 'antd';
 
+// Setting Variables
+@primary-color: #00bb98; // primary color for all components
+@secondary-color: #fff; // primary color for all components
+
+// Menu
+@menu-bg: @primary-color;
+@menu-item-color: #fff;
+@menu-item-active-border-width: 3px;
+@menu-highlight-color: @secondary-color;
+
+
+
+
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.nav-link active {
-  color: #000000;
+.ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.ant-menu-horizontal>.ant-menu-item>a {
+  font-size: 1.4em;
+}
+
+.ant-menu-horizontal>.ant-menu-item-selected>a {
+  font-weight: bold;
+  font-size: 1.4em;
 }
 
 .ant-pagination {
@@ -21,3 +44,9 @@
     display: none;
   }
 }
+
+.no-print {
+  background: @primary-color;
+}
+
+// @primary-color: #fff; // primary color for all components
