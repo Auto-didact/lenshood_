@@ -15,7 +15,7 @@ const NavLinkWithI18n = translate('contact')(({ t }: { t: TranslateFunction }) =
 
 export default new ClientModule({
   route: [<Route exact path="/contact" component={Contact} />],
-  navItem: [
+  navItemTest: [
     <MenuItem key="/contact">
       <NavLinkWithI18n />
     </MenuItem>

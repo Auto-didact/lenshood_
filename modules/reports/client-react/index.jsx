@@ -16,7 +16,7 @@ const NavLinkWithI18n = translate('report')(({ t }) => (
 
 export default new ClientModule(reports, {
   route: [<Route exact path="/report" component={Report} />],
-  navItem: [
+  navItemTest: [
     <MenuItem key="/report">
       <NavLinkWithI18n />
     </MenuItem>

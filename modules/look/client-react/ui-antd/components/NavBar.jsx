@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Row, Col } from 'antd';
+import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
+
 import MenuItem from './MenuItem';
+import DropDown from './Dropdown';
+import Avatar from './Avatar';
 
 import settings from '../../../../../settings';
 
@@ -37,6 +41,23 @@ class NavBar extends React.Component {
               </NavLink>
             </MenuItem>
             {ref.modules.navItems}
+
+            {__DEV__ && (
+              <MenuItem>
+                <DropDown type="deployment-unit">
+                  {ref.modules.navItemsTest}
+                  <MenuItem>
+                    <a href="/graphiql">GraphiQL</a>
+                  </MenuItem>
+                </DropDown>
+              </MenuItem>
+            )}
+
+            <IfLoggedIn role="admin">
+              <MenuItem>
+                <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
+              </MenuItem>
+            </IfLoggedIn>
           </Menu>
         </Col>
         <Col span={10}>
@@ -46,12 +67,15 @@ class NavBar extends React.Component {
             mode="horizontal"
             style={{ lineHeight: '60px', float: 'right' }}
           >
-            {ref.modules.navItemsRight}
-            {__DEV__ && (
+            <IfLoggedIn role="admin">
               <MenuItem>
-                <a href="/graphiql">GraphiQL</a>
+                <DropDown content={<Avatar />} noicon>
+                  {ref.modules.navItemsUser}
+                </DropDown>
               </MenuItem>
-            )}
+            </IfLoggedIn>
+
+            {ref.modules.navItemsRight}
           </Menu>
         </Col>
       </Row>

@@ -74,14 +74,14 @@ export default new ClientModule({
     <AuthRoute exact path="/forgot-password" redirectOnLoggedIn redirect="/profile" component={ForgotPassword} />,
     <AuthRoute exact path="/reset-password/:token" redirectOnLoggedIn redirect="/profile" component={ResetPassword} />
   ],
-  navItem: [
+  navItemAdmin: [
     <IfLoggedIn key="/users" role="admin">
       <MenuItem>
         <NavLinkUsersWithI18n />
       </MenuItem>
     </IfLoggedIn>
   ],
-  navItemRight: [
+  navItemUser: [
     <IfLoggedIn key="/profile">
       <MenuItem>
         <NavLink to="/profile" className="nav-link" activeClassName="active">
@@ -93,7 +93,10 @@ export default new ClientModule({
       <MenuItem>
         <LogoutLink />
       </MenuItem>
-    </IfLoggedIn>,
+    </IfLoggedIn>
+  ],
+
+  navItemRight: [
     <IfNotLoggedIn key="/login">
       <MenuItem>
         <NavLinkLoginWithI18n />

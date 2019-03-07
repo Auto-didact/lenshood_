@@ -32,7 +32,3 @@ declare module '@gqlapp/authentication-client-react' {
   const authentication: any;
   export = authentication;
 }
-declare module "*.vue" {
-  import Vue from "vue";
-  export default Vue;
-}
