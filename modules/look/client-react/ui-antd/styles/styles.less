@@ -1,14 +1,15 @@
 @import 'antd';
 
 // Setting Variables
-@primary-color: #00bb98; // primary color for all components
+@primary-color: #23b195; // primary color for all components
 @secondary-color: #fff; // primary color for all components
-
+@tertiary-color: #211f1f;
 // Menu
 @menu-bg: @primary-color;
 @menu-item-color: #fff;
 @menu-item-active-border-width: 3px;
 @menu-highlight-color: @secondary-color;
+@border-radius-base: 3px; // major border radius
 
 
 
@@ -46,7 +47,14 @@
 }
 
 .no-print {
+  background: @tertiary-color;
+  color: @secondary-color;
+}
+
+.header {
   background: @primary-color;
 }
 
-// @primary-color: #fff; // primary color for all components
+#content {
+  background: @secondary-color;
+}
