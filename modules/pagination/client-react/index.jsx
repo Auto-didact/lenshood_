@@ -15,7 +15,7 @@ const NavLinkWithI18n = translate()(({ t }) => (
 
 export default new ClientModule({
   route: [<Route exact path="/pagination" component={PaginationDemo} />],
-  navItem: [
+  navItemTest: [
     <MenuItem key="/pagination">
       <NavLinkWithI18n />
     </MenuItem>

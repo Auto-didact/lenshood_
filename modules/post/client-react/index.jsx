@@ -22,7 +22,7 @@ export default new ClientModule({
     <Route exact path="/post/new" component={PostAdd} />,
     <Route path="/post/:id" component={PostEdit} />
   ],
-  navItem: [
+  navItemTest: [
     <MenuItem key="/posts">
       <NavLinkWithI18n />
     </MenuItem>
