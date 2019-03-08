@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 
 import NavBar from './NavBar';
-import settings from '../../../../../settings';
+import Footer from './Footer';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 class PageLayout extends React.Component {
   render() {
@@ -21,9 +21,8 @@ class PageLayout extends React.Component {
         <Content id="content" style={{ padding: 24 }}>
           {children}
         </Content>
-        <Footer className="no-print" style={{ textAlign: 'center' }}>
-          &copy; {new Date().getFullYear()}. {settings.app.name}.
-        </Footer>
+
+        <Footer />
       </Layout>
     );
   }
