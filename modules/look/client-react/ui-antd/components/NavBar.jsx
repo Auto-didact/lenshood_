@@ -67,7 +67,7 @@ class NavBar extends React.Component {
             mode="horizontal"
             style={{ lineHeight: '60px', float: 'right' }}
           >
-            <IfLoggedIn role="admin">
+            <IfLoggedIn>
               <MenuItem>
                 <DropDown content={<Avatar />} noicon>
                   {ref.modules.navItemsUser}
