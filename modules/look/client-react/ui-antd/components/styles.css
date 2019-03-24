@@ -1,0 +1,19 @@
+.footer a {
+    color: white;
+    margin-right: 3px;
+    padding-right: 3px;
+}
+
+.footer a:hover {
+    color: #aaa;
+    text-decoration: underline;
+}
+
+.iconFooter {
+    color: black;
+    background: white;
+}
+
+.footer h3 {
+    font-weight: bold;
+}
