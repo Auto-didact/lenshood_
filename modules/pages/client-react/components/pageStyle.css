@@ -1,28 +1,31 @@
 /* Mission Page */
-.MissionContainer, .TermsContainer {
-    border: 0.5px solid #ddd;
-    padding: 10px;
-    margin: 0;
-    text-align: justify;
+.MissionContainer,
+.TermsContainer,
+.FAQContainer {
+  border: 0.5px solid #ddd;
+  padding: 10px;
+  margin: 0;
+  text-align: justify;
 }
 
-.MissionContainer h1, .TermsContainer h1 {
-    font-size: 30px;
-    font-weight: 600;
+.MissionContainer h1,
+.TermsContainer h1,
+.FAQContainer h1 {
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .TermsContainer h2 {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-.MissionContainer h2
- {
-    font-size: 25px;
-    font-weight: 600;
+.MissionContainer h2 {
+  font-size: 25px;
+  font-weight: 600;
 }
 
-.MissionContainer h3
- {
-    padding-left: 10px;
-    font-weight: 600;
+.MissionContainer h3, .FAQContainer h3 {
+    padding-top: 10px;
+  padding-left: 10px;
+  font-weight: 600;
 }
