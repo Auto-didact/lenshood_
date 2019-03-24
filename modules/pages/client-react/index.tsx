@@ -28,7 +28,7 @@ export default new ClientModule({
   ],
   localization: [
     {
-      ns: ['mission', 'about-us', 'terms-of-service', 'privacy-rules', 'renting', 'lending', 'faq', 'blog', 'pages'],
+      ns: 'pages',
       resources
     }
   ]

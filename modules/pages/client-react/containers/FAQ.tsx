@@ -13,4 +13,4 @@ class FAQ extends React.Component<PagesProps> {
   }
 }
 
-export default translate('faq')(FAQ);
+export default translate('pages')(FAQ);

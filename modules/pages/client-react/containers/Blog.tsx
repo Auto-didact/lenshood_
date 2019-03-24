@@ -13,4 +13,4 @@ class Blog extends React.Component<PagesProps> {
   }
 }
 
-export default translate('blog')(Blog);
+export default translate('pages')(Blog);

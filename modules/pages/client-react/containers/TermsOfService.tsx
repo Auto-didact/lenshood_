@@ -13,4 +13,4 @@ class TermsOfService extends React.Component<PagesProps> {
   }
 }
 
-export default translate('terms-of-service')(TermsOfService);
+export default translate('pages')(TermsOfService);

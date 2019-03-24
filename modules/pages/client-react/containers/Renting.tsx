@@ -13,4 +13,4 @@ class Renting extends React.Component<PagesProps> {
   }
 }
 
-export default translate('renting')(Renting);
+export default translate('pages')(Renting);
