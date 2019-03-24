@@ -16,7 +16,7 @@ export default class Footer extends React.Component {
             <ul>
               <h3>About Lenshood</h3>
               <li>
-                <Link to="localhost:3000/about-us">About us</Link>
+                <Link to="/about-us">About us</Link>
               </li>
               <li>
                 <Link to="/terms-of-service">Terms of Service</Link>
@@ -69,17 +69,17 @@ export default class Footer extends React.Component {
                 <Link to="/blog">Blog</Link>
               </li>
               <li>
-                <a href="https://facebook.com/lenshoodcommunity">
+                <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/lenshoodcommunity">
                   {' '}
                   <Icon theme="filled" type="facebook" />
                 </a>
-                <a href="https://www.linkedin.com/company/wearelenshood">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/wearelenshood">
                   <Icon theme="filled" type="linkedin" />
                 </a>
-                <a href="https://www.instagram.com/we_are_lenshood/">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/we_are_lenshood/">
                   <Icon theme="filled" type="instagram" />
                 </a>
-                <a href="/">
+                <a target="_blank" rel="noopener noreferrer" href="/">
                   <Icon type="twitter" />
                 </a>
               </li>
