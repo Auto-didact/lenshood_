@@ -1,12 +1,17 @@
-.MissionContainer {
+/* Mission Page */
+.MissionContainer, .TermsContainer {
     border: 0.5px solid #ddd;
     padding: 10px;
     margin: 0;
     text-align: justify;
 }
 
-.MissionContainer h1 {
+.MissionContainer h1, .TermsContainer h1 {
     font-size: 30px;
+    font-weight: 600;
+}
+
+.TermsContainer h2 {
     font-weight: 600;
 }
 
