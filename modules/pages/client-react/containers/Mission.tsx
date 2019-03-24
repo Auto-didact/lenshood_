@@ -13,4 +13,4 @@ class Mission extends React.Component<PagesProps> {
   }
 }
 
-export default translate('mission')(Mission);
+export default translate('pages')(Mission);

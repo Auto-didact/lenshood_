@@ -13,4 +13,4 @@ class AboutUs extends React.Component<PagesProps> {
   }
 }
 
-export default translate('about-us')(AboutUs);
+export default translate('pages')(AboutUs);

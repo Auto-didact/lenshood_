@@ -13,4 +13,4 @@ class Lending extends React.Component<PagesProps> {
   }
 }
 
-export default translate('lending')(Lending);
+export default translate('pages')(Lending);
