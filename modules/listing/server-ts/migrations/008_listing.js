@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
         table.string('gear_category');
         table.string('gear_subcategory');
         table.string('description');
-        table.string('content');
         table.timestamps(false, true);
       })
       .createTable('listing_image', table => {
@@ -67,10 +66,10 @@ exports.up = function(knex, Promise) {
           .references('id')
           .inTable('listing')
           .onDelete('CASCADE');
-        table.integer('gear');
-        table.integer('brand');
-        table.integer('model');
-        table.integer('serial');
+        table.string('gear');
+        table.string('brand');
+        table.string('model');
+        table.string('serial');
         table.timestamps(false, true);
       })
       .createTable('review', table => {
