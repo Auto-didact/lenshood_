@@ -1,16 +1,33 @@
 # Entity
-type TypeName {
-  typeName: String!
+type Listing {
+  id: Int!
+  gearCategory: String!
+  gearSubcategory: String!
+  description: String!
+  listingImage: String
+}
+type ListingEdges {
+  node: Listing
+  cursor: Int
+}
+type ListingPageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+type Listings {
+  totalCount: Int
+  edges: [ListingEdges]
+  pageInfo: ListingPageInfo
 }
 
 extend type Query {
-  queryName: TypeName
+  listings(limit: Int, after: Int): Listings
 }
 
-extend type Mutation {
-  mutationName(varName: Int!): TypeName
-}
+# extend type Mutation {
+#   mutationName(varName: Int!): TypeName
+# }
 
-extend type Subscription {
-  subscriptionName: TypeName
-}
+# extend type Subscription {
+#   subscriptionName: TypeName
+# }
