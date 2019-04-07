@@ -51,6 +51,8 @@ export interface Identifier {
   id: number;
 }
 export default class ListingDAO extends Model {
+  private id: any;
+
   static get tableName() {
     return 'listing';
   }
@@ -148,7 +150,7 @@ export default class ListingDAO extends Model {
     return res.id;
   }
 
-  public addListingReviewDAO({ comment, rating, listingId }: ListingReviewDAO) {
+  public addListingReviewDAO({ comment, rating, listingId }: ListingReview) {
     return returnId(knex('listing_review')).insert({ comment, rating, listing_id: listingId });
   }
 
@@ -166,7 +168,7 @@ export default class ListingDAO extends Model {
       .del();
   }
 
-  public editListingReviewDAO({ id, comment, rating }: ListingReviewDAO & Identifier) {
+  public editListingReviewDAO({ id, comment, rating }: ListingReview & Identifier) {
     return knex('listing_review')
       .where('id', '=', id)
       .update({
