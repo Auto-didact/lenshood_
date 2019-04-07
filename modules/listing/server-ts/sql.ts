@@ -34,6 +34,7 @@ export interface Listing {
   gearCategory: string;
   gearSubcategory: string;
   description: string;
+  status: string;
   listingImages: ListingImage[];
   listingDetail: ListingDetail;
   listingDamage: ListingDamage[];

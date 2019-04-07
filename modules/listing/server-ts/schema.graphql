@@ -3,6 +3,7 @@ type Listing {
   gearCategory: String!
   gearSubcategory: String!
   description: String!
+  status: String
   listingImages: [ListingImage]
   listingDetail: ListingDetail
   listingRental: ListingRental
@@ -133,6 +134,7 @@ input AddListingInput {
   gearCategory: String!
   gearSubcategory: String!
   description: String!
+  status: String
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput
@@ -145,6 +147,7 @@ input EditListingInput {
   gearCategory: String!
   gearSubcategory: String!
   description: String!
+  status: String
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput
