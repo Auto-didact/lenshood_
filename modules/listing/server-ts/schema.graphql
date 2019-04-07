@@ -1,10 +1,61 @@
-# Entity
 type Listing {
   id: Int!
   gearCategory: String!
   gearSubcategory: String!
   description: String!
-  listingImage: String
+  listingImages: [ListingImage]
+  listingDetail: ListingDetail
+  listingRental: ListingRental
+  listingContent: ListingContent
+  createdAt: String!
+  updatedAt: String!
+}
+type ListingImage {
+  id: Int!
+  listingId: String!
+  imageUrl: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ListingDetail {
+  id: Int!
+  listingId: String!
+  condition: String!
+  repairHistory: String!
+  age: String!
+  damages: [ListingDamage]
+
+  createdAt: String!
+  updatedAt: String!
+}
+type ListingDamage {
+  id: Int!
+  listingDetailId: String!
+  imageUrl: String!
+  damageDetail: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type ListingRental {
+  id: Int!
+  listingId: String!
+  perDay: String!
+  perWeek: String!
+  perMonth: String!
+  replacementValue: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type ListingContent {
+  id: Int!
+  listingId: String!
+  gear: String!
+  brand: String!
+  model: String!
+  serial: String!
+  createdAt: String!
+  updatedAt: String!
 }
 type ListingEdges {
   node: Listing
@@ -19,15 +70,131 @@ type Listings {
   edges: [ListingEdges]
   pageInfo: ListingPageInfo
 }
+type ListingReview {
+  id: Int!
+  listingId: String!
+  comment: String!
+  rating: String!
+}
 
 extend type Query {
   listings(limit: Int, after: Int): Listings
+  listing(id: Int!): Listing
 }
 
-# extend type Mutation {
-#   mutationName(varName: Int!): TypeName
-# }
+extend type Mutation {
+  # Create new listing
+  addListing(input: AddListingInput!): Listing
+  # Delete a listing
+  deleteListing(id: Int!): Listing
+  # Edit a listing
+  editListing(input: EditListingInput!): Listing
 
-# extend type Subscription {
-#   subscriptionName: TypeName
-# }
+  # Add listingReview to listing
+  addListingReview(input: AddListingReviewInput!): ListingReview
+  # Delete a listingReview
+  deleteListingReview(input: DeleteListingReviewInput!): ListingReview
+  # Edit a listingReview
+  editListingReview(input: EditListingReviewInput!): ListingReview
+}
+
+# Input for addListing Mutation
+input ListingImageInput {
+  id: Int
+  imageUrl: String!
+}
+input ListingDetailInput {
+  id: Int
+  condition: String!
+  repairHistory: String!
+  age: String!
+  damages: [ListingDamageInput]
+}
+input ListingDamageInput {
+  id: Int
+  imageUrl: String!
+  damageDetail: String!
+}
+input ListingRentalInput {
+  id: Int
+  perDay: Int!
+  perWeek: Int!
+  perMonth: Int!
+  replacementValue: Int!
+}
+input ListingContentInput {
+  id: Int
+  gear: String!
+  brand: String!
+  model: String!
+  serial: String!
+}
+input AddListingInput {
+  gearCategory: String!
+  gearSubcategory: String!
+  description: String!
+  listingImages: [ListingImageInput]
+  listingDetail: ListingDetailInput
+  listingRental: ListingRentalInput
+  listingContent: ListingContentInput
+}
+
+# Input for editListing Mutation
+input EditListingInput {
+  id: Int!
+  gearCategory: String!
+  gearSubcategory: String!
+  description: String!
+  listingImages: [ListingImageInput]
+  listingDetail: ListingDetailInput
+  listingRental: ListingRentalInput
+  listingContent: ListingContentInput
+}
+
+# Input for addListingReview Mutation
+input AddListingReviewInput {
+  rating: String!
+  comment: String!
+  # Needed for listingReviewUpdated Subscription filter
+  listingId: Int!
+}
+
+# Input for editListingReview Mutation
+input DeleteListingReviewInput {
+  id: Int!
+  # Needed for listingReviewUpdated Subscription filter
+  listingId: Int!
+}
+
+# Input for deleteListingReview Mutation
+input EditListingReviewInput {
+  id: Int!
+  comment: String!
+  rating: String!
+  # Needed for listingReviewUpdated Subscription filter
+  listingId: Int!
+}
+
+extend type Subscription {
+  # Subscription for when editing a listing
+  listingUpdated(id: Int!): UpdateListingPayload
+  # Subscription for listing list
+  listingsUpdated(endCursor: Int!): UpdateListingPayload
+  # Subscription for listingReviews
+  listingReviewUpdated(listingId: Int!): UpdateListingReviewPayload
+}
+
+# Payload for listingsUpdated Subscription
+type UpdateListingPayload {
+  mutation: String!
+  id: Int!
+  node: Listing
+}
+
+# Payload for listingReviewUpdated Subscription
+type UpdateListingReviewPayload {
+  mutation: String!
+  id: Int
+  listingId: Int!
+  node: ListingReview
+}
