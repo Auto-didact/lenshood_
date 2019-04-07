@@ -1,5 +1,5 @@
 import { camelizeKeys, decamelizeKeys } from 'humps';
-const { Model } = require('objection');
+import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 
 // Give the knex object to objection.
