@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
         table.string('gear_category');
         table.string('gear_subcategory');
         table.string('description');
+        table.string('status');
         table.timestamps(false, true);
       })
       .createTable('listing_image', table => {
@@ -72,7 +73,7 @@ exports.up = function(knex, Promise) {
         table.string('serial');
         table.timestamps(false, true);
       })
-      .createTable('review', table => {
+      .createTable('listing_review', table => {
         table.increments('id');
         table
           .integer('listing_id')
