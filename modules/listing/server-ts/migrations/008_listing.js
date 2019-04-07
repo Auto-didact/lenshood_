@@ -2,14 +2,14 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema
       .createTable('listing', table => {
-        table.increments();
+        table.increments('id');
         table.string('gear_category');
         table.string('gear_subcategory');
         table.string('description');
         table.timestamps(false, true);
       })
       .createTable('listing_image', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_id')
           .unsigned()
@@ -20,7 +20,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
       })
       .createTable('listing_detail', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_id')
           .unsigned()
@@ -33,7 +33,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
       })
       .createTable('listing_damage', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_detail_id')
           .unsigned()
@@ -45,7 +45,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
       })
       .createTable('listing_rental', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_id')
           .unsigned()
@@ -59,7 +59,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
       })
       .createTable('listing_content', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_id')
           .unsigned()
@@ -73,7 +73,7 @@ exports.up = function(knex, Promise) {
         table.timestamps(false, true);
       })
       .createTable('review', table => {
-        table.increments();
+        table.increments('id');
         table
           .integer('listing_id')
           .unsigned()
