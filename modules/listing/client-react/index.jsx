@@ -8,7 +8,7 @@ import { MenuItem } from '@gqlapp/look-client-react';
 
 import Listings from './containers/Listings';
 // import Listing from './containers/Listing';
-// import ListingEdit from './containers/ListingEdit';
+import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
 import resources from './locales';
 // import resolvers from './resolvers';
@@ -22,7 +22,8 @@ const NavLinkAdminWithI18n = translate('listing')(({ t }) => (
 export default new ClientModule({
   route: [
     <Route exact path="/listings" component={Listings} />,
-    <Route exact path="/listing/new" component={ListingAdd} />
+    <Route exact path="/listing/new" component={ListingAdd} />,
+    <Route path="/listing/:id" component={ListingEdit} />
   ],
   navItemAdmin: [
     <IfLoggedIn>
