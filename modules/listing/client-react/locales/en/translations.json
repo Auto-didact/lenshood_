@@ -1,6 +1,60 @@
 {
-  "navLink": "Listing nav link",
-  "title": "Listing module",
-  "meta": "Listing example",
-  "welcomeText": "Hello, This is the Listing module"
+  "navLinkAdmin": "Listings",
+  "comment": {
+    "title": "Comments",
+    "label": {
+      "field": "Comment",
+      "add": "Add",
+      "edit": "Edit",
+      "comment": "comment"
+    },
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete"
+    },
+    "column": {
+      "content": "Content",
+      "actions": "Actions"
+    }
+  },
+
+  "listing": {
+    "title": "Edit Listing",
+    "meta": "An Edit Listing page example",
+    "loadMsg": "Loading...",
+    "noListingsMsg": "There are no listings yet.",
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete",
+      "back": "Back"
+    },
+    "label": {
+      "edit": "Edit",
+      "create": "Create",
+      "listing": "Listing"
+    },
+    "field": {
+      "gearCategory": "Gear Category",
+      "gearSubcategory": "Gear Sub-Category",
+      "description": "Description"
+
+    }
+  },
+
+  "list": {
+    "title": "Listings",
+    "meta": "A List of All Listings page example",
+    "column": {
+      "description": "Description",
+      "actions": "Actions"
+    },
+    "btn": {
+      "add": "Add",
+      "del": "Delete",
+      "more": "Load more ..."
+    },
+    "subTitle": "Listing List"
+  }
 }

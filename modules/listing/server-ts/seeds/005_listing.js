@@ -8,7 +8,7 @@ export async function seed(knex, Promise) {
     'listing_damage',
     'listing_rental',
     'listing_content',
-    'review'
+    'listing_review'
   ]);
 
   await Promise.all(
@@ -16,7 +16,8 @@ export async function seed(knex, Promise) {
       const listing = await returnId(knex('listing')).insert({
         gear_category: `Listing gear_category ${ii + 1}`,
         gear_subcategory: `Listing gear_subcategory ${ii + 1}`,
-        description: `Listing description ${ii + 1}`
+        description: `Listing description ${ii + 1}`,
+        status: `active`
       });
       await Promise.all(
         [...Array(3).keys()].map(async () => {
@@ -57,7 +58,7 @@ export async function seed(knex, Promise) {
       );
       await Promise.all(
         [...Array(3).keys()].map(async jj => {
-          return returnId(knex('review')).insert({
+          return returnId(knex('listing_review')).insert({
             listing_id: listing[0],
             comment: `Review title ${jj + 1} for Listing ${listing[0]}`,
             rating: jj + 2

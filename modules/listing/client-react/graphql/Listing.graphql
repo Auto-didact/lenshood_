@@ -1,0 +1,6 @@
+fragment ListingInfo on Listing {
+  id
+  gearCategory
+  gearSubcategory
+  description
+}
