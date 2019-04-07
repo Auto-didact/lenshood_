@@ -40,8 +40,6 @@ class NavBar extends React.Component {
                 {settings.app.name}
               </NavLink>
             </MenuItem>
-            {ref.modules.navItems}
-
             {__DEV__ && (
               <MenuItem>
                 <DropDown type="deployment-unit">
@@ -58,6 +56,7 @@ class NavBar extends React.Component {
                 <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
               </MenuItem>
             </IfLoggedIn>
+            {ref.modules.navItems}
           </Menu>
         </Col>
         <Col span={10}>
@@ -67,6 +66,7 @@ class NavBar extends React.Component {
             mode="horizontal"
             style={{ lineHeight: '60px', float: 'right' }}
           >
+            {ref.modules.navItemsRight}
             <IfLoggedIn>
               <MenuItem>
                 <DropDown content={<Avatar />} noicon>
@@ -74,8 +74,6 @@ class NavBar extends React.Component {
                 </DropDown>
               </MenuItem>
             </IfLoggedIn>
-
-            {ref.modules.navItemsRight}
           </Menu>
         </Col>
       </Row>
