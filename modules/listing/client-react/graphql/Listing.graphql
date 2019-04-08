@@ -3,4 +3,36 @@ fragment ListingInfo on Listing {
   gearCategory
   gearSubcategory
   description
+  status
+  createdAt
+  updatedAt
+  listingImages {
+    id
+    imageUrl
+  }
+  listingDetail {
+    id
+    condition
+    repairHistory
+    age
+    damages {
+      id
+      imageUrl
+      damageDetail
+    }
+  }
+  listingRental {
+    id
+    perDay
+    perWeek
+    perMonth
+    replacementValue
+  }
+  listingContent {
+    id
+    gear
+    brand
+    model
+    serial
+  }
 }

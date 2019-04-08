@@ -56,7 +56,12 @@ const ListingFormWithFormik = withFormik({
   mapPropsToValues: props => ({
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
-    description: props.listing && props.listing.description
+    description: props.listing && props.listing.description,
+    status: props.listing && props.listing.status,
+    listingImages: props.listing && props.listing.listingImages,
+    listingDetail: props.listing && props.listing.listingDetail,
+    listingRental: props.listing && props.listing.listingRental,
+    listingContent: props.listing && props.listing.listingContent
   }),
   validate: values => validate(values, listingFormSchema),
   handleSubmit(
