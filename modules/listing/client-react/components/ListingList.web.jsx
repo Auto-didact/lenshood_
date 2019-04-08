@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Table, Button, Pagination } from '@gqlapp/look-client-react';
+import ListingDrawer from './ListingDrawer';
 import settings from '../../../../settings';
 
 const { itemsNumber, type } = settings.pagination.web;
@@ -19,23 +20,46 @@ NoListingsMessage.propTypes = { t: PropTypes.func };
 const ListingList = ({ loading, listings, t, loadData, deleteListing }) => {
   const columns = [
     {
+      title: t('list.column.gearCategory'),
+      dataIndex: 'gearCategory',
+      key: 'gearCategory',
+      render: text => <div>{text}</div>
+    },
+    {
+      title: t('list.column.gearSubcategory'),
+      dataIndex: 'gearSubcategory',
+      key: 'gearSubCategory',
+      render: text => <div>{text}</div>
+    },
+    {
       title: t('list.column.description'),
       dataIndex: 'description',
       key: 'description',
-      render: (text, record) => (
-        <Link className="listing-link" to={`/listing/${record.id}`}>
-          {text}
-        </Link>
-      )
+      render: text => <div>{text}</div>
+    },
+    {
+      title: t('list.column.status'),
+      dataIndex: 'status',
+      key: 'status',
+      render: text => <div>{text}</div>
     },
     {
       title: t('list.column.actions'),
       key: 'actions',
-      width: 50,
+      width: 200,
       render: (text, record) => (
-        <Button color="primary" size="sm" className="delete-button" onClick={() => deleteListing(record.id)}>
-          {t('listing.btn.del')}
-        </Button>
+        <div>
+          {/* <Link className="listing-link" to={`/listing/${record.id}`}>
+            <Button color="primary" size="sm">
+              Edit
+            </Button>
+          </Link> */}
+          <ListingDrawer listing={record} />
+
+          <Button color="primary" size="sm" className="delete-button" onClick={() => deleteListing(record.id)}>
+            {t('listing.btn.del')}
+          </Button>
+        </div>
       )
     }
   ];
