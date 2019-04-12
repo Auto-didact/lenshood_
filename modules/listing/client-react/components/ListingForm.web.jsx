@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
-import { Form, RenderField, Button } from '@gqlapp/look-client-react';
+import { Form, RenderField, RenderSelect, Option, Button } from '@gqlapp/look-client-react';
 
 const listingFormSchema = {
   gearCategory: [required],
@@ -36,6 +36,26 @@ const ListingForm = ({ values, handleSubmit, submitting, t }) => {
         label={t('listing.field.description')}
         value={values.description}
       />
+      <Field
+        name="status"
+        component={RenderSelect}
+        type="select"
+        label={t('listing.field.status')}
+        value={values.status}
+      >
+        <Option value="idle">{t('listing.form.field.status.idle')}</Option>
+        <Option value="on_rent">{t('listing.form.field.status.on_rent')}</Option>
+        <Option value="on_shelf">{t('listing.form.field.status.on_shelf')}</Option>
+      </Field>
+
+      {/* <Field
+        name="listingImages"
+        component={RenderDragger}
+        type="text"
+        label={t('listing.field.gearCategory')}
+        value={values.gearCategory}
+      /> */}
+
       <Button color="primary" type="submit" disabled={submitting}>
         {t('listing.btn.submit')}
       </Button>
@@ -57,7 +77,7 @@ const ListingFormWithFormik = withFormik({
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
-    status: props.listing && props.listing.status,
+    status: (props.listing && props.listing.status) || 'idle',
     listingImages: props.listing && props.listing.listingImages,
     listingDetail: props.listing && props.listing.listingDetail,
     listingRental: props.listing && props.listing.listingRental,
