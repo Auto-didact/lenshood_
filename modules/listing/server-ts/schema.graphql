@@ -7,7 +7,7 @@ type Listing {
   listingImages: [ListingImage]
   listingDetail: ListingDetail
   listingRental: ListingRental
-  listingContent: ListingContent
+  listingContent: [ListingContent]
   createdAt: String!
   updatedAt: String!
 }
@@ -138,7 +138,7 @@ input AddListingInput {
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput
-  listingContent: ListingContentInput
+  listingContent: [ListingContentInput]
 }
 
 # Input for editListing Mutation
@@ -151,7 +151,7 @@ input EditListingInput {
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput
-  listingContent: ListingContentInput
+  listingContent: [ListingContentInput]
 }
 
 # Input for addListingReview Mutation

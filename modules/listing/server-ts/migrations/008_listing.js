@@ -3,6 +3,12 @@ exports.up = function(knex, Promise) {
     knex.schema
       .createTable('listing', table => {
         table.increments('id');
+        table
+          .integer('user_id')
+          .unsigned()
+          .references('id')
+          .inTable('user')
+          .onDelete('CASCADE');
         table.string('gear_category');
         table.string('gear_subcategory');
         table.string('description');
