@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'antd';
+import { Form, Select } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -13,9 +13,9 @@ const RenderField = ({ input, label, type, children, meta: { touched, error } })
   return (
     <FormItem label={label} validateStatus={validateStatus} help={error}>
       <div>
-        <select {...input} type={type}>
+        <Select {...input} type={type}>
           {children}
-        </select>
+        </Select>
       </div>
     </FormItem>
   );

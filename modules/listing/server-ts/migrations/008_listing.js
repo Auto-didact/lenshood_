@@ -12,7 +12,8 @@ exports.up = function(knex, Promise) {
         table.string('gear_category');
         table.string('gear_subcategory');
         table.string('description');
-        table.string('status');
+        table.string('status').defaultTo('idle');
+        table.boolean('is_active').defaultTo(true);
         table.timestamps(false, true);
       })
       .createTable('listing_image', table => {
