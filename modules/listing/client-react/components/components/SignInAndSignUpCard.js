@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../resources/listingCatalogue.css";
-import { Form, Input, Divider, Row, Col, Card, Button } from "antd";
-import naruto2 from "../resources/naruto2.jpg";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../resources/listingCatalogue.css';
+import { Form, Input, Divider, Row, Col, Card, Button } from 'antd';
+import naruto2 from '../resources/naruto2.jpg';
 
 class SignIn extends Component {
   render() {
@@ -17,10 +17,10 @@ class SignIn extends Component {
             <Input type="password" placeholder="Password" />
             <Link
               style={{
-                color: "#23b195",
-                fontSize: "11px",
-                letterSpacing: "0.8px",
-                float: "right"
+                color: '#23b195',
+                fontSize: '11px',
+                letterSpacing: '0.8px',
+                float: 'right'
               }}
               to="/"
             >
@@ -28,7 +28,7 @@ class SignIn extends Component {
             </Link>
             <Button
               style={{
-                marginTop: "10px"
+                marginTop: '10px'
               }}
               className="themeColor"
               block
@@ -36,11 +36,8 @@ class SignIn extends Component {
               Sign In
             </Button>
             <p className="belowFormtext">
-              New to LensHood?{" "}
-              <span
-                onClick={e => this.props.setModal1Visible("signup")}
-                className="colorCursor"
-              >
+              New to LensHood?{' '}
+              <span onClick={e => this.props.setModal1Visible('signup')} className="colorCursor">
                 Sign Up
               </span>
             </p>
@@ -70,11 +67,8 @@ class SignUp extends Component {
               Sign Up
             </Button>
             <p className="belowFormtext">
-              Already have an account?{" "}
-              <span
-                onClick={e => this.props.setModal1Visible("signin")}
-                className="colorCursor"
-              >
+              Already have an account?{' '}
+              <span onClick={e => this.props.setModal1Visible('signin')} className="colorCursor">
                 Sign In
               </span>
             </p>
@@ -86,7 +80,7 @@ class SignUp extends Component {
 }
 export default class SignInAndSignUpCard extends Component {
   state = {
-    SignInState: "signin"
+    SignInState: 'signin'
   };
 
   setModal1Visible(val) {
@@ -101,34 +95,28 @@ export default class SignInAndSignUpCard extends Component {
             <img
               src={naruto2}
               alt=""
-              width={"100%"}
-              style={
-                this.state.SignInState === "signin"
-                  ? { height: "463px" }
-                  : { height: "504px" }
-              }
+              width={'100%'}
+              style={this.state.SignInState === 'signin' ? { height: '463px' } : { height: '504px' }}
             />
           </Col>
           <Col span={16}>
-            <Card style={{ padding: "0 10px 0 25px" }}>
+            <Card style={{ padding: '0 10px 0 25px' }}>
               <h2
                 style={{
-                  paddingBottom: "4px",
+                  paddingBottom: '4px',
                   fonWweight: 900,
-                  letterSpacing: "0.4px",
-                  textShadow: "1px 0 0"
+                  letterSpacing: '0.4px',
+                  textShadow: '1px 0 0'
                 }}
               >
-                {this.state.SignInState === "signin"
-                  ? "Sign in to Lenshood"
-                  : "Create Account"}
+                {this.state.SignInState === 'signin' ? 'Sign in to Lenshood' : 'Create Account'}
               </h2>
               <Row gutter={16}>
                 <Col span={12}>
                   <Button
                     style={{
-                      background: "#3c60a2",
-                      color: "white"
+                      background: '#3c60a2',
+                      color: 'white'
                     }}
                     block
                   >
@@ -138,8 +126,8 @@ export default class SignInAndSignUpCard extends Component {
                 <Col span={12}>
                   <Button
                     style={{
-                      background: "#c55643",
-                      color: "white"
+                      background: '#c55643',
+                      color: 'white'
                     }}
                     block
                   >
@@ -149,14 +137,14 @@ export default class SignInAndSignUpCard extends Component {
               </Row>
               <Divider
                 style={{
-                  color: "#999",
-                  fontSize: "10px",
-                  padding: "15px 50px 5px 50px"
+                  color: '#999',
+                  fontSize: '10px',
+                  padding: '15px 50px 5px 50px'
                 }}
               >
                 or via E-mail
               </Divider>
-              {this.state.SignInState === "signin" ? (
+              {this.state.SignInState === 'signin' ? (
                 <SignIn setModal1Visible={this.setModal1Visible.bind(this)} />
               ) : (
                 <SignUp setModal1Visible={this.setModal1Visible.bind(this)} />

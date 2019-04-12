@@ -48,7 +48,10 @@
     "meta": "A List of All Listings page example",
     "column": {
       "description": "Description",
-      "actions": "Actions"
+      "gearCategory": "Gear Category",
+      "gearSubcategory": "Gear Sub-Category",
+      "actions": "Actions",
+      "status": "Status"
     },
     "btn": {
       "add": "Add",
