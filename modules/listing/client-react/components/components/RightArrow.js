@@ -1,6 +1,6 @@
-import React from "react";
-import "../resources/listingCatalogue.css";
-import { Icon } from "antd";
+import React from 'react';
+import '../resources/listingCatalogue.css';
+import { Icon } from 'antd';
 
 const RightArrow = props => {
   return (

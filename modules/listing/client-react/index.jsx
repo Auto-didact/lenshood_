@@ -29,6 +29,9 @@ const NavLinkAdminWithI18n = translate('listing')(({ t }) => (
 
 export default new ClientModule({
   route: [
+    // Home
+    <Route exact path="/" component={ListingCatalogue} />,
+
     <Route exact path="/listings" component={Listings} />,
     <Route exact path="/listing/new" component={ListingAdd} />,
     <Route path="/listing/:id" component={ListingEdit} />,
