@@ -85,7 +85,7 @@ export default class ListingDAO extends Model {
         }
       },
       listing_content: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasManyRelation,
         modelClass: ListingContent,
         join: {
           from: 'listing.id',
