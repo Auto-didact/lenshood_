@@ -21,12 +21,12 @@ class UserCard extends Component {
             >
               {seller.name}
               <br />
-              <h5 style={{ color: '#23b195', fontSize: '10px' }}>
+              <p style={{ color: '#23b195', fontSize: '10px' }}>
                 {' '}
                 <Rate disabled defaultValue={seller.rating} style={{ color: '#23b195', fontSize: '10px' }} />
                 <br />
                 Read Reviews ({seller.reviewsCount})
-              </h5>
+              </p>
             </h4>
           </Col>
           <Col span={8}>
