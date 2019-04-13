@@ -26,7 +26,6 @@ type ListingDetail {
   repairHistory: String!
   age: String!
   damages: [ListingDamage]
-
   createdAt: String!
   updatedAt: String!
 }

@@ -4,7 +4,15 @@ import { withFormik } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
-import { Form, RenderField, RenderSelect, Option, Button } from '@gqlapp/look-client-react';
+import {
+  Form,
+  RenderField,
+  RenderSelect,
+  Option,
+  Button,
+  RenderUpload,
+  RenderDynamicField
+} from '@gqlapp/look-client-react';
 
 const listingFormSchema = {
   gearCategory: [required],
@@ -13,6 +21,16 @@ const listingFormSchema = {
 };
 
 const ListingForm = ({ values, handleSubmit, submitting, t }) => {
+  let listingImagesList = [];
+  if (values.listingImages) {
+    listingImagesList = values.listingImages.map(img => ({
+      uid: img.id,
+      name: img.id,
+      status: 'done',
+      url: img.imageUrl,
+      thumbUrl: img.imageUrl
+    }));
+  }
   return (
     <Form name="listing" onSubmit={handleSubmit}>
       <Field
@@ -48,14 +66,20 @@ const ListingForm = ({ values, handleSubmit, submitting, t }) => {
         <Option value="on_shelf">{t('listing.form.field.status.on_shelf')}</Option>
       </Field>
 
-      {/* <Field
-        name="listingImages"
-        component={RenderDragger}
+      <Field
+        name="imagesUpload"
+        component={RenderUpload}
         type="text"
-        label={t('listing.field.gearCategory')}
-        value={values.gearCategory}
-      /> */}
-
+        label={t('listing.field.imagesUpload')}
+        defaultFileList={listingImagesList}
+      />
+      <Field
+        name="description"
+        component={RenderDynamicField}
+        type="text"
+        label={t('listing.field.description')}
+        value={values.description}
+      />
       <Button color="primary" type="submit" disabled={submitting}>
         {t('listing.btn.submit')}
       </Button>
