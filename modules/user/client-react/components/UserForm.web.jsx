@@ -40,13 +40,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
       />
       <Field name="email" component={RenderField} type="email" label={t('userEdit.form.field.email')} value={email} />
       {shouldDisplayRole && (
-        <Field
-          name="role"
-          component={RenderSelect}
-          type="select"
-          label={t('userEdit.form.field.role.label')}
-          value={role}
-        >
+        <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
           <Option value="user">{t('userEdit.form.field.role.user')}</Option>
           <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
         </Field>
