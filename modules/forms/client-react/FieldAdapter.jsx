@@ -23,12 +23,13 @@ class FieldAdapter extends Component {
     this.props = props;
   }
 
-  onChange = e => {
+  onChange = value => {
+    console.log(value);
     const { onChange } = this.props;
     if (onChange) {
-      onChange(e.target.value, e);
+      onChange(value);
     } else {
-      this.props.formik.handleChange(e);
+      this.props.formik.setFieldValue(this.props.name, value);
     }
   };
 
