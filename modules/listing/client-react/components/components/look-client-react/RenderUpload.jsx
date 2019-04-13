@@ -4,7 +4,7 @@ import { Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-const RenderDragger = ({ input, label, type, meta: { touched, error }, placeholder }) => {
+export const RenderUpload = ({ input, label, type, meta: { touched, error }, placeholder }) => {
   let validateStatus = '';
   if (touched && error) {
     validateStatus = 'error';
@@ -19,12 +19,10 @@ const RenderDragger = ({ input, label, type, meta: { touched, error }, placehold
   );
 };
 
-RenderDragger.propTypes = {
+RenderUpload.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   meta: PropTypes.object
 };
-
-export default RenderDragger;
