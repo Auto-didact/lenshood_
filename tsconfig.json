@@ -22,7 +22,7 @@
     "**/typings.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.vue"
+    "**/*.vue", "modules/order/client-react/components/OrderCard.jsx", "modules/order/client-react/components/CheckoutSteps.jsx", "modules/order/client-react/components/CheckoutPayView.jsx", "modules/order/client-react/components/CheckoutOrderView.jsx", "modules/order/client-react/components/CheckoutCartView.jsx", "modules/order/client-react/components/CheckoutBillView.jsx", "modules/order/client-react/containers/CheckoutPay.jsx"
   ],
   "exclude": [
     "node_modules"
