@@ -36,3 +36,4 @@ fragment ListingInfo on Listing {
     serial
   }
 }
+

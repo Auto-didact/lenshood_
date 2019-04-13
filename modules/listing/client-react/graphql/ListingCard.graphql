@@ -1,0 +1,14 @@
+fragment ListingCard on Listing {
+  id
+  gearCategory
+  gearSubcategory
+  createdAt
+  listingImages {
+    id
+    imageUrl
+  }
+  listingRental {
+    id
+    perDay
+  }
+}

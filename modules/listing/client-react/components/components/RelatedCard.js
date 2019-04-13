@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Card, Rate, Icon, Avatar } from 'antd';
 import '../resources/listingCatalogue.css';
-import { Card, Rate, Icon } from 'antd';
-import { Avatar } from 'antd';
 
 const { Meta } = Card;
 
 class RelatedCard extends Component {
   render() {
-    let list = this.props.relatedlist;
+    // To Do: check if it is not present then set as default value
+    let listing = this.props.relatedList;
+    const listing_img = listing.listingImages[0].imageUrl;
+    const rent_per_day = listing.listingRental.perDay;
+    const title = listing.gearCategory;
+    const seller = 'Ravi Kishan(To Do)';
+    const rating = 4;
+
     return (
-      <Card hoverable cover={<img alt="" src={list.image} />}>
-        <Meta title={list.name.substring(0, 20)} description={<h5>&#8377;{list.rent} per day</h5>} />
+      <Card hoverable cover={<img alt="" src={listing_img} />}>
+        <Meta title={title.substring(0, 25)} description={<h5>&#8377;{rent_per_day} per day</h5>} />
         <Meta
           style={{ marginTop: '20px', padding: '0' }}
           avatar={<Avatar />}
@@ -22,9 +29,9 @@ class RelatedCard extends Component {
                 margin: '5px 0'
               }}
             >
-              {list.seller}
+              {seller}
               <br />
-              <Rate disabled defaultValue={list.rating} style={{ color: '#23b195', fontSize: '6px' }} />
+              <Rate disabled defaultValue={rating} style={{ color: '#23b195', fontSize: '6px' }} />
               <div
                 style={{
                   position: 'absolute',
@@ -45,5 +52,9 @@ class RelatedCard extends Component {
     );
   }
 }
+
+RelatedCard.propTypes = {
+  relatedList: PropTypes.object.isRequired
+};
 
 export default RelatedCard;
