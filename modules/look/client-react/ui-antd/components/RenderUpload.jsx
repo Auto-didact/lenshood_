@@ -36,7 +36,15 @@ RenderUpload.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   meta: PropTypes.object,
-  defaultFileList: PropTypes.object
+  defaultFileList: PropTypes.arrayOf(
+    PropTypes.shape({
+      uid: PropTypes.number,
+      name: PropTypes.number,
+      status: PropTypes.string,
+      url: PropTypes.string,
+      thumbUrl: PropTypes.string
+    })
+  )
 };
 
 export default RenderUpload;

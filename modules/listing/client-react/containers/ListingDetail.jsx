@@ -1,102 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 import ListingEditView from '../components/ListingEditView';
+import ListingDetailView from '../components/ListingDetailView';
 
 import LISTING_QUERY from '../graphql/ListingQuery.graphql';
-import EDIT_LISTING from '../graphql/EditListing.graphql';
-import LISTING_SUBSCRIPTION from '../graphql/ListingSubscription.graphql';
 
-const subscribeToListingEdit = (subscribeToMore, listingId, history, navigation) =>
-  subscribeToMore({
-    document: LISTING_SUBSCRIPTION,
-    variables: { id: listingId },
-    updateQuery: (
-      prev,
-      {
-        subscriptionData: {
-          data: {
-            listingUpdated: { mutation }
-          }
-        }
-      }
-    ) => {
-      if (mutation === 'DELETED') {
-        if (history) {
-          return history.push('/listings');
-        } else if (navigation) {
-          return navigation.goBack();
-        }
-      }
-      return prev;
-    }
-  });
-
-const ListingEdit = props => {
-  useEffect(() => {
-    if (props.listing) {
-      const {
-        subscribeToMore,
-        listing: { id },
-        history,
-        navigation
-      } = props;
-      const subscribe = subscribeToListingEdit(subscribeToMore, id, history, navigation);
-      return () => subscribe();
-    }
-  });
-
-  return <ListingEditView {...props} />;
+const ListingDetail = props => {
+  return <ListingDetailView {...props} />;
 };
 
-ListingEdit.propTypes = {
+ListingDetail.propTypes = {
   loading: PropTypes.bool.isRequired,
   listing: PropTypes.object,
-  subscribeToMore: PropTypes.func.isRequired,
   history: PropTypes.object,
   navigation: PropTypes.object
 };
 
-export default compose(
-  graphql(LISTING_QUERY, {
-    options: props => {
-      let id = 0;
-      if (props.match) {
-        id = props.match.params.id;
-      } else if (props.navigation) {
-        id = props.navigation.state.params.id;
-      }
-
-      return {
-        variables: { id: Number(id) }
-      };
-    },
-    props({ data: { loading, error, listing, subscribeToMore } }) {
-      if (error) throw new Error(error);
-      return { loading, listing, subscribeToMore };
+export default graphql(LISTING_QUERY, {
+  options: props => {
+    let id = 0;
+    if (props.match) {
+      id = props.match.params.id;
+    } else if (props.navigation) {
+      id = props.navigation.state.params.id;
     }
-  }),
-  graphql(EDIT_LISTING, {
-    props: ({ ownProps: { history, navigation }, mutate }) => ({
-      editListing: async (id, gearCategory, gearSubcategory, description) => {
-        await mutate({
-          variables: {
-            input: {
-              id: id,
-              gearCategory: gearCategory.trim(),
-              gearSubcategory: gearSubcategory.trim(),
-              description: description.trim()
-            }
-          }
-        });
-        if (history) {
-          return history.push('/listings');
-        }
-        if (navigation) {
-          return navigation.navigate('ListingList');
-        }
-      }
-    })
-  })
-)(ListingEdit);
+
+    return {
+      variables: { id: Number(id) }
+    };
+  },
+  props({ data: { loading, error, listing } }) {
+    if (error) throw new Error(error);
+    return { loading, listing };
+  }
+})(ListingDetail);

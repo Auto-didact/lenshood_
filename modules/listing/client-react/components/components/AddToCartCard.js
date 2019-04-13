@@ -5,12 +5,14 @@ import { Row, Col, Icon, DatePicker, Checkbox, Slider, Button, Card } from 'antd
 const { RangePicker } = DatePicker;
 export default class AddToCartCard extends Component {
   render() {
+    const listing = this.props.listing;
+
     return (
       <div style={{ marginLeft: '20px' }}>
         <Card style={{ textAlign: 'center' }}>
           <h3>Select your rental period</h3>
           <h5>
-            Price per day <h4>&#8377; {this.props.product.rentPerDay}</h4>
+            Price per day <h4>&#8377; {listing.listingRental.perDay}</h4>
           </h5>
           <h5>
             -25% discount<h5>{this.props.noOfDays} days</h5>
@@ -29,10 +31,10 @@ export default class AddToCartCard extends Component {
         <Card>
           <Row style={{ textAlign: 'center' }}>
             <Col span={12}>
-              &#8377; {this.props.product.rentPerDay} <h5>per day</h5>
+              &#8377; {listing.listingRental.perDay} <h5>per day</h5>
             </Col>
             <Col span={12}>
-              &#8377; {this.props.product.rentPerWeek} <h5>per week</h5>
+              &#8377; {listing.listingRental.perWeek} <h5>per week</h5>
             </Col>
           </Row>
           <hr />
@@ -66,19 +68,19 @@ export default class AddToCartCard extends Component {
           <br />
           <div>
             <p>
-              Rent per day <div style={{ float: 'right' }}>&#8377; {this.props.product.rentPerDay}</div>
+              Rent per day <div style={{ float: 'right' }}>&#8377; {listing.listingRental.perDay}</div>
             </p>
             <p>
               Service fee <div style={{ float: 'right' }}>&#8377; {this.props.product.serviceFee}</div>
             </p>
             <p>
-              &#8377; {this.props.product.rentPerDay}/- <Icon type="close" /> {this.props.noOfDays} days{' '}
-              <div style={{ float: 'right' }}>&#8377; {this.props.product.rentPerDay * this.props.noOfDays}</div>
+              &#8377; {listing.listingRental.perDay}/- <Icon type="close" /> {this.props.noOfDays} days{' '}
+              <div style={{ float: 'right' }}>&#8377; {listing.listingRental.perDay * this.props.noOfDays}</div>
             </p>
             <p>
               25% Multi day discount{' '}
               <div style={{ float: 'right', color: '#23b195' }}>
-                -&#8377; {this.props.product.rentPerDay * this.props.noOfDays * 0.25}
+                -&#8377; {listing.listingRental.perDay * this.props.noOfDays * 0.25}
               </div>
             </p>
           </div>
@@ -87,8 +89,8 @@ export default class AddToCartCard extends Component {
             Total rent amount{' '}
             <strong style={{ float: 'right', color: '#23b195' }}>
               &#8377;{' '}
-              {this.props.product.rentPerDay * this.props.noOfDays -
-                this.props.product.rentPerDay * this.props.noOfDays * 0.25 +
+              {listing.listingRental.perDay * this.props.noOfDays -
+                listing.listingRental.perDay * this.props.noOfDays * 0.25 +
                 this.props.product.serviceFee}
             </strong>
           </h3>
