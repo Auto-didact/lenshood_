@@ -1,0 +1,17 @@
+#import "./ListingCard.graphql"
+
+query listingsCard($limit: Int!, $after: Int) {
+  listings(limit: $limit, after: $after) {
+    totalCount
+    edges {
+      cursor
+      node {
+        ...ListingCard
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
