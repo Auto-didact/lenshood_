@@ -12,7 +12,7 @@ import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
 
-import ListingDetail from './components/ListingDetail';
+import ListingDetail from './containers/ListingDetail';
 import MyListings from './components/MyListings';
 import ListYourGearOwner from './components/ListYourGearOwner';
 import ListYourGearProduct from './components/ListYourGearProduct';
@@ -39,7 +39,7 @@ export default new ClientModule({
     <Route exact path="/mylisting/" component={MyListingDetail} />,
 
     // Components
-    <Route exact path="/listing-detail" component={ListingDetail} />,
+    <Route exact path="/listing-detail/:id" component={ListingDetail} />,
     <Route exact path="/my-listings" component={MyListings} />,
     <Route exact path="/list-your-gear" component={ListYourGearOwner} />,
     <Route exact path="/list-your-gear2" component={ListYourGearProduct} />,
