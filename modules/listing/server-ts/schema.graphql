@@ -4,6 +4,7 @@ type Listing {
   gearSubcategory: String!
   description: String!
   status: String
+  isActive: Boolean
   listingImages: [ListingImage]
   listingDetail: ListingDetail
   listingRental: ListingRental

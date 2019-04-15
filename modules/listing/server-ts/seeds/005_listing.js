@@ -16,8 +16,7 @@ export async function seed(knex, Promise) {
       const listing = await returnId(knex('listing')).insert({
         gear_category: `Listing gear_category ${ii + 1}`,
         gear_subcategory: `Listing gear_subcategory ${ii + 1}`,
-        description: `Listing description ${ii + 1}`,
-        status: `active`
+        description: `Listing description ${ii + 1}`
       });
       await Promise.all(
         [...Array(3).keys()].map(async () => {
