@@ -1,62 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Icon, Button } from 'antd';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { Form, Icon } from 'antd';
+import { RenderField, Button } from '@gqlapp/look-client-react';
 
 const FormItem = Form.Item;
 
-let FieldInitial = [{ id: 1, value: 'some value' }, { id: 2, value: 'some other value' }];
-
-class DynamicFieldSet extends React.Component {
-  // remove = k => {
-  //   const { form } = this.props;
-  //   // can use data-binding to get
-  //   const keys = keysInitial;
-  //   // We need at least one passenger
-  //   if (keys.length === 1) {
-  //     return;
-  //   }
-
-  //   // can use data-binding to set
-  //   form.setFieldsValue({
-  //     keys: keys.filter(key => key !== k)
-  //   });
-  // };
-
+export default class DynamicFieldSet extends React.Component {
   add = () => {
-    const { form } = this.props;
-    // can use data-binding to get
-    const keys = form.FieldValues;
-    const nextKeys = keys.concat({ id: null, value: '' });
-    // can use data-binding to set
-    // important! notify form to detect changes
-    form.setFieldsValue({
-      keys: nextKeys
-    });
-  };
+    const arrayHelpers = this.props.arrayHelpers;
+    let obj = {};
+    const keys = this.props.keys;
+    {
+      keys.map(k => (obj[k] = ''));
+    }
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       const { keys, names } = values;
-  //       console.log('Received values of form: ', values);
-  //       console.log('Merged values:', keys.map(key => names[key]));
-  //     }
-  //   });
-  // };
+    arrayHelpers.push(obj);
+  };
 
   render() {
     // const { getFieldDecorator, getFieldValue } = this.props.form;
-    // const formItemLayout = {
-    //   labelCol: {
-    //     xs: { span: 24 },
-    //     sm: { span: 4 }
-    //   },
-    //   wrapperCol: {
-    //     xs: { span: 24 },
-    //     sm: { span: 20 }
-    //   }
-    // };
     const formItemLayoutWithOutLabel = {
       wrapperCol: {
         xs: { span: 24, offset: 0 },
@@ -64,64 +27,53 @@ class DynamicFieldSet extends React.Component {
       }
     };
     // getFieldDecorator('keys', { initialValue: [] });
-    // const keys = getFieldValue('keys');
-    // const formItems = keys.map((k, index) => (
-    //   <Form.Item
-    //     {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-    //     label={index === 0 ? 'Passengers' : ''}
-    //     required={false}
-    //     key={k}
-    //   >
-    //     {getFieldDecorator(`names[${k}]`, {
-    //       validateTrigger: ['onChange', 'onBlur'],
-    //       rules: [
-    //         {
-    //           required: true,
-    //           whitespace: true,
-    //           message: "Please input passenger's name or delete this field."
-    //         }
-    //       ]
-    //     })(<Input placeholder="passenger name" style={{ width: '60%', marginRight: 8 }} />)}
-    //     {keys.length > 1 ? (
-    //       <Icon className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} />
-    //     ) : null}
-    //   </Form.Item>
-    // ));
+    const keys = this.props.keys;
+    const name = this.props.name;
+    const values = this.props.values;
+    const arrayHelpers = this.props.arrayHelpers;
+    let formItems = null;
+
+    if (values) {
+      formItems = values.map((v, indexv) => (
+        <FormItem required={false} key={indexv} style={{ margin: '0px' }}>
+          {keys.map((k, indexk) => (
+            <FormItem style={{ display: 'inline-block', margin: '0px 5px' }} key={indexk}>
+              <Field
+                name={`${name}[${indexv}].${k}`}
+                component={RenderField}
+                type="text"
+                label={k}
+                value={v[k]}
+                key={indexv}
+                // style={{ display: 'inline-block', margin: '0px 5px' }}
+              />
+            </FormItem>
+          ))}
+          {keys.length > 1 ? (
+            <Icon className="dynamic-delete-button" type="minus-circle-o" onClick={() => arrayHelpers.remove(indexv)} />
+          ) : null}
+        </FormItem>
+      ));
+    }
     return (
       <div>
-        {/* {formItems} */}
-        <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-            <Icon type="plus" /> Add field
-          </Button>
+        <FormItem label={this.props.label}>
+          {formItems}
+          <FormItem {...formItemLayoutWithOutLabel}>
+            <Button style={{ width: '30%' }} onClick={this.add}>
+              <Icon type="plus" /> Add field
+            </Button>
+          </FormItem>
         </FormItem>
       </div>
     );
   }
 }
 
-const RenderDynamicField = ({ input, label, type, meta: { touched, error }, placeholder }) => {
-  let validateStatus = '';
-  if (touched && error) {
-    validateStatus = 'error';
-  }
-
-  return (
-    // <FormItem label={label} validateStatus={validateStatus} help={touched && error}>
-    //   <div>
-    //     <Input {...input} placeholder={label || placeholder} type={type} />
-    //   </div>
-    // </FormItem>
-    <DynamicFieldSet FieldValues={FieldInitial} />
-  );
-};
-
-RenderDynamicField.propTypes = {
-  input: PropTypes.object,
+DynamicFieldSet.propTypes = {
+  name: PropTypes.string,
   label: PropTypes.string,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  meta: PropTypes.object
+  values: PropTypes.array,
+  keys: PropTypes.array,
+  arrayHelpers: PropTypes.object
 };
-
-export default RenderDynamicField;

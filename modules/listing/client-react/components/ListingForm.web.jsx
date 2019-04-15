@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { withFormik, FieldArray } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
+
 import {
   Form,
   RenderField,
@@ -11,7 +12,8 @@ import {
   Option,
   Button,
   RenderUpload,
-  RenderDynamicField
+  RenderDynamicField,
+  RenderCheckBox
 } from '@gqlapp/look-client-react';
 
 const listingFormSchema = {
@@ -21,16 +23,6 @@ const listingFormSchema = {
 };
 
 const ListingForm = ({ values, handleSubmit, submitting, t }) => {
-  let listingImagesList = [];
-  if (values.listingImages) {
-    listingImagesList = values.listingImages.map(img => ({
-      uid: img.id,
-      name: img.id,
-      status: 'done',
-      url: img.imageUrl,
-      thumbUrl: img.imageUrl
-    }));
-  }
   return (
     <Form name="listing" onSubmit={handleSubmit}>
       <Field
@@ -67,18 +59,46 @@ const ListingForm = ({ values, handleSubmit, submitting, t }) => {
       </Field>
 
       <Field
-        name="imagesUpload"
-        component={RenderUpload}
+        name="isActive"
+        component={RenderCheckBox}
         type="text"
+        label={t('listing.field.isActive')}
+        value={values.isActive}
+      />
+
+      {/* <Field
+        name="listingImages"
+        component={RenderUpload}
         label={t('listing.field.imagesUpload')}
         defaultFileList={listingImagesList}
+        value="values.listingImages"
+      /> */}
+      <FieldArray
+        name="listingImages"
+        label={t('listing.field.listingImages')}
+        render={arrayHelpers => (
+          <RenderUpload arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
+        )}
       />
-      <Field
-        name="description"
+
+      {/* <Field
+        name="listingContent"
         component={RenderDynamicField}
-        type="text"
-        label={t('listing.field.description')}
-        value={values.description}
+        label={t('listing.field.listingContent')}
+        values={values.listingContent}
+        keys={['gear', 'brand', 'model', 'serial']}
+      /> */}
+      <FieldArray
+        name="listingContent"
+        label={t('listing.field.listingContent')}
+        render={arrayHelpers => (
+          <RenderDynamicField
+            keys={['gear', 'brand', 'model', 'serial']}
+            arrayHelpers={arrayHelpers}
+            values={values.listingContent}
+            name="listingContent"
+          />
+        )}
       />
       <Button color="primary" type="submit" disabled={submitting}>
         {t('listing.btn.submit')}
@@ -102,6 +122,7 @@ const ListingFormWithFormik = withFormik({
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
     status: (props.listing && props.listing.status) || 'idle',
+    isActive: (props.listing && props.listing.isActive) || false,
     listingImages: props.listing && props.listing.listingImages,
     listingDetail: props.listing && props.listing.listingDetail,
     listingRental: props.listing && props.listing.listingRental,
@@ -114,7 +135,8 @@ const ListingFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    onSubmit(values);
+    // onSubmit(values);
+    console.log(values);
   },
   enableReinitialize: true,
   displayName: 'ListingForm' // helps with React DevTools

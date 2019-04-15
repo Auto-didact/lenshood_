@@ -35,6 +35,7 @@ export interface Listing {
   gearSubcategory: string;
   description: string;
   status: string;
+  isActive: boolean;
   listingImages: ListingImage[];
   listingDetail: ListingDetail;
   listingDamage: ListingDamage[];
@@ -58,6 +59,10 @@ export default class ListingDAO extends Model {
     return 'listing';
   }
 
+  static get idColumn() {
+    return 'id';
+  }
+
   static get relationMappings() {
     return {
       listing_images: {
@@ -69,7 +74,7 @@ export default class ListingDAO extends Model {
         }
       },
       listing_detail: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasOneRelation,
         modelClass: ListingDetail,
         join: {
           from: 'listing.id',
@@ -77,7 +82,7 @@ export default class ListingDAO extends Model {
         }
       },
       listing_rental: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasOneRelation,
         modelClass: ListingRental,
         join: {
           from: 'listing.id',
@@ -90,6 +95,14 @@ export default class ListingDAO extends Model {
         join: {
           from: 'listing.id',
           to: 'listing_content.listing_id'
+        }
+      },
+      listing_review: {
+        relation: Model.HasManyRelation,
+        modelClass: ListingReviewDAO,
+        join: {
+          from: 'listing.id',
+          to: 'listing_review.listing_id'
         }
       }
     };
@@ -185,6 +198,10 @@ class ListingImage extends Model {
     return 'listing_image';
   }
 
+  static get idColumn() {
+    return 'id';
+  }
+
   static get relationMappings() {
     return {
       listing: {
@@ -203,6 +220,10 @@ class ListingImage extends Model {
 class ListingDetail extends Model {
   static get tableName() {
     return 'listing_detail';
+  }
+
+  static get idColumn() {
+    return 'id';
   }
 
   static get relationMappings() {
@@ -233,6 +254,10 @@ class ListingDamage extends Model {
     return 'listing_damage';
   }
 
+  static get idColumn() {
+    return 'id';
+  }
+
   static get relationMappings() {
     return {
       listing_detail: {
@@ -251,6 +276,10 @@ class ListingDamage extends Model {
 class ListingRental extends Model {
   static get tableName() {
     return 'listing_rental';
+  }
+
+  static get idColumn() {
+    return 'id';
   }
 
   static get relationMappings() {
@@ -273,6 +302,10 @@ class ListingContent extends Model {
     return 'listing_content';
   }
 
+  static get idColumn() {
+    return 'id';
+  }
+
   static get relationMappings() {
     return {
       listing: {
@@ -291,6 +324,10 @@ class ListingContent extends Model {
 class ListingReviewDAO extends Model {
   static get tableName() {
     return 'listing_review';
+  }
+
+  static get idColumn() {
+    return 'id';
   }
 
   static get relationMappings() {

@@ -63,6 +63,7 @@ export default class ListingDrawer extends Component {
             </Link>
           </p>
           <p style={pStyle}>Status: {listing.status}</p>
+          <p style={pStyle}>Visible: {listing.isActive}</p>
           <Row>
             <Col span={12}>
               <DescriptionItem title="Category" content={listing.gearCategory} />

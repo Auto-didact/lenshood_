@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'formik';
+import { isString } from 'util';
 import { PLATFORM } from '../../../packages/common/utils';
 
 class FieldAdapter extends Component {
@@ -23,13 +24,19 @@ class FieldAdapter extends Component {
     this.props = props;
   }
 
-  onChange = value => {
-    console.log(value);
+  onChange = e => {
     const { onChange } = this.props;
+    console.log(e);
     if (onChange) {
-      onChange(value);
+      onChange(e);
+    } else if (isString(e)) {
+      // for Option Field
+      this.props.formik.setFieldValue(this.props.name, e);
+    } else if (e.target.checked) {
+      console.log('s');
+      this.props.formik.setFieldValue(e.target.name, e.target.checked);
     } else {
-      this.props.formik.setFieldValue(this.props.name, value);
+      this.props.formik.setFieldValue(this.props.name, e.target.value);
     }
   };
 

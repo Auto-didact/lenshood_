@@ -17,6 +17,7 @@ import MyListings from './components/MyListings';
 import ListYourGearOwner from './components/ListYourGearOwner';
 import ListYourGearProduct from './components/ListYourGearProduct';
 import ListYourGearRental from './components/ListYourGearRental';
+import ListingDynamicFieldFormTest from './components/ListingDynamicFieldFormTest';
 
 import resources from './locales';
 // import resolvers from './resolvers';
@@ -43,7 +44,8 @@ export default new ClientModule({
     <Route exact path="/my-listings" component={MyListings} />,
     <Route exact path="/list-your-gear" component={ListYourGearOwner} />,
     <Route exact path="/list-your-gear2" component={ListYourGearProduct} />,
-    <Route exact path="/list-your-gear3" component={ListYourGearRental} />
+    <Route exact path="/list-your-gear3" component={ListYourGearRental} />,
+    <Route exact path="/listing-dynamic-field" component={ListingDynamicFieldFormTest} />
   ],
   navItemAdmin: [
     <IfLoggedIn>

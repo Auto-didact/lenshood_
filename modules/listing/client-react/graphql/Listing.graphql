@@ -4,6 +4,7 @@ fragment ListingInfo on Listing {
   gearSubcategory
   description
   status
+  isActive
   createdAt
   updatedAt
   listingImages {

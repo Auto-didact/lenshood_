@@ -79,15 +79,10 @@ export default compose(
   }),
   graphql(EDIT_LISTING, {
     props: ({ ownProps: { history, navigation }, mutate }) => ({
-      editListing: async (id, gearCategory, gearSubcategory, description) => {
+      editListing: async values => {
         await mutate({
           variables: {
-            input: {
-              id: id,
-              gearCategory: gearCategory.trim(),
-              gearSubcategory: gearSubcategory.trim(),
-              description: description.trim()
-            }
+            input: { values }
           }
         });
         if (history) {
