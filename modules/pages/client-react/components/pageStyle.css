@@ -16,7 +16,9 @@
 }
 
 .TermsContainer h2 {
+  width: 300px;
   font-weight: 600;
+  padding: 20px;
 }
 
 .MissionContainer h2 {
@@ -24,8 +26,17 @@
   font-weight: 600;
 }
 
-.MissionContainer h3, .FAQContainer h3 {
-    padding-top: 10px;
+.MissionContainer h3,
+.FAQContainer h3 {
+  padding-top: 10px;
   padding-left: 10px;
   font-weight: 600;
+}
+
+.SidebarItems menu.Item {
+  background: "#fff";
+}
+
+.SidebarItemsActive menu.Item {
+  background: "#fff";
 }

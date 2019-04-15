@@ -41,6 +41,9 @@ export default class Footer extends React.Component {
                     <Link to="/lending">Lending</Link>
                   </li>
                   <li>
+                    <Link to="/TrustAndSafety">Trust And Safety</Link>
+                  </li>
+                  <li>
                     <Link to="/faq">FAQ</Link>
                   </li>
                 </ul>
@@ -93,13 +96,22 @@ export default class Footer extends React.Component {
               </Col>
             </Row>
           </Col>
-          <Col className="FooterLogo" span={24}>
-            <Link to="/">
-              <h1>
-                <Icon className="Fill-4" type="smile" />
-                <br /> LensHood
-              </h1>
-            </Link>
+          <Col className="FooterLogo" span={24} style={{ borderTopStyle: 'solid', padding: '10px 0px 0px 0px' }}>
+            <Row>
+              <Link to="/">
+                <img
+                  src={require('../../logo/OrgLogo.png')}
+                  height="50"
+                  width="50"
+                  align="centre"
+                  style={{
+                    display: 'block',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                />
+              </Link>
+            </Row>
           </Col>
         </Row>
       </Container>
