@@ -1,18 +1,18 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+// import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import settings from '../../../../settings';
+// import settings from '../../../../settings';
 import './pageStyle.css';
 interface MissionViewProps {
   t: TranslateFunction;
 }
 
-const renderMetaData = (t: TranslateFunction) => (
-  <Helmet
-    title={`${settings.app.name} - Mission`}
-    meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
-  />
-);
+// const renderMetaData = (t: TranslateFunction) => (
+//   <Helmet
+//     title={`${settings.app.name} - Mission`}
+//     meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
+//   />
+// );
 
 const MissionView = ({ t }: MissionViewProps) => {
   return (

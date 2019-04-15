@@ -5,6 +5,7 @@ import StaticView from '../components/StaticView';
 
 interface PagesProps {
   t: TranslateFunction;
+  match: any;
 }
 
 class Static extends React.Component<PagesProps> {

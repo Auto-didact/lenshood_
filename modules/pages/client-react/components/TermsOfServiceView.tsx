@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../settings';
-import { SiderC } from './Sider';
+// import { SiderC } from './Sider';
 
 interface TermsOfServiceViewProps {
   t: TranslateFunction;
