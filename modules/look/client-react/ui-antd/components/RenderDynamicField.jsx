@@ -20,12 +20,12 @@ export default class DynamicFieldSet extends React.Component {
 
   render() {
     // const { getFieldDecorator, getFieldValue } = this.props.form;
-    const formItemLayoutWithOutLabel = {
-      wrapperCol: {
-        xs: { span: 24, offset: 0 },
-        sm: { span: 20, offset: 4 }
-      }
-    };
+    // const formItemLayoutWithOutLabel = {
+    //   wrapperCol: {
+    //     xs: { span: 24, offset: 0 },
+    //     sm: { span: 20, offset: 4 }
+    //   }
+    // };
     // getFieldDecorator('keys', { initialValue: [] });
     const keys = this.props.keys;
     const name = this.props.name;
@@ -59,7 +59,7 @@ export default class DynamicFieldSet extends React.Component {
       <div>
         <FormItem label={this.props.label}>
           {formItems}
-          <FormItem {...formItemLayoutWithOutLabel}>
+          <FormItem>
             <Button style={{ width: '30%' }} onClick={this.add}>
               <Icon type="plus" /> Add field
             </Button>

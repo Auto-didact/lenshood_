@@ -9,7 +9,7 @@ import ListingForm from './ListingForm';
 import settings from '../../../../settings';
 
 const onSubmit = addListing => values => {
-  addListing(values.gearCategory, values.gearSubcategory, values.description);
+  addListing(values);
 };
 
 const ListingAddView = ({ addListing, t }) => {

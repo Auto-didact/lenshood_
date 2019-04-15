@@ -8,6 +8,23 @@ import LISTING_QUERY from '../graphql/ListingQuery.graphql';
 import EDIT_LISTING from '../graphql/EditListing.graphql';
 import LISTING_SUBSCRIPTION from '../graphql/ListingSubscription.graphql';
 
+const removeTypename = value => {
+  if (value === null || value === undefined) {
+    return value;
+  } else if (Array.isArray(value)) {
+    return value.map(v => removeTypename(v));
+  } else if (typeof value === 'object') {
+    const newObj = {};
+    Object.entries(value).forEach(([key, v]) => {
+      if (key !== '__typename') {
+        newObj[key] = removeTypename(v);
+      }
+    });
+    return newObj;
+  }
+  return value;
+};
+
 const subscribeToListingEdit = (subscribeToMore, listingId, history, navigation) =>
   subscribeToMore({
     document: LISTING_SUBSCRIPTION,
@@ -82,7 +99,7 @@ export default compose(
       editListing: async values => {
         await mutate({
           variables: {
-            input: { values }
+            input: removeTypename(values)
           }
         });
         if (history) {
