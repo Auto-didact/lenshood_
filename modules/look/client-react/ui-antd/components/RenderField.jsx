@@ -9,7 +9,6 @@ const RenderField = ({ input, label, type, meta: { touched, error }, placeholder
   if (touched && error) {
     validateStatus = 'error';
   }
-
   return (
     <FormItem label={label} validateStatus={validateStatus} help={touched && error}>
       <div>

@@ -9,7 +9,9 @@ import ListingForm from './ListingForm';
 import settings from '../../../../settings';
 
 const onSubmit = (listing, editListing) => values => {
-  editListing(listing.id, values.gearCategory, values.gearSubcategory, values.description);
+  values['id'] = listing.id;
+  console.log(values);
+  editListing(values);
 };
 
 const ListingEditView = ({ loading, listing, location, editListing, t }) => {

@@ -18,23 +18,18 @@ class ListingAdd extends React.Component {
 
 export default graphql(ADD_LISTING, {
   props: ({ ownProps: { history, navigation }, mutate }) => ({
-    addListing: async (gearCategory, gearSubcategory, description) => {
+    addListing: async values => {
+      console.log(values);
       let listingData = await mutate({
         variables: {
-          input: {
-            gearCategory: gearCategory.trim(),
-            gearSubcategory: gearSubcategory.trim(),
-            description: description.trim()
-          }
+          input: values
         },
         optimisticResponse: {
           __typename: 'Mutation',
           addListing: {
             __typename: 'Listing',
             id: null,
-            gearCategory: gearCategory,
-            gearSubcategory: gearSubcategory,
-            description: description
+            ...values
           }
         }
       });
