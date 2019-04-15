@@ -8,7 +8,7 @@ import MenuItem from './MenuItem';
 import DropDown from './Dropdown';
 import Avatar from './Avatar';
 
-import settings from '../../../../../settings';
+//import settings from '../../../../../settings';
 
 const ref = { modules: null };
 
@@ -37,7 +37,7 @@ class NavBar extends React.Component {
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
-                {settings.app.name}
+                <img src={require('../../logo/OrgLogo-white.png')} height="40" width="40" />
               </NavLink>
             </MenuItem>
             {__DEV__ && (

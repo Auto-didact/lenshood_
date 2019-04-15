@@ -1,61 +1,117 @@
 import React from 'react';
 
 import { Icon } from 'antd';
-
+import { Link } from 'react-router-dom';
 import Container from './Container';
 import Row from './Row';
 import Col from './Col';
+import './styles.css';
 
 export default class Footer extends React.Component {
   render() {
     return (
       <Container className="no-print">
-        <Row gutter={16}>
-          <Col span={6}>
-            <h3>About Lenshood</h3>
-
-            <ul>
-              <li>About us</li>
-              <li>Terms of Service</li>
-              <li>Privacy Rules</li>
-              <li>Mission</li>
-            </ul>
+        <Row className="footer" gutter={16}>
+          <Col lg={12} sm={24}>
+            <Row>
+              <Col span={12}>
+                <ul>
+                  <h3>About Lenshood</h3>
+                  <li>
+                    <Link to="/about-us">About us</Link>
+                  </li>
+                  <li>
+                    <Link to="/terms-of-service">Terms of Service</Link>
+                  </li>
+                  <li>
+                    <Link to="/privacy-rules">Privacy Rules</Link>
+                  </li>
+                  <li>
+                    <Link to="/mission">Mission</Link>
+                  </li>
+                </ul>
+              </Col>
+              <Col span={12}>
+                <ul>
+                  <h3>How It Works</h3>
+                  <li>
+                    <Link to="/renting">Renting</Link>
+                  </li>
+                  <li>
+                    <Link to="/lending">Lending</Link>
+                  </li>
+                  <li>
+                    <Link to="/TrustAndSafety">Trust And Safety</Link>
+                  </li>
+                  <li>
+                    <Link to="/faq">FAQ</Link>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
           </Col>
-          <Col span={6}>
-            <h3>How It Works</h3>
-
-            <ul>
-              <li>Renting</li>
-              <li>Lending</li>
-              <li>FAQ</li>
-            </ul>
+          <Col lg={12} sm={24}>
+            <Row>
+              <Col span={12}>
+                <ul>
+                  <h3>Keep In Touch</h3>
+                  <li>
+                    <a href="mailto:reachus@lenshood.in">
+                      Write to us:
+                      <br />
+                      reachus@lenshood.in
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      For any inquiry:
+                      <br />
+                      +91-9085626859
+                    </a>
+                  </li>
+                </ul>
+              </Col>
+              <Col span={12}>
+                <ul>
+                  <h3>Follow Us</h3>
+                  <li>
+                    <Link to="/blog">Blog</Link>
+                  </li>
+                  <li>
+                    <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/lenshoodcommunity">
+                      {' '}
+                      <Icon theme="filled" type="facebook" />
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/wearelenshood">
+                      <Icon theme="filled" type="linkedin" />
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/we_are_lenshood/">
+                      <Icon theme="filled" type="instagram" />
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="/">
+                      <Icon type="twitter" />
+                    </a>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
           </Col>
-          <Col span={6}>
-            <h3>Keep In Touch</h3>
-            <ul>
-              <li>
-                Write to us:
-                <br />
-                reachus@lenshood.in
-              </li>
-              <li>
-                For any inquiry:
-                <br />
-                +91-9085626859
-              </li>
-            </ul>
-          </Col>
-          <Col span={6}>
-            <h3>Follow Us</h3>
-            <ul>
-              <li>Blog</li>
-              <li>
-                <Icon type="facebook" />
-                <Icon type="linkedin" />
-                <Icon type="instagram" />
-                <Icon type="twitter" />
-              </li>
-            </ul>
+          <Col className="FooterLogo" span={24} style={{ borderTopStyle: 'solid', padding: '10px 0px 0px 0px' }}>
+            <Row>
+              <Link to="/">
+                <img
+                  src={require('../../logo/OrgLogo.png')}
+                  height="50"
+                  width="50"
+                  align="centre"
+                  style={{
+                    display: 'block',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                />
+              </Link>
+            </Row>
           </Col>
         </Row>
       </Container>

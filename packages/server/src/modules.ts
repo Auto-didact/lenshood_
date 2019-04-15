@@ -1,4 +1,5 @@
 import listing from '@gqlapp/listing-server-ts';
+import order from '@gqlapp/order-server-ts';
 import core from '@gqlapp/core-server-ts';
 import i18n from '@gqlapp/i18n-server-ts';
 import validation from '@gqlapp/validation-common-react';
@@ -22,6 +23,7 @@ const user = require('@gqlapp/user-server-ts').default;
 
 const modules: ServerModule = new ServerModule(
   listing,
+  order,
   authentication,
   cookies,
   i18n,

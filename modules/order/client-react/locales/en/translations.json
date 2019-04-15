@@ -1,0 +1,21 @@
+{
+  "product": {
+    "name": "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
+    "image": "../resources/naruto2.jpg",
+    "days": 4,
+    "date": {
+      "start": "04 Jan'19",
+      "end": "07 Jan'19"
+    },
+    "refund": 5000,
+    "totalRent": 1300
+  },
+  "address": {
+    "name": "Ankit Jain",
+    "address1": "Room A308, Manas Hostel, IITG",
+    "address2": "Guwahati, North Guwahati",
+    "state": "Assam",
+    "PIN": "7810390",
+    "mobile": "+91-9085626859"
+  }
+}
