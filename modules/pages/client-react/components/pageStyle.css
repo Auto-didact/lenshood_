@@ -1,0 +1,42 @@
+/* Mission Page */
+.MissionContainer,
+.TermsContainer,
+.FAQContainer {
+  border: 0.5px solid #ddd;
+  padding: 10px;
+  margin: 0;
+  text-align: justify;
+}
+
+.MissionContainer h1,
+.TermsContainer h1,
+.FAQContainer h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.TermsContainer h2 {
+  width: 300px;
+  font-weight: 600;
+  padding: 20px;
+}
+
+.MissionContainer h2 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.MissionContainer h3,
+.FAQContainer h3 {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.SidebarItems menu.Item {
+  background: "#fff";
+}
+
+.SidebarItemsActive menu.Item {
+  background: "#fff";
+}
