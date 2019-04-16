@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'antd';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import RelatedCard from './RelatedCard';
 
 class SuggestedCardList extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Rate, Button, Card, Avatar } from 'antd';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 
 class UserCard extends Component {
   render() {

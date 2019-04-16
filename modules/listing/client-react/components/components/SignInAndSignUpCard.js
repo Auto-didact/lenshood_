@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Form, Input, Divider, Row, Col, Card, Button } from 'antd';
 import naruto2 from '../resources/naruto2.jpg';
 

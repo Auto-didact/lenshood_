@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Icon, Button, Row, Col } from 'antd';
 
 class DetailsCard extends Component {

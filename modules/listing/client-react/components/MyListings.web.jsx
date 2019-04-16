@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col, Breadcrumb } from 'antd';
-import './resources/listingCatalogue.css';
+// import './resources/listingCatalogue.css';
 import MyList from './components/MyList';
 import AccDetailsMenu from './components/AccDetailsMenu';
 import naruto from './resources/naruto.jpg';

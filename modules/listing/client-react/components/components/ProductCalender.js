@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Calendar, Card, Icon, Avatar } from 'antd';
 import moment from 'moment';
 
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 
 class ProductCalender extends Component {
   render() {
