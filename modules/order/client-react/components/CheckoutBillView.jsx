@@ -1,27 +1,24 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import settings from "../../../../settings";
-import { Row, Col, Icon, Button } from "antd";
-import CheckoutSteps from "./CheckoutSteps";
-import OrderCard from "./OrderCard";
-import naruto2 from "../resources/naruto2.jpg";
+import settings from '../../../../settings';
+import { Row, Col, Icon, Button } from 'antd';
+import CheckoutSteps from './CheckoutSteps';
+import OrderCard from './OrderCard';
+import naruto2 from '../resources/naruto2.jpg';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Bill`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
 export default class CheckoutBillView extends React.Component {
   state = {
     product: {
-      name:
-        "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
+      name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
       image: naruto2,
       days: 4,
       date: {
@@ -32,12 +29,12 @@ export default class CheckoutBillView extends React.Component {
       totalRent: 1300
     },
     address: {
-      name: "Ankit Jain",
-      address1: "Room A308, Manas Hostel, IITG",
-      address2: "Guwahati, North Guwahati",
-      state: "Assam",
-      PIN: "7810390",
-      mobile: "+91-9085626859"
+      name: 'Ankit Jain',
+      address1: 'Room A308, Manas Hostel, IITG',
+      address2: 'Guwahati, North Guwahati',
+      state: 'Assam',
+      PIN: '7810390',
+      mobile: '+91-9085626859'
     }
   };
 
@@ -99,16 +96,8 @@ export default class CheckoutBillView extends React.Component {
                 </Col>
               </Row>
             </Col>
-            <Col
-              lg={{ span: 8, offset: 0 }}
-              sm={{ span: 18, offset: 3 }}
-              xs={{ span: 22, offset: 1 }}
-            >
-              <OrderCard
-                product={this.state.product}
-                paid={false}
-                buttonText={"Continue"}
-              />
+            <Col lg={{ span: 8, offset: 0 }} sm={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+              <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />
             </Col>
           </Row>
         </div>
