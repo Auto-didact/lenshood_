@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Steps } from 'antd';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 
 const Step = Steps.Step;
 

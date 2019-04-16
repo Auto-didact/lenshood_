@@ -1,62 +1,82 @@
-import React, { Component } from 'react';
-import { Row, Col, Form, Input, Button, Checkbox, Upload, Icon, Modal } from 'antd';
-import { PageLayout } from '@gqlapp/look-client-react';
-import './resources/listingCatalogue.css';
-import ListYGSteps from './components/ListYGSteps';
+import React, { Component } from "react";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Upload,
+  Icon,
+  Modal
+} from "antd";
+import { PageLayout } from "@gqlapp/look-client-react";
+// import "./resources/listingCatalogue.css";
+import ListYGSteps from "./components/ListYGSteps";
 
 const { TextArea } = Input;
 
 class ListTourGearProduct extends Component {
   state = {
-    package: ['Naruto', 'Sasuke', 'Sakura', 'Minato', 'Jiraiya', 'Tsunade', 'Hinata', 'Shikamaru', 'Choji'],
+    package: [
+      "Naruto",
+      "Sasuke",
+      "Sakura",
+      "Minato",
+      "Jiraiya",
+      "Tsunade",
+      "Hinata",
+      "Shikamaru",
+      "Choji"
+    ],
     category: [
       {
-        icon: 'camera',
-        name: 'Camera'
+        icon: "camera",
+        name: "Camera"
       },
       {
-        icon: 'printer',
-        name: 'DSLR'
+        icon: "printer",
+        name: "DSLR"
       },
       {
-        icon: 'filter',
-        name: 'Lens'
+        icon: "filter",
+        name: "Lens"
       },
       {
-        icon: 'video-camera',
-        name: 'Video Camera'
+        icon: "video-camera",
+        name: "Video Camera"
       },
       {
-        icon: 'rocket',
-        name: 'Drone and arial'
+        icon: "rocket",
+        name: "Drone and arial"
       },
       {
-        icon: 'cluster',
-        name: 'Tripod and Support'
+        icon: "cluster",
+        name: "Tripod and Support"
       },
       {
-        icon: 'bulb',
-        name: 'Lighting'
+        icon: "bulb",
+        name: "Lighting"
       },
       {
-        icon: 'sound',
-        name: 'Audio and recording'
+        icon: "sound",
+        name: "Audio and recording"
       },
       {
-        icon: 'radar-chart',
-        name: 'Others'
+        icon: "radar-chart",
+        name: "Others"
       }
     ],
-    value: '',
+    value: "",
     previewVisible: false,
-    previewImage: '',
+    previewImage: "",
     fileList: []
   };
   classNamesgroup(e) {
     if (this.state.value === e) {
-      return 'ActiveCond';
+      return "ActiveCond prodDiv";
     } else {
-      return 'NotActive';
+      return "NotActive prodDiv";
     }
   }
   renderCategory(e) {
@@ -78,16 +98,20 @@ class ListTourGearProduct extends Component {
     const uploadButton = (
       <div>
         <Icon type="plus" />
-        <div style={{ textAlign: 'center' }} className="ant-upload-text">
+        <div style={{ textAlign: "center" }} className="ant-upload-text">
           Upload
         </div>
       </div>
     );
     return (
       <PageLayout>
-        <div style={{ padding: '20px' }}>
+        <div className="Listyourgearcards">
           <Row>
-            <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} style={{ padding: '24px auto' }}>
+            <Col
+              md={{ span: 14, offset: 5 }}
+              sm={{ span: 20, offset: 2 }}
+              className="LYGcol1"
+            >
               <ListYGSteps step={1} />
               <Form layout="vertical">
                 <Form.Item label={<strong>Listing title</strong>}>
@@ -100,8 +124,8 @@ class ListTourGearProduct extends Component {
                   <Input type="text" />
                 </Form.Item>
                 <Form.Item label={<strong>In the package</strong>}>
-                  <p style={{ fontSize: '10px' }}>Select your offering</p>
-                  <Checkbox.Group style={{ width: '100%' }}>
+                  <p className="font10">Select your offering</p>
+                  <Checkbox.Group width={"100%"}>
                     <Row gutter={16}>
                       {this.state.package.map(item => (
                         <Col span={12}>
@@ -112,16 +136,17 @@ class ListTourGearProduct extends Component {
                   </Checkbox.Group>
                 </Form.Item>
                 <Form.Item label={<strong>Gear category</strong>}>
-                  <p style={{ fontSize: '10px' }}>Select the closest category your gear belongs to</p>
+                  <p className="font10">
+                    Select the closest category your gear belongs to
+                  </p>
                   <Row gutter={16}>
                     {this.state.category.map(item => (
-                      <Col md={6} xs={8} style={{ textAlign: 'center' }}>
+                      <Col md={6} xs={8}>
                         <div
                           onClick={e => this.renderCategory(item.name)}
                           className={this.classNamesgroup(item.name)}
-                          style={{ padding: '50px', height: '200px' }}
                         >
-                          <div style={{ fontSize: '50px' }}>
+                          <div>
                             <Icon type={item.icon} />
                           </div>
                           <h5>{item.name}</h5>
@@ -131,7 +156,9 @@ class ListTourGearProduct extends Component {
                   </Row>
                 </Form.Item>
                 <Form.Item label={<strong>Upload Images</strong>}>
-                  <p style={{ fontSize: '10px' }}>Upload upto 4 images in jpj, jpeg, png format.</p>
+                  <p className="font10">
+                    Upload upto 4 images in jpj, jpeg, png format.
+                  </p>
                   <Upload
                     action="//jsonplaceholder.typicode.com/posts/"
                     listType="picture-card"
@@ -141,8 +168,12 @@ class ListTourGearProduct extends Component {
                   >
                     {fileList.length >= 4 ? null : uploadButton}
                   </Upload>
-                  <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                    <img alt="" style={{ width: '100%' }} src={previewImage} />
+                  <Modal
+                    visible={previewVisible}
+                    footer={null}
+                    onCancel={this.handleCancel}
+                  >
+                    <img alt="" width={"100%"} src={previewImage} />
                   </Modal>
                 </Form.Item>
                 <Row gutter={32}>
