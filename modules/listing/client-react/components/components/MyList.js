@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Layout, Button, Row, Col } from 'antd';
 import DetailsCard from './DetailsCard';
 

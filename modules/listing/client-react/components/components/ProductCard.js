@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Carousel, Card } from 'antd';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 
 class ProductCard extends Component {
   render() {

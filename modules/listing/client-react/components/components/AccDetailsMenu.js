@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Item } = Menu;

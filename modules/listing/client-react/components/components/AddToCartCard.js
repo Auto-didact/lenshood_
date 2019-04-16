@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Row, Col, Icon, DatePicker, Checkbox, Slider, Button, Card } from 'antd';
 
 const { RangePicker } = DatePicker;

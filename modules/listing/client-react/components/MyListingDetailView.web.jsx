@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col, Breadcrumb, Card } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
-import './resources/listingCatalogue.css';
+// import './resources/listingCatalogue.css';
 import AccDetailsMenu from './components/AccDetailsMenu';
 import DetailsCard from './components/DetailsCard';
 import ProductCalender from './components/ProductCalender';

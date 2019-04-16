@@ -1,4 +1,4 @@
-@import 'antd';
+@import "antd";
 
 // Setting Variables
 @primary-color: #23b195; // primary color for all components
@@ -11,10 +11,6 @@
 @menu-highlight-color: @secondary-color;
 @border-radius-base: 3px; // major border radius
 
-
-
-
-
 #root {
   min-height: 100vh;
   display: flex;
@@ -25,11 +21,11 @@
   border-bottom: none;
 }
 
-.ant-menu-horizontal>.ant-menu-item>a {
+.ant-menu-horizontal > .ant-menu-item > a {
   font-size: 1.4em;
 }
 
-.ant-menu-horizontal>.ant-menu-item-selected>a {
+.ant-menu-horizontal > .ant-menu-item-selected > a {
   font-weight: bold;
   font-size: 1.4em;
 }
@@ -48,7 +44,7 @@
 
 .no-print {
   background: @tertiary-color;
-  color: @secondary-color  !important;
+  color: @secondary-color !important;
   padding: 2% 5%;
 }
 
@@ -128,9 +124,6 @@
   color: white !important;
   border: #23b195 0.5px solid !important;
   width: 33%;
-}
-.filterButtons {
-  margin: 0 5px !important;
 }
 
 .ActiveCond,
@@ -530,4 +523,74 @@
 
 .prodCond ul {
   padding-left: 22px;
+}
+
+// Listing Catalogue
+.Pad20 {
+  padding: 0 20px;
+}
+
+.pad10 {
+  padding: 0 10%;
+}
+
+.RowDiv {
+  padding: 5px 10%;
+  overflow: hidden;
+}
+
+.PadB10 {
+  padding-bottom: 10px;
+}
+
+.mapView {
+  margin: 0 10px 15px 10px;
+}
+
+.CatalogueHr {
+  border: 0.5px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.headingTop {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+// RelatedCard
+
+.RelCardMeta {
+  margin-top: 20px !important;
+  padding: 0 !important;
+}
+
+.RelCardh {
+  font-size: 10px;
+  line-height: 15px;
+  margin: 5px 0;
+}
+
+.CardRate {
+  color: #23b195;
+  font-size: 6px;
+}
+
+.RelIconGroup {
+  position: absolute;
+  right: 5px;
+  bottom: 40px;
+  float: right;
+  color: #23b195;
+  font-size: 12px;
+}
+
+.marginR10 {
+  margin-right: 10px;
+}
+
+.filterButtons {
+  float: left;
+  width: 100%;
+  margin-right: 3px;
+  overflow: hidden;
 }

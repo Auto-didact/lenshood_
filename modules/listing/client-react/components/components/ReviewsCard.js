@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Rate, List, Row, Col, Card, Avatar } from 'antd';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 
 class ReviewsCard extends Component {
   averageReviews(array) {

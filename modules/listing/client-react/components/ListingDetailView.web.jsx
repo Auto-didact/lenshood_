@@ -4,7 +4,7 @@ import { translate } from '@gqlapp/i18n-client-react';
 import Helmet from 'react-helmet';
 import { Row, Col, Breadcrumb, Card } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
-import './resources/listingCatalogue.css';
+// import './resources/listingCatalogue.css';
 import UserCard from './components/userCard';
 import ProductCard from './components/ProductCard';
 import ReviewsCard from './components/ReviewsCard';
