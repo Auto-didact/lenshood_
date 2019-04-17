@@ -166,7 +166,7 @@ class ListingDetailView extends Component {
     } else {
       return (
         <PageLayout>
-          <div style={{ padding: '10px 20px' }}>
+          <div className="detViewPad">
             <Breadcrumb separator=">">
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item href=""> DSLR cameras </Breadcrumb.Item>
@@ -175,15 +175,11 @@ class ListingDetailView extends Component {
             </Breadcrumb>
           </div>
           <h1
-            style={{
-              backgroundColor: 'rgba(35, 177, 149,0.2)',
-              padding: '10px 7%',
-              fontSize: '25px'
-            }}
+           className="gearCat"
           >
             {listing.gearCategory}
           </h1>
-          <Row style={{ padding: '0 7%' }}>
+          <Row className="padH4p">
             <Col lg={16} md={13} sm={24}>
               <ProductCard listing={listing} />
               <ReviewsCard reviews={this.state.product.reviews} />
@@ -199,13 +195,13 @@ class ListingDetailView extends Component {
             </Col>
             {/* <Col span={24}>
             <Card>
-              <h2 style={{ fontWeight: 'bold' }}>Other listings by {this.state.product.seller.name}</h2>
+              <h2 className="fontBold">Other listings by {this.state.product.seller.name}</h2>
               <SuggestedCardList relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
             {/* <Col span={24}>
             <Card>
-              <h2 style={{ fontWeight: 'bold' }}>Frequently rented along with {this.state.product.title}</h2>
+              <h2 className="fontBold">Frequently rented along with {this.state.product.title}</h2>
               <SuggestedCardList relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
