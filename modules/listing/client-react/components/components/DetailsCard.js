@@ -6,47 +6,27 @@ class DetailsCard extends Component {
   render() {
     return (
       <Row
-        style={{
-          marginBottom: '30px',
-          border: '1px solid #ddd',
-          minWidth: '100%'
-        }}
+        className="DetailsRow"
       >
         <Col span={10}>
-          <div style={{ width: '100%' }}>
+          <div className="width100">
             <img
-              style={{
-                height: '160px',
-                width: '100%',
-                paddingRight: '20px'
-              }}
+              className="DetailsWidth"
               alt=""
               src={this.props.item.image}
             />
           </div>
         </Col>
-        <Col span={14} style={{ paddingTop: '10px' }}>
+        <Col span={14} className="PadT10" >
           {this.props.item.nature === 'On Rent' ? (
             <h6
-              style={{
-                color: 'white',
-                padding: '1px 5px',
-                float: 'right',
-                marginRight: '12px',
-                background: '#e3c41c'
-              }}
+            className="OnRentTag"
             >
               On Rent
             </h6>
           ) : (
             <h6
-              style={{
-                color: 'white',
-                padding: '1px 5px',
-                float: 'right',
-                marginRight: '12px',
-                background: '#e3951c'
-              }}
+              className="OnShelfTag"
             >
               On Shelf
             </h6>
@@ -54,36 +34,22 @@ class DetailsCard extends Component {
           <h4>{this.props.item.name}</h4>
           <h5>
             <span
-              style={{
-                background: '#23b195',
-                color: 'white',
-                padding: '0px 6px 1px 7px'
-              }}
+              className="StarRate"
             >
               {this.props.item.rating} <Icon type="star" theme="filled" />
             </span>
-            <span style={{ color: '#23b195' }}> ({this.props.item.reviews})</span>
+            <span className="mainColor"> ({this.props.item.reviews})</span>
           </h5>
-          <h5 style={{ marginBottom: '25px' }}>
+          <h5 className="marginB25">
             <strong>&#8377; {this.props.item.rent} per day</strong>
           </h5>
           <Button
-            style={{
-              background: '#23b195',
-              color: 'white',
-              width: '40%',
-              margin: '0 2.5%'
-            }}
+           className="ListingButtons"
           >
             <span>{this.props.buttonText} Listing</span>
           </Button>
           <Button
-            style={{
-              background: '#23b195',
-              color: 'white',
-              width: '40%',
-              margin: '0 2.5%'
-            }}
+           className="ListingButtons"
           >
             Remove Listing
           </Button>

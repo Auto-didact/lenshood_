@@ -25,15 +25,11 @@ class RelatedCard extends Component {
             className="RelCardMeta"
             avatar={<Avatar />}
             title={
-              <h4
-               className="RelCardh"
-              >
+              <h4 className="RelCardh">
                 {seller}
                 <br />
                 <Rate disabled defaultValue={rating} className="CardRate" />
-                <div
-                 className="RelIconGroup" 
-                >
+                <div className="RelIconGroup">
                   <Icon type="car" theme="filled" className="marginR10" />
                   <Icon type="safety-certificate" theme="filled" />
                 </div>

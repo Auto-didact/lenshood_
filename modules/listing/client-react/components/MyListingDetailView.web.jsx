@@ -67,16 +67,16 @@ class MyListDetails extends Component {
       }
     ]
   };
+
   render() {
     return (
       <PageLayout>
-        <div style={{ padding: '20px' }}>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Account</Breadcrumb.Item>
             <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
           </Breadcrumb>
-          <Layout style={{ padding: '24px 0', background: '#fff' }}>
-            <Row style={{ padding: '0 5%' }}>
+          <Layout className="layoutList">
+            <Row className="layoutRow">
               <Col lg={7} md={24}>
                 <AccDetailsMenu select={3} />
               </Col>
@@ -89,7 +89,6 @@ class MyListDetails extends Component {
               </Col>
             </Row>
           </Layout>
-        </div>
       </PageLayout>
     );
   }
