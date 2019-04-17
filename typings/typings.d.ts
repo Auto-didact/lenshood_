@@ -31,4 +31,5 @@ declare module '@gqlapp/user-server-ts' {
 declare module '@gqlapp/authentication-client-react' {
   const authentication: any;
   export = authentication;
+
 }
