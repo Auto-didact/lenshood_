@@ -9,20 +9,16 @@ class AccDetailsMenu extends Component {
   render() {
     return (
       <div
-        style={{
-          minWidth: '100%',
-          overflow: 'hidden'
-        }}
+        className="SliderDiv"
       >
-        <Sider width={550} style={{ background: '#fff', padding: '40px 0' }}>
-          <h4 style={{ padding: '0 20px' }}>
+        <Sider width={550} className="SliderStart">
+          <h4 className="Pad20">
             <strong>Account Details</strong>
           </h4>
           <Menu
             mode="inline"
             defaultSelectedKeys={[`${this.props.select}`]}
             defaultOpenKeys={['sub1']}
-            style={{ height: '100%' }}
             className="AccountDetails"
           >
             <Item className="AccDetItem" key="1">
