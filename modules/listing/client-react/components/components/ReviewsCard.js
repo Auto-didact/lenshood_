@@ -61,7 +61,7 @@ class ReviewsCard extends Component {
                   >
                     <Link
                       to=""
-                      className="itemName"
+                      className="itemLink"
                       href="#"
                     >
                       {item.name}
