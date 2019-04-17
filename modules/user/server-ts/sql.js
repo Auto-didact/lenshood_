@@ -3,9 +3,34 @@ import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import { has } from 'lodash';
 import bcrypt from 'bcryptjs';
 import { knex, returnId } from '@gqlapp/database-server-ts';
+import { Model } from 'objection';
+
+// Give the knex object to objection.
+Model.knex(knex);
 
 // Actual query fetching and transformation in DB
-class User {
+class User extends Model {
+  static get tableName() {
+    return 'listing';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  // static get relationMappings() {
+  //   return {
+  //     listing_images: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: ListingImage,
+  //       join: {
+  //         from: 'listing.id',
+  //         to: 'listing_image.listing_id'
+  //       }
+  //     }
+  //   };
+  // }
+
   async getUsers(orderBy, filter) {
     const queryBuilder = knex
       .select(
