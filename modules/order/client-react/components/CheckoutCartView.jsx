@@ -113,7 +113,7 @@ export default class CheckoutCartView extends React.Component {
 class CartItem extends React.Component {
   render() {
     return (
-      <Row className="cartitem">
+      <Row className="cartitem borderRadius9">
         <Col span={8}>
           <img alt="" src={this.props.products.image} />
         </Col>
