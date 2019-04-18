@@ -11,25 +11,137 @@ Model.knex(knex);
 // Actual query fetching and transformation in DB
 class User extends Model {
   static get tableName() {
-    return 'listing';
+    return 'user';
   }
 
   static get idColumn() {
     return 'id';
   }
 
-  // static get relationMappings() {
-  //   return {
-  //     listing_images: {
-  //       relation: Model.HasManyRelation,
-  //       modelClass: ListingImage,
-  //       join: {
-  //         from: 'listing.id',
-  //         to: 'listing_image.listing_id'
-  //       }
-  //     }
-  //   };
-  // }
+  static get relationMappings() {
+    return {
+      profile: {
+        relation: Model.HasOneRelation,
+        modelClass: UserProfile,
+        join: {
+          from: 'user.id',
+          to: 'user_profile.user_id'
+        }
+      },
+      addresses: {
+        relation: Model.HasManyRelation,
+        modelClass: UserAddress,
+        join: {
+          from: 'user.id',
+          to: 'user_address.user_id'
+        }
+      },
+      identification: {
+        relation: Model.HasManyRelation,
+        modelClass: UserIdentification,
+        join: {
+          from: 'user.id',
+          to: 'user_identification.user_id'
+        }
+      },
+      verification: {
+        relation: Model.HasOneRelation,
+        modelClass: UserVerification,
+        join: {
+          from: 'user.id',
+          to: 'user_verification.user_id'
+        }
+      },
+      endorsements: {
+        relation: Model.HasManyRelation,
+        modelClass: UserEndorsement,
+        join: {
+          from: 'user.id',
+          to: 'user_endorsement.endorsee_id'
+        }
+      },
+      endorsed: {
+        relation: Model.HasManyRelation,
+        modelClass: UserEndorsement,
+        join: {
+          from: 'user.id',
+          to: 'user_endorsement.endorser_id'
+        }
+      },
+      followers: {
+        relation: Model.HasManyRelation,
+        modelClass: UserFollower,
+        join: {
+          from: 'user.id',
+          to: 'user_follwer.followee_id'
+        }
+      },
+      following: {
+        relation: Model.HasManyRelation,
+        modelClass: UserFollower,
+        join: {
+          from: 'user.id',
+          to: 'user_follower.follower_id'
+        }
+      },
+      portfolio: {
+        relation: Model.HasOneRelation,
+        modelClass: UserPortfolio,
+        join: {
+          from: 'user.id',
+          to: 'user_portfolio.user_id'
+        }
+      },
+      remarks: {
+        relation: Model.HasManyRelation,
+        modelClass: UserRemark,
+        join: {
+          from: 'user.id',
+          to: 'user_remark.user_id'
+        }
+      },
+      auth_certification: {
+        relation: Model.HasOneRelation,
+        modelClass: AuthCertificate,
+        join: {
+          from: 'user.id',
+          to: 'auth_certificate.user_id'
+        }
+      },
+      auth_facebook: {
+        relation: Model.HasOneRelation,
+        modelClass: AuthFacebook,
+        join: {
+          from: 'user.id',
+          to: 'auth_facebook.user_id'
+        }
+      },
+      auth_google: {
+        relation: Model.HasOneRelation,
+        modelClass: AuthGoogle,
+        join: {
+          from: 'user.id',
+          to: 'auth_google.user_id'
+        }
+      },
+      auth_github: {
+        relation: Model.HasOneRelation,
+        modelClass: AuthGithub,
+        join: {
+          from: 'user.id',
+          to: 'auth_github.user_id'
+        }
+      },
+      auth_linkedin: {
+        relation: Model.HasOneRelation,
+        modelClass: AuthLinkedin,
+        join: {
+          from: 'user.id',
+          to: 'auth_linkedin.user_id'
+        }
+      }
+    };
+  }
 
   async getUsers(orderBy, filter) {
     const queryBuilder = knex
@@ -59,40 +171,40 @@ class User extends Model {
       .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
       .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id');
 
-    // add order by
-    if (orderBy && orderBy.column) {
-      let column = orderBy.column;
-      let order = 'asc';
-      if (orderBy.order) {
-        order = orderBy.order;
-      }
+    // // add order by
+    // if (orderBy && orderBy.column) {
+    //   let column = orderBy.column;
+    //   let order = 'asc';
+    //   if (orderBy.order) {
+    //     order = orderBy.order;
+    //   }
 
-      queryBuilder.orderBy(decamelize(column), order);
-    }
+    //   queryBuilder.orderBy(decamelize(column), order);
+    // }
 
-    // add filter conditions
-    if (filter) {
-      if (has(filter, 'role') && filter.role !== '') {
-        queryBuilder.where(function() {
-          this.where('u.role', filter.role);
-        });
-      }
+    // // add filter conditions
+    // if (filter) {
+    //   if (has(filter, 'role') && filter.role !== '') {
+    //     queryBuilder.where(function() {
+    //       this.where('u.role', filter.role);
+    //     });
+    //   }
 
-      if (has(filter, 'isActive') && filter.isActive !== null) {
-        queryBuilder.where(function() {
-          this.where('u.is_active', filter.isActive);
-        });
-      }
+    //   if (has(filter, 'isActive') && filter.isActive !== null) {
+    //     queryBuilder.where(function() {
+    //       this.where('u.is_active', filter.isActive);
+    //     });
+    //   }
 
-      if (has(filter, 'searchText') && filter.searchText !== '') {
-        queryBuilder.where(function() {
-          this.where(knex.raw('LOWER(??) LIKE LOWER(?)', ['username', `%${filter.searchText}%`]))
-            .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['email', `%${filter.searchText}%`]))
-            .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['first_name', `%${filter.searchText}%`]))
-            .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['last_name', `%${filter.searchText}%`]));
-        });
-      }
-    }
+    //   if (has(filter, 'searchText') && filter.searchText !== '') {
+    //     queryBuilder.where(function() {
+    //       this.where(knex.raw('LOWER(??) LIKE LOWER(?)', ['username', `%${filter.searchText}%`]))
+    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['email', `%${filter.searchText}%`]))
+    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['first_name', `%${filter.searchText}%`]))
+    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['last_name', `%${filter.searchText}%`]));
+    //     });
+    //   }
+    // }
 
     return camelizeKeys(await queryBuilder);
   }
@@ -394,3 +506,339 @@ class User extends Model {
 const userDAO = new User();
 
 export default userDAO;
+
+// UserProfile model.
+class UserProfile extends Model {
+  static get tableName() {
+    return 'user_profile';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_profile.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserAddress model.
+class UserAddress extends Model {
+  static get tableName() {
+    return 'user_address';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_address.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserIdentification model.
+class UserIdentification extends Model {
+  static get tableName() {
+    return 'user_identification';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_identification.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserVerification model.
+class UserVerification extends Model {
+  static get tableName() {
+    return 'user_verification';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_verification.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserEndorsement model.
+class UserEndorsement extends Model {
+  static get tableName() {
+    return 'user_endorsement';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      endorser: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_endorsement.endorser_id',
+          to: 'user.id'
+        }
+      },
+      endorsee: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_endorsement.endorsee_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserFollower model.
+class UserFollower extends Model {
+  static get tableName() {
+    return 'user_follower';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      follower: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_follower.follwer_id',
+          to: 'user.id'
+        }
+      },
+      follwee: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_follower.followee_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserPortfolio model.
+class UserPortfolio extends Model {
+  static get tableName() {
+    return 'user_portfoliio';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_portfolio.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserRemark model.
+class UserRemark extends Model {
+  static get tableName() {
+    return 'user_remark';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_remark.user_id',
+          to: 'user.id'
+        }
+      },
+      admin: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_remark.admin_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// AuthLinkedin model.
+class AuthLinkedin extends Model {
+  static get tableName() {
+    return 'auth_linkedin';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'auth_linkedin.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// AuthGithub model.
+class AuthGithub extends Model {
+  static get tableName() {
+    return 'auth_github';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'auth_github.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// AuthGoogle model.
+class AuthGoogle extends Model {
+  static get tableName() {
+    return 'auth_google';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'auth_google.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// AuthFacebook model.
+class AuthFacebook extends Model {
+  static get tableName() {
+    return 'auth_facebook';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'auth_facebook.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// AuthCertificate model.
+class AuthCertificate extends Model {
+  static get tableName() {
+    return 'auth_certificate';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'auth_certificate.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}

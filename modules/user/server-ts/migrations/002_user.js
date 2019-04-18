@@ -232,6 +232,13 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('auth_google'),
     knex.schema.dropTable('auth_github'),
     knex.schema.dropTable('auth_linkedin'),
+    knex.schema.dropTable('user_remark'),
+    knex.schema.dropTable('user_portfoio'),
+    knex.schema.dropTable('user_follower'),
+    knex.schema.dropTable('user_endorsement'),
+    knex.schema.dropTable('user_verification'),
+    knex.schema.dropTable('user_identification'),
+    knex.schema.dropTable('user_address'),
     knex.schema.dropTable('user_profile'),
     knex.schema.dropTable('user')
   ]);
