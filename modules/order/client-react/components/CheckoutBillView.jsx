@@ -55,7 +55,7 @@ export default class CheckoutBillView extends React.Component {
                   xs={{ span: 18, offset: 3 }}
                   sm={{ span: 12, offset: 0 }}
                   md={{ span: 10, offset: 0 }}
-                  className="homeCol"
+                  className="PadB30"
                 >
                   <div className="HomeAddress">
                     <div className="HomeAddressBlock">
@@ -82,7 +82,7 @@ export default class CheckoutBillView extends React.Component {
                   xs={{ span: 14, offset: 5 }}
                   sm={{ span: 10, offset: 0 }}
                   md={{ span: 8, offset: 0 }}
-                  className="homeCol"
+                  className="PadB30"
                 >
                   <div
                     className="AddNewAddressBlock"

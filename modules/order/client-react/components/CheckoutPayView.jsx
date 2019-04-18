@@ -38,7 +38,7 @@ export default class CheckoutPay extends React.Component {
       <PageLayout>
         {renderMetaData()}
         <div className="checkoutDiv">
-          <Row gutter={32}>
+          <Row gutter={16}>
             <CheckoutSteps step={2} />
             <Col lg={6} sm={10} className="ColMenu">
               <div>
