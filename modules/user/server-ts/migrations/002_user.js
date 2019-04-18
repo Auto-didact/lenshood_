@@ -14,8 +14,8 @@ exports.up = function(knex, Promise) {
       table.string('first_name');
       table.string('last_name');
 
-      table.boolean('is_verified');
-      table.boolean('is_available');
+      table.boolean('is_verified').defaultTo(false);
+      table.boolean('is_available').defaultTo(true);
       table.string('website');
       table.string('about');
       table.string('designation');
@@ -76,7 +76,7 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.string('type');
       table.string('document_url');
-      table.boolean('is_verified');
+      table.boolean('is_verified').defaultTo(false);
       table
         .integer('user_id')
         .unsigned()
@@ -87,11 +87,11 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('user_verification', table => {
       table.increments();
-      table.boolean('is_email_verified');
-      table.boolean('is_mobile_verified');
-      table.boolean('is_address_verified');
-      table.boolean('is_id_verified');
-      table.boolean('is_referred');
+      table.boolean('is_email_verified').defaultTo(false);
+      table.boolean('is_mobile_verified').defaultTo(false);
+      table.boolean('is_address_verified').defaultTo(false);
+      table.boolean('is_id_verified').defaultTo(false);
+      table.boolean('is_referred').defaultTo(false);
       table
         .integer('user_id')
         .unsigned()
