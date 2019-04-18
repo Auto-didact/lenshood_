@@ -5,6 +5,13 @@ export async function seed(knex, Promise) {
   await truncateTables(knex, Promise, [
     'user',
     'user_profile',
+    'user_address',
+    'user_identification',
+    'user_verification',
+    'user_endorsement',
+    'user_follower',
+    'user_portfolio',
+    'user_remark',
     'auth_certificate',
     'auth_facebook',
     'auth_github',
