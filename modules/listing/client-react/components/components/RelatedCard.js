@@ -18,8 +18,8 @@ class RelatedCard extends Component {
     const rating = 4;
 
     return (
-      <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
-        <Card hoverable cover={<img alt="" src={listing_img} />}>
+      <Link className="listing-link" to={`/listing-detail/${listing_id}`} >
+        <Card hoverable cover={<img alt="" src={listing_img} className="relatedCardImg"/>} className="relatedCard">
           <Meta title={title.substring(0, 25)} description={<h5>&#8377;{rent_per_day} per day</h5>} />
           <Meta
             className="RelCardMeta"
