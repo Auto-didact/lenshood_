@@ -31,7 +31,7 @@ class MyListingProducts extends Component {
   render() {
     return (
       <Content style={{ padding: '0 30px 0 30px', minHeight: 280, minWidth: '100%' }}>
-        <Row style={{ margin: '15px' }}>
+        <Row>
           <Col md={10} xs={8}>
             <h2 style={{ fontSize: '23px', fontWeight: 'bold' }}>My Listings</h2>
             <br />
