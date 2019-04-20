@@ -12,7 +12,7 @@ type User {
   endorsed: [UserEndorsed]
   followers: [UserFollower]
   following: [UserFollowing]
-  portfolio: [UserPortfolio]
+  portfolios: [UserPortfolio]
   remarks: [UserRemark]
 
   authCertificate: CertificateAuth
