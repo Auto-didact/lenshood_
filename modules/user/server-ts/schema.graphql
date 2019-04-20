@@ -6,12 +6,59 @@ type User {
   email: String!
   profile: UserProfile
   auth: UserAuth
+  createdAt: String
+  updatedAt: String
 }
 
 type UserProfile {
+  id: Int
   firstName: String
   lastName: String
+  isVerified: Boolean
+  isAvailable: Boolean
+  website: String
+  about: String
+  designation: String
+  avatar: String
+  rating: String
+  responseTime: String
+  acceptanceRate: String
+  mobile: String
+  flag: String
+  createdAt: String
+  updatedAt: String
+
+  # referred_by
   fullName: String
+}
+
+type UserIdentification {
+  id: Int
+  type: String
+  documentUrl: String
+  isVerified: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+type UserAddress {
+  id: Int
+  streetAddress1: String
+  streetAddress2: String
+  city: String
+  state: String
+  pinCode: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserVerification {
+  id: Int
+  isEmailVerified: Boolean
+  isMobileVerified: Boolean
+  isAddressVerified: Boolean
+  isIDVerified: Boolean
+  isReferred: Boolean
 }
 
 # Additional authentication service info

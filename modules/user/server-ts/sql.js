@@ -73,7 +73,7 @@ class User extends Model {
         modelClass: UserFollower,
         join: {
           from: 'user.id',
-          to: 'user_follwer.followee_id'
+          to: 'user_follower.followee_id'
         }
       },
       following: {
@@ -100,7 +100,7 @@ class User extends Model {
           to: 'user_remark.user_id'
         }
       },
-      auth_certification: {
+      auth_certificate: {
         relation: Model.HasOneRelation,
         modelClass: AuthCertificate,
         join: {
@@ -144,32 +144,36 @@ class User extends Model {
   }
 
   async getUsers(orderBy, filter) {
-    const queryBuilder = knex
-      .select(
-        'u.id as id',
-        'u.username as username',
-        'u.role',
-        'u.is_active',
-        'u.email as email',
-        'up.first_name as first_name',
-        'up.last_name as last_name',
-        'ca.serial',
-        'fa.fb_id',
-        'fa.display_name AS fbDisplayName',
-        'lna.ln_id',
-        'lna.display_name AS lnDisplayName',
-        'gha.gh_id',
-        'gha.display_name AS ghDisplayName',
-        'ga.google_id',
-        'ga.display_name AS googleDisplayName'
-      )
-      .from('user AS u')
-      .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-      .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-      .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-      .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-      .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-      .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id');
+    const eager =
+      '[profile, addresses, identification, verification, endorsements, endorsed, followers, following, portfolio, remarks, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
+    // const queryBuilder = knex
+    //   .select(
+    //     'u.id as id',
+    //     'u.username as username',
+    //     'u.role',
+    //     'u.is_active',
+    //     'u.email as email',
+    //     'up.first_name as first_name',
+    //     'up.last_name as last_name',
+    //     'ca.serial',
+    //     'fa.fb_id',
+    //     'fa.display_name AS fbDisplayName',
+    //     'lna.ln_id',
+    //     'lna.display_name AS lnDisplayName',
+    //     'gha.gh_id',
+    //     'gha.display_name AS ghDisplayName',
+    //     'ga.google_id',
+    //     'ga.display_name AS googleDisplayName'
+    //   )
+    //   .from('user AS u')
+    //   .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
+    //   .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
+    //   .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
+    //   .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
+    //   .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
+    //   .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id');
+
+    const queryBuilder = User.query().eager(eager);
 
     // // add order by
     // if (orderBy && orderBy.column) {
@@ -670,7 +674,7 @@ class UserFollower extends Model {
 // UserPortfolio model.
 class UserPortfolio extends Model {
   static get tableName() {
-    return 'user_portfoliio';
+    return 'user_portfolio';
   }
 
   static get idColumn() {
