@@ -145,7 +145,7 @@ class User extends Model {
 
   async getUsers(orderBy, filter) {
     const eager =
-      '[profile, addresses, identification, verification, endorsements, endorsed, followers, following, portfolio, remarks, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
+      '[profile, profile.referred_by, addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolio, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
     // const queryBuilder = knex
     //   .select(
     //     'u.id as id',
