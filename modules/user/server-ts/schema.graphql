@@ -5,7 +5,22 @@ type User {
   isActive: Boolean
   email: String!
   profile: UserProfile
-  auth: UserAuth
+  addresses: [UserAddress]
+  identification: [UserIdentification]
+  verification: UserVerification
+  endorsements: [UserEndorsement]
+  endorsed: [UserEndorsed]
+  followers: [UserFollower]
+  following: [UserFollowing]
+  portfolio: [UserPortfolio]
+  remarks: [UserRemark]
+
+  auth_certificate: CertificateAuth
+  auth_facebook: FacebookAuth
+  auth_google: GoogleAuth
+  auth_github: GithubAuth
+  auth_linkedin: LinkedInAuth
+
   createdAt: String
   updatedAt: String
 }
@@ -28,7 +43,8 @@ type UserProfile {
   createdAt: String
   updatedAt: String
 
-  # referred_by
+  referredBy: User
+
   fullName: String
 }
 
@@ -59,7 +75,58 @@ type UserVerification {
   isAddressVerified: Boolean
   isIDVerified: Boolean
   isReferred: Boolean
+  createdAt: String
+  updatedAt: String
+
 }
+
+type UserEndorsement {
+  id: Int
+  endorser: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserEndorsed {
+  id: Int
+  endorsee: User
+  createdAt: String
+  updatedAt: String
+}
+
+
+type UserFollower {
+  id: Int
+  follower: User
+  createdAt: String
+  updatedAt: String
+
+}
+
+type UserFollowing {
+  id: Int
+  followee: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPortfolio {
+  id: Int
+  platform: String
+  portfolioUrl: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserRemark {
+  id: Int
+  type: String
+  remark: String
+  admin: User
+  createdAt: String
+  updatedAt: String
+}
+
 
 # Additional authentication service info
 type UserAuth {
@@ -72,26 +139,38 @@ type UserAuth {
 
 type CertificateAuth {
   serial: String
+  createdAt: String
+  updatedAt: String
 }
 
 type FacebookAuth {
   fbId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
+
 }
 
 type GoogleAuth {
   googleId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type GithubAuth {
   ghId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type LinkedInAuth {
   lnId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
+
 }
 
 extend type Query {
