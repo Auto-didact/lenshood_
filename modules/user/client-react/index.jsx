@@ -114,9 +114,11 @@ export default new ClientModule({
     </IfNotLoggedIn>
   ],
   navItemAccount: [
-    <MenuItem key="/profile">
-      <NavLinkProfileWithI18n />
-    </MenuItem>
+    <IfLoggedIn key="/profile">
+      <MenuItem key="/profile">
+        <NavLinkProfileWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
   ],
 
   resolver: [resolvers],
