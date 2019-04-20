@@ -10,7 +10,7 @@ Model.knex(knex);
 
 // Actual query fetching and transformation in DB
 const user_eager =
-  '[profile, profile.referred_by, profile.referred_by.profile, addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolio, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
+  '[profile, profile.[referred_by, referred_by.profile], addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolios, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
 
 class User extends Model {
   static get tableName() {
@@ -87,8 +87,8 @@ class User extends Model {
           to: 'user_follower.follower_id'
         }
       },
-      portfolio: {
-        relation: Model.HasOneRelation,
+      portfolios: {
+        relation: Model.HasManyRelation,
         modelClass: UserPortfolio,
         join: {
           from: 'user.id',
