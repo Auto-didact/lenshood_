@@ -15,11 +15,11 @@ type User {
   portfolio: [UserPortfolio]
   remarks: [UserRemark]
 
-  auth_certificate: CertificateAuth
-  auth_facebook: FacebookAuth
-  auth_google: GoogleAuth
-  auth_github: GithubAuth
-  auth_linkedin: LinkedInAuth
+  authCertificate: CertificateAuth
+  authFacebook: FacebookAuth
+  authGoogle: GoogleAuth
+  authGithub: GithubAuth
+  authLinkedin: LinkedInAuth
 
   createdAt: String
   updatedAt: String
@@ -42,10 +42,7 @@ type UserProfile {
   flag: String
   createdAt: String
   updatedAt: String
-
   referredBy: User
-
-  fullName: String
 }
 
 type UserIdentification {
@@ -177,7 +174,7 @@ extend type Query {
   # Get all users ordered by: OrderByUserInput add filtered by: FilterUserInput
   users(orderBy: OrderByUserInput, filter: FilterUserInput): [User]
   # Get user by id
-  user(id: Int!): UserPayload
+  user(id: Int!): User
   # Get current user
   currentUser: User
 }
@@ -188,9 +185,9 @@ type UserPayload {
 
 extend type Mutation {
   # Create new user
-  addUser(input: AddUserInput!): UserPayload!
+  addUser(input: AddUserInput!): User!
   # Edit a user
-  editUser(input: EditUserInput!): UserPayload!
+  editUser(input: EditUserInput!): User!
   # Delete a user
   deleteUser(id: Int!): UserPayload!
 }

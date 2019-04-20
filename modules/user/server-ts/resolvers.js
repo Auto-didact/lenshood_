@@ -4,8 +4,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import withAuth from 'graphql-auth';
 import { withFilter } from 'graphql-subscriptions';
-import { createTransaction } from '@gqlapp/database-server-ts';
 import { UserInputError } from 'apollo-server-errors';
+
+// To Do
+// import { createTransaction } from '@gqlapp/database-server-ts';
+// import { transaction } from 'objection';
 
 import settings from '../../../settings';
 
@@ -27,7 +30,7 @@ export default pubsub => ({
     user: withAuth(['user:view:self'], (obj, { id }, { identity, User, req: { t } }) => {
       if (identity.id === id || identity.role === 'admin') {
         try {
-          return { user: User.getUser(id) };
+          return User.getUser(id);
         } catch (e) {
           return { errors: e };
         }
@@ -43,29 +46,29 @@ export default pubsub => ({
       }
     }
   },
-  User: {
-    profile(obj) {
-      return obj;
-    },
-    auth(obj) {
-      return obj;
-    }
-  },
-  UserProfile: {
-    firstName(obj) {
-      return obj.firstName;
-    },
-    lastName(obj) {
-      return obj.lastName;
-    },
-    fullName(obj) {
-      if (obj.firstName && obj.lastName) {
-        return `${obj.firstName} ${obj.lastName}`;
-      } else {
-        return null;
-      }
-    }
-  },
+  // User: {
+  //   profile(obj) {
+  //     return obj;
+  //   },
+  //   auth(obj) {
+  //     return obj;
+  //   }
+  // },
+  // UserProfile: {
+  //   firstName(obj) {
+  //     return obj.firstName;
+  //   },
+  //   lastName(obj) {
+  //     return obj.lastName;
+  //   },
+  //   fullName(obj) {
+  //     if (obj.firstName && obj.lastName) {
+  //       return `${obj.firstName} ${obj.lastName}`;
+  //     } else {
+  //       return null;
+  //     }
+  //   }
+  // },
   Mutation: {
     addUser: withAuth(
       (obj, { input }, { identity }) => {
@@ -73,39 +76,43 @@ export default pubsub => ({
       },
       async (obj, { input }, { User, req: { universalCookies, t }, mailer, req }) => {
         const errors = {};
-
+        // console.log(input);
         const userExists = await User.getUserByUsername(input.username);
         if (userExists) {
           errors.username = t('user:usernameIsExisted');
         }
-
         const emailExists = await User.getUserByEmail(input.email);
         if (emailExists) {
           errors.email = t('user:emailIsExisted');
         }
-
         if (input.password.length < password.minLength) {
           errors.password = t('user:passwordLength', { length: password.minLength });
         }
-
         if (!isEmpty(errors)) throw new UserInputError('Failed to get events due to validation errors', { errors });
 
         const passwordHash = await createPasswordHash(input.password);
 
-        const trx = await createTransaction();
+        let trx;
         let createdUserId;
-        try {
-          [createdUserId] = await User.register(input, passwordHash).transacting(trx);
-          await User.editUserProfile({ id: createdUserId, ...input }).transacting(trx);
-          if (certificate.enabled) await User.editAuthCertificate({ id: createdUserId, ...input }).transacting(trx);
-          trx.commit();
-        } catch (e) {
-          trx.rollback();
-        }
+        // trx = await transaction.start(User);
+        // try {
+        input['password_hash'] = passwordHash;
+        delete input['password'];
+        // To Do Transactions
+        createdUserId = await User.register(input);
+        await User.editUserProfile({ id: createdUserId, ...input });
+
+        // confirm this To Do
+        if (certificate.enabled) await User.editAuthCertificate({ id: createdUserId, ...input });
+        //   trx.commit();
+        // } catch (e) {
+        //   console.log(e);
+        //   trx.rollback();
+        // }
 
         try {
           const user = await User.getUser(createdUserId);
-
+          console.log(user);
           if (mailer && password.sendAddNewUserEmail && !emailExists && req) {
             // async email
             jwt.sign({ identity: pick(user, 'id') }, secret, { expiresIn: '1d' }, (err, emailToken) => {
@@ -131,7 +138,7 @@ export default pubsub => ({
               node: user
             }
           });
-          return { user };
+          return user;
         } catch (e) {
           return e;
         }
@@ -146,7 +153,6 @@ export default pubsub => ({
         const isSelf = () => identity.id === input.id;
 
         const errors = {};
-
         const userExists = await User.getUserByUsername(input.username);
         if (userExists && userExists.id !== input.id) {
           errors.username = t('user:usernameIsExisted');
@@ -163,19 +169,27 @@ export default pubsub => ({
 
         if (!isEmpty(errors)) throw new UserInputError('Failed to get events due to validation errors', { errors });
 
-        const userInfo = !isSelf() && isAdmin() ? input : pick(input, ['id', 'username', 'email', 'password']);
+        // To Do
+        // const userInfo = !isSelf() && isAdmin() ? input : pick(input, ['id', 'username', 'email', 'password']);
 
-        const isProfileExists = await User.isUserProfileExists(input.id);
-        const passwordHash = await createPasswordHash(input.password);
+        const userInfo = !isSelf() && isAdmin() ? input : input;
 
-        const trx = await createTransaction();
-        try {
-          await User.editUser(userInfo, passwordHash).transacting(trx);
-          await User.editUserProfile(input, isProfileExists).transacting(trx);
-          trx.commit();
-        } catch (e) {
-          trx.rollback();
+        // const isProfileExists = await User.isUserProfileExists(input.id);
+        if (input.password) {
+          const passwordHash = await createPasswordHash(input.password);
+          // console.log(passwordHash);
+          userInfo['password_hash'] = passwordHash;
+          delete userInfo['password'];
         }
+        // To Do transactions
+        // const trx = await createTransaction();
+        // try {
+        await User.editUser(userInfo);
+        // await User.editUserProfile(input, isProfileExists);
+        // trx.commit();
+        // } catch (e) {
+        //   trx.rollback();
+        // }
 
         if (certificate.enabled) {
           await User.editAuthCertificate(input);
@@ -189,8 +203,8 @@ export default pubsub => ({
               node: user
             }
           });
-
-          return { user };
+          console.log(user);
+          return user;
         } catch (e) {
           throw e;
         }

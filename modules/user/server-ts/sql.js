@@ -9,6 +9,9 @@ import { Model } from 'objection';
 Model.knex(knex);
 
 // Actual query fetching and transformation in DB
+const user_eager =
+  '[profile, profile.referred_by, profile.referred_by.profile, addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolio, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
+
 class User extends Model {
   static get tableName() {
     return 'user';
@@ -144,47 +147,18 @@ class User extends Model {
   }
 
   async getUsers(orderBy, filter) {
-    const eager =
-      '[profile, profile.referred_by, addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolio, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
-    // const queryBuilder = knex
-    //   .select(
-    //     'u.id as id',
-    //     'u.username as username',
-    //     'u.role',
-    //     'u.is_active',
-    //     'u.email as email',
-    //     'up.first_name as first_name',
-    //     'up.last_name as last_name',
-    //     'ca.serial',
-    //     'fa.fb_id',
-    //     'fa.display_name AS fbDisplayName',
-    //     'lna.ln_id',
-    //     'lna.display_name AS lnDisplayName',
-    //     'gha.gh_id',
-    //     'gha.display_name AS ghDisplayName',
-    //     'ga.google_id',
-    //     'ga.display_name AS googleDisplayName'
-    //   )
-    //   .from('user AS u')
-    //   .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-    //   .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-    //   .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-    //   .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-    //   .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-    //   .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id');
+    const queryBuilder = User.query().eager(user_eager);
 
-    const queryBuilder = User.query().eager(eager);
+    // add order by
+    if (orderBy && orderBy.column) {
+      let column = orderBy.column;
+      let order = 'asc';
+      if (orderBy.order) {
+        order = orderBy.order;
+      }
 
-    // // add order by
-    // if (orderBy && orderBy.column) {
-    //   let column = orderBy.column;
-    //   let order = 'asc';
-    //   if (orderBy.order) {
-    //     order = orderBy.order;
-    //   }
-
-    //   queryBuilder.orderBy(decamelize(column), order);
-    // }
+      queryBuilder.orderBy(decamelize(column), order);
+    }
 
     // // add filter conditions
     // if (filter) {
@@ -209,77 +183,65 @@ class User extends Model {
     //     });
     //   }
     // }
-
-    return camelizeKeys(await queryBuilder);
+    const res = camelizeKeys(await queryBuilder);
+    // console.log(res);
+    return res;
   }
 
   async getUser(id) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.role',
-          'u.is_active',
-          'u.email',
-          'up.first_name',
-          'up.last_name',
-          'ca.serial',
-          'fa.fb_id',
-          'fa.display_name AS fbDisplayName',
-          'lna.ln_id',
-          'lna.display_name AS lnDisplayName',
-          'gha.gh_id',
-          'gha.display_name AS ghDisplayName',
-          'ga.google_id',
-          'ga.display_name AS googleDisplayName'
-        )
-        .from('user AS u')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-        .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-        .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-        .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-        .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id')
-        .where('u.id', '=', id)
-        .first()
-    );
+    const queryBuilder = User.query()
+      .findById(id)
+      .eager(user_eager);
+    const res = camelizeKeys(await queryBuilder);
+    // console.log(res);
+    return res;
   }
 
-  async getUserWithPassword(id) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.password_hash',
-          'u.role',
-          'u.is_active',
-          'u.email',
-          'up.first_name',
-          'up.last_name'
-        )
-        .from('user AS u')
-        .where('u.id', '=', id)
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .first()
-    );
-  }
+  // async getUserWithPassword(id) {
+  //   return camelizeKeys(
+  //     await knex
+  //       .select(
+  //         'u.id',
+  //         'u.username',
+  //         'u.password_hash',
+  //         'u.role',
+  //         'u.is_active',
+  //         'u.email',
+  //         'up.first_name',
+  //         'up.last_name'
+  //       )
+  //       .from('user AS u')
+  //       .where('u.id', '=', id)
+  //       .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
+  //       .first()
+  //   );
+  // }
 
   async getUserWithSerial(serial) {
-    return camelizeKeys(
-      await knex
-        .select('u.id', 'u.username', 'u.role', 'u.is_active', 'ca.serial', 'up.first_name', 'up.last_name')
-        .from('user AS u')
-        .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .where('ca.serial', '=', serial)
-        .first()
-    );
+    // return camelizeKeys(
+    //   await knex
+    //     .select('u.id', 'u.username', 'u.role', 'u.is_active', 'ca.serial', 'up.first_name', 'up.last_name')
+    //     .from('user AS u')
+    //     .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
+    //     .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
+    //     .where('ca.serial', '=', serial)
+    //     .first()
+    // );
+
+    // confirm this To Do
+    const queryBuilder = User.query()
+      .where('user.id', '=', AuthCertificate.query().where('serial', serial)[0].user_id)
+      .eager(user_eager);
+    const res = camelizeKeys(await queryBuilder);
+    // console.log(res);
+    return res;
   }
 
-  register({ username, email, role = 'user', isActive }, passwordHash) {
-    return knex('user').insert(decamelizeKeys({ username, email, role, passwordHash, isActive }));
+  async register(params) {
+    // return knex('user').insert(decamelizeKeys({ username, email, role, passwordHash, isActive }));
+    const res = await User.query().insertGraph(decamelizeKeys(params));
+    console.log(res);
+    return res.id;
   }
 
   createFacebookAuth({ id, displayName, userId }) {
@@ -298,36 +260,36 @@ class User extends Model {
     return returnId(knex('auth_linkedin')).insert({ ln_id: id, display_name: displayName, user_id: userId });
   }
 
-  editUser({ id, username, email, role, isActive }, passwordHash) {
-    const localAuthInput = passwordHash ? { email, passwordHash } : { email };
-    return knex('user')
-      .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
-      .where({ id });
+  async editUser(params) {
+    // const localAuthInput = passwordHash ? { email, passwordHash } : { email };
+    // return knex('user')
+    //   .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
+    //   .where({ id });
+    const res = await User.query().upsertGraph(decamelizeKeys(params));
+    return res.id;
   }
 
-  async isUserProfileExists(userId) {
-    return !!(await knex('user_profile')
-      .count('id as count')
-      .where(decamelizeKeys({ userId }))
-      .first()).count;
-  }
+  // async isUserProfileExists(userId) {
+  //   return !!(await knex('user_profile')
+  //     .count('id as count')
+  //     .where(decamelizeKeys({ userId }))
+  //     .first()).count;
+  // }
 
-  editUserProfile({ id, profile }, isExists) {
-    if (isExists) {
-      return knex('user_profile')
-        .update(decamelizeKeys(profile))
-        .where({ user_id: id });
-    } else {
-      return returnId(knex('user_profile')).insert({ ...decamelizeKeys(profile), user_id: id });
-    }
-  }
+  // async editUserProfile(params, isExists) {
+  //   if (isExists) {
+  //     // return knex('user_profile')
+  //     //   .update(decamelizeKeys(profile))
+  //     //   .where({ user_id: id });
 
-  async editAuthCertificate({
-    id,
-    auth: {
-      certificate: { serial }
-    }
-  }) {
+  //     const res = await UserProfile.query().upsertGraph(decamelizeKeys(params));
+  //     return res.id;
+  //   } else {
+  //     return returnId(knex('user_profile')).insert({ ...decamelizeKeys(profile), user_id: id });
+  //   }
+  // }
+
+  async editAuthCertificate({ id, authCertificate: { serial } }) {
     const userProfile = await knex
       .select('id')
       .from('auth_certificate')
@@ -667,7 +629,7 @@ class UserFollower extends Model {
           to: 'user.id'
         }
       },
-      follwee: {
+      followee: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
