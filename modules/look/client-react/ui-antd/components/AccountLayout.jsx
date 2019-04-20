@@ -22,7 +22,7 @@ class AccountLayout extends React.Component {
           </Header>
         )}
 
-        <Row style={{ padding: '5% 5%', background: '#fff' }}>
+        <Row style={{ padding: '2% 5%', background: '#fff' }}>
           <Col lg={6} md={24}>
             <h4 style={{ padding: '0 20px' }}>
               <strong>Account Details</strong>
