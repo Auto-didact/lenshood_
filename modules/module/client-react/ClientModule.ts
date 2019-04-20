@@ -8,6 +8,7 @@ export interface ClientModuleShape extends BaseModuleShape {
   navItemTest?: Array<React.ReactElement<any>>;
   navItemUser?: Array<React.ReactElement<any>>;
   navItemAdmin?: Array<React.ReactElement<any>>;
+  navItemAccount?: Array<React.ReactElement<any>>;
   stylesInsert?: string[];
   scriptsInsert?: string[];
 }
@@ -76,6 +77,17 @@ class ClientModule extends BaseModule {
         )
       : false;
     return false;
+  }
+
+  get navItemsAccount() {
+    return this.navItemAccount
+      ? this.navItemAccount.map(
+          (component: React.ReactElement<any>, idx: number, items: Array<React.ReactElement<any>>) =>
+            React.cloneElement(component, {
+              key: component.key || idx + items.length
+            })
+        )
+      : null;
   }
 
   get stylesInserts() {

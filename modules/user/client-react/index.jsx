@@ -5,6 +5,9 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { MenuItem } from '@gqlapp/look-client-react';
 import ClientModule from '@gqlapp/module-client-react';
 
+// To Do
+import { Icon } from 'antd';
+
 import resolvers from './resolvers';
 import resources from './locales';
 import DataRootComponent from './containers/DataRootComponent';
@@ -49,6 +52,13 @@ const NavLinkUsersWithI18n = translate('user')(({ t }) => (
     {t('navLink.users')}
   </NavLink>
 ));
+const NavLinkProfileWithI18n = translate('user')(({ t }) => (
+  <NavLink to="/profile" className="nav-link" activeClassName="active">
+    <Icon type="user" />
+    {t('navLink.profile')}
+  </NavLink>
+));
+
 const NavLinkLoginWithI18n = translate('user')(({ t }) => (
   <NavLink to="/login" className="nav-link" activeClassName="active">
     {t('navLink.signIn')}
@@ -103,6 +113,12 @@ export default new ClientModule({
       </MenuItem>
     </IfNotLoggedIn>
   ],
+  navItemAccount: [
+    <MenuItem key="/profile">
+      <NavLinkProfileWithI18n />
+    </MenuItem>
+  ],
+
   resolver: [resolvers],
   localization: [{ ns: 'user', resources }],
   dataRootComponent: [DataRootComponent],

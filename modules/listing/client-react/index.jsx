@@ -6,6 +6,9 @@ import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
 import { Route, NavLink } from 'react-router-dom';
 import { MenuItem } from '@gqlapp/look-client-react';
 
+// To Do
+import { Icon } from 'antd';
+
 import Listings from './containers/Listings';
 import ListingCatalogue from './containers/ListingCatalogue';
 import MyListingDetail from './containers/MyListingDetail';
@@ -25,6 +28,12 @@ import resources from './locales';
 const NavLinkAdminWithI18n = translate('listing')(({ t }) => (
   <NavLink to="/listings" className="nav-link" activeClassName="active">
     {t('listing:navLinkAdmin')}
+  </NavLink>
+));
+const NavLinkMyListingsWithI18n = translate('listing')(({ t }) => (
+  <NavLink to="/my-listings" className="nav-link" activeClassName="active">
+    <Icon type="solution" />
+    {t('listing:navLinkMyListings')}
   </NavLink>
 ));
 
@@ -54,5 +63,11 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
+  navItemAccount: [
+    <MenuItem key="/my-listings">
+      <NavLinkMyListingsWithI18n />
+    </MenuItem>
+  ],
+
   localization: [{ ns: 'listing', resources }]
 });

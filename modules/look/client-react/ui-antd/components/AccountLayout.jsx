@@ -1,0 +1,72 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter, NavLink } from 'react-router-dom';
+import { Layout, Row, Col, Menu, Icon } from 'antd';
+
+import NavBar, { ref } from './NavBar';
+import Footer from './Footer';
+
+const { Header, Content } = Layout;
+const { Item } = Menu;
+
+// const ref = { modules: modules };
+
+class AccountLayout extends React.Component {
+  render() {
+    const { children, navBar } = this.props;
+    return (
+      <Layout>
+        {navBar !== false && (
+          <Header className="header">
+            <NavBar />
+          </Header>
+        )}
+
+        <Row style={{ padding: '5% 5%', background: '#fff' }}>
+          <Col lg={6} md={24}>
+            <h4 style={{ padding: '0 20px' }}>
+              <strong>Account Details</strong>
+            </h4>
+            <Menu
+              mode="inline"
+              theme="light"
+              defaultSelectedKeys={[`${this.props.select}`]}
+              defaultOpenKeys={['sub1']}
+              style={{ height: '100%' }}
+              className="AccountDetails"
+            >
+              {/* <Item className="AccDetItem" key="/profile">
+                <Icon type="user" /> Profile
+              </Item>
+              <Item className="AccDetItem" key="2">
+                <Icon type="shopping-cart" /> My Orders
+              </Item>
+              <Item className="AccDetItem" key="3">
+                {' '}
+                <Icon type="solution" /> My Listings
+              </Item>
+              <Item className="AccDetItem" key="4">
+                <Icon type="heart" /> Watchist
+              </Item> */}
+
+              {ref.modules.navItemsAccount}
+            </Menu>
+          </Col>
+          <Col lg={16} md={24}>
+            <Content id="content" style={{ padding: 24 }}>
+              {children}
+            </Content>
+          </Col>
+        </Row>
+        <Footer />
+      </Layout>
+    );
+  }
+}
+
+AccountLayout.propTypes = {
+  children: PropTypes.node,
+  navBar: PropTypes.bool
+};
+
+export default withRouter(AccountLayout);

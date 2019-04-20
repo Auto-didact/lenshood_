@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
 import { Layout, Menu, Icon } from 'antd';
+import '../resources/listingCatalogue.css';
 
 const { Item } = Menu;
 const { Sider } = Layout;

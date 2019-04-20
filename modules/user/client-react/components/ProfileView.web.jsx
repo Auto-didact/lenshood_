@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { LayoutCenter, Card, CardGroup, CardTitle, CardText, PageLayout } from '@gqlapp/look-client-react';
+import { LayoutCenter, Card, CardGroup, CardTitle, CardText, AccountLayout } from '@gqlapp/look-client-react';
 
 import settings from '../../../../settings';
 
@@ -25,14 +25,14 @@ const renderMetaData = t => {
 const ProfileView = ({ currentUserLoading, currentUser, t }) => {
   if (currentUserLoading && !currentUser) {
     return (
-      <PageLayout>
+      <AccountLayout select="/profile">
         {renderMetaData(t)}
         <div className="text-center">{t('profile.loadMsg')}</div>
-      </PageLayout>
+      </AccountLayout>
     );
   } else if (currentUser) {
     return (
-      <PageLayout>
+      <AccountLayout select="/profile">
         {renderMetaData(t)}
         <LayoutCenter>
           <h1 className="text-center">{t('profile.card.title')}</h1>
@@ -64,14 +64,14 @@ const ProfileView = ({ currentUserLoading, currentUser, t }) => {
             {t('profile.editProfileText')}
           </Link>
         </LayoutCenter>
-      </PageLayout>
+      </AccountLayout>
     );
   } else {
     return (
-      <PageLayout>
+      <AccountLayout>
         {renderMetaData(t)}
         <h2>{t('profile.errorMsg')}</h2>
-      </PageLayout>
+      </AccountLayout>
     );
   }
 };
