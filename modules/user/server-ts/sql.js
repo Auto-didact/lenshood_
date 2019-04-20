@@ -530,6 +530,14 @@ class UserProfile extends Model {
           from: 'user_profile.user_id',
           to: 'user.id'
         }
+      },
+      referred_by: {
+        relation: Model.HasOneRelation, //Confirm this! To Do
+        modelClass: User,
+        join: {
+          from: 'user_profile.referrer_id',
+          to: 'user.id'
+        }
       }
     };
   }
