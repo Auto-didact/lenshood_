@@ -65,14 +65,14 @@ export default new ClientModule({
   ],
   navItemUser: [
     <IfLoggedIn key="/my-listings">
-      <MenuItem>
+      <MenuItem key="/my-listings">
         <NavLinkMyListingsWithI18n />
       </MenuItem>
     </IfLoggedIn>
   ],
   navItemAccount: [
-    <IfLoggedIn>
-      <MenuItem key="/my-listings">
+    <IfLoggedIn key="/my-listings">
+      <MenuItem >
         <NavLinkMyListingsWithI18n />
       </MenuItem>
     </IfLoggedIn>

@@ -115,7 +115,7 @@ export default new ClientModule({
   ],
   navItemAccount: [
     <IfLoggedIn key="/profile">
-      <MenuItem key="/profile">
+      <MenuItem>
         <NavLinkProfileWithI18n />
       </MenuItem>
     </IfLoggedIn>
