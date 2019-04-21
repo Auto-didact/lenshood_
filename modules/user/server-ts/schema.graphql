@@ -70,7 +70,7 @@ type UserVerification {
   isEmailVerified: Boolean
   isMobileVerified: Boolean
   isAddressVerified: Boolean
-  isIDVerified: Boolean
+  isIdVerified: Boolean
   isReferred: Boolean
   createdAt: String
   updatedAt: String

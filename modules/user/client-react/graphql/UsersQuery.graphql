@@ -1,7 +1,7 @@
-#import "./User.graphql"
+#import "./UserComplete.graphql"
 
 query users($orderBy: OrderByUserInput, $filter: FilterUserInput) {
   users(orderBy: $orderBy, filter: $filter) {
-    ...UserInfo
+    ...UserCompleteInfo
   }
 }

@@ -1,7 +1,7 @@
-#import "./User.graphql"
+#import "./UserComplete.graphql"
 
 query currentUser {
   currentUser {
-    ...UserInfo
+    ...UserCompleteInfo
   }
 }
