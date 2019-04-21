@@ -20,7 +20,6 @@ const Login = props => {
     } catch (e) {
       throw new FormError(t('login.errorMsg'), e);
     }
-
     await authentication.doLogin(client);
     await client.writeQuery({ query: CURRENT_USER_QUERY, data: { currentUser: login.user } });
     if (onLogin) {
