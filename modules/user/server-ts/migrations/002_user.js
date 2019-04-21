@@ -76,9 +76,17 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.string('type');
       table.string('document_url');
-      table.boolean('is_verified').defaultTo(false);
       table
         .integer('user_id')
+        .unsigned()
+        .references('id')
+        .inTable('user')
+        .onDelete('CASCADE');
+
+      // To Do Combine this into one
+      table.boolean('is_verified').defaultTo(false);
+      table
+        .integer('admin_id')
         .unsigned()
         .references('id')
         .inTable('user')
