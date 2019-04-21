@@ -279,7 +279,10 @@
 
 /* Listing Detail View */
 
-/* .CaraImg {} */
+.CaraImg {
+  height: 350px !important;
+  width: 100% !important;
+}
 
 .fontBold {
   font-weight: bold;
