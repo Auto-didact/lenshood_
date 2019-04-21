@@ -14,10 +14,12 @@ fragment UserProfileInfo on UserProfile {
   flag
   referredBy {
     id
+    email
     profile {
       firstName
       lastName
       avatar
+      mobile
     }
   }
 }

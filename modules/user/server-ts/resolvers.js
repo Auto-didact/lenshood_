@@ -40,7 +40,8 @@ export default pubsub => ({
     }),
     currentUser(obj, args, { User, identity }) {
       if (identity) {
-        return User.getUser(identity.id);
+        const user = User.getUser(identity.id);
+        return user;
       } else {
         return null;
       }

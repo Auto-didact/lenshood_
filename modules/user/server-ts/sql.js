@@ -9,8 +9,20 @@ import { Model } from 'objection';
 Model.knex(knex);
 
 // Actual query fetching and transformation in DB
-const user_eager =
-  '[profile, profile.[referred_by, referred_by.profile], addresses, identification, verification, endorsements, endorsements.endorser, endorsed, endorsed.endorsee, followers, followers.follower, following, following.followee, portfolios, remarks, remarks.admin, auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate ]';
+const user_eager = `[
+  profile, profile.[referred_by, 
+  referred_by.profile], 
+  addresses, 
+  identification, 
+  verification, 
+  endorsements, endorsements.[endorser, endorser.profile], 
+  endorsed, endorsed.[endorsee, endorsee.profile], 
+  followers, followers.[follower, follower.profile], 
+  following, following.[followee, followee.profile], 
+  portfolios, 
+  remarks, remarks.admin, 
+  auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate 
+]`;
 
 class User extends Model {
   static get tableName() {
