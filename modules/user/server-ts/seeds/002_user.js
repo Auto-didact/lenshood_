@@ -73,6 +73,12 @@ export async function seed(knex, Promise) {
   );
 
   await returnId(
+    knex('user_verification').insert({
+      user_id: admin_id[0]
+    })
+  );
+
+  await returnId(
     knex('user_portfolio').insert({
       platform: 'google',
       portfolio_url: 'www.google.com',
@@ -148,6 +154,12 @@ export async function seed(knex, Promise) {
     knex('user_portfolio').insert({
       platform: 'yahoo',
       portfolio_url: 'www.yahoo.com',
+      user_id: user_id[0]
+    })
+  );
+
+  await returnId(
+    knex('user_verification').insert({
       user_id: user_id[0]
     })
   );

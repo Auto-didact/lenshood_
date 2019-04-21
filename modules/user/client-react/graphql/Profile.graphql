@@ -1,4 +1,23 @@
 fragment UserProfileInfo on UserProfile {
   firstName
   lastName
+  isVerified
+  isAvailable
+  website
+  about
+  designation
+  avatar
+  rating
+  responseTime
+  acceptanceRate
+  mobile
+  flag
+  referredBy {
+    id
+    profile {
+      firstName
+      lastName
+      avatar
+    }
+  }
 }
