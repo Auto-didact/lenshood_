@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { returnId, truncateTables } from '@gqlapp/database-server-ts';
-import { TimeoutError } from 'rxjs';
+// import { TimeoutError } from 'rxjs';
 
 export async function seed(knex, Promise) {
   await truncateTables(knex, Promise, [
@@ -93,7 +93,7 @@ export async function seed(knex, Promise) {
     })
   );
 
-  // user identification
+  // admin identification
   await returnId(
     knex('user_identification').insert({
       type: 'aadhar',
@@ -398,13 +398,87 @@ export async function seed(knex, Promise) {
 
       // To Do Combine this
       is_verified: true,
-      referrer_id: admin_id[0]
+      admin_id: admin_id[0]
     })
   );
   await returnId(
     knex('user_identification').insert({
       type: 'aadhar',
       document_url: 'www.yahoo.com'
+    })
+  );
+
+  // user and admin followers
+  // admin followers
+  await returnId(
+    knex('user_follower').insert({
+      follower_id: user_id2[0],
+      followee_id: admin_id[0]
+    })
+  );
+  await returnId(
+    knex('user_follower').insert({
+      follower_id: user_id1[0],
+      followee_id: admin_id[0]
+    })
+  );
+
+  // user1,2 followers
+  await returnId(
+    knex('user_follower').insert({
+      follower_id: user_id1[0],
+      followee_id: user_id2[0]
+    })
+  );
+  await returnId(
+    knex('user_follower').insert({
+      follower_id: user_id2[0],
+      followee_id: user_id3[0]
+    })
+  );
+
+  // user and admin endorsements
+  await returnId(
+    knex('user_endorsement').insert({
+      endorser_id: user_id2[0],
+      endorsee_id: admin_id[0]
+    })
+  );
+  await returnId(
+    knex('user_endorsement').insert({
+      endorser_id: user_id1[0],
+      endorsee_id: admin_id[0]
+    })
+  );
+
+  await returnId(
+    knex('user_endorsement').insert({
+      endorser_id: admin_id[0],
+      endorsee_id: user_id1[0]
+    })
+  );
+  await returnId(
+    knex('user_endorsement').insert({
+      endorser_id: user_id2[0],
+      endorsee_id: user_id1[0]
+    })
+  );
+
+  // admin remarks
+  await returnId(
+    knex('user_remark').insert({
+      user_id: user_id1[0],
+      admin_id: admin_id[0],
+      type: 'profile',
+      remark: 'this is a good user!'
+    })
+  );
+  await returnId(
+    knex('user_remark').insert({
+      user_id: user_id2[0],
+      admin_id: admin_id[0],
+      type: 'profile',
+      remark: 'Someone verify this users document!'
     })
   );
 }
