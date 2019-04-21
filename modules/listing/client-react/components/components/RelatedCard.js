@@ -20,20 +20,20 @@ class RelatedCard extends Component {
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`} >
         <Card hoverable cover={<img alt="" src={listing_img} className="relatedCardImg"/>} className="relatedCard">
-          <Meta title={title.substring(0, 25)} description={<h5>&#8377;{rent_per_day} per day</h5>} />
+          <Meta title={title.substring(0, 25)} description={<h4>&#8377;{rent_per_day} per day</h4>} />
           <Meta
             className="RelCardMeta"
             avatar={<Avatar />}
             title={
-              <h4 className="RelCardh">
+              <h3 className="RelCardh">
                 {seller}
                 <br />
                 <Rate disabled defaultValue={rating} className="CardRate" />
-                <div className="RelIconGroup">
+                {/* <div className="RelIconGroup">
                   <Icon type="car" theme="filled" className="marginR10" />
                   <Icon type="safety-certificate" theme="filled" />
-                </div>
-              </h4>
+                </div> */}
+              </h3>
             }
           />
         </Card>
