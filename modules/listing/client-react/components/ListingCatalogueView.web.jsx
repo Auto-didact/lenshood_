@@ -74,8 +74,8 @@ class ListingCatalogueView extends Component {
         <div className="Pad20" />
         <div className="container">
           <Row>
-            <div className="RowDiv">
-              <Col lg={20} md={24} classNmae="PadB10">
+            {/* <div className="RowDiv"> */}
+              {/* <Col lg={20} md={24} classNmae="PadB10">
                 <Row gutter={16}>
                   <Col md={4} xs={8}>
                     <Button className="filterButtons">Category</Button>
@@ -93,15 +93,15 @@ class ListingCatalogueView extends Component {
                     <Button className="filterButtons">More Filters</Button>
                   </Col>
                 </Row>
-              </Col>
-              <Col lg={4} md={24}>
+              </Col> */}
+              {/* <Col lg={4} md={24}>
                 <span>
                   <span className="mapView">Map view</span>
                   <Switch />
                 </span>
-              </Col>
-            </div>
-            <hr className="CatalogueHr" />
+              </Col> */}
+            {/* </div> */}
+            {/* <hr className="CatalogueHr" /> */}
             <div className="pad10">
               {/* <Col span={24}>
                 <h2 className="headingTop">

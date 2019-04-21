@@ -100,15 +100,18 @@
   margin: 15px 0;
 }
 
- /* RelatedCard */
+/* RelatedCard */
 
- .relatedCard {
-  height: 300px !important
- }
+.relatedCard {
+  height: 300px !important;
+  border-radius: 9px !important;
+  box-shadow: 0 1px 4px 0 rgba(179, 178, 178, 0.5);
+}
 
- .relatedCardImg {
-  height: 150px !important
- }
+.relatedCardImg {
+  height: 150px !important;
+  width: 100% !important;
+}
 
 .RelCardMeta {
   margin-top: 20px !important;
@@ -116,14 +119,14 @@
 }
 
 .RelCardh {
-  font-size: 10px;
-  line-height: 15px;
-  margin: 5px 0;
+  font-size: 13px;
+  line-height: 14px;
+  margin: 0;
 }
 
 .CardRate {
   color: #23b195 !important;
-  font-size: 6px !important;
+  font-size: 11px !important;
 }
 
 .RelIconGroup {
@@ -142,7 +145,7 @@
   overflow: hidden !important;
 }
 
- /* MyListingDetailView */
+/* MyListingDetailView */
 
 .SliderDiv {
   min-width: 100%;
@@ -195,7 +198,7 @@
   margin: 0 2.5% !important;
 }
 
- /* Product Calender */
+/* Product Calender */
 
 .CalendarBox {
   padding-right: 15px !important;
@@ -238,7 +241,7 @@
   padding: 0 14px;
 }
 
- /* Reviews Card */
+/* Reviews Card */
 
 .RevCard {
   text-align: justify;
@@ -274,7 +277,9 @@
   min-width: 100%;
 }
 
- /* Listing Detail View */
+/* Listing Detail View */
+
+/* .CaraImg {} */
 
 .fontBold {
   font-weight: bold;
@@ -322,7 +327,7 @@
   border: solid 0.5px #979797;
 }
 
-  /* Add To Cart */
+/* Add To Cart */
 
 .ATChr {
   border: #ddd 1px solid;
