@@ -9,41 +9,6 @@ fragment UserInfo on User {
   profile {
     ...UserProfileInfo
   }
-  addresses {
-    streetAddress1
-    streetAddress2
-    city
-    state
-    pinCode
-  }
-  identification {
-    type
-    documentUrl
-    isVerified
-  }
-  verification {
-    isEmailVerified
-    isMobileVerified
-    isAddressVerified
-    isIdVerified
-    isReferred
-  }
-  endorsements {
-    endorser
-  }
-  endorsed {
-    endorsee
-  }
-  followers {
-    follower
-  }
-  following {
-    followee
-  }
-  portfolios {
-    platform
-    portfolioUrl
-  }
   authCertificate {
     serial
   }
