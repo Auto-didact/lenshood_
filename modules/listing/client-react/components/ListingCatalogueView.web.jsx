@@ -69,7 +69,7 @@ class ListingCatalogueView extends Component {
         <div style={{ padding: '0 20px' }} />
         <div className="container">
           <Row>
-            <div style={{ padding: '5px 10%', overflow: 'hidden' }}>
+            {/* <div style={{ padding: '5px 10%', overflow: 'hidden' }}>
               <Col lg={20} md={24} style={{ paddingBottom: '10px' }}>
                 <Button className="filterButtons">Category</Button>
                 <Button className="filterButtons">Brand</Button>
@@ -84,7 +84,7 @@ class ListingCatalogueView extends Component {
                 </span>
               </Col>
             </div>
-            <hr style={{ border: '0.5px solid #ddd', marginBottom: '15px' }} />
+            <hr style={{ border: '0.5px solid #ddd', marginBottom: '15px' }} /> */}
             <div style={{ padding: '0 10%' }}>
               {/* <Col span={24}>
                 <h2 style={{ fontWeight: 'bold', margin: '15px 0' }}>
