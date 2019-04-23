@@ -115,7 +115,7 @@ class ListTourGearProduct extends Component {
                   <p className="font10">Select the closest category your gear belongs to</p>
                   <Row gutter={16}>
                     {this.state.category.map(item => (
-                      <Col md={6} xs={8}>
+                      <Col md={6} sm={8} xs={12}>
                         <div onClick={e => this.renderCategory(item.name)} className={this.classNamesgroup(item.name)}>
                           <div>
                             <Icon type={item.icon} />

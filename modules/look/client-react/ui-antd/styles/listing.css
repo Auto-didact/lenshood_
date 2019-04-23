@@ -3,8 +3,8 @@
 /* List your gear form */
 
 .listSubmitButton {
-  background: #23b195;
-  color: white;
+  background: #23b195 !important;
+  color: white !important;
   padding: 0 10%;
   float: right;
 }
@@ -19,8 +19,9 @@
   border: 0.5px #23b195 solid !important;
   font-size: 10px;
   float: right;
-  width: 28%;
+  /* width: 28%; */
   color: #23b195 !important;
+  /* overflow:  */
 }
 
 .uploadButton {
