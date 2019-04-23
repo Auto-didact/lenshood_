@@ -29,7 +29,9 @@
       "edit": "Edit",
       "submit": "Save",
       "del": "Delete",
-      "back": "Back"
+      "back": "Back",
+      "prev": "Previous",
+      "next": "Next"
     },
     "label": {
       "edit": "Edit",
@@ -39,8 +41,22 @@
     "field": {
       "gearCategory": "Gear Category",
       "gearSubcategory": "Gear Sub-Category",
-      "description": "Description"
-
+      "listingDamages": "Damages",
+      "description": "Description",
+      "status": "Status",
+      "isActive": "Active",
+      "listingContent": "Listing Content",
+      "listingDetail": {
+        "condition": "Condition",
+        "repairHistory": "Repair History",
+        "age": "Age"
+      },
+      "listingRental": {
+        "perDay": "Rent per Day",
+        "perWeek": "Rent per Week",
+        "perMonth": "Rent per Week",
+        "replacementValue": "Replacement Value"
+      }
     }
   },
 
