@@ -113,7 +113,7 @@ export default pubsub => ({
 
         try {
           const user = await User.getUser(createdUserId);
-          console.log(user);
+          // console.log(user);
           if (mailer && password.sendAddNewUserEmail && !emailExists && req) {
             // async email
             jwt.sign({ identity: pick(user, 'id') }, secret, { expiresIn: '1d' }, (err, emailToken) => {
@@ -204,7 +204,7 @@ export default pubsub => ({
               node: user
             }
           });
-          console.log(user);
+          // console.log(user);
           return user;
         } catch (e) {
           throw e;

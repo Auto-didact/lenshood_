@@ -15,6 +15,9 @@ type User {
   portfolios: [UserPortfolio]
   remarks: [UserRemark]
 
+  # Listing Module
+  listings: [Listing]
+
   authCertificate: CertificateAuth
   authFacebook: FacebookAuth
   authGoogle: GoogleAuth
