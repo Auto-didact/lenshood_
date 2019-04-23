@@ -20,9 +20,6 @@ class ListingForm extends Component {
     super(props);
     this.state = { step: 0 };
 
-    const { values, t } = this.props;
-    this.steps = [<ProductDetails values={values} t={t} />, <RentalDetails values={values} t={t} />];
-
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
   }
@@ -35,11 +32,11 @@ class ListingForm extends Component {
   };
 
   render() {
-    const { handleSubmit, submitting, t } = this.props;
+    const { values, handleSubmit, submitting, t } = this.props;
+    this.steps = [<ProductDetails values={values} t={t} />, <RentalDetails values={values} t={t} />];
+
     return (
       <Form name="listing" onSubmit={handleSubmit}>
-        {/* <ProductDetails values={values} t={t} />
-        <RentalDetails values={values} t={t} /> */}
         {this.steps[this.state.step]}
 
         {this.state.step === this.steps.length - 1 ? (
@@ -57,10 +54,6 @@ class ListingForm extends Component {
             {t('listing.btn.next')}
           </Button>
         )}
-
-        {/* <Button color="primary" type="submit" disabled={submitting}>
-          {t('listing.btn.submit')}
-        </Button> */}
       </Form>
     );
   }
