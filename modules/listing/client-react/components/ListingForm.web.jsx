@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
@@ -15,18 +15,56 @@ const listingFormSchema = {
   description: [required]
 };
 
-const ListingForm = ({ values, handleSubmit, submitting, t }) => {
-  return (
-    <Form name="listing" onSubmit={handleSubmit}>
-      <ProductDetails values={values} t={t} />
-      <RentalDetails values={values} t={t} />
+class ListingForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { step: 0 };
 
-      <Button color="primary" type="submit" disabled={submitting}>
-        {t('listing.btn.submit')}
-      </Button>
-    </Form>
-  );
-};
+    const { values, t } = this.props;
+    this.steps = [<ProductDetails values={values} t={t} />, <RentalDetails values={values} t={t} />];
+
+    this.nextStep = this.nextStep.bind(this);
+    this.prevStep = this.prevStep.bind(this);
+  }
+
+  nextStep = () => {
+    this.setState(state => ({ step: state.step + 1 }));
+  };
+  prevStep = () => {
+    this.setState(state => ({ step: state.step - 1 }));
+  };
+
+  render() {
+    const { handleSubmit, submitting, t } = this.props;
+    return (
+      <Form name="listing" onSubmit={handleSubmit}>
+        {/* <ProductDetails values={values} t={t} />
+        <RentalDetails values={values} t={t} /> */}
+        {this.steps[this.state.step]}
+
+        {this.state.step === this.steps.length - 1 ? (
+          <>
+            <Button color="secondary" onClick={this.prevStep}>
+              {t('listing.btn.prev')}
+            </Button>
+
+            <Button color="primary" type="submit" disabled={submitting}>
+              {t('listing.btn.submit')}
+            </Button>
+          </>
+        ) : (
+          <Button color="secondary" onClick={this.nextStep}>
+            {t('listing.btn.next')}
+          </Button>
+        )}
+
+        {/* <Button color="primary" type="submit" disabled={submitting}>
+          {t('listing.btn.submit')}
+        </Button> */}
+      </Form>
+    );
+  }
+}
 
 ListingForm.propTypes = {
   handleSubmit: PropTypes.func,
