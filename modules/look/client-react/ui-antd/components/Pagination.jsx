@@ -17,15 +17,15 @@ const Pagination = ({
 }) => {
   if (pagination === 'relay') {
     return hasNextPage ? (
-      <div>
+      <div style={{ display: 'flex', flexCirection: 'column', justifyContent: 'center' }}>
+        <Button id="load-more" color="primary" onClick={() => handlePageChange(pagination)}>
+          {loadMoreText}
+        </Button>
         <div>
           <small>
             ({itemsPerPage} / {total})
           </small>
         </div>
-        <Button id="load-more" color="primary" onClick={() => handlePageChange(pagination)}>
-          {loadMoreText}
-        </Button>
       </div>
     ) : null;
   } else {
