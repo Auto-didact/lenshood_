@@ -19,7 +19,6 @@ class ProductCard extends Component {
             </div>
           ))}
         </Carousel>
-        <br />
         <Row>
           <Col span={12}>
             <strong className="mainColor font12">Replacement Value</strong>

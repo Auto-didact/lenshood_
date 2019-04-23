@@ -68,7 +68,7 @@ class ListTourGearRental extends Component {
                 <Form.Item label={<strong>Product condition</strong>}>
                   <p className="selectfit">Select the one your product best fits into.</p>
                   <Row gutter={24}>
-                    <Col span={8}>
+                    <Col sm={8} xs={12}>
                       <div
                         onClick={e => this.renderCondition('excellent')}
                         className={this.classNamesgroup('excellent')}
@@ -83,7 +83,7 @@ class ListTourGearRental extends Component {
                         </ul>
                       </div>
                     </Col>
-                    <Col span={8}>
+                    <Col sm={8} xs={12}>
                       <div onClick={e => this.renderCondition('good')} className={this.classNamesgroup('good')}>
                         <h3> Good</h3>
                         <ul>
@@ -95,7 +95,7 @@ class ListTourGearRental extends Component {
                         </ul>
                       </div>
                     </Col>
-                    <Col span={8}>
+                    <Col sm={8} xs={12}>
                       <div
                         onClick={e => this.renderCondition('fairly used')}
                         className={this.classNamesgroup('fairly used')}
