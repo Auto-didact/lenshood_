@@ -4,12 +4,14 @@ import { has } from 'lodash';
 import bcrypt from 'bcryptjs';
 import { knex, returnId } from '@gqlapp/database-server-ts';
 import { Model } from 'objection';
+import Listing from '@gqlapp/listing-server-ts/sql';
 
 // Give the knex object to objection.
 Model.knex(knex);
 
 // Actual query fetching and transformation in DB
 const user_eager = `[
+  listings,
   profile, profile.[referred_by, 
   referred_by.profile], 
   addresses, 
@@ -24,7 +26,7 @@ const user_eager = `[
   auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate 
 ]`;
 
-class User extends Model {
+export class User extends Model {
   static get tableName() {
     return 'user';
   }
@@ -35,6 +37,14 @@ class User extends Model {
 
   static get relationMappings() {
     return {
+      listings: {
+        relation: Model.HasManyRelation,
+        modelClass: Listing,
+        join: {
+          from: 'user.id',
+          to: 'listing.user_id'
+        }
+      },
       profile: {
         relation: Model.HasOneRelation,
         modelClass: UserProfile,
@@ -481,9 +491,9 @@ class User extends Model {
     );
   }
 }
-const userDAO = new User();
 
-export default userDAO;
+const UserDAO = new User();
+export default UserDAO;
 
 // UserProfile model.
 class UserProfile extends Model {
