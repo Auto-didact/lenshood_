@@ -61,7 +61,26 @@
         "name": "User Name",
         "email": "Email",
         "role": "Role",
-        "full": "Full Name"
+        "full": "Full Name",
+        "responseTime": "Response Time",
+        "acceptanceRate": "Acceptance Rate",
+        "designation": "Designation",
+        "about": "About",
+        "website": "Website",
+        "mobile": "Mobile",
+        "isVarified": "Varification Status",
+        "isAvailable": "Availability Status",
+        "rating": "Rating",
+        "flag": "Flag",
+        "referedBy": {
+          "id": "ID",
+          "email": "Email",
+          "profile": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "mobile": "Mobile"
+          }
+        }
       },
       "fldEmail": "Email",
       "btnSubmit": "Send instructions"
