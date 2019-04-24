@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col, Breadcrumb, Card } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
-import './resources/listingCatalogue.css';
+// import './resources/listingCatalogue.css';
 import AccDetailsMenu from './components/AccDetailsMenu';
 import DetailsCard from './components/DetailsCard';
 import ProductCalender from './components/ProductCalender';
@@ -67,16 +67,16 @@ class MyListDetails extends Component {
       }
     ]
   };
+
   render() {
     return (
       <PageLayout>
-        <div style={{ padding: '20px' }}>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Account</Breadcrumb.Item>
             <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
           </Breadcrumb>
-          <Layout style={{ padding: '24px 0', background: '#fff' }}>
-            <Row style={{ padding: '0 5%' }}>
+          <Layout className="layoutList">
+            <Row className="layoutRow">
               <Col lg={7} md={24}>
                 <AccDetailsMenu select={3} />
               </Col>
@@ -89,7 +89,6 @@ class MyListDetails extends Component {
               </Col>
             </Row>
           </Layout>
-        </div>
       </PageLayout>
     );
   }

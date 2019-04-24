@@ -1,0 +1,181 @@
+@import "~antd/dist/antd.css";
+
+/* Checkout pages */
+
+.billingAddress {
+  font-size: 15px;
+  text-shadow: 0.6px 0 0;
+  letter-spacing: 0.2px;
+}
+
+.HomeAddress {
+  font-size: 12px;
+  padding: 20px;
+  padding-bottom: 40px;
+  background-color: rgba(35, 177, 149, 0.2);
+  width: 100%;
+}
+
+.HomeAddressBlock {
+  font-size: 14px;
+  text-shadow: 0.7px 0 0;
+  letter-spacing: 0.3px;
+}
+
+.AddNewAddress {
+  font-size: 70px;
+  line-height: 75px;
+  text-shadow: 1px 0 0;
+  color: #ddd;
+}
+
+.AddNewAddressBlock {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 35px 20px;
+  cursor: pointer;
+}
+
+.addressIcons,
+.addressIcons:hover {
+  border: 0;
+  color: #5d5f5f !important;
+  overflow: hidden;
+  padding: 0;
+  padding-left: 15px;
+  float: right;
+}
+
+.homeicon {
+  float: right;
+  color: #5d5f5f;
+}
+
+.addressLines h4 {
+  line-height: 12px;
+  color: #5d5f5f !important;
+}
+
+.listcloseicons {
+  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.checkoutDiv {
+  padding: 20px 8%;
+}
+
+.checkSlider {
+  background: #fff !important;
+  padding: 40px 0;
+}
+
+.checkSlider h4 {
+  padding: 0 20px;
+}
+
+.ColMenu {
+  border: 0.5px solid #ddd;
+}
+
+.ColMenu div {
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.productname {
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-bottom: 2%;
+  overflow: hidden;
+}
+
+.cartitem {
+  box-shadow: 0 0 10px 4px rgba(49, 196, 167, 0.09);
+}
+
+.cartitem img {
+  width: 100%;
+  height: 160px;
+}
+
+.AddMoreproducts,
+.AddMoreproducts:hover {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  color: #23b195;
+}
+
+.noOfDays {
+  font-size: 11px;
+  color: #4a4a4a;
+  letter-spacing: 1px;
+  float: right;
+}
+
+.addCard {
+  border: solid 0.5px #23b195 !important;
+  padding: 5px 10%;
+  float: right;
+}
+
+.addCard h4 {
+  text-shadow: 0.5px 0 0;
+  color: #23b195 !important;
+}
+
+.ColPad {
+  padding: 12px 15px !important;
+}
+
+.cardFormitem {
+  border: solid 0.5px #23b195 !important;
+  padding: 20px !important;
+}
+
+.cardFormChead {
+  padding-bottom: 20px;
+}
+
+.checkoutSteps {
+  text-align: center;
+  text-shadow: 1px 0 0;
+  font-size: 30px;
+  margin-bottom: 19px;
+}
+
+.lightText {
+  font-size: 11px;
+  color: #4a4a4a;
+  letter-spacing: 1px;
+}
+
+.rentAmount {
+  font-size: 15px;
+  text-shadow: 0.5px 0 0;
+  line-height: 15px;
+}
+
+.itemName {
+  font-size: 13px;
+  line-height: 14px;
+  color: #4a4a4a;
+  letter-spacing: 0.1px;
+  text-align: justify;
+}
+
+.orderImage {
+  width: 100%;
+  padding-right: 15px;
+  height: 60px;
+}
+
+.cartSum {
+  text-shadow: 0.5px 0 0;
+  font-size: 19px;
+}

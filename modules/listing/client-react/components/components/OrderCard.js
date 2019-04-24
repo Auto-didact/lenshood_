@@ -1,5 +1,5 @@
 import React from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Row, Col, Button, Card } from 'antd';
 
 export default class OrderCard extends React.Component {
