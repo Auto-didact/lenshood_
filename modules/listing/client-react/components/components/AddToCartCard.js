@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-// import '../resources/listingCatalogue.css';
 import {
   Row,
   Col,
   Icon,
   DatePicker,
-  Checkbox,
+  // Checkbox,
   Slider,
   Button,
   Card
@@ -23,9 +22,9 @@ export default class AddToCartCard extends Component {
           <h5>
             Price per day <h4>&#8377; {listing.listingRental.perDay}</h4>
           </h5>
-          <h5>
+          {/* <h5>
             -25% discount<h5>{this.props.noOfDays} days</h5>
-          </h5>
+          </h5> */}
           <Slider
             min={1}
             max={30}
@@ -48,14 +47,14 @@ export default class AddToCartCard extends Component {
               &#8377; {listing.listingRental.perWeek} <h5>per week</h5>
             </Col>
           </Row>
-          <hr />
-          <p>
+          {/* <hr /> */}
+          {/* <p>
             Owner Delivery <Icon type="car" />
             <Checkbox.Group className="rightfloat">
               <Checkbox value="Owner Delivery" />
             </Checkbox.Group>
             <h5>Benefits you gain the most out of your service</h5>
-          </p>
+          </p> */}
 
           <hr className="ATChr" />
           <strong>Dates</strong>
@@ -75,7 +74,7 @@ export default class AddToCartCard extends Component {
               }}
             />
           </div>
-          <h5>Pick up and return days are free</h5>
+          {/* <h5>Pick up and return days are free</h5> */}
           <br />
           <div>
             <p>
@@ -97,21 +96,20 @@ export default class AddToCartCard extends Component {
                 &#8377; {listing.listingRental.perDay * this.props.noOfDays}
               </div>
             </p>
-            <p>
+            {/* <p>
               25% Multi day discount{" "}
               <div className="colorFloat">
                 -&#8377;{" "}
                 {listing.listingRental.perDay * this.props.noOfDays * 0.25}
               </div>
-            </p>
+            </p> */}
           </div>
           <hr />
           <h3>
             Total rent amount{" "}
             <strong className="colorFloat">
               &#8377;{" "}
-              {listing.listingRental.perDay * this.props.noOfDays -
-                listing.listingRental.perDay * this.props.noOfDays * 0.25 +
+              {listing.listingRental.perDay * this.props.noOfDays +
                 this.props.product.serviceFee}
             </strong>
           </h3>

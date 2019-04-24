@@ -280,6 +280,13 @@
 
 /* Listing Detail View */
 
+.caroIcon {
+  font-size: 55px !important;
+  margin-top: 155px !important; 
+  text-align: center !important;
+  color: #aaa !important;
+}
+
 .CaraImg {
   height: 350px !important;
   width: 100% !important;
