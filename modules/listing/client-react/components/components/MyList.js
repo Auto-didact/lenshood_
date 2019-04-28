@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Layout, Button, Row, Col } from 'antd';
 import DetailsCard from './DetailsCard';
 
@@ -30,21 +30,21 @@ class MyListingProducts extends Component {
   }
   render() {
     return (
-      <Content style={{ padding: '0 30px 0 30px', minHeight: 280, minWidth: '100%' }}>
-        <Row>
+      <Content className="myListContent">
+        <Row className="margin15">
           <Col md={10} xs={8}>
-            <h2 style={{ fontSize: '23px', fontWeight: 'bold' }}>My Listings</h2>
+            <h2 className="MyListHead">My Listings</h2>
             <br />
           </Col>
           <Col md={14} xs={16}>
-            <ButtonGroup style={{ width: '100%' }}>
-              <Button onClick={e => this.FilterItems('all')} className={this.classNamesgroup('all')}>
+            <ButtonGroup className="width100">
+              <Button onClick={() => this.FilterItems('all')} className={this.classNamesgroup('all')}>
                 All
               </Button>
-              <Button onClick={e => this.FilterItems('On Shelf')} className={this.classNamesgroup('On Shelf')}>
+              <Button onClick={() => this.FilterItems('On Shelf')} className={this.classNamesgroup('On Shelf')}>
                 On Shelf
               </Button>
-              <Button onClick={e => this.FilterItems('On Rent')} className={this.classNamesgroup('On Rent')}>
+              <Button onClick={() => this.FilterItems('On Rent')} className={this.classNamesgroup('On Rent')}>
                 On Rent
               </Button>
             </ButtonGroup>

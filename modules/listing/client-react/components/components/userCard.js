@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Row, Col, Rate, Button, Card, Avatar } from 'antd';
-import '../resources/listingCatalogue.css';
+import React, { Component } from "react";
+import { Row, Col, Rate, Button, Card, Avatar } from "antd";
+// import '../resources/listingCatalogue.css';
 
 class UserCard extends Component {
   render() {
@@ -12,62 +12,35 @@ class UserCard extends Component {
             <Avatar />
           </Col>
           <Col span={12}>
-            <h4
-              style={{
-                fontSize: '14px',
-                lineHeight: '15px',
-                marginLeft: '5px'
-              }}
-            >
+            <h4 className="sellerName">
               {seller.name}
               <br />
-              <p style={{ color: '#23b195', fontSize: '10px' }}>
-                {' '}
-                <Rate disabled defaultValue={seller.rating} style={{ color: '#23b195', fontSize: '10px' }} />
+              <p className="font10 mainColor">
+                {" "}
+                <Rate
+                  disabled
+                  defaultValue={seller.rating}
+                  className="font10 mainColor"
+                />
                 <br />
                 Read Reviews ({seller.reviewsCount})
               </p>
             </h4>
           </Col>
           <Col span={8}>
-            <Button
-              style={{
-                color: '#23b195',
-                border: '#23b195 0.5px solid',
-                float: 'right'
-              }}
-              ghost
-            >
+            <Button className="FollowButtom themeColorInverted" ghost>
               Follow
             </Button>
           </Col>
         </Row>
         <br />
-        <h4
-          style={{
-            fontSize: '14px'
-          }}
-        >
-          About
-        </h4>
-        <p
-          style={{
-            fontSize: '12px'
-          }}
-        >
-          {seller.About}
-        </p>
-        <h4
-          style={{
-            fontSize: '14px'
-          }}
-        >
-          Web references
-        </h4>
+        <h4 className="font14">About</h4>
+        <p className="font12">{seller.About}</p>
+        <h4 className="font14">Web references</h4>
         <strong>
           {seller.references.map(item => (
             <strong>
-              <a href={item} style={{ color: 'black', fontSize: '12px' }}>
+              <a href={item} className="font12 itemLink">
                 {item}
                 <br />
               </a>
@@ -75,16 +48,7 @@ class UserCard extends Component {
           ))}
         </strong>
         <br />
-        <Button
-          color="primary"
-          style={{
-            color: '#23b195',
-            border: '#23b195 0.5px solid',
-            margin: '0 30%',
-            width: '40%'
-          }}
-          ghost
-        >
+        <Button className="contactButton themeColorInverted" ghost>
           Contact
         </Button>
       </Card>

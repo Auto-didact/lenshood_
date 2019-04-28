@@ -1,5 +1,5 @@
 import React from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Card } from 'antd';
 
 const { Meta } = Card;
