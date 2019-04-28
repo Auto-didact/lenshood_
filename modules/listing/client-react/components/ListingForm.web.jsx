@@ -5,9 +5,12 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
 
 import { Form, Button } from '@gqlapp/look-client-react';
+// Abstract Out
+import { Row, Col } from 'antd';
 
 import ProductDetails from './components/ListingForm/ProductDetails';
 import RentalDetails from './components/ListingForm/RentalDetails';
+import ListYGSteps from './components/ListYGSteps';
 
 const listingFormSchema = {
   gearCategory: [required],
@@ -36,25 +39,34 @@ class ListingForm extends Component {
     this.steps = [<ProductDetails values={values} t={t} />, <RentalDetails values={values} t={t} />];
 
     return (
-      <Form name="listing" onSubmit={handleSubmit}>
-        {this.steps[this.state.step]}
+      <div className="Listyourgearcards">
+        <Row>
+          <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
+            <ListYGSteps step={this.state.step + 1} />
 
-        {this.state.step === this.steps.length - 1 ? (
-          <>
-            <Button color="secondary" onClick={this.prevStep}>
-              {t('listing.btn.prev')}
-            </Button>
+            <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
+              {this.steps[this.state.step]}
 
-            <Button color="primary" type="submit" disabled={submitting}>
-              {t('listing.btn.submit')}
-            </Button>
-          </>
-        ) : (
-          <Button color="secondary" onClick={this.nextStep}>
-            {t('listing.btn.next')}
-          </Button>
-        )}
-      </Form>
+              {this.state.step === this.steps.length - 1 ? (
+                <>
+                  <Button color="secondary" onClick={this.prevStep}>
+                    {t('listing.btn.prev')}
+                  </Button>
+
+                  {/* abstract out styles To DO */}
+                  <Button color="primary" type="submit" disabled={submitting} style={{ float: 'right' }}>
+                    {t('listing.btn.submit')}
+                  </Button>
+                </>
+              ) : (
+                <Button color="secondary" onClick={this.nextStep} style={{ float: 'right' }}>
+                  {t('listing.btn.next')}
+                </Button>
+              )}
+            </Form>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
