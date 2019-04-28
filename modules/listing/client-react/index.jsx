@@ -36,6 +36,11 @@ const NavLinkMyListingsWithI18n = translate('listing')(({ t }) => (
     {t('listing:navLinkMyListings')}
   </NavLink>
 ));
+const NavLinkListYourGearWithI18n = translate('listing')(({ t }) => (
+  <NavLink to="/listing/new" className="nav-link" activeClassName="active">
+    {t('listing:navLinkListYourGear')}
+  </NavLink>
+));
 
 export default new ClientModule({
   route: [
@@ -77,6 +82,12 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
-
+  navItemRight: [
+    <IfLoggedIn key="/listing/new">
+      <MenuItem>
+        <NavLinkListYourGearWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
+  ],
   localization: [{ ns: 'listing', resources }]
 });
