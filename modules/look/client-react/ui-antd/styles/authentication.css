@@ -1,0 +1,69 @@
+@import "~antd/dist/antd.css";
+
+/* SIGN-IN PAGES */
+
+.signInForm {
+  color: #4a4a4a;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  padding-bottom: 10px;
+}
+
+.paddingMarginBottom {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.belowFormtext {
+  color: #4a4a4a;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0.8px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.viaEmail {
+  color: #999 !important;
+  font-size: 10px !important;
+  padding: 15px 50px 5px 50px !important;
+}
+
+.googlebtn {
+  background: #c55643 !important;
+  color: white !important;
+}
+
+.fbookbtn {
+  background: #3c60a2 !important;
+  color: white !important;
+}
+
+.signinstate {
+  padding-bottom: 4px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  text-shadow: 1px 0 0;
+}
+
+.modalcard {
+  padding: 0 10px 0 25px;
+}
+
+.signInimg {
+  width: 100%;
+  height: 471px;
+}
+
+.signupImg {
+  width: 100%;
+  height: 513px;
+}
+
+.forgotpass {
+  color: #23b195 !important;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  float: right;
+  margin-bottom: 10px;
+}
