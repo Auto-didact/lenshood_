@@ -6,6 +6,9 @@ import { RenderField, RenderDynamicField } from '@gqlapp/look-client-react';
 
 export default class RentalDetails extends Component {
   render() {
+    const listingCondition = ['New', 'Good', 'Fair'];
+    const listingAge = ['< 1 year', '1 - 2 years', '> 3 years'];
+
     const values = this.props.values;
     const t = this.props.t;
     return (
@@ -13,17 +16,19 @@ export default class RentalDetails extends Component {
         <Field
           name="listingDetail.condition"
           component={RenderField}
-          type="text"
+          type="radio"
           label={t('listing.field.listingDetail.condition')}
           value={values.listingDetail.condition}
         />
-        <Field
+
+        {/* Need to remove this everywhere To Do */}
+        {/* <Field
           name="listingDetail.repairHistory"
           component={RenderField}
           type="text"
           label={t('listing.field.listingDetail.repairHistory')}
           value={values.listingDetail.repairHistory}
-        />
+        /> */}
         <Field
           name="listingDetail.age"
           component={RenderField}

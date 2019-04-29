@@ -12,6 +12,61 @@ import {
 } from '@gqlapp/look-client-react';
 
 export default class ProductDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      /* To Do - Find a way to handle these options in a better way (Database or Constants) */
+      listingCategories: [
+        {
+          gearCategory: 'Cameras',
+          gearSubcategories: [
+            'DSLR',
+            'SLR',
+            'Mirrorless Camera',
+            'Point & Shoot Camera',
+            'Video Camera',
+            'Cinema Camera',
+            'Go Pro & Headcam',
+            'Other'
+          ],
+          components: ['Body', 'Lens', 'Memory Card', 'Battery', 'Battery Charger']
+        },
+        {
+          gearCategory: 'Lenses',
+          gearSubcategories: [
+            'DSLR Lens',
+            'Prime Lens',
+            'Mirrorless Lense',
+            'Cinema Lens',
+            'Lens Accessories',
+            'Other Lenses'
+          ],
+          components: ['Lens']
+        }
+      ],
+      activeGearSubcategories: null
+    };
+    this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
+    this.activeGearSubcategories = this.activeGearSubcategories.bind(this);
+  }
+
+  handleGearCategoryChange = value => {
+    const activeCategory = this.state.listingCategories.filter(category => {
+      return category.gearCategory == value;
+    });
+    const gearSubcategories = activeCategory[0].gearSubcategories;
+    console.log(gearSubcategories);
+    this.setState({ activeGearSubcategories: gearSubcategories });
+  };
+
+  activeGearSubcategories = () => {
+    const activeCategory = this.state.listingCategories.filter(category => {
+      return category.gearCategory == this.state.activeGearCategory;
+    });
+    const gearSubcategories = activeCategory[0].gearSubcategories;
+    return gearSubcategories;
+  };
+
   render() {
     const values = this.props.values;
     const t = this.props.t;
@@ -20,20 +75,35 @@ export default class ProductDetails extends Component {
         {/* Gear Category */}
         <Field
           name="gearCategory"
-          component={RenderField}
+          component={RenderSelect}
           type="text"
           label={t('listing.field.gearCategory')}
           value={values.gearCategory}
-        />
+          onChange={this.handleGearCategoryChange}
+        >
+          {this.state.listingCategories.map((category, idx) => (
+            <Option key={idx} value={category.gearCategory}>
+              {category.gearCategory}
+            </Option>
+          ))}
+        </Field>
 
         {/* Gear Sub-Category */}
-        <Field
-          name="gearSubcategory"
-          component={RenderField}
-          type="text"
-          label={t('listing.field.gearSubcategory')}
-          value={values.gearSubcategory}
-        />
+        {this.state.activeGearSubcategories ? (
+          <Field
+            name="gearSubcategory"
+            component={RenderSelect}
+            type="text"
+            label={t('listing.field.gearSubcategory')}
+            value={values.gearSubcategory}
+          >
+            {this.state.activeGearSubcategories.map((category, idx) => (
+              <Option key={idx} value={category}>
+                {category}
+              </Option>
+            ))}
+          </Field>
+        ) : null}
 
         {/* Gear description */}
         <Field
