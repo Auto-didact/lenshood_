@@ -12,6 +12,7 @@ export { default as RenderField } from './RenderField';
 export { default as RenderSelect } from './RenderSelect';
 export { default as RenderRadioGroup } from './RenderRadioGroup';
 export { default as RenderCheckBox } from './RenderCheckBox';
+export { default as RenderUploadMultiple } from './RenderUploadMultiple';
 export { default as RenderUpload } from './RenderUpload';
 export { default as RenderDynamicField } from './RenderDynamicField';
 export { default as Alert } from './Alert';

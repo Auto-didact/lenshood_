@@ -37,13 +37,13 @@ export default class RentalDetails extends Component {
         </Field>
 
         {/* Need to remove this everywhere To Do */}
-        {/* <Field
+        <Field
           name="listingDetail.repairHistory"
           component={RenderField}
           type="text"
           label={t('listing.field.listingDetail.repairHistory')}
           value={values.listingDetail.repairHistory}
-        /> */}
+        />
         <Field
           name="listingDetail.age"
           component={RenderRadioGroup}
@@ -61,7 +61,7 @@ export default class RentalDetails extends Component {
           name="listingDetail.damages"
           render={arrayHelpers => (
             <RenderDynamicField
-              keys={['imageUrl', 'damageDetail']}
+              keys={[{ key: 'imageUrl', type: 'image' }, { key: 'damageDetail', type: 'text' }]}
               arrayHelpers={arrayHelpers}
               values={values.listingDetail.damages}
               name="listingDetail.damages"
