@@ -27,9 +27,9 @@ const ListingAddView = ({ addListing, t }) => {
   return (
     <PageLayout>
       {renderMetaData()}
-      <Link id="back-button" to="/listings">
+      {/* <Link id="back-button" to="/listings">
         {t('listing.btn.back')}
-      </Link>
+      </Link> */}
       <ListingForm onSubmit={onSubmit(addListing)} />
       <br />
     </PageLayout>

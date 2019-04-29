@@ -53,13 +53,13 @@ class ListingForm extends Component {
                     {t('listing.btn.prev')}
                   </Button>
 
-                  {/* abstract out styles To DO */}
+                  {/* abstract out styles To Do, and arrows to button */}
                   <Button color="primary" type="submit" disabled={submitting} style={{ float: 'right' }}>
                     {t('listing.btn.submit')}
                   </Button>
                 </>
               ) : (
-                <Button color="secondary" onClick={this.nextStep} style={{ float: 'right' }}>
+                <Button color="primary" onClick={this.nextStep} style={{ float: 'right' }}>
                   {t('listing.btn.next')}
                 </Button>
               )}
