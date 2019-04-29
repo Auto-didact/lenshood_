@@ -6,7 +6,7 @@ import {
   RenderField,
   RenderSelect,
   Option,
-  RenderUpload,
+  RenderUploadMultiple,
   RenderDynamicField,
   RenderCheckBox
 } from '@gqlapp/look-client-react';
@@ -148,7 +148,7 @@ export default class ProductDetails extends Component {
           name="listingImages"
           label={t('listing.field.listingImages')}
           render={arrayHelpers => (
-            <RenderUpload arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
+            <RenderUploadMultiple arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
           )}
         />
         {/* Listing Content */}
@@ -156,7 +156,12 @@ export default class ProductDetails extends Component {
           name="listingContent"
           render={arrayHelpers => (
             <RenderDynamicField
-              keys={['gear', 'brand', 'model', 'serial']}
+              keys={[
+                { key: 'gear', type: 'text' },
+                { key: 'brand', type: 'text' },
+                { key: 'model', type: 'text' },
+                { key: 'serial', type: 'text' }
+              ]}
               arrayHelpers={arrayHelpers}
               values={values.listingContent}
               name="listingContent"

@@ -6,7 +6,7 @@ import { required, validate } from '@gqlapp/validation-common-react';
 
 import { Form, Button } from '@gqlapp/look-client-react';
 // Abstract Out
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 import ProductDetails from './components/ListingForm/ProductDetails';
 import RentalDetails from './components/ListingForm/RentalDetails';
@@ -50,17 +50,20 @@ class ListingForm extends Component {
               {this.state.step === this.steps.length - 1 ? (
                 <>
                   <Button color="secondary" onClick={this.prevStep}>
+                    <Icon type="left-circle" />
                     {t('listing.btn.prev')}
                   </Button>
 
                   {/* abstract out styles To Do, and arrows to button */}
                   <Button color="primary" type="submit" disabled={submitting} style={{ float: 'right' }}>
                     {t('listing.btn.submit')}
+                    <Icon type="enter" />
                   </Button>
                 </>
               ) : (
                 <Button color="primary" onClick={this.nextStep} style={{ float: 'right' }}>
                   {t('listing.btn.next')}
+                  <Icon type="right-circle" />
                 </Button>
               )}
             </Form>
@@ -99,8 +102,8 @@ const ListingFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    // console.log(values);
-    onSubmit(values);
+    console.log(values);
+    // onSubmit(values);
   },
   enableReinitialize: true,
   displayName: 'ListingForm' // helps with React DevTools
