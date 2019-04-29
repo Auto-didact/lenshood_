@@ -42,7 +42,7 @@ export default class DynamicFieldSet extends React.Component {
                   name={`${name}[${indexv}].${k.key}`}
                   component={RenderField}
                   type="text"
-                  label={k.key}
+                  label={k.label || k.key}
                   value={v[k.key]}
                   key={indexv}
                   // style={{ display: 'inline-block', margin: '0px 5px' }}
@@ -54,7 +54,7 @@ export default class DynamicFieldSet extends React.Component {
                   name={`${name}[${indexv}].${k.key}`}
                   component={RenderUpload}
                   type="text"
-                  label={k.key}
+                  label={k.label || k.key}
                   value={v[k.key]}
                   key={indexv}
                   // style={{ display: 'inline-block', margin: '0px 5px' }}

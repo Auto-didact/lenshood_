@@ -8,8 +8,14 @@ import {
   Option,
   RenderUploadMultiple,
   RenderDynamicField,
-  RenderCheckBox
+  RenderCheckBox,
+  RenderRadioGroup
 } from '@gqlapp/look-client-react';
+
+// Abstract Radio Button out To Do
+import { Radio } from 'antd';
+
+const RadioButton = Radio.Button;
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -46,7 +52,12 @@ export default class ProductDetails extends Component {
       ],
       status: ['Idle', 'On Rent', 'On Shelf', 'Disabled'],
       activeGearSubcategories: null,
-      activeComponents: null
+      activeComponents: null,
+
+      listingCondition: ['New', 'Good', 'Fair'],
+      listingAge: ['< 1 year', '1 - 2 years', '> 3 years'],
+
+      isAdmin: false
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
   }
@@ -109,48 +120,33 @@ export default class ProductDetails extends Component {
           </Field>
         ) : null}
 
-        {/* Gear description */}
-        <Field
-          name="description"
-          component={RenderField}
-          type="text"
-          label={t('listing.field.description')}
-          value={values.description}
-        />
-
         {/* Listing Status */}
-        <Field
-          name="status"
-          component={RenderSelect}
-          type="select"
-          label={t('listing.field.status')}
-          value={values.status}
-        >
-          {this.state.status.map((status, idx) => (
-            <Option key={idx} value={status}>
-              {status}
-            </Option>
-          ))}
-        </Field>
+        {this.state.isAdmin ? (
+          <Field
+            name="status"
+            component={RenderSelect}
+            type="select"
+            label={t('listing.field.status')}
+            value={values.status}
+          >
+            {this.state.status.map((status, idx) => (
+              <Option key={idx} value={status}>
+                {status}
+              </Option>
+            ))}
+          </Field>
+        ) : null}
 
         {/* Listing Is Active (for not showind anywhere) */}
-        <Field
-          name="isActive"
-          component={RenderCheckBox}
-          type="text"
-          label={t('listing.field.isActive')}
-          checked={values.isActive}
-        />
+        {this.state.isAdmin ? (
+          <Field
+            name="isActive"
+            component={RenderCheckBox}
+            label={t('listing.field.isActive')}
+            checked={values.isActive}
+          />
+        ) : null}
 
-        {/* To Do - Convert Field Array to Field Adaptor */}
-        {/* Listing Images */}
-        <FieldArray
-          name="listingImages"
-          label={t('listing.field.listingImages')}
-          render={arrayHelpers => (
-            <RenderUploadMultiple arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
-          )}
-        />
         {/* Listing Content */}
         <FieldArray
           name="listingContent"
@@ -166,6 +162,68 @@ export default class ProductDetails extends Component {
               values={values.listingContent}
               name="listingContent"
               label={t('listing.field.listingContent')}
+            />
+          )}
+        />
+
+        {/* To Do - Convert Field Array to Field Adaptor */}
+        {/* Listing Images */}
+        <FieldArray
+          name="listingImages"
+          label={t('listing.field.listingImages')}
+          render={arrayHelpers => (
+            <RenderUploadMultiple arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
+          )}
+        />
+
+        {/* Gear description */}
+        <Field
+          name="description"
+          component={RenderField}
+          type="textarea"
+          label={t('listing.field.description')}
+          value={values.description}
+        />
+
+        <Field
+          name="listingDetail.condition"
+          component={RenderRadioGroup}
+          type="text"
+          label={t('listing.field.listingDetail.condition')}
+          value={values.listingDetail.condition}
+        >
+          {this.state.listingCondition.map((condition, idx) => (
+            <RadioButton key={idx} value={condition}>
+              {condition}
+            </RadioButton>
+          ))}
+        </Field>
+
+        <Field
+          name="listingDetail.age"
+          component={RenderRadioGroup}
+          type="text"
+          label={t('listing.field.listingDetail.age')}
+          value={values.listingDetail.age}
+        >
+          {this.state.listingAge.map((value, idx) => (
+            <RadioButton key={idx} value={value}>
+              {value}
+            </RadioButton>
+          ))}
+        </Field>
+        <FieldArray
+          name="listingDetail.damages"
+          render={arrayHelpers => (
+            <RenderDynamicField
+              keys={[
+                { key: 'imageUrl', type: 'image', label: 'Image' },
+                { key: 'damageDetail', type: 'text', label: 'Details' }
+              ]}
+              arrayHelpers={arrayHelpers}
+              values={values.listingDetail.damages}
+              name="listingDetail.damages"
+              label={t('listing.field.listingDamages')}
             />
           )}
         />
