@@ -2,24 +2,39 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { FieldArray } from 'formik';
-import { RenderField, RenderDynamicField } from '@gqlapp/look-client-react';
+import { RenderField, RenderRadioGroup, RenderDynamicField } from '@gqlapp/look-client-react';
+
+// Abstract Radio Button out To Do
+import { Radio } from 'antd';
+
+const RadioButton = Radio.Button;
 
 export default class RentalDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listingCondition: ['New', 'Good', 'Fair'],
+      listingAge: ['< 1 year', '1 - 2 years', '> 3 years']
+    };
+  }
   render() {
-    const listingCondition = ['New', 'Good', 'Fair'];
-    const listingAge = ['< 1 year', '1 - 2 years', '> 3 years'];
-
     const values = this.props.values;
     const t = this.props.t;
     return (
       <>
         <Field
           name="listingDetail.condition"
-          component={RenderField}
-          type="radio"
+          component={RenderRadioGroup}
+          type="text"
           label={t('listing.field.listingDetail.condition')}
           value={values.listingDetail.condition}
-        />
+        >
+          {this.state.listingCondition.map((condition, idx) => (
+            <RadioButton key={idx} value={condition}>
+              {condition}
+            </RadioButton>
+          ))}
+        </Field>
 
         {/* Need to remove this everywhere To Do */}
         {/* <Field
@@ -31,11 +46,17 @@ export default class RentalDetails extends Component {
         /> */}
         <Field
           name="listingDetail.age"
-          component={RenderField}
+          component={RenderRadioGroup}
           type="text"
           label={t('listing.field.listingDetail.age')}
           value={values.listingDetail.age}
-        />
+        >
+          {this.state.listingAge.map((value, idx) => (
+            <RadioButton key={idx} value={value}>
+              {value}
+            </RadioButton>
+          ))}
+        </Field>
         <FieldArray
           name="listingDetail.damages"
           render={arrayHelpers => (

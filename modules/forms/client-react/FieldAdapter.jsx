@@ -35,6 +35,8 @@ class FieldAdapter extends Component {
     if (isString(e)) {
       // for Option Field
       this.props.formik.setFieldValue(this.props.name, e);
+    } else if (e.target.type == 'radio') {
+      this.props.formik.setFieldValue(e.target.name, e.target.value);
     } else if (e.target.checked) {
       this.props.formik.setFieldValue(e.target.name, e.target.checked);
     } else if (e.target.type == 'number') {

@@ -85,7 +85,7 @@ const ListingFormWithFormik = withFormik({
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
-    status: (props.listing && props.listing.status) || 'idle',
+    status: (props.listing && props.listing.status) || 'Idle',
     isActive: (props.listing && props.listing.isActive) || false,
     listingImages: props.listing && props.listing.listingImages,
     listingDetail: (props.listing && props.listing.listingDetail) || {},
