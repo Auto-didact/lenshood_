@@ -44,10 +44,11 @@ export default class ProductDetails extends Component {
           components: ['Lens']
         }
       ],
-      activeGearSubcategories: null
+      status: ['Idle', 'On Rent', 'On Shelf', 'Disabled'],
+      activeGearSubcategories: null,
+      activeComponents: null
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
-    this.activeGearSubcategories = this.activeGearSubcategories.bind(this);
   }
 
   handleGearCategoryChange = value => {
@@ -59,13 +60,16 @@ export default class ProductDetails extends Component {
     this.setState({ activeGearSubcategories: gearSubcategories });
   };
 
-  activeGearSubcategories = () => {
-    const activeCategory = this.state.listingCategories.filter(category => {
-      return category.gearCategory == this.state.activeGearCategory;
-    });
-    const gearSubcategories = activeCategory[0].gearSubcategories;
-    return gearSubcategories;
-  };
+  // To Do Create a function to render options
+  // renderOptions = values => {
+  //   const options = values.map((value, idx) => (
+  //     <Option key={idx} value={value}>
+  //       {value}
+  //     </Option>
+  //   ));
+
+  //   return <>{options}</>;
+  // };
 
   render() {
     const values = this.props.values;
@@ -122,11 +126,11 @@ export default class ProductDetails extends Component {
           label={t('listing.field.status')}
           value={values.status}
         >
-          {/* To Do - Find a way to handle these options in a better way (Database or Constants) */}
-          <Option value="idle">Idle</Option>
-          <Option value="on_rent">On Rent</Option>
-          <Option value="on_shelf">On Shelf</Option>
-          <Option value="disabled">Disabled</Option>
+          {this.state.status.map((status, idx) => (
+            <Option key={idx} value={status}>
+              {status}
+            </Option>
+          ))}
         </Field>
 
         {/* Listing Is Active (for not showind anywhere) */}

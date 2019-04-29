@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Select } from 'antd';
+
+// Abstract Out Select & Form To Do
+import { Form, Radio } from 'antd';
 
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 
-const RenderSelect = ({ input, label, children, meta: { touched, error } }) => {
+const RenderRadioGroup = ({ input, label, children, meta: { touched, error } }) => {
   let validateStatus = '';
   if (touched && error) {
     validateStatus = 'error';
@@ -13,17 +16,17 @@ const RenderSelect = ({ input, label, children, meta: { touched, error } }) => {
   return (
     <FormItem label={label} validateStatus={validateStatus} help={error}>
       <div>
-        <Select {...input}>{children}</Select>
+        <RadioGroup {...input}>{children}</RadioGroup>
       </div>
     </FormItem>
   );
 };
 
-RenderSelect.propTypes = {
+RenderRadioGroup.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
   children: PropTypes.node
 };
 
-export default RenderSelect;
+export default RenderRadioGroup;
