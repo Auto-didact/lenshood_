@@ -34,12 +34,10 @@ class ProductCard extends Component {
     return (
       <Card className="justifyAlign">
         <Row>
-          <Col sm={3} md={2}>
-            <h1 className="caroIcon">
-              <Icon type="left-circle" onClick={this.previous} />
+          <Col lg={{ span: 22, offset: 1 }} sm={24}>
+            <h1 className="caroIcon caroIconleft">
+              <Icon type="left-circle" onClick={this.previous} theme="filled" />
             </h1>
-          </Col>
-          <Col sm={18} md={20}>
             <Carousel ref={node => (this.carousel = node)} {...status}>
               {images.map(item => (
                 <div>
@@ -47,10 +45,8 @@ class ProductCard extends Component {
                 </div>
               ))}
             </Carousel>
-          </Col>
-          <Col sm={3} md={2}>
-            <h1 className="caroIcon">
-              <Icon type="right-circle" onClick={this.next} />
+            <h1 className="caroIcon caroIconright">
+              <Icon type="right-circle" onClick={this.next} theme="filled" />
             </h1>
           </Col>
         </Row>
