@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import '../resources/listingCatalogue.css';
-import { Layout, Button, Row, Col } from "antd";
-import DetailsCard from "./DetailsCard";
+import { Layout, Button, Row, Col } from 'antd';
+import DetailsCard from './DetailsCard';
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
 class MyListingProducts extends Component {
   state = {
-    value: "On Rent"
+    value: 'On Rent'
   };
   classNamesgroup(e) {
     if (this.state.value === e) {
-      return "btnActive";
+      return 'btnActive';
     } else {
-      return "btn";
+      return 'btn';
     }
   }
   FilterItems(e) {
@@ -33,29 +33,18 @@ class MyListingProducts extends Component {
       <Content className="myListContent">
         <Row className="margin15">
           <Col md={10} xs={8}>
-            <h2 className="MyListHead">
-              My Listings
-            </h2>
+            <h2 className="MyListHead">My Listings</h2>
             <br />
           </Col>
           <Col md={14} xs={16}>
             <ButtonGroup className="width100">
-              <Button
-                onClick={() => this.FilterItems("all")}
-                className={this.classNamesgroup("all")}
-              >
+              <Button onClick={() => this.FilterItems('all')} className={this.classNamesgroup('all')}>
                 All
               </Button>
-              <Button
-                onClick={() => this.FilterItems("On Shelf")}
-                className={this.classNamesgroup("On Shelf")}
-              >
+              <Button onClick={() => this.FilterItems('On Shelf')} className={this.classNamesgroup('On Shelf')}>
                 On Shelf
               </Button>
-              <Button
-                onClick={() => this.FilterItems("On Rent")}
-                className={this.classNamesgroup("On Rent")}
-              >
+              <Button onClick={() => this.FilterItems('On Rent')} className={this.classNamesgroup('On Rent')}>
                 On Rent
               </Button>
             </ButtonGroup>
@@ -63,9 +52,7 @@ class MyListingProducts extends Component {
         </Row>
         {this.props.products
           ? this.props.products.map(item =>
-              this.state.value === "all"
-                ? this.returnItem(item)
-                : this.renderItem(item)
+              this.state.value === 'all' ? this.returnItem(item) : this.renderItem(item)
             )
           : null}
       </Content>

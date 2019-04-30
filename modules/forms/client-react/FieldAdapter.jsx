@@ -28,12 +28,15 @@ class FieldAdapter extends Component {
   // To Do - ReConfirm that this works
   onChange = e => {
     const { onChange } = this.props;
-    // console.log(e.target.type);
+    console.log(e);
     if (onChange) {
       onChange(e);
-    } else if (isString(e)) {
+    }
+    if (isString(e)) {
       // for Option Field
       this.props.formik.setFieldValue(this.props.name, e);
+    } else if (e.target.type == 'radio') {
+      this.props.formik.setFieldValue(e.target.name, e.target.value);
     } else if (e.target.checked) {
       this.props.formik.setFieldValue(e.target.name, e.target.checked);
     } else if (e.target.type == 'number') {

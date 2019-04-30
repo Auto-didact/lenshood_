@@ -9,25 +9,23 @@ fragment UserInfo on User {
   profile {
     ...UserProfileInfo
   }
-  auth {
-    certificate {
-      serial
-    }
-    facebook {
-      fbId
-      displayName
-    }
-    google {
-      googleId
-      displayName
-    }
-    github {
-      ghId
-      displayName
-    }
-    linkedin {
-      lnId
-      displayName
-    }
+  authCertificate {
+    serial
+  }
+  authFacebook {
+    fbId
+    displayName
+  }
+  authGoogle {
+    googleId
+    displayName
+  }
+  authGithub {
+    ghId
+    displayName
+  }
+  authLinkedin {
+    lnId
+    displayName
   }
 }
