@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card, CardGroup, CardText } from '@gqlapp/look-client-react';
-import ProfileMini from './ProfileMini';
+import React from "react";
+import { Card, CardGroup, CardText } from "@gqlapp/look-client-react";
+import ProfileMini from "./ProfileMini";
 
-const UsersCard = ({ data, t }) => {
+const UsersCard = ({ data }) => {
   if (data.list.length === 0) {
     return (
       <Card>
