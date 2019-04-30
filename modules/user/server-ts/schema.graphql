@@ -5,14 +5,128 @@ type User {
   isActive: Boolean
   email: String!
   profile: UserProfile
-  auth: UserAuth
+  addresses: [UserAddress]
+  identification: [UserIdentification]
+  verification: UserVerification
+  endorsements: [UserEndorsement]
+  endorsed: [UserEndorsed]
+  followers: [UserFollower]
+  following: [UserFollowing]
+  portfolios: [UserPortfolio]
+  remarks: [UserRemark]
+
+  # Listing Module
+  listings: [Listing]
+
+  authCertificate: CertificateAuth
+  authFacebook: FacebookAuth
+  authGoogle: GoogleAuth
+  authGithub: GithubAuth
+  authLinkedin: LinkedInAuth
+
+  createdAt: String
+  updatedAt: String
 }
 
 type UserProfile {
+  id: Int
   firstName: String
   lastName: String
-  fullName: String
+  isVerified: Boolean
+  isAvailable: Boolean
+  website: String
+  about: String
+  designation: String
+  avatar: String
+  rating: String
+  responseTime: String
+  acceptanceRate: String
+  mobile: String
+  flag: String
+  createdAt: String
+  updatedAt: String
+  referredBy: User
 }
+
+type UserIdentification {
+  id: Int
+  type: String
+  documentUrl: String
+  isVerified: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+type UserAddress {
+  id: Int
+  streetAddress1: String
+  streetAddress2: String
+  city: String
+  state: String
+  pinCode: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserVerification {
+  id: Int
+  isEmailVerified: Boolean
+  isMobileVerified: Boolean
+  isAddressVerified: Boolean
+  isIdVerified: Boolean
+  isReferred: Boolean
+  createdAt: String
+  updatedAt: String
+
+}
+
+type UserEndorsement {
+  id: Int
+  endorser: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserEndorsed {
+  id: Int
+  endorsee: User
+  createdAt: String
+  updatedAt: String
+}
+
+
+type UserFollower {
+  id: Int
+  follower: User
+  createdAt: String
+  updatedAt: String
+
+}
+
+type UserFollowing {
+  id: Int
+  followee: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPortfolio {
+  id: Int
+  platform: String
+  portfolioUrl: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserRemark {
+  id: Int
+  type: String
+  remark: String
+  admin: User
+  createdAt: String
+  updatedAt: String
+}
+
 
 # Additional authentication service info
 type UserAuth {
@@ -25,33 +139,45 @@ type UserAuth {
 
 type CertificateAuth {
   serial: String
+  createdAt: String
+  updatedAt: String
 }
 
 type FacebookAuth {
   fbId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
+
 }
 
 type GoogleAuth {
   googleId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type GithubAuth {
   ghId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type LinkedInAuth {
   lnId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
+
 }
 
 extend type Query {
   # Get all users ordered by: OrderByUserInput add filtered by: FilterUserInput
   users(orderBy: OrderByUserInput, filter: FilterUserInput): [User]
   # Get user by id
-  user(id: Int!): UserPayload
+  user(id: Int!): User
   # Get current user
   currentUser: User
 }
@@ -62,9 +188,9 @@ type UserPayload {
 
 extend type Mutation {
   # Create new user
-  addUser(input: AddUserInput!): UserPayload!
+  addUser(input: AddUserInput!): User!
   # Edit a user
-  editUser(input: EditUserInput!): UserPayload!
+  editUser(input: EditUserInput!): User!
   # Delete a user
   deleteUser(id: Int!): UserPayload!
 }

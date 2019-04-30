@@ -10,10 +10,9 @@ import Avatar from './Avatar';
 
 //import settings from '../../../../../settings';
 
-const ref = { modules: null };
+export const ref = { modules: null };
 
 export const onAppCreate = modules => (ref.modules = modules);
-
 class NavBar extends React.Component {
   state = {
     current: '/'

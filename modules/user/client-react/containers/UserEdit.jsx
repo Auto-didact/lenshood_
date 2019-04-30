@@ -67,7 +67,7 @@ export default compose(
       };
     },
     props({ data: { loading, user } }) {
-      const userPayload = user ? { user: user.user } : {};
+      const userPayload = user ? { user: user } : {};
       return {
         loading,
         ...userPayload

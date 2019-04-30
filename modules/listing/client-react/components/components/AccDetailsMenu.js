@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import '../resources/listingCatalogue.css';
 import { Layout, Menu, Icon } from 'antd';
+import '../resources/listingCatalogue.css';
 
 const { Item } = Menu;
 const { Sider } = Layout;
@@ -8,9 +9,7 @@ const { Sider } = Layout;
 class AccDetailsMenu extends Component {
   render() {
     return (
-      <div
-        className="SliderDiv"
-      >
+      <div className="SliderDiv">
         <Sider width={550} className="SliderStart">
           <h4 className="Pad20">
             <strong>Account Details</strong>

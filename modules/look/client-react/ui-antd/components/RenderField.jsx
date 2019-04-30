@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 
 const FormItem = Form.Item;
+const { TextArea } = Input;
 
 const RenderField = ({ input, label, type, meta: { touched, error }, placeholder }) => {
   let validateStatus = '';
@@ -12,7 +13,9 @@ const RenderField = ({ input, label, type, meta: { touched, error }, placeholder
   return (
     <FormItem label={label} validateStatus={validateStatus} help={touched && error}>
       <div>
-        <Input {...input} placeholder={label || placeholder} type={type} />
+        {type != 'textarea' ? <Input {...input} placeholder={label || placeholder} type={type} /> : null}
+
+        {type == 'textarea' ? <TextArea {...input} placeholder={label || placeholder} /> : null}
       </div>
     </FormItem>
   );
