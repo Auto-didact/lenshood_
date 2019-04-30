@@ -12,7 +12,7 @@ import ProductDetails from './components/ListingForm/ProductDetails';
 import RentalDetails from './components/ListingForm/RentalDetails';
 import ListYGSteps from './components/ListYGSteps';
 
-const listingFormSchema = {
+const ProductDetailsSchema = {
   gearCategory: [required],
   gearSubcategory: [required],
   description: [required]
@@ -95,7 +95,7 @@ const ListingFormWithFormik = withFormik({
     listingRental: (props.listing && props.listing.listingRental) || {},
     listingContent: (props.listing && props.listing.listingContent) || []
   }),
-  validate: values => validate(values, listingFormSchema),
+  validate: values => validate(values, ProductDetailsSchema),
   handleSubmit(
     values,
     {
