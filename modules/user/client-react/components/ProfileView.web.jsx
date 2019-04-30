@@ -1,21 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
-import { StripeSubscriptionProfile } from "@gqlapp/payments-client-react";
-import { translate } from "@gqlapp/i18n-client-react";
-import {
-  Card,
-  CardGroup,
-  CardText,
-  AccountLayout
-} from "@gqlapp/look-client-react";
-import { Row, Col } from "antd";
-import VerificationView from "./VerificationView";
-import ProfileHead from "./ProfileHead";
-import UsersCard from "./UsersCard";
-import settings from "../../../../settings";
-import AddressCard from "./AddressCard";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Card, CardGroup, CardText, AccountLayout } from '@gqlapp/look-client-react';
+import { Row, Col } from 'antd';
+import VerificationView from './VerificationView';
+import ProfileHead from './ProfileHead';
+import UsersCard from './UsersCard';
+import settings from '../../../../settings';
+import AddressCard from './AddressCard';
 // To Do Abstract Out
 
 class ProfileView extends React.Component {
@@ -28,8 +23,8 @@ class ProfileView extends React.Component {
     const following = currentUser.following;
     return {
       endorsements: {
-        title: t("profile.card.group.endorsements.title"),
-        notFound: t("profile.card.group.endorsements.notFound"),
+        title: t('profile.card.group.endorsements.title'),
+        notFound: t('profile.card.group.endorsements.notFound'),
         list: [
           {
             avatar: endorsements[0].endorser.profile.avatar,
@@ -44,8 +39,8 @@ class ProfileView extends React.Component {
         ]
       },
       endorsed: {
-        title: t("profile.card.group.endorsed.title"),
-        notFound: t("profile.card.group.endorsed.notFound"),
+        title: t('profile.card.group.endorsed.title'),
+        notFound: t('profile.card.group.endorsed.notFound'),
         list: [
           {
             avatar: endorsed[0].endorsee.profile.avatar,
@@ -55,8 +50,8 @@ class ProfileView extends React.Component {
         ]
       },
       followers: {
-        title: t("profile.card.group.followers.title"),
-        notFound: t("profile.card.group.followers.notFound"),
+        title: t('profile.card.group.followers.title'),
+        notFound: t('profile.card.group.followers.notFound'),
         list: [
           {
             avatar: followers[0].follower.profile.avatar,
@@ -71,14 +66,14 @@ class ProfileView extends React.Component {
         ]
       },
       following: {
-        title: t("profile.card.group.following.title"),
-        notFound: t("profile.card.group.following.notFound"),
+        title: t('profile.card.group.following.title'),
+        notFound: t('profile.card.group.following.notFound'),
         list: []
       },
       profileHead: {
-        rating: t("profile.card.group.rating"),
-        acceptanceRate: t("profile.card.group.acceptanceRate"),
-        responseTime: t("profile.card.group.responseTime")
+        rating: t('profile.card.group.rating'),
+        acceptanceRate: t('profile.card.group.acceptanceRate'),
+        responseTime: t('profile.card.group.responseTime')
       }
     };
   };
@@ -86,11 +81,11 @@ class ProfileView extends React.Component {
   renderMetaData = t => {
     return (
       <Helmet
-        title={`${settings.app.name} - ${t("profile.title")}`}
+        title={`${settings.app.name} - ${t('profile.title')}`}
         meta={[
           {
-            name: "description",
-            content: `${settings.app.name} - ${t("profile.meta")}`
+            name: 'description',
+            content: `${settings.app.name} - ${t('profile.meta')}`
           }
         ]}
       />
@@ -103,61 +98,57 @@ class ProfileView extends React.Component {
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">
-          <div className="text-center">{t("profile.loadMsg")}</div>
+          <div className="text-center">{t('profile.loadMsg')}</div>
         </AccountLayout>
       );
     } else if (currentUser) {
       console.log(currentUser);
       return (
         <AccountLayout select="/profile">
-          <h2 style={{ padding: "0 20px 0px 33%" }}>
-            <strong>{t("profile.card.title")}</strong>
+          <h2 style={{ padding: '0 20px 0px 33%' }}>
+            <strong>{t('profile.card.title')}</strong>
           </h2>
 
-          <Row gutter={5} style={{ padding: "0px 0px 0px 3%" }}>
+          <Row gutter={5} style={{ padding: '0px 0px 0px 3%' }}>
             <Col span={16}>
               <Card>
-                <ProfileHead
-                  profile={currentUser.profile}
-                  description={this.usersCardData().profileHead}
-                />
+                <ProfileHead profile={currentUser.profile} description={this.usersCardData().profileHead} />
 
                 <Row>
                   <Col span={12}>
                     <CardGroup>
-                      <h2>{t("profile.card.group.name")}:</h2>
+                      <h2>{t('profile.card.group.name')}:</h2>
                       <CardText>{currentUser.username}</CardText>
                     </CardGroup>
                     {currentUser.profile && currentUser.profile.website && (
                       <CardGroup>
-                        <h2>{t("profile.card.group.website")}:</h2>
+                        <h2>{t('profile.card.group.website')}:</h2>
                         <CardText>{currentUser.profile.website}</CardText>
                       </CardGroup>
                     )}
 
                     <CardGroup>
-                      <h2>{t("profile.card.group.email")}:</h2>
+                      <h2>{t('profile.card.group.email')}:</h2>
                       <CardText>{currentUser.email}</CardText>
                     </CardGroup>
 
                     {currentUser.profile && currentUser.profile.mobile && (
                       <CardGroup>
-                        <h2>{t("profile.card.group.mobile")}:</h2>
+                        <h2>{t('profile.card.group.mobile')}:</h2>
                         <CardText>{currentUser.profile.mobile}</CardText>
                       </CardGroup>
                     )}
 
                     <CardGroup>
-                      <h2>{t("profile.card.group.role")}:</h2>
+                      <h2>{t('profile.card.group.role')}:</h2>
                       <CardText>{currentUser.role}</CardText>
                     </CardGroup>
                     {/* Portfolios */}
                     <CardGroup>
-                      <h2>{t("profile.card.group.portfolios.title")}</h2>
+                      <h2>{t('profile.card.group.portfolios.title')}</h2>
                       {currentUser.portfolios.map((portfolio, key) => (
                         <h3>
-                          {t("profile.card.group.portfolios.subtitle")} :{" "}
-                          {key + 1}
+                          {t('profile.card.group.portfolios.subtitle')} : {key + 1}
                         </h3>
                       ))}
                     </CardGroup>
@@ -166,17 +157,17 @@ class ProfileView extends React.Component {
                     {/* Addresses */}
                     {currentUser.profile && currentUser.profile.about && (
                       <CardGroup>
-                        <h2>{t("profile.card.group.about")}:</h2>
+                        <h2>{t('profile.card.group.about')}:</h2>
                         <CardText>{currentUser.profile.about}</CardText>
                       </CardGroup>
                     )}
 
                     <CardGroup>
-                      <h2>{t("profile.card.group.addresses.title")}</h2>
+                      <h2>{t('profile.card.group.addresses.title')}</h2>
                       {currentUser.addresses.map((address, key) => (
                         <AddressCard
                           address={address}
-                          subTitle={t("profile.card.group.addresses.subTitle")}
+                          subTitle={t('profile.card.group.addresses.subTitle')}
                           index={key}
                         />
                       ))}
@@ -185,9 +176,7 @@ class ProfileView extends React.Component {
                     {/* Credit card info (Stripe subscription module)*/}
                     {settings.stripe.subscription.enabled &&
                       settings.stripe.subscription.publicKey &&
-                      currentUser.role === "user" && (
-                        <StripeSubscriptionProfile />
-                      )}
+                      currentUser.role === 'user' && <StripeSubscriptionProfile />}
                   </Col>
                 </Row>
               </Card>
@@ -201,14 +190,14 @@ class ProfileView extends React.Component {
             </Col>
           </Row>
           <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
-            {t("profile.editProfileText")}
+            {t('profile.editProfileText')}
           </Link>
         </AccountLayout>
       );
     } else {
       return (
         <AccountLayout>
-          <h2>{t("profile.errorMsg")}</h2>
+          <h2>{t('profile.errorMsg')}</h2>
         </AccountLayout>
       );
     }
@@ -220,4 +209,4 @@ ProfileView.propTypes = {
   currentUser: PropTypes.object,
   t: PropTypes.func
 };
-export default translate("user")(ProfileView);
+export default translate('user')(ProfileView);
