@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Layout, Row, Col, Menu, Icon } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { Layout, Row, Col, Menu } from 'antd';
 
 import NavBar, { ref } from './NavBar';
 import Footer from './Footer';
 
 const { Header, Content } = Layout;
-const { Item } = Menu;
 
 // const ref = { modules: modules };
 
@@ -23,8 +22,8 @@ class AccountLayout extends React.Component {
         )}
 
         <Row style={{ padding: '2% 5%', background: '#fff' }}>
-          <Col lg={6} md={24}>
-            <h4 style={{ padding: '0 20px' }}>
+          <Col lg={4} md={24}>
+            <h4 style={{ padding: '0 20px 13px' }}>
               <strong>Account Details</strong>
             </h4>
             <Menu
@@ -52,10 +51,8 @@ class AccountLayout extends React.Component {
               {ref.modules.navItemsAccount}
             </Menu>
           </Col>
-          <Col lg={16} md={24}>
-            <Content id="content" style={{ padding: 24 }}>
-              {children}
-            </Content>
+          <Col lg={18} md={50}>
+            <Content id="content">{children}</Content>
           </Col>
         </Row>
         <Footer />
