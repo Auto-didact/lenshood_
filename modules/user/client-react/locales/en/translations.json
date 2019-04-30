@@ -68,10 +68,48 @@
         "about": "About",
         "website": "Website",
         "mobile": "Mobile",
-        "isVarified": "Varification Status",
+
         "isAvailable": "Availability Status",
         "rating": "Rating",
         "flag": "Flag",
+        "verification": {
+          "title": "Varification Status",
+          "address": "Address",
+          "email": "Email",
+          "id": "ID",
+          "mobile": "Mobile",
+          "isReferred": "Referred"
+        },
+        "addresses": {
+          "title": "Addresses",
+          "subTitle": "Address",
+          "city": "City",
+          "pinCode": "Pin Code",
+          "state": "State",
+          "streetAddress": "Street Address"
+        },
+        "portfolios": {
+          "title": "Portfolios",
+          "subtitle": "Portfolio"
+        },
+        "endorsements": {
+          "title": "Endorsements",
+          "subTitle": "Endorsement",
+          "notFound": "No Endorsements Found"
+        },
+        "endorsed": {
+          "title": "Endorsed",
+          "subTitle": "Endorsee",
+          "notFound": "No Endorsee Found"
+        },
+        "followers": {
+          "title": "Followers",
+          "notFound": "No Followers Found"
+        },
+        "following": {
+          "title": "Following",
+          "notFound": "No Following Found"
+        },
         "referedBy": {
           "id": "ID",
           "email": "Email",
