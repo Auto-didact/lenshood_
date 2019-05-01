@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, Carousel, Card, Icon } from "antd";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Row, Col, Carousel, Card, Icon } from 'antd';
 // import '../resources/listingCatalogue.css';
 
 class ProductCard extends Component {
@@ -53,10 +53,7 @@ class ProductCard extends Component {
         <Row>
           <Col span={12}>
             <strong className="mainColor font12">Replacement Value</strong>
-            <span className="mainColor font14">
-              {" "}
-              &#8377; {replacementValue} /-{" "}
-            </span>
+            <span className="mainColor font14"> &#8377; {replacementValue} /- </span>
           </Col>
           {/* <Col span={12}>
             <Link to="" className="font14 mainColor rightfloat">
