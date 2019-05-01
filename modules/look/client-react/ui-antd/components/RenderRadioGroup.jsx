@@ -9,15 +9,17 @@ const RadioGroup = Radio.Group;
 
 const RenderRadioGroup = ({ input, label, children, meta: { touched, error } }) => {
   let validateStatus = '';
-  if (touched && error) {
+  if (error) {
     validateStatus = 'error';
   }
-
+  const onBlur = e => {
+    console.log(e);
+  };
   return (
     <FormItem label={label} validateStatus={validateStatus} help={error}>
-      <div>
-        <RadioGroup {...input}>{children}</RadioGroup>
-      </div>
+      <RadioGroup {...input} onBlur={onBlur}>
+        {children}
+      </RadioGroup>
     </FormItem>
   );
 };
