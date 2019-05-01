@@ -11,10 +11,8 @@ const RenderSelect = ({ input, label, children, meta: { touched, error } }) => {
   }
 
   return (
-    <FormItem label={label} validateStatus={validateStatus} help={touched && error}>
-      <div>
-        <Select {...input}>{children}</Select>
-      </div>
+    <FormItem label={label} hasFeedback validateStatus={validateStatus} help={touched && error}>
+      <Select {...input}>{children}</Select>
     </FormItem>
   );
 };
