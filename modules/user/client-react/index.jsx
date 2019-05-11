@@ -53,7 +53,7 @@ const NavLinkUsersWithI18n = translate('user')(({ t }) => (
   </NavLink>
 ));
 const NavLinkProfileWithI18n = translate('user')(({ t }) => (
-  <NavLink to="/profile" className="nav-link" activeClassName="active">
+  <NavLink to="/profile" className="AccDetItem" activeClassName="AccDetItemSelected">
     <Icon type="user" />
     {t('navLink.profile')}
   </NavLink>
