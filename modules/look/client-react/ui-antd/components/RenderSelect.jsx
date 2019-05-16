@@ -4,26 +4,24 @@ import { Form, Select } from 'antd';
 
 const FormItem = Form.Item;
 
-const RenderField = ({ input, label, children, meta: { touched, error } }) => {
+const RenderSelect = ({ input, label, children, meta: { touched, error } }) => {
   let validateStatus = '';
   if (touched && error) {
     validateStatus = 'error';
   }
 
   return (
-    <FormItem label={label} validateStatus={validateStatus} help={error}>
-      <div>
-        <Select {...input}>{children}</Select>
-      </div>
+    <FormItem label={label} hasFeedback validateStatus={validateStatus} help={touched && error}>
+      <Select {...input}>{children}</Select>
     </FormItem>
   );
 };
 
-RenderField.propTypes = {
+RenderSelect.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
   children: PropTypes.node
 };
 
-export default RenderField;
+export default RenderSelect;

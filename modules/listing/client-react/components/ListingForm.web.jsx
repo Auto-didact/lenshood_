@@ -5,11 +5,14 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
 
 import { Form, Button } from '@gqlapp/look-client-react';
+// Abstract Out
+import { Row, Col, Icon, message } from 'antd';
 
 import ProductDetails from './components/ListingForm/ProductDetails';
 import RentalDetails from './components/ListingForm/RentalDetails';
+import ListYGSteps from './components/ListYGSteps';
 
-const listingFormSchema = {
+const ProductDetailsSchema = {
   gearCategory: [required],
   gearSubcategory: [required],
   description: [required]
@@ -24,8 +27,15 @@ class ListingForm extends Component {
     this.prevStep = this.prevStep.bind(this);
   }
 
-  nextStep = () => {
-    this.setState(state => ({ step: state.step + 1 }));
+  nextStep = async () => {
+    let errors = await this.props.validateForm(this.props.values);
+    var isErrorsEmpty = !Object.keys(errors).length;
+    // console.log(errors);
+    // console.log(this.props.values);
+    if (isErrorsEmpty) this.setState(state => ({ step: state.step + 1 }));
+    else message.info('Fill in the Required details before moving on!');
+
+    // set errors and touched
   };
   prevStep = () => {
     this.setState(state => ({ step: state.step - 1 }));
@@ -36,30 +46,43 @@ class ListingForm extends Component {
     this.steps = [<ProductDetails values={values} t={t} />, <RentalDetails values={values} t={t} />];
 
     return (
-      <Form name="listing" onSubmit={handleSubmit}>
-        {this.steps[this.state.step]}
+      <div className="Listyourgearcards">
+        <Row>
+          <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
+            <ListYGSteps step={this.state.step + 1} />
 
-        {this.state.step === this.steps.length - 1 ? (
-          <>
-            <Button color="secondary" onClick={this.prevStep}>
-              {t('listing.btn.prev')}
-            </Button>
+            <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
+              {this.steps[this.state.step]}
 
-            <Button color="primary" type="submit" disabled={submitting}>
-              {t('listing.btn.submit')}
-            </Button>
-          </>
-        ) : (
-          <Button color="secondary" onClick={this.nextStep}>
-            {t('listing.btn.next')}
-          </Button>
-        )}
-      </Form>
+              {this.state.step === this.steps.length - 1 ? (
+                <>
+                  <Button color="secondary" onClick={this.prevStep}>
+                    <Icon type="left-circle" />
+                    {t('listing.btn.prev')}
+                  </Button>
+
+                  {/* abstract out styles To Do, and arrows to button */}
+                  <Button color="primary" type="submit" disabled={submitting} style={{ float: 'right' }}>
+                    {t('listing.btn.submit')}
+                    <Icon type="enter" />
+                  </Button>
+                </>
+              ) : (
+                <Button color="primary" onClick={this.nextStep} style={{ float: 'right' }}>
+                  {t('listing.btn.next')}
+                  <Icon type="right-circle" />
+                </Button>
+              )}
+            </Form>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
 
 ListingForm.propTypes = {
+  validateForm: PropTypes.func,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
@@ -73,22 +96,22 @@ const ListingFormWithFormik = withFormik({
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
-    status: (props.listing && props.listing.status) || 'idle',
-    isActive: (props.listing && props.listing.isActive) || false,
+    status: (props.listing && props.listing.status) || 'Idle',
+    isActive: (props.listing && props.listing.isActive) || true,
     listingImages: props.listing && props.listing.listingImages,
     listingDetail: (props.listing && props.listing.listingDetail) || {},
     listingRental: (props.listing && props.listing.listingRental) || {},
     listingContent: (props.listing && props.listing.listingContent) || []
   }),
-  validate: values => validate(values, listingFormSchema),
+  validate: values => validate(values, ProductDetailsSchema),
   handleSubmit(
     values,
     {
       props: { onSubmit }
     }
   ) {
-    // console.log(values);
-    onSubmit(values);
+    console.log(values);
+    // onSubmit(values);
   },
   enableReinitialize: true,
   displayName: 'ListingForm' // helps with React DevTools

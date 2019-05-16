@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
-import './resources/listingCatalogue.css';
+// import "./resources/listingCatalogue.css";
 import ListYGSteps from './components/ListYGSteps';
 
 const { TextArea } = Input;
@@ -10,16 +10,9 @@ class ListYourGearOwner extends Component {
   render() {
     return (
       <PageLayout>
-        <div style={{ padding: '20px' }}>
+        <div className="Listyourgearcards">
           <Row>
-            <Col
-              md={{ span: 14, offset: 5 }}
-              sm={{ span: 20, offset: 2 }}
-              style={{
-                padding: '24px auto',
-                background: '#fff'
-              }}
-            >
+            <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
               <ListYGSteps step={0} />
               <Form layout="vertical">
                 <Form.Item label={<strong>Email ID</strong>}>
@@ -46,10 +39,8 @@ class ListYourGearOwner extends Component {
                 <Form.Item label={<strong>Address</strong>}>
                   <TextArea rows="6" />
                 </Form.Item>
-                <Form.Item label={<strong style={{ lineHeight: '13px' }}>Add locations you serve</strong>}>
-                  <p style={{ lineHeight: '13px', fontSize: '13px' }}>
-                    Start entering the locality, landmark, zip code (Separated by comma)
-                  </p>
+                <Form.Item label={<strong className="addLocThatYouServe">Add locations you serve</strong>}>
+                  <p className="startLoc">Start entering the locality, landmark, zip code (Separated by comma)</p>
                   <Input />
                 </Form.Item>
                 <Form.Item>

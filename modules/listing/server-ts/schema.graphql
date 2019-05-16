@@ -28,7 +28,6 @@ type ListingDetail {
   id: Int!
   listingId: Int!
   condition: String!
-  repairHistory: String!
   age: String!
   damages: [ListingDamage]
   createdAt: String!
@@ -111,7 +110,6 @@ input ListingImageInput {
 input ListingDetailInput {
   id: Int
   condition: String!
-  repairHistory: String!
   age: String!
   damages: [ListingDamageInput]
 }

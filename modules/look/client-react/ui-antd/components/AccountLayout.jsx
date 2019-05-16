@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { Layout, Row, Col, Menu } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { Layout, Row, Col, Menu } from "antd";
 
-import NavBar, { ref } from './NavBar';
-import Footer from './Footer';
+import NavBar, { ref } from "./NavBar";
+import Footer from "./Footer";
 
-const { Header, Content } = Layout;
+const { Header, Content, Sider } = Layout;
 
 // const ref = { modules: modules };
 
@@ -14,24 +14,21 @@ class AccountLayout extends React.Component {
   render() {
     const { children, navBar } = this.props;
     return (
-      <Layout>
+      <Layout className="layoutList">
         {navBar !== false && (
           <Header className="header">
             <NavBar />
           </Header>
         )}
-
-        <Row style={{ padding: '2% 5%', background: '#fff' }}>
-          <Col lg={4} md={24}>
-            <h4 style={{ padding: '0 20px 13px' }}>
+        <Row className="layoutRow" gutter={16}>
+          <Col lg={6} md={24} className="SliderStart">
+            <h3 className="Pad20">
               <strong>Account Details</strong>
-            </h4>
+            </h3>
             <Menu
               mode="inline"
-              theme="light"
               defaultSelectedKeys={[`${this.props.select}`]}
-              defaultOpenKeys={['sub1']}
-              style={{ height: '100%' }}
+              defaultOpenKeys={["sub1"]}
               className="AccountDetails"
             >
               {/* <Item className="AccDetItem" key="/profile">
@@ -51,7 +48,7 @@ class AccountLayout extends React.Component {
               {ref.modules.navItemsAccount}
             </Menu>
           </Col>
-          <Col lg={18} md={50}>
+          <Col lg={15} md={24}>
             <Content id="content">{children}</Content>
           </Col>
         </Row>

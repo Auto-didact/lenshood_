@@ -1,41 +1,72 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Upload, Icon } from 'antd';
+import { Form, Upload, Modal, Icon } from 'antd';
 
 const FormItem = Form.Item;
 
 export default class RenderUpload extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // To Do Fix this thing
+    this.state = {
+      previewVisible: false,
+      previewImage: '',
+      fileList: props.value
+        ? [
+            {
+              uid: '-1',
+              name: 'Damage.png',
+              status: 'done',
+              url: props.value
+            }
+          ]
+        : []
+    };
+  }
+
   onChangeHandler = ({ file, fileList }) => {
-    console.log(file.status);
-    console.log(fileList);
+    // console.log(file.status);
+    // console.log(fileList);
     // console.log(file.response.secure_url);
-    const arrayHelpers = this.props.arrayHelpers;
+    // const arrayHelpers = this.props.arrayHelpers;
 
     if (file.status == 'done') {
       if (file.response) {
         let url = file.response.secure_url;
         if (url) {
-          console.log(url);
+          // console.log(url);
           //set value in form
-          const dictKey = this.props.dictKey;
-          let obj = {};
-          obj[dictKey] = url;
-          arrayHelpers.push(obj);
+          this.props.input.onChange(url);
         }
       }
     } else if (file.status == 'removed') {
-      console.log(file);
+      // console.log(file);
       //remove value in form
-      arrayHelpers.remove(file.uid);
+      this.props.input.onChange('');
     }
+    this.setState({ fileList });
   };
+
+  handleCancel = () => this.setState({ previewVisible: false });
+
+  handlePreview = file => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true
+    });
+  };
+
+  handleChange = ({ fileList }) => this.setState({ fileList });
+
   render() {
     // { input, label, meta: { touched, error }, defaultFileList }) = this.props
     // const touched = this.props.meta.touched;
     // const error = this.props.meta.error;
     const label = this.props.label;
     // const input = this.props.input;
+    // console.log(input);
     // const defaultFileList = this.props.defaultFileList;
 
     const cloudinary_url = 'https://api.cloudinary.com/v1_1/www-lenshood-in/image/upload';
@@ -47,54 +78,48 @@ export default class RenderUpload extends React.Component {
     // if (touched && error) {
     //   validateStatus = 'error';
     // }
-    let defaultFileList = [];
-    if (this.props.values) {
-      defaultFileList = this.props.values.map((img, index) => ({
-        uid: index,
-        name: 'link',
-        status: 'done',
-        url: img.imageUrl,
-        thumbUrl: img.imageUrl
-      }));
-    }
+    // let defaultFileList = [];
+    // if (this.props.values) {
+    //   defaultFileList = this.props.values.map((img, index) => ({
+    //     uid: index,
+    //     name: 'link',
+    //     status: 'done',
+    //     url: img.imageUrl,
+    //     thumbUrl: img.imageUrl
+    //   }));
+    // }
+
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
 
     return (
       <FormItem label={label} validateStatus={validateStatus}>
-        <div className="dropbox">
-          <Upload.Dragger
-            defaultFileList={defaultFileList}
-            name="file"
-            listType="picture"
-            className="upload-list-inline"
-            onChange={this.onChangeHandler}
+        <div className="clearfix">
+          <Upload
             action={cloudinary_url}
             data={cloudinary_data}
-            // headers={headers}
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={this.handlePreview}
+            onChange={this.onChangeHandler}
           >
-            <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
-            </p>
-            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-            <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-          </Upload.Dragger>
-        </div>
+            {fileList.length >= 1 ? null : uploadButton}
+          </Upload>
+          <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          </Modal>
+        </div>{' '}
       </FormItem>
     );
   }
 }
 RenderUpload.propTypes = {
-  dictKey: PropTypes.string,
+  input: PropTypes.object,
   label: PropTypes.string,
-  type: PropTypes.string,
-  defaultFileList: PropTypes.arrayOf(
-    PropTypes.shape({
-      uid: PropTypes.number,
-      name: PropTypes.string,
-      status: PropTypes.string,
-      url: PropTypes.string,
-      thumbUrl: PropTypes.string
-    })
-  ),
-  arrayHelpers: PropTypes.object,
-  values: PropTypes.array
+  value: PropTypes.string
 };
