@@ -36,7 +36,7 @@ class NavBar extends React.Component {
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
-                <img src={require('../../logo/OrgLogo-white.png')} height="40" width="40" />
+                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
               </NavLink>
             </MenuItem>
             {__DEV__ && (

@@ -31,9 +31,14 @@ const NavLinkAdminWithI18n = translate('listing')(({ t }) => (
   </NavLink>
 ));
 const NavLinkMyListingsWithI18n = translate('listing')(({ t }) => (
-  <NavLink to="/my-listings" className="nav-link" activeClassName="active">
+  <NavLink to="/my-listings" className=" AccDetItem" activeClassName="AccDetItemSelected">
     <Icon type="solution" />
     {t('listing:navLinkMyListings')}
+  </NavLink>
+));
+const NavLinkListYourGearWithI18n = translate('listing')(({ t }) => (
+  <NavLink to="/listing/new" className="nav-link" activeClassName="active">
+    {t('listing:navLinkListYourGear')}
   </NavLink>
 ));
 
@@ -77,6 +82,12 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
-
+  navItemRight: [
+    <IfLoggedIn key="/listing/new">
+      <MenuItem>
+        <NavLinkListYourGearWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
+  ],
   localization: [{ ns: 'listing', resources }]
 });

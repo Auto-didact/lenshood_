@@ -44,7 +44,12 @@ const ListingList = ({ loading, listings, t, loadData }) => {
       {/* Render metadata */}
       <Helmet
         title={`${settings.app.name} - ${t('list.title')}`}
-        meta={[{ name: 'description', content: `${settings.app.name} - ${t('list.meta')}` }]}
+        meta={[
+          {
+            name: 'description',
+            content: `${settings.app.name} - ${t('list.meta')}`
+          }
+        ]}
       />
       {/* Render loader */}
       {loading && !listings && <Loading t={t} />}
@@ -66,28 +71,40 @@ class ListingCatalogueView extends Component {
     // console.log(this.props.listings);
     return (
       <div>
-        <div style={{ padding: '0 20px' }} />
+        <div className="Pad20" />
         <div className="container">
           <Row>
-            {/* <div style={{ padding: '5px 10%', overflow: 'hidden' }}>
-              <Col lg={20} md={24} style={{ paddingBottom: '10px' }}>
-                <Button className="filterButtons">Category</Button>
-                <Button className="filterButtons">Brand</Button>
-                <Button className="filterButtons">Price</Button>
-                <Button className="filterButtons">Dates</Button>
-                <Button className="filterButtons">More Filters</Button>
-              </Col>
-              <Col lg={4} md={24}>
+            {/* <div className="RowDiv"> */}
+            {/* <Col lg={20} md={24} classNmae="PadB10">
+                <Row gutter={16}>
+                  <Col md={4} xs={8}>
+                    <Button className="filterButtons">Category</Button>
+                  </Col>
+                  <Col md={4} xs={8}>
+                    <Button className="filterButtons">Brand</Button>
+                  </Col>
+                  <Col md={4} xs={8}>
+                    <Button className="filterButtons">Price</Button>
+                  </Col>
+                  <Col md={4} xs={8}>
+                    <Button className="filterButtons">Dates</Button>
+                  </Col>
+                  <Col md={4} xs={8}>
+                    <Button className="filterButtons">More Filters</Button>
+                  </Col>
+                </Row>
+              </Col> */}
+            {/* <Col lg={4} md={24}>
                 <span>
-                  <span style={{ margin: '0 10px 15px 10px' }}>Map view</span>
+                  <span className="mapView">Map view</span>
                   <Switch />
                 </span>
-              </Col>
-            </div>
-            <hr style={{ border: '0.5px solid #ddd', marginBottom: '15px' }} /> */}
-            <div style={{ padding: '0 10%' }}>
+              </Col> */}
+            {/* </div> */}
+            {/* <hr className="CatalogueHr" /> */}
+            <div className="pad10">
               {/* <Col span={24}>
-                <h2 style={{ fontWeight: 'bold', margin: '15px 0' }}>
+                <h2 className="headingTop">
                   <strong>Explore gear for your project or occasion</strong>
                 </h2>
                 <Row gutter={16}>
@@ -102,7 +119,7 @@ class ListingCatalogueView extends Component {
               </Col> */}
               {/* <b />
               <Col span={24}>
-                <h2 style={{ fontWeight: 'bold', margin: '15px 0' }}>
+                <h2 className="headingTop">
                   <strong>Most popular products</strong>
                 </h2>
                 <Row gutter={16}>
@@ -115,7 +132,7 @@ class ListingCatalogueView extends Component {
               </Col>
               <br /> */}
               <Col span={24}>
-                <h2 style={{ fontWeight: 'bold', margin: '15px 0' }}>
+                <h2 className="headingTop">
                   <strong>All listings</strong>
                 </h2>
                 <SuggestedCardList relatedList={this.props.listings} />

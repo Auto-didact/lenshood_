@@ -1,26 +1,24 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from "../../../../settings";
-import { Link } from "react-router-dom";
-import { Row, Col, Button, Card, Icon } from "antd";
-import CheckoutSteps from "./CheckoutSteps";
-import naruto2 from "../resources/naruto2.jpg";
+import settings from '../../../../settings';
+import { Link } from 'react-router-dom';
+import { Row, Col, Button, Card, Icon } from 'antd';
+import CheckoutSteps from './CheckoutSteps';
+import naruto2 from '../resources/naruto2.jpg';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Cart`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
 export default class CheckoutCartView extends React.Component {
   state = {
     products: {
-      name: "Just a random name to fill the space",
+      name: 'Just a random name to fill the space',
       image: naruto2,
       days: 4,
       date: {
@@ -38,21 +36,17 @@ export default class CheckoutCartView extends React.Component {
         <h2 className="cartSum">Cart Summary</h2>
         <div className="font12">
           <p>
-            Rent per day{" "}
-            <div className="rightfloat">&#8377; {this.state.products.rent}</div>
+            Rent per day <div className="rightfloat">&#8377; {this.state.products.rent}</div>
           </p>
           <p>
             Service fee <div className="rightfloat">&#8377; 100</div>
           </p>
           <p>
-            &#8377; {this.state.products.rent}/- <Icon type="close" />{" "}
-            {this.state.products.days}days{" "}
-            <div className="rightfloat">
-              &#8377; {this.state.products.rent * this.state.products.days}
-            </div>
+            &#8377; {this.state.products.rent}/- <Icon type="close" /> {this.state.products.days}days{' '}
+            <div className="rightfloat">&#8377; {this.state.products.rent * this.state.products.days}</div>
           </p>
           <p>
-            25% Multi day discount{" "}
+            25% Multi day discount{' '}
             <div className="colorFloat">
               -&#8377;
               {0.25 * this.state.products.rent * this.state.products.days}
@@ -60,17 +54,14 @@ export default class CheckoutCartView extends React.Component {
           </p>
           <br />
           <h3>
-            Total rent amount{" "}
+            Total rent amount{' '}
             <strong className="colorFloat">
               &#8377;
               {this.totalAmount(this.state.products)}
             </strong>
           </h3>
           <p>
-            Refundable deposit{" "}
-            <div className="rightfloat">
-              &#8377; {this.state.products.refund}
-            </div>
+            Refundable deposit <div className="rightfloat">&#8377; {this.state.products.refund}</div>
           </p>
         </div>
         <br />
@@ -109,12 +100,7 @@ export default class CheckoutCartView extends React.Component {
             <Col md={13} sm={{ span: 22, offset: 1 }} className="margin20">
               <CartItem products={this.state.products} />
             </Col>
-            <Col
-              lg={7}
-              md={8}
-              sm={{ span: 18, offset: 3 }}
-              xs={{ span: 22, offset: 1 }}
-            >
+            <Col lg={7} md={8} sm={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
               {this.cartTotal()}
             </Col>
           </Row>
@@ -127,7 +113,7 @@ export default class CheckoutCartView extends React.Component {
 class CartItem extends React.Component {
   render() {
     return (
-      <Row className="cartitem">
+      <Row className="cartitem borderRadius9">
         <Col span={8}>
           <img alt="" src={this.props.products.image} />
         </Col>
@@ -139,15 +125,12 @@ class CartItem extends React.Component {
             <Col lg={10} sm={12} xs={13} className="font11h">
               Refundundable deposit
               <br />
-              <strong className="colorCursor">
-                &#8377; {this.props.products.refund}
-              </strong>
+              <strong className="colorCursor">&#8377; {this.props.products.refund}</strong>
               <br />
               <br />
               Rental period <br />
               <strong>
-                {this.props.products.date.start} -{" "}
-                {this.props.products.date.end}
+                {this.props.products.date.start} - {this.props.products.date.end}
               </strong>
             </Col>
             <Col lg={10} sm={12} xs={11} className="font11h">

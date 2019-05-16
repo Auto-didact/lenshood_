@@ -1,0 +1,329 @@
+@import "~antd/dist/antd.css";
+
+/* tile uploaded pictures */
+.upload-list-inline .ant-upload-list-item {
+  float: left;
+  width: 200px;
+  margin-right: 8px;
+}
+.upload-list-inline .ant-upload-animate-enter {
+  animation-name: uploadAnimateInlineIn;
+}
+.upload-list-inline .ant-upload-animate-leave {
+  animation-name: uploadAnimateInlineOut;
+}
+
+// Setting Variables
+@primary-color: #23b195; // primary color for all components
+@secondary-color: #fff; // primary color for all components
+@tertiary-color: #211f1f;
+// Menu
+@menu-bg: @primary-color;
+@menu-item-color: #fff;
+@menu-item-active-border-width: 3px;
+@menu-highlight-color: @secondary-color;
+@border-radius-base: 9px; // major border radius
+@box-shadow-base: 0 0 8px 4px rgba(49, 196, 167, 0.05);
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.ant-menu-horizontal > .ant-menu-item > a {
+  font-size: 1.4em;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected > a {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.ant-pagination {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+.no-print {
+  background: @tertiary-color;
+  color: @secondary-color !important;
+  padding: 2% 5%;
+}
+
+.no-print h3 {
+  color: #fff !important;
+}
+
+.no-print li {
+  list-style: none;
+  padding: 2% 0;
+}
+
+.header {
+  background: @primary-color;
+}
+
+#content {
+  background: @secondary-color;
+}
+
+.ant-button.checked {
+  background: #23b195 !important;
+  color: #ffffff;
+}
+
+.btn {
+  color: #23b195;
+  border: #23b195 0.5px solid;
+  width: 33%;
+}
+
+.btnActive,
+.btn:hover {
+  background-color: #23b195 !important;
+  color: white !important;
+  border: #23b195 0.5px solid !important;
+  width: 33%;
+}
+
+.ActiveCond,
+.NotActive:hover {
+  cursor: pointer;
+  background-color: rgba(35, 177, 149, 0.2) !important;
+}
+
+.NotActive {
+  border: 0.5px solid rgba(35, 177, 149, 0.2);
+}
+
+.ant-upload-select-picture-card i {
+  font-size: 32px;
+  color: #999;
+}
+
+.ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}
+
+.ant-carousel .slick-slide {
+  padding-bottom: 20px;
+  padding-top: 5px;
+  background: #666;
+  overflow: hidden;
+}
+.ant-carousel {
+  margin-bottom: 20px;
+}
+
+.themeColor,
+.themeColor:hover {
+  background: #23b195 !important;
+  color: white !important;
+  border-radius: 4px;
+  border: 0.5px solid #23b195 !important;
+}
+
+.colorCursor {
+  color: #23b195;
+  cursor: pointer;
+}
+
+.borderRadius9 {
+  border-radius: 9px;
+}
+
+.boxShadowTheme {
+  box-shadow: 0 0 8px 4px rgba(49, 196, 167, 0.05);
+}
+
+.PadB30 {
+  padding-bottom: 30px;
+}
+
+.colorFloat {
+  float: right;
+  color: #23b195;
+}
+
+.font10 {
+  font-size: 10px;
+}
+
+.font11h {
+  font-size: 11.5px;
+}
+
+.font12 {
+  font-size: 12px;
+}
+
+.font14 {
+  font-size: 14px;
+}
+
+.font16 {
+  font-size: 16px;
+}
+
+.margin20 {
+  margin: 20px 0;
+}
+
+.marginB30 {
+  margin-bottom: 30px;
+}
+.borderzero {
+  border: 0 !important;
+}
+
+.rightfloat {
+  float: right;
+}
+
+.leftfloat {
+  float: left;
+}
+
+.Pad20 {
+  padding: 0 20px;
+}
+
+.padA20 {
+  padding: 20px;
+}
+
+.pad10 {
+  padding: 0 10%;
+}
+
+.PadB10 {
+  padding-bottom: 10px;
+}
+
+.PadT10 {
+  padding-top: 10px;
+}
+
+.padH4p {
+  padding: 0 4%;
+}
+
+.marginR10 {
+  margin-right: 10px;
+}
+
+.layoutList {
+  background: #fff !important;
+}
+
+.layoutRow {
+  padding: 30px 5%;
+}
+
+.AccountDetails {
+  min-width: 100% !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  background: white !important;
+  padding: 0 !important;
+}
+.AccountDetails .ant-menu-item {
+  padding: 0 !important;
+}
+.AccDetItem {
+  color: black !important;
+  background: white !important;
+  width: 100% !important;
+  padding-left: 20px !important;
+  margin: 0 !important;
+}
+
+.AccDetItem:hover,
+.AccDetItemSelected {
+  color: #23b195 !important;
+}
+
+.AccDetItemSelected {
+  border-left: 2px solid #23b195 !important;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.mainColor {
+  color: #23b195 !important;
+}
+
+.marginB25 {
+  margin-bottom: 25px;
+}
+
+.marginB20 {
+  margin-bottom: 20px;
+}
+
+.marginL20 {
+  margin-left: 20px;
+}
+
+.marginB10 {
+  margin-bottom: 10px;
+}
+
+.marginT30 {
+  margin-bottom: 30px;
+}
+
+.margin15 {
+  margin: 15px;
+}
+
+.PadL15 {
+  padding-left: 15px;
+}
+
+.lineHeight18 {
+  line-height: 18px;
+}
+.Inline-blockDisplay {
+  display: inline-block;
+}
+
+.InlineDisplay {
+  display: inline;
+}
+
+.blockDisplay {
+  display: block;
+}
+
+.itemLink {
+  color: #000 !important;
+  font-weight: 500;
+}
+
+.justifyAlign {
+  text-align: justify;
+}
+
+.centerAlign {
+  text-align: center;
+}

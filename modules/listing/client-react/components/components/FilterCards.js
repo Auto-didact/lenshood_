@@ -1,5 +1,5 @@
 import React from 'react';
-import '../resources/listingCatalogue.css';
+// import '../resources/listingCatalogue.css';
 import { Row, Col } from 'antd';
 
 class FilterCards extends React.Component {
