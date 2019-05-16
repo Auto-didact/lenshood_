@@ -15,7 +15,7 @@ class MyListings extends Component {
       {
         name: 'Blah blah bleh',
         rent: 1200,
-        image: naruto,
+        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 4,
         reviews: 7,
         nature: 'On Rent'
@@ -23,7 +23,7 @@ class MyListings extends Component {
       {
         name: 'Blah lah bleh',
         rent: 120,
-        image: naruto2,
+        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3.7,
         reviews: 12,
         nature: 'On Shelf'
@@ -31,7 +31,7 @@ class MyListings extends Component {
       {
         name: 'fdgbdfcgmbkmg;ngvjnpcghn',
         rent: 200,
-        image: naruto4,
+        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3,
         reviews: 8,
         nature: 'On Rent'
@@ -39,7 +39,7 @@ class MyListings extends Component {
       {
         name: 'Blah lah bleh',
         rent: 120,
-        image: naruto3,
+        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3.9,
         reviews: 25,
         nature: 'On Rent'
