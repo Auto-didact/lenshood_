@@ -12,15 +12,15 @@ Model.knex(knex);
 // Actual query fetching and transformation in DB
 const user_eager = `[
   listings,
-  profile, profile.[referred_by, 
+  profile.[referred_by, 
   referred_by.profile], 
   addresses, 
   identification, 
   verification, 
-  endorsements, endorsements.[endorser, endorser.profile], 
-  endorsed, endorsed.[endorsee, endorsee.profile], 
-  followers, followers.[follower, follower.profile], 
-  following, following.[followee, followee.profile], 
+  endorsements.[endorser, endorser.profile], 
+  endorsed.[endorsee, endorsee.profile], 
+  followers.[follower, follower.profile], 
+  following.[followee, followee.profile], 
   portfolios, 
   remarks, remarks.admin, 
   auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate 
@@ -164,6 +164,14 @@ export class User extends Model {
           from: 'user.id',
           to: 'auth_linkedin.user_id'
         }
+      },
+      user_driving_license: {
+        relation: Model.HasOneRelation,
+        modelClass: UserDrivingLicense,
+        join: {
+          from: 'user.id',
+          to: 'user_driving_license.user_id'
+        }
       }
     };
   }
@@ -289,6 +297,17 @@ export class User extends Model {
     //   .where({ id });
     const res = await User.query().upsertGraph(decamelizeKeys(params));
     return res.id;
+  }
+
+  async addUserDrivingLicense(id, params) {
+    const user = await User.query().findById(id);
+    const dl = await user.$relatedQuery('user_driving_license').insert(params);
+    // const localAuthInput = passwordHash ? { email, passwordHash } : { email };
+    // return knex('user')
+    //   .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
+    //   .where({ id });
+    // const res = await User.query().upsertGraph(decamelizeKeys(params));
+    return camelizeKeys(dl);
   }
 
   // async isUserProfileExists(userId) {
@@ -592,6 +611,30 @@ class UserVerification extends Model {
         modelClass: User,
         join: {
           from: 'user_verification.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserDrivingLicense model.
+class UserDrivingLicense extends Model {
+  static get tableName() {
+    return 'user_driving_license';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_driving_license.user_id',
           to: 'user.id'
         }
       }

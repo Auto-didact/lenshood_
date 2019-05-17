@@ -108,6 +108,29 @@ exports.up = function(knex, Promise) {
         .onDelete('CASCADE');
       table.timestamps(false, true);
     }),
+    knex.schema.createTable('user_driving_license', table => {
+      table.increments();
+      table.string('transaction_id');
+      table.string('driving_license_id');
+      table.string('issue_date');
+      table.string('name');
+      table.string('father_or_husband');
+      table.string('image_url');
+      table.string('blood_group');
+      table.string('dob');
+      table.string('cov');
+      table.string('address');
+      table.string('validity_transport');
+      table.string('validity_non_transport');
+
+      table
+        .integer('user_id')
+        .unsigned()
+        .references('id')
+        .inTable('user')
+        .onDelete('CASCADE');
+      table.timestamps(false, true);
+    }),
     knex.schema.createTable('user_endorsement', table => {
       table.increments();
       table

@@ -79,6 +79,26 @@ type UserVerification {
   updatedAt: String
 
 }
+type UserDrivingLicense {
+  id: Int
+
+  transactionId: String
+  drivingLicenseId: String
+  issueDate: String
+  fatherOrHusband: String
+  imageUrl: String
+  bloodGroup: String
+  dob: String
+  cov: String
+  address: String
+  validityTransport: String
+  validityNonTransport: String
+
+  createdAt: String
+  updatedAt: String
+
+}
+
 
 type UserEndorsement {
   id: Int
@@ -180,6 +200,8 @@ extend type Query {
   user(id: Int!): User
   # Get current user
   currentUser: User
+  # Get user's driving license info
+  userDrivingLicense(id: Int!): UserDrivingLicense
 }
 
 type UserPayload {
@@ -193,6 +215,9 @@ extend type Mutation {
   editUser(input: EditUserInput!): User!
   # Delete a user
   deleteUser(id: Int!): UserPayload!
+  # Add driving license for a user
+  addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
+
 }
 
 # Input for ordering users
@@ -273,6 +298,14 @@ input ProfileInput {
   firstName: String
   lastName: String
 }
+
+# Input for addUser Mutation
+input AddDrivingLicenseInput {
+  id: Int!
+  dlId: String!
+  dob: String!
+}
+
 
 extend type Subscription {
   # Subscription for users list
