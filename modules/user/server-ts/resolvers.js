@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import withAuth from 'graphql-auth';
 import { withFilter } from 'graphql-subscriptions';
 import { UserInputError } from 'apollo-server-errors';
+import DrivingLicenseAPI from './helpers/DrivingLicenseAPI';
 
 // To Do
 // import { createTransaction } from '@gqlapp/database-server-ts';
@@ -240,6 +241,47 @@ export default pubsub => ({
           return { user };
         } else {
           throw new Error(t('user:userCouldNotDeleted'));
+        }
+      }
+    ),
+    addUserDrivingLicense: withAuth(
+      (obj, args, { identity }) => {
+        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+      },
+      async (obj, { input }, { User, identity, req: { t } }) => {
+        // To Do Check for user type and have validations for adding appropriately
+        // const isAdmin = () => identity.role === 'admin';
+        // const isSelf = () => identity.id === input.id;
+
+        const dl = await DrivingLicenseAPI(input);
+        // To Do Convert image bytecode to image url
+        const params = {
+          transaction_id: dl.id,
+          driving_license_id: input.dlId,
+          issue_date: dl.result.issue_date,
+          father_or_husband: dl.result['father/husband'],
+          image_url: dl.result.img,
+          name: dl.result.name,
+          blood_group: dl.result.blood_group,
+          dob: dl.result.dob,
+          cov: dl.result.cov_details.cov,
+          address: dl.result.address,
+          validity_transport: dl.result.validity['non-transport'],
+          validity_non_transport: dl.result.validity['non-transport']
+        };
+        const user_dl = await User.addUserDrivingLicense(input.id, params);
+        try {
+          const user = await User.getUser(input.id);
+          pubsub.publish(USERS_SUBSCRIPTION, {
+            usersUpdated: {
+              mutation: 'UPDATED',
+              node: user
+            }
+          });
+          // console.log(user);
+          return user_dl;
+        } catch (e) {
+          throw e;
         }
       }
     )
