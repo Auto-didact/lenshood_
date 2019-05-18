@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { FormError } from '@gqlapp/forms-client-react';
+
+import { Button } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
 import DLVerificationForm from '../../components/verification/DLVerificationForm';
 

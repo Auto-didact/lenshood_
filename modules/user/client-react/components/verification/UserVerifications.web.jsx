@@ -6,6 +6,8 @@ import { Card, CardGroup, CardText } from '@gqlapp/look-client-react';
 // To Do Abstract Out
 import { Icon, Row, Col } from 'antd';
 import DLVerification from '../../containers/verification/DLVerification';
+import MobileVerification from '../../containers/verification/MobileVerification';
+
 import settings from '../../../../../settings';
 
 const renderMetaData = t => {
@@ -46,11 +48,7 @@ const VerificationView = ({ data, t }) => {
       </CardText>
 
       <DLVerification vStatus={data.isIdVerified} />
-
-      <CardText>
-        {t('profile.card.group.verification.mobile')}
-        {renderVarificationIcon(data.isMobileVerified)}
-      </CardText>
+      <MobileVerification vStatus={data.isIdVerified} />
 
       <CardText>
         {t('profile.card.group.verification.isReferred')}

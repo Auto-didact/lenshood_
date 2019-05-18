@@ -230,8 +230,17 @@
   },
   "DL": {
     "field": {
-      "dl_id": "Driving Licence Number",
+      "dlId": "Driving Licence Number",
       "dob": "Date of Birth"
+    },
+    "btn": {
+      "submit": "Submit"
+    }
+  },
+  "mobileOTP": {
+    "field": {
+      "mobile": "Mobile Number",
+      "otp": "One Time Password"
     },
     "btn": {
       "submit": "Submit"
