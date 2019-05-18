@@ -5,7 +5,7 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { Modal, Button } from 'antd';
 import VerificationIcon from './VerificationIcon';
 
-class DLVerification extends React.Component {
+class VerificationModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +29,10 @@ class DLVerification extends React.Component {
     return (
       <div>
         <Button block type="dashed" onClick={this.showModal}>
-          {this.props.t('profile.card.group.verification.id')}
+          {this.props.button}
           <VerificationIcon vStatus={this.props.vStatus} />
         </Button>
-        <Modal title="Driving License Verification" visible={visible} onCancel={this.handleCancel} footer={null}>
+        <Modal title={this.props.title} visible={visible} onCancel={this.handleCancel} footer={null}>
           {this.props.children}
         </Modal>
       </div>
@@ -40,8 +40,10 @@ class DLVerification extends React.Component {
   }
 }
 
-DLVerification.propTypes = {
+VerificationModal.propTypes = {
   children: PropTypes.object,
+  button: PropTypes.string,
+  title: PropTypes.string,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
@@ -51,4 +53,4 @@ DLVerification.propTypes = {
   t: PropTypes.func
 };
 
-export default translate('user')(DLVerification);
+export default translate('user')(VerificationModal);
