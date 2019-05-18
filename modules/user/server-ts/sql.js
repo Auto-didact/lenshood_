@@ -12,15 +12,15 @@ Model.knex(knex);
 // Actual query fetching and transformation in DB
 const user_eager = `[
   listings,
-  profile.[referred_by, 
-  referred_by.profile], 
+  profile.[referred_by.profile], 
   addresses, 
   identification, 
-  verification, 
-  endorsements.[endorser, endorser.profile], 
-  endorsed.[endorsee, endorsee.profile], 
-  followers.[follower, follower.profile], 
-  following.[followee, followee.profile], 
+  verification,
+  driving_license,
+  endorsements.[endorser.profile], 
+  endorsed.[endorsee.profile], 
+  followers.[follower.profile], 
+  following.[followee.profile], 
   portfolios, 
   remarks, remarks.admin, 
   auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate 
@@ -165,7 +165,7 @@ export class User extends Model {
           to: 'auth_linkedin.user_id'
         }
       },
-      user_driving_license: {
+      driving_license: {
         relation: Model.HasOneRelation,
         modelClass: UserDrivingLicense,
         join: {
@@ -301,13 +301,8 @@ export class User extends Model {
 
   async addUserDrivingLicense(id, params) {
     const user = await User.query().findById(id);
-    const dl = await user.$relatedQuery('user_driving_license').insert(params);
-    // const localAuthInput = passwordHash ? { email, passwordHash } : { email };
-    // return knex('user')
-    //   .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
-    //   .where({ id });
-    // const res = await User.query().upsertGraph(decamelizeKeys(params));
-    return camelizeKeys(dl);
+    const driving_license = await user.$relatedQuery('driving_license').insert(params);
+    return camelizeKeys(driving_license);
   }
 
   // async isUserProfileExists(userId) {

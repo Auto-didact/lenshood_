@@ -24,6 +24,7 @@ export default params => {
 
       res.on('end', function() {
         var body = Buffer.concat(chunks);
+        console.log(JSON.parse(body));
         resolve(JSON.parse(body));
       });
 

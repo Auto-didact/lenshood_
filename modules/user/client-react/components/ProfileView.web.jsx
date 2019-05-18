@@ -6,7 +6,7 @@ import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Card, CardGroup, CardText, AccountLayout } from '@gqlapp/look-client-react';
 import { Row, Col } from 'antd';
-import VerificationView from './VerificationView';
+import UserVerifications from './verification/UserVerifications';
 import ProfileHead from './ProfileHead';
 import UsersCard from './UsersCard';
 import settings from '../../../../settings';
@@ -21,6 +21,7 @@ class ProfileView extends React.Component {
     const endorsed = currentUser.endorsed;
     const followers = currentUser.followers;
     const following = currentUser.following;
+    // To Do remove these hardcode values use map instead
     return {
       endorsements: {
         title: t('profile.card.group.endorsements.title'),
@@ -182,7 +183,7 @@ class ProfileView extends React.Component {
               </Card>
             </Col>
             <Col span={8}>
-              <VerificationView data={currentUser.verification} />
+              <UserVerifications data={currentUser.verification} />
               <UsersCard data={this.usersCardData().endorsements} />
               <UsersCard data={this.usersCardData().endorsed} />
               <UsersCard data={this.usersCardData().followers} />

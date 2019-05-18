@@ -8,6 +8,7 @@ type User {
   addresses: [UserAddress]
   identification: [UserIdentification]
   verification: UserVerification
+  drivingLicense: UserDrivingLicense
   endorsements: [UserEndorsement]
   endorsed: [UserEndorsed]
   followers: [UserFollower]
@@ -301,7 +302,7 @@ input ProfileInput {
 
 # Input for addUser Mutation
 input AddDrivingLicenseInput {
-  id: Int!
+  id: Int
   dlId: String!
   dob: String!
 }
