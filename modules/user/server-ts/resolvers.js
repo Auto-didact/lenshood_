@@ -253,7 +253,20 @@ export default pubsub => ({
         // const isAdmin = () => identity.role === 'admin';
         // const isSelf = () => identity.id === input.id;
 
-        const dl = await DrivingLicenseAPI(input);
+        // const dl = await DrivingLicenseAPI(input);
+        const dl = {
+          id: '332323',
+          result: {
+            issue_date: 'dsfsf',
+            'father/husband': 'dsfdsf',
+            image_url: 'sfsdf',
+            name: 'dsfsfd',
+            blood_group: 'sfsd',
+            dob: 'sfsdf',
+            cov_details: [{ cov: 'sdfdsf' }],
+            address: 'dsfdsfd'
+          }
+        };
         // To Do Convert image bytecode to image url
         const params = {
           transaction_id: dl.id,
@@ -264,14 +277,23 @@ export default pubsub => ({
           name: dl.result.name,
           blood_group: dl.result.blood_group,
           dob: dl.result.dob,
-          cov: dl.result.cov_details.cov,
-          address: dl.result.address,
-          validity_transport: dl.result.validity['non-transport'],
-          validity_non_transport: dl.result.validity['non-transport']
+          cov: dl.result.cov_details[0].cov,
+          address: dl.result.address
+          // validity_transport: dl.result.validity['non-transport'],
+          // validity_non_transport: dl.result.validity['non-transport']
         };
-        const user_dl = await User.addUserDrivingLicense(input.id, params);
+
+        var user_dl;
+        if (typeof input.id !== 'undefined') {
+          user_dl = await User.addUserDrivingLicense(input.id, params);
+        } else {
+          user_dl = await User.addUserDrivingLicense(identity.id, params);
+        }
+
+        // To Do set id verified to true
+
         try {
-          const user = await User.getUser(input.id);
+          const user = await User.getUser(input.id || identity.id);
           pubsub.publish(USERS_SUBSCRIPTION, {
             usersUpdated: {
               mutation: 'UPDATED',
