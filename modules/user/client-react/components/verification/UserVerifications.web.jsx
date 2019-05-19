@@ -43,9 +43,9 @@ const VerificationView = ({ data, t }) => {
         {renderVarificationIcon(data.isAddressVerified)}
       </CardText>
 
-      <EmailVerification vStatus={data.isIdVerified} />
+      <EmailVerification vStatus={data.isEmailVerified} />
       <DLVerification vStatus={data.isIdVerified} />
-      <MobileVerification vStatus={data.isIdVerified} />
+      <MobileVerification vStatus={data.isMobileVerified} />
 
       <CardText>
         {t('profile.card.group.verification.isReferred')}

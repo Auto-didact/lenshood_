@@ -17,6 +17,7 @@ const user_eager = `[
   identification, 
   verification,
   driving_license,
+  mobile,
   endorsements.[endorser.profile], 
   endorsed.[endorsee.profile], 
   followers.[follower.profile], 
@@ -172,6 +173,14 @@ export class User extends Model {
           from: 'user.id',
           to: 'user_driving_license.user_id'
         }
+      },
+      mobile: {
+        relation: Model.HasOneRelation,
+        modelClass: UserMobile,
+        join: {
+          from: 'user.id',
+          to: 'user_mobile.user_id'
+        }
       }
     };
   }
@@ -299,10 +308,33 @@ export class User extends Model {
     return res.id;
   }
 
+  async patchProfile(id, params) {
+    const user = await User.query().findById(id);
+    const profile = await user.$relatedQuery('profile').patch(params);
+    return camelizeKeys(profile);
+  }
+
   async addUserDrivingLicense(id, params) {
     const user = await User.query().findById(id);
     const driving_license = await user.$relatedQuery('driving_license').insert(params);
     return camelizeKeys(driving_license);
+  }
+
+  async addUserMobile(id, params) {
+    const user = await User.query().findById(id);
+    const mobile = await user.$relatedQuery('mobile').insert(params);
+    return camelizeKeys(mobile);
+  }
+
+  async updateUserMobileVerified(id) {
+    const mobile = await UserMobile.query().patchAndFetchById(id, { is_verified: true });
+    return camelizeKeys(mobile);
+  }
+
+  async updateUserVerification(id, params) {
+    const user = await User.query().findById(id);
+    const verification = await user.$relatedQuery('verification').patch(params);
+    return camelizeKeys(verification);
   }
 
   // async isUserProfileExists(userId) {
@@ -630,6 +662,30 @@ class UserDrivingLicense extends Model {
         modelClass: User,
         join: {
           from: 'user_driving_license.user_id',
+          to: 'user.id'
+        }
+      }
+    };
+  }
+}
+
+// UserMobile model.
+class UserMobile extends Model {
+  static get tableName() {
+    return 'user_mobile';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'user_mobile.user_id',
           to: 'user.id'
         }
       }

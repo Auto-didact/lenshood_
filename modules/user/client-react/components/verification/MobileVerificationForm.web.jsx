@@ -22,7 +22,7 @@ const MobileForm = ({ otp, values, handleSubmit, submitting, t }) => {
           value={values.mobile}
         />
       ) : (
-        <Field name="otp" component={RenderField} type="text" label={t('mobileOTP.field.otp')} value={values.otp} />
+        <Field name="otp" component={RenderField} type="number" label={t('mobileOTP.field.otp')} value={values.otp} />
       )}
       <Button color="primary" type="submit" disabled={submitting}>
         {t('mobileOTP.btn.submit')}
@@ -37,7 +37,7 @@ MobileForm.propTypes = {
   submitting: PropTypes.bool,
   values: PropTypes.object,
   Mobile: PropTypes.object,
-  otp: PropTypes.boolean,
+  otp: PropTypes.bool,
   t: PropTypes.func
 };
 
