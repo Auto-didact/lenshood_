@@ -343,11 +343,10 @@ export default pubsub => ({
           mobile.isVerified = input.otp === otp;
           if (mobile.isVerified) {
             await User.updateUserMobileVerified(user.mobile.id);
-            // await User.updateUserVerification(user.id, { is_mobile_verified: true });
+            await User.updateUserVerification(user.id, { is_mobile_verified: true });
 
             // set as primary mobile
             const patched = await User.patchProfile(user.id, { mobile: mobile.mobile });
-            console.log(patched);
           } else {
             mobile.error = 'Wrong OTP';
           }
