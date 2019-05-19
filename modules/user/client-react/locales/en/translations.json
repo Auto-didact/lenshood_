@@ -246,6 +246,14 @@
       "submit": "Submit"
     }
   },
+  "email": {
+    "field": {
+      "email": "Email"
+    },
+    "btn": {
+      "submit": "Submit"
+    }
+  },
   "nativeMock": "Hello, ",
   "mobile": {
     "login": {

@@ -1,79 +1,80 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import { FormError } from '@gqlapp/forms-client-react';
-
-import { Button } from 'antd';
+import { Alert } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
-import DLVerificationForm from '../../components/verification/DLVerificationForm';
+import EmailVerificationForm from '../../components/verification/EmailVerificationForm';
 
-import ADD_DL from '../../graphql/AddDrivingLicense.graphql';
+import ADD_Email from '../../graphql/AddEmail.graphql';
 
-const DrivingLicense = dl => {
-  return <div>{JSON.stringify(dl)}</div>;
+const Email = data => {
+  return <Alert message={`An Email has been sent to ${data.email}`} type="info" />;
 };
 
-class DLAdd extends Component {
+class EmailAdd extends Component {
   constructor(props) {
     super(props);
     this.subscription = null;
     this.state = {
       loading: false,
       form: true,
-      verified: false
+      vStatus: props.vStatus,
+      sent: false
     };
 
-    this.setDrivingLicense = this.setDrivingLicense.bind(this);
+    this.setEmail = this.setEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  setDrivingLicense(dl) {
-    this.setState({ dl: dl });
+  setEmail(email) {
+    this.setState({ email: email, form: false, sent: true });
   }
 
-  onSubmit(addDL) {
+  onSubmit(addEmail) {
     return async values => {
-      const dl = await addDL(values.dlId, values.dob);
-      this.setDrivingLicense(dl);
+      console.log(values);
+      // To Do change email values in set email, uncomment below line
+      // const emailData = await addEmail(values.email, values.otp);
+      this.setEmail(values.email);
     };
   }
 
   onChange(values) {
-    this.setState({ loading: true, form: false });
-    this.onSubmit(this.props.addDL)(values);
-    this.setState({ loading: false, verified: true });
+    this.setState({ loading: true });
+    this.onSubmit(this.props.addEmail)(values);
+    this.setState({ loading: false });
   }
 
-  // async onSubmit(values, addDL) {
-  //   console.log(addDL);
-  //   // addDL(values.dlId, values.dob);
+  // async onSubmit(values, addEmail) {
+  //   console.log(addEmail);
+  //   // addEmail(values.emailId, values.dob);
   // }
 
   render() {
     return (
-      <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.props.vStatus}>
+      <VerificationModal button="Email" title="Email Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? 'Loading...' : ''}
-        {this.state.form ? <DLVerificationForm onSubmit={this.onChange} /> : ''}
-        {this.state.verified ? <DrivingLicense dl={this.state.dl} /> : ''}
+        {this.state.form ? <EmailVerificationForm otp={this.state.otp} onSubmit={this.onChange} /> : ''}
+        {this.state.sent ? <Email email={this.state.email} /> : ''}
       </VerificationModal>
     );
   }
 }
 
-DLAdd.propTypes = {
+EmailAdd.propTypes = {
   vStatus: PropTypes.bool,
-  addDL: PropTypes.func.isRequired
+  addEmail: PropTypes.func.isRequired
 };
 
-export default graphql(ADD_DL, {
+export default graphql(ADD_Email, {
   props: ({ ownProps: { history, navigation }, mutate }) => ({
-    addDL: async (dlId, dob) => {
-      let DLData = await mutate({
-        variables: { input: { dlId: dlId.trim(), dob: dob.trim() } }
+    addEmail: async (email, otp) => {
+      let EmailData = await mutate({
+        variables: { input: { email: email, otp: otp } }
       });
 
-      return DLData.data.addUserDrivingLicense;
+      return EmailData.data.addUserEmail;
     }
   })
-})(DLAdd);
+})(EmailAdd);
