@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
-import { required, validate } from '@gqlapp/validation-common-react';
+import { required, phoneNumber, validate } from '@gqlapp/validation-common-react';
 import { Form, RenderField, Button } from '@gqlapp/look-client-react';
 
 const MobileFormSchema = {
-  mobile: [required]
+  mobile: [required, phoneNumber]
 };
 
 const MobileForm = ({ otp, values, handleSubmit, submitting, t }) => {
@@ -43,7 +43,7 @@ MobileForm.propTypes = {
 
 const MobileFormWithFormik = withFormik({
   mapPropsToValues: props => ({
-    mobile: props.Mobile && props.Mobile.mobile,
+    mobile: props.mobile && props.mobile.mobile,
     otp: props.Mobile && props.Mobile.otp
   }),
   validate: values => validate(values, MobileFormSchema),

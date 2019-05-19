@@ -18,7 +18,7 @@ class MobileAdd extends Component {
       loading: false,
       form: true,
       otp: false,
-      verified: false
+      vStatus: props.vStatus
     };
 
     this.setMobile = this.setMobile.bind(this);
@@ -46,7 +46,7 @@ class MobileAdd extends Component {
       // const mobileData = await addMobile(values.mobile, values.otp);
 
       if (mobileData.isVerified) {
-        this.setState({ form: false, verified: true });
+        this.setState({ form: false, vStatus: true });
       }
       this.setMobile(mobileData);
     };
@@ -65,10 +65,10 @@ class MobileAdd extends Component {
 
   render() {
     return (
-      <VerificationModal button="Mobile" title="Mobile Verification" vStatus={this.props.vStatus}>
+      <VerificationModal button="Mobile" title="Mobile Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? 'Loading...' : ''}
         {this.state.form ? <MobileVerificationForm otp={this.state.otp} onSubmit={this.onChange} /> : ''}
-        {this.state.verified ? <Mobile mobile={this.state.mobile} /> : ''}
+        {this.state.vStatus ? <Mobile mobile={this.state.mobile} /> : ''}
       </VerificationModal>
     );
   }

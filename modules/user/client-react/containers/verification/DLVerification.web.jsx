@@ -17,7 +17,8 @@ class DLAdd extends Component {
     this.state = {
       loading: false,
       form: true,
-      verified: false
+      verified: false,
+      vStatus: props.vStatus
     };
 
     this.setDrivingLicense = this.setDrivingLicense.bind(this);
@@ -26,7 +27,7 @@ class DLAdd extends Component {
   }
 
   setDrivingLicense(dl) {
-    this.setState({ dl: dl });
+    this.setState({ dl: dl, vStatus: true });
   }
 
   onSubmit(addDL) {
@@ -36,9 +37,9 @@ class DLAdd extends Component {
     };
   }
 
-  onChange(values) {
+  async onChange(values) {
     this.setState({ loading: true, form: false });
-    this.onSubmit(this.props.addDL)(values);
+    await this.onSubmit(this.props.addDL)(values);
     this.setState({ loading: false, verified: true });
   }
 
@@ -49,7 +50,7 @@ class DLAdd extends Component {
 
   render() {
     return (
-      <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.props.vStatus}>
+      <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? 'Loading...' : ''}
         {this.state.form ? <DLVerificationForm onSubmit={this.onChange} /> : ''}
         {this.state.verified ? <DrivingLicense dl={this.state.dl} /> : ''}

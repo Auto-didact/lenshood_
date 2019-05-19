@@ -7,6 +7,7 @@ import { Card, CardGroup, CardText } from '@gqlapp/look-client-react';
 import { Icon, Row, Col } from 'antd';
 import DLVerification from '../../containers/verification/DLVerification';
 import MobileVerification from '../../containers/verification/MobileVerification';
+import EmailVerification from '../../containers/verification/EmailVerification';
 
 import settings from '../../../../../settings';
 
@@ -42,11 +43,7 @@ const VerificationView = ({ data, t }) => {
         {renderVarificationIcon(data.isAddressVerified)}
       </CardText>
 
-      <CardText>
-        {t('profile.card.group.verification.email')}
-        {renderVarificationIcon(data.isEmailVerified)}
-      </CardText>
-
+      <EmailVerification vStatus={data.isIdVerified} />
       <DLVerification vStatus={data.isIdVerified} />
       <MobileVerification vStatus={data.isIdVerified} />
 

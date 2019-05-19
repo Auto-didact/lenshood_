@@ -4,7 +4,9 @@ import { withFormik } from 'formik';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
-import { Form, RenderField, Button } from '@gqlapp/look-client-react';
+import { Form, RenderField, RenderDatePicker, Button } from '@gqlapp/look-client-react';
+
+var moment = require('moment');
 
 const DLFormSchema = {
   dlId: [required],
@@ -12,10 +14,17 @@ const DLFormSchema = {
 };
 
 const DLForm = ({ values, handleSubmit, submitting, t }) => {
+  console.log(values);
   return (
     <Form name="DL" onSubmit={handleSubmit}>
       <Field name="dlId" component={RenderField} type="text" label={t('DL.field.dlId')} value={values.dlId} />
-      <Field name="dob" component={RenderField} type="text" label={t('DL.field.dob')} value={values.dob} />
+      <Field
+        name="dob"
+        component={RenderDatePicker}
+        type="text"
+        label={t('DL.field.dob')}
+        value={values.dob ? moment(values.dob, 'DD/MM/YYYY') : null}
+      />
       <Button color="primary" type="submit" disabled={submitting}>
         {t('DL.btn.submit')}
       </Button>
