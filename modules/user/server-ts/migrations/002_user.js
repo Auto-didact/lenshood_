@@ -131,6 +131,20 @@ exports.up = function(knex, Promise) {
         .onDelete('CASCADE');
       table.timestamps(false, true);
     }),
+    knex.schema.createTable('user_mobile', table => {
+      table.increments();
+      table.string('mobile');
+      table.int('otp');
+      table.boolean('is_verified').defaultTo(false);
+
+      table
+        .integer('user_id')
+        .unsigned()
+        .references('id')
+        .inTable('user')
+        .onDelete('CASCADE');
+      table.timestamps(false, true);
+    }),
     knex.schema.createTable('user_endorsement', table => {
       table.increments();
       table
@@ -269,6 +283,7 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('user_endorsement'),
     knex.schema.dropTable('user_verification'),
     knex.schema.dropTable('user_driving_license'),
+    knex.schema.dropTable('user_mobile'),
     knex.schema.dropTable('user_identification'),
     knex.schema.dropTable('user_address'),
     knex.schema.dropTable('user_profile'),

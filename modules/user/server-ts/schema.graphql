@@ -209,6 +209,14 @@ type UserPayload {
   user: User
 }
 
+type UserMobile {
+  id: Int
+  mobile: String!
+  otpSent: Boolean
+  isVerified: Boolean
+  error: String
+}
+
 extend type Mutation {
   # Create new user
   addUser(input: AddUserInput!): User!
@@ -218,6 +226,8 @@ extend type Mutation {
   deleteUser(id: Int!): UserPayload!
   # Add driving license for a user
   addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
+  # Add Mobile for a user
+  addUserMobile(input: AddMobileInput!): UserMobile!
 
 }
 
@@ -300,11 +310,18 @@ input ProfileInput {
   lastName: String
 }
 
-# Input for addUser Mutation
+# Input for Driving License Verification Mutation
 input AddDrivingLicenseInput {
   id: Int
   dlId: String!
   dob: String!
+}
+
+# Input for Mobile Verificaton Mutation
+input AddMobileInput {
+  id: Int
+  mobile: String!
+  otp: Int
 }
 
 

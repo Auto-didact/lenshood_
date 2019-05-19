@@ -103,7 +103,7 @@ class ProfileView extends React.Component {
         </AccountLayout>
       );
     } else if (currentUser) {
-      console.log(currentUser);
+      // console.log(currentUser);
       return (
         <AccountLayout select="/profile">
           <h2 style={{ padding: '0 20px 0px 33%' }}>

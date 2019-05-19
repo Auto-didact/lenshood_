@@ -41,7 +41,7 @@ class VerificationModal extends React.Component {
 }
 
 VerificationModal.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.object.isRequired,
   button: PropTypes.string,
   title: PropTypes.string,
   handleSubmit: PropTypes.func,

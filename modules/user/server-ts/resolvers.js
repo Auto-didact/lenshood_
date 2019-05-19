@@ -6,6 +6,7 @@ import withAuth from 'graphql-auth';
 import { withFilter } from 'graphql-subscriptions';
 import { UserInputError } from 'apollo-server-errors';
 import DrivingLicenseAPI from './helpers/DrivingLicenseAPI';
+import OTPAPI from './helpers/OTPAPI';
 
 // To Do
 // import { createTransaction } from '@gqlapp/database-server-ts';
@@ -302,6 +303,68 @@ export default pubsub => ({
           });
           // console.log(user);
           return user_dl;
+        } catch (e) {
+          throw e;
+        }
+      }
+    ),
+    addUserMobile: withAuth(
+      (obj, args, { identity }) => {
+        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+      },
+      async (obj, { input }, { User, identity, req: { t } }) => {
+        // To Do Check for user type and have validations for adding appropriately
+        // const isAdmin = () => identity.role === 'admin';
+        // const isSelf = () => identity.id === input.id;
+
+        // if user doesnt have the mobile call otp & save to database
+        const mobile = {
+          mobile: input.mobile
+        };
+
+        if (typeof input.otp === 'undefined') {
+          // call otp api
+          const otp = await OTPAPI(input.mobile);
+          // const otp = 1111;
+          // console.log(otp);
+          mobile.otpSent = otp && true;
+
+          var mobile_db;
+          if (typeof input.id !== 'undefined') {
+            mobile_db = await User.addUserMobile(input.id, { mobile: input.mobile, otp: otp });
+          } else {
+            mobile_db = await User.addUserMobile(identity.id, { mobile: input.mobile, otp: otp });
+          }
+        } else {
+          // check if otp is correct
+          const user = await User.getUser(input.id || identity.id);
+          const otp = user.mobile.otp;
+          mobile.otpSent = otp && true;
+          mobile.isVerified = input.otp === otp;
+          if (mobile.isVerified) {
+            await User.updateUserMobileVerified(user.mobile.id);
+            // await User.updateUserVerification(user.id, { is_mobile_verified: true });
+
+            // set as primary mobile
+            const patched = await User.patchProfile(user.id, { mobile: mobile.mobile });
+            console.log(patched);
+          } else {
+            mobile.error = 'Wrong OTP';
+          }
+        }
+        // else check for otp and return value
+        // save mobile to database
+
+        try {
+          const user = await User.getUser(input.id || identity.id);
+          pubsub.publish(USERS_SUBSCRIPTION, {
+            usersUpdated: {
+              mutation: 'UPDATED',
+              node: user
+            }
+          });
+          // console.log(user);
+          return mobile;
         } catch (e) {
           throw e;
         }
