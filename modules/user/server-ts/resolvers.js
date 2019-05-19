@@ -254,20 +254,20 @@ export default pubsub => ({
         // const isAdmin = () => identity.role === 'admin';
         // const isSelf = () => identity.id === input.id;
 
-        // const dl = await DrivingLicenseAPI(input);
-        const dl = {
-          id: '332323',
-          result: {
-            issue_date: 'dsfsf',
-            'father/husband': 'dsfdsf',
-            image_url: 'sfsdf',
-            name: 'dsfsfd',
-            blood_group: 'sfsd',
-            dob: 'sfsdf',
-            cov_details: [{ cov: 'sdfdsf' }],
-            address: 'dsfdsfd'
-          }
-        };
+        const dl = await DrivingLicenseAPI(input);
+        // const dl = {
+        //   id: '332323',
+        //   result: {
+        //     issue_date: 'dsfsf',
+        //     'father/husband': 'dsfdsf',
+        //     image_url: 'sfsdf',
+        //     name: 'dsfsfd',
+        //     blood_group: 'sfsd',
+        //     dob: 'sfsdf',
+        //     cov_details: [{ cov: 'sdfdsf' }],
+        //     address: 'dsfdsfd'
+        //   }
+        // };
         // To Do Convert image bytecode to image url
         const params = {
           transaction_id: dl.id,
