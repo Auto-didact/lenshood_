@@ -16,9 +16,14 @@ const registerFormSchema = {
   passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
+const onSubmit = e => {
+  e.preventDefault();
+  console.log('submit!');
+};
+
 const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
   return (
-    <Form name="register" onSubmit={handleSubmit}>
+    <Form name="register" onSubmit={onSubmit}>
       <Field
         name="username"
         component={RenderField}
@@ -70,6 +75,7 @@ const RegisterFormWithFormik = withFormik({
     }
   ) {
     onSubmit(values).catch(e => {
+      console.log(values);
       if (isFormError(e)) {
         setErrors(e.errors);
       } else {
