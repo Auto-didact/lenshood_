@@ -110,8 +110,8 @@ const ListingFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    console.log(values);
-    // onSubmit(values);
+    // console.log(values);
+    onSubmit(values);
   },
   enableReinitialize: true,
   displayName: 'ListingForm' // helps with React DevTools
