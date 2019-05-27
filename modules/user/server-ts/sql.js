@@ -279,7 +279,6 @@ export class User extends Model {
   async register(params) {
     // return knex('user').insert(decamelizeKeys({ username, email, role, passwordHash, isActive }));
     const res = await User.query().insertGraph(decamelizeKeys(params));
-    console.log(res);
     return res.id;
   }
 

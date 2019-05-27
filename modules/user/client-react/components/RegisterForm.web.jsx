@@ -23,7 +23,7 @@ const onSubmit = e => {
 
 const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
   return (
-    <Form name="register" onSubmit={onSubmit}>
+    <Form name="register" onSubmit={handleSubmit}>
       <Field
         name="username"
         component={RenderField}
@@ -74,8 +74,8 @@ const RegisterFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
+    console.log(values);
     onSubmit(values).catch(e => {
-      console.log(values);
       if (isFormError(e)) {
         setErrors(e.errors);
       } else {
