@@ -6,6 +6,9 @@ import { access } from '@gqlapp/authentication-server-ts';
 import User from '../../sql';
 import settings from '../../../../../settings';
 
+const createPasswordHash = password => {
+  return bcrypt.hash(password, 12) || false;
+};
 const validateUserPassword = async (user, password, t) => {
   if (!user) {
     // user with provided email not found
@@ -57,9 +60,13 @@ export default () => ({
       if (!isEmpty(errors)) throw new UserInputError('Failed reset password', { errors });
 
       let userId = 0;
+      const password = input.password;
       if (!emailExists) {
+        const passwordHash = await createPasswordHash(input.password);
+        input['password_hash'] = passwordHash;
+        delete input['password'];
         let isActive = !settings.auth.password.confirm;
-        [userId] = await User.register({ ...input, isActive });
+        userId = await User.register({ ...input, isActive });
 
         // if user has previously logged with facebook auth
       } else {
@@ -68,7 +75,6 @@ export default () => ({
       }
 
       const user = await User.getUser(userId);
-
       if (mailer && settings.auth.password.sendConfirmationEmail && !emailExists && req) {
         // async email
         jwt.sign({ identity: pick(user, 'id') }, settings.auth.secret, { expiresIn: '1d' }, (err, emailToken) => {
@@ -83,7 +89,7 @@ export default () => ({
               <p><a href="${url}">${url}</a></p>
               <p>Below are your login information</p>
               <p>Your email is: ${user.email}</p>
-              <p>Your password is: ${input.password}</p>`
+              <p>Your password is: ${password}</p>`
           });
         });
       }

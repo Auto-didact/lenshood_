@@ -79,7 +79,6 @@ export default pubsub => ({
       },
       async (obj, { input }, { User, req: { universalCookies, t }, mailer, req }) => {
         const errors = {};
-        // console.log(input);
         const userExists = await User.getUserByUsername(input.username);
         if (userExists) {
           errors.username = t('user:usernameIsExisted');
@@ -103,7 +102,7 @@ export default pubsub => ({
         delete input['password'];
         // To Do Transactions
         createdUserId = await User.register(input);
-        await User.editUserProfile({ id: createdUserId, ...input });
+        // await User.editUserProfile({ id: createdUserId, ...input });
 
         // confirm this To Do
         if (certificate.enabled) await User.editAuthCertificate({ id: createdUserId, ...input });

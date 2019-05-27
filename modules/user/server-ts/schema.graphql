@@ -1,7 +1,7 @@
 type User {
   id: Int!
   username: String!
-  role: String!
+  role: String
   isActive: Boolean
   email: String!
   profile: UserProfile
@@ -287,7 +287,7 @@ input AddUserInput {
   username: String!
   email: String!
   password: String!
-  role: String!
+  role: String
   isActive: Boolean
   profile: ProfileInput
   auth: AuthInput
