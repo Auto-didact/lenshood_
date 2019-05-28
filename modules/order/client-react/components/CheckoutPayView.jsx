@@ -1,12 +1,12 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import { PageLayout } from '@gqlapp/look-client-react';
+import React from "react";
+import Helmet from "react-helmet";
+import { PageLayout } from "@gqlapp/look-client-react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from '../../../../settings';
-import { Layout, Menu, Row, Col, Card, Form, Input, Button } from 'antd';
-import CheckoutSteps from './CheckoutSteps';
-import OrderCard from './OrderCard';
-import naruto2 from '../resources/naruto2.jpg';
+import settings from "../../../../settings";
+import { Layout, Menu, Row, Col, Card, Form, Input, Button } from "antd";
+import CheckoutSteps from "./CheckoutSteps";
+import OrderCard from "./OrderCard";
+import naruto2 from "../resources/naruto2.jpg";
 
 const { Item } = Menu;
 const { Sider } = Layout;
@@ -14,14 +14,17 @@ const { Sider } = Layout;
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Payment`}
-    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
+    meta={[
+      { name: "description", content: `${settings.app.name} - ${"meta"}` }
+    ]}
   />
 );
 
 export default class CheckoutPay extends React.Component {
   state = {
     product: {
-      name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
+      name:
+        "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
       image: naruto2,
       days: 4,
       date: {
@@ -40,28 +43,45 @@ export default class CheckoutPay extends React.Component {
         <div className="checkoutDiv">
           <Row gutter={16}>
             <CheckoutSteps step={2} />
-            <Col lg={6} sm={10} className="ColMenu">
-              <div>
-                <Sider width={550} className="checkSlider">
-                  <h4>
-                    <strong>Choose payment option</strong>
-                  </h4>
-                  <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} className="AccountDetails">
-                    <Item className="AccDetItem" key="1">
-                      Debit Card
-                    </Item>
-                    <Item className="AccDetItem" key="2">
-                      Credit Card
-                    </Item>
-                    <Item className="AccDetItem" key="3">
-                      Net Banking
-                    </Item>
-                    <Item className="AccDetItem" key="4">
-                      UPI
-                    </Item>
-                  </Menu>
-                </Sider>
-              </div>
+            <Col lg={6} sm={10} className="ColMenu checkSlider">
+              <h4>
+                <strong>Choose payment option</strong>
+              </h4>
+              <Menu
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                className="AccountDetails"
+              >
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="1"
+                >
+                  Debit Card
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="2"
+                >
+                  Credit Card
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="3"
+                >
+                  Net Banking
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="4"
+                >
+                  UPI
+                </Item>
+              </Menu>
             </Col>
             <Col lg={9} sm={14} className="marginB30">
               <Card>
@@ -70,20 +90,36 @@ export default class CheckoutPay extends React.Component {
                 </h4>
                 <Form layout="vertical">
                   <Form.Item>
-                    <Input placeholder="Name on card" type="text" className="cardFormitem" />
+                    <Input
+                      placeholder="Name on card"
+                      type="text"
+                      className="cardFormitem"
+                    />
                   </Form.Item>
                   <Form.Item>
-                    <Input placeholder="Card Number" type="text" className="cardFormitem" />
+                    <Input
+                      placeholder="Card Number"
+                      type="text"
+                      className="cardFormitem"
+                    />
                   </Form.Item>
                   <Row gutter={32}>
                     <Col span={12}>
                       <Form.Item>
-                        <Input placeholder="Expiry date" type="text" className="cardFormitem" />
+                        <Input
+                          placeholder="Expiry date"
+                          type="text"
+                          className="cardFormitem"
+                        />
                       </Form.Item>
                     </Col>
                     <Col span={12}>
                       <Form.Item>
-                        <Input placeholder="CVV" type="text" className="cardFormitem" />
+                        <Input
+                          placeholder="CVV"
+                          type="text"
+                          className="cardFormitem"
+                        />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -95,8 +131,16 @@ export default class CheckoutPay extends React.Component {
                 </Form>
               </Card>
             </Col>
-            <Col lg={{ span: 8, offset: 0 }} sm={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-              <OrderCard product={this.state.product} paid={false} buttonText={'Place order'} />
+            <Col
+              lg={{ span: 8, offset: 0 }}
+              sm={{ span: 18, offset: 3 }}
+              xs={{ span: 22, offset: 1 }}
+            >
+              <OrderCard
+                product={this.state.product}
+                paid={false}
+                buttonText={"Place order"}
+              />
             </Col>
           </Row>
         </div>
