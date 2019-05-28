@@ -104,17 +104,17 @@
 /* RelatedCard */
 
 .relatedCard {
-  height: 300px !important;
+  /* height: 300px !important; */
   border-radius: 9px !important;
   box-shadow: 0 1px 4px 0 rgba(179, 178, 178, 0.5);
-  width:215px !important;
+  /* width: auto !important; */
   margin-top: 20px;
   overflow: hidden;
 }
 
 .relatedCardImg {
-  height: 150px !important;
-  width: auto !important;
+  /* height: 150px !important; */
+  /* width: 100% !important; */
   overflow: hidden;
 }
 
@@ -285,7 +285,7 @@
   color: #fff !important;
   position: absolute !important;
   z-index: 100 !important;
-  top: 160px !important; 
+  top: 160px !important;
   padding: 0 !important;
   border-radius: 100% !important;
   text-shadow: #000 10px;
