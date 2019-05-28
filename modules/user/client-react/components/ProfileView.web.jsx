@@ -1,16 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
-import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
-import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, AccountLayout } from '@gqlapp/look-client-react';
-import { Row, Col } from 'antd';
-import VerificationView from './VerificationView';
-import ProfileHead from './ProfileHead';
-import UsersCard from './UsersCard';
-import settings from '../../../../settings';
-import AddressCard from './AddressCard';
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { Link } from "react-router-dom";
+import { StripeSubscriptionProfile } from "@gqlapp/payments-client-react";
+import { translate } from "@gqlapp/i18n-client-react";
+import {
+  Card,
+  CardGroup,
+  CardText,
+  CardTitle,
+  AccountLayout
+} from "@gqlapp/look-client-react";
+import { Row, Col, Divider, Icon } from "antd";
+import VerificationCard from "./VerificationCard";
+import ProfileHead from "./ProfileHead";
+import UsersCard from "./UsersCard";
+import settings from "../../../../settings";
+import AddressCard from "./AddressCard";
+
 // To Do Abstract Out
 
 class ProfileView extends React.Component {
@@ -18,62 +25,72 @@ class ProfileView extends React.Component {
     const { currentUser, currentUserLoading } = this.props;
     const { t } = this.props;
     const endorsements = currentUser.endorsements;
+
     const endorsed = currentUser.endorsed;
     const followers = currentUser.followers;
     const following = currentUser.following;
+
+    function getEndorsements(endorsement) {
+      if (endorsement) {
+        var data = endorsement.endorser.profile;
+
+        return data;
+      } else {
+        return null;
+      }
+    }
+    function getEndorsed(endorse) {
+      if (endorse) {
+        var data = endorse.endorsee.profile;
+
+        return data;
+      } else {
+        return null;
+      }
+    }
+
+    function getFollowers(follower) {
+      if (follower) {
+        var data = follower.follower.profile;
+        return data;
+      } else {
+        return null;
+      }
+    }
+
+    function getFollowing(follow) {
+      if (follow) {
+        console.log("there", follow);
+        return follow;
+      } else {
+        return null;
+      }
+    }
     return {
       endorsements: {
-        title: t('profile.card.group.endorsements.title'),
-        notFound: t('profile.card.group.endorsements.notFound'),
-        list: [
-          {
-            avatar: endorsements[0].endorser.profile.avatar,
-            firstName: endorsements[0].endorser.profile.firstName,
-            lastName: endorsements[0].endorser.profile.lastName
-          },
-          {
-            avatar: endorsements[1].endorser.profile.avatar,
-            firstName: endorsements[1].endorser.profile.firstName,
-            lastName: endorsements[1].endorser.profile.lastName
-          }
-        ]
+        title: t("profile.card.group.endorsements.title"),
+        notFound: t("profile.card.group.endorsements.notFound"),
+        list: endorsements.map(getEndorsements)
       },
       endorsed: {
-        title: t('profile.card.group.endorsed.title'),
-        notFound: t('profile.card.group.endorsed.notFound'),
-        list: [
-          {
-            avatar: endorsed[0].endorsee.profile.avatar,
-            firstName: endorsed[0].endorsee.profile.firstName,
-            lastName: endorsed[0].endorsee.profile.lastName
-          }
-        ]
+        title: t("profile.card.group.endorsed.title"),
+        notFound: t("profile.card.group.endorsed.notFound"),
+        list: endorsed.map(getEndorsed)
       },
       followers: {
-        title: t('profile.card.group.followers.title'),
-        notFound: t('profile.card.group.followers.notFound'),
-        list: [
-          {
-            avatar: followers[0].follower.profile.avatar,
-            firstName: followers[0].follower.profile.firstName,
-            lastName: followers[0].follower.profile.lastName
-          },
-          {
-            avatar: followers[1].follower.profile.avatar,
-            firstName: followers[1].follower.profile.firstName,
-            lastName: followers[1].follower.profile.lastName
-          }
-        ]
+        title: t("profile.card.group.followers.title"),
+        notFound: t("profile.card.group.followers.notFound"),
+        list: followers.map(getFollowers)
       },
       following: {
-        title: t('profile.card.group.following.title'),
-        notFound: t('profile.card.group.following.notFound'),
-        list: []
+        title: t("profile.card.group.following.title"),
+        notFound: t("profile.card.group.following.notFound"),
+        list: following.map(getFollowing)
       },
       profileHead: {
-        rating: t('profile.card.group.rating'),
-        acceptanceRate: t('profile.card.group.acceptanceRate'),
-        responseTime: t('profile.card.group.responseTime')
+        rating: t("profile.card.group.rating"),
+        acceptanceRate: t("profile.card.group.acceptanceRate"),
+        responseTime: t("profile.card.group.responseTime")
       }
     };
   };
@@ -81,11 +98,11 @@ class ProfileView extends React.Component {
   renderMetaData = t => {
     return (
       <Helmet
-        title={`${settings.app.name} - ${t('profile.title')}`}
+        title={`${settings.app.name} - ${t("profile.title")}`}
         meta={[
           {
-            name: 'description',
-            content: `${settings.app.name} - ${t('profile.meta')}`
+            name: "description",
+            content: `${settings.app.name} - ${t("profile.meta")}`
           }
         ]}
       />
@@ -95,109 +112,144 @@ class ProfileView extends React.Component {
   render() {
     const { t } = this.props;
     const { currentUser, currentUserLoading } = this.props;
+
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">
-          <div className="text-center">{t('profile.loadMsg')}</div>
+          <div className="text-center">{t("profile.loadMsg")}</div>
         </AccountLayout>
       );
     } else if (currentUser) {
-      console.log(currentUser);
       return (
         <AccountLayout select="/profile">
-          <h2 style={{ padding: '0 20px 0px 33%' }}>
-            <strong>{t('profile.card.title')}</strong>
-          </h2>
-
-          <Row gutter={5} style={{ padding: '0px 0px 0px 3%' }}>
-            <Col span={16}>
+          <Row gutter={5}>
+            <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
               <Card>
-                <ProfileHead profile={currentUser.profile} description={this.usersCardData().profileHead} />
-
+                <CardTitle>{t("profile.card.title")}</CardTitle>
+                <Divider />
+                <ProfileHead
+                  profile={currentUser.profile}
+                  description={this.usersCardData().profileHead}
+                />
+                <Divider />
                 <Row>
                   <Col span={12}>
-                    <CardGroup>
-                      <h2>{t('profile.card.group.name')}:</h2>
+                    <div>
+                      <h2>{t("profile.card.group.name")}:</h2>
                       <CardText>{currentUser.username}</CardText>
-                    </CardGroup>
-                    {currentUser.profile && currentUser.profile.website && (
-                      <CardGroup>
-                        <h2>{t('profile.card.group.website')}:</h2>
-                        <CardText>{currentUser.profile.website}</CardText>
-                      </CardGroup>
+                    </div>
+                    {currentUser.profile && currentUser.profile.about && (
+                      <div>
+                        <h2>{t("profile.card.group.about")}:</h2>
+                        <CardText>{currentUser.profile.about}</CardText>
+                      </div>
                     )}
+                    <h2>{t("profile.card.group.role")}:</h2>
+                    <CardText>{currentUser.role}</CardText>
 
-                    <CardGroup>
-                      <h2>{t('profile.card.group.email')}:</h2>
-                      <CardText>{currentUser.email}</CardText>
-                    </CardGroup>
-
-                    {currentUser.profile && currentUser.profile.mobile && (
-                      <CardGroup>
-                        <h2>{t('profile.card.group.mobile')}:</h2>
-                        <CardText>{currentUser.profile.mobile}</CardText>
-                      </CardGroup>
-                    )}
-
-                    <CardGroup>
-                      <h2>{t('profile.card.group.role')}:</h2>
-                      <CardText>{currentUser.role}</CardText>
-                    </CardGroup>
                     {/* Portfolios */}
-                    <CardGroup>
-                      <h2>{t('profile.card.group.portfolios.title')}</h2>
-                      {currentUser.portfolios.map((portfolio, key) => (
-                        <h3>
-                          {t('profile.card.group.portfolios.subtitle')} : {key + 1}
-                        </h3>
-                      ))}
-                    </CardGroup>
+
+                    <h2>{t("profile.card.group.portfolios.title")}</h2>
+                    {currentUser.portfolios.map((portfolio, key) => (
+                      <h3>
+                        {t("profile.card.group.portfolios.subtitle")} :{" "}
+                        {key + 1}
+                      </h3>
+                    ))}
                   </Col>
                   <Col span={12}>
-                    {/* Addresses */}
-                    {currentUser.profile && currentUser.profile.about && (
-                      <CardGroup>
-                        <h2>{t('profile.card.group.about')}:</h2>
-                        <CardText>{currentUser.profile.about}</CardText>
-                      </CardGroup>
+                    {currentUser.profile && currentUser.profile.website && (
+                      <div>
+                        <Icon type="link" />
+
+                        <CardText>{currentUser.profile.website}</CardText>
+                      </div>
                     )}
 
-                    <CardGroup>
-                      <h2>{t('profile.card.group.addresses.title')}</h2>
-                      {currentUser.addresses.map((address, key) => (
-                        <AddressCard
-                          address={address}
-                          subTitle={t('profile.card.group.addresses.subTitle')}
-                          index={key}
-                        />
-                      ))}
-                    </CardGroup>
+                    <h2>{t("profile.card.group.email")}:</h2>
+                    <CardText>{currentUser.email}</CardText>
 
-                    {/* Credit card info (Stripe subscription module)*/}
-                    {settings.stripe.subscription.enabled &&
-                      settings.stripe.subscription.publicKey &&
-                      currentUser.role === 'user' && <StripeSubscriptionProfile />}
+                    {currentUser.profile && currentUser.profile.mobile && (
+                      <div>
+                        <h2>
+                          <Icon type="contacts" />
+                        </h2>
+                        <CardText>{currentUser.profile.mobile}</CardText>
+                      </div>
+                    )}
                   </Col>
+                </Row>
+                <Divider />
+                <h2>{t("profile.card.group.addresses.title")}</h2>
+
+                <Row gutter={10}>
+                  {currentUser.addresses.map((address, key) => (
+                    <Col xs={{ span: 24 }} md={{ span: 12 }}>
+                      <AddressCard
+                        address={address}
+                        subTitle={t("profile.card.group.addresses.subTitle")}
+                        index={key}
+                      />
+                    </Col>
+                  ))}
+                  {/* Credit card info (Stripe subscription module)*/}
+                  {settings.stripe.subscription.enabled &&
+                    settings.stripe.subscription.publicKey &&
+                    currentUser.role === "user" && (
+                      <StripeSubscriptionProfile />
+                    )}
                 </Row>
               </Card>
             </Col>
-            <Col span={8}>
-              <VerificationView data={currentUser.verification} />
-              <UsersCard data={this.usersCardData().endorsements} />
-              <UsersCard data={this.usersCardData().endorsed} />
-              <UsersCard data={this.usersCardData().followers} />
-              <UsersCard data={this.usersCardData().following} />
+            <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+              <Row
+                gutter={10}
+                type="flex"
+                justify="space-around"
+                align="middle"
+              >
+                {/*Verification*/}
+                <Col
+                  xs={{ span: 24 }}
+                  md={{ span: 8 }}
+                  lg={{ span: 24 }}
+                  style={{ height: "100%" }}
+                >
+                  <VerificationCard data={currentUser.verification} />
+                </Col>
+
+                <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>
+                  <Row>
+                    {/*endorsements*/}
+                    <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
+                      <UsersCard data={this.usersCardData().endorsements} />
+                    </Col>
+                    {/*endorsed*/}
+                    <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
+                      <UsersCard data={this.usersCardData().endorsed} />
+                    </Col>
+                    {/*followers*/}
+                    <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
+                      <UsersCard data={this.usersCardData().followers} />
+                    </Col>
+                    {/*following*/}
+                    <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
+                      <UsersCard data={this.usersCardData().following} />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
             </Col>
           </Row>
           <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
-            {t('profile.editProfileText')}
+            {t("profile.editProfileText")}
           </Link>
         </AccountLayout>
       );
     } else {
       return (
         <AccountLayout>
-          <h2>{t('profile.errorMsg')}</h2>
+          <h2>{t("profile.errorMsg")}</h2>
         </AccountLayout>
       );
     }
@@ -209,4 +261,4 @@ ProfileView.propTypes = {
   currentUser: PropTypes.object,
   t: PropTypes.func
 };
-export default translate('user')(ProfileView);
+export default translate("user")(ProfileView);

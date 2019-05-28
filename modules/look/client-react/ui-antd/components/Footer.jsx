@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
-import Container from './Container';
-import Row from './Row';
-import Col from './Col';
-import './styles.css';
+import { Icon } from "antd";
+import { Link } from "react-router-dom";
+import Container from "./Container";
+import Row from "./Row";
+import Col from "./Col";
+import "./styles.css";
 
 export default class Footer extends React.Component {
   render() {
     return (
-      <Container className="no-print">
+      <Container className="no-print" align="center">
         <Row className="footer" gutter={16}>
           <Col lg={12} sm={24}>
             <Row>
-              <Col span={12}>
+              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
                 <ul>
                   <h3>About Lenshood</h3>
                   <li>
@@ -31,7 +31,7 @@ export default class Footer extends React.Component {
                   </li>
                 </ul>
               </Col>
-              <Col span={12}>
+              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
                 <ul>
                   <h3>How It Works</h3>
                   <li>
@@ -52,7 +52,7 @@ export default class Footer extends React.Component {
           </Col>
           <Col lg={12} sm={24}>
             <Row>
-              <Col span={12}>
+              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
                 <ul>
                   <h3>Keep In Touch</h3>
                   <li>
@@ -71,21 +71,33 @@ export default class Footer extends React.Component {
                   </li>
                 </ul>
               </Col>
-              <Col span={12}>
+              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
                 <ul>
                   <h3>Follow Us</h3>
                   <li>
                     <Link to="/blog">Blog</Link>
                   </li>
                   <li>
-                    <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/lenshoodcommunity">
-                      {' '}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://facebook.com/lenshoodcommunity"
+                    >
+                      {" "}
                       <Icon theme="filled" type="facebook" />
                     </a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/wearelenshood">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.linkedin.com/company/wearelenshood"
+                    >
                       <Icon theme="filled" type="linkedin" />
                     </a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/we_are_lenshood/">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.instagram.com/we_are_lenshood/"
+                    >
                       <Icon theme="filled" type="instagram" />
                     </a>
                     <a target="_blank" rel="noopener noreferrer" href="/">
@@ -96,18 +108,22 @@ export default class Footer extends React.Component {
               </Col>
             </Row>
           </Col>
-          <Col className="FooterLogo" span={24} style={{ borderTopStyle: 'solid', padding: '10px 0px 0px 0px' }}>
+          <Col
+            className="FooterLogo"
+            span={24}
+            style={{ borderTopStyle: "solid", padding: "10px 0px 0px 0px" }}
+          >
             <Row>
               <Link to="/">
                 <img
-                  src={require('../../logo/OrgLogo.png')}
+                  src={require("../../logo/OrgLogo.png")}
                   height="50"
                   width="50"
                   align="centre"
                   style={{
-                    display: 'block',
-                    marginLeft: 'auto',
-                    marginRight: 'auto'
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto"
                   }}
                 />
               </Link>
