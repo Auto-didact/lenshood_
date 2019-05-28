@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Row, Col } from 'antd';
-import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
+import React from "react";
+import PropTypes from "prop-types";
+import { withRouter, NavLink } from "react-router-dom";
+import { Menu, Row, Col } from "antd";
+import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
 
-import MenuItem from './MenuItem';
-import DropDown from './Dropdown';
-import Avatar from './Avatar';
+import MenuItem from "./MenuItem";
+import DropDown from "./Dropdown";
+import Avatar from "./Avatar";
 
 //import settings from '../../../../../settings';
 
@@ -15,7 +15,7 @@ export const ref = { modules: null };
 export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
-    current: '/'
+    current: "/"
   };
 
   handleClick = e => {
@@ -32,11 +32,15 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: '60px' }}
+            style={{ lineHeight: "60px" }}
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
-                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                <img
+                  src={require("../../logo/Logo2.png")}
+                  height="40"
+                  width="40"
+                />
               </NavLink>
             </MenuItem>
             {__DEV__ && (
@@ -52,7 +56,9 @@ class NavBar extends React.Component {
 
             <IfLoggedIn role="admin">
               <MenuItem>
-                <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
+                <DropDown type="safety-certificate">
+                  {ref.modules.navItemsAdmin}
+                </DropDown>
               </MenuItem>
             </IfLoggedIn>
             {ref.modules.navItems}
@@ -63,7 +69,7 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: '60px', float: 'right' }}
+            style={{ lineHeight: "60px", float: "right" }}
           >
             {ref.modules.navItemsRight}
             <IfLoggedIn>

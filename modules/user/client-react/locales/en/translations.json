@@ -73,7 +73,7 @@
         "rating": "Rating",
         "flag": "Flag",
         "verification": {
-          "title": "Varification Status",
+          "title": "Verification Status",
           "address": "Address",
           "email": "Email",
           "id": "ID",
