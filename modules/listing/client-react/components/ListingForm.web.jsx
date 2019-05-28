@@ -6,7 +6,7 @@ import { required, validate } from '@gqlapp/validation-common-react';
 
 import { Form, Button } from '@gqlapp/look-client-react';
 // Abstract Out
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, message } from 'antd';
 
 import ProductDetails from './components/ListingForm/ProductDetails';
 import RentalDetails from './components/ListingForm/RentalDetails';
@@ -27,8 +27,15 @@ class ListingForm extends Component {
     this.prevStep = this.prevStep.bind(this);
   }
 
-  nextStep = () => {
-    this.setState(state => ({ step: state.step + 1 }));
+  nextStep = async () => {
+    let errors = await this.props.validateForm(this.props.values);
+    var isErrorsEmpty = !Object.keys(errors).length;
+    // console.log(errors);
+    // console.log(this.props.values);
+    if (isErrorsEmpty) this.setState(state => ({ step: state.step + 1 }));
+    else message.info('Fill in the Required details before moving on!');
+
+    // set errors and touched
   };
   prevStep = () => {
     this.setState(state => ({ step: state.step - 1 }));
@@ -75,6 +82,7 @@ class ListingForm extends Component {
 }
 
 ListingForm.propTypes = {
+  validateForm: PropTypes.func,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,

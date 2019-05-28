@@ -5,7 +5,7 @@ import { FieldArray } from 'formik';
 import {
   RenderField,
   RenderSelect,
-  Option,
+  // Option,
   RenderUploadMultiple,
   RenderDynamicField,
   RenderCheckBox,
@@ -13,7 +13,7 @@ import {
 } from '@gqlapp/look-client-react';
 
 // Abstract Radio Button out To Do
-import { Radio } from 'antd';
+import { Radio, Select } from 'antd';
 
 const RadioButton = Radio.Button;
 
@@ -97,9 +97,9 @@ export default class ProductDetails extends Component {
           onChange={this.handleGearCategoryChange}
         >
           {this.state.listingCategories.map((category, idx) => (
-            <Option key={idx} value={category.gearCategory}>
+            <Select.Option key={idx} value={category.gearCategory}>
               {category.gearCategory}
-            </Option>
+            </Select.Option>
           ))}
         </Field>
 
@@ -113,9 +113,9 @@ export default class ProductDetails extends Component {
             value={values.gearSubcategory}
           >
             {this.state.activeGearSubcategories.map((category, idx) => (
-              <Option key={idx} value={category}>
+              <Select.Option key={idx} value={category}>
                 {category}
-              </Option>
+              </Select.Option>
             ))}
           </Field>
         ) : null}
@@ -130,9 +130,9 @@ export default class ProductDetails extends Component {
             value={values.status}
           >
             {this.state.status.map((status, idx) => (
-              <Option key={idx} value={status}>
+              <Select.Option key={idx} value={status}>
                 {status}
-              </Option>
+              </Select.Option>
             ))}
           </Field>
         ) : null}

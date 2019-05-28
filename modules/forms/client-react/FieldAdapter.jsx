@@ -28,7 +28,7 @@ class FieldAdapter extends Component {
   // To Do - ReConfirm that this works
   onChange = e => {
     const { onChange } = this.props;
-    console.log(e);
+    // console.log(e);
     if (onChange) {
       onChange(e);
     }
@@ -54,7 +54,9 @@ class FieldAdapter extends Component {
       if (PLATFORM === 'mobile') {
         formik.setFieldTouched(name, true);
       } else {
-        formik.handleBlur(e);
+        // console.log(name);
+        // formik.handleBlur(e);
+        formik.setFieldTouched(name, true);
       }
     }
   };
