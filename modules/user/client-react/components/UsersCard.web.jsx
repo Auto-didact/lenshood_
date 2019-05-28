@@ -6,22 +6,22 @@ const UsersCard = ({ data }) => {
   if (data.list.length === 0) {
     return (
       <Card>
-        <CardGroup>
-          <h3>{data.title}</h3>
+        <h3>{data.title}</h3>
+        <div style={{ height: "70px", overflow: "auto" }}>
           <CardText>{data.notFound}</CardText>
-        </CardGroup>
+        </div>
       </Card>
     );
   } else {
     return (
       <Card>
-        <CardGroup>
-          <h3>{data.title}</h3>
-
+        <h3>{data.title}</h3>
+        <div style={{ height: "70px", overflow: "auto" }}>
           {data.list.map(item => (
             <ProfileMini item={item} />
+            // <Divider />
           ))}
-        </CardGroup>
+        </div>
       </Card>
     );
   }

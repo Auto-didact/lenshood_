@@ -3,6 +3,7 @@ import { CardText } from '@gqlapp/look-client-react';
 import { Avatar, Row, Col } from 'antd';
 
 const ProfileMini = ({ item }) => {
+
   return (
     <Row>
       <Col span={4}>
