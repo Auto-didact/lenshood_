@@ -114,7 +114,7 @@ class ProfileView extends React.Component {
         </AccountLayout>
       );
     } else if (currentUser) {
-      // console.log(currentUser);
+      console.log(currentUser);
       return (
         <AccountLayout select="/profile">
           <Row gutter={5}>
@@ -122,7 +122,10 @@ class ProfileView extends React.Component {
               <Card>
                 <CardTitle>{t('profile.card.title')}</CardTitle>
                 <Divider />
-                <ProfileHead profile={currentUser.profile} description={this.usersCardData().profileHead} />
+                <ProfileHead
+                  profile={currentUser.profile && currentUser.profile}
+                  description={this.usersCardData().profileHead}
+                />
                 <Divider />
                 <Row>
                   <Col span={12}>
@@ -130,64 +133,80 @@ class ProfileView extends React.Component {
                       <h2>{t('profile.card.group.name')}:</h2>
                       <CardText>{currentUser.username}</CardText>
                     </div>
-                    {currentUser.profile && currentUser.profile.about && (
-                      <div>
-                        <h2>{t('profile.card.group.about')}:</h2>
-                        <CardText>{currentUser.profile.about}</CardText>
-                      </div>
-                    )}
-                    <h2>{t('profile.card.group.role')}:</h2>
-                    <CardText>{currentUser.role}</CardText>
+                    <div>
+                      <h2>{t('profile.card.group.about')}:</h2>
+
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.about ? currentUser.profile.about : 'Not Provided'}
+                      </CardText>
+                    </div>
+
+                    <div>
+                      <h2>{t('profile.card.group.role')}:</h2>
+
+                      <CardText>{currentUser.role ? currentUser.role : 'Not Provided'}</CardText>
+                    </div>
 
                     {/* Portfolios */}
-
                     <h2>{t('profile.card.group.portfolios.title')}</h2>
-                    {currentUser.portfolios.map((portfolio, key) => (
-                      <h3>
-                        {t('profile.card.group.portfolios.subtitle')} : {key + 1}
-                      </h3>
-                    ))}
+                    {currentUser.portfolios && currentUser.portfolios.length !== 0
+                      ? currentUser.portfolios.map((portfolio, key) => (
+                          <div key={key}>
+                            <CardText>
+                              {portfolio.platform} : {portfolio.portfolioUrl}
+                            </CardText>
+                          </div>
+                        ))
+                      : 'Not Provided'}
                   </Col>
                   <Col span={12}>
-                    {currentUser.profile && currentUser.profile.website && (
-                      <div>
-                        <Icon type="link" />
+                    <div>
+                      <Icon type="link" />
 
-                        <CardText>{currentUser.profile.website}</CardText>
-                      </div>
-                    )}
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.website
+                          ? currentUser.profile.website
+                          : 'Not Provided'}
+                      </CardText>
+                    </div>
 
-                    <h2>{t('profile.card.group.email')}:</h2>
-                    <CardText>{currentUser.email}</CardText>
+                    <div>
+                      <h2>{t('profile.card.group.email')}:</h2>
+                      <CardText>{currentUser.email ? currentUser.email : 'Not Provided'}</CardText>
+                    </div>
 
-                    {currentUser.profile && currentUser.profile.mobile && (
-                      <div>
-                        <h2>
-                          <Icon type="contacts" />
-                        </h2>
-                        <CardText>{currentUser.profile.mobile}</CardText>
-                      </div>
-                    )}
+                    <div>
+                      <h2>
+                        <Icon type="contacts" />
+                      </h2>
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.mobile
+                          ? currentUser.profile.mobile
+                          : 'Not Provided'}
+                      </CardText>
+                    </div>
                   </Col>
                 </Row>
                 <Divider />
                 <h2>{t('profile.card.group.addresses.title')}</h2>
-
                 <Row gutter={10}>
-                  {currentUser.addresses.map((address, key) => (
-                    <Col xs={{ span: 24 }} md={{ span: 12 }}>
-                      <AddressCard
-                        address={address}
-                        subTitle={t('profile.card.group.addresses.subTitle')}
-                        index={key}
-                      />
-                    </Col>
-                  ))}
-                  {/* Credit card info (Stripe subscription module)*/}
-                  {settings.stripe.subscription.enabled &&
-                    settings.stripe.subscription.publicKey &&
-                    currentUser.role === 'user' && <StripeSubscriptionProfile />}
+                  {currentUser.addresses && currentUser.addresses.length !== 0
+                    ? currentUser.addresses.map((address, key) => (
+                        <Col xs={{ span: 24 }} md={{ span: 12 }} key={key}>
+                          <AddressCard
+                            address={address}
+                            subTitle={t('profile.card.group.addresses.subTitle')}
+                            index={key}
+                          />
+                        </Col>
+                      ))
+                    : 'Not Provided'}
                 </Row>
+
+                {/* Credit card info (Stripe subscription module)*/}
+                {settings.stripe.subscription.enabled &&
+                  settings.stripe.subscription.publicKey &&
+                  currentUser.role === 'user' && <StripeSubscriptionProfile />}
               </Card>
             </Col>
             <Col xs={{ span: 24 }} lg={{ span: 8 }}>

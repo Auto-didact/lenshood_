@@ -74,7 +74,10 @@ export default class UserDrawer extends Component {
           />
           <Rate disabled defaultValue={parseInt(user.profile && user.profile.rating ? user.profile.rating : 0)} />
           <p style={pStyle}>Is Active?: {user.isActive ? 'Yes' : 'No'}</p>
-          <p style={pStyle}>Mobile: {user.profile.mobile}</p>
+          <p style={pStyle}>
+            Mobile:
+            {user.profile && user.profile.mobile ? user.profile.mobile : 'Not Provided'}
+          </p>
           <Row>
             <Col span={12}>
               <DescriptionItem title="Username" content={user.username} />
@@ -85,42 +88,66 @@ export default class UserDrawer extends Component {
           </Row>
           <Row>
             <Col span={12}>
-              <DescriptionItem title="First Name" content={user.profile.firstName} />
+              <DescriptionItem
+                title="First Name"
+                content={user.profile && user.profile.firstName ? user.profile.firstName : 'Not Provided'}
+              />
             </Col>
             <Col span={12}>
-              <DescriptionItem title="Last Name" content={user.profile.lastName} />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={12}>
-              <DescriptionItem title="Is Verfied?" content={user.profile.isVerified ? 'Yes' : 'No'} />
-            </Col>
-            <Col span={12}>
-              <DescriptionItem title="Is Available" content={user.profile.isAvailable ? 'Yes' : 'No'} />
+              <DescriptionItem
+                title="Last Name"
+                content={user.profile && user.profile.lastName ? user.profile.lastName : 'Not Provided'}
+              />
             </Col>
           </Row>
           <Row>
             <Col span={12}>
-              <DescriptionItem title="Response Time" content={user.profile.responseTime} />
+              <DescriptionItem title="Is Verfied?" content={user.profile && user.profile.isVerified ? 'Yes' : 'No'} />
             </Col>
             <Col span={12}>
-              <DescriptionItem title="Acceptance Rate" content={user.profile.acceptanceRate} />
+              <DescriptionItem title="Is Available" content={user.profile && user.profile.isAvailable ? 'Yes' : 'No'} />
             </Col>
           </Row>
           <Row>
             <Col span={12}>
-              <DescriptionItem title="Designation" content={user.profile.designation} />
+              <DescriptionItem
+                title="Response Time"
+                content={user.profile && user.profile.responseTime ? user.profile.responseTime : 'Not Provided'}
+              />
             </Col>
             <Col span={12}>
-              <DescriptionItem title="Website" content={user.profile.website} />
+              <DescriptionItem
+                title="Acceptance Rate"
+                content={user.profile && user.profile.acceptanceRate ? user.profile.acceptanceRate : 'Not Provided'}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <DescriptionItem
+                title="Designation"
+                content={user.profile && user.profile.designation ? user.profile.designation : 'Not Provided'}
+              />
+            </Col>
+            <Col span={12}>
+              <DescriptionItem
+                title="Website"
+                content={user.profile && user.profile.website ? user.profile.website : 'Not Provided'}
+              />
             </Col>
           </Row>
           <Row>
             <Col span={20}>
-              <DescriptionItem title="about" content={user.profile.about} />
+              <DescriptionItem
+                title="about"
+                content={user.profile && user.profile.about ? user.profile.about : 'Not Provided'}
+              />
             </Col>
             <Col span={4}>
-              <DescriptionItem title="Flag" content={user.profile.flag} />
+              <DescriptionItem
+                title="Flag"
+                content={user.profile && user.profile.flag ? user.profile.flag : 'Not Provided'}
+              />
             </Col>
           </Row>
           <Row>
