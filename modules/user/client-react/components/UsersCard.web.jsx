@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardGroup, CardText } from "@gqlapp/look-client-react";
+import { Card, CardText } from "@gqlapp/look-client-react";
 import ProfileMini from "./ProfileMini";
 
 const UsersCard = ({ data }) => {
@@ -17,8 +17,8 @@ const UsersCard = ({ data }) => {
       <Card>
         <h3>{data.title}</h3>
         <div style={{ height: "70px", overflow: "auto" }}>
-          {data.list.map(item => (
-            <ProfileMini item={item} />
+          {data.list.map((item, key) => (
+            <ProfileMini item={item} key={key} />
             // <Divider />
           ))}
         </div>
