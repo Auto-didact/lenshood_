@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Form, Upload, Icon } from "antd";
+import { Form, Upload, Icon } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -10,7 +10,7 @@ export default class RenderUpload extends React.Component {
     // console.log(file.response.secure_url);
     const arrayHelpers = this.props.arrayHelpers;
 
-    if (file.status == "done") {
+    if (file.status == 'done') {
       if (file.response) {
         let url = file.response.secure_url;
         if (url) {
@@ -21,7 +21,7 @@ export default class RenderUpload extends React.Component {
           arrayHelpers.push(obj);
         }
       }
-    } else if (file.status == "removed") {
+    } else if (file.status == 'removed') {
       //remove value in form
       arrayHelpers.remove(file.uid);
     }
@@ -34,13 +34,12 @@ export default class RenderUpload extends React.Component {
     // const input = this.props.input;
     // const defaultFileList = this.props.defaultFileList;
 
-    const cloudinary_url =
-      "https://api.cloudinary.com/v1_1/www-lenshood-in/image/upload";
+    const cloudinary_url = 'https://api.cloudinary.com/v1_1/www-lenshood-in/image/upload';
     // { upload_preset: 'nxzf2ip6' }
     // const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-    const cloudinary_data = { upload_preset: "nxzf2ip6" };
+    const cloudinary_data = { upload_preset: 'nxzf2ip6' };
 
-    let validateStatus = "";
+    let validateStatus = '';
     // if (touched && error) {
     //   validateStatus = 'error';
     // }
@@ -48,8 +47,8 @@ export default class RenderUpload extends React.Component {
     if (this.props.values) {
       defaultFileList = this.props.values.map((img, index) => ({
         uid: index,
-        name: "link",
-        status: "done",
+        name: 'link',
+        status: 'done',
         url: img.imageUrl,
         thumbUrl: img.imageUrl
       }));
@@ -71,12 +70,8 @@ export default class RenderUpload extends React.Component {
             <p className="ant-upload-drag-icon">
               <Icon type="inbox" />
             </p>
-            <p className="ant-upload-text">
-              Click or drag file to this area to upload
-            </p>
-            <p className="ant-upload-hint">
-              Support for a single or bulk upload.
-            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">Support for a single or bulk upload.</p>
           </Upload.Dragger>
         </div>
       </FormItem>

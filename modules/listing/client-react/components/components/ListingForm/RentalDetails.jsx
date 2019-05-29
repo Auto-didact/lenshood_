@@ -5,6 +5,9 @@ import { RenderField } from "@gqlapp/look-client-react";
 
 export default class RentalDetails extends Component {
   render() {
+    //To Do - abstract out.
+    const placeholderRent = "0.8% - 1.2% of replacement value";
+
     const values = this.props.values;
     const t = this.props.t;
     const isAdmin = this.props.isAdmin;
@@ -24,6 +27,7 @@ export default class RentalDetails extends Component {
           type="number"
           label={t("listing.field.listingRental.perDay")}
           value={values.listingRental.perDay}
+          placeholder={placeholderRent}
         />
         {isAdmin && (
           <>
