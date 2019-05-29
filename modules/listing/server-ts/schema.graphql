@@ -133,6 +133,7 @@ input ListingContentInput {
   serial: String!
 }
 input AddListingInput {
+  userId: Int!
   gearCategory: String!
   gearSubcategory: String!
   description: String!
@@ -147,6 +148,7 @@ input AddListingInput {
 # Input for editListing Mutation
 input EditListingInput {
   id: Int!
+  userId: Int!
   gearCategory: String
   gearSubcategory: String
   description: String
