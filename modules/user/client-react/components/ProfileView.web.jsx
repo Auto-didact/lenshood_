@@ -119,22 +119,24 @@ class ProfileView extends React.Component {
         </AccountLayout>
       );
     } else if (currentUser) {
-      console.log(currentUser);
       return (
         <AccountLayout select="/profile">
           <Row gutter={5}>
             <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
               <Card>
-                <CardTitle>{t("profile.card.title")}</CardTitle>
-                <h4 align="right">
-                  <Link
-                    className="mt-2 btn user-link"
-                    to={`/users/${currentUser.id}`}
-                  >
-                    <Icon type="edit" />
-                    {t("profile.editProfileText")}
-                  </Link>
-                </h4>
+                <CardTitle>
+                  {t("profile.card.title")}{" "}
+                  <span>
+                    <Link
+                      className="mt-2 btn user-link"
+                      to={`/users/${currentUser.id}`}
+                    >
+                      <Icon type="edit" />
+                      {/*t("profile.editProfileText")*/}
+                    </Link>
+                  </span>
+                </CardTitle>
+
                 <Divider />
                 <ProfileHead
                   profile={currentUser.profile && currentUser.profile}
@@ -180,8 +182,9 @@ class ProfileView extends React.Component {
                   </Col>
                   <Col span={12}>
                     <div>
-                      <Icon type="link" />
-
+                      <h2>
+                        <Icon type="link" />
+                      </h2>
                       <CardText>
                         {currentUser.profile && currentUser.profile.website
                           ? currentUser.profile.website

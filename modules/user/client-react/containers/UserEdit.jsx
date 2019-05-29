@@ -15,31 +15,31 @@ const UserEdit = props => {
   const { user, editUser, t, history, navigation } = props;
 
   const onSubmit = async values => {
-    console.log(values);
-    // let userValues = pick(values, [
-    //   "username",
-    //   "email",
-    //   "role",
-    //   "isActive",
-    //   "password"
-    // ]);
+    let userValues = pick(values, [
+      "username",
+      "email",
+      "role",
+      "isActive",
+      "profile",
+      "addresses",
+      "portfolios"
+    ]);
     //
-    // userValues["profile"] = pick(values.profile, ["firstName", "lastName"]);
-    //
-    // userValues = UserFormatter.trimExtraSpaces(userValues);
-    //
-    // if (settings.auth.certificate.enabled) {
-    //   userValues["auth"] = {
-    //     certificate: pick(values.auth.certificate, "serial")
-    //   };
-    // }
-    //
-    // try {
-    //   await editUser({ id: user.id, ...userValues });
-    // } catch (e) {
-    //   throw new FormError(t("userEdit.errorMsg"), e);
-    // }
-    //
+
+    userValues = UserFormatter.trimExtraSpaces(userValues);
+
+    if (settings.auth.certificate.enabled) {
+      userValues["auth"] = {
+        certificate: pick(values.auth.certificate, "serial")
+      };
+    }
+
+    try {
+      await editUser({ id: user.id, ...userValues });
+    } catch (e) {
+      throw new FormError(t("userEdit.errorMsg"), e);
+    }
+
     // if (history) {
     //   return history.goBack();
     // }
