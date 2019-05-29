@@ -167,6 +167,17 @@
       "field": {
         "name": "Username",
         "email": "Email",
+        "avatar": "Avatar",
+        "about": "About",
+        "designation": "Designation",
+        "mobile": "Mobile",
+        "flag": "Flag",
+        "rating": "Rating",
+        "website": "Website",
+        "available": "Availability",
+        "isverified": "Is Verified",
+        "addresses": "Addresses",
+        "portfolios": "Portfolios",
         "role": {
           "label": "Role",
           "user": "user",
