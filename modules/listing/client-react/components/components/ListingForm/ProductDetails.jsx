@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { FieldArray } from "formik";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { FieldArray } from 'formik';
 import {
   RenderField,
   RenderSelect,
@@ -10,10 +10,10 @@ import {
   RenderDynamicField,
   RenderCheckBox,
   RenderRadioGroup
-} from "@gqlapp/look-client-react";
+} from '@gqlapp/look-client-react';
 
 // Abstract Radio Button out To Do
-import { Radio, Select } from "antd";
+import { Radio, Select } from 'antd';
 
 const RadioButton = Radio.Button;
 
@@ -24,44 +24,38 @@ export default class ProductDetails extends Component {
       /* To Do - Find a way to handle these options in a better way (Database or Constants) */
       listingCategories: [
         {
-          gearCategory: "Cameras",
+          gearCategory: 'Cameras',
           gearSubcategories: [
-            "DSLR",
-            "SLR",
-            "Mirrorless Camera",
-            "Point & Shoot Camera",
-            "Video Camera",
-            "Cinema Camera",
-            "Go Pro & Headcam",
-            "Other"
+            'DSLR',
+            'SLR',
+            'Mirrorless Camera',
+            'Point & Shoot Camera',
+            'Video Camera',
+            'Cinema Camera',
+            'Go Pro & Headcam',
+            'Other'
           ],
-          components: [
-            "Body",
-            "Lens",
-            "Memory Card",
-            "Battery",
-            "Battery Charger"
-          ]
+          components: ['Body', 'Lens', 'Memory Card', 'Battery', 'Battery Charger']
         },
         {
-          gearCategory: "Lenses",
+          gearCategory: 'Lenses',
           gearSubcategories: [
-            "DSLR Lens",
-            "Prime Lens",
-            "Mirrorless Lense",
-            "Cinema Lens",
-            "Lens Accessories",
-            "Other Lenses"
+            'DSLR Lens',
+            'Prime Lens',
+            'Mirrorless Lense',
+            'Cinema Lens',
+            'Lens Accessories',
+            'Other Lenses'
           ],
-          components: ["Lens"]
+          components: ['Lens']
         }
       ],
-      status: ["Idle", "On Rent", "On Shelf", "Disabled"],
+      status: ['Idle', 'On Rent', 'On Shelf', 'Disabled'],
       activeGearSubcategories: null,
       activeComponents: null,
 
-      listingCondition: ["New", "Good", "Fair"],
-      listingAge: ["< 1 year", "1 - 2 years", "> 3 years"],
+      listingCondition: ['New', 'Good', 'Fair'],
+      listingAge: ['< 1 year', '1 - 2 years', '> 3 years'],
 
       isAdmin: false
     };
@@ -100,7 +94,7 @@ export default class ProductDetails extends Component {
           name="gearCategory"
           component={RenderSelect}
           type="text"
-          label={t("listing.field.gearCategory")}
+          label={t('listing.field.gearCategory')}
           value={values.gearCategory}
           onChange={this.handleGearCategoryChange}
         >
@@ -117,7 +111,7 @@ export default class ProductDetails extends Component {
             name="gearSubcategory"
             component={RenderSelect}
             type="text"
-            label={t("listing.field.gearSubcategory")}
+            label={t('listing.field.gearSubcategory')}
             value={values.gearSubcategory}
           >
             {this.state.activeGearSubcategories.map((category, idx) => (
@@ -134,7 +128,7 @@ export default class ProductDetails extends Component {
             name="status"
             component={RenderSelect}
             type="select"
-            label={t("listing.field.status")}
+            label={t('listing.field.status')}
             value={values.status}
           >
             {this.state.status.map((status, idx) => (
@@ -150,7 +144,7 @@ export default class ProductDetails extends Component {
           <Field
             name="isActive"
             component={RenderCheckBox}
-            label={t("listing.field.isActive")}
+            label={t('listing.field.isActive')}
             checked={values.isActive}
           />
         ) : null}
@@ -163,29 +157,29 @@ export default class ProductDetails extends Component {
               buttonText="Add Component"
               keys={[
                 {
-                  key: "gear",
-                  type: "text",
-                  label: "Component Type",
-                  placeholder: "ex: Body, Lens"
+                  key: 'gear',
+                  type: 'text',
+                  label: 'Component Type',
+                  placeholder: 'ex: Body, Lens'
                 },
                 {
-                  key: "brand",
-                  type: "text",
-                  label: "Brand",
-                  placeholder: "ex: Canon, NIkon"
+                  key: 'brand',
+                  type: 'text',
+                  label: 'Brand',
+                  placeholder: 'ex: Canon, NIkon'
                 },
                 {
-                  key: "model",
-                  type: "text",
-                  label: "Model",
-                  placeholder: "ex: 5D MARK IV, D5600"
+                  key: 'model',
+                  type: 'text',
+                  label: 'Model',
+                  placeholder: 'ex: 5D MARK IV, D5600'
                 },
-                { key: "serial", type: "text", label: "Serial Number" }
+                { key: 'serial', type: 'text', label: 'Serial Number' }
               ]}
               arrayHelpers={arrayHelpers}
               values={values.listingContent}
               name="listingContent"
-              label={t("listing.field.gearComponents")}
+              label={t('listing.field.gearComponents')}
             />
           )}
         />
@@ -194,13 +188,9 @@ export default class ProductDetails extends Component {
         {/* Listing Images */}
         <FieldArray
           name="listingImages"
-          label={t("listing.field.listingImages")}
+          label={t('listing.field.listingImages')}
           render={arrayHelpers => (
-            <RenderUploadMultiple
-              arrayHelpers={arrayHelpers}
-              values={values.listingImages}
-              dictKey="imageUrl"
-            />
+            <RenderUploadMultiple arrayHelpers={arrayHelpers} values={values.listingImages} dictKey="imageUrl" />
           )}
         />
 
@@ -209,7 +199,7 @@ export default class ProductDetails extends Component {
           name="description"
           component={RenderField}
           type="textarea"
-          label={t("listing.field.description")}
+          label={t('listing.field.description')}
           value={values.description}
         />
 
@@ -218,7 +208,7 @@ export default class ProductDetails extends Component {
             name="listingDetail.condition"
             component={RenderRadioGroup}
             type="text"
-            label={t("listing.field.listingDetail.condition")}
+            label={t('listing.field.listingDetail.condition')}
             value={values.listingDetail.condition}
           >
             {this.state.listingCondition.map((condition, idx) => (
@@ -233,7 +223,7 @@ export default class ProductDetails extends Component {
           name="listingDetail.age"
           component={RenderRadioGroup}
           type="text"
-          label={t("listing.field.listingDetail.age")}
+          label={t('listing.field.listingDetail.age')}
           value={values.listingDetail.age}
         >
           {this.state.listingAge.map((value, idx) => (
@@ -248,13 +238,13 @@ export default class ProductDetails extends Component {
             <RenderDynamicField
               buttonText="Add Damages"
               keys={[
-                { key: "imageUrl", type: "image", label: "Image" },
-                { key: "damageDetail", type: "text", label: "Details" }
+                { key: 'imageUrl', type: 'image', label: 'Image' },
+                { key: 'damageDetail', type: 'text', label: 'Details' }
               ]}
               arrayHelpers={arrayHelpers}
               values={values.listingDetail.damages}
               name="listingDetail.damages"
-              label={t("listing.field.listingDamages")}
+              label={t('listing.field.listingDamages')}
             />
           )}
         />

@@ -1,10 +1,10 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import CURRENT_USER_QUERY from '@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql';
 
-import ListingAddView from "../components/ListingAddView";
+import ListingAddView from '../components/ListingAddView';
 
-import ADD_LISTING from "../graphql/AddListing.graphql";
-import CURRENT_USER_QUERY from "@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql";
+import ADD_LISTING from '../graphql/AddListing.graphql';
 
 class ListingAdd extends React.Component {
   constructor(props) {
@@ -26,9 +26,9 @@ export default compose(
             input: values
           },
           optimisticResponse: {
-            __typename: "Mutation",
+            __typename: 'Mutation',
             addListing: {
-              __typename: "Listing",
+              __typename: 'Listing',
               id: null,
               ...values
             }
@@ -36,11 +36,11 @@ export default compose(
         });
 
         if (history) {
-          return history.push("/listing/" + listingData.data.addListing.id, {
+          return history.push('/listing/' + listingData.data.addListing.id, {
             listing: listingData.data.addListing
           });
         } else if (navigation) {
-          return navigation.navigate("ListingEdit", {
+          return navigation.navigate('ListingEdit', {
             id: listingData.data.addListing.id
           });
         }
