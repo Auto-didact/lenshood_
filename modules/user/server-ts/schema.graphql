@@ -78,7 +78,6 @@ type UserVerification {
   isReferred: Boolean
   createdAt: String
   updatedAt: String
-
 }
 type UserDrivingLicense {
   id: Int
@@ -97,9 +96,7 @@ type UserDrivingLicense {
 
   createdAt: String
   updatedAt: String
-
 }
-
 
 type UserEndorsement {
   id: Int
@@ -115,13 +112,11 @@ type UserEndorsed {
   updatedAt: String
 }
 
-
 type UserFollower {
   id: Int
   follower: User
   createdAt: String
   updatedAt: String
-
 }
 
 type UserFollowing {
@@ -148,7 +143,6 @@ type UserRemark {
   updatedAt: String
 }
 
-
 # Additional authentication service info
 type UserAuth {
   certificate: CertificateAuth
@@ -169,7 +163,6 @@ type FacebookAuth {
   displayName: String
   createdAt: String
   updatedAt: String
-
 }
 
 type GoogleAuth {
@@ -191,7 +184,6 @@ type LinkedInAuth {
   displayName: String
   createdAt: String
   updatedAt: String
-
 }
 
 extend type Query {
@@ -228,7 +220,6 @@ extend type Mutation {
   addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
   # Add Mobile for a user
   addUserMobile(input: AddMobileInput!): UserMobile!
-
 }
 
 # Input for ordering users
@@ -302,12 +293,37 @@ input EditUserInput {
   email: String!
   password: String
   profile: ProfileInput
+  addresses: [AddressInput]
+  portfolios: [PortfolioInput]
   auth: AuthInput
 }
 
 input ProfileInput {
   firstName: String
   lastName: String
+  about: String
+
+  rating: String
+  isVerified: Boolean
+  isAvailable: Boolean
+  flag: String
+  avatar: String
+  designation: String
+  mobile: String
+  website: String
+}
+
+input PortfolioInput {
+  platform: String
+  portfolioUrl: String
+}
+
+input AddressInput {
+  streetAddress1: String
+  streetAddress2: String
+  city: String
+  state: String
+  pinCode: String
 }
 
 # Input for Driving License Verification Mutation
@@ -323,7 +339,6 @@ input AddMobileInput {
   mobile: String!
   otp: Int
 }
-
 
 extend type Subscription {
   # Subscription for users list

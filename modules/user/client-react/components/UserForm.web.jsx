@@ -40,6 +40,14 @@ const createUserFormSchema = {
   ]
 };
 
+const isAdminFunction = role => {
+  if (role === "admin") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const updateUserFormSchema = {
   ...userFormSchema,
   password: minLength(settings.auth.password.minLength),
@@ -59,6 +67,7 @@ const UserForm = ({
   shouldDisplayActive
 }) => {
   const {
+    userRole,
     username,
     email,
     role,
@@ -70,9 +79,17 @@ const UserForm = ({
     addresses,
     portfolios
   } = values;
-  const isAdmin = shouldDisplayRole;
+
+  const isAdmin = isAdminFunction(userRole);
   return (
     <Form name="user" onSubmit={handleSubmit}>
+      <Field
+        name="profile.avatar"
+        component={RenderUpload}
+        type="text"
+        label={t("userEdit.form.field.avatar")}
+        value={profile.avatar}
+      />
       <Field
         name="username"
         component={RenderField}
@@ -87,7 +104,7 @@ const UserForm = ({
         label={t("userEdit.form.field.email")}
         value={email}
       />
-      {shouldDisplayRole && (
+      {isAdmin && (
         <Field
           name="role"
           component={RenderSelect}
@@ -99,7 +116,7 @@ const UserForm = ({
         </Field>
       )}
 
-      {shouldDisplayActive && (
+      {isAdmin && (
         <Field
           name="isActive"
           component={RenderCheckBox}
@@ -122,13 +139,7 @@ const UserForm = ({
         label={t("userEdit.form.field.lastName")}
         value={profile.lastName}
       />
-      <Field
-        name="profile.avatar"
-        component={RenderUpload}
-        type="text"
-        label={t("userEdit.form.field.avatar")}
-        value={profile.avatar}
-      />
+
       <Field
         name="profile.about"
         component={RenderField}
@@ -153,13 +164,15 @@ const UserForm = ({
         value={profile.mobile}
       />
 
-      <Field
-        name="profile.flag"
-        component={RenderField}
-        type="text"
-        label={t("userEdit.form.field.flag")}
-        value={profile.flag}
-      />
+      {isAdmin && (
+        <Field
+          name="profile.flag"
+          component={RenderField}
+          type="text"
+          label={t("userEdit.form.field.flag")}
+          value={profile.flag}
+        />
+      )}
 
       {isAdmin && (
         <Field
@@ -208,6 +221,7 @@ const UserForm = ({
               { key: "state", type: "text" },
               { key: "pinCode", type: "text" }
             ]}
+            buttonText="Add Address"
             arrayHelpers={arrayHelpers}
             values={addresses}
             name="addresses"
@@ -224,6 +238,7 @@ const UserForm = ({
               { key: "platform", type: "text" },
               { key: "portfolioUrl", type: "text" }
             ]}
+            buttonText="Add Portfolio"
             arrayHelpers={arrayHelpers}
             values={portfolios}
             name="portfolios"
@@ -298,7 +313,8 @@ const UserFormWithFormik = withFormik({
       addresses,
       portfolios
     } = values.initialValues;
-    console.log("initial", values.initialValues);
+
+    const userRole = values.userRole;
 
     function getAddresses(address) {
       return {
@@ -318,6 +334,7 @@ const UserFormWithFormik = withFormik({
     }
 
     return {
+      userRole: userRole,
       username: username,
       email: email,
       role: role || "user",

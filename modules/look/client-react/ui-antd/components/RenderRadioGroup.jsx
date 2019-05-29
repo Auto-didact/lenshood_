@@ -1,20 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 // Abstract Out Select & Form To Do
-import { Form, Radio } from 'antd';
+import { Form, Radio } from "antd";
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
-const RenderRadioGroup = ({ input, label, children, meta: { touched, error } }) => {
-  let validateStatus = '';
+const RenderRadioGroup = ({
+  input,
+  label,
+  children,
+  meta: { touched, error }
+}) => {
+  let validateStatus = "";
   if (error) {
-    validateStatus = 'error';
+    validateStatus = "error";
   }
-  const onBlur = e => {
-    console.log(e);
-  };
+  const onBlur = e => {};
   return (
     <FormItem label={label} validateStatus={validateStatus} help={error}>
       <RadioGroup {...input} onBlur={onBlur}>
