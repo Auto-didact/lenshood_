@@ -2,6 +2,7 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
 import { Listing, ListingReview, Identifier } from './sql';
+import withAuth from 'graphql-auth';
 
 interface Edges {
   cursor: number;
@@ -68,19 +69,24 @@ export default (pubsub: PubSub) => ({
   //   })
   // },
   Mutation: {
-    async addListing(obj: any, { input }: ListingInput, context: any) {
-      const id = await context.Listing.addListing(input);
-      const listing = await context.Listing.listing(id);
-      // publish for listing list
-      pubsub.publish(LISTINGS_SUBSCRIPTION, {
-        listingsUpdated: {
-          mutation: 'CREATED',
-          id,
-          node: listing
-        }
-      });
-      return listing;
-    },
+    addListing: withAuth(
+      (obj, { input }, { identity }) => {
+        return identity.id !== input.id ? ['listing:create'] : ['listing:create:self'];
+      },
+      async (obj: any, { input }: ListingInput, context: any) => {
+        const id = await context.Listing.addListing(input);
+        const listing = await context.Listing.listing(id);
+        // publish for listing list
+        pubsub.publish(LISTINGS_SUBSCRIPTION, {
+          listingsUpdated: {
+            mutation: 'CREATED',
+            id,
+            node: listing
+          }
+        });
+        return listing;
+      }
+    ),
     async deleteListing(obj: any, { id }: Identifier, context: any) {
       const listing = await context.Listing.listing(id);
       const isDeleted = await context.Listing.deleteListing(id);
