@@ -28,7 +28,7 @@ class VerificationModal extends React.Component {
     const { visible, loading } = this.state;
     return (
       <div>
-        <Button block type="dashed" onClick={this.showModal}>
+        <Button block type="dashed" onClick={this.showModal} disabled={this.props.vStatus}>
           {this.props.button}
           <VerificationIcon vStatus={this.props.vStatus} />
         </Button>

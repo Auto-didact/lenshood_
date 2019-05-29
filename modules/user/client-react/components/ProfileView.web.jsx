@@ -1,16 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
-import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
-import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, CardTitle, AccountLayout } from '@gqlapp/look-client-react';
-import { Row, Col, Divider, Icon } from 'antd';
-import UserVerifications from './verification/UserVerifications';
-import ProfileHead from './ProfileHead';
-import UsersCard from './UsersCard';
-import settings from '../../../../settings';
-import AddressCard from './AddressCard';
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { Link } from "react-router-dom";
+import { StripeSubscriptionProfile } from "@gqlapp/payments-client-react";
+import { translate } from "@gqlapp/i18n-client-react";
+import {
+  Card,
+  CardGroup,
+  CardText,
+  CardTitle,
+  AccountLayout
+} from "@gqlapp/look-client-react";
+import { Row, Col, Divider, Icon } from "antd";
+import UserVerifications from "./verification/UserVerifications";
+import ProfileHead from "./ProfileHead";
+import UsersCard from "./UsersCard";
+import settings from "../../../../settings";
+import AddressCard from "./AddressCard";
 
 // To Do Abstract Out
 
@@ -54,37 +60,36 @@ class ProfileView extends React.Component {
 
     function getFollowing(follow) {
       if (follow) {
-        console.log('there', follow);
-        return follow;
+        return follow.following.profile;
       } else {
         return null;
       }
     }
     return {
       endorsements: {
-        title: t('profile.card.group.endorsements.title'),
-        notFound: t('profile.card.group.endorsements.notFound'),
+        title: t("profile.card.group.endorsements.title"),
+        notFound: t("profile.card.group.endorsements.notFound"),
         list: endorsements.map(getEndorsements)
       },
       endorsed: {
-        title: t('profile.card.group.endorsed.title'),
-        notFound: t('profile.card.group.endorsed.notFound'),
+        title: t("profile.card.group.endorsed.title"),
+        notFound: t("profile.card.group.endorsed.notFound"),
         list: endorsed.map(getEndorsed)
       },
       followers: {
-        title: t('profile.card.group.followers.title'),
-        notFound: t('profile.card.group.followers.notFound'),
+        title: t("profile.card.group.followers.title"),
+        notFound: t("profile.card.group.followers.notFound"),
         list: followers.map(getFollowers)
       },
       following: {
-        title: t('profile.card.group.following.title'),
-        notFound: t('profile.card.group.following.notFound'),
+        title: t("profile.card.group.following.title"),
+        notFound: t("profile.card.group.following.notFound"),
         list: following.map(getFollowing)
       },
       profileHead: {
-        rating: t('profile.card.group.rating'),
-        acceptanceRate: t('profile.card.group.acceptanceRate'),
-        responseTime: t('profile.card.group.responseTime')
+        rating: t("profile.card.group.rating"),
+        acceptanceRate: t("profile.card.group.acceptanceRate"),
+        responseTime: t("profile.card.group.responseTime")
       }
     };
   };
@@ -92,11 +97,11 @@ class ProfileView extends React.Component {
   renderMetaData = t => {
     return (
       <Helmet
-        title={`${settings.app.name} - ${t('profile.title')}`}
+        title={`${settings.app.name} - ${t("profile.title")}`}
         meta={[
           {
-            name: 'description',
-            content: `${settings.app.name} - ${t('profile.meta')}`
+            name: "description",
+            content: `${settings.app.name} - ${t("profile.meta")}`
           }
         ]}
       />
@@ -110,90 +115,137 @@ class ProfileView extends React.Component {
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">
-          <div className="text-center">{t('profile.loadMsg')}</div>
+          <div className="text-center">{t("profile.loadMsg")}</div>
         </AccountLayout>
       );
     } else if (currentUser) {
-      // console.log(currentUser);
+      console.log(currentUser);
       return (
         <AccountLayout select="/profile">
           <Row gutter={5}>
             <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
               <Card>
-                <CardTitle>{t('profile.card.title')}</CardTitle>
+                <CardTitle>{t("profile.card.title")}</CardTitle>
+                <h4 align="right">
+                  <Link
+                    className="mt-2 btn user-link"
+                    to={`/users/${currentUser.id}`}
+                  >
+                    <Icon type="edit" />
+                    {t("profile.editProfileText")}
+                  </Link>
+                </h4>
                 <Divider />
-                <ProfileHead profile={currentUser.profile} description={this.usersCardData().profileHead} />
+                <ProfileHead
+                  profile={currentUser.profile && currentUser.profile}
+                  description={this.usersCardData().profileHead}
+                />
                 <Divider />
                 <Row>
                   <Col span={12}>
                     <div>
-                      <h2>{t('profile.card.group.name')}:</h2>
+                      <h2>{t("profile.card.group.name")}:</h2>
                       <CardText>{currentUser.username}</CardText>
                     </div>
-                    {currentUser.profile && currentUser.profile.about && (
-                      <div>
-                        <h2>{t('profile.card.group.about')}:</h2>
-                        <CardText>{currentUser.profile.about}</CardText>
-                      </div>
-                    )}
-                    <h2>{t('profile.card.group.role')}:</h2>
-                    <CardText>{currentUser.role}</CardText>
+                    <div>
+                      <h2>{t("profile.card.group.about")}:</h2>
+
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.about
+                          ? currentUser.profile.about
+                          : "Not Provided"}
+                      </CardText>
+                    </div>
+
+                    <div>
+                      <h2>{t("profile.card.group.role")}:</h2>
+
+                      <CardText>
+                        {currentUser.role ? currentUser.role : "Not Provided"}
+                      </CardText>
+                    </div>
 
                     {/* Portfolios */}
-
-                    <h2>{t('profile.card.group.portfolios.title')}</h2>
-                    {currentUser.portfolios.map((portfolio, key) => (
-                      <h3>
-                        {t('profile.card.group.portfolios.subtitle')} : {key + 1}
-                      </h3>
-                    ))}
+                    <h2>{t("profile.card.group.portfolios.title")}</h2>
+                    {currentUser.portfolios &&
+                    currentUser.portfolios.length !== 0
+                      ? currentUser.portfolios.map((portfolio, key) => (
+                          <div key={key}>
+                            <CardText>
+                              {portfolio.platform} : {portfolio.portfolioUrl}
+                            </CardText>
+                          </div>
+                        ))
+                      : "Not Provided"}
                   </Col>
                   <Col span={12}>
-                    {currentUser.profile && currentUser.profile.website && (
-                      <div>
-                        <Icon type="link" />
+                    <div>
+                      <Icon type="link" />
 
-                        <CardText>{currentUser.profile.website}</CardText>
-                      </div>
-                    )}
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.website
+                          ? currentUser.profile.website
+                          : "Not Provided"}
+                      </CardText>
+                    </div>
 
-                    <h2>{t('profile.card.group.email')}:</h2>
-                    <CardText>{currentUser.email}</CardText>
+                    <div>
+                      <h2>{t("profile.card.group.email")}:</h2>
+                      <CardText>
+                        {currentUser.email ? currentUser.email : "Not Provided"}
+                      </CardText>
+                    </div>
 
-                    {currentUser.profile && currentUser.profile.mobile && (
-                      <div>
-                        <h2>
-                          <Icon type="contacts" />
-                        </h2>
-                        <CardText>{currentUser.profile.mobile}</CardText>
-                      </div>
-                    )}
+                    <div>
+                      <h2>
+                        <Icon type="contacts" />
+                      </h2>
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.mobile
+                          ? currentUser.profile.mobile
+                          : "Not Provided"}
+                      </CardText>
+                    </div>
                   </Col>
                 </Row>
                 <Divider />
-                <h2>{t('profile.card.group.addresses.title')}</h2>
-
+                <h2>{t("profile.card.group.addresses.title")}</h2>
                 <Row gutter={10}>
-                  {currentUser.addresses.map((address, key) => (
-                    <Col xs={{ span: 24 }} md={{ span: 12 }}>
-                      <AddressCard
-                        address={address}
-                        subTitle={t('profile.card.group.addresses.subTitle')}
-                        index={key}
-                      />
-                    </Col>
-                  ))}
-                  {/* Credit card info (Stripe subscription module)*/}
-                  {settings.stripe.subscription.enabled &&
-                    settings.stripe.subscription.publicKey &&
-                    currentUser.role === 'user' && <StripeSubscriptionProfile />}
+                  {currentUser.addresses && currentUser.addresses.length !== 0
+                    ? currentUser.addresses.map((address, key) => (
+                        <Col xs={{ span: 24 }} md={{ span: 12 }} key={key}>
+                          <AddressCard
+                            address={address}
+                            subTitle={t(
+                              "profile.card.group.addresses.subTitle"
+                            )}
+                            index={key}
+                          />
+                        </Col>
+                      ))
+                    : "Not Provided"}
                 </Row>
+
+                {/* Credit card info (Stripe subscription module)*/}
+                {settings.stripe.subscription.enabled &&
+                  settings.stripe.subscription.publicKey &&
+                  currentUser.role === "user" && <StripeSubscriptionProfile />}
               </Card>
             </Col>
             <Col xs={{ span: 24 }} lg={{ span: 8 }}>
-              <Row gutter={10} type="flex" justify="space-around" align="middle">
+              <Row
+                gutter={10}
+                type="flex"
+                justify="space-around"
+                align="middle"
+              >
                 {/*Verification*/}
-                <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 24 }} style={{ height: '100%' }}>
+                <Col
+                  xs={{ span: 24 }}
+                  md={{ span: 8 }}
+                  lg={{ span: 24 }}
+                  style={{ height: "100%" }}
+                >
                   <UserVerifications data={currentUser.verification} />
                 </Col>
 
@@ -220,15 +272,12 @@ class ProfileView extends React.Component {
               </Row>
             </Col>
           </Row>
-          <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
-            {t('profile.editProfileText')}
-          </Link>
         </AccountLayout>
       );
     } else {
       return (
         <AccountLayout>
-          <h2>{t('profile.errorMsg')}</h2>
+          <h2>{t("profile.errorMsg")}</h2>
         </AccountLayout>
       );
     }
@@ -240,4 +289,4 @@ ProfileView.propTypes = {
   currentUser: PropTypes.object,
   t: PropTypes.func
 };
-export default translate('user')(ProfileView);
+export default translate("user")(ProfileView);
