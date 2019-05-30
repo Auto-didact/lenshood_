@@ -3,6 +3,7 @@ fragment ListingCard on Listing {
   gearCategory
   gearSubcategory
   createdAt
+
   listingImages {
     id
     imageUrl
@@ -10,5 +11,15 @@ fragment ListingCard on Listing {
   listingRental {
     id
     perDay
+  }
+  user {
+    id
+    username
+    profile {
+      avatar
+      firstName
+      lastName
+      rating
+    }
   }
 }
