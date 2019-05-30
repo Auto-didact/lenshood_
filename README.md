@@ -12,7 +12,7 @@
 
 ## Official Website
 
-Visit [www.lenshood.in] to learn about Lenshood. You can also test a [lenshood-demo.herokuapp.com] deployed on 
+Visit [www.lenshood.in] to learn about Lenshood. You can also test a [www.lenshood-demo.herokuapp.com] deployed on 
 Heroku.
 
 ## Description
