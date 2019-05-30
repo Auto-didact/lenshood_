@@ -99,15 +99,15 @@ Here's a demo of Apollo Universal Starter Kit in action:
 You can try out the latest version of Apollo Universal Starter Kit [deployed on Heroku]. If you want to see the mobile
 React Native application in action, check out [this demo on Expo.io].
 
-## First Run of Apollo Universal Starter Kit
+## First Run of lenshood-dev
 
 Verify if you use Node.js 6.x or higher (Node.js ^10 is recommended) before running the starter kit.
 
 1. Clone the stable branch of Apollo Universal Starter Kit.
 
 ```
-git clone -b stable https://github.com/sysgears/apollo-universal-starter-kit.git
-cd apollo-universal-starter-kit
+git clone -b https://github.com/beingtmk/lenshood-dev.git
+cd lenshood-dev
 ```
 
 2. Install the dependencies. Make sure that you use Yarn 1.0.0 or higher.
