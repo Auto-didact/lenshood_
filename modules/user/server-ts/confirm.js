@@ -7,7 +7,9 @@ export default async (req, res, next) => {
     const token = Buffer.from(req.params.token, 'base64').toString();
     const result = jwt.verify(token, settings.auth.secret);
     await User.updateActive(result.identity.id, true);
-
+    await User.updateUserVerification(result.identity.id, {
+      is_email_verified: true
+    });
     res.redirect('/login');
   } catch (e) {
     res.send('error');
