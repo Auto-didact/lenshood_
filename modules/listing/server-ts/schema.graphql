@@ -84,6 +84,7 @@ type ListingReview {
 extend type Query {
   listings(limit: Int, after: Int): Listings
   listing(id: Int!): Listing
+  userListings(userId: Int!): [Listing]
 }
 
 extend type Mutation {
@@ -133,6 +134,7 @@ input ListingContentInput {
   serial: String!
 }
 input AddListingInput {
+  userId: Int
   gearCategory: String!
   gearSubcategory: String!
   description: String!
@@ -147,6 +149,7 @@ input AddListingInput {
 # Input for editListing Mutation
 input EditListingInput {
   id: Int!
+  userId: Int!
   gearCategory: String
   gearSubcategory: String
   description: String

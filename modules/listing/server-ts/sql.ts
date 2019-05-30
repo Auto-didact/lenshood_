@@ -32,6 +32,7 @@ interface ListingContent {
   serial: string;
 }
 export interface Listing {
+  userId: number;
   gearCategory: string;
   gearSubcategory: string;
   description: string;
@@ -150,6 +151,17 @@ export default class ListingDAO extends Model {
     const res = camelizeKeys(
       await ListingDAO.query()
         .findById(id)
+        .eager(eager)
+        .orderBy('id', 'desc')
+    );
+    // console.log(query[0]);
+    return res;
+  }
+
+  public async userListings(userId: number) {
+    const res = camelizeKeys(
+      await ListingDAO.query()
+        .where('user_id', userId)
         .eager(eager)
         .orderBy('id', 'desc')
     );
