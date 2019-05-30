@@ -10,11 +10,17 @@ const { Meta } = Card;
 class RelatedCard extends Component {
   render() {
     // To Do: check if it is not present then set as default value
+
     let listing = this.props.relatedList;
+
     const listing_id = listing.id;
-    const listing_img = listing.listingImages[0].imageUrl;
-    const rent_per_day = listing.listingRental.perDay;
-    const title = listing.gearCategory;
+    const listing_img =
+      (listing.listingImages.length !== 0 &&
+        listing.listingImages[0].imageUrl) ||
+      "https://cdn.pixabay.com/photo/2013/11/28/10/02/photo-camera-219958_960_720.jpg";
+
+    const rent_per_day = listing.listingRental.perDay || "Not Provided";
+    const title = listing.gearCategory || "Not Provided";
     const seller = "Ravi Kishan(To Do)";
     const rating = 4;
 
