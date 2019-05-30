@@ -61,6 +61,9 @@ export default (pubsub: PubSub) => ({
     },
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
+    },
+    userListings(obj: any, { userId }: any, context: any) {
+      return context.Listing.userListings(userId);
     }
   },
   // Listing: {
@@ -69,24 +72,20 @@ export default (pubsub: PubSub) => ({
   //   })
   // },
   Mutation: {
-    addListing: withAuth(
-      (obj, { input }, { identity }) => {
-        return identity.id !== input.id ? ['listing:create'] : ['listing:create:self'];
-      },
-      async (obj: any, { input }: ListingInput, context: any) => {
-        const id = await context.Listing.addListing(input);
-        const listing = await context.Listing.listing(id);
-        // publish for listing list
-        pubsub.publish(LISTINGS_SUBSCRIPTION, {
-          listingsUpdated: {
-            mutation: 'CREATED',
-            id,
-            node: listing
-          }
-        });
-        return listing;
-      }
-    ),
+    async addListing(obj: any, { input }: ListingInput, context: any) {
+      input.userId = context.identity.id;
+      const id = await context.Listing.addListing(input);
+      const listing = await context.Listing.listing(id);
+      // publish for listing list
+      pubsub.publish(LISTINGS_SUBSCRIPTION, {
+        listingsUpdated: {
+          mutation: 'CREATED',
+          id,
+          node: listing
+        }
+      });
+      return listing;
+    },
     async deleteListing(obj: any, { id }: Identifier, context: any) {
       const listing = await context.Listing.listing(id);
       const isDeleted = await context.Listing.deleteListing(id);
