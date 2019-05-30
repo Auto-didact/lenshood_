@@ -1,48 +1,53 @@
-import React, { Component } from 'react';
-import { Layout, Row, Col, Breadcrumb } from 'antd';
-import { AccountLayout } from '@gqlapp/look-client-react';
+import React, { Component } from "react";
+
 // import './resources/listingCatalogue.css';
-import MyList from './components/MyList';
-import AccDetailsMenu from './components/AccDetailsMenu';
-import naruto from './resources/naruto.jpg';
-import naruto2 from './resources/naruto2.jpg';
-import naruto3 from './resources/naruto3.jpg';
-import naruto4 from './resources/naruto4.jpg';
+
+import MyListingsView from "../components/MyListingsView";
+
+import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
 
 class MyListings extends Component {
   state = {
-    products: [
+    listings: [
       {
-        name: 'Blah blah bleh',
-        rent: 1200,
+        description: "Blah blah bleh",
+        listingRental: {
+          perDay: 1200
+        },
         image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 4,
         reviews: 7,
-        nature: 'On Rent'
+        status: ALL
       },
       {
-        name: 'Blah lah bleh',
-        rent: 120,
+        description: "Blah lah bleh",
+        listingRental: {
+          perDay: 120
+        },
         image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3.7,
         reviews: 12,
-        nature: 'On Shelf'
+        status: ONSHELF
       },
       {
-        name: 'fdgbdfcgmbkmg;ngvjnpcghn',
-        rent: 200,
+        description: "fdgbdfcgmbkmg;ngvjnpcghn",
+        listingRental: {
+          perDay: 200
+        },
         image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3,
         reviews: 8,
-        nature: 'On Rent'
+        status: "On Rent"
       },
       {
-        name: 'Blah lah bleh',
-        rent: 120,
+        description: "Blah lah bleh",
+        listingRental: {
+          perDay: 120
+        },
         image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
         rating: 3.9,
         reviews: 25,
-        nature: 'On Rent'
+        status: ONRENT
       }
     ]
   };
@@ -64,9 +69,7 @@ class MyListings extends Component {
       //     </Row>
       //   </Layout>
       // </div>
-      <AccountLayout select="/my-listings">
-        <MyList products={this.state.products} />
-      </AccountLayout>
+      <MyListingsView listings={this.state.listings} />
     );
   }
 }

@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
+import ListingForm from './ListingForm';
 
-import ListingForm from "./ListingForm";
-import settings from "../../../../settings";
+import settings from '../../../../settings';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout } from '@gqlapp/look-client-react';
 
 const onSubmit = addListing => values => {
   addListing(values);
@@ -15,11 +15,11 @@ const onSubmit = addListing => values => {
 const ListingAddView = ({ addListing, t, currentUser }) => {
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("listing.title")}`}
+      title={`${settings.app.name} - ${t('listing.title')}`}
       meta={[
         {
-          name: "description",
-          content: t("listing.meta")
+          name: 'description',
+          content: t('listing.meta')
         }
       ]}
     />
@@ -42,4 +42,4 @@ ListingAddView.propTypes = {
   currentUser: PropTypes.object
 };
 
-export default translate("listing")(ListingAddView);
+export default translate('listing')(ListingAddView);

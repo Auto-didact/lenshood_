@@ -1,27 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout } from '@gqlapp/look-client-react';
 
-import ListingForm from "./ListingForm";
-import settings from "../../../../settings";
+import ListingForm from './ListingForm';
+import settings from '../../../../settings';
 
 const onSubmit = (listing, editListing) => values => {
-  values["id"] = listing.id;
+  values['id'] = listing.id;
 
   editListing(values);
 };
 
-const ListingEditView = ({
-  loading,
-  listing,
-  location,
-  editListing,
-  t,
-  currentUser
-}) => {
+const ListingEditView = ({ loading, listing, location, editListing, t, currentUser }) => {
   let listingObj = listing;
   // if new listing was just added read it from router
   if (!listingObj && location.state) {
@@ -30,11 +23,11 @@ const ListingEditView = ({
 
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("listing.title")}`}
+      title={`${settings.app.name} - ${t('listing.title')}`}
       meta={[
         {
-          name: "description",
-          content: t("listing.meta")
+          name: 'description',
+          content: t('listing.meta')
         }
       ]}
     />
@@ -44,7 +37,7 @@ const ListingEditView = ({
     return (
       <PageLayout>
         {renderMetaData()}
-        <div className="text-center">{t("listing.loadMsg")}</div>
+        <div className="text-center">{t('listing.loadMsg')}</div>
       </PageLayout>
     );
   } else {
@@ -57,11 +50,7 @@ const ListingEditView = ({
         <h2>
           {t(`listing.label.edit`)} {t('listing.label.listing')}
         </h2> */}
-        <ListingForm
-          onSubmit={onSubmit(listingObj, editListing)}
-          listing={listing}
-          currentUser={currentUser}
-        />
+        <ListingForm onSubmit={onSubmit(listingObj, editListing)} listing={listing} currentUser={currentUser} />
       </PageLayout>
     );
   }
@@ -75,4 +64,4 @@ ListingEditView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("listing")(ListingEditView);
+export default translate('listing')(ListingEditView);
