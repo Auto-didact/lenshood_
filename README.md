@@ -17,7 +17,7 @@ Heroku.
 
 ## Description
 
-This project is based on Appollo Universal Starter Kit
+This project is based on Apollo Universal Starter Kit
 
 Apollo Universal Starter Kit is an SEO-friendly, fully configured, modular starter project for developing [Universal
 JavaScript] applications. You can use our kit to create your applications in JavaScript or TypeScript for all major
@@ -222,102 +222,3 @@ Modules
 * [Stripe Payments]
 * [Mobile Chat]
 
-## Support
-
-### Community Support
-
-* [Gitter channel] &ndash; ask questions, find answers, and participate in general discussions
-* [GitHub issues] &ndash; submit issues and send feature requests
-* [Wiki] &ndash; read documentation for the usage scenarios of the starter kit; edit the documentation
-* [FAQ] &ndash; consult the Frequently Asked Questions section in Wiki
-
-### Commercial Support
-
-The [SysGears] team provides comprehensive support for commercial partners. Our team can guide you when you're using
-Apollo Universal Starter Kit to build your application.
-
-You can contact us via [Skype] or email [info@sysgears.com](mailto:info@sysgears.com).
-
-## Contributors
-
-Thanks a lot to all the wonderful people who contributed to Apollo Universal Starter Kit!
-
-<a href="https://github.com/sysgears/apollo-universal-starter-kit/graphs/contributors"><img src="https://opencollective.com/apollo-universal-starter-kit/contributors.svg?width=890" /></a>
-
-## Backers
-
-Thanks a lot to all our backers!
-
-<a href="https://opencollective.com/apollo-universal-starter-kit#backers" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/backers.svg?width=890"></a>
-
-## Sponsors
-
-You can support this project by becoming a sponsor! Your logo will show up here with a link to your website.
-
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/0/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/1/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/2/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/3/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/4/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/5/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/6/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/7/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/8/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/9/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/9/avatar.svg"></a>
-
-## License
-
-Copyright &copy; 2016, 2017 [SysGears INC]. This source code is licensed under the [MIT] license.
-
-[our chat]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
-[mit]: LICENSE
-[universal javascript]: https://medium.com/@mjackson/universal-javascript-4761051b7ae9
-[apollo]: http://www.apollostack.com
-[graphql]: http://graphql.org
-[jwt]: https://jwt.io
-[react]: https://reactjs.org/
-[angular]: https://angular.io/
-[react native]: https://facebook.github.io/react-native/
-[expo]: https://expo.io/
-[knex.js]: http://knexjs.org
-[express]: http://expressjs.com
-[typescript]: https://www.typescriptlang.org/
-[twitter bootstrap]: http://getbootstrap.com
-[ant design]: https://ant.design
-[ant design mobile]: https://mobile.ant.design
-[nativebase]: https://nativebase.io
-[apollokit.org]: https://apollokit.org
-[demo application]: https://apollo-universal-starter-kit.herokuapp.com
-[spinjs]: https://github.com/sysgears/spinjs
-[react native gifted chat]: https://github.com/FaridSafi/react-native-gifted-chat
-[deployed on heroku]: https://apollo-universal-starter-kit.herokuapp.com
-[this demo on Expo.io]: https://expo.io/@sysgears/apollo-universal-starter-kit
-[stable]: https://github.com/sysgears/apollo-universal-starter-kit/tree/stable
-[master]: https://github.com/sysgears/apollo-universal-starter-kit/tree/master
-[single]: https://github.com/sysgears/apollo-universal-starter-kit/tree/single
-[apollo1]: https://github.com/sysgears/apollo-universal-starter-kit/tree/apollo1
-[cli-crud]: https://github.com/sysgears/apollo-universal-starter-kit/tree/cli-crud
-[sqlite installation guide]: http://www.sqlitetutorial.net/download-install-sqlite/
-[http://localhost:3000]: http://localhost:3000
-[http://localhost:8080]: http://localhost:8080
-[getting started]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md
-[installing and running apollo universal starter kit]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#installing-and-running-apollo-universal-starter-kit
-[running the mobile app with expo]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#running-the-mobile-app-with-expo
-[running the starter kit in a mobile simulator]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#running-the-starter-kit-in-a-mobile-simulator
-[running apollo universal starter kit with docker]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/docker.md
-[deploying apollo universal starter kit to production]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/deployment.md
-[configuring apollo universal starter kit]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/configuration.md
-[features and modules]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/featuresAndModules.md
-[writing code]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/writingCode.md
-[apollo universal starter kit cli]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/tools/cli.md
-[available scripts]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/yarnScripts.md
-[frequently asked questions]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/faq.md
-[stripe payments]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/modules/stripeSubscription.md
-[mobile chat]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/modules/mobileChat.md
-[sysgears inc]: http://sysgears.com
-[gitter channel]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
-[github issues]: https://github.com/sysgears/apollo-universal-starter-kit/issues
-[wiki]: https://github.com/sysgears/apollo-universal-starter-kit/wiki
-[faq]: https://github.com/sysgears/apollo-universal-starter-kit/wiki/Frequently-Asked-Questions
-[sysgears]: https://sysgears.com
-[skype]: http://hatscripts.com/addskype?sysgears
