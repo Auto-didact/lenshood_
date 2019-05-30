@@ -84,7 +84,7 @@ type ListingReview {
 extend type Query {
   listings(limit: Int, after: Int): Listings
   listing(id: Int!): Listing
-  userListings(userId: Int!): [Listing]
+  userListings(userId: Int): [Listing]
 }
 
 extend type Mutation {
