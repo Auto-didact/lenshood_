@@ -1,6 +1,6 @@
-<p align="center"><a href="#"><img width="150" src="https://rawgit.com/sysgears/apollo-universal-starter-kit/master/logo.svg"></a></p>
 
-# Apollo Universal Starter Kit
+
+# Lenshood
 
 [![Backers on Open Collective](https://opencollective.com/apollo-universal-starter-kit/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/apollo-universal-starter-kit/sponsors/badge.svg)](#sponsors)
@@ -13,10 +13,12 @@
 
 ## Official Website
 
-Visit [apollokit.org] to learn about Apollo Universal Starter Kit. You can also test a [demo application] deployed on 
+Visit [www.lenshood.in] to learn about Lenshood. You can also test a [lenshood-demo.herokuapp.com] deployed on 
 Heroku.
 
 ## Description
+
+This project is based on Appollo Universal Starter Kit
 
 ![](Technologies.png)
 
@@ -36,11 +38,9 @@ great possibilities for styling for your web and mobile applications.
 ## Table of Contents
 
 * [Overview](#overview)
-    * [Why Use Apollo Universal Starter Kit](#why-use-apollo-universal-starter-kit)
     * [Concept](#concept)
     * [Architecture and Implemented Modules](#architecture-and-implemented-modules)
 * [Demo](#demo)
-* [Branches](#branches)
 * [First Run of Apollo Universal Starter Kit](#first-run-of-apollo-universal-starter-kit)
 * [Project Structure](#project-structure)
 * [Apollo Universal Starter Kit Documentation](#apollo-universal-starter-kit-documentation)
@@ -53,26 +53,6 @@ great possibilities for styling for your web and mobile applications.
 * [License Info](#license)
 
 ## Overview
-
-### Why Use Apollo Universal Starter Kit
-
-#### I am a Developer
-
-* Better productivity thanks to live reload and (partial) hot code reload
-* A fractal modular application architecture that's easy to support and extend
-* The possibility to create modules in TypeScript _and_ JavaScript at the same time
-* No need to develop [typical features](#architecture-and-implemented-modules) for your applications
-* Zero project configuration thanks to [SpinJS]
-
-#### I am a Project Manager
-
-* Your application will work faster thanks to GraphQL
-* Your team will be able to reuse the code for all the platforms
-* Your team can create client, server, and mobile JavaScript applications
-* Your application will be easier to support and evolve thanks to the fractal modular architecture
-* Your application will be based on a widely-used JavaScript ecosystem (it's easy to find JS developers)
-* Your team can develop new features straightaway instead of creating the basic features
-* Your application will be integrated with Stripe, one of the top payment processors
 
 ### Concept
 
@@ -129,16 +109,6 @@ Here's a demo of Apollo Universal Starter Kit in action:
 You can try out the latest version of Apollo Universal Starter Kit [deployed on Heroku]. If you want to see the mobile
 React Native application in action, check out [this demo on Expo.io].
 
-## Branches
-
-| Branch       | Description                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| [stable]     | The latest stable version of the kit (recommended)                  |
-| [master]     | The kit version with the latest features. May not work consistently |
-| [single]     | A single-package Apollo v2 version of the kit                       |
-| [apollo1]    | The Apollo v1 version of the kit                                    |
-| [cli-crud]   | This kit version features a CLI to generate CRUD implementations    |
-
 ## First Run of Apollo Universal Starter Kit
 
 Verify if you use Node.js 6.x or higher (Node.js ^10 is recommended) before running the starter kit.
@@ -189,7 +159,7 @@ The structure is _fractal_ meaning the functionality is grouped primarily by fea
 current structure isn't prescriptive, and you can change it however you like.
 
 ```
-apollo-universal-starter-kit
+lenshood-dev
 ├── config                      # Various application configurations
 ├── docs                        # Documentation
 ├── node_modules                # Global Node.js modules
