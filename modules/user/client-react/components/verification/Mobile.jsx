@@ -7,10 +7,13 @@ const Mobile = ({ mobile }) => {
     return <h4>Unavailable</h4>;
   } else {
     return (
-      <Card title="Your Mobile Number">
+      <>
+        <h2>Your Mobile</h2>
         <h4>{mobile.mobile}</h4>
-        <h4>Verfication Status: {mobile.isVerified}</h4>
-      </Card>
+        <h4>
+          Verfication Status: {mobile && mobile.isVerfied ? "Done" : "Not Done"}
+        </h4>
+      </>
     );
   }
 };
