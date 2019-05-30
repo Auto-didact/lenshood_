@@ -41,7 +41,6 @@ great possibilities for styling for your web and mobile applications.
 * [First Run of Apollo Universal Starter Kit](#first-run-of-apollo-universal-starter-kit)
 * [Project Structure](#project-structure)
 * [Apollo Universal Starter Kit Documentation](#apollo-universal-starter-kit-documentation)
-* [Links](#links)
 
 ## Overview
 
@@ -216,7 +215,6 @@ Modules
 * [Stripe Payments]
 * [Mobile Chat]
 
-## Links
 [our chat]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
 [mit]: LICENSE
 [universal javascript]: https://medium.com/@mjackson/universal-javascript-4761051b7ae9
