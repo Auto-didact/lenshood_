@@ -374,6 +374,7 @@ export default pubsub => ({
             const patched = await User.patchProfile(user.id, {
               mobile: mobile.mobile
             });
+            console.log(patched);
           } else {
             mobile.error = 'Wrong OTP';
           }
