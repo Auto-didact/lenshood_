@@ -14,6 +14,7 @@ export async function seed(knex, Promise) {
   await Promise.all(
     [...Array(20).keys()].map(async ii => {
       const listing = await returnId(knex('listing')).insert({
+        user_id: 1,
         gear_category: `Listing gear_category ${ii + 1}`,
         gear_subcategory: `Listing gear_subcategory ${ii + 1}`,
         description: `Listing description ${ii + 1}`
@@ -29,7 +30,6 @@ export async function seed(knex, Promise) {
       await returnId(knex('listing_detail')).insert({
         listing_id: listing[0],
         condition: `Listing Condition ${ii + 1}`,
-        repair_history: `Listing repair_history ${ii + 1}`,
         age: `Listing age ${ii + 1}`
       });
       await returnId(knex('listing_damage')).insert({

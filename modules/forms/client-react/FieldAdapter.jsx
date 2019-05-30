@@ -26,14 +26,18 @@ class FieldAdapter extends Component {
   }
 
   // To Do - ReConfirm that this works
-  onChange = e => {
+  onChange = (e, secondArg) => {
     const { onChange } = this.props;
-    // console.log(e.target.type);
     if (onChange) {
       onChange(e);
+    }
+    if (e._isAMomentObject && secondArg) {
+      this.props.formik.setFieldValue(this.props.name, secondArg);
     } else if (isString(e)) {
       // for Option Field
       this.props.formik.setFieldValue(this.props.name, e);
+    } else if (e.target.type == 'radio') {
+      this.props.formik.setFieldValue(e.target.name, e.target.value);
     } else if (e.target.checked) {
       this.props.formik.setFieldValue(e.target.name, e.target.checked);
     } else if (e.target.type == 'number') {
@@ -51,7 +55,9 @@ class FieldAdapter extends Component {
       if (PLATFORM === 'mobile') {
         formik.setFieldTouched(name, true);
       } else {
-        formik.handleBlur(e);
+        // console.log(name);
+        // formik.handleBlur(e);
+        formik.setFieldTouched(name, true);
       }
     }
   };

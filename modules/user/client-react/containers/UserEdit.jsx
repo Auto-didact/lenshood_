@@ -15,14 +15,15 @@ const UserEdit = props => {
   const { user, editUser, t, history, navigation } = props;
 
   const onSubmit = async values => {
-    let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'password']);
-
-    userValues['profile'] = pick(values.profile, ['firstName', 'lastName']);
+    let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'profile', 'addresses', 'portfolios']);
+    //
 
     userValues = UserFormatter.trimExtraSpaces(userValues);
 
     if (settings.auth.certificate.enabled) {
-      userValues['auth'] = { certificate: pick(values.auth.certificate, 'serial') };
+      userValues['auth'] = {
+        certificate: pick(values.auth.certificate, 'serial')
+      };
     }
 
     try {
@@ -31,13 +32,13 @@ const UserEdit = props => {
       throw new FormError(t('userEdit.errorMsg'), e);
     }
 
-    if (history) {
-      return history.goBack();
-    }
-
-    if (navigation) {
-      return navigation.goBack();
-    }
+    // if (history) {
+    //   return history.goBack();
+    // }
+    //
+    // if (navigation) {
+    //   return navigation.goBack();
+    // }
   };
 
   return <UserEditView onSubmit={onSubmit} {...props} />;
@@ -67,7 +68,7 @@ export default compose(
       };
     },
     props({ data: { loading, user } }) {
-      const userPayload = user ? { user: user.user } : {};
+      const userPayload = user ? { user: user } : {};
       return {
         loading,
         ...userPayload

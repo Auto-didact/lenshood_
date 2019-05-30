@@ -61,7 +61,64 @@
         "name": "User Name",
         "email": "Email",
         "role": "Role",
-        "full": "Full Name"
+        "full": "Full Name",
+        "responseTime": "Response Time",
+        "acceptanceRate": "Acceptance Rate",
+        "designation": "Designation",
+        "about": "About",
+        "website": "Website",
+        "mobile": "Mobile",
+
+        "isAvailable": "Availability Status",
+        "rating": "Rating",
+        "flag": "Flag",
+        "verification": {
+          "title": "Verification Status",
+          "address": "Address",
+          "email": "Email",
+          "id": "ID",
+          "mobile": "Mobile",
+          "isReferred": "Referred"
+        },
+        "addresses": {
+          "title": "Addresses",
+          "subTitle": "Address",
+          "city": "City",
+          "pinCode": "Pin Code",
+          "state": "State",
+          "streetAddress": "Street Address"
+        },
+        "portfolios": {
+          "title": "Portfolios",
+          "subtitle": "Portfolio"
+        },
+        "endorsements": {
+          "title": "Endorsements",
+          "subTitle": "Endorsement",
+          "notFound": "No Endorsements Found"
+        },
+        "endorsed": {
+          "title": "Endorsed",
+          "subTitle": "Endorsee",
+          "notFound": "No Endorsee Found"
+        },
+        "followers": {
+          "title": "Followers",
+          "notFound": "No Followers Found"
+        },
+        "following": {
+          "title": "Following",
+          "notFound": "No Following Found"
+        },
+        "referedBy": {
+          "id": "ID",
+          "email": "Email",
+          "profile": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "mobile": "Mobile"
+          }
+        }
       },
       "fldEmail": "Email",
       "btnSubmit": "Send instructions"
@@ -110,6 +167,17 @@
       "field": {
         "name": "Username",
         "email": "Email",
+        "avatar": "Avatar",
+        "about": "About",
+        "designation": "Designation",
+        "mobile": "Mobile",
+        "flag": "Flag",
+        "rating": "Rating",
+        "website": "Website",
+        "available": "Availability",
+        "isverified": "Is Verified",
+        "addresses": "Addresses",
+        "portfolios": "Portfolios",
         "role": {
           "label": "Role",
           "user": "user",
@@ -171,7 +239,32 @@
       "delete": "Delete"
     }
   },
-
+  "DL": {
+    "field": {
+      "dlId": "Driving Licence Number",
+      "dob": "Date of Birth"
+    },
+    "btn": {
+      "submit": "Submit"
+    }
+  },
+  "mobileOTP": {
+    "field": {
+      "mobile": "Mobile Number",
+      "otp": "One Time Password"
+    },
+    "btn": {
+      "submit": "Submit"
+    }
+  },
+  "email": {
+    "field": {
+      "email": "Email"
+    },
+    "btn": {
+      "submit": "Submit"
+    }
+  },
   "nativeMock": "Hello, ",
   "mobile": {
     "login": {

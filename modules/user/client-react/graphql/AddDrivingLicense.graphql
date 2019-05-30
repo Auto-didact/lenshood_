@@ -1,0 +1,6 @@
+#import "./DrivingLicense.graphql"
+mutation addUserDrivingLicense($input: AddDrivingLicenseInput!) {
+  addUserDrivingLicense(input: $input) {
+    ...UserDrivingLicense
+  }
+}

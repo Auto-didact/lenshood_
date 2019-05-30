@@ -1,0 +1,16 @@
+fragment UserDrivingLicense on UserDrivingLicense {
+  id
+  transactionId
+  drivingLicenseId
+  issueDate
+  fatherOrHusband
+  imageUrl
+  bloodGroup
+  dob
+  cov
+  address
+  validityTransport
+  validityNonTransport
+  createdAt
+  updatedAt
+}

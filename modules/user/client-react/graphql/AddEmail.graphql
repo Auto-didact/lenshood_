@@ -1,0 +1,5 @@
+mutation addUserEmail($input: AddEmailInput!) {
+  addUserEmail(input: $input) {
+    email
+  }
+}

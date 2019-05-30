@@ -13,8 +13,10 @@ const { Sider } = Layout;
 
 const renderMetaData = () => (
   <Helmet
-  title={`${settings.app.name} - Payment`}
-  meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
+    title={`${settings.app.name} - Payment`}
+    meta={[
+      { name: "description", content: `${settings.app.name} - ${"meta"}` }
+    ]}
   />
 );
 
@@ -39,35 +41,47 @@ export default class CheckoutPay extends React.Component {
       <PageLayout>
         {renderMetaData()}
         <div className="checkoutDiv">
-          <Row gutter={32}>
+          <Row gutter={16}>
             <CheckoutSteps step={2} />
-            <Col lg={6} sm={10} className="ColMenu">
-              <div>
-                <Sider width={550} className="checkSlider">
-                  <h4>
-                    <strong>Choose payment option</strong>
-                  </h4>
-                  <Menu
-                    mode="inline"
-                    defaultSelectedKeys={["1"]}
-                    defaultOpenKeys={["sub1"]}
-                    className="AccountDetails"
-                  >
-                    <Item className="AccDetItem" key="1">
-                      Debit Card
-                    </Item>
-                    <Item className="AccDetItem" key="2">
-                      Credit Card
-                    </Item>
-                    <Item className="AccDetItem" key="3">
-                      Net Banking
-                    </Item>
-                    <Item className="AccDetItem" key="4">
-                      UPI
-                    </Item>
-                  </Menu>
-                </Sider>
-              </div>
+            <Col lg={6} sm={10} className="ColMenu checkSlider">
+              <h4>
+                <strong>Choose payment option</strong>
+              </h4>
+              <Menu
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                className="AccountDetails"
+              >
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="1"
+                >
+                  Debit Card
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="2"
+                >
+                  Credit Card
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="3"
+                >
+                  Net Banking
+                </Item>
+                <Item
+                  className=" AccDetItem"
+                  activeClassName="AccDetItemSelected"
+                  key="4"
+                >
+                  UPI
+                </Item>
+              </Menu>
             </Col>
             <Col lg={9} sm={14} className="marginB30">
               <Card>

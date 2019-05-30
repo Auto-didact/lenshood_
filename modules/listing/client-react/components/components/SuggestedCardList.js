@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { List } from 'antd';
-import '../resources/listingCatalogue.css';
-import RelatedCard from './RelatedCard';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { List } from "antd";
+// import '../resources/listingCatalogue.css';
+import RelatedCard from "./RelatedCard";
 
 class SuggestedCardList extends Component {
   render() {
-    console.log(this.relatedList);
     return (
       <List
         grid={{
-          gutter: 16,
+          gutter: 24,
           xs: 1,
           sm: 2,
-          md: 3,
-          lg: 4,
+          md: 2,
+          lg: 3,
           xl: 4,
-          xxl: 3
+          xxl: 4
         }}
         dataSource={this.props.relatedList}
         renderItem={item => (

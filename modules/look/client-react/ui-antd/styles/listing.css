@@ -1,0 +1,364 @@
+@import "~antd/dist/antd.css";
+
+/* List your gear form */
+
+.listSubmitButton {
+  background: #23b195 !important;
+  color: white !important;
+  padding: 0 10%;
+  float: right;
+}
+
+.listSteps {
+  text-align: center;
+  font-weight: 600;
+  color: #777;
+}
+
+.DraftButton {
+  border: 0.5px #23b195 solid !important;
+  font-size: 10px;
+  float: right;
+  /* width: 28%; */
+  color: #23b195 !important;
+  /* overflow:  */
+}
+
+.uploadButton {
+  font-size: 10px;
+  margin-left: 20px;
+  float: right;
+  width: 28%;
+}
+
+.selectfit {
+  color: #5d5f5f;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.perDayWeek {
+  color: #5d5f5f;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.Listyourgearcards {
+  padding: 20px;
+}
+
+.LYGcol1 {
+  padding: 24px auto;
+  background: #fff;
+}
+
+.addLocThatYouServe {
+  line-height: 13px;
+}
+
+.startLoc {
+  line-height: 13px;
+  font-size: 13px;
+}
+
+.prodDiv {
+  padding: 50px;
+  height: 200px;
+  text-align: center;
+}
+
+.prodDiv div {
+  font-size: 50px;
+}
+
+.prodCond {
+  font-size: 12px;
+  padding: 10%;
+}
+
+.prodCond ul {
+  padding-left: 22px;
+}
+
+/*  Listing Catalogue */
+
+.RowDiv {
+  padding: 5px 10%;
+  overflow: hidden;
+}
+
+.mapView {
+  margin: 0 10px 15px 10px;
+}
+
+.CatalogueHr {
+  border: 0.5px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.headingTop {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+/* RelatedCard */
+
+.relatedCard {
+  /* height: 300px !important; */
+  border-radius: 9px !important;
+  box-shadow: 0 1px 4px 0 rgba(179, 178, 178, 0.5);
+  /* width: auto !important; */
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.relatedCardImg {
+  /* height: 150px !important; */
+  /* width: 100% !important; */
+  overflow: hidden;
+}
+
+.RelCardMeta {
+  margin-top: 20px !important;
+  padding: 0 !important;
+}
+
+.RelCardh {
+  font-size: 13px;
+  line-height: 14px;
+  margin: 0;
+}
+
+.CardRate {
+  color: #23b195 !important;
+  font-size: 11px !important;
+}
+
+.RelIconGroup {
+  position: absolute;
+  right: 5px;
+  bottom: 40px;
+  float: right;
+  color: #23b195;
+  font-size: 12px;
+}
+
+.filterButtons {
+  float: left;
+  width: 100% !important;
+  margin-right: 3px !important;
+  overflow: hidden !important;
+}
+
+/* MyListingDetailView */
+
+.SliderStart {
+  background: #fff !important;
+  padding: 40px 0;
+}
+
+.DetailsRow {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  min-width: 100%;
+}
+
+.DetailsWidth {
+  height: 160px;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.OnRentTag {
+  color: white;
+  padding: 1px 5px;
+  float: right;
+  margin-right: 12px;
+  background: #e3c41c;
+}
+
+.OnShelfTag {
+  color: white;
+  padding: 1px 5px;
+  float: right;
+  margin-right: 12px;
+  background: #e3951c;
+}
+
+.StarRate {
+  background: #23b195;
+  color: white;
+  padding: 0px 6px 1px 7px;
+}
+
+.ListingButtons {
+  background: #23b195 !important;
+  color: white !important;
+  width: 40% !important;
+  margin: 0 2.5% !important;
+}
+
+/* Product Calender */
+
+.CalendarBox {
+  padding-right: 15px !important;
+  border-right: 1px #eee solid;
+}
+
+.Bookings {
+  font-weight: 600;
+  padding-bottom: 0;
+}
+
+.BookingsCard {
+  border: 0 !important;
+  padding: 2px !important;
+}
+
+.BookDate {
+  line-height: 11px;
+  font-size: 10px;
+}
+
+.RateBook {
+  padding-bottom: 5px;
+  border-bottom: 1px #eee solid;
+  margin-bottom: 15px;
+}
+
+.RateBook h5 {
+  margin: 10px 3px;
+}
+
+.RateBookIcon {
+  background: #23b195;
+  color: white;
+  padding: 0px 6px 1px 7px;
+}
+
+.CancelBook {
+  color: #23b195;
+  padding: 0 14px;
+}
+
+/* Reviews Card */
+
+.RevCard {
+  text-align: justify;
+  margin: 20px 0;
+  box-shadow: 0 0 8px 4px rgba(49, 196, 167, 0.04);
+}
+
+.RevStar {
+  color: #23b195 !important;
+  font-size: 10px !important;
+  margin: 0 4px !important;
+}
+
+.DateandDes {
+  line-height: 18px;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+
+.reviewVal {
+  display: inline;
+  margin-right: 5px;
+}
+
+.MyListHead {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.myListContent {
+  padding: 0 30px;
+  min-height: 280;
+  min-width: 100%;
+}
+
+/* Listing Detail View */
+
+.caroIcon {
+  font-size: 40px !important;
+  text-align: center !important;
+  color: #fff !important;
+  position: absolute !important;
+  z-index: 100 !important;
+  top: 160px !important;
+  padding: 0 !important;
+  border-radius: 100% !important;
+  text-shadow: #000 10px;
+}
+
+.caroIconleft {
+  left: 5px !important;
+}
+.caroIconright {
+  right: 5px !important;
+}
+
+.CaraImg {
+  height: 350px !important;
+  width: 100% !important;
+  z-index: 50 !important;
+}
+
+.fontBold {
+  font-weight: bold;
+}
+
+.gearCat {
+  background-color: rgba(35, 177, 149, 0.2);
+  padding: 10px 4%;
+  font-size: 25px;
+}
+
+.detViewPad {
+  padding: 10px 20px;
+}
+
+.userCard {
+  text-align: justify;
+  margin: 20px !important;
+  box-shadow: 0 0 8px 4px rgba(49, 196, 167, 0.04);
+  margin-right: 0 !important;
+}
+
+.contactButton {
+  margin: 0 30%;
+  width: 40%;
+}
+
+.FollowButtom {
+  float: right;
+  width: 80px !important;
+}
+
+.sellerName {
+  font-size: 14px;
+  line-height: 15px;
+  margin-left: 5px;
+}
+
+.themeColorInverted {
+  color: #23b195 !important;
+  border: #23b195 0.5px solid !important;
+}
+
+.PChr {
+  border: solid 0.5px #979797;
+}
+
+/* Add To Cart */
+
+.ATChr {
+  border: #ddd 1px solid;
+  margin: 20px 0;
+}
+
+.itemGearPC {
+  background: #23b195;
+  padding: 0 7px;
+  margin: 0 4% 0 8%;
+}

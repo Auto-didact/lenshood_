@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Card, Rate, Icon, Avatar } from 'antd';
-import '../resources/listingCatalogue.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import { Card, Rate, Icon, Avatar } from "antd";
+// import '../resources/listingCatalogue.css';
 
 const { Meta } = Card;
 
 class RelatedCard extends Component {
   render() {
     // To Do: check if it is not present then set as default value
+
     let listing = this.props.relatedList;
+
     const listing_id = listing.id;
-    const listing_img = listing.listingImages[0].imageUrl;
-    const rent_per_day = listing.listingRental.perDay;
-    const title = listing.gearCategory;
-    const seller = 'Ravi Kishan(To Do)';
+    const listing_img =
+      (listing.listingImages.length !== 0 &&
+        listing.listingImages[0].imageUrl) ||
+      "https://cdn.pixabay.com/photo/2013/11/28/10/02/photo-camera-219958_960_720.jpg";
+
+    const rent_per_day = listing.listingRental.perDay || "Not Provided";
+    const title = listing.gearCategory || "Not Provided";
+    const seller = "Ravi Kishan(To Do)";
     const rating = 4;
 
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
-        <Card hoverable cover={<img alt="" src={listing_img} />}>
-          <Meta title={title.substring(0, 25)} description={<h5>&#8377;{rent_per_day} per day</h5>} />
+        <Card
+          style={{ margin: "5px", boxShadow: "3px 3px 5px  #94ead9" }}
+          hoverable
+          cover={<img alt="" src={listing_img} className="relatedCardImg" />}
+          className="relatedCard"
+        >
           <Meta
-            style={{ marginTop: '20px', padding: '0' }}
+            title={title.substring(0, 25)}
+            description={<h4>&#8377;{rent_per_day} per day</h4>}
+          />
+          <Meta
+            className="RelCardMeta"
             avatar={<Avatar />}
             title={
-              <h4
-                style={{
-                  fontSize: '10px',
-                  lineHeight: '15px',
-                  margin: '5px 0'
-                }}
-              >
+              <h3 className="RelCardh">
                 {seller}
                 <br />
-                <Rate disabled defaultValue={rating} style={{ color: '#23b195', fontSize: '6px' }} />
-                <div
-                  style={{
-                    position: 'absolute',
-                    right: '5px',
-                    bottom: '40px',
-                    float: 'right',
-                    color: '#23b195',
-                    fontSize: '12px'
-                  }}
-                >
-                  <Icon type="car" theme="filled" style={{ marginRight: '10px' }} />
+                <Rate disabled defaultValue={rating} className="CardRate" />
+                {/* <div className="RelIconGroup">
+                  <Icon type="car" theme="filled" className="marginR10" />
                   <Icon type="safety-certificate" theme="filled" />
-                </div>
-              </h4>
+                </div> */}
+              </h3>
             }
           />
         </Card>

@@ -16,6 +16,11 @@ const registerFormSchema = {
   passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
+const onSubmit = e => {
+  e.preventDefault();
+  console.log('submit!');
+};
+
 const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
   return (
     <Form name="register" onSubmit={handleSubmit}>
@@ -60,7 +65,12 @@ RegisterForm.propTypes = {
 };
 
 const RegisterFormWithFormik = withFormik({
-  mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '' }),
+  mapPropsToValues: () => ({
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirmation: ''
+  }),
   validate: values => validate(values, registerFormSchema),
   async handleSubmit(
     values,

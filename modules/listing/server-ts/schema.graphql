@@ -1,5 +1,9 @@
 type Listing {
   id: Int!
+  
+  # User module
+  user: User
+  
   gearCategory: String!
   gearSubcategory: String!
   description: String!
@@ -24,7 +28,6 @@ type ListingDetail {
   id: Int!
   listingId: Int!
   condition: String!
-  repairHistory: String!
   age: String!
   damages: [ListingDamage]
   createdAt: String!
@@ -81,6 +84,7 @@ type ListingReview {
 extend type Query {
   listings(limit: Int, after: Int): Listings
   listing(id: Int!): Listing
+  userListings(userId: Int!): [Listing]
 }
 
 extend type Mutation {
@@ -107,7 +111,6 @@ input ListingImageInput {
 input ListingDetailInput {
   id: Int
   condition: String!
-  repairHistory: String!
   age: String!
   damages: [ListingDamageInput]
 }
@@ -131,6 +134,7 @@ input ListingContentInput {
   serial: String!
 }
 input AddListingInput {
+  userId: Int
   gearCategory: String!
   gearSubcategory: String!
   description: String!
@@ -145,9 +149,10 @@ input AddListingInput {
 # Input for editListing Mutation
 input EditListingInput {
   id: Int!
-  gearCategory: String!
-  gearSubcategory: String!
-  description: String!
+  userId: Int!
+  gearCategory: String
+  gearSubcategory: String
+  description: String
   status: String
   isActive: Boolean
   listingImages: [ListingImageInput]

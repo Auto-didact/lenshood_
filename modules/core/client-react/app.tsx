@@ -4,7 +4,7 @@ import ClientModule from '@gqlapp/module-client-react';
 
 // Virtual module, generated in-memory by spinjs, contains count of backend rebuilds
 // tslint:disable-next-line
-import 'backend_reload';
+// import 'backend_reload';
 
 import log from '../../../packages/common/log';
 import { onAppCreate as onCreateMain, Main, onAppDispose } from './Main';
@@ -38,10 +38,10 @@ const onAppCreate = (modules: ClientModule, entryModule: NodeModule) => {
 if (__DEV__ && module.hot) {
   module.hot.accept();
 
-  module.hot.accept('backend_reload', () => {
-    log.debug('Reloading front-end');
-    window.location.reload();
-  });
+  // module.hot.accept('backend_reload', () => {
+  //   log.debug('Reloading front-end');
+  //   window.location.reload();
+  // });
 }
 
 export default new ClientModule({ onAppCreate: [onAppCreate] });

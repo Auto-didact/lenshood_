@@ -36,7 +36,6 @@ exports.up = function(knex, Promise) {
           .inTable('listing')
           .onDelete('CASCADE');
         table.string('condition');
-        table.string('repair_history');
         table.string('age');
         table.timestamps(false, true);
       })

@@ -10,11 +10,11 @@ import settings from '../../../../settings';
 
 const onSubmit = (listing, editListing) => values => {
   values['id'] = listing.id;
-  console.log(values);
+
   editListing(values);
 };
 
-const ListingEditView = ({ loading, listing, location, editListing, t }) => {
+const ListingEditView = ({ loading, listing, location, editListing, t, currentUser }) => {
   let listingObj = listing;
   // if new listing was just added read it from router
   if (!listingObj && location.state) {
@@ -44,13 +44,13 @@ const ListingEditView = ({ loading, listing, location, editListing, t }) => {
     return (
       <PageLayout>
         {renderMetaData()}
-        <Link id="back-button" to="/listings">
+        {/* <Link id="back-button" to="/listings">
           {t('listing.btn.back')}
         </Link>
         <h2>
           {t(`listing.label.edit`)} {t('listing.label.listing')}
-        </h2>
-        <ListingForm onSubmit={onSubmit(listingObj, editListing)} listing={listing} />
+        </h2> */}
+        <ListingForm onSubmit={onSubmit(listingObj, editListing)} listing={listing} currentUser={currentUser} />
       </PageLayout>
     );
   }

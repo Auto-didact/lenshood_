@@ -1,6 +1,7 @@
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
+import { User } from '@gqlapp/user-server-ts/sql';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -31,6 +32,7 @@ interface ListingContent {
   serial: string;
 }
 export interface Listing {
+  userId: number;
   gearCategory: string;
   gearSubcategory: string;
   description: string;
@@ -52,6 +54,8 @@ export interface ListingReview {
 export interface Identifier {
   id: number;
 }
+
+const eager = '[user, listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]';
 export default class ListingDAO extends Model {
   private id: any;
 
@@ -65,6 +69,14 @@ export default class ListingDAO extends Model {
 
   static get relationMappings() {
     return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'listing.user_id',
+          to: 'user.id'
+        }
+      },
       listing_images: {
         relation: Model.HasManyRelation,
         modelClass: ListingImage,
@@ -109,7 +121,6 @@ export default class ListingDAO extends Model {
   }
 
   public async listingsPagination(limit: number, after: number) {
-    const eager = '[listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]';
     const res = camelizeKeys(
       await ListingDAO.query()
         .eager(eager)
@@ -117,7 +128,7 @@ export default class ListingDAO extends Model {
         .limit(limit)
         .offset(after)
     );
-    // console.log(query[0]);
+    // console.log(res);
     return res;
   }
 
@@ -137,10 +148,20 @@ export default class ListingDAO extends Model {
   }
 
   public async listing(id: number) {
-    const eager = '[listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]';
     const res = camelizeKeys(
       await ListingDAO.query()
         .findById(id)
+        .eager(eager)
+        .orderBy('id', 'desc')
+    );
+    // console.log(query[0]);
+    return res;
+  }
+
+  public async userListings(userId: number) {
+    const res = camelizeKeys(
+      await ListingDAO.query()
+        .where('user_id', userId)
         .eager(eager)
         .orderBy('id', 'desc')
     );

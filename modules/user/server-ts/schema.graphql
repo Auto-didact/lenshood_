@@ -1,17 +1,146 @@
 type User {
   id: Int!
   username: String!
-  role: String!
+  role: String
   isActive: Boolean
   email: String!
   profile: UserProfile
-  auth: UserAuth
+  addresses: [UserAddress]
+  identification: [UserIdentification]
+  verification: UserVerification
+  drivingLicense: UserDrivingLicense
+  endorsements: [UserEndorsement]
+  endorsed: [UserEndorsed]
+  followers: [UserFollower]
+  following: [UserFollowing]
+  portfolios: [UserPortfolio]
+  remarks: [UserRemark]
+
+  # Listing Module
+  listings: [Listing]
+
+  authCertificate: CertificateAuth
+  authFacebook: FacebookAuth
+  authGoogle: GoogleAuth
+  authGithub: GithubAuth
+  authLinkedin: LinkedInAuth
+
+  createdAt: String
+  updatedAt: String
 }
 
 type UserProfile {
+  id: Int
   firstName: String
   lastName: String
-  fullName: String
+  isVerified: Boolean
+  isAvailable: Boolean
+  website: String
+  about: String
+  designation: String
+  avatar: String
+  rating: String
+  responseTime: String
+  acceptanceRate: String
+  mobile: String
+  flag: String
+  createdAt: String
+  updatedAt: String
+  referredBy: User
+}
+
+type UserIdentification {
+  id: Int
+  type: String
+  documentUrl: String
+  isVerified: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+type UserAddress {
+  id: Int
+  streetAddress1: String
+  streetAddress2: String
+  city: String
+  state: String
+  pinCode: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserVerification {
+  id: Int
+  isEmailVerified: Boolean
+  isMobileVerified: Boolean
+  isAddressVerified: Boolean
+  isIdVerified: Boolean
+  isReferred: Boolean
+  createdAt: String
+  updatedAt: String
+}
+type UserDrivingLicense {
+  id: Int
+
+  transactionId: String
+  drivingLicenseId: String
+  issueDate: String
+  fatherOrHusband: String
+  imageUrl: String
+  bloodGroup: String
+  dob: String
+  cov: String
+  address: String
+  validityTransport: String
+  validityNonTransport: String
+
+  createdAt: String
+  updatedAt: String
+}
+
+type UserEndorsement {
+  id: Int
+  endorser: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserEndorsed {
+  id: Int
+  endorsee: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserFollower {
+  id: Int
+  follower: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserFollowing {
+  id: Int
+  followee: User
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPortfolio {
+  id: Int
+  platform: String
+  portfolioUrl: String
+  createdAt: String
+  updatedAt: String
+}
+
+type UserRemark {
+  id: Int
+  type: String
+  remark: String
+  admin: User
+  createdAt: String
+  updatedAt: String
 }
 
 # Additional authentication service info
@@ -25,48 +154,72 @@ type UserAuth {
 
 type CertificateAuth {
   serial: String
+  createdAt: String
+  updatedAt: String
 }
 
 type FacebookAuth {
   fbId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type GoogleAuth {
   googleId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type GithubAuth {
   ghId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 type LinkedInAuth {
   lnId: String
   displayName: String
+  createdAt: String
+  updatedAt: String
 }
 
 extend type Query {
   # Get all users ordered by: OrderByUserInput add filtered by: FilterUserInput
   users(orderBy: OrderByUserInput, filter: FilterUserInput): [User]
   # Get user by id
-  user(id: Int!): UserPayload
+  user(id: Int!): User
   # Get current user
   currentUser: User
+  # Get user's driving license info
+  userDrivingLicense(id: Int!): UserDrivingLicense
 }
 
 type UserPayload {
   user: User
 }
 
+type UserMobile {
+  id: Int
+  mobile: String!
+  otpSent: Boolean
+  isVerified: Boolean
+  error: String
+}
+
 extend type Mutation {
   # Create new user
-  addUser(input: AddUserInput!): UserPayload!
+  addUser(input: AddUserInput!): User!
   # Edit a user
-  editUser(input: EditUserInput!): UserPayload!
+  editUser(input: EditUserInput!): User!
   # Delete a user
   deleteUser(id: Int!): UserPayload!
+  # Add driving license for a user
+  addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
+  # Add Mobile for a user
+  addUserMobile(input: AddMobileInput!): UserMobile!
 }
 
 # Input for ordering users
@@ -125,7 +278,7 @@ input AddUserInput {
   username: String!
   email: String!
   password: String!
-  role: String!
+  role: String
   isActive: Boolean
   profile: ProfileInput
   auth: AuthInput
@@ -140,12 +293,51 @@ input EditUserInput {
   email: String!
   password: String
   profile: ProfileInput
+  addresses: [AddressInput]
+  portfolios: [PortfolioInput]
   auth: AuthInput
 }
 
 input ProfileInput {
   firstName: String
   lastName: String
+  about: String
+
+  rating: String
+  isVerified: Boolean
+  isAvailable: Boolean
+  flag: String
+  avatar: String
+  designation: String
+  mobile: String
+  website: String
+}
+
+input PortfolioInput {
+  platform: String
+  portfolioUrl: String
+}
+
+input AddressInput {
+  streetAddress1: String
+  streetAddress2: String
+  city: String
+  state: String
+  pinCode: String
+}
+
+# Input for Driving License Verification Mutation
+input AddDrivingLicenseInput {
+  id: Int
+  dlId: String!
+  dob: String!
+}
+
+# Input for Mobile Verificaton Mutation
+input AddMobileInput {
+  id: Int
+  mobile: String!
+  otp: Int
 }
 
 extend type Subscription {

@@ -1,0 +1,100 @@
+#import "./Profile.graphql"
+
+fragment UserCompleteInfo on User {
+  id
+  username
+  role
+  isActive
+  email
+  profile {
+    ...UserProfileInfo
+  }
+  addresses {
+    streetAddress1
+    streetAddress2
+    city
+    state
+    pinCode
+  }
+  identification {
+    type
+    documentUrl
+    isVerified
+  }
+  verification {
+    isEmailVerified
+    isMobileVerified
+    isAddressVerified
+    isIdVerified
+    isReferred
+  }
+  endorsements {
+    endorser{
+      id
+      username
+      profile{
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  endorsed {
+    endorsee{
+      id
+      username
+      profile{
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  followers {
+    follower{
+      id
+      username
+      profile{
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  following {
+    followee{
+      id
+      username
+      profile{
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  portfolios {
+    platform
+    portfolioUrl
+  }
+  authCertificate {
+    serial
+  }
+  authFacebook {
+    fbId
+    displayName
+  }
+  authGoogle {
+    googleId
+    displayName
+  }
+  authGithub {
+    ghId
+    displayName
+  }
+  authLinkedin {
+    lnId
+    displayName
+  }
+  createdAt
+  updatedAt
+}
