@@ -63,7 +63,7 @@ export default (pubsub: PubSub) => ({
       return context.Listing.listing(id);
     },
     userListings(obj: any, { userId }: any, context: any) {
-      return context.Listing.userListings(userId);
+      return context.Listing.userListings(userId || context.identity.id);
     }
   },
   // Listing: {
