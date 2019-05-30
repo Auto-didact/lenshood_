@@ -2,29 +2,32 @@ import React, { Component } from "react";
 // import '../resources/listingCatalogue.css';
 import { Layout, Button, Row, Col } from "antd";
 import DetailsCard from "./DetailsCard";
+import { ALL, ONSHELF, ONRENT } from "../../constants/ListingStates";
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
 class MyListingProducts extends Component {
   state = {
-    value: "On Rent"
+    status: ONRENT,
+    listings: this.props.listings
   };
   classNamesgroup(e) {
-    if (this.state.value === e) {
+    if (this.state.status === e) {
       return "btnActive";
     } else {
       return "btn";
     }
   }
   FilterItems(e) {
-    this.setState({ value: e });
+    this.setState({ status: e });
   }
   returnItem(item) {
+    console.log("item", item);
     return <DetailsCard buttonText="View" item={item} />;
   }
   renderItem(item) {
-    if (item.nature === this.state.value) {
+    if (item.status === this.state.status) {
       return this.returnItem(item);
     }
   }
@@ -39,29 +42,29 @@ class MyListingProducts extends Component {
           <Col md={{ span: 10 }} sm={{ span: 24 }} xs={{ span: 24 }}>
             <ButtonGroup className="width100">
               <Button
-                onClick={() => this.FilterItems("all")}
-                className={this.classNamesgroup("all")}
+                onClick={() => this.FilterItems(ALL)}
+                className={this.classNamesgroup(ALL)}
               >
                 All
               </Button>
               <Button
-                onClick={() => this.FilterItems("On Shelf")}
-                className={this.classNamesgroup("On Shelf")}
+                onClick={() => this.FilterItems(ONSHELF)}
+                className={this.classNamesgroup(ONSHELF)}
               >
                 On Shelf
               </Button>
               <Button
-                onClick={() => this.FilterItems("On Rent")}
-                className={this.classNamesgroup("On Rent")}
+                onClick={() => this.FilterItems(ONRENT)}
+                className={this.classNamesgroup(ONRENT)}
               >
                 On Rent
               </Button>
             </ButtonGroup>
           </Col>
         </Row>
-        {this.props.products
-          ? this.props.products.map(item =>
-              this.state.value === "all"
+        {this.state.listings
+          ? this.state.listings.map(item =>
+              this.state.status === ALL
                 ? this.returnItem(item)
                 : this.renderItem(item)
             )

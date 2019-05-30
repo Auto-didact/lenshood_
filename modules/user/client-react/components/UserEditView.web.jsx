@@ -48,7 +48,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
             shouldDisplayRole={isNotSelf}
             shouldDisplayActive={isNotSelf}
             initialValues={user}
-            userRole={currentUser.role}
+            userRole={currentUser && currentUser.role ? currentUser.role : null}
           />
         </>
       )}

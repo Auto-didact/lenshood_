@@ -50,7 +50,9 @@ class ListingForm extends Component {
 
   render() {
     const { values, handleSubmit, submitting, t, currentUser } = this.props;
-    const isAdmin = this.isAdminFunction(currentUser.role);
+    const isAdmin = this.isAdminFunction(
+      currentUser && currentUser.role ? currentUser.role : null
+    );
     // console.log("currentUser", this.props);
     // const userRole = currentUser.role;
     this.steps = [

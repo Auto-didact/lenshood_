@@ -1,8 +1,8 @@
-import React from "react";
-import { Formik, Form, FormikProps, ErrorMessage, FieldArray } from "formik";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { Icon } from "antd";
-import { RenderField, Button } from "@gqlapp/look-client-react";
+import React from 'react';
+import { Formik, Form, FormikProps, ErrorMessage, FieldArray } from 'formik';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { Icon } from 'antd';
+import { RenderField, Button } from '@gqlapp/look-client-react';
 
 export default class DynamicFieldForm extends React.Component {
   handleSubmit = values => {
@@ -11,10 +11,10 @@ export default class DynamicFieldForm extends React.Component {
 
   render() {
     let vehicles = [
-      { id: 1, vehicle: "car", brand: "hyundai" },
-      { id: 2, vehicle: "motorcycle", brand: "harley" },
-      { id: 3, vehicle: "airplane", brand: "boeing" },
-      { id: 4, vehicle: "rocket", brand: "spacex" }
+      { id: 1, vehicle: 'car', brand: 'hyundai' },
+      { id: 2, vehicle: 'motorcycle', brand: 'harley' },
+      { id: 3, vehicle: 'airplane', brand: 'boeing' },
+      { id: 4, vehicle: 'rocket', brand: 'spacex' }
     ];
 
     return (
@@ -25,8 +25,7 @@ export default class DynamicFieldForm extends React.Component {
         validate={values => {
           let errors = [];
 
-          if (!values.vehicles.length)
-            errors.vehicles = "At least one vehicle is required";
+          if (!values.vehicles.length) errors.vehicles = 'At least one vehicle is required';
           return errors;
         }}
         onSubmit={this.handleSubmit}
@@ -58,25 +57,14 @@ export default class DynamicFieldForm extends React.Component {
                         <Field name={`vehicles[${index}].brand`} /> */}
 
                         {/* Remove this vehicle */}
-                        <Button
-                          onClick={() => arrayHelpers.remove(index)}
-                          style={{ width: "60%" }}
-                        >
-                          <Icon
-                            className="dynamic-delete-button"
-                            type="minus-circle-o"
-                          />
+                        <Button onClick={() => arrayHelpers.remove(index)} style={{ width: '60%' }}>
+                          <Icon className="dynamic-delete-button" type="minus-circle-o" />
                         </Button>
                       </div>
                     ))}
 
                     {/* Add a new empty vehicle at the end of the list */}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        arrayHelpers.push({ vehicle: "", brand: "" })
-                      }
-                    >
+                    <button type="button" onClick={() => arrayHelpers.push({ vehicle: '', brand: '' })}>
                       Add Vehicle
                     </button>
                   </div>
