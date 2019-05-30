@@ -332,7 +332,13 @@ export class User extends Model {
 
   async updateUserVerification(id, params) {
     const user = await User.query().findById(id);
-    const verification = await user.$relatedQuery('verification').patch(params);
+
+    let verification = await user.$relatedQuery('verification').patch(params);
+    if (!verification) {
+      console.log('here');
+      verification = await user.$relatedQuery('verification').insert(params);
+    }
+
     return camelizeKeys(verification);
   }
 
