@@ -12,12 +12,12 @@
 
 ## Official Website
 
-Visit [www.lenshood.in] to learn about Lenshood. You can also test a [www.lenshood-demo.herokuapp.com] deployed on 
+Visit [www.lenshood.in] to learn about Lenshood. You can also test a [lenshood-demo.herokuapp.com] deployed on 
 Heroku.
 
 ## Description
 
-This project is based on Apollo Universal Starter Kit
+This project is based on Appollo Universal Starter Kit
 
 Apollo Universal Starter Kit is an SEO-friendly, fully configured, modular starter project for developing [Universal
 JavaScript] applications. You can use our kit to create your applications in JavaScript or TypeScript for all major
@@ -41,13 +41,7 @@ great possibilities for styling for your web and mobile applications.
 * [First Run of Apollo Universal Starter Kit](#first-run-of-apollo-universal-starter-kit)
 * [Project Structure](#project-structure)
 * [Apollo Universal Starter Kit Documentation](#apollo-universal-starter-kit-documentation)
-* [Support](#support)
-    * [Community Support](#community-support)
-    * [Commercial Support](#commercial-support)
-* [Contributors](#contributors)
-* [Backers](#backers)
-* [Sponsors](#sponsors)
-* [License Info](#license)
+* [Links](#links)
 
 ## Overview
 
@@ -222,3 +216,56 @@ Modules
 * [Stripe Payments]
 * [Mobile Chat]
 
+## Links
+[our chat]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
+[mit]: LICENSE
+[universal javascript]: https://medium.com/@mjackson/universal-javascript-4761051b7ae9
+[apollo]: http://www.apollostack.com
+[graphql]: http://graphql.org
+[jwt]: https://jwt.io
+[react]: https://reactjs.org/
+[angular]: https://angular.io/
+[react native]: https://facebook.github.io/react-native/
+[expo]: https://expo.io/
+[knex.js]: http://knexjs.org
+[express]: http://expressjs.com
+[typescript]: https://www.typescriptlang.org/
+[twitter bootstrap]: http://getbootstrap.com
+[ant design]: https://ant.design
+[ant design mobile]: https://mobile.ant.design
+[nativebase]: https://nativebase.io
+[apollokit.org]: https://apollokit.org
+[demo application]: https://apollo-universal-starter-kit.herokuapp.com
+[spinjs]: https://github.com/sysgears/spinjs
+[react native gifted chat]: https://github.com/FaridSafi/react-native-gifted-chat
+[deployed on heroku]: https://apollo-universal-starter-kit.herokuapp.com
+[this demo on Expo.io]: https://expo.io/@sysgears/apollo-universal-starter-kit
+[stable]: https://github.com/sysgears/apollo-universal-starter-kit/tree/stable
+[master]: https://github.com/sysgears/apollo-universal-starter-kit/tree/master
+[single]: https://github.com/sysgears/apollo-universal-starter-kit/tree/single
+[apollo1]: https://github.com/sysgears/apollo-universal-starter-kit/tree/apollo1
+[cli-crud]: https://github.com/sysgears/apollo-universal-starter-kit/tree/cli-crud
+[sqlite installation guide]: http://www.sqlitetutorial.net/download-install-sqlite/
+[http://localhost:3000]: http://localhost:3000
+[http://localhost:8080]: http://localhost:8080
+[getting started]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md
+[installing and running apollo universal starter kit]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#installing-and-running-apollo-universal-starter-kit
+[running the mobile app with expo]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#running-the-mobile-app-with-expo
+[running the starter kit in a mobile simulator]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/gettingStarted.md#running-the-starter-kit-in-a-mobile-simulator
+[running apollo universal starter kit with docker]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/docker.md
+[deploying apollo universal starter kit to production]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/deployment.md
+[configuring apollo universal starter kit]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/configuration.md
+[features and modules]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/featuresAndModules.md
+[writing code]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/writingCode.md
+[apollo universal starter kit cli]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/tools/cli.md
+[available scripts]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/yarnScripts.md
+[frequently asked questions]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/faq.md
+[stripe payments]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/modules/stripeSubscription.md
+[mobile chat]: https://github.com/sysgears/apollo-universal-starter-kit/blob/master/docs/modules/mobileChat.md
+[sysgears inc]: http://sysgears.com
+[gitter channel]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
+[github issues]: https://github.com/sysgears/apollo-universal-starter-kit/issues
+[wiki]: https://github.com/sysgears/apollo-universal-starter-kit/wiki
+[faq]: https://github.com/sysgears/apollo-universal-starter-kit/wiki/Frequently-Asked-Questions
+[sysgears]: https://sysgears.com
+[skype]: http://hatscripts.com/addskype?sysgears
