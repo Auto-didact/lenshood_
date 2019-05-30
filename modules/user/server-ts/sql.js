@@ -310,6 +310,9 @@ export class User extends Model {
   async patchProfile(id, params) {
     const user = await User.query().findById(id);
     const profile = await user.$relatedQuery('profile').patch(params);
+    if (!profile) {
+      await user.$relatedQuery('profile').insert(params);
+    }
     return camelizeKeys(profile);
   }
 
@@ -335,7 +338,6 @@ export class User extends Model {
 
     let verification = await user.$relatedQuery('verification').patch(params);
     if (!verification) {
-      console.log('here');
       verification = await user.$relatedQuery('verification').insert(params);
     }
 
