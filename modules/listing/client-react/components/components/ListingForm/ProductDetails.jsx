@@ -50,25 +50,51 @@ export default class ProductDetails extends Component {
           components: ['Lens']
         }
       ],
-      status: ['Idle', 'On Rent', 'On Shelf', 'Disabled'],
+      status: ['idle', 'on_rent', 'on_shelf', 'disabled'],
+      activeGearCategory: null,
       activeGearSubcategories: null,
       activeComponents: null,
 
       listingCondition: ['New', 'Good', 'Fair'],
       listingAge: ['< 1 year', '1 - 2 years', '> 3 years'],
 
+      listingContent: props.values.listingContent,
+
       isAdmin: false
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
+    this.handleGearSubCategoryChange = this.handleGearSubCategoryChange.bind(this);
   }
 
   handleGearCategoryChange = value => {
-    const activeCategory = this.state.listingCategories.filter(category => {
+    const activeGearCategory = this.state.listingCategories.filter(category => {
       return category.gearCategory == value;
     });
-    const gearSubcategories = activeCategory[0].gearSubcategories;
+    const gearSubcategories = activeGearCategory[0].gearSubcategories;
 
-    this.setState({ activeGearSubcategories: gearSubcategories });
+    this.setState({ activeGearCategory: activeGearCategory, activeGearSubcategories: gearSubcategories });
+  };
+
+  handleGearSubCategoryChange = value => {
+    // const activeCategory = this.state.listingCategories.filter(category => {
+    //   return category.gearCategory == value;
+    // });
+    // const gearSubcategories = activeCategory[0].gearSubcategories;
+    // this.setState({ activeGearSubcategories: gearSubcategories });
+    const componentsObject = this.state.listingCategories[0].components.map(component => {
+      const container = {};
+
+      container['gear'] = component;
+      container['brand'] = '';
+      container['model'] = '';
+      container['serial'] = '';
+
+      return container;
+    });
+
+    if (this.state.listingContent.length === 0 && value === 'DSLR') {
+      this.setState({ listingContent: componentsObject });
+    }
   };
 
   // To Do Create a function to render options
@@ -86,7 +112,6 @@ export default class ProductDetails extends Component {
     const values = this.props.values;
     const t = this.props.t;
     const isAdmin = this.props.isAdmin;
-
     return (
       <>
         {/* Gear Category */}
@@ -113,6 +138,7 @@ export default class ProductDetails extends Component {
             type="text"
             label={t('listing.field.gearSubcategory')}
             value={values.gearSubcategory}
+            onChange={this.handleGearSubCategoryChange}
           >
             {this.state.activeGearSubcategories.map((category, idx) => (
               <Select.Option key={idx} value={category}>
@@ -178,6 +204,7 @@ export default class ProductDetails extends Component {
               ]}
               arrayHelpers={arrayHelpers}
               values={values.listingContent}
+              initialValues={this.state.listingContent}
               name="listingContent"
               label={t('listing.field.gearComponents')}
             />
@@ -254,7 +281,7 @@ export default class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  values: PropTypes.object,
+  props: PropTypes.object,
   isAdmin: PropTypes.bool,
   t: PropTypes.func
 };
