@@ -4,10 +4,11 @@ import { PageLayout } from "@gqlapp/look-client-react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
 import settings from "../../../../settings";
 import { Link } from "react-router-dom";
-import { Row, Col, Button, Card, Icon } from "antd";
+import { Row, Col, Button, Card, Icon, DatePicker } from "antd";
 import CheckoutSteps from "./CheckoutSteps";
-// import camera from "../resources/camera.jpeg";
 import camera from "../resources/camera.jpg";
+
+const { RangePicker } = DatePicker;
 
 const renderMetaData = () => (
   <Helmet
@@ -47,7 +48,7 @@ export default class CheckoutCartView extends React.Component {
     ]
   };
   count = 1;
-  
+
   totalRent(cartArray) {
     return cartArray.reduce((acum, item) => {
       acum += item.days * item.rent;
@@ -207,8 +208,8 @@ export default class CheckoutCartView extends React.Component {
             <br />
             <Col
               xl={11}
-              lg={{span: 13, offset: 1}}
-              // sm={{ span: 20, offset: 1 }}
+              lg={{ span: 13, offset: 1 }}
+              sm={{ span: 20, offset: 1 }}
               xs={{ span: 22, offset: 1 }}
               className="margin20"
             >
@@ -216,8 +217,8 @@ export default class CheckoutCartView extends React.Component {
             </Col>
             <Col
               lg={7}
-              md={{ span: 14, offset: 2 }}
-              sm={{ span: 18, offset: 2 }}
+              md={{ span: 20, offset: 0 }}
+              sm={{ span: 20, offset: 0 }}
               xs={{ span: 22, offset: 1 }}
             >
               {this.cartTotal()}
@@ -230,6 +231,10 @@ export default class CheckoutCartView extends React.Component {
 }
 
 class CartItem extends React.Component {
+  selectDate() {
+    console.log("Calender");
+    return <RangePicker size="small" />;
+  }
   render() {
     return (
       <Row className="cartitem borderRadius9">
@@ -264,7 +269,7 @@ class CartItem extends React.Component {
               <br />
               <br />
               Rental period <br />
-              <strong>
+              <strong onClick={() => this.selectDate.bind(this)}>
                 {this.props.products.date.start} -{" "}
                 {this.props.products.date.end}
               </strong>
