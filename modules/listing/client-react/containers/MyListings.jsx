@@ -1,56 +1,61 @@
 import React, { Component } from "react";
 
 // import './resources/listingCatalogue.css';
+import { graphql, compose } from "react-apollo";
 
 import MyListingsView from "../components/MyListingsView";
+import MY_LISTINGS_QUERY from "../graphql/MyListingsQuery.graphql";
 
 import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
 
 class MyListings extends Component {
-  state = {
-    listings: [
-      {
-        description: "Blah blah bleh",
-        listingRental: {
-          perDay: 1200
+  constructor(props) {
+    super(props);
+    this.state = {
+      listings: [
+        {
+          description: "Blah blah bleh",
+          listingRental: {
+            perDay: 1200
+          },
+          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
+          rating: 4,
+          reviews: 7,
+          status: ALL
         },
-        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-        rating: 4,
-        reviews: 7,
-        status: ALL
-      },
-      {
-        description: "Blah lah bleh",
-        listingRental: {
-          perDay: 120
+        {
+          description: "Blah lah bleh",
+          listingRental: {
+            perDay: 120
+          },
+          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
+          rating: 3.7,
+          reviews: 12,
+          status: ONSHELF
         },
-        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-        rating: 3.7,
-        reviews: 12,
-        status: ONSHELF
-      },
-      {
-        description: "fdgbdfcgmbkmg;ngvjnpcghn",
-        listingRental: {
-          perDay: 200
+        {
+          description: "fdgbdfcgmbkmg;ngvjnpcghn",
+          listingRental: {
+            perDay: 200
+          },
+          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
+          rating: 3,
+          reviews: 8,
+          status: "On Rent"
         },
-        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-        rating: 3,
-        reviews: 8,
-        status: "On Rent"
-      },
-      {
-        description: "Blah lah bleh",
-        listingRental: {
-          perDay: 120
-        },
-        image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-        rating: 3.9,
-        reviews: 25,
-        status: ONRENT
-      }
-    ]
-  };
+        {
+          description: "Blah lah bleh",
+          listingRental: {
+            perDay: 120
+          },
+          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
+          rating: 3.9,
+          reviews: 25,
+          status: ONRENT
+        }
+      ]
+    };
+  }
   render() {
     return (
       // <div className="padA20">
@@ -69,9 +74,16 @@ class MyListings extends Component {
       //     </Row>
       //   </Layout>
       // </div>
-      <MyListingsView listings={this.state.listings} />
+      <MyListingsView listings={this.props.userListings} />
     );
   }
 }
 
-export default MyListings;
+export default compose(
+  graphql(MY_LISTINGS_QUERY, {
+    props({ data: { loading, error, userListings } }) {
+      if (error) throw new Error(error);
+      return { loading, userListings };
+    }
+  })
+)(MyListings);
