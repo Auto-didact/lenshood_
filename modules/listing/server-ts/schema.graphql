@@ -1,12 +1,12 @@
 type Listing {
   id: Int!
-  
+
   # User module
   user: User
-  
+
   gearCategory: String!
   gearSubcategory: String!
-  description: String!
+  description: String
   status: String
   isActive: Boolean
   listingImages: [ListingImage]
@@ -27,8 +27,8 @@ type ListingImage {
 type ListingDetail {
   id: Int!
   listingId: Int!
-  condition: String!
-  age: String!
+  condition: String
+  age: String
   damages: [ListingDamage]
   createdAt: String!
   updatedAt: String!
@@ -45,8 +45,8 @@ type ListingRental {
   id: Int!
   listingId: Int!
   perDay: Int!
-  perWeek: Int!
-  perMonth: Int!
+  perWeek: Int
+  perMonth: Int
   replacementValue: Int!
   createdAt: String!
   updatedAt: String!
@@ -110,8 +110,8 @@ input ListingImageInput {
 }
 input ListingDetailInput {
   id: Int
-  condition: String!
-  age: String!
+  condition: String
+  age: String
   damages: [ListingDamageInput]
 }
 input ListingDamageInput {
@@ -122,8 +122,8 @@ input ListingDamageInput {
 input ListingRentalInput {
   id: Int
   perDay: Int!
-  perWeek: Int!
-  perMonth: Int!
+  perWeek: Int
+  perMonth: Int
   replacementValue: Int!
 }
 input ListingContentInput {
@@ -137,7 +137,7 @@ input AddListingInput {
   userId: Int
   gearCategory: String!
   gearSubcategory: String!
-  description: String!
+  description: String
   status: String
   isActive: Boolean
   listingImages: [ListingImageInput]
