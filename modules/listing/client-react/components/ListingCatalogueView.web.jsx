@@ -78,7 +78,6 @@ ListingList.propTypes = {
 
 class ListingCatalogueView extends Component {
   render() {
-    // console.log(this.props.listings);
     return (
       <div>
         <div className="Pad20" />

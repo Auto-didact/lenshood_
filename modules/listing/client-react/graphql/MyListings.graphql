@@ -1,0 +1,14 @@
+fragment MyListings on Listing {
+  id
+  description
+  listingImages {
+    id
+    imageUrl
+  }
+  listingRental {
+    id
+    listingId
+    replacementValue
+    perDay
+  }
+}
