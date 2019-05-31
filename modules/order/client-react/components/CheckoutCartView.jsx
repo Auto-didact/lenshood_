@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Button, Card, Icon } from "antd";
 import CheckoutSteps from "./CheckoutSteps";
 // import camera from "../resources/camera.jpeg";
-import camera from "../resources/naruto2.jpg";
+import camera from "../resources/camera.jpg";
 
 const renderMetaData = () => (
   <Helmet
@@ -179,30 +179,44 @@ export default class CheckoutCartView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <CheckoutSteps step={0} />
-            <Col span={24}> <Col span={12} className="font14">
-              <div>
-                <strong>My cart - </strong>
-                {this.state.products.length} items
-              </div>
-              <div>
-                Total rent:{" "}
-                <strong>&#8377; {this.totalRent(this.state.products)} </strong>
-              </div>
+            <Col span={24}>
+              {" "}
+              <Col span={12} className="font14">
+                <div>
+                  <strong>My cart - </strong>
+                  {this.state.products.length} items
+                </div>
+                <div>
+                  Total rent:{" "}
+                  <strong>
+                    &#8377; {this.totalRent(this.state.products)}{" "}
+                  </strong>
+                </div>
+              </Col>
+              <Col span={12}>
+                <p
+                  onClick={() => this.Addproducts()}
+                  className="AddMoreproducts"
+                >
+                  Add more products
+                </p>
+              </Col>
             </Col>
-            <Col span={12}>
-              <p onClick={() => this.Addproducts()} className="AddMoreproducts">
-                Add more products
-              </p>
-            </Col></Col>
             <br />
             <br />
-            <Col 
-              xl={11} md={13} sm={{ span: 22, offset: 1 }} className="margin20">
+            <Col
+              xl={11}
+              lg={{span: 13, offset: 1}}
+              sm={{ span: 18, offset: 3 }}
+              xs={{ span: 22, offset: 1 }}
+              className="margin20"
+            >
               {this.renderCart()}
             </Col>
-            <Col lg={7}
-              md={{ span: 8, offset: 2 }}
-              sm={{ span: 18, offset: 3 }}
+            <Col
+              lg={7}
+              md={{ span: 14, offset: 2 }}
+              sm={{ span: 18, offset: 2 }}
               xs={{ span: 22, offset: 1 }}
             >
               {this.cartTotal()}
