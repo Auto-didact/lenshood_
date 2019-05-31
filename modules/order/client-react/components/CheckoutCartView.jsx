@@ -149,18 +149,21 @@ export default class CheckoutCartView extends React.Component {
       ]
     });
   }
+
   deleteProduct(id) {
     // CODE FOR Deleting THE POST WILL GO HERE
     var i, index;
     for (i = 0; i < this.state.products.length; i++) {
       if (this.state.products[i].id == id) {
-        alert(this.state.products[i].id);
         index = i;
         break;
       }
     }
     this.setState({
-      products: [...this.state.products.slice(0, index), ...this.state.products.slice(index + 1)]
+      products: [
+        ...this.state.products.slice(0, index),
+        ...this.state.products.slice(index + 1)
+      ]
     });
   }
 
@@ -168,6 +171,7 @@ export default class CheckoutCartView extends React.Component {
     // CODE FOR EDITTING THE POST WILL GO HERE
     console.log("Edit Product Details!!");
   };
+
   render() {
     return (
       <PageLayout>
@@ -175,7 +179,7 @@ export default class CheckoutCartView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <CheckoutSteps step={0} />
-            <Col span={12} className="font14">
+            <Col span={24}> <Col span={12} className="font14">
               <div>
                 <strong>My cart - </strong>
                 {this.state.products.length} items
@@ -189,14 +193,15 @@ export default class CheckoutCartView extends React.Component {
               <p onClick={() => this.Addproducts()} className="AddMoreproducts">
                 Add more products
               </p>
-            </Col>
-            <Col md={13} sm={{ span: 22, offset: 1 }} className="margin20">
+            </Col></Col>
+            <br />
+            <br />
+            <Col 
+              xl={11} md={13} sm={{ span: 22, offset: 1 }} className="margin20">
               {this.renderCart()}
-              {/* <CartItem products={this.state.products} /> */}
             </Col>
-            <Col
-              lg={7}
-              md={8}
+            <Col lg={7}
+              md={{ span: 8, offset: 2 }}
               sm={{ span: 18, offset: 3 }}
               xs={{ span: 22, offset: 1 }}
             >
@@ -213,15 +218,29 @@ class CartItem extends React.Component {
   render() {
     return (
       <Row className="cartitem borderRadius9">
-        <Col span={8}>
+        <div className="listcloseicons">
+          <Button
+            onClick={() => this.props.editProduct()}
+            className="borderzero listclose"
+          >
+            <Icon type="edit" />
+          </Button>
+          <Button
+            className="borderzero listclose"
+            onClick={() => this.props.deleteProduct()}
+          >
+            <Icon type="close" />
+          </Button>
+        </div>
+        <Col md={8} xs={24}>
           <img alt="" src={this.props.products.image} />
         </Col>
-        <Col span={16} className="ColPad">
+        <Col md={16} xs={24} className="ColPad">
           <Row className="font12">
-            <Col span={16}>
+            <Col md={16} sm={24}>
               <h3 className="productname">{this.props.products.name}</h3>
             </Col>
-            <Col lg={10} sm={12} xs={13} className="font11h">
+            <Col lg={12} sm={12} xs={14} className="font11h">
               Refundundable deposit
               <br />
               <strong className="colorCursor">
@@ -235,7 +254,7 @@ class CartItem extends React.Component {
                 {this.props.products.date.end}
               </strong>
             </Col>
-            <Col lg={10} sm={12} xs={11} className="font11h">
+            <Col lg={10} sm={12} xs={10} className="font11h">
               Rent <br />
               <strong>&#8377; {this.props.products.rent}</strong>
               <br />
@@ -245,20 +264,6 @@ class CartItem extends React.Component {
             </Col>
           </Row>
         </Col>
-        <div className="listcloseicons">
-          <Button
-            onClick={() => this.props.editProduct()}
-            className="borderzero"
-          >
-            <Icon type="edit" />
-          </Button>
-          <Button
-            className="borderzero"
-            onClick={() => this.props.deleteProduct()}
-          >
-            <Icon type="close" />
-          </Button>
-        </div>
       </Row>
     );
   }
