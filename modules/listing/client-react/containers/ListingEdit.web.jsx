@@ -63,7 +63,7 @@ const ListingEdit = props => {
       return () => subscribe();
     }
   });
-
+  // console.log(props);
   return <ListingEditView {...props} />;
 };
 

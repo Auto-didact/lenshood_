@@ -58,8 +58,8 @@ export async function seed(knex, Promise) {
   // admin addresses
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_1',
-      street_address_2: 'stree_address_1',
+      street_address1: 'stree_address_1',
+      street_address2: 'stree_address_1',
       city: 'city',
       state: 'state',
       pin_code: 'pin_code',
@@ -68,8 +68,8 @@ export async function seed(knex, Promise) {
   );
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_11',
-      street_address_2: 'stree_address_11',
+      street_address1: 'stree_address_11',
+      street_address2: 'stree_address_11',
       city: 'city1',
       state: 'state1',
       pin_code: 'pin_code1',
@@ -207,8 +207,8 @@ export async function seed(knex, Promise) {
   // users addresses
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_11',
-      street_address_2: 'stree_address_11',
+      street_address1: 'stree_address_11',
+      street_address2: 'stree_address_11',
       city: 'city1',
       state: 'state1',
       pin_code: 'pin_code1',
@@ -217,8 +217,8 @@ export async function seed(knex, Promise) {
   );
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_112',
-      street_address_2: 'stree_address_112',
+      street_address1: 'stree_address_112',
+      street_address2: 'stree_address_112',
       city: 'city12',
       state: 'state12',
       pin_code: 'pin_code12',
@@ -228,8 +228,8 @@ export async function seed(knex, Promise) {
 
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_11',
-      street_address_2: 'stree_address_11',
+      street_address1: 'stree_address_11',
+      street_address2: 'stree_address_11',
       city: 'city1',
       state: 'state1',
       pin_code: 'pin_code1',
@@ -238,8 +238,8 @@ export async function seed(knex, Promise) {
   );
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_112',
-      street_address_2: 'stree_address_112',
+      street_address1: 'stree_address_112',
+      street_address2: 'stree_address_112',
       city: 'city12',
       state: 'state12',
       pin_code: 'pin_code12',
@@ -249,8 +249,8 @@ export async function seed(knex, Promise) {
 
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_11',
-      street_address_2: 'stree_address_11',
+      street_address1: 'stree_address_11',
+      street_address2: 'stree_address_11',
       city: 'city1',
       state: 'state1',
       pin_code: 'pin_code1',
@@ -259,8 +259,8 @@ export async function seed(knex, Promise) {
   );
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_112',
-      street_address_2: 'stree_address_112',
+      street_address1: 'stree_address_112',
+      street_address2: 'stree_address_112',
       city: 'city12',
       state: 'state12',
       pin_code: 'pin_code12',
@@ -270,8 +270,8 @@ export async function seed(knex, Promise) {
 
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_11',
-      street_address_2: 'stree_address_11',
+      street_address1: 'stree_address_11',
+      street_address2: 'stree_address_11',
       city: 'city1',
       state: 'state1',
       pin_code: 'pin_code1',
@@ -280,8 +280,8 @@ export async function seed(knex, Promise) {
   );
   await returnId(
     knex('user_address').insert({
-      street_address_1: 'stree_address_112',
-      street_address_2: 'stree_address_112',
+      street_address1: 'stree_address_112',
+      street_address2: 'stree_address_112',
       city: 'city12',
       state: 'state12',
       pin_code: 'pin_code12',

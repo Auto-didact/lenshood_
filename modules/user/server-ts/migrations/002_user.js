@@ -42,8 +42,8 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('user_address', table => {
       table.increments();
-      table.string('street_address_1');
-      table.string('street_address_2');
+      table.string('street_address1');
+      table.string('street_address2');
       table.string('city');
       table.string('state');
       table.string('pin_code');

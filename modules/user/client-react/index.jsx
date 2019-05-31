@@ -21,6 +21,7 @@ import ResetPassword from './containers/ResetPassword';
 import ProfileView from './components/ProfileView';
 
 import { AuthRoute, IfLoggedIn, IfNotLoggedIn, withLoadedUser, withLogout } from './containers/Auth';
+import { isAdminFunction } from './helpers/isAdmin';
 
 const ProfileName = withLoadedUser(({ currentUser }) =>
   currentUser ? currentUser.fullName || currentUser.username : null

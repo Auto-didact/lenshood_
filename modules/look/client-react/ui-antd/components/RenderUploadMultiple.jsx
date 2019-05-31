@@ -14,7 +14,6 @@ export default class RenderUpload extends React.Component {
       if (file.response) {
         let url = file.response.secure_url;
         if (url) {
-          console.log(url);
           //set value in form
           const dictKey = this.props.dictKey;
           let obj = {};

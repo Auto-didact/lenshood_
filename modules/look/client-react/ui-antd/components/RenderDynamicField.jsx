@@ -11,7 +11,7 @@ export default class DynamicFieldSet extends React.Component {
     const arrayHelpers = this.props.arrayHelpers;
     let obj = {};
     const keys = this.props.keys;
-    console.log(keys);
+
     keys.map(k => (obj[k.key] = ''));
 
     arrayHelpers.push(obj);
@@ -41,8 +41,10 @@ export default class DynamicFieldSet extends React.Component {
                 <Field
                   name={`${name}[${indexv}].${k.key}`}
                   component={RenderField}
+                  placeholder={k.placeholder || k.key}
                   type="text"
-                  label={k.label || k.key}
+                  label={`${k.label || k.key}`}
+                  // label={`${k.label || k.key} #${indexv + 1}`}
                   value={v[k.key]}
                   key={indexv}
                   // style={{ display: 'inline-block', margin: '0px 5px' }}
@@ -74,7 +76,7 @@ export default class DynamicFieldSet extends React.Component {
           {formItems}
           <FormItem>
             <Button style={{ width: '30%' }} onClick={this.add}>
-              <Icon type="plus" /> Add field
+              <Icon type="plus" /> {this.props.buttonText || 'Add Field'}
             </Button>
           </FormItem>
         </FormItem>
@@ -88,5 +90,6 @@ DynamicFieldSet.propTypes = {
   label: PropTypes.string,
   values: PropTypes.array,
   keys: PropTypes.array,
+  buttonText: PropTypes.string,
   arrayHelpers: PropTypes.object
 };

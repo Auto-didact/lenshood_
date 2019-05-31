@@ -9,6 +9,17 @@ fragment UserInfo on User {
   profile {
     ...UserProfileInfo
   }
+  addresses {
+    streetAddress1
+    streetAddress2
+    city
+    state
+    pinCode
+  }
+  portfolios {
+    platform
+    portfolioUrl
+  }
   authCertificate {
     serial
   }

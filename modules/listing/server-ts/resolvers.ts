@@ -2,6 +2,7 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
 import { Listing, ListingReview, Identifier } from './sql';
+import withAuth from 'graphql-auth';
 
 interface Edges {
   cursor: number;
@@ -60,6 +61,9 @@ export default (pubsub: PubSub) => ({
     },
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
+    },
+    userListings(obj: any, { userId }: any, context: any) {
+      return context.Listing.userListings(userId || context.identity.id);
     }
   },
   // Listing: {
@@ -69,6 +73,7 @@ export default (pubsub: PubSub) => ({
   // },
   Mutation: {
     async addListing(obj: any, { input }: ListingInput, context: any) {
+      input.userId = context.identity.id;
       const id = await context.Listing.addListing(input);
       const listing = await context.Listing.listing(id);
       // publish for listing list

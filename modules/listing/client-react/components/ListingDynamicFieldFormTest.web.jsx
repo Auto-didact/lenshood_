@@ -6,7 +6,6 @@ import { RenderField, Button } from '@gqlapp/look-client-react';
 
 export default class DynamicFieldForm extends React.Component {
   handleSubmit = values => {
-    console.log(values);
     return;
   };
 

@@ -4,12 +4,9 @@ import { graphql } from 'react-apollo';
 import { Alert, Button } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
 import MobileVerificationForm from '../../components/verification/MobileVerificationForm';
+import Mobile from '../../components/verification/Mobile';
 
 import ADD_Mobile from '../../graphql/AddMobile.graphql';
-
-const Mobile = mobile => {
-  return <div>{JSON.stringify(mobile)}</div>;
-};
 
 class MobileAdd extends Component {
   constructor(props) {
@@ -49,7 +46,12 @@ class MobileAdd extends Component {
         if (mobileData.error && !mobileData.isVerified) {
           this.setState({ error: mobileData.error });
         } else {
-          this.setState({ vStatus: true, error: null, otp: false, form: false });
+          this.setState({
+            vStatus: true,
+            error: null,
+            otp: false,
+            form: false
+          });
           this.setMobile(mobileData);
         }
       }
@@ -76,6 +78,7 @@ class MobileAdd extends Component {
         {this.state.otp ? <Alert message={`An OTP has been sent to ${this.state.mobileNo}`} /> : ''}
         {this.state.error ? <Alert type="error" message={`Error Occurred: `} description={this.state.error} /> : ''}
         {this.state.form ? <MobileVerificationForm otp={this.state.otp} onSubmit={this.onChange} /> : ''}
+
         {this.state.vStatus ? <Mobile mobile={this.state.mobile} /> : ''}
       </VerificationModal>
     );

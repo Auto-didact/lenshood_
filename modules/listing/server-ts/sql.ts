@@ -1,7 +1,7 @@
-import { camelizeKeys, decamelizeKeys } from 'humps';
-import { Model } from 'objection';
-import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
-import { User } from '@gqlapp/user-server-ts/sql';
+import { camelizeKeys, decamelizeKeys } from "humps";
+import { Model } from "objection";
+import { knex, returnId, orderedFor } from "@gqlapp/database-server-ts";
+import { User } from "@gqlapp/user-server-ts/sql";
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -32,6 +32,7 @@ interface ListingContent {
   serial: string;
 }
 export interface Listing {
+  userId: number;
   gearCategory: string;
   gearSubcategory: string;
   description: string;
@@ -54,16 +55,17 @@ export interface Identifier {
   id: number;
 }
 
-const eager = '[user, listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]';
+const eager =
+  "[user.[profile], listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]";
 export default class ListingDAO extends Model {
   private id: any;
 
   static get tableName() {
-    return 'listing';
+    return "listing";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -72,48 +74,48 @@ export default class ListingDAO extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'listing.user_id',
-          to: 'user.id'
+          from: "listing.user_id",
+          to: "user.id"
         }
       },
       listing_images: {
         relation: Model.HasManyRelation,
         modelClass: ListingImage,
         join: {
-          from: 'listing.id',
-          to: 'listing_image.listing_id'
+          from: "listing.id",
+          to: "listing_image.listing_id"
         }
       },
       listing_detail: {
         relation: Model.HasOneRelation,
         modelClass: ListingDetail,
         join: {
-          from: 'listing.id',
-          to: 'listing_detail.listing_id'
+          from: "listing.id",
+          to: "listing_detail.listing_id"
         }
       },
       listing_rental: {
         relation: Model.HasOneRelation,
         modelClass: ListingRental,
         join: {
-          from: 'listing.id',
-          to: 'listing_rental.listing_id'
+          from: "listing.id",
+          to: "listing_rental.listing_id"
         }
       },
       listing_content: {
         relation: Model.HasManyRelation,
         modelClass: ListingContent,
         join: {
-          from: 'listing.id',
-          to: 'listing_content.listing_id'
+          from: "listing.id",
+          to: "listing_content.listing_id"
         }
       },
       listing_review: {
         relation: Model.HasManyRelation,
         modelClass: ListingReviewDAO,
         join: {
-          from: 'listing.id',
-          to: 'listing_review.listing_id'
+          from: "listing.id",
+          to: "listing_review.listing_id"
         }
       }
     };
@@ -123,7 +125,7 @@ export default class ListingDAO extends Model {
     const res = camelizeKeys(
       await ListingDAO.query()
         .eager(eager)
-        .orderBy('id', 'desc')
+        .orderBy("id", "desc")
         .limit(limit)
         .offset(after)
     );
@@ -134,15 +136,15 @@ export default class ListingDAO extends Model {
   public async getReviewsForListingIds(listingIds: number[]) {
     const res = camelizeKeys(
       await ListingReviewDAO.query()
-        .whereIn('listing_id', listingIds)
-        .orderBy('id', 'desc')
+        .whereIn("listing_id", listingIds)
+        .orderBy("id", "desc")
     );
-    return orderedFor(res, listingIds, 'listing_id', false);
+    return orderedFor(res, listingIds, "listing_id", false);
   }
 
   public getTotal() {
-    return knex('listing')
-      .countDistinct('id as count')
+    return knex("listing")
+      .countDistinct("id as count")
       .first();
   }
 
@@ -151,7 +153,18 @@ export default class ListingDAO extends Model {
       await ListingDAO.query()
         .findById(id)
         .eager(eager)
-        .orderBy('id', 'desc')
+        .orderBy("id", "desc")
+    );
+    // console.log(query[0]);
+    return res;
+  }
+
+  public async userListings(userId: number) {
+    const res = camelizeKeys(
+      await ListingDAO.query()
+        .where("user_id", userId)
+        .eager(eager)
+        .orderBy("id", "desc")
     );
     // console.log(query[0]);
     return res;
@@ -163,8 +176,8 @@ export default class ListingDAO extends Model {
   }
 
   public deleteListing(id: number) {
-    return knex('listing')
-      .where('id', '=', id)
+    return knex("listing")
+      .where("id", "=", id)
       .del();
   }
 
@@ -174,26 +187,34 @@ export default class ListingDAO extends Model {
   }
 
   public addListingReviewDAO({ comment, rating, listingId }: ListingReview) {
-    return returnId(knex('listing_review')).insert({ comment, rating, listing_id: listingId });
+    return returnId(knex("listing_review")).insert({
+      comment,
+      rating,
+      listing_id: listingId
+    });
   }
 
   public getListingReviewDAO(id: number) {
     return knex
-      .select('id', 'comment', 'rating')
-      .from('listing_review')
-      .where('id', '=', id)
+      .select("id", "comment", "rating")
+      .from("listing_review")
+      .where("id", "=", id)
       .first();
   }
 
   public deleteListingReviewDAO(id: number) {
-    return knex('listing_review')
-      .where('id', '=', id)
+    return knex("listing_review")
+      .where("id", "=", id)
       .del();
   }
 
-  public editListingReviewDAO({ id, comment, rating }: ListingReview & Identifier) {
-    return knex('listing_review')
-      .where('id', '=', id)
+  public editListingReviewDAO({
+    id,
+    comment,
+    rating
+  }: ListingReview & Identifier) {
+    return knex("listing_review")
+      .where("id", "=", id)
       .update({
         comment,
         rating
@@ -204,11 +225,11 @@ export default class ListingDAO extends Model {
 // ListingImage model.
 class ListingImage extends Model {
   static get tableName() {
-    return 'listing_image';
+    return "listing_image";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -217,8 +238,8 @@ class ListingImage extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDAO,
         join: {
-          from: 'listing_image.listing_id',
-          to: 'listing.id'
+          from: "listing_image.listing_id",
+          to: "listing.id"
         }
       }
     };
@@ -228,11 +249,11 @@ class ListingImage extends Model {
 // ListingDetail model.
 class ListingDetail extends Model {
   static get tableName() {
-    return 'listing_detail';
+    return "listing_detail";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -241,16 +262,16 @@ class ListingDetail extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDAO,
         join: {
-          from: 'listing_detail.listing_id',
-          to: 'listing.id'
+          from: "listing_detail.listing_id",
+          to: "listing.id"
         }
       },
       damages: {
         relation: Model.HasManyRelation,
         modelClass: ListingDamage,
         join: {
-          from: 'listing_detail.id',
-          to: 'listing_damage.listing_detail_id'
+          from: "listing_detail.id",
+          to: "listing_damage.listing_detail_id"
         }
       }
     };
@@ -260,11 +281,11 @@ class ListingDetail extends Model {
 // ListingDamage model.
 class ListingDamage extends Model {
   static get tableName() {
-    return 'listing_damage';
+    return "listing_damage";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -273,8 +294,8 @@ class ListingDamage extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDetail,
         join: {
-          from: 'listing_damage.listing_detail_id',
-          to: 'listing_detail.id'
+          from: "listing_damage.listing_detail_id",
+          to: "listing_detail.id"
         }
       }
     };
@@ -284,11 +305,11 @@ class ListingDamage extends Model {
 // ListingRental model.
 class ListingRental extends Model {
   static get tableName() {
-    return 'listing_rental';
+    return "listing_rental";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -297,8 +318,8 @@ class ListingRental extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDAO,
         join: {
-          from: 'listing_rental.listing_id',
-          to: 'listing.id'
+          from: "listing_rental.listing_id",
+          to: "listing.id"
         }
       }
     };
@@ -308,11 +329,11 @@ class ListingRental extends Model {
 // ListingContent model.
 class ListingContent extends Model {
   static get tableName() {
-    return 'listing_content';
+    return "listing_content";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -321,8 +342,8 @@ class ListingContent extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDAO,
         join: {
-          from: 'listing_content.listing_id',
-          to: 'listing.id'
+          from: "listing_content.listing_id",
+          to: "listing.id"
         }
       }
     };
@@ -332,11 +353,11 @@ class ListingContent extends Model {
 // ListingReviewDAO model.
 class ListingReviewDAO extends Model {
   static get tableName() {
-    return 'listing_review';
+    return "listing_review";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get relationMappings() {
@@ -345,8 +366,8 @@ class ListingReviewDAO extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: ListingDAO,
         join: {
-          from: 'listing_review.listing_id',
-          to: 'listing.id'
+          from: "listing_review.listing_id",
+          to: "listing.id"
         }
       }
     };

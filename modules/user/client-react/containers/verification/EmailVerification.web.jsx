@@ -4,12 +4,9 @@ import { graphql } from 'react-apollo';
 import { Alert } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
 import EmailVerificationForm from '../../components/verification/EmailVerificationForm';
+import Email from '../../components/verification/Email';
 
 import ADD_Email from '../../graphql/AddEmail.graphql';
-
-const Email = data => {
-  return <Alert message={`An Email has been sent to ${data.email}`} type="info" />;
-};
 
 class EmailAdd extends Component {
   constructor(props) {
@@ -33,7 +30,6 @@ class EmailAdd extends Component {
 
   onSubmit(addEmail) {
     return async values => {
-      console.log(values);
       // To Do change email values in set email, uncomment below line
       // const emailData = await addEmail(values.email, values.otp);
       this.setEmail(values.email);
@@ -56,7 +52,7 @@ class EmailAdd extends Component {
       <VerificationModal button="Email" title="Email Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? 'Loading...' : ''}
         {this.state.form ? <EmailVerificationForm otp={this.state.otp} onSubmit={this.onChange} /> : ''}
-        {this.state.sent ? <Email email={this.state.email} /> : ''}
+        {this.state.sent ? <Email email={this.state.email} sentStatus={this.state.sent} /> : ''}
       </VerificationModal>
     );
   }

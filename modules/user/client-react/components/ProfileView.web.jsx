@@ -54,8 +54,7 @@ class ProfileView extends React.Component {
 
     function getFollowing(follow) {
       if (follow) {
-        console.log('there', follow);
-        return follow;
+        return follow.following.profile;
       } else {
         return null;
       }
@@ -106,6 +105,7 @@ class ProfileView extends React.Component {
   render() {
     const { t } = this.props;
     const { currentUser, currentUserLoading } = this.props;
+    console.log(this.props);
 
     if (currentUserLoading && !currentUser) {
       return (
@@ -114,15 +114,26 @@ class ProfileView extends React.Component {
         </AccountLayout>
       );
     } else if (currentUser) {
-      // console.log(currentUser);
       return (
         <AccountLayout select="/profile">
           <Row gutter={5}>
             <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
               <Card>
-                <CardTitle>{t('profile.card.title')}</CardTitle>
+                <CardTitle>
+                  {t('profile.card.title')}{' '}
+                  <span>
+                    <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
+                      <Icon type="edit" />
+                      {/*t("profile.editProfileText")*/}
+                    </Link>
+                  </span>
+                </CardTitle>
+
                 <Divider />
-                <ProfileHead profile={currentUser.profile} description={this.usersCardData().profileHead} />
+                <ProfileHead
+                  profile={currentUser.profile && currentUser.profile}
+                  description={this.usersCardData().profileHead}
+                />
                 <Divider />
                 <Row>
                   <Col span={12}>
@@ -130,64 +141,81 @@ class ProfileView extends React.Component {
                       <h2>{t('profile.card.group.name')}:</h2>
                       <CardText>{currentUser.username}</CardText>
                     </div>
-                    {currentUser.profile && currentUser.profile.about && (
-                      <div>
-                        <h2>{t('profile.card.group.about')}:</h2>
-                        <CardText>{currentUser.profile.about}</CardText>
-                      </div>
-                    )}
-                    <h2>{t('profile.card.group.role')}:</h2>
-                    <CardText>{currentUser.role}</CardText>
+                    <div>
+                      <h2>{t('profile.card.group.about')}:</h2>
+
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.about ? currentUser.profile.about : 'Not Provided'}
+                      </CardText>
+                    </div>
+
+                    <div>
+                      <h2>{t('profile.card.group.role')}:</h2>
+
+                      <CardText>{currentUser.role ? currentUser.role : 'Not Provided'}</CardText>
+                    </div>
 
                     {/* Portfolios */}
-
                     <h2>{t('profile.card.group.portfolios.title')}</h2>
-                    {currentUser.portfolios.map((portfolio, key) => (
-                      <h3>
-                        {t('profile.card.group.portfolios.subtitle')} : {key + 1}
-                      </h3>
-                    ))}
+                    {currentUser.portfolios && currentUser.portfolios.length !== 0
+                      ? currentUser.portfolios.map((portfolio, key) => (
+                          <div key={key}>
+                            <CardText>
+                              {portfolio.platform} : {portfolio.portfolioUrl}
+                            </CardText>
+                          </div>
+                        ))
+                      : 'Not Provided'}
                   </Col>
                   <Col span={12}>
-                    {currentUser.profile && currentUser.profile.website && (
-                      <div>
+                    <div>
+                      <h2>
                         <Icon type="link" />
+                      </h2>
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.website
+                          ? currentUser.profile.website
+                          : 'Not Provided'}
+                      </CardText>
+                    </div>
 
-                        <CardText>{currentUser.profile.website}</CardText>
-                      </div>
-                    )}
+                    <div>
+                      <h2>{t('profile.card.group.email')}:</h2>
+                      <CardText>{currentUser.email ? currentUser.email : 'Not Provided'}</CardText>
+                    </div>
 
-                    <h2>{t('profile.card.group.email')}:</h2>
-                    <CardText>{currentUser.email}</CardText>
-
-                    {currentUser.profile && currentUser.profile.mobile && (
-                      <div>
-                        <h2>
-                          <Icon type="contacts" />
-                        </h2>
-                        <CardText>{currentUser.profile.mobile}</CardText>
-                      </div>
-                    )}
+                    <div>
+                      <h2>
+                        <Icon type="contacts" />
+                      </h2>
+                      <CardText>
+                        {currentUser.profile && currentUser.profile.mobile
+                          ? currentUser.profile.mobile
+                          : 'Not Provided'}
+                      </CardText>
+                    </div>
                   </Col>
                 </Row>
                 <Divider />
                 <h2>{t('profile.card.group.addresses.title')}</h2>
-
                 <Row gutter={10}>
-                  {currentUser.addresses.map((address, key) => (
-                    <Col xs={{ span: 24 }} md={{ span: 12 }}>
-                      <AddressCard
-                        address={address}
-                        subTitle={t('profile.card.group.addresses.subTitle')}
-                        index={key}
-                      />
-                    </Col>
-                  ))}
-                  {/* Credit card info (Stripe subscription module)*/}
-                  {settings.stripe.subscription.enabled &&
-                    settings.stripe.subscription.publicKey &&
-                    currentUser.role === 'user' && <StripeSubscriptionProfile />}
+                  {currentUser.addresses && currentUser.addresses.length !== 0
+                    ? currentUser.addresses.map((address, key) => (
+                        <Col xs={{ span: 24 }} md={{ span: 12 }} key={key}>
+                          <AddressCard
+                            address={address}
+                            subTitle={t('profile.card.group.addresses.subTitle')}
+                            index={key}
+                          />
+                        </Col>
+                      ))
+                    : 'Not Provided'}
                 </Row>
+
+                {/* Credit card info (Stripe subscription module)*/}
+                {settings.stripe.subscription.enabled &&
+                  settings.stripe.subscription.publicKey &&
+                  currentUser.role === 'user' && <StripeSubscriptionProfile />}
               </Card>
             </Col>
             <Col xs={{ span: 24 }} lg={{ span: 8 }}>
@@ -220,9 +248,6 @@ class ProfileView extends React.Component {
               </Row>
             </Col>
           </Row>
-          <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
-            {t('profile.editProfileText')}
-          </Link>
         </AccountLayout>
       );
     } else {
