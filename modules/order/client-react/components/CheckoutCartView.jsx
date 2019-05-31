@@ -47,6 +47,7 @@ export default class CheckoutCartView extends React.Component {
     ]
   };
   count = 1;
+  
   totalRent(cartArray) {
     return cartArray.reduce((acum, item) => {
       acum += item.days * item.rent;
@@ -207,7 +208,7 @@ export default class CheckoutCartView extends React.Component {
             <Col
               xl={11}
               lg={{span: 13, offset: 1}}
-              sm={{ span: 18, offset: 3 }}
+              // sm={{ span: 20, offset: 1 }}
               xs={{ span: 22, offset: 1 }}
               className="margin20"
             >
@@ -246,10 +247,10 @@ class CartItem extends React.Component {
             <Icon type="close" />
           </Button>
         </div>
-        <Col md={8} xs={24}>
+        <Col sm={8} xs={24}>
           <img alt="" src={this.props.products.image} />
         </Col>
-        <Col md={16} xs={24} className="ColPad">
+        <Col sm={16} xs={24} className="ColPad">
           <Row className="font12">
             <Col md={16} sm={24}>
               <h3 className="productname">{this.props.products.name}</h3>
