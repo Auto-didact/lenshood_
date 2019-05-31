@@ -23,7 +23,6 @@ class MyListingProducts extends Component {
     this.setState({ status: e });
   }
   returnItem(item) {
-    console.log("item", item);
     return <DetailsCard buttonText="View" item={item} />;
   }
   renderItem(item) {

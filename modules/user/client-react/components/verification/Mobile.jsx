@@ -10,9 +10,7 @@ const Mobile = ({ mobile }) => {
       <>
         <h2>Your Mobile</h2>
         <h4>{mobile.mobile}</h4>
-        <h4>
-          Verfication Status: {mobile && mobile.isVerfied ? "Done" : "Not Done"}
-        </h4>
+        <h4>Verfication Status: {mobile.isVerfied ? "Done" : "Not Done"}</h4>
       </>
     );
   }
