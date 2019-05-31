@@ -26,14 +26,14 @@ const LoginView = ({ onSubmit, t }) => {
       <LayoutCenter>
         <h1 className="text-center">{t('login.form.title')}</h1>
         <LoginForm onSubmit={onSubmit} />
-        <hr />
+        {/* <hr />
         <Card>
           <CardGroup>
             <CardTitle>{t('login.cardTitle')}:</CardTitle>
             <CardText>admin@example.com:admin123</CardText>
             <CardText>user@example.com:user1234</CardText>
           </CardGroup>
-        </Card>
+        </Card> */}
       </LayoutCenter>
     </PageLayout>
   );

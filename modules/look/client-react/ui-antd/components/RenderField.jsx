@@ -12,9 +12,9 @@ const RenderField = ({ input, label, type, meta: { touched, error }, placeholder
   }
   return (
     <FormItem label={label} hasFeedback={type != 'textarea'} validateStatus={validateStatus} help={touched && error}>
-      {type != 'textarea' ? <Input {...input} placeholder={label || placeholder} type={type} /> : null}
+      {type != 'textarea' ? <Input {...input} placeholder={placeholder || label} type={type} /> : null}
 
-      {type == 'textarea' ? <TextArea {...input} placeholder={label || placeholder} /> : null}
+      {type == 'textarea' ? <TextArea {...input} placeholder={placeholder || label} /> : null}
     </FormItem>
   );
 };

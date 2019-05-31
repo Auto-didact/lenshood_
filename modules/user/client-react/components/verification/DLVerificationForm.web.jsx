@@ -14,7 +14,6 @@ const DLFormSchema = {
 };
 
 const DLForm = ({ values, handleSubmit, submitting, t }) => {
-  console.log(values);
   return (
     <Form name="DL" onSubmit={handleSubmit}>
       <Field name="dlId" component={RenderField} type="text" label={t('DL.field.dlId')} value={values.dlId} />

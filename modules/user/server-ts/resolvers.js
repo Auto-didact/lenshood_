@@ -88,7 +88,9 @@ export default pubsub => ({
           errors.email = t('user:emailIsExisted');
         }
         if (input.password.length < password.minLength) {
-          errors.password = t('user:passwordLength', { length: password.minLength });
+          errors.password = t('user:passwordLength', {
+            length: password.minLength
+          });
         }
         if (!isEmpty(errors)) throw new UserInputError('Failed to get events due to validation errors', { errors });
 
@@ -166,7 +168,9 @@ export default pubsub => ({
         }
 
         if (input.password && input.password.length < password.minLength) {
-          errors.password = t('user:passwordLength', { length: password.minLength });
+          errors.password = t('user:passwordLength', {
+            length: password.minLength
+          });
         }
 
         if (!isEmpty(errors)) throw new UserInputError('Failed to get events due to validation errors', { errors });
@@ -245,8 +249,12 @@ export default pubsub => ({
       }
     ),
     addUserDrivingLicense: withAuth(
-      (obj, args, { identity }) => {
-        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+      (obj, args, { identity, auth }) => {
+        if (typeof args.id !== 'undefined') {
+          return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        } else {
+          return ['user:update:self'];
+        }
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
         // To Do Check for user type and have validations for adding appropriately
@@ -286,8 +294,14 @@ export default pubsub => ({
         var user_dl;
         if (typeof input.id !== 'undefined') {
           user_dl = await User.addUserDrivingLicense(input.id, params);
+          await User.updateUserVerification(input.id, {
+            is_id_verified: true
+          });
         } else {
           user_dl = await User.addUserDrivingLicense(identity.id, params);
+          await User.updateUserVerification(identity.id, {
+            is_id_verified: true
+          });
         }
 
         // To Do set id verified to true
@@ -309,7 +323,11 @@ export default pubsub => ({
     ),
     addUserMobile: withAuth(
       (obj, args, { identity }) => {
-        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        if (typeof args.id !== 'undefined') {
+          return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        } else {
+          return ['user:update:self'];
+        }
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
         // To Do Check for user type and have validations for adding appropriately
@@ -330,9 +348,15 @@ export default pubsub => ({
 
           var mobile_db;
           if (typeof input.id !== 'undefined') {
-            mobile_db = await User.addUserMobile(input.id, { mobile: input.mobile, otp: otp });
+            mobile_db = await User.addUserMobile(input.id, {
+              mobile: input.mobile,
+              otp: otp
+            });
           } else {
-            mobile_db = await User.addUserMobile(identity.id, { mobile: input.mobile, otp: otp });
+            mobile_db = await User.addUserMobile(identity.id, {
+              mobile: input.mobile,
+              otp: otp
+            });
           }
         } else {
           // check if otp is correct
@@ -342,10 +366,15 @@ export default pubsub => ({
           mobile.isVerified = input.otp === otp;
           if (mobile.isVerified) {
             await User.updateUserMobileVerified(user.mobile.id);
-            await User.updateUserVerification(user.id, { is_mobile_verified: true });
+            await User.updateUserVerification(user.id, {
+              is_mobile_verified: true
+            });
 
             // set as primary mobile
-            const patched = await User.patchProfile(user.id, { mobile: mobile.mobile });
+            const patched = await User.patchProfile(user.id, {
+              mobile: mobile.mobile
+            });
+            console.log(patched);
           } else {
             mobile.error = 'Wrong OTP';
           }

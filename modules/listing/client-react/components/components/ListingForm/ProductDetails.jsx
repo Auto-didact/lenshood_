@@ -50,25 +50,51 @@ export default class ProductDetails extends Component {
           components: ['Lens']
         }
       ],
-      status: ['Idle', 'On Rent', 'On Shelf', 'Disabled'],
+      status: ['idle', 'on_rent', 'on_shelf', 'disabled'],
+      activeGearCategory: null,
       activeGearSubcategories: null,
       activeComponents: null,
 
       listingCondition: ['New', 'Good', 'Fair'],
       listingAge: ['< 1 year', '1 - 2 years', '> 3 years'],
 
+      listingContent: props.values.listingContent,
+
       isAdmin: false
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
+    this.handleGearSubCategoryChange = this.handleGearSubCategoryChange.bind(this);
   }
 
   handleGearCategoryChange = value => {
-    const activeCategory = this.state.listingCategories.filter(category => {
+    const activeGearCategory = this.state.listingCategories.filter(category => {
       return category.gearCategory == value;
     });
-    const gearSubcategories = activeCategory[0].gearSubcategories;
-    console.log(gearSubcategories);
-    this.setState({ activeGearSubcategories: gearSubcategories });
+    const gearSubcategories = activeGearCategory[0].gearSubcategories;
+
+    this.setState({ activeGearCategory: activeGearCategory, activeGearSubcategories: gearSubcategories });
+  };
+
+  handleGearSubCategoryChange = value => {
+    // const activeCategory = this.state.listingCategories.filter(category => {
+    //   return category.gearCategory == value;
+    // });
+    // const gearSubcategories = activeCategory[0].gearSubcategories;
+    // this.setState({ activeGearSubcategories: gearSubcategories });
+    const componentsObject = this.state.listingCategories[0].components.map(component => {
+      const container = {};
+
+      container['gear'] = component;
+      container['brand'] = '';
+      container['model'] = '';
+      container['serial'] = '';
+
+      return container;
+    });
+
+    if (this.state.listingContent.length === 0 && value === 'DSLR') {
+      this.setState({ listingContent: componentsObject });
+    }
   };
 
   // To Do Create a function to render options
@@ -85,6 +111,7 @@ export default class ProductDetails extends Component {
   render() {
     const values = this.props.values;
     const t = this.props.t;
+    const isAdmin = this.props.isAdmin;
     return (
       <>
         {/* Gear Category */}
@@ -111,6 +138,7 @@ export default class ProductDetails extends Component {
             type="text"
             label={t('listing.field.gearSubcategory')}
             value={values.gearSubcategory}
+            onChange={this.handleGearSubCategoryChange}
           >
             {this.state.activeGearSubcategories.map((category, idx) => (
               <Select.Option key={idx} value={category}>
@@ -152,16 +180,33 @@ export default class ProductDetails extends Component {
           name="listingContent"
           render={arrayHelpers => (
             <RenderDynamicField
+              buttonText="Add Component"
               keys={[
-                { key: 'gear', type: 'text' },
-                { key: 'brand', type: 'text' },
-                { key: 'model', type: 'text' },
-                { key: 'serial', type: 'text' }
+                {
+                  key: 'gear',
+                  type: 'text',
+                  label: 'Component Type',
+                  placeholder: 'ex: Body, Lens'
+                },
+                {
+                  key: 'brand',
+                  type: 'text',
+                  label: 'Brand',
+                  placeholder: 'ex: Canon, NIkon'
+                },
+                {
+                  key: 'model',
+                  type: 'text',
+                  label: 'Model',
+                  placeholder: 'ex: 5D MARK IV, D5600'
+                },
+                { key: 'serial', type: 'text', label: 'Serial Number' }
               ]}
               arrayHelpers={arrayHelpers}
               values={values.listingContent}
+              initialValues={this.state.listingContent}
               name="listingContent"
-              label={t('listing.field.listingContent')}
+              label={t('listing.field.gearComponents')}
             />
           )}
         />
@@ -185,19 +230,21 @@ export default class ProductDetails extends Component {
           value={values.description}
         />
 
-        <Field
-          name="listingDetail.condition"
-          component={RenderRadioGroup}
-          type="text"
-          label={t('listing.field.listingDetail.condition')}
-          value={values.listingDetail.condition}
-        >
-          {this.state.listingCondition.map((condition, idx) => (
-            <RadioButton key={idx} value={condition}>
-              {condition}
-            </RadioButton>
-          ))}
-        </Field>
+        {isAdmin && (
+          <Field
+            name="listingDetail.condition"
+            component={RenderRadioGroup}
+            type="text"
+            label={t('listing.field.listingDetail.condition')}
+            value={values.listingDetail.condition}
+          >
+            {this.state.listingCondition.map((condition, idx) => (
+              <RadioButton key={idx} value={condition}>
+                {condition}
+              </RadioButton>
+            ))}
+          </Field>
+        )}
 
         <Field
           name="listingDetail.age"
@@ -216,6 +263,7 @@ export default class ProductDetails extends Component {
           name="listingDetail.damages"
           render={arrayHelpers => (
             <RenderDynamicField
+              buttonText="Add Damages"
               keys={[
                 { key: 'imageUrl', type: 'image', label: 'Image' },
                 { key: 'damageDetail', type: 'text', label: 'Details' }
@@ -233,6 +281,7 @@ export default class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  values: PropTypes.object,
+  props: PropTypes.object,
+  isAdmin: PropTypes.bool,
   t: PropTypes.func
 };

@@ -46,7 +46,7 @@
       "description": "Description",
       "status": "Status",
       "isActive": "Active",
-      "listingContent": "Listing Content",
+      "gearComponents": "Gear Components",
       "listingDetail": {
         "condition": "Condition",
         "repairHistory": "Repair History",
@@ -55,7 +55,7 @@
       "listingRental": {
         "perDay": "Rent per Day",
         "perWeek": "Rent per Week",
-        "perMonth": "Rent per Week",
+        "perMonth": "Rent per Month",
         "replacementValue": "Replacement Value"
       }
     }
