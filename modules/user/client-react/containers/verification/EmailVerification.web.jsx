@@ -30,7 +30,6 @@ class EmailAdd extends Component {
 
   onSubmit(addEmail) {
     return async values => {
-      console.log(values);
       // To Do change email values in set email, uncomment below line
       // const emailData = await addEmail(values.email, values.otp);
       this.setEmail(values.email);
