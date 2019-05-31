@@ -1,12 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withRouter, NavLink } from "react-router-dom";
-import { Menu, Row, Col } from "antd";
-import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter, NavLink } from 'react-router-dom';
+import { Menu, Row, Col } from 'antd';
+import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
+import { slide as Burger } from 'react-burger-menu';
 
-import MenuItem from "./MenuItem";
-import DropDown from "./Dropdown";
-import Avatar from "./Avatar";
+import MenuItem from './MenuItem';
+import DropDown from './Dropdown';
+import Avatar from './Avatar';
 
 //import settings from '../../../../../settings';
 
@@ -15,7 +16,26 @@ export const ref = { modules: null };
 export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
-    current: "/"
+    current: '/',
+    width: 0,
+    height: 0
+  };
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  showSettings(event) {
+    event.preventDefault();
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
   handleClick = e => {
@@ -23,24 +43,60 @@ class NavBar extends React.Component {
       current: e.key
     });
   };
+  //Styling For Burger Menu
+  styling = {
+    bmBurgerButton: {
+      position: 'fixed',
+      width: '30px',
+      height: '24px',
+      right: '20px',
+      top: '20px'
+    },
+    bmBurgerBars: {
+      background: '#ffffff'
+    },
+    bmCrossButton: {
+      position: 'fixed',
+      height: '30px',
+      width: '30px',
+      right: '20px'
+    },
+    bmCross: {
+      background: '#23b195'
+    },
+    bmMenu: {
+      background: '#ffffff',
+      padding: '0 0 0 0',
+      fontSize: '1.15em'
+    },
+    bmMorphShape: {
+      fill: '#373a47'
+    },
+    bmItemList: {
+      color: '#b8b7ad',
+      padding: '4px'
+    },
+    bmItem: {
+      display: 'inline-block'
+    },
+    bmOverlay: {
+      background: 'rgba(0, 0, 0, 0)'
+    }
+  };
 
   render() {
-    return (
+    return this.state.width > 800 ? (
       <Row gutter={0}>
         <Col span={14}>
           <Menu
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: "60px" }}
+            style={{ lineHeight: '60px' }}
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
-                <img
-                  src={require("../../logo/Logo2.png")}
-                  height="40"
-                  width="40"
-                />
+                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
               </NavLink>
             </MenuItem>
             {__DEV__ && (
@@ -56,9 +112,7 @@ class NavBar extends React.Component {
 
             <IfLoggedIn role="admin">
               <MenuItem>
-                <DropDown type="safety-certificate">
-                  {ref.modules.navItemsAdmin}
-                </DropDown>
+                <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
               </MenuItem>
             </IfLoggedIn>
             {ref.modules.navItems}
@@ -69,7 +123,7 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: "60px", float: "right" }}
+            style={{ lineHeight: '60px', float: 'right' }}
           >
             {ref.modules.navItemsRight}
             <IfLoggedIn>
@@ -82,6 +136,98 @@ class NavBar extends React.Component {
           </Menu>
         </Col>
       </Row>
+    ) : (
+      //Render This if screen width less than 800
+
+      <div id="outer-container">
+        <div style={{ float: 'left' }}>
+          <NavLink to="/" className="nav-link">
+            <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+          </NavLink>
+        </div>
+        <Menu
+          onClick={this.handleClick}
+          selectedKeys={[this.props.location.pathname]}
+          mode="horizontal"
+          style={{ lineHeight: '60px', float: 'right' }}
+        >
+          {/*ref.modules.navItemsRight*/}
+          <IfLoggedIn>
+            <MenuItem>
+              <DropDown content={<Avatar />} noicon>
+                {ref.modules.navItemsUser}
+              </DropDown>
+            </MenuItem>
+          </IfLoggedIn>
+        </Menu>
+
+        <Burger right width={250} styles={this.styling}>
+          <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '40px' }}>
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.props.location.pathname]}
+              mode="horizontal"
+              style={{ lineHeight: '60px', float: 'left' }}
+            >
+              {ref.modules.navItemsRight}
+            </Menu>
+          </div>
+
+          {ref.modules.navItemsTest.map(item => {
+            return (
+              <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+                <NavLink to={item.key} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
+                  {item.key.charAt(1).toUpperCase() + item.key.substring(2)}
+                </NavLink>
+              </div>
+            );
+          })}
+          <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+            <a href="/graphiql" className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
+              GraphiQL
+            </a>
+          </div>
+
+          {ref.modules.navItemsAdmin.map(item => {
+            let k = item ? (item.key.charAt(0) == '/' ? item.key : item.props.children.key) : null;
+            return (
+              <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+                <NavLink to={k} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
+                  {k.charAt(1).toUpperCase() + k.substring(2)}
+                </NavLink>
+              </div>
+            );
+          })}
+
+          {/*<Menu
+                  onClick={this.handleClick}
+                  selectedKeys={[this.props.location.pathname]}
+                  mode="horizontal"
+                  style={{ lineHeight: "60px" }}
+                >
+                  
+                  {__DEV__ && (
+                    <MenuItem>
+                      <DropDown type="deployment-unit">
+                        {ref.modules.navItemsTest}
+                        <MenuItem>
+                          <a href="/graphiql">GraphiQL</a>
+                        </MenuItem>
+                      </DropDown>
+                    </MenuItem>
+                  )}
+
+                  <IfLoggedIn role="admin">
+                    <MenuItem>
+                      <DropDown type="safety-certificate">
+                        {ref.modules.navItemsAdmin}
+                      </DropDown>
+                    </MenuItem>
+                  </IfLoggedIn>
+                  {ref.modules.navItems}
+                  </Menu>*/}
+        </Burger>
+      </div>
     );
   }
 }
