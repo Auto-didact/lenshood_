@@ -249,8 +249,12 @@ export default pubsub => ({
       }
     ),
     addUserDrivingLicense: withAuth(
-      (obj, args, { identity }) => {
-        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+      (obj, args, { identity, auth }) => {
+        if (typeof args.id !== 'undefined') {
+          return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        } else {
+          return ['user:update:self'];
+        }
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
         // To Do Check for user type and have validations for adding appropriately
@@ -290,8 +294,14 @@ export default pubsub => ({
         var user_dl;
         if (typeof input.id !== 'undefined') {
           user_dl = await User.addUserDrivingLicense(input.id, params);
+          await User.updateUserVerification(input.id, {
+            is_id_verified: true
+          });
         } else {
           user_dl = await User.addUserDrivingLicense(identity.id, params);
+          await User.updateUserVerification(identity.id, {
+            is_id_verified: true
+          });
         }
 
         // To Do set id verified to true
@@ -313,7 +323,11 @@ export default pubsub => ({
     ),
     addUserMobile: withAuth(
       (obj, args, { identity }) => {
-        return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        if (typeof args.id !== 'undefined') {
+          return identity.id !== args.input.id ? ['user:update'] : ['user:update:self'];
+        } else {
+          return ['user:update:self'];
+        }
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
         // To Do Check for user type and have validations for adding appropriately
@@ -360,6 +374,7 @@ export default pubsub => ({
             const patched = await User.patchProfile(user.id, {
               mobile: mobile.mobile
             });
+            console.log(patched);
           } else {
             mobile.error = 'Wrong OTP';
           }

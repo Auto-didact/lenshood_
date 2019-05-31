@@ -9,6 +9,7 @@ type User {
   identification: [UserIdentification]
   verification: UserVerification
   drivingLicense: UserDrivingLicense
+  mobile: UserMobile
   endorsements: [UserEndorsement]
   endorsed: [UserEndorsed]
   followers: [UserFollower]
@@ -97,6 +98,15 @@ type UserDrivingLicense {
   createdAt: String
   updatedAt: String
 }
+
+type UserMobile {
+  id: Int
+  mobile: String!
+  otpSent: Boolean
+  isVerified: Boolean
+  error: String
+}
+
 
 type UserEndorsement {
   id: Int
@@ -199,14 +209,6 @@ extend type Query {
 
 type UserPayload {
   user: User
-}
-
-type UserMobile {
-  id: Int
-  mobile: String!
-  otpSent: Boolean
-  isVerified: Boolean
-  error: String
 }
 
 extend type Mutation {
