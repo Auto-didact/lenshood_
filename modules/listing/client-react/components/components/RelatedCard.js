@@ -22,12 +22,14 @@ class RelatedCard extends Component {
     const rent_per_day = listing.listingRental.perDay || "Not Provided";
     const title = listing.gearCategory || "Not Provided";
     const seller =
-      listing.user.profile.firstName.concat(
-        " ",
-        listing.user.profile.lastName
-      ) || "Name Not Provided";
+      (listing.user.profile &&
+        listing.user.profile.firstName.concat(
+          " ",
+          listing.user.profile.lastName
+        )) ||
+      "Name Not Provided";
     const sellerAvatar =
-      listing.user.profile.avatar ||
+      (listing.user.profile && listing.user.profile.avatar) ||
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
     const rating = listing.user.rating || null;
     const Rating = r => {
