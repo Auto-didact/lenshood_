@@ -101,7 +101,7 @@ class MobileAdd extends Component {
         ) : (
           ""
         )}
-        {console.log(this.state.mobile)}
+
         {this.state.vStatus ? <Mobile mobile={this.state.mobile} /> : ""}
       </VerificationModal>
     );

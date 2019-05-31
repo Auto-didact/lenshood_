@@ -21,8 +21,22 @@ class RelatedCard extends Component {
 
     const rent_per_day = listing.listingRental.perDay || "Not Provided";
     const title = listing.gearCategory || "Not Provided";
-    const seller = "Ravi Kishan(To Do)";
-    const rating = 4;
+    const seller =
+      listing.user.profile.firstName.concat(
+        " ",
+        listing.user.profile.lastName
+      ) || "Name Not Provided";
+    const sellerAvatar =
+      listing.user.profile.avatar ||
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+    const rating = listing.user.rating || null;
+    const Rating = r => {
+      if (r) {
+        return <Rate disabled defaultValue={r} className="CardRate" />;
+      } else {
+        return "No Reviews";
+      }
+    };
 
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
@@ -38,12 +52,12 @@ class RelatedCard extends Component {
           />
           <Meta
             className="RelCardMeta"
-            avatar={<Avatar />}
+            avatar={<Avatar src={sellerAvatar} />}
             title={
               <h3 className="RelCardh">
                 {seller}
                 <br />
-                <Rate disabled defaultValue={rating} className="CardRate" />
+                {Rating(rating)}
                 {/* <div className="RelIconGroup">
                   <Icon type="car" theme="filled" className="marginR10" />
                   <Icon type="safety-certificate" theme="filled" />
