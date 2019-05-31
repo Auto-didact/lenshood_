@@ -42,7 +42,7 @@ const renderSocialButtons = (buttonsLength, t) => {
     </div>
   ) : (
     <div>
-      {facebook.enabled && (
+      {/* {facebook.enabled && (
         <div className="text-center">
           <FacebookButton text={t('login.fbBtn')} type={'button'} />
         </div>
@@ -51,7 +51,7 @@ const renderSocialButtons = (buttonsLength, t) => {
         <div className="text-center">
           <GoogleButton text={t('login.googleBtn')} type={'button'} />
         </div>
-      )}
+      )} */}
       {github.enabled && (
         <div className="text-center">
           <GitHubButton text={t('login.githubBtn')} type={'button'} />
