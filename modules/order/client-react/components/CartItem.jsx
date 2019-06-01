@@ -1,67 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
 import { Row, Col, Button, Icon, DatePicker, Modal } from "antd";
 import moment from "moment";
 
-export default class CartItem extends React.Component {
-  state = {
-    startValue: moment(this.props.products.date.start, "DD-MM-YY"),
-    endValue: moment(this.props.products.date.end, "DD-MM-YY"),
-    endOpen: false
-  };
-  // disabledStartDate = startValue => {
-  //   const endValue = this.state.endValue;
-  //   if (!startValue || !endValue) {
-  //     return false;
-  //   }
-  //   return startValue.valueOf() > endValue.valueOf();
-  // };
-  // disabledEndDate = endValue => {
-  //   const startValue = this.state.startValue;
-  //   if (!endValue || !startValue) {
-  //     return false;
-  //   }
-  //   return endValue.valueOf() <= startValue.valueOf();
-  // };
+const { RangePicker } = DatePicker;
 
-  onChange = (field, value) => {
-    this.setState({
-      [field]: value
-    });
-  };
-
-  onStartChange = value => {
-    this.onChange("startValue", value);
-  };
-
-  onEndChange = value => {
-    this.onChange("endValue", value);
-  };
-
-  handleStartOpenChange = open => {
-    if (!open) {
-      this.setState({ endOpen: true });
-    }
-  };
-
-  handleEndOpenChange = open => {
-    this.setState({ endOpen: open });
-  };
-  cancelChange() {
-    this.setState({
-      startValue: moment(this.props.products.date.start, "DD-MM-YY"),
-      endValue: moment(this.props.products.date.end, "DD-MM-YY")
-    });
-    this.props.setModal1Visible();
-  }
-  render() {
-    let product = this.props.products;
-    const { startValue, endValue, endOpen } = this.state;
+const CartItem = (props) => {
+    let product = props.products;
+    const [dateRange, setDateRange] = useState([moment(product.date.start,"DD-MM-YY"), moment(product.date.end,"DD-MM-YY")]);
     return (
       <Row className="cartitem borderRadius9">
         <div className="listcloseicons">
           <Button
-            onClick={() => this.cancelChange()}
+            onClick={() => props.setModal1Visible()}
             className="borderzero listclose"
           >
             <Icon type="edit" />
@@ -69,46 +20,27 @@ export default class CartItem extends React.Component {
           <Modal
             title="Edit Product"
             centered
-            visible={this.props.modal1Visible}
-            onOk={() =>
-              this.props.editProduct(
-                product.id,
-                this.state.startValue,
-                this.state.endValue
-              )
-            }
-            onCancel={() => this.cancelChange()}
+            visible={props.modal1Visible}
+            onOk={() => props.editProduct(product.id, dateRange[0], dateRange[1])}
+            onCancel={() => props.setModal1Visible()}
           >
             <h3>
               <strong>{product.name}</strong>
             </h3>
             <h4>Change Dates:</h4>
-            <DatePicker
-              size="small"
-              // disabledDate={this.disabledStartDate}
+            <RangePicker
+              value={dateRange}
               format="DD-MM-YY"
-              value={startValue}
-              placeholder="Start"
-              onChange={this.onStartChange}
-              onOpenChange={this.handleStartOpenChange}
-            />
-            <DatePicker
               size="small"
-              // disabledDate={this.disabledEndDate}
-              format="DD-MM-YY"
-              value={endValue}
-              placeholder="End"
-              onChange={this.onEndChange}
-              open={endOpen}
-              onOpenChange={this.handleEndOpenChange}
+              onChange={v => setDateRange(v)}
             />
             <br />
             <br />
-            <h4>No of days : {endValue.diff(startValue, "days") + 1}</h4>
+            <h4>No of days : {dateRange[1].diff(dateRange[0], "days") + 1}</h4>
           </Modal>
           <Button
             className="borderzero listclose"
-            onClick={() => this.props.deleteProduct()}
+            onClick={() => props.deleteProduct()}
           >
             <Icon type="close" />
           </Button>
@@ -158,4 +90,5 @@ export default class CartItem extends React.Component {
       </Row>
     );
   }
-}
+
+export default CartItem
