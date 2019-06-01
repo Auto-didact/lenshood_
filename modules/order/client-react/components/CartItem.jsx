@@ -9,20 +9,20 @@ export default class CartItem extends React.Component {
     endValue: moment(this.props.products.date.end, "DD-MM-YY"),
     endOpen: false
   };
-  disabledStartDate = startValue => {
-    const endValue = this.state.endValue;
-    if (!startValue || !endValue) {
-      return false;
-    }
-    return startValue.valueOf() > endValue.valueOf();
-  };
-  disabledEndDate = endValue => {
-    const startValue = this.state.startValue;
-    if (!endValue || !startValue) {
-      return false;
-    }
-    return endValue.valueOf() <= startValue.valueOf();
-  };
+  // disabledStartDate = startValue => {
+  //   const endValue = this.state.endValue;
+  //   if (!startValue || !endValue) {
+  //     return false;
+  //   }
+  //   return startValue.valueOf() > endValue.valueOf();
+  // };
+  // disabledEndDate = endValue => {
+  //   const startValue = this.state.startValue;
+  //   if (!endValue || !startValue) {
+  //     return false;
+  //   }
+  //   return endValue.valueOf() <= startValue.valueOf();
+  // };
 
   onChange = (field, value) => {
     this.setState({
@@ -85,7 +85,7 @@ export default class CartItem extends React.Component {
             <h4>Change Dates:</h4>
             <DatePicker
               size="small"
-              disabledDate={this.disabledStartDate}
+              // disabledDate={this.disabledStartDate}
               format="DD-MM-YY"
               value={startValue}
               placeholder="Start"
@@ -94,7 +94,7 @@ export default class CartItem extends React.Component {
             />
             <DatePicker
               size="small"
-              disabledDate={this.disabledEndDate}
+              // disabledDate={this.disabledEndDate}
               format="DD-MM-YY"
               value={endValue}
               placeholder="End"
@@ -121,34 +121,37 @@ export default class CartItem extends React.Component {
             <Col md={16} sm={24}>
               <h3 className="productname">{product.name}</h3>
             </Col>
-            <br/>
+            <br />
             {/* <Col lg={12} sm={12} xs={14} className="font11h"> */}
-              {/* Refundundable deposit
+            {/* Refundundable deposit
               <br />
               <strong className="colorCursor">&#8377; {product.refund}</strong>
               <br />
               <br /> */}
-              {/* Rental period <br />
+            {/* Rental period <br />
               <strong>
                 {product.date.start} - {product.date.end}
               </strong>
             </Col> */}
             <Col lg={16} sm={24}>
-            <Col span={12} className="font11h">
-              Rent <br />
-              <strong>&#8377; {product.rent}</strong></Col>
               <Col span={12} className="font11h">
-              {/* <br />
+                Rent <br />
+                <strong>&#8377; {product.rent}</strong>
+              </Col>
+              <Col span={12} className="font11h">
+                {/* <br />
               <br /> */}
-              Days: <br />
-              <strong>{product.days}</strong>
-            </Col>
+                Days: <br />
+                <strong>{product.days}</strong>
+              </Col>
             </Col>
             <Col md={16} sm={24} className="marginT20">
-              <p className="font11h">Rental period <br />
-              <strong>
-                {product.date.start} - {product.date.end}
-              </strong></p>
+              <p className="font11h">
+                Rental period <br />
+                <strong>
+                  {product.date.start} - {product.date.end}
+                </strong>
+              </p>
             </Col>
           </Row>
         </Col>

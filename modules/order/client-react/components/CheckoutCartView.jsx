@@ -94,7 +94,11 @@ export default class CheckoutCartView extends React.Component {
             Total rent amount{" "}
             <strong className="colorFloat">
               &#8377;
-              {TotalAmount(this.state.products, this.state.gst, this.state.deliveryfee)}
+              {TotalAmount(
+                this.state.products,
+                this.state.gst,
+                this.state.deliveryfee
+              )}
             </strong>
           </h3>
           {/* <p>
@@ -174,16 +178,21 @@ export default class CheckoutCartView extends React.Component {
 
   editProduct(id, startDate, EndDate) {
     // Edit datat goes here
-    var i, index;
-    for (i = 0; i < this.state.products.length; i++) {
-      if (this.state.products[i].id == id) {
-        this.state.products[i].date.start = startDate.format("DD-MM-YY");
-        this.state.products[i].date.end = EndDate.format("DD-MM-YY");
-        this.state.products[i].days = EndDate.diff(startDate, "days") + 1;
-        break;
+
+    if (EndDate.diff(startDate, "days") < 0) {
+      alert("Error in date input");
+    } else {
+      var i, index;
+      for (i = 0; i < this.state.products.length; i++) {
+        if (this.state.products[i].id == id) {
+          this.state.products[i].date.start = startDate.format("DD-MM-YY");
+          this.state.products[i].date.end = EndDate.format("DD-MM-YY");
+          this.state.products[i].days = EndDate.diff(startDate, "days") + 1;
+          break;
+        }
       }
+      this.setModal1Visible();
     }
-    this.setModal1Visible();
   }
 
   render() {
@@ -192,33 +201,35 @@ export default class CheckoutCartView extends React.Component {
         {renderMetaData()}
         <div className="checkoutDiv">
           <Row>
-            <CheckoutSteps step={0} />
-            <Col span={24} className="font14">
-              <div>
-                <strong>My cart - </strong>
-                {this.state.products.length} items
-              </div>
-              <div>
-                Total rent:{" "}
-                <strong>&#8377; {TotalRent(this.state.products)} </strong>
-              </div>
-            </Col>
-            <br />
-            <br />
-            <Col
-              xl={11}
-              lg={{ span: 13, offset: 1 }}
-              xs={{ span: 22, offset: 1 }}
-              className="margin20"
-            >
-              {this.renderCart()}
-            </Col>
-            <Col
-              lg={7}
-              sm={{ span: 22, offset: 0 }}
-              xs={{ span: 22, offset: 1 }}
-            >
-              {this.cartTotal()}
+            <Col lg={{ span: 22, offset: 2 }} xs={{ span: 24, offset: 0 }}>
+              <CheckoutSteps step={0} />
+              <Col span={24} className="font14">
+                <div>
+                  <strong>My cart - </strong>
+                  {this.state.products.length} items
+                </div>
+                <div>
+                  Total rent:{" "}
+                  <strong>&#8377; {TotalRent(this.state.products)} </strong>
+                </div>
+              </Col>
+              <br />
+              <br />
+              <Col
+                xl={11}
+                lg={{ span: 13, offset: 1 }}
+                xs={{ span: 24, offset: 0 }}
+                className="margin20"
+              >
+                {this.renderCart()}
+              </Col>
+              <Col
+                lg={{ span: 7, offset: 1 }}
+                sm={{ span: 24, offset: 0 }}
+                xs={{ span: 24, offset: 0 }}
+              >
+                {this.cartTotal()}
+              </Col>
             </Col>
           </Row>
         </div>
