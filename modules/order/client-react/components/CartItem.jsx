@@ -121,24 +121,34 @@ export default class CartItem extends React.Component {
             <Col md={16} sm={24}>
               <h3 className="productname">{product.name}</h3>
             </Col>
-            <Col lg={12} sm={12} xs={14} className="font11h">
-              Refundundable deposit
+            <br/>
+            {/* <Col lg={12} sm={12} xs={14} className="font11h"> */}
+              {/* Refundundable deposit
               <br />
               <strong className="colorCursor">&#8377; {product.refund}</strong>
               <br />
-              <br />
-              Rental period <br />
+              <br /> */}
+              {/* Rental period <br />
               <strong>
                 {product.date.start} - {product.date.end}
               </strong>
-            </Col>
-            <Col lg={10} sm={12} xs={10} className="font11h">
+            </Col> */}
+            <Col lg={16} sm={24}>
+            <Col span={12} className="font11h">
               Rent <br />
-              <strong>&#8377; {product.rent}</strong>
-              <br />
-              <br />
+              <strong>&#8377; {product.rent}</strong></Col>
+              <Col span={12} className="font11h">
+              {/* <br />
+              <br /> */}
               Days: <br />
               <strong>{product.days}</strong>
+            </Col>
+            </Col>
+            <Col md={16} sm={24} className="marginT20">
+              <p className="font11h">Rental period <br />
+              <strong>
+                {product.date.start} - {product.date.end}
+              </strong></p>
             </Col>
           </Row>
         </Col>

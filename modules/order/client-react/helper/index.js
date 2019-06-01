@@ -4,10 +4,11 @@ export function Refund(cartArray) {
     return acum;
   }, 0);
 }
-export function TotalAmount(cart) {
+export function TotalAmount(cart, gst, delivery) {
   let total = TotalRent(cart);
-  total -= 0.25 * total;
-  total += 100; // service tax
+  // total -= 0.25 * total;
+  total += (gst/100)*total
+  total += delivery; // delivery fee
   return total;
 }
 export function TotalRent(cartArray) {
