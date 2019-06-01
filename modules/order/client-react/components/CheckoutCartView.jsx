@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Button, Card, Icon, DatePicker } from "antd";
 import CheckoutSteps from "./CheckoutSteps";
 import camera from "../resources/camera.jpg";
+import { TotalAmount, TotalRent, Refund } from "../helper/index";
 
 const { RangePicker } = DatePicker;
 
@@ -45,16 +46,10 @@ export default class CheckoutCartView extends React.Component {
         refund: 3000,
         rent: 200
       }
-    ]
+    ],
+    servicefee: 100
   };
   count = 1;
-
-  totalRent(cartArray) {
-    return cartArray.reduce((acum, item) => {
-      acum += item.days * item.rent;
-      return acum;
-    }, 0);
-  }
 
   cartTotal() {
     return (
@@ -80,25 +75,26 @@ export default class CheckoutCartView extends React.Component {
             25% Multi day discount{" "}
             <div className="colorFloat">
               -&#8377;
-              {0.25 * this.totalRent(this.state.products)}
+              {0.25 * TotalRent(this.state.products)}
             </div>
           </p>
 
           <p>
-            Service fee <div className="rightfloat">&#8377; 100</div>
+            Service fee{" "}
+            <div className="rightfloat">&#8377; {this.state.servicefee}</div>
           </p>
           <hr />
           <h3>
             Total rent amount{" "}
             <strong className="colorFloat">
               &#8377;
-              {this.totalAmount(this.state.products)}
+              {TotalAmount(this.state.products)}
             </strong>
           </h3>
           <p>
             Refundable deposit{" "}
             <div className="rightfloat">
-              &#8377; {this.Refund(this.state.products)}
+              &#8377; {Refund(this.state.products)}
             </div>
           </p>
         </div>
@@ -109,18 +105,7 @@ export default class CheckoutCartView extends React.Component {
       </Card>
     );
   }
-  Refund(cartArray) {
-    return cartArray.reduce((acum, item) => {
-      acum += item.refund;
-      return acum;
-    }, 0);
-  }
-  totalAmount(cart) {
-    let total = this.totalRent(cart);
-    total -= 0.25 * total;
-    total += 100;
-    return total;
-  }
+
   renderCart() {
     return this.state.products.map(cartItem => {
       return (
@@ -169,9 +154,20 @@ export default class CheckoutCartView extends React.Component {
     });
   }
 
-  editProduct = event => {
+  editProduct = id => {
     // CODE FOR EDITTING THE POST WILL GO HERE
     console.log("Edit Product Details!!");
+    var i, index;
+    for (i = 0; i < this.state.products.length; i++) {
+      if (this.state.products[i].id == id) {
+        index = i;
+        break;
+      }
+    }
+    // this.setState({
+    //   products[index].date.start:
+    //   ]
+    // });
   };
 
   render() {
@@ -191,7 +187,7 @@ export default class CheckoutCartView extends React.Component {
                 <div>
                   Total rent:{" "}
                   <strong>
-                    &#8377; {this.totalRent(this.state.products)}{" "}
+                    &#8377; {TotalRent( this.state.products)}{" "}
                   </strong>
                 </div>
               </Col>
@@ -231,10 +227,6 @@ export default class CheckoutCartView extends React.Component {
 }
 
 class CartItem extends React.Component {
-  selectDate() {
-    console.log("Calender");
-    return <RangePicker size="small" />;
-  }
   render() {
     return (
       <Row className="cartitem borderRadius9">
@@ -269,7 +261,7 @@ class CartItem extends React.Component {
               <br />
               <br />
               Rental period <br />
-              <strong onClick={() => this.selectDate.bind(this)}>
+              <strong>
                 {this.props.products.date.start} -{" "}
                 {this.props.products.date.end}
               </strong>
