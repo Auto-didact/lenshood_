@@ -16,4 +16,3 @@ export function TotalRent(cartArray) {
     return acum;
   }, 0);
 }
-
