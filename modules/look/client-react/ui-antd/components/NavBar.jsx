@@ -67,7 +67,7 @@ class NavBar extends React.Component {
     bmMenu: {
       background: '#ffffff',
       padding: '0 0 0 0',
-      fontSize: '1.15em'
+      fontSize: '1.35em'
     },
     bmMorphShape: {
       fill: '#373a47'
@@ -167,7 +167,7 @@ class NavBar extends React.Component {
               onClick={this.handleClick}
               selectedKeys={[this.props.location.pathname]}
               mode="horizontal"
-              style={{ lineHeight: '60px', float: 'left' }}
+              style={{ lineHeight: '60px', float: 'left', width: '246px' }}
             >
               {ref.modules.navItemsRight}
             </Menu>
@@ -177,14 +177,17 @@ class NavBar extends React.Component {
             return (
               <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
                 <NavLink to={item.key} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-                  {item.key.charAt(1).toUpperCase() + item.key.substring(2)}
+                  <div style={{ width: '236px', marginLeft: '10px' }}>
+                    {' '}
+                    {item.key.charAt(1).toUpperCase() + item.key.substring(2)}
+                  </div>
                 </NavLink>
               </div>
             );
           })}
           <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
             <a href="/graphiql" className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-              GraphiQL
+              <div style={{ width: '236px', marginLeft: '10px' }}>GraphiQL</div>
             </a>
           </div>
 
@@ -193,39 +196,11 @@ class NavBar extends React.Component {
             return (
               <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
                 <NavLink to={k} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-                  {k.charAt(1).toUpperCase() + k.substring(2)}
+                  <div style={{ width: '236px', marginLeft: '10px' }}>{k.charAt(1).toUpperCase() + k.substring(2)}</div>
                 </NavLink>
               </div>
             );
           })}
-
-          {/*<Menu
-                  onClick={this.handleClick}
-                  selectedKeys={[this.props.location.pathname]}
-                  mode="horizontal"
-                  style={{ lineHeight: "60px" }}
-                >
-                  
-                  {__DEV__ && (
-                    <MenuItem>
-                      <DropDown type="deployment-unit">
-                        {ref.modules.navItemsTest}
-                        <MenuItem>
-                          <a href="/graphiql">GraphiQL</a>
-                        </MenuItem>
-                      </DropDown>
-                    </MenuItem>
-                  )}
-
-                  <IfLoggedIn role="admin">
-                    <MenuItem>
-                      <DropDown type="safety-certificate">
-                        {ref.modules.navItemsAdmin}
-                      </DropDown>
-                    </MenuItem>
-                  </IfLoggedIn>
-                  {ref.modules.navItems}
-                  </Menu>*/}
         </Burger>
       </div>
     );
