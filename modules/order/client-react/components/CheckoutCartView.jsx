@@ -46,8 +46,9 @@ export default class CheckoutCartView extends React.Component {
         rent: 200
       }
     ],
-    servicefee: 100,
-    modal1Visible: false
+    deliveryfee: 100,
+    modal1Visible: false,
+    gst: 18
   };
   count = 1;
 
@@ -75,36 +76,47 @@ export default class CheckoutCartView extends React.Component {
             </div>
           ))}
 
-          <p>
+          {/* <p>
             25% Multi day discount{" "}
             <div className="colorFloat">
               -&#8377;
               {0.25 * TotalRent(this.state.products)}
             </div>
-          </p>
+          </p> */}
 
           <p>
-            Service fee{" "}
-            <div className="rightfloat">&#8377; {this.state.servicefee}</div>
+            Delivery fee (Drop and Pick Up){" "}
+            <div className="rightfloat">&#8377; {this.state.deliveryfee}</div>
           </p>
           <hr />
+          <p>GST ({this.state.gst}%)</p>
           <h3>
             Total rent amount{" "}
             <strong className="colorFloat">
               &#8377;
-              {TotalAmount(this.state.products)}
+              {TotalAmount(this.state.products, this.state.gst, this.state.deliveryfee)}
             </strong>
           </h3>
-          <p>
+          {/* <p>
             Refundable deposit{" "}
             <div className="rightfloat">
               &#8377; {Refund(this.state.products)}
             </div>
-          </p>
+          </p> */}
         </div>
         <br />
         <Button className="themeColor" block>
           Checkout
+        </Button>
+        <br />
+        <Button
+          type="primary"
+          className="margin20"
+          ghost
+          onClick={() => this.Addproducts()}
+          block
+        >
+          Add more products
         </Button>
       </Card>
     );
@@ -181,26 +193,15 @@ export default class CheckoutCartView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <CheckoutSteps step={0} />
-            <Col span={24}>
-              {" "}
-              <Col span={12} className="font14">
-                <div>
-                  <strong>My cart - </strong>
-                  {this.state.products.length} items
-                </div>
-                <div>
-                  Total rent:{" "}
-                  <strong>&#8377; {TotalRent(this.state.products)} </strong>
-                </div>
-              </Col>
-              <Col span={12}>
-                <p
-                  onClick={() => this.Addproducts()}
-                  className="AddMoreproducts"
-                >
-                  Add more products
-                </p>
-              </Col>
+            <Col span={24} className="font14">
+              <div>
+                <strong>My cart - </strong>
+                {this.state.products.length} items
+              </div>
+              <div>
+                Total rent:{" "}
+                <strong>&#8377; {TotalRent(this.state.products)} </strong>
+              </div>
             </Col>
             <br />
             <br />
