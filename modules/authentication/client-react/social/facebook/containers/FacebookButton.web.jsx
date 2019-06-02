@@ -13,14 +13,14 @@ const facebookLogin = () => {
 
 const FacebookButton = withApollo(({ text }) => {
   return (
-    <Button type="button" size="lg" onClick={facebookLogin} className="facebookBtn">
-      <div className="iconContainer">
+    <Button type="button" onClick={facebookLogin} className="fbookbtn" block>
+      {/* <div className="iconContainer">
         <FontAwesomeIcon icon={faFacebookSquare} className="facebookIcon" />
         <div className="separator" />
       </div>
-      <div className="btnText">
-        <span>{text}</span>
-      </div>
+      <div className="btnText"> */}
+        <span>FaceBook</span>
+      {/* </div> */}
     </Button>
   );
 });
