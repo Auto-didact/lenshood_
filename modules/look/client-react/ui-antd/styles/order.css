@@ -186,3 +186,27 @@
   text-shadow: 0.5px 0 0;
   font-size: 19px;
 }
+
+.OrderHead {
+  text-shadow: 0.5px 0 0;
+  font-size: 17px;
+}
+
+.PaidMethodColor {
+  color: #676767;
+}
+
+.ProductRef {
+  float: right;
+  letter-spacing: 1px;
+}
+
+.RefundOrder {
+  font-size: 11px;
+  color: #4a4a4a;
+  letter-spacing: 0.5px;
+}
+
+.TrackSteps .ant-steps-item-title {
+  width: 100% !important;
+}
