@@ -58,7 +58,7 @@ export default class CheckoutCartView extends React.Component {
 
   cartTotal() {
     return (
-      <Card className="margin20">
+      <Card className="margin20 boxShadowTheme borderRadius9">
         <h2 className="cartSum">Cart Summary</h2>
         <div className="font12">
           {this.state.products.map((item, key) => (
@@ -89,7 +89,11 @@ export default class CheckoutCartView extends React.Component {
             <div className="rightfloat">&#8377; {this.state.deliveryfee}</div>
           </p>
           <hr />
-          <p>GST ({this.state.gst}%)</p>
+          <p>GST ({this.state.gst}%)<div className="rightfloat">&#8377; {this.state.gst*TotalAmount(
+                this.state.products,
+                0,
+                0
+              )/100}</div></p>
           <h3>
             Total rent amount{" "}
             <strong className="colorFloat">
