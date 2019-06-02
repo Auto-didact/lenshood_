@@ -46,7 +46,7 @@ class NavBar extends React.Component {
   //Styling For Burger Menu
   styling = {
     bmBurgerButton: {
-      position: 'fixed',
+      position: 'absolute',
       width: '30px',
       height: '24px',
       right: '20px',
