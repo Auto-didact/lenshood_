@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { withApollo } from "react-apollo";
 import faGooglePlusSquare from "@fortawesome/fontawesome-free-brands/faGooglePlusSquare";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import { Button } from "@gqlapp/look-client-react";
+// import { Button } from "@gqlapp/look-client-react";
 import "./GoogleButton.css";
+import { Icon, Button } from "antd";
 
 const googleLogin = () => {
   window.location = "/auth/google";
@@ -12,14 +13,10 @@ const googleLogin = () => {
 
 const GoogleButton = withApollo(({ text }) => {
   return (
-    <Button type="button" onClick={googleLogin} className="googlebtn" block>
-      {/* <div className="iconContainer">
-        <FontAwesomeIcon icon={faGooglePlusSquare} className="googleIcon" /> */}
-        {/* <div className="separator" /> */}
-      {/* </div> */}
-      {/* <div className="btnText"> */}
-        <span>Google</span>
-      {/* </div> */}
+    <Button onClick={googleLogin} className="googleBtn" block>
+      <Icon type="google" />
+      <div className="separator" />
+      <span>Continue with Google</span>
     </Button>
   );
 });
