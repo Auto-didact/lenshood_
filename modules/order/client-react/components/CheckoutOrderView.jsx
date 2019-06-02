@@ -74,6 +74,7 @@ export default class CheckoutOrderView extends React.Component {
               <Col
                 lg={{ span: 8, offset: 2 }}
                 xs={{ span: 24, offset: 0 }}
+                className="marginT20"
               >
                 <OrderCard
                   product={this.state.product}
