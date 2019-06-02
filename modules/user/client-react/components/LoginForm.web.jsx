@@ -87,28 +87,32 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
   return (
     <Modal
       centered
-      width={650}
+      width={700}
       bodyStyle={{ padding: "0" }}
       visible={true}
       footer={null}
+      closable={false}
       // onCancel={() => this.setModal1Visible(false)}
     >
       <Row>
-        <Col span={8}>
+        <Col sm={8} xs={0}>
           <img src={camera} alt="" className="signInimg" />
         </Col>
-        <Col span={16}>
+        <Col sm={0} xs={24}>
+          <img src={camera} alt="" className="signImg" />
+        </Col>
+        <Col sm={16} xs={24}>
           <Card className="modalcard">
-            <h2 className="signinstate">Sign in to Lenshood</h2>
-            <Row gutter={16}>
-              <Col span={12}>
+            <h1 className="signinstate">Let's Go...</h1>
+            <Row>
+              <Col span={24}>
                 {facebook.enabled && (
                   <div className="text-center">
                     <FacebookButton text={t("login.fbBtn")} type={"button"} />
                   </div>
                 )}
               </Col>
-              <Col span={12}>
+              <Col span={24}>
                 {google.enabled && (
                   <div className="text-center">
                     <GoogleButton text={t("login.googleBtn")} type={"button"} />
@@ -116,8 +120,8 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
                 )}
               </Col>
             </Row>
-            <Divider className="viaEmail">or via E-mail</Divider>
-            <p className="signInForm">Let me help you sign in</p>
+            <h2 className="youcanAlways">Or you can always...</h2>
+            {/* <p className="signInForm">Let me help you sign in</p> */}
             <Form
               className="paddingMarginBottom"
               name="login"
@@ -141,7 +145,7 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
                 // label={t("login.form.field.pass")}
                 value={values.password}
               />
-              <Link className="forgotpass marginB20" to="/forgot-password">
+              <Link className="forgotpass" to="/forgot-password">
                 {t("login.btn.forgotPass")}
               </Link>
               <div className="text-center">
