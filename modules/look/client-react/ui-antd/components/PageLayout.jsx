@@ -18,7 +18,7 @@ class PageLayout extends React.Component {
             <NavBar />
           </Header>
         )}
-        <Content id="content" style={{ padding: 24 }}>
+        <Content id="content" style={{ padding: 24, marginTop: '30px' }}>
           {children}
         </Content>
 
