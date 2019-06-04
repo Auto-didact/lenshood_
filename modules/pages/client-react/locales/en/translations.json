@@ -166,5 +166,63 @@
     "navigation": "/terms-of-service",
 
     "welcomeText": "Hello, This is the Pages module"
+  },
+  "mission":{
+    "navLink": {
+      "mission": "/mission"
+    },
+    "title":"Mission",
+    "meta":{
+      "visionMission": {
+        "key": 1,
+        "text": "LensHood's Vision & Mission",
+        "active": "false",
+
+        "content": {
+          "p1": {
+            "head": "LensHood's Vision & Mission",
+
+            "p11":"Our vision is to build a sustainable future where people collaboratively consume various equipments, resources and thereby making anything affordable and accessible.",
+            "p12":"The most important part of LensHood is you folks, our beloved community.",
+            "p13":"We are building a world in which every content creator has the access to resources they need to pursue their passion and tell their story, regardless of budget, background, or location. Because we believe everyone has something to say and deserves to have their story heard."
+          }
+        }
+      },
+      "coreValues":{
+        "key": 2,
+        "text":"LensHood's Core Values",
+        "active":"false",
+        "content":{
+          "p1":{
+            "head":"Support and Empower",
+            "p11":"We believe nothing should come between you and your dreams! Our aim is to help you achieve it by giving you access to great tools at affordable rates. So everything we do is focused on enabling creators to to make great content by providing them with the right tools, resources, and education."
+          },
+          "p2":{
+            "head":"Be Inclusive",
+            "p21":"We seek to create a workplace and community where everyone feels welcome and all voices are heard. We value and promote the diversity in our workforce, our community, and beyond."
+          },
+          "p3":{
+            "head":"Learn and Act",
+            "p31":"We seek to continuously learn, keep an ear to the ground, and both listen to and start new trends. We don't fear change, and we are always ready to take action."
+          },
+          "p4":{
+            "head":"Create and Be Curious",
+            "p41":" We believe creativity makes the world a more interesting and fun place. We aren't afraid of obstacles and constraints - they make us more agile and able to invent new things and look for new approaches."
+          },
+          "p5":{
+            "head":"Trust and be Trustworthy",
+            "p51":"Trust is the foundation on which LendHood is built. At LensHood, relationships are built on openness integrity, honesty and an eagerness to help one another."
+          },
+          "p6":{
+            "head":"Take Ownership",
+            "p61":"We take responsibility for our actions and think on behalf of the larger team and community. We think about resources as if they were our own, and are always on the lookout for better ways to serve members"
+          }
+        }
+      }
+
+
+
+    }
+
   }
 }
