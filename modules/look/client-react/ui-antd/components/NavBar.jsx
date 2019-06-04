@@ -62,10 +62,10 @@ class NavBar extends React.Component {
       right: '20px'
     },
     bmCross: {
-      background: '#23b195'
+      background: '#ffffff'
     },
     bmMenu: {
-      background: '#ffffff',
+      background: '#23b195',
       padding: '0 0 0 0',
       fontSize: '1.35em'
     },
@@ -73,7 +73,7 @@ class NavBar extends React.Component {
       fill: '#373a47'
     },
     bmItemList: {
-      color: '#b8b7ad',
+      color: '#91d8ca',
       padding: '4px'
     },
     bmItem: {
@@ -162,12 +162,22 @@ class NavBar extends React.Component {
         </Menu>
 
         <Burger right width={250} styles={this.styling}>
-          <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '40px' }}>
+          <div
+            style={{
+              width: '246px',
+              backgroundColor: '#23b195',
+              marginTop: '60px',
+              marginBottom: '-25px',
+              borderTop: '2px solid #91d8ca',
+              borderBottom: '2px solid #91d8ca',
+              outline: 'none'
+            }}
+          >
             <Menu
               onClick={this.handleClick}
               selectedKeys={[this.props.location.pathname]}
               mode="horizontal"
-              style={{ lineHeight: '60px', float: 'left', width: '246px' }}
+              style={{ lineHeight: '60px', float: 'left', width: '246px', fontWeight: 'bold' }}
             >
               {ref.modules.navItemsRight}
             </Menu>
@@ -175,9 +185,17 @@ class NavBar extends React.Component {
 
           {ref.modules.navItemsTest.map(item => {
             return (
-              <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+              <div
+                style={{
+                  width: '246px',
+                  backgroundColor: '#23b195',
+                  marginTop: '2px',
+                  fontWeight: 'bold',
+                  borderBottom: '2px solid #91d8ca'
+                }}
+              >
                 <NavLink to={item.key} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-                  <div style={{ width: '236px', marginLeft: '10px' }}>
+                  <div style={{ width: '236px', marginLeft: '10px', paddingLeft: '6px' }}>
                     {' '}
                     {item.key.charAt(1).toUpperCase() + item.key.substring(2)}
                   </div>
@@ -185,18 +203,36 @@ class NavBar extends React.Component {
               </div>
             );
           })}
-          <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+          <div
+            style={{
+              width: '246px',
+              backgroundColor: '#23b195',
+              marginTop: '2px',
+              fontWeight: 'bold',
+              borderBottom: '2px solid #91d8ca'
+            }}
+          >
             <a href="/graphiql" className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-              <div style={{ width: '236px', marginLeft: '10px' }}>GraphiQL</div>
+              <div style={{ width: '236px', marginLeft: '10px', paddingLeft: '6px' }}>GraphiQL</div>
             </a>
           </div>
 
           {ref.modules.navItemsAdmin.map(item => {
             let k = item ? (item.key.charAt(0) == '/' ? item.key : item.props.children.key) : null;
             return (
-              <div style={{ width: '246px', backgroundColor: '#23b195', marginTop: '2px' }}>
+              <div
+                style={{
+                  width: '246px',
+                  backgroundColor: '#23b195',
+                  marginTop: '2px',
+                  fontWeight: 'bold',
+                  borderBottom: '2px solid #91d8ca'
+                }}
+              >
                 <NavLink to={k} className="nav-link" style={{ color: '#ffffff', height: '30px' }}>
-                  <div style={{ width: '236px', marginLeft: '10px' }}>{k.charAt(1).toUpperCase() + k.substring(2)}</div>
+                  <div style={{ width: '236px', marginLeft: '10px', paddingLeft: '6px' }}>
+                    {k.charAt(1).toUpperCase() + k.substring(2)}
+                  </div>
                 </NavLink>
               </div>
             );
