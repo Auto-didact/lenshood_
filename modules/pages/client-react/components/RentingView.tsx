@@ -132,7 +132,7 @@ const RentingView = ({ t }: RentingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      minWidth: '500px',
+
                       fontSize: '30px'
                     }}
                   >
@@ -161,7 +161,7 @@ const RentingView = ({ t }: RentingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       fontSize: '30px',
-                      minWidth: '500px',
+
                       maxWidth: '500px'
                     }}
                   >
@@ -231,7 +231,7 @@ const RentingView = ({ t }: RentingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      minWidth: '500px',
+
                       fontSize: '30px'
                     }}
                   >
@@ -260,7 +260,7 @@ const RentingView = ({ t }: RentingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      minWidth: '500px',
+
                       fontSize: '30px'
                     }}
                   >
@@ -310,7 +310,7 @@ const RentingView = ({ t }: RentingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       fontSize: '30px',
-                      minWidth: '500px',
+
                       maxWidth: '500px'
                     }}
                   >

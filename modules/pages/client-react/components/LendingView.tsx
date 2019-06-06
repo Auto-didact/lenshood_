@@ -132,8 +132,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      fontSize: '30px',
-                      minWidth: '500px'
+                      fontSize: '30px'
                     }}
                   >
                     Get ready with your ID Proofs for LensHood KYC.
@@ -161,7 +160,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       fontSize: '30px',
-                      minWidth: '500px',
+
                       maxWidth: '500px'
                     }}
                   >
@@ -231,7 +230,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      minWidth: '500px',
+
                       fontSize: '30px'
                     }}
                   >
@@ -260,7 +259,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       maxWidth: '500px',
-                      minWidth: '500px',
+
                       fontSize: '30px'
                     }}
                   >
@@ -310,7 +309,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0',
                       padding: '0 0 10px 40px',
                       fontSize: '30px',
-                      minWidth: '500px',
+
                       maxWidth: '500px'
                     }}
                   >
