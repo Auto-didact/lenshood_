@@ -13,7 +13,8 @@ export default class SavedAddress extends React.Component {
       value: PropTypes.any,
       onSave: PropTypes.func,
       visible: PropTypes.any,
-      saveFormRef: PropTypes.func
+      saveFormRef: PropTypes.func,
+      onChange: PropTypes.func
     };
   }
   state = {
@@ -21,7 +22,7 @@ export default class SavedAddress extends React.Component {
   };
 
   render() {
-    const { address, onShowModal, onDelete, onCancel, value, onSave, visible, saveFormRef } = this.props;
+    const { address, onShowModal, onDelete, onCancel, value, onSave, visible, saveFormRef, onChange } = this.props;
 
     return (
       <React.Fragment>
@@ -33,6 +34,7 @@ export default class SavedAddress extends React.Component {
             md={{ span: 10, offset: 0 }}
             className="PadB30"
           >
+            {console.log(adres)}
             <div className="HomeAddress">
               <div className="HomeAddressBlock">
                 Home Address <Icon type="home" className="homeicon" />
@@ -61,6 +63,7 @@ export default class SavedAddress extends React.Component {
           onCancel={onCancel}
           onSave={onSave}
           value={value}
+          onChange={onChange}
         />
       </React.Fragment>
     );
