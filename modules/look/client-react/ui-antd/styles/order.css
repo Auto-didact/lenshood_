@@ -210,3 +210,43 @@
 .TrackSteps .ant-steps-item-title {
   width: 100% !important;
 }
+
+.orderGrey {
+  color: #676767;
+}
+
+.CancelRequest {
+  margin-top: 10px !important;
+  border-radius: 4px !important;
+}
+
+.itemDetails{
+  font-size: 11px;
+  line-height: 11px !important;
+}
+
+.orderTotalDate {
+  margin-top: 13px !important;
+  margin-bottom: 2px !important;
+}
+
+.orderstartend {
+  font-size: 12px;
+  line-height: 11px !important;
+}
+
+.btnOrder {
+  color: #23b195;
+  border: #23b195 0.5px solid !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}
+
+.btnOrderActive,
+.btnOrder:hover {
+  background-color: #23b195 !important;
+  color: white !important;
+  border: #23b195 0.5px solid !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}
