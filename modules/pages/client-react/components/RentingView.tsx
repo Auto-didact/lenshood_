@@ -80,7 +80,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -99,7 +100,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -119,7 +121,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -147,7 +150,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -192,7 +196,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -215,7 +220,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -243,7 +249,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -271,7 +278,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
@@ -291,7 +299,8 @@ const RentingView = ({ t }: RentingViewProps) => {
                   flexDirection: 'row',
                   marginTop: '100px',
                   flexWrap: 'wrap',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  width: '100%'
                 }}
               >
                 <div>
