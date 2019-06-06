@@ -1,41 +1,63 @@
 import React, { Component } from "react";
 // import '../resources/listingCatalogue.css';
-import { Icon, Button, Row, Col } from "antd";
+import { Icon, Button, Row, Col, Card, Popconfirm, message } from "antd";
+import { Link } from "react-router-dom";
 
 class DetailsCard extends Component {
   render() {
-    console.log(this.props.item);
     const item = this.props.item;
     const buttonText = this.props.buttonText;
+    function confirm(e) {
+      console.log(e);
+      message.success("Click on Yes");
+    }
+
+    function cancel(e) {
+      console.log(e);
+      message.error("Click on No");
+    }
     return (
-      <div style={{ boxShadow: "3px 3px 5px  #94ead9" }}>
-        <Row
-          className="DetailsRow"
-          type="flex"
-          justify="space-around"
-          align="middle"
-        >
-          <Col xs={{ span: 24 }} md={{ span: 12 }}>
-            <div className="width100">
-              <img
-                style={{ width: "100%" }}
-                alt=""
-                src={
-                  item.listingImages.length !== 0
-                    ? item.listingImages[0].imageUrl
-                    : null
-                }
-              />
-            </div>
+      <Card
+        className="DetailsCard"
+        hoverable
+        bodyStyle={{
+          padding: "0px"
+        }}
+      >
+        <Row type="flex" justify="space-around" align="middle">
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 9 }}
+            xxl={{ span: 6 }}
+            className="DetailsCardCol"
+          >
+            <img
+              className="DetailsCardImg"
+              alt=""
+              src={
+                item.listingImages.length !== 0
+                  ? item.listingImages[0].imageUrl
+                  : null
+              }
+            />
           </Col>
-          <Col xs={{ span: 24 }} md={{ span: 12 }} className="PadT10">
-            <div style={{ padding: "10px 0px 10px 15px" }}>
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 15 }}
+            xxl={{ span: 18 }}
+            className="DetailsCardCol"
+          >
+            <div style={{ padding: "10px", align: "center" }}>
               {item.status === "On Rent" ? (
                 <h6 className="OnRentTag">On Rent</h6>
               ) : (
                 <h6 className="OnShelfTag">On Shelf</h6>
               )}
-              <h4>{item.description}</h4>
+              <h3>
+                {item.listingContent.map(gear => (
+                  <span>{`${gear.brand} ${gear.gear} / `}</span>
+                ))}
+              </h3>
               {/*<h5>
                 <span className="StarRate">
                   {item.rating} <Icon type="star" theme="filled" />
@@ -45,17 +67,44 @@ class DetailsCard extends Component {
               <h5 className="marginB25">
                 <strong>&#8377; {item.listingRental.perDay} per day</strong>
               </h5>
-
-              <Button className="ListingButtons">
-                <span>{buttonText} Listing</span>
-              </Button>
-              <Button className="ListingButtons">
-                <Icon type="delete" />
-              </Button>
+              <Row style={{ marginBottom: "8px" }}>
+                <Col span={12} align="left" style={{ paddingLeft: "20px" }}>
+                  <Link to={`/listing/${item.id}`}>
+                    <Button shape="circle" size="large">
+                      <Icon type="edit" />
+                    </Button>
+                  </Link>
+                </Col>
+                <Col span={12} align="right" style={{ paddingRight: "20px" }}>
+                  <Popconfirm
+                    title="Are you sure delete this listing?"
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="danger" shape="circle" size="large">
+                      <Icon type="delete" />
+                    </Button>
+                  </Popconfirm>
+                </Col>
+              </Row>
+              <Row gutter={13} align="center">
+                <Col span={12}>
+                  <Button type="primary" block>
+                    Move To Shelf
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button type="primary" block>
+                    Rent Now
+                  </Button>
+                </Col>
+              </Row>
             </div>
           </Col>
         </Row>
-      </div>
+      </Card>
     );
   }
 }

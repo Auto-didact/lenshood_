@@ -9,6 +9,7 @@ import settings from "../../../../settings";
 import SuggestedCardList from "./components/SuggestedCardList";
 
 const { itemsNumber, type } = settings.pagination.web;
+const margin = "5%";
 
 const Loading = ({ t }) => (
   <div className="text-center">{t("listing.loadMsg")}</div>
@@ -32,16 +33,20 @@ const ListingList = ({ loading, listings, t, loadData }) => {
 
   const RenderListings = () => (
     <Fragment>
-      <ListingCatalogueView listings={listings.edges.map(({ node }) => node)} />
-      <Pagination
-        itemsPerPage={listings.edges.length}
-        handlePageChange={handlePageChange}
-        hasNextPage={listings.pageInfo.hasNextPage}
-        pagination={type}
-        total={listings.totalCount}
-        loadMoreText={t("list.btn.more")}
-        defaultPageSize={itemsNumber}
-      />
+      <div>
+        <ListingCatalogueView
+          listings={listings.edges.map(({ node }) => node)}
+        />
+        <Pagination
+          itemsPerPage={listings.edges.length}
+          handlePageChange={handlePageChange}
+          hasNextPage={listings.pageInfo.hasNextPage}
+          pagination={type}
+          total={listings.totalCount}
+          loadMoreText={t("list.btn.more")}
+          defaultPageSize={itemsNumber}
+        />
+      </div>
     </Fragment>
   );
 

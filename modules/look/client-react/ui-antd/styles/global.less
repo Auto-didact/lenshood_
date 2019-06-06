@@ -23,7 +23,26 @@
 @menu-item-active-border-width: 3px;
 @menu-highlight-color: @secondary-color;
 @border-radius-base: 9px; // major border radius
-@box-shadow-base: 0 0 8px 4px rgba(49, 196, 167, 0.05);
+@box-shadow-base: 0 2px 8px 4px rgba(49, 196, 167, 0.05);
+
+// Card
+@card-head-color: @heading-color;
+@card-head-background: transparent;
+@card-head-padding: 16px;
+@card-inner-head-padding: 12px;
+@card-padding-base: 24px;
+@card-actions-background: @background-color-light;
+@card-background: #cfd8dc;
+@card-shadow: 2px 2px 2px rgba(35, 177, 149, 0.3);
+@card-radius: 8px;
+
+.card-custom {
+  margin: 5px;
+}
+
+.avatar-user {
+  border: 5px solid red;
+}
 
 #root {
   min-height: 100vh;
@@ -213,10 +232,6 @@
   padding-bottom: 10px;
 }
 
-.PadT10 {
-  padding-top: 10px;
-}
-
 .padH4p {
   padding: 0 4%;
 }
@@ -230,7 +245,7 @@
 }
 
 .layoutRow {
-  padding: 30px 5%;
+  padding: 0% 5% 5% 5%;
 }
 
 .AccountDetails {

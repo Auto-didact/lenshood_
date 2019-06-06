@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Layout } from "antd";
 
-import NavBar from './NavBar';
-import Footer from './Footer';
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const { Header, Content } = Layout;
 
@@ -18,9 +18,7 @@ class PageLayout extends React.Component {
             <NavBar />
           </Header>
         )}
-        <Content id="content" style={{ padding: 24 }}>
-          {children}
-        </Content>
+        <Content id="content">{children}</Content>
 
         <Footer />
       </Layout>

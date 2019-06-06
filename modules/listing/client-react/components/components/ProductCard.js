@@ -1,7 +1,31 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Carousel, Card, Icon } from 'antd';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import {
+  Row,
+  Col,
+  Carousel,
+  Icon,
+  Divider,
+  CardText,
+  Card,
+  Button
+} from "antd";
+import { ImgCamera } from "../../constants/DefaultImages";
 // import '../resources/listingCatalogue.css';
+// To Do Carousel Arrows;
+// function SampleNextArrow(props) {
+//   const { className, onClick } = props;
+//   return <Icon type="right-circle" className={className} onClick={onClick} />;
+// }
+//
+// function SamplePrevArrow(props) {
+//   const { className, onClick } = props;
+//   return (
+//     <Button>
+//       <Icon type="left-circle" className={className} onClick={onClick} />
+//     </Button>
+//   );
+// }
 
 class ProductCard extends Component {
   constructor(props) {
@@ -20,40 +44,51 @@ class ProductCard extends Component {
   }
   render() {
     const listing = this.props.listing;
-    const images = listing.listingImages;
+    const images = listing.listingImages || ImgCamera;
     const replacementValue = listing.listingRental.replacementValue;
     const description = listing.description;
     const packageContents = listing.listingContent;
+    console.log("this", listing);
     const status = {
-      dots: true,
+      customPaging: function(i) {
+        return (
+          <a>
+            <img
+              src={images[i].imageUrl}
+              style={{ width: "30px", height: "30px" }}
+            />
+          </a>
+        );
+      },
+
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      dots: true
+
+      // nextArrow: <SampleNextArrow />,
+      // prevArrow: <SamplePrevArrow />
     };
     return (
-      <Card className="justifyAlign">
-        <Row>
-          <Col lg={{ span: 22, offset: 1 }} sm={24}>
-            <h1 className="caroIcon caroIconleft">
-              <Icon type="left-circle" onClick={this.previous} theme="filled" />
-            </h1>
-            <Carousel ref={node => (this.carousel = node)} {...status}>
-              {images.map(item => (
-                <div>
-                  <img src={item.imageUrl} alt="" className="CaraImg" />
-                </div>
-              ))}
-            </Carousel>
-            <h1 className="caroIcon caroIconright">
-              <Icon type="right-circle" onClick={this.next} theme="filled" />
-            </h1>
-          </Col>
-        </Row>
+      <div style={{ paddingRight: "4px", paddingTop: "5px" }}>
+        <div style={{ marginLeft: "10px", marginRight: "10px" }}>
+          <Carousel autoplay ref={node => (this.carousel = node)} {...status}>
+            {images.map(item => (
+              <div align="center">
+                <img src={item.imageUrl} style={{ height: "300px" }} />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+
         <Row>
           <Col span={12}>
             <strong className="mainColor font12">Replacement Value</strong>
-            <span className="mainColor font14"> &#8377; {replacementValue} /- </span>
+            <span className="mainColor font14">
+              {" "}
+              &#8377; {replacementValue} /-{" "}
+            </span>
           </Col>
           {/* <Col span={12}>
             <Link to="" className="font14 mainColor rightfloat">
@@ -61,22 +96,39 @@ class ProductCard extends Component {
             </Link>
           </Col> */}
         </Row>
-        <br />
+
         {/* <h3 className="font16 blockDisplay fontBold">Specifications</h3>
         <ul>
           {listing.Specification.map(item => (
             <li className="font14">{item}</li>
           ))}
         </ul> */}
-        <hr className="PChr" />
-        <h3 className="font16 blockDisplay fontBold">Description</h3>
-        <p className="font14">{description}</p>
+        <Divider />
+        <div>
+          <h3 className="font16 blockDisplay fontBold">Description</h3>
+          <p className="font14">{description}</p>
+
+          <h3 className="font16 blockDisplay fontBold">Age</h3>
+          <p>{listing.listingDetail && listing.listingDetail.age}</p>
+          {/*  <h4>Damages</h4>
+
+          listing.listingDetail && listing.listingDetail.damages ? (
+            listing.listingDetail.damages.map(damage => (
+              <div>
+                <img alt="" src={damage.imageUrl} className="relatedCardImg" />
+                <h5>{damage.damageDetail}</h5>
+              </div>
+            ))
+          ) : (
+            <CardText>"Not Provided"</CardText>
+          )*/}
+        </div>
         <br />
-        <h3 className="font16 blockDisplay fontBold">In the package</h3>
-        {packageContents.map(item => (
-          <div className="Inline-blockDisplay width50 font14">
+        <h3 className="font16 blockDisplay fontBold">Gear Components</h3>
+        {packageContents.map((item, key) => (
+          <div>
             <span className="itemGearPC" />
-            {item.gear}
+            {item.gear} {item.brand} {item.model} {item.serial}
           </div>
         ))}
         <br />
@@ -86,7 +138,7 @@ class ProductCard extends Component {
         <br />
         <h3 className="font16 blockDisplay fontBold">Damage Policy</h3>
         <p className="font14">{listing.damagePolicy}</p>
-      </Card>
+      </div>
     );
   }
 }
