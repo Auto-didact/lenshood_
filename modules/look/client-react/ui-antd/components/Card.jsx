@@ -6,10 +6,7 @@ import { Card as ADCard } from "antd";
 
 const Card = ({ children, ...props }) => {
   return (
-    <ADCard
-      style={{ margin: "7px", boxShadow: "5px 3px 5px  #94ead9" }}
-      {...props}
-    >
+    <ADCard className="card-custom" {...props}>
       {children}
     </ADCard>
   );

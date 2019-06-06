@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 class MyListingProducts extends Component {
   state = {
-    status: ONRENT,
+    status: ALL,
     listings: this.props.listings
   };
   classNamesgroup(e) {

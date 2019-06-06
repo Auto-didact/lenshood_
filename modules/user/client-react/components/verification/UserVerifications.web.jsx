@@ -1,24 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import Helmet from 'react-helmet';
-import { translate } from '@gqlapp/i18n-client-react';
-import { Card } from '@gqlapp/look-client-react';
+import Helmet from "react-helmet";
+import { translate } from "@gqlapp/i18n-client-react";
+import { Card } from "@gqlapp/look-client-react";
 // To Do Abstract Out
-import { Icon } from 'antd';
-import DLVerification from '../../containers/verification/DLVerification';
-import MobileVerification from '../../containers/verification/MobileVerification';
-import EmailVerification from '../../containers/verification/EmailVerification';
+import { Icon } from "antd";
+import DLVerification from "../../containers/verification/DLVerification";
+import MobileVerification from "../../containers/verification/MobileVerification";
+import EmailVerification from "../../containers/verification/EmailVerification";
 
-import settings from '../../../../../settings';
+import settings from "../../../../../settings";
 
 const renderMetaData = t => {
   return (
     <Helmet
-      title={`${settings.app.name} - ${t('profile.title')}`}
+      title={`${settings.app.name} - ${t("profile.title")}`}
       meta={[
         {
-          name: 'description',
-          content: `${settings.app.name} - ${t('profile.meta')}`
+          name: "description",
+          content: `${settings.app.name} - ${t("profile.meta")}`
         }
       ]}
     />
@@ -33,11 +33,13 @@ const renderVarificationIcon = varStatus => {
   }
 };
 
-const VerificationView = ({ data, t }) => {
+const VerificationView = ({ data, verification, t }) => {
+  const mobile = verification.mobileVerification;
+  const email = verification.emailVerification;
   return (
     <Card>
       {renderMetaData(t)}
-      <h3>{t('profile.card.group.verification.title')}</h3>
+      <h3>{t("profile.card.group.verification.title")}</h3>
       {/*
         <CardText>
         {t("profile.card.group.verification.address")}
@@ -45,9 +47,9 @@ const VerificationView = ({ data, t }) => {
       </CardText>
       */}
 
-      <EmailVerification vStatus={data && data.isEmailVerified} />
+      <EmailVerification email={email} />
       <DLVerification vStatus={data && data.isIdVerified} />
-      <MobileVerification vStatus={data && data.isMobileVerified} />
+      <MobileVerification mobile={mobile} />
 
       {/*
         <CardText>
@@ -59,4 +61,4 @@ const VerificationView = ({ data, t }) => {
   );
 };
 
-export default translate('user')(VerificationView);
+export default translate("user")(VerificationView);

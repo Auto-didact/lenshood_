@@ -19,8 +19,8 @@ class SuggestedCardList extends Component {
         }}
         dataSource={this.props.relatedList}
         renderItem={item => (
-          <List.Item>
-            <RelatedCard relatedList={item} />
+          <List.Item key={item.id}>
+            <RelatedCard key={item.id} relatedListing={item} />
           </List.Item>
         )}
       />
