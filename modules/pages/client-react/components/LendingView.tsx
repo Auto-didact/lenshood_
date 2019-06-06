@@ -152,7 +152,15 @@ const LendingView = ({ t }: LendingViewProps) => {
               >
                 <div>
                   <h1 style={{ fontWeight: '600', fontSize: '50px', margin: '0 0 0 0' }}>4. Search</h1>
-                  <h2 style={{ margin: '0 0 0 0', padding: '0 0 10px 40px', fontSize: '30px' }}>
+                  <h2
+                    style={{
+                      margin: '0 0 0 0',
+                      padding: '0 0 10px 40px',
+                      fontSize: '30px',
+                      minWidth: '500px',
+                      maxWidth: '500px'
+                    }}
+                  >
                     Sit back & Relax ll our hustler comes to your doorstep.
                   </h2>
                 </div>
