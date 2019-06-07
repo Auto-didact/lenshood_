@@ -22,9 +22,17 @@ class UserCard extends Component {
         : "Name Not Provided";
 
     return (
-      <Card style={{ backgroundColor: "#FAFAFA" }}>
-        <Row>
-          <Col xs={{ span: 24 }} sm={{ span: 16 }} style={{ marginTop: "5px" }}>
+      <Card
+        style={{ backgroundColor: "#FAFAFA", width: "100%", marginTop: "10px" }}
+      >
+        <Row type="flex" justify="space-around" align="middle">
+          <Col
+            lg={{ span: 18 }}
+            md={{ span: 24 }}
+            xs={{ span: 24 }}
+            sm={{ span: 16 }}
+            style={{ marginTop: "5px" }}
+          >
             <Meta
               avatar={
                 <Avatar
@@ -51,9 +59,17 @@ class UserCard extends Component {
               }
             />
           </Col>
-          <Col xs={{ span: 24 }} sm={{ span: 8 }} style={{ marginTop: "5px" }}>
+          <Col
+            lg={{ span: 6 }}
+            md={{ span: 24 }}
+            xs={{ span: 24 }}
+            sm={{ span: 8 }}
+            style={{ marginTop: "5px", maxWidth: "150px" }}
+          >
             <div align="center">
-              <Button type="primary">Follow</Button>
+              <Button type="primary" block>
+                Follow
+              </Button>
               <br />
             </div>
           </Col>

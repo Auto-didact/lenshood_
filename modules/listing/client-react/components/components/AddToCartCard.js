@@ -7,9 +7,10 @@ import {
   // Checkbox,
   Slider,
   Button,
+  Card,
   Divider
 } from "antd";
-import { Card, CardTitle, CardText } from "@gqlapp/look-client-react";
+import { CardTitle, CardText } from "@gqlapp/look-client-react";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
@@ -34,7 +35,7 @@ export default class AddToCartCard extends Component {
     const date = this.state.dateInit;
 
     return (
-      <Card style={{ backgroundColor: "#FAFAFA" }}>
+      <Card style={{ backgroundColor: "#FAFAFA", width: "100%" }}>
         <CardTitle style={{ textAlign: "center" }}>
           Select your rental period
         </CardTitle>

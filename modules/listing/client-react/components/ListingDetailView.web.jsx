@@ -85,11 +85,11 @@ class ListingDetailView extends Component {
             gutter={10}
             style={{ marginLeft: leftGap, marginRight: leftGap }}
           >
-            <Col lg={16} md={13} sm={24}>
+            <Col xl={16} lg={15} md={13} sm={24}>
               <ProductCard listing={listing} />
               {/*<ReviewsCard reviews={this.state.product.reviews} />*/}
             </Col>
-            <Col lg={8} md={11} sm={24}>
+            <Col xl={8} lg={9} md={11} sm={24}>
               <Row>
                 <Col span={24}>
                   <AddToCartCard

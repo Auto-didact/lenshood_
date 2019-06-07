@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "react-apollo";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'react-apollo';
 
-import ListingEditView from "../components/ListingEditView";
-import ListingDetailView from "../components/ListingDetailView";
+import ListingEditView from '../components/ListingEditView';
+import ListingDetailView from '../components/ListingDetailView';
 
-import LISTING_QUERY from "../graphql/ListingQuery.graphql";
+import LISTING_QUERY from '../graphql/ListingQuery.graphql';
 
 const ListingDetail = props => {
   return <ListingDetailView {...props} />;

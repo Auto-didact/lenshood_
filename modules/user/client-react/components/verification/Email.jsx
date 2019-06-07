@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Card, Alert } from "antd";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Card, Alert } from 'antd';
 
 const Email = ({ email, sentStatus }) => {
   // To Do - Align steps with variables.

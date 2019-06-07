@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Rate, List, Row, Col, Avatar } from "antd";
-import { Card } from "@gqlapp/look-client-react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Rate, List, Row, Col, Avatar } from 'antd';
+import { Card } from '@gqlapp/look-client-react';
 // import '../resources/listingCatalogue.css';
 
 class ReviewsCard extends Component {
@@ -19,23 +19,16 @@ class ReviewsCard extends Component {
     return (
       <Card>
         <h4>
-          {reviews.reviewers.length} reviews on this item{" "}
-          <Rate
-            disabled
-            defaultValue={this.averageReviews(reviews.properties)}
-            className="RevStar"
-          />{" "}
-          <h5 className="InlineDisplay">
-            {this.averageReviews(reviews.properties)}
-          </h5>
+          {reviews.reviewers.length} reviews on this item{' '}
+          <Rate disabled defaultValue={this.averageReviews(reviews.properties)} className="RevStar" />{' '}
+          <h5 className="InlineDisplay">{this.averageReviews(reviews.properties)}</h5>
         </h4>
         <Row>
           {Object.entries(reviews.properties).map(([key, value]) => (
             <Col lg={12} sm={24}>
               {key}
               <div className="rightfloat">
-                <h5 className="reviewVal">{value}</h5>{" "}
-                <Rate disabled defaultValue={value} className="RevStar" />{" "}
+                <h5 className="reviewVal">{value}</h5> <Rate disabled defaultValue={value} className="RevStar" />{' '}
               </div>
             </Col>
           ))}
