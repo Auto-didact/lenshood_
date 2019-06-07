@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Card as ADCard } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Card as ADCard } from 'antd';
 
 // To Do : Abstract out styles;
 

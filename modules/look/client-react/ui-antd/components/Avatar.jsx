@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // import PropTypes from 'prop-types';
-import { Avatar as AvaTar } from "antd";
+import { Avatar as AvaTar } from 'antd';
 
 class Avatar extends React.Component {
   // static propTypes = {

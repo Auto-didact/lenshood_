@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Layout } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Layout } from 'antd';
 
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 const { Header, Content } = Layout;
 

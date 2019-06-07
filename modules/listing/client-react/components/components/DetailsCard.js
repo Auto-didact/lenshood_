@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import '../resources/listingCatalogue.css';
-import { Icon, Button, Row, Col, Card, Popconfirm, message } from "antd";
-import { Link } from "react-router-dom";
+import { Icon, Button, Row, Col, Card, Popconfirm, message } from 'antd';
+import { Link } from 'react-router-dom';
 
 class DetailsCard extends Component {
   render() {
@@ -9,46 +9,32 @@ class DetailsCard extends Component {
     const buttonText = this.props.buttonText;
     function confirm(e) {
       console.log(e);
-      message.success("Click on Yes");
+      message.success('Click on Yes');
     }
 
     function cancel(e) {
       console.log(e);
-      message.error("Click on No");
+      message.error('Click on No');
     }
     return (
       <Card
         className="DetailsCard"
         hoverable
         bodyStyle={{
-          padding: "0px"
+          padding: '0px'
         }}
       >
         <Row type="flex" justify="space-around" align="middle">
-          <Col
-            xs={{ span: 24 }}
-            md={{ span: 9 }}
-            xxl={{ span: 6 }}
-            className="DetailsCardCol"
-          >
+          <Col xs={{ span: 24 }} md={{ span: 9 }} xxl={{ span: 6 }} className="DetailsCardCol">
             <img
               className="DetailsCardImg"
               alt=""
-              src={
-                item.listingImages.length !== 0
-                  ? item.listingImages[0].imageUrl
-                  : null
-              }
+              src={item.listingImages.length !== 0 ? item.listingImages[0].imageUrl : null}
             />
           </Col>
-          <Col
-            xs={{ span: 24 }}
-            md={{ span: 15 }}
-            xxl={{ span: 18 }}
-            className="DetailsCardCol"
-          >
-            <div style={{ padding: "10px", align: "center" }}>
-              {item.status === "On Rent" ? (
+          <Col xs={{ span: 24 }} md={{ span: 15 }} xxl={{ span: 18 }} className="DetailsCardCol">
+            <div style={{ padding: '10px', align: 'center' }}>
+              {item.status === 'On Rent' ? (
                 <h6 className="OnRentTag">On Rent</h6>
               ) : (
                 <h6 className="OnShelfTag">On Shelf</h6>
@@ -67,15 +53,15 @@ class DetailsCard extends Component {
               <h5 className="marginB25">
                 <strong>&#8377; {item.listingRental.perDay} per day</strong>
               </h5>
-              <Row style={{ marginBottom: "8px" }}>
-                <Col span={12} align="left" style={{ paddingLeft: "20px" }}>
+              <Row style={{ marginBottom: '8px' }}>
+                <Col span={12} align="left" style={{ paddingLeft: '20px' }}>
                   <Link to={`/listing/${item.id}`}>
                     <Button shape="circle" size="large">
                       <Icon type="edit" />
                     </Button>
                   </Link>
                 </Col>
-                <Col span={12} align="right" style={{ paddingRight: "20px" }}>
+                <Col span={12} align="right" style={{ paddingRight: '20px' }}>
                   <Popconfirm
                     title="Are you sure delete this listing?"
                     onConfirm={confirm}
