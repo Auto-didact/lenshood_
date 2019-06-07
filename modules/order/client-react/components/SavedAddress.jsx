@@ -34,7 +34,6 @@ export default class SavedAddress extends React.Component {
             md={{ span: 10, offset: 0 }}
             className="PadB30"
           >
-            {console.log(adres)}
             <div className="HomeAddress">
               <div className="HomeAddressBlock">
                 Home Address <Icon type="home" className="homeicon" />
@@ -42,10 +41,10 @@ export default class SavedAddress extends React.Component {
               <br />
               <div className="addressLines">
                 <h4>{adres.name},</h4>
-                <h4>{adres.address1},</h4>
-                <h4>{adres.address2},</h4>
+                <h4>{adres.streetAddress1},</h4>
+                <h4>{adres.streetAddress2},</h4>
                 <h4>{adres.state}.</h4>
-                <h4>{adres.PIN}</h4>
+                <h4>{adres.pinCode}</h4>
                 <h4>Mobile: {adres.mobile}</h4>
               </div>
               <Button className="addressIcons" ghost onClick={() => onDelete(adres)}>

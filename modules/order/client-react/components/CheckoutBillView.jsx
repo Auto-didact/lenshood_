@@ -42,22 +42,20 @@ export default class CheckoutBillView extends React.Component {
     const obj1 = {};
     obj.id = 1;
     obj.name = 'Ankit Jain';
-    obj.address1 = 'Room A308, Manas Hostel, IITG';
-    obj.address2 = 'Guwahati, North Guwahati';
+    obj.streetAddress1 = 'Room A308, Manas Hostel, IITG';
+    obj.streetAddress2 = 'Guwahati, North Guwahati';
     obj.city = 'Guwahati';
     obj.state = 'Assam';
-    obj.PIN = '7810390';
-    obj.mobile = '9085626859';
+    obj.pinCode = '7810390';
     address.push(obj);
 
     obj1.id = 2;
-    obj1.name = 'Ankit Jain1dsfasd';
-    obj1.address1 = 'Room A308, Masdfasdfanas Hostel, IITG';
-    obj1.address2 = 'GuwaSADFASDAFShati, North Guwahati';
-    obj1.city = 'Gusadfasdfwahati';
-    obj1.state = 'Assdfasdfsam';
-    obj1.PIN = '781023141234390';
-    obj1.mobile = '90832412345626859';
+    obj1.name = 'Ankit Jain-2';
+    obj1.streetAddress1 = 'Room A308, Manas Hostel, IITG-2';
+    obj1.streetAddress2 = 'Guwahati, North Guwahati-2';
+    obj1.city = 'Guwahati-2';
+    obj1.state = 'Assam-2';
+    obj1.pinCode = '7810390-2';
     address.push(obj1);
 
     this.setState({ address });
@@ -74,10 +72,9 @@ export default class CheckoutBillView extends React.Component {
 
   hideModal = () => {
     this.setState({ visible: false });
-    console.log('Visible set to false');
   };
 
-  handleSave = () => {
+  handleSave = value => {
     const form = this.formRef.props.form;
     const address = this.state.address;
 
@@ -87,26 +84,32 @@ export default class CheckoutBillView extends React.Component {
       }
       //Adding new/ Updating address on the db.
       let addressInDb = address.find(a => a.id === values.id) || {};
-      console.log(values);
+
+      // Dont write "addressInDb = values;" coz addressInDb.id would be undefined which will break the futher code.
       addressInDb.name = values.name;
-      addressInDb.address1 = values.address1;
-      addressInDb.address2 = values.address2;
+      addressInDb.streetAddress1 = values.streetAddress1;
+      addressInDb.streetAddress2 = values.streetAddress2;
       addressInDb.city = values.city;
       addressInDb.state = values.state;
-      addressInDb.PIN = values.PIN;
-      addressInDb.mobile = values.mobile;
+      addressInDb.pinCode = values.pinCode;
 
-      if (!addressInDb.id) {
-        addressInDb.id = Date.now().toString();
-        address.push(addressInDb);
-      }
-      console.log(addressInDb);
-      console.log('Received values of form: ', address);
-      form.resetFields();
-      this.setState({ visible: false });
-
-      return addressInDb;
+      this.handleAddressPush(addressInDb, address, form, value);
     });
+  };
+
+  handleAddressPush = (addressInDb, address, form, value) => {
+    if (!addressInDb.id && !value.id) {
+      addressInDb.id = Date.now().toString();
+      address.push(addressInDb);
+    } else {
+      const index = address.indexOf(value);
+      addressInDb.id = value.id;
+      address[index] = { ...addressInDb };
+    }
+    this.setState({ address });
+    console.log('Received values from state/server: ', this.state.address);
+    form.resetFields();
+    this.setState({ visible: false });
   };
 
   saveFormRef = formRef => {
