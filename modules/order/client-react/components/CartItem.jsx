@@ -42,7 +42,7 @@ const CartItem = props => {
         </Modal>
         <Button
           className="borderzero listclose"
-          onClick={() => props.deleteProduct()}
+          onClick={() => props.deleteProduct(product.id)}
         >
           <Icon type="close" />
         </Button>
