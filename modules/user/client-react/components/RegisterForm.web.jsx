@@ -174,7 +174,7 @@ const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
                 )}
               </div>
               <Button
-                className="themeColor"
+                color="primary"
                 block
                 type="submit"
                 disabled={submitting}

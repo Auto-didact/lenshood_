@@ -119,10 +119,10 @@ export default class AddToCartCard extends Component {
               &#8377; {this.props.product.refundableDeposit}
             </div>
           </p>
-          <Button className="themeColor marginB10" block>
+          <Button className="marginB10" type="primary" block>
             BOOK NOW
           </Button>
-          <Button className="themeColorInverted" block>
+          <Button type="primary" ghost block>
             ADD TO BAG <Icon type="shopping" />
           </Button>
         </Card>
