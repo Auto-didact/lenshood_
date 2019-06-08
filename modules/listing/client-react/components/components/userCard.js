@@ -28,7 +28,7 @@ class UserCard extends Component {
             </h4>
           </Col>
           <Col span={8}>
-            <Button className="FollowButtom themeColorInverted" ghost>
+            <Button className="FollowButtom" type="primary" ghost>
               Follow
             </Button>
           </Col>
@@ -48,7 +48,7 @@ class UserCard extends Component {
           ))}
         </strong>
         <br />
-        <Button className="contactButton themeColorInverted" ghost>
+        <Button className="contactButton" type="primary" ghost>
           Contact
         </Button>
       </Card>

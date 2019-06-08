@@ -154,7 +154,7 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
                 )}
               </div>
               <Button
-                className="themeColor"
+                color="primary"
                 block
                 type="submit"
                 disabled={submitting}

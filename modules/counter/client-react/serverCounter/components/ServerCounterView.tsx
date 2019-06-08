@@ -1,8 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Button } from '@gqlapp/look-client-react';
-import { TranslateFunction } from '@gqlapp/i18n-client-react';
+import { Button } from "@gqlapp/look-client-react";
+import { TranslateFunction } from "@gqlapp/i18n-client-react";
+
+import CartCount from "../../Cart/CartCount";
 
 const Section = styled.section`
   margin-bottom: 30px;
@@ -16,17 +18,23 @@ interface ViewProps {
   loading: boolean;
 }
 
-export const ServerCounterView = ({ t, children, counter, loading }: ViewProps) => {
+export const ServerCounterView = ({
+  t,
+  children,
+  counter,
+  loading
+}: ViewProps) => {
   if (loading) {
     return (
       <Section>
-        <div className="text-center">{t('loading')}</div>
+        <div className="text-center">{t("loading")}</div>
       </Section>
     );
   } else {
     return (
       <Section>
-        <p>{t('text', { amount: counter.amount })}</p>
+        <CartCount count={counter.amount} />
+        <p>{t("text", { amount: counter.amount })}</p>
         {children}
       </Section>
     );
