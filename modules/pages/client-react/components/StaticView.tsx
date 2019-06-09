@@ -9,6 +9,7 @@ import Mission from '../containers/Mission';
 import PrivacyRules from '../containers/PrivacyRules';
 import Renting from '../containers/Renting';
 import TermsOfService from '../containers/TermsOfService';
+import TrustAndSafety from '../containers/TrustAndSafety';
 // import { Layout, Menu, Breadcrumb, Icon, Row } from 'antd';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
@@ -38,6 +39,7 @@ class StaticView extends React.Component<StaticViewProps> {
           <Route exact path="/privacy-rules" component={PrivacyRules} />,
           <Route exact path="/renting" component={Renting} />,
           <Route exact path="/lending" component={Lending} />,
+          <Route exact path="/TrustAndSafety" component={TrustAndSafety} />,
           <Route exact path="/faq" component={FAQ} />,
           <Route exact path="/blog" component={Blog} />
         </Switch>

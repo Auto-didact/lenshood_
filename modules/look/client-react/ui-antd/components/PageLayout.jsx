@@ -14,11 +14,11 @@ class PageLayout extends React.Component {
     return (
       <Layout>
         {navBar !== false && (
-          <Header className="header">
+          <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <NavBar />
           </Header>
         )}
-        <Content id="content" style={{ padding: 24 }}>
+        <Content id="content" style={{ padding: 24, marginTop: '64px' }}>
           {children}
         </Content>
 
