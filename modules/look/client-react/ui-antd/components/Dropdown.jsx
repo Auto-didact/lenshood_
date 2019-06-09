@@ -7,6 +7,9 @@ class DropDown extends React.Component {
     children: PropTypes.node,
     type: PropTypes.string
   };
+  componentWillMOunt() {
+    console.log(this.props);
+  }
 
   render() {
     const { children, ...props } = this.props;
@@ -16,7 +19,7 @@ class DropDown extends React.Component {
 
     const content = props.content ? props.content : null;
     return (
-      <Dropdown overlay={menu} trigger={['click']}>
+      <Dropdown overlay={menu} trigger={['click', 'hover']}>
         <a className="ant-dropdown-link" href="#">
           {content}
           {!props.noicon ? <Icon type={props.type ? props.type : 'down'} /> : null}
