@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Icon, Button } from 'antd';
+import { Icon, Button, Radio } from 'antd';
 import PropTypes from 'prop-types';
 import AddNewAddress from './AddNewAddress';
 
@@ -10,6 +10,7 @@ export default class SavedAddress extends React.Component {
       onShowModal: PropTypes.func,
       onDelete: PropTypes.func,
       onCancel: PropTypes.func,
+      onSelect: PropTypes.func,
       value: PropTypes.any,
       onSave: PropTypes.func,
       visible: PropTypes.any,
@@ -17,24 +18,26 @@ export default class SavedAddress extends React.Component {
       onChange: PropTypes.func
     };
   }
-  state = {
-    visible: false
-  };
 
   render() {
-    const { address, onShowModal, onDelete, onCancel, value, onSave, visible, saveFormRef, onChange } = this.props;
+    const {
+      address,
+      onShowModal,
+      onDelete,
+      onCancel,
+      value,
+      onSelect,
+      onSave,
+      visible,
+      saveFormRef,
+      onChange
+    } = this.props;
 
     return (
       <React.Fragment>
         {address.map(adres => (
-          <Col
-            key={adres.id}
-            xs={{ span: 18, offset: 3 }}
-            sm={{ span: 12, offset: 0 }}
-            md={{ span: 10, offset: 0 }}
-            className="PadB30"
-          >
-            <div className="HomeAddress">
+          <Radio.Button key={adres.id} value={adres} onClick={() => onSelect(adres)}>
+            <div style={{ marginTop: 16 }} className="HomeAddress">
               <div className="HomeAddressBlock">
                 Home Address <Icon type="home" className="homeicon" />
               </div>
@@ -54,7 +57,7 @@ export default class SavedAddress extends React.Component {
                 <Icon type="edit" />
               </Button>
             </div>
-          </Col>
+          </Radio.Button>
         ))}
         <AddNewAddress
           wrappedComponentRef={saveFormRef}

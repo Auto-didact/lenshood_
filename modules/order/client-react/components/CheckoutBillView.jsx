@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Radio } from 'antd';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
@@ -137,7 +137,13 @@ export default class CheckoutBillView extends React.Component {
       onSave={this.handleSave}
       value=""
       onChange={this.handleChange}
+      onSelect={this.handleSelected}
     />;
+  };
+
+  handleSelected = adres => {
+    this.setState({ value: adres });
+    console.log('selected value', adres);
   };
 
   render() {
@@ -155,17 +161,27 @@ export default class CheckoutBillView extends React.Component {
             </Col>
             <Col lg={14} sm={24}>
               <Row gutter={32}>
-                <SavedAddress
-                  address={this.state.address}
-                  onDelete={this.handleDelete}
-                  visible={this.state.visible}
-                  onCancel={this.hideModal}
-                  onSave={this.handleSave}
-                  onShowModal={this.showModal}
-                  saveFormRef={this.saveFormRef}
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                />
+                <Col
+                  xs={{ span: 18, offset: 3 }}
+                  sm={{ span: 12, offset: 0 }}
+                  md={{ span: 10, offset: 0 }}
+                  className="PadB30"
+                >
+                  <Radio.Group defaultValue={this.state.address[0]}>
+                    <SavedAddress
+                      address={this.state.address}
+                      onDelete={this.handleDelete}
+                      visible={this.state.visible}
+                      onCancel={this.hideModal}
+                      onSave={this.handleSave}
+                      onShowModal={this.showModal}
+                      saveFormRef={this.saveFormRef}
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      onSelect={this.handleSelected}
+                    />
+                  </Radio.Group>
+                </Col>
                 <Col
                   xs={{ span: 14, offset: 5 }}
                   sm={{ span: 10, offset: 0 }}

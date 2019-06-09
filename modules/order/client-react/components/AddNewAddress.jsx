@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { Modal, Form, Input } from 'antd';
+import { RenderField } from '@gqlapp/look-client-react';
 
 const AddNewAddress = Form.create({ name: 'form_in_modal' })(
   // eslint-disable-next-line
@@ -14,6 +16,11 @@ const AddNewAddress = Form.create({ name: 'form_in_modal' })(
         visible: PropTypes.any,
         form: PropTypes.any
       };
+    }
+
+    constructor(props) {
+      super(props);
+      this.props = props;
     }
 
     handleChange = ({ currentTarget: input }) => {
@@ -72,6 +79,9 @@ const AddNewAddress = Form.create({ name: 'form_in_modal' })(
               })(<Input type="number" onChange={() => this.handleChange} />)}
             </Form.Item>
           </Form>
+
+          {/* Initailly checking if a single field gets loaded corectly. */}
+          <Field name="name" component={RenderField} type="text" label="Name" value={value.name} />
         </Modal>
       );
     }
