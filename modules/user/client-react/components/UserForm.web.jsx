@@ -81,6 +81,7 @@ const UserForm = ({
   } = values;
 
   const isAdmin = isAdminFunction(userRole);
+
   return (
     <Form name="user" onSubmit={handleSubmit}>
       <Field
@@ -116,15 +117,6 @@ const UserForm = ({
         </Field>
       )}
 
-      {isAdmin && (
-        <Field
-          name="isActive"
-          component={RenderCheckBox}
-          type="checkbox"
-          label={t("userEdit.form.field.active")}
-          checked={isActive}
-        />
-      )}
       <Field
         name="profile.firstName"
         component={RenderField}
@@ -173,15 +165,6 @@ const UserForm = ({
           value={profile.flag}
         />
       )}
-      {isAdmin && (
-        <Field
-          name="profile.flag"
-          component={RenderField}
-          type="text"
-          label={t("userEdit.form.field.flag")}
-          value={profile.flag}
-        />
-      )}
 
       {isAdmin && (
         <Field
@@ -211,11 +194,11 @@ const UserForm = ({
 
       {isAdmin && (
         <Field
-          name="profile.isActive"
+          name="isActive"
           component={RenderCheckBox}
           type="checkbox"
           label={t("userEdit.form.field.active")}
-          checked={profile.isActive}
+          checked={isActive}
         />
       )}
 
@@ -375,8 +358,7 @@ const UserFormWithFormik = withFormik({
         isAvailable: profile && profile.isAvailable,
         isVerified: profile && profile.isVerified,
         rating: profile && profile.rating,
-        website: profile && profile.website,
-        isActive: profile && profile.isActive
+        website: profile && profile.website
       },
       addresses:
         addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
