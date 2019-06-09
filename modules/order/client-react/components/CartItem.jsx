@@ -3,7 +3,7 @@ import { Row, Col, Button, Icon, DatePicker, Modal } from "antd";
 import PropTypes from "prop-types";
 import moment from "moment";
 import {
-  RenderRangePicker,
+  RenderDateRangePicker,
   Button as FormButton,
   Form
 } from "@gqlapp/look-client-react";
@@ -48,7 +48,7 @@ const CartItem = props => {
             <h4>Change Dates:</h4>
             <Field
               name="dateRange"
-              component={RenderRangePicker}
+              component={RenderDateRangePicker}
               value={dates}
               onChange={v => setDateRange(v)}
             />
