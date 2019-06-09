@@ -164,7 +164,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.11",
-    "opencollective": "^1.0.3"
+    "opencollective": "^1.0.3",
+    "react-burger-menu": "^2.6.10"
   },
   "resolutions": {
     "immutability-helper": "2.8.1",
