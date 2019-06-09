@@ -107,7 +107,6 @@ type UserMobile {
   error: String
 }
 
-
 type UserEndorsement {
   id: Int
   endorser: User
@@ -283,6 +282,8 @@ input AddUserInput {
   role: String
   isActive: Boolean
   profile: ProfileInput
+  addresses: [AddressInput]
+  portfolios: [PortfolioInput]
   auth: AuthInput
 }
 
