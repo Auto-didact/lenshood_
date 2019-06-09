@@ -31,6 +31,7 @@ class DetailsCard extends Component {
             md={{ span: 9 }}
             xxl={{ span: 6 }}
             className="DetailsCardCol"
+            align="center"
           >
             <img
               className="DetailsCardImg"
@@ -54,10 +55,12 @@ class DetailsCard extends Component {
               ) : (
                 <h6 className="OnShelfTag">On Shelf</h6>
               )}
-              <h3>
-                {item.listingContent.map(gear => (
-                  <span>{`${gear.brand} ${gear.gear} / `}</span>
-                ))}
+              <h3 className="DetailsCardHeading">
+                {item.listingContent.length !== 0
+                  ? item.listingContent.map(gear => (
+                      <span>{`${gear.brand} ${gear.gear} / `}</span>
+                    ))
+                  : "Info Not Provided"}
               </h3>
               {/*<h5>
                 <span className="StarRate">
