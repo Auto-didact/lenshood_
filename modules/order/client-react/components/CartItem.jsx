@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Icon, DatePicker, Modal } from "antd";
+import PropTypes from "prop-types";
 import moment from "moment";
+import {
+  RenderRangePicker,
+  Button as FormButton,
+  Form
+} from "@gqlapp/look-client-react";
+import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
+import { withFormik } from "formik";
+import { required, validate } from "@gqlapp/validation-common-react";
+// const { RangePicker } = DatePicker;
 
-const { RangePicker } = DatePicker;
+const DateChangeSchema = {
+  dateRange: [required]
+};
 
 const CartItem = props => {
+  const { handleSubmit, submitting, errors } = props;
   let product = props.products;
-  const [dateRange, setDateRange] = useState([
+  const [dates, setDateRange] = useState([
     moment(product.date.start, "DD-MM-YY"),
     moment(product.date.end, "DD-MM-YY")
   ]);
@@ -19,27 +32,38 @@ const CartItem = props => {
         >
           <Icon type="edit" />
         </Button>
+
         <Modal
           title="Edit Product"
           centered
           visible={props.modal1Visible}
-          onOk={() => props.editProduct(product.id, dateRange[0], dateRange[1])}
+          footer={null}
+          // onOk={() => props.editProduct(product.id, dateRange[0], dateRange[1])}
           onCancel={() => props.setModal1Visible()}
         >
-          <h3>
-            <strong>{product.name}</strong>
-          </h3>
-          <h4>Change Dates:</h4>
-          <RangePicker
-            value={dateRange}
-            format="DD-MM-YY"
-            size="small"
-            onChange={v => setDateRange(v)}
-          />
-          <br />
-          <br />
-          <h4>No of days : {dateRange[1].diff(dateRange[0], "days") + 1}</h4>
+          <Form name="CartItem" onSubmit={handleSubmit}>
+            <h3>
+              <strong>{product.name}</strong>
+            </h3>
+            <h4>Change Dates:</h4>
+            <Field
+              name="dateRange"
+              component={RenderRangePicker}
+              value={dates}
+              onChange={v => setDateRange(v)}
+            />
+            <div className="text-center">
+              {errors && errors.errorMsg && (
+                <Alert color="error">{errors.errorMsg}</Alert>
+              )}
+            </div>
+            <h4>No of days : {dates[1].diff(dates[0], "days") + 1}</h4>
+            <FormButton color="primary" type="submit" disabled={submitting}>
+              Submit
+            </FormButton>
+          </Form>
         </Modal>
+
         <Button
           className="borderzero listclose"
           onClick={() => props.deleteProduct(product.id)}
@@ -93,4 +117,30 @@ const CartItem = props => {
   );
 };
 
-export default CartItem;
+CartItem.propTypes = {
+  handleSubmit: PropTypes.func,
+  submitting: PropTypes.bool,
+  errors: PropTypes.object
+};
+
+const CartItemWithFormik = withFormik({
+  mapPropsToValues: props => ({
+    dateRange: [
+      moment(props.products.date.start, "DD-MM-YY"),
+      moment(props.products.date.end, "DD-MM-YY")
+    ]
+  }),
+  validate: values => validate(values, DateChangeSchema),
+  handleSubmit({ dateRange }, { props }) {
+    console.log(props.products.id);
+    props.editProduct(
+      props.products.id,
+      moment(dateRange[0], "DD-MM-YY"),
+      moment(dateRange[1], "DD-MM-YY")
+    );
+  },
+  enableReinitialize: true,
+  displayName: "DatesChangeForm" // helps with React DevTools
+});
+
+export default CartItemWithFormik(CartItem);
