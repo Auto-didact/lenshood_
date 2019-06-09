@@ -28,12 +28,14 @@ class FieldAdapter extends Component {
   // To Do - ReConfirm that this works
   onChange = (e, secondArg) => {
     const { onChange } = this.props;
+    console.log(onChange)
     if (onChange) {
       onChange(e);
     }
     if (e._isAMomentObject && secondArg) {
       this.props.formik.setFieldValue(this.props.name, secondArg);
     } else if (
+      Array.isArray(e) &&
       e[0]._isAMomentObject &&
       e[1]._isAMomentObject &&
       secondArg
@@ -110,8 +112,7 @@ class FieldAdapter extends Component {
       disabled
     };
 
-    const changeEventHandler =
-      PLATFORM === "mobile" ? "onChangeText" : "onChange";
+    const changeEventHandler = PLATFORM === "mobile" ? "onChangeText" : "onChange";
     input[changeEventHandler] = this[changeEventHandler];
 
     return React.createElement(component, {
