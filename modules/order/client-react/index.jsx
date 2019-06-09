@@ -40,12 +40,5 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
-  navItemUser: [
-    <IfLoggedIn key="/my-orders">
-      <MenuItem>
-        <NavLinkMyOrdersWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
-  ],
   localization: [{ ns: 'order', resources }]
 });
