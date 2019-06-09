@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 const dateFormat = "DD-MM-YY";
 const { RangePicker } = DatePicker;
 
-const RenderRangePicker = ({ input, label, meta: { touched, error } }) => {
+const RenderDateRangePicker = ({ input, label, meta: { touched, error } }) => {
   let validateStatus = "";
   if (error) {
     validateStatus = "error";
@@ -20,11 +20,11 @@ const RenderRangePicker = ({ input, label, meta: { touched, error } }) => {
   );
 };
 
-RenderRangePicker.propTypes = {
+RenderDateRangePicker.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
   children: PropTypes.node
 };
 
-export default RenderRangePicker;
+export default RenderDateRangePicker;
