@@ -6,7 +6,7 @@ export default class CartCount extends React.Component {
     return (
       <div>
         <Badge count={this.props.count}>
-          <Avatar size="default" icon="shopping-cart" className="themeColor" />
+          <Avatar size="large" icon="shopping-cart" className="themeColor" />
         </Badge>
       </div>
     );
