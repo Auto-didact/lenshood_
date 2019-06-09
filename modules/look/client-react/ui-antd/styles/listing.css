@@ -163,14 +163,19 @@
 .DetailsCardCol {
   overflow: hidden !important;
   border-radius: 8px 0px 0px 0px !important;
-  align: center !important;
+
   object-fit: cover;
+  height: 250px;
 }
 
 .DetailsCard {
   margin: 0px 0px 15px 0px !important;
   border-radius: 8px 0px !important;
   min-width: 100%;
+}
+
+.DetailsCardHeading {
+  height: 100px;
 }
 
 .DetailsWidth {
@@ -180,7 +185,7 @@
 }
 
 .DetailsCardImg {
-  width: 100%;
+  height: 100%;
 }
 
 .OnRentTag {
