@@ -7,7 +7,8 @@ const AddressCard = ({ address, subTitle, index }) => {
       style={{
         backgroundColor: '#c1f7ed',
         padding: '10% 10% 5% 10%',
-        marginBottom: '2%'
+        marginBottom: '2%',
+        height: '150px'
       }}
     >
       <h3>
