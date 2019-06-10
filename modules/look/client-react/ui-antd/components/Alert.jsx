@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Alert as ADAlert } from 'antd';
 
 const Alert = ({ children, color, ...props }) => {
-  // return <ADAlert message={children} type={color} {...props} />;
-  return <div>Hi this is RenderDragger!</div>;
+  return <ADAlert message={children} type={color} {...props} />;
 };
 
 Alert.propTypes = {
