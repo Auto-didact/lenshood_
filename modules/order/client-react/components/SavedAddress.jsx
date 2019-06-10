@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Button, Radio } from 'antd';
 import PropTypes from 'prop-types';
-import AddNewAddress from './AddNewAddress';
+import AddressForm from './AddressForm';
 
 export default class SavedAddress extends React.Component {
   static get propTypes() {
@@ -59,7 +59,7 @@ export default class SavedAddress extends React.Component {
             </div>
           </Radio.Button>
         ))}
-        <AddNewAddress
+        <AddressForm
           wrappedComponentRef={saveFormRef}
           visible={visible}
           onCancel={onCancel}

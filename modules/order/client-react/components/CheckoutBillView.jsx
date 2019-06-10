@@ -8,7 +8,7 @@ import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
 import SavedAddress from './SavedAddress';
 import naruto2 from '../resources/naruto2.jpg';
-import AddNewAddress from './AddNewAddress';
+import AddressForm from './AddressForm';
 
 const renderMetaData = () => (
   <Helmet
@@ -55,7 +55,7 @@ export default class CheckoutBillView extends React.Component {
     obj1.streetAddress2 = 'Guwahati, North Guwahati-2';
     obj1.city = 'Guwahati-2';
     obj1.state = 'Assam-2';
-    obj1.pinCode = '7810390-2';
+    obj1.pinCode = '7810390';
     address.push(obj1);
 
     this.setState({ address });
@@ -123,14 +123,14 @@ export default class CheckoutBillView extends React.Component {
     console.log('This address has been deleted');
   };
 
-  handleChange = data => {
-    const address = this.state.address;
-    address[data.id] = data;
-    this.setState({ address });
-  };
+  // handleChange = data => {
+  //   const address = this.state.address;
+  //   address[data.id] = data;
+  //   this.setState({ address });
+  // };
 
   handleAddAddress = () => {
-    <AddNewAddress
+    <AddressForm
       wrappedComponentRef={this.saveFormRef}
       visible={this.state.visible}
       onCancel={this.hideModal}
