@@ -14,9 +14,10 @@ class MobileAdd extends Component {
     this.subscription = null;
     this.state = {
       loading: false,
-      form: props.vStatus ? false : true,
+      form: props.mobile && props.mobile.isVerified ? false : true,
       otp: false,
-      vStatus: props.vStatus
+      vStatus: props.mobile && props.mobile.isVerified,
+      mobile: props.mobile || null
     };
 
     this.setMobile = this.setMobile.bind(this);
@@ -86,7 +87,8 @@ class MobileAdd extends Component {
 }
 MobileAdd.propTypes = {
   vStatus: PropTypes.bool,
-  addMobile: PropTypes.func.isRequired
+  addMobile: PropTypes.func.isRequired,
+  mobile: PropTypes.object
 };
 
 export default graphql(ADD_Mobile, {
