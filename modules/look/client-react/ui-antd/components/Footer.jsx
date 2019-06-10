@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Dropdown, Icon } from 'antd';
+import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import Container from './Container';
 import Row from './Row';
@@ -58,7 +58,7 @@ export default class Footer extends React.Component {
         <Row className="footer" gutter={16}>
           <Col lg={12} sm={24}>
             <Row>
-              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
+              <Col sm={{ span: 12 }}>
                 <ul>
                   <h3>About Lenshood</h3>
                   <li>
@@ -75,7 +75,7 @@ export default class Footer extends React.Component {
                   </li>
                 </ul>
               </Col>
-              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
+              <Col sm={{ span: 12 }}>
                 <ul>
                   <h3>How It Works</h3>
                   <li>
@@ -96,7 +96,7 @@ export default class Footer extends React.Component {
           </Col>
           <Col lg={12} sm={24}>
             <Row>
-              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
+              <Col sm={{ span: 12 }}>
                 <ul>
                   <h3>Keep In Touch</h3>
                   <li>
@@ -115,7 +115,7 @@ export default class Footer extends React.Component {
                   </li>
                 </ul>
               </Col>
-              <Col sm={{ span: 24 }} sm={{ span: 12 }}>
+              <Col sm={{ span: 12 }}>
                 <ul>
                   <h3>Follow Us</h3>
                   <li>
@@ -168,7 +168,13 @@ export default class Footer extends React.Component {
                 About Lenshood
                 <img src={require('../images/dropdown.png')} width="20px" height="20px" />
               </h3>
-              <div style={this.state.show1 ? { display: 'block' } : { display: 'none' }}>
+              <div
+                style={
+                  this.state.show1
+                    ? { display: 'block' }
+                    : { display: 'none', position: 'absolute', marginLeft: '20px' }
+                }
+              >
                 <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                   <li>
                     <Link to="/about-us">About us</Link>
