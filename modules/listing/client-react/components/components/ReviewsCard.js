@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Rate, List, Row, Col, Card, Avatar } from "antd";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Rate, List, Row, Col, Avatar } from 'antd';
+import { Card } from '@gqlapp/look-client-react';
 // import '../resources/listingCatalogue.css';
 
 class ReviewsCard extends Component {
@@ -16,33 +17,18 @@ class ReviewsCard extends Component {
   render() {
     let reviews = this.props.reviews;
     return (
-      <Card
-        className="RevCard"
-      >
+      <Card>
         <h4>
-          {reviews.reviewers.length} reviews on this item{" "}
-          <Rate
-            disabled
-            defaultValue={this.averageReviews(reviews.properties)}
-            className="RevStar"
-          />{" "}
-          <h5 className="InlineDisplay">
-            {this.averageReviews(reviews.properties)}
-          </h5>
+          {reviews.reviewers.length} reviews on this item{' '}
+          <Rate disabled defaultValue={this.averageReviews(reviews.properties)} className="RevStar" />{' '}
+          <h5 className="InlineDisplay">{this.averageReviews(reviews.properties)}</h5>
         </h4>
         <Row>
           {Object.entries(reviews.properties).map(([key, value]) => (
             <Col lg={12} sm={24}>
               {key}
               <div className="rightfloat">
-                <h5 className="reviewVal">
-                  {value}
-                </h5>{" "}
-                <Rate
-                  disabled
-                  defaultValue={value}
-                  className="RevStar"
-                />{" "}
+                <h5 className="reviewVal">{value}</h5> <Rate disabled defaultValue={value} className="RevStar" />{' '}
               </div>
             </Col>
           ))}
@@ -56,22 +42,14 @@ class ReviewsCard extends Component {
               <List.Item.Meta
                 avatar={<Avatar />}
                 title={
-                  <div
-                    className="DateandDes"
-                  >
-                    <Link
-                      to=""
-                      className="itemLink"
-                      href="#"
-                    >
+                  <div className="DateandDes">
+                    <Link to="" className="itemLink" href="#">
                       {item.name}
                     </Link>
                     <h5>{item.Date}</h5>
                   </div>
                 }
-                description={
-                  <h5 className="lineHeight18">{item.word}</h5>
-                }
+                description={<h5 className="lineHeight18">{item.word}</h5>}
               />
             </List.Item>
           )}
