@@ -1,10 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
-import { isEmpty } from 'lodash';
-import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
-import { translate } from '@gqlapp/i18n-client-react';
-import { email, minLength, required, match, validate } from '@gqlapp/validation-common-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { withFormik } from "formik";
+import { isEmpty } from "lodash";
+import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
+import { translate } from "@gqlapp/i18n-client-react";
+import {
+  email,
+  minLength,
+  required,
+  match,
+  validate
+} from "@gqlapp/validation-common-react";
 import {
   Form,
   RenderField,
@@ -15,9 +21,9 @@ import {
   Option,
   Button,
   Alert
-} from '@gqlapp/look-client-react';
-import { FieldArray } from 'formik';
-import settings from '../../../../settings';
+} from "@gqlapp/look-client-react";
+import { FieldArray } from "formik";
+import settings from "../../../../settings";
 
 const userFormSchema = {
   username: [required, minLength(3)],
@@ -27,11 +33,15 @@ const userFormSchema = {
 const createUserFormSchema = {
   ...userFormSchema,
   password: [required, minLength(settings.auth.password.minLength)],
-  passwordConfirmation: [required, match('password'), minLength(settings.auth.password.minLength)]
+  passwordConfirmation: [
+    required,
+    match("password"),
+    minLength(settings.auth.password.minLength)
+  ]
 };
 
 const isAdminFunction = role => {
-  if (role === 'admin') {
+  if (role === "admin") {
     return true;
   } else {
     return false;
@@ -41,10 +51,21 @@ const isAdminFunction = role => {
 const updateUserFormSchema = {
   ...userFormSchema,
   password: minLength(settings.auth.password.minLength),
-  passwordConfirmation: [match('password'), minLength(settings.auth.password.minLength)]
+  passwordConfirmation: [
+    match("password"),
+    minLength(settings.auth.password.minLength)
+  ]
 };
 
-const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDisplayRole, shouldDisplayActive }) => {
+const UserForm = ({
+  values,
+  handleSubmit,
+  errors,
+  setFieldValue,
+  t,
+  shouldDisplayRole,
+  shouldDisplayActive
+}) => {
   const {
     userRole,
     username,
@@ -60,51 +81,54 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
   } = values;
 
   const isAdmin = isAdminFunction(userRole);
+
   return (
     <Form name="user" onSubmit={handleSubmit}>
       <Field
         name="profile.avatar"
         component={RenderUpload}
         type="text"
-        label={t('userEdit.form.field.avatar')}
+        label={t("userEdit.form.field.avatar")}
         value={profile.avatar}
       />
       <Field
         name="username"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.name')}
+        label={t("userEdit.form.field.name")}
         value={username}
       />
-      <Field name="email" component={RenderField} type="email" label={t('userEdit.form.field.email')} value={email} />
+      <Field
+        name="email"
+        component={RenderField}
+        type="email"
+        label={t("userEdit.form.field.email")}
+        value={email}
+      />
       {isAdmin && (
-        <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
-          <Option value="user">{t('userEdit.form.field.role.user')}</Option>
-          <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
+        <Field
+          name="role"
+          component={RenderSelect}
+          label={t("userEdit.form.field.role.label")}
+          value={role}
+        >
+          <Option value="user">{t("userEdit.form.field.role.user")}</Option>
+          <Option value="admin">{t("userEdit.form.field.role.admin")}</Option>
         </Field>
       )}
 
-      {isAdmin && (
-        <Field
-          name="isActive"
-          component={RenderCheckBox}
-          type="checkbox"
-          label={t('userEdit.form.field.active')}
-          checked={isActive}
-        />
-      )}
       <Field
         name="profile.firstName"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.firstName')}
+        label={t("userEdit.form.field.firstName")}
         value={profile.firstName}
       />
       <Field
         name="profile.lastName"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.lastName')}
+        label={t("userEdit.form.field.lastName")}
         value={profile.lastName}
       />
 
@@ -112,7 +136,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="profile.about"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.about')}
+        label={t("userEdit.form.field.about")}
         value={profile.about}
       />
 
@@ -120,7 +144,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="profile.designation"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.designation')}
+        label={t("userEdit.form.field.designation")}
         value={profile.designation}
       />
 
@@ -128,7 +152,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="profile.mobile"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.mobile')}
+        label={t("userEdit.form.field.mobile")}
         value={profile.mobile}
       />
 
@@ -137,7 +161,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
           name="profile.flag"
           component={RenderField}
           type="text"
-          label={t('userEdit.form.field.flag')}
+          label={t("userEdit.form.field.flag")}
           value={profile.flag}
         />
       )}
@@ -147,7 +171,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
           name="profile.rating"
           component={RenderField}
           type="text"
-          label={t('userEdit.form.field.rating')}
+          label={t("userEdit.form.field.rating")}
           value={profile.rating}
         />
       )}
@@ -156,7 +180,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="profile.website"
         component={RenderField}
         type="text"
-        label={t('userEdit.form.field.website')}
+        label={t("userEdit.form.field.website")}
         value={profile.website}
       />
 
@@ -164,16 +188,26 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="profile.isAvailable"
         component={RenderCheckBox}
         type="checkbox"
-        label={t('userEdit.form.field.available')}
+        label={t("userEdit.form.field.available")}
         checked={profile.isAvailable}
       />
+
+      {isAdmin && (
+        <Field
+          name="isActive"
+          component={RenderCheckBox}
+          type="checkbox"
+          label={t("userEdit.form.field.active")}
+          checked={isActive}
+        />
+      )}
 
       {isAdmin && (
         <Field
           name="profile.isVerified"
           component={RenderCheckBox}
           type="checkbox"
-          label={t('userEdit.form.field.isverified')}
+          label={t("userEdit.form.field.isverified")}
           checked={profile.isVerified}
         />
       )}
@@ -183,17 +217,17 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         render={arrayHelpers => (
           <RenderDynamicField
             keys={[
-              { key: 'streetAddress1', type: 'text' },
-              { key: 'streetAddress2', type: 'text' },
-              { key: 'city', type: 'text' },
-              { key: 'state', type: 'text' },
-              { key: 'pinCode', type: 'text' }
+              { key: "streetAddress1", type: "text" },
+              { key: "streetAddress2", type: "text" },
+              { key: "city", type: "text" },
+              { key: "state", type: "text" },
+              { key: "pinCode", type: "text" }
             ]}
             buttonText="Add Address"
             arrayHelpers={arrayHelpers}
             values={addresses}
             name="addresses"
-            label={t('userEdit.form.field.addresses')}
+            label={t("userEdit.form.field.addresses")}
           />
         )}
       />
@@ -202,12 +236,15 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
         name="portfolios"
         render={arrayHelpers => (
           <RenderDynamicField
-            keys={[{ key: 'platform', type: 'text' }, { key: 'portfolioUrl', type: 'text' }]}
+            keys={[
+              { key: "platform", type: "text" },
+              { key: "portfolioUrl", type: "text" }
+            ]}
             buttonText="Add Portfolio"
             arrayHelpers={arrayHelpers}
             values={portfolios}
             name="portfolios"
-            label={t('userEdit.form.field.portfolios')}
+            label={t("userEdit.form.field.portfolios")}
           />
         )}
       />
@@ -217,33 +254,39 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
           name="serial"
           component={RenderField}
           type="text"
-          label={t('userEdit.form.field.serial')}
+          label={t("userEdit.form.field.serial")}
           value={auth && auth.certificate && auth.certificate.serial}
           onChange={value =>
-            setFieldValue('auth', {
+            setFieldValue("auth", {
               ...auth,
               certificate: { ...auth.certificate, serial: value }
             })
           }
         />
       )}
-      {/*<Field
-        name="password"
-        component={RenderField}
-        type="password"
-        label={t('userEdit.form.field.pass')}
-        value={password}
-      />
-      <Field
-        name="passwordConfirmation"
-        component={RenderField}
-        type="password"
-        label={t('userEdit.form.field.passConf')}
-        value={passwordConfirmation}
-      />*/}
-      {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
+      {isAdmin && (
+        <div>
+          <Field
+            name="password"
+            component={RenderField}
+            type="password"
+            label={t("userEdit.form.field.pass")}
+            value={password}
+          />
+          <Field
+            name="passwordConfirmation"
+            component={RenderField}
+            type="password"
+            label={t("userEdit.form.field.passConf")}
+            value={passwordConfirmation}
+          />
+        </div>
+      )}
+      {errors && errors.errorMsg && (
+        <Alert color="error">{errors.errorMsg}</Alert>
+      )}
       <Button color="primary" type="submit">
-        {t('userEdit.form.btnSubmit')}
+        {t("userEdit.form.btnSubmit")}
       </Button>
     </Form>
   );
@@ -267,7 +310,15 @@ UserForm.propTypes = {
 
 const UserFormWithFormik = withFormik({
   mapPropsToValues: values => {
-    const { username, email, role, isActive, profile, addresses, portfolios } = values.initialValues;
+    const {
+      username,
+      email,
+      role,
+      isActive,
+      profile,
+      addresses,
+      portfolios
+    } = values.initialValues;
 
     const userRole = values.userRole;
 
@@ -292,10 +343,10 @@ const UserFormWithFormik = withFormik({
       userRole: userRole,
       username: username,
       email: email,
-      role: role || 'user',
+      role: role || "user",
       isActive: isActive,
-      password: '',
-      passwordConfirmation: '',
+      password: "",
+      passwordConfirmation: "",
       profile: {
         firstName: profile && profile.firstName,
         lastName: profile && profile.lastName,
@@ -309,8 +360,12 @@ const UserFormWithFormik = withFormik({
         rating: profile && profile.rating,
         website: profile && profile.website
       },
-      addresses: addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
-      portfolios: portfolios && portfolios.length !== 0 ? portfolios.map(getPortfolios) : [],
+      addresses:
+        addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
+      portfolios:
+        portfolios && portfolios.length !== 0
+          ? portfolios.map(getPortfolios)
+          : [],
       auth: {
         ...values.initialValues.auth
       }
@@ -331,9 +386,12 @@ const UserFormWithFormik = withFormik({
       }
     });
   },
-  displayName: 'SignUpForm ', // helps with React DevTools
+  displayName: "SignUpForm ", // helps with React DevTools
   validate: (values, props) =>
-    validate(values, isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema)
+    validate(
+      values,
+      isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema
+    )
 });
 
-export default translate('user')(UserFormWithFormik(UserForm));
+export default translate("user")(UserFormWithFormik(UserForm));

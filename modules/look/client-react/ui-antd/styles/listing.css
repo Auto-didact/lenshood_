@@ -105,8 +105,8 @@
 
 .relatedCard {
   /* height: 300px !important; */
-  border-radius: 9px !important;
-  box-shadow: 0 1px 4px 0 rgba(179, 178, 178, 0.5);
+
+  border: 0px !important;
   /* width: auto !important; */
   margin-top: 20px;
   overflow: hidden;
@@ -123,9 +123,12 @@
   padding: 0 !important;
 }
 
-.RelCardh {
+.CatalogUserName {
   font-size: 13px;
   line-height: 14px;
+  margin: 0;
+}
+.UserCardUserName {
   margin: 0;
 }
 
@@ -157,16 +160,32 @@
   padding: 40px 0;
 }
 
-.DetailsRow {
-  margin-bottom: 30px;
-  border: 1px solid #ddd;
+.DetailsCardCol {
+  overflow: hidden !important;
+  border-radius: 8px 0px 0px 0px !important;
+
+  object-fit: cover;
+  height: 250px;
+}
+
+.DetailsCard {
+  margin: 0px 0px 15px 0px !important;
+  border-radius: 8px 0px !important;
   min-width: 100%;
+}
+
+.DetailsCardHeading {
+  height: 100px;
 }
 
 .DetailsWidth {
   height: 160px;
   width: 100%;
   padding-right: 20px;
+}
+
+.DetailsCardImg {
+  height: 100%;
 }
 
 .OnRentTag {
@@ -191,11 +210,8 @@
   padding: 0px 6px 1px 7px;
 }
 
-.ListingButtons {
-  background: #23b195 !important;
-  color: white !important;
-  width: 40% !important;
-  margin: 0 2.5% !important;
+.MyListings {
+  padding-left: 5%;
 }
 
 /* Product Calender */
@@ -299,8 +315,8 @@
 }
 
 .CaraImg {
-  height: 350px !important;
-  width: 100% !important;
+  height: 433px !important;
+
   z-index: 50 !important;
 }
 
@@ -310,7 +326,6 @@
 
 .gearCat {
   background-color: rgba(35, 177, 149, 0.2);
-  padding: 10px 4%;
   font-size: 25px;
 }
 
@@ -339,6 +354,7 @@
   font-size: 14px;
   line-height: 15px;
   margin-left: 5px;
+  display: inline;
 }
 
 .PChr {
@@ -355,5 +371,107 @@
 .itemGearPC {
   background: #23b195;
   padding: 0 7px;
-  margin: 0 4% 0 8%;
+  margin: 3px 5px 3px 0px;
 }
+
+/* .variable-width .slick-slide p {
+  background: #fff;
+  height: 100px;
+  color: #fff;
+  margin: 5px;
+  line-height: 100px;
+  text-align: center;
+}
+.center .slick-center h3 {
+  color: #fff;
+  opacity: 0;
+  transform: scale(1.08);
+}
+.center h3 {
+  opacity: 0;
+  transition: all 300ms ease;
+}
+.content {
+  (100%)padding: 20px;
+  margin: auto;
+  width: 90%;
+}
+.slick-slide .image {
+  padding: 10px;
+}
+.slick-slide img {
+  border: 5px solid #fff;
+  display: block;
+  margin: auto;
+}
+.slick-slide img.slick-loading {
+  border: 0;
+}
+.slick-slider {
+  margin: 30px auto 50px;
+}
+.slick-dots {
+  margin-left: 0;
+}
+.slick-thumb {
+  bottom: -45px;
+}
+.slick-thumb li {
+  width: 60px;
+  height: 45px;
+}
+.slick-thumb li img {
+  filter: grayscale(0%);
+}
+.slick-thumb li.slick-active img {
+  filter: grayscale(0%);
+}
+@media (max-width: 768px) {
+  h3 {
+    font-size: 24px;
+  }
+  .center {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+  .center .slick-center h3 {
+    color: #fff;
+    opacity: 0;
+    transform: scale(1);
+  }
+  .center h3 {
+    opacity: 0.8;
+    transform: scale(0.95);
+    transition: all 300ms ease;
+  }
+}
+.slick-vertical .slick-slide {
+  height: 180px;
+}
+.slick-arrow {
+  background-color: #23b195;
+  /* color: black; */
+/* }
+.slick-arrow:hover {
+  background-color: #23b195;
+}*/
+.ant-carousel .slick-slide {
+  background: #fff !important;
+}
+
+/* .slick-prev {
+  z-index: 100;
+  left: 20px !important;
+  color: red !important;
+  background: red !important;
+  height: 50px !important;
+  width: 50px !important;
+}
+.slick-next {
+  z-index: 100;
+  right: 20px !important;
+  color: red !important;
+  background: #fff !important;
+  height: 50px !important;
+  width: 50px !important;
+} */

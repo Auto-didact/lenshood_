@@ -1,56 +1,101 @@
 import React, { Component } from "react";
 import { Row, Col, Rate, Button, Card, Avatar } from "antd";
+import { CardText } from "@gqlapp/look-client-react";
+import { ImgUser } from "../../constants/DefaultImages";
 // import '../resources/listingCatalogue.css';
+const { Meta } = Card;
 
 class UserCard extends Component {
   render() {
     let seller = this.props.seller;
+    const portfolios = this.props.seller && this.props.seller.portfolios;
+    const firstName = seller && seller.profile && seller.profile.firstName;
+    const lastName = seller && seller.profile && seller.profile.lastName;
+
+    const sellerName =
+      firstName && lastName
+        ? `${firstName} ${lastName}`
+        : firstName || lastname
+        ? firstName
+          ? firstName
+          : lastName
+        : "Name Not Provided";
+
     return (
-      <Card className="userCard">
-        <Row>
-          <Col span={4}>
-            <Avatar />
-          </Col>
-          <Col span={12}>
-            <h4 className="sellerName">
-              {seller.name}
-              <br />
-              <p className="font10 mainColor">
-                {" "}
-                <Rate
-                  disabled
-                  defaultValue={seller.rating}
-                  className="font10 mainColor"
+      <Card
+        style={{ backgroundColor: "#FAFAFA", width: "100%", marginTop: "10px" }}
+      >
+        <Row type="flex" justify="space-around" align="middle">
+          <Col
+            lg={{ span: 18 }}
+            md={{ span: 24 }}
+            xs={{ span: 24 }}
+            sm={{ span: 16 }}
+            style={{ marginTop: "5px" }}
+          >
+            <Meta
+              avatar={
+                <Avatar
+                  size={70}
+                  src={seller.profile.avatar ? seller.profile.avatar : ImgUser}
                 />
-                <br />
-                Read Reviews ({seller.reviewsCount})
-              </p>
-            </h4>
+              }
+              title={
+                <div>
+                  <h4 className="UserCardUserName">{sellerName}</h4>
+                  <div>
+                    {seller.profile.rating ? (
+                      <Rate
+                        disabled
+                        defaultValue={seller.profile.rating}
+                        className="font10 mainColor"
+                      />
+                    ) : (
+                      <p>Not Rated</p>
+                    )}
+                  </div>
+                  <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
+                </div>
+              }
+            />
           </Col>
-          <Col span={8}>
-            <Button className="FollowButtom" type="primary" ghost>
-              Follow
-            </Button>
+          <Col
+            lg={{ span: 6 }}
+            md={{ span: 24 }}
+            xs={{ span: 24 }}
+            sm={{ span: 8 }}
+            style={{ marginTop: "5px", maxWidth: "150px" }}
+          >
+            <div align="center">
+              <Button type="primary" block>
+                Follow
+              </Button>
+              <br />
+            </div>
           </Col>
         </Row>
+
         <br />
         <h4 className="font14">About</h4>
-        <p className="font12">{seller.About}</p>
+        <p className="font12">{seller.profile.about}</p>
         <h4 className="font14">Web references</h4>
-        <strong>
-          {seller.references.map(item => (
+        {portfolios ? (
+          portfolios.map(item => (
             <strong>
-              <a href={item} className="font12 itemLink">
-                {item}
+              <a href={item.portfolioUrl} className="font12 itemLink">
+                {item.portfolioUrl}
                 <br />
               </a>
             </strong>
-          ))}
-        </strong>
+          ))
+        ) : (
+          <CardText>Not Available</CardText>
+        )}
         <br />
-        <Button className="contactButton" type="primary" ghost>
-          Contact
-        </Button>
+        <br />
+        <div align="center">
+          <Button>Contact</Button>
+        </div>
       </Card>
     );
   }

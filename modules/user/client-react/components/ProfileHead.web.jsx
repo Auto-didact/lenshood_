@@ -1,16 +1,12 @@
 import React from 'react';
 import { CardGroup } from '@gqlapp/look-client-react';
 import { Avatar, Icon, Row, Col, Divider } from 'antd';
+import { ImgUser } from '../constants/DefaultImages';
 
 const ProfileHead = ({ profile, description }) => {
   return (
     <div align="center" style={{ marginBottom: '10px' }}>
-      <Avatar
-        size={100}
-        src={
-          profile && profile.image ? profile.image : 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-        }
-      />
+      <Avatar size={100} src={profile && profile.avatar ? profile.avatar : ImgUser} />
       <br />
 
       <CardGroup>
