@@ -35,5 +35,19 @@ fragment ListingInfo on Listing {
     model
     serial
   }
+  user {
+    id
+    username
+    portfolios {
+      platform
+      portfolioUrl
+    }
+    profile {
+      avatar
+      firstName
+      lastName
+      rating
+      about
+    }
+  }
 }
-

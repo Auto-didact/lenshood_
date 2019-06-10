@@ -18,9 +18,11 @@ class PageLayout extends React.Component {
             <NavBar />
           </Header>
         )}
+
         <Content id="content" style={{ padding: 24, marginTop: '64px' }}>
           {children}
         </Content>
+
 
         <Footer />
       </Layout>

@@ -1,6 +1,15 @@
 fragment MyListings on Listing {
   id
+  status
   description
+  gearCategory
+  gearSubcategory
+  listingContent {
+    id
+    gear
+    brand
+    model
+  }
   listingImages {
     id
     imageUrl
