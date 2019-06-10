@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../settings';
 // import { SiderC } from './Sider';
+import './pageStyle.css';
 
 interface TermsOfServiceViewProps {
   t: TranslateFunction;
@@ -24,10 +25,33 @@ const TermsOfServiceView = ({ t }: TermsOfServiceViewProps) => {
   renderMetaData(t);
 
   return (
-    <div>
-      <div className="TermsContainer">
-        <h1>{t('terms_of_service.title')}</h1>
-        <h2>{t('terms_of_service.meta.overview.text')}</h2>
+    <div
+      style={{
+        width: '100%',
+        alignItems: 'center',
+        fontFamily: 'Avenir Next',
+        display: 'flex',
+        flexDirection: 'column',
+        border: 'none'
+      }}
+    >
+      <div
+        className="TermsContainer"
+        style={{
+          left: '50%',
+          width: '100%',
+          marginBottom: '32px',
+          marginTop: '16px',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+          maxWidth: '800px',
+          display: 'flex',
+          flexDirection: 'column',
+          border: 'none'
+        }}
+      >
+        <h1 style={{}}>{t('terms_of_service.title')}</h1>
+        <h2 style={{}}>{t('terms_of_service.meta.overview.text')}</h2>
         <p>{t('terms_of_service.meta.overview.content.p1.head')}</p>
         <ul>
           <li>{t('terms_of_service.meta.overview.content.p1.l1')}</li>
