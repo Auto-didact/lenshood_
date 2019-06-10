@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Layout } from "antd";
 
-import NavBar from './NavBar';
-import Footer from './Footer';
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const { Header, Content } = Layout;
 
@@ -14,15 +14,17 @@ class PageLayout extends React.Component {
     return (
       <Layout>
         {navBar !== false && (
-          <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+          <Header
+            className="header"
+            style={{ position: "fixed", zIndex: 1, width: "100%" }}
+          >
             <NavBar />
           </Header>
         )}
 
-        <Content id="content" style={{ padding: 24, marginTop: '64px' }}>
+        <Content id="content" style={{ marginTop: "64px" }}>
           {children}
         </Content>
-
 
         <Footer />
       </Layout>
