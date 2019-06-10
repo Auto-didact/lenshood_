@@ -4,7 +4,7 @@ import { Icon, Button, Row, Col } from "antd";
 
 class DetailsCard extends Component {
   render() {
-    console.log(this.props.item);
+    // console.log(this.props.item);
     const item = this.props.item;
     const buttonText = this.props.buttonText;
     return (
@@ -22,7 +22,8 @@ class DetailsCard extends Component {
                 alt=""
                 src={
                   item.listingImages.length !== 0
-                    ? item.listingImages[0].imageUrl
+                    ? item.listingImages[0]
+                    // .imageUrl
                     : null
                 }
               />
