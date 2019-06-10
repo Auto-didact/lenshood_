@@ -6,16 +6,20 @@ class ProductCalender extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      myBooks: [],
+      bookings: this.props.bookings,
+      name: this.props.name
     };
     this.dateArray = this.dateArray.bind(this);
     this.disabledDate = this.disabledDate.bind(this);
-    // this.dateCellRender = this.dateCellRender.bind(this);
   }
 
   dateArray() {
     var i;
-    this.props.bookings.map(book => {
+    // var x = moment(Date.now());
+    // alert(x.format("YYYY-MM-DD"));
+    this.state.bookings.map(book => {
       for (
         i = book.start;
         moment(i) <= moment(book.end);
@@ -23,13 +27,10 @@ class ProductCalender extends Component {
           .add(1, "d")
           .format("YYYY-MM-DD")
       ) {
-        this.state.items.push(i);
+        if (book.name === this.state.name) this.state.myBooks.push(i);
+        else this.state.items.push(i);
       }
     });
-  }
-
-  componentDidMount() {
-    this.dateArray();
   }
 
   disabledDate(current) {
@@ -38,7 +39,7 @@ class ProductCalender extends Component {
       this.state.items.some(
         row =>
           moment(row).format("YYYY-MM-DD") ===
-            moment(current._d).format("YYYY-MM-DD") ||
+            moment(current._d).format("YYYY-MM-DD") &&
           current.valueOf() < Date.now()
       )
     ) {
@@ -47,42 +48,62 @@ class ProductCalender extends Component {
       return false;
     }
   }
+  dateFullCellRender = current => {
+    const style = {};
+    if (current && current.valueOf() < Date.now()) {
+      style.background = "#ddd";
+      style.borderRadius = "50%";
+      style.color = "white";
+      style.cursor = "not-allowed";
+    } else if (
+      current &&
+      current.valueOf() > Date.now() &&
+      this.state.items.some(
+        row =>
+          moment(row).format("YYYY-MM-DD") ===
+          moment(current._d).format("YYYY-MM-DD")
+      )
+    ) {
+      style.background = "#23b195";
+      style.color = "white";
+      style.borderRadius = "50%";
+    } else if (
+      current &&
+      current.valueOf() > Date.now() &&
+      this.state.myBooks.some(
+        row =>
+          moment(row).format("YYYY-MM-DD") ===
+          moment(current._d).format("YYYY-MM-DD")
+      )
+    ) {
+      style.background = "#a0f5e4";
+      style.color = "#888";
+      style.borderRadius = "50%";
+    }
 
-  // dateCellRender(current) {
-  //   if (
-  //     current &&
-  //     this.state.items.some(
-  //       row =>
-  //         moment(row).format("YYYY-MM-DD") ===
-  //         moment(current._d).format("YYYY-MM-DD")
-  //     )
-  //   ) {
-  //     return (
-  //       <div
-  //         style={{
-  //           background: " #a0f5e4 !important",
-  //           color: "#fff !important", width:"20px !important", height:"20px !important"
-  //         }}
-  //       />
-  //     );
-  //   }
-  // }
+    return (
+      <div className="ant-calendar-date" style={style}>
+        {current.date()}
+      </div>
+    );
+  };
   render() {
+    this.dateArray();
     return (
       <Row>
         <h3>Product Calender</h3>
         <br />
         <Col sm={13} className="CalendarBox">
           <Calendar
-            // dateCellRender={this.dateCellRender}
             disabledDate={this.disabledDate}
+            dateFullCellRender={this.dateFullCellRender}
             fullscreen={false}
           />
         </Col>
         <Col sm={11} className="PadL15">
           <h3 className="Bookings">Bookings</h3>
           <Card className="BookingsCard">
-            {this.props.bookings.map(item => (
+            {this.state.bookings.map(item => (
               <div>
                 <Row>
                   <Col md={5} sm={7}>

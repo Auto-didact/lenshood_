@@ -20,7 +20,7 @@ class AccountLayout extends React.Component {
             <NavBar />
           </Header>
         )}
-        <Row className="layoutRow" gutter={16}>
+        <Row className="layoutRow marginT20" gutter={16}>
           <Col lg={6} md={24} className="SliderStart">
             <h3 className="Pad20">
               <strong>Account Details</strong>
