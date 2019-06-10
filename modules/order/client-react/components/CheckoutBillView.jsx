@@ -136,7 +136,7 @@ export default class CheckoutBillView extends React.Component {
       onCancel={this.hideModal}
       onSave={this.handleSave}
       value=""
-      onChange={this.handleChange}
+      // onChange={this.handleChange}
       onSelect={this.handleSelected}
     />;
   };
@@ -177,7 +177,7 @@ export default class CheckoutBillView extends React.Component {
                       onShowModal={this.showModal}
                       saveFormRef={this.saveFormRef}
                       value={this.state.value}
-                      onChange={this.handleChange}
+                      // onChange={this.handleChange}
                       onSelect={this.handleSelected}
                     />
                   </Radio.Group>

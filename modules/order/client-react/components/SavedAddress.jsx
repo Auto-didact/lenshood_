@@ -29,8 +29,8 @@ export default class SavedAddress extends React.Component {
       onSelect,
       onSave,
       visible,
-      saveFormRef,
-      onChange
+      saveFormRef
+      // onChange
     } = this.props;
 
     return (
@@ -65,7 +65,7 @@ export default class SavedAddress extends React.Component {
           onCancel={onCancel}
           onSave={onSave}
           value={value}
-          onChange={onChange}
+          // onChange={onChange}
         />
       </React.Fragment>
     );
