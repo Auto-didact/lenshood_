@@ -9,8 +9,11 @@ import ReviewsCard from "./components/ReviewsCard";
 import naruto4 from "./resources/naruto4.jpg";
 import naruto3 from "./resources/naruto3.jpg";
 
+import { AccountLayout } from "@gqlapp/look-client-react";
+
 class MyListDetails extends Component {
   state = {
+    name: "Bishal Deb",
     product: {
       description: "Blah blah bleh",
       listingRental: { perDay: 1200 },
@@ -42,15 +45,17 @@ class MyListDetails extends Component {
         }
       ]
     },
-    myBookings: {
-      start: "2019-06-20",
-      end: "2019-06-22"
-    },
     bookings: [
+      {
+        name: "Bishal Deb",
+        rating: 3.7,
+        start: "2019-06-20",
+        end: "2019-06-22"
+      },
       {
         name: "Rajeev Khanna",
         rating: 4,
-        start: "2019-07-01",
+        start: "2019-07-03",
         end: "2019-07-12"
       },
       {
@@ -60,7 +65,7 @@ class MyListDetails extends Component {
         end: "2019-06-16"
       },
       {
-        name: "BIshal Deb",
+        name: "Bishal Deb",
         rating: 3.7,
         start: "2019-06-25",
         end: "2019-06-30"
@@ -70,26 +75,20 @@ class MyListDetails extends Component {
 
   render() {
     return (
-      <PageLayout>
-        <Breadcrumb separator=">">
+      <AccountLayout select="/my-listings">
+        {/* <Breadcrumb separator=">">
           <Breadcrumb.Item>Account</Breadcrumb.Item>
           <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
-        </Breadcrumb>
-        <Layout className="layoutList">
-          <Row className="layoutRow">
-            <Col lg={7} md={24}>
-              <AccDetailsMenu select={3} />
-            </Col>
-            <Col lg={15} md={24}>
-              <DetailsCard buttonText="Edit" item={this.state.product} />
-              <Card>
-                <ProductCalender bookings={this.state.bookings} myBookings={this.state.myBookings} />
-              </Card>
-              <ReviewsCard reviews={this.state.reviews} />
-            </Col>
-          </Row>
-        </Layout>
-      </PageLayout>
+        </Breadcrumb> */}
+        <DetailsCard buttonText="Edit" item={this.state.product} />
+        <Card>
+          <ProductCalender
+            bookings={this.state.bookings}
+            name={this.state.name}
+          />
+        </Card>
+        <ReviewsCard reviews={this.state.reviews} />
+      </AccountLayout>
     );
   }
 }
