@@ -115,7 +115,7 @@ class RelatedCard extends Component {
                 {rating ? (
                   <Rate disabled defaultValue={rating} className="CardRate" />
                 ) : (
-                  <p>Not Reviewed</p>
+                  <a>Not Reviewed</a>
                 )}
                 {/* <div className="RelIconGroup">
                   <Icon type="car" theme="filled" className="marginR10" />
