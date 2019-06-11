@@ -17,15 +17,20 @@ const AddressSchema = {
 
 // eslint-disable-next-line
 class AddressForm extends React.Component {
-  // handleChange = value => {
-  //   console.log('value', value);
-  //   const data = { ...this.props.value };
-  //   console.log('value.name', value.name);
-  //   data[value.name] = value;
-  //   // {
-  //   //   () => this.props.onChange(data);
-  //   // }
-  // };
+  handleChange = value => {
+    const target = value.target;
+    const values = target.value;
+    console.log('value', values);
+    const name = target.name;
+
+    // value.persist();
+    const data = { ...this.props.value };
+    console.log('value.name', name);
+    console.log('data[target.name]', data[target.name]);
+    data[target.name] = values;
+    console.log('data', data);
+    this.props.onChange(data);
+  };
 
   render() {
     const { onCancel, handleSubmit, value, visible } = this.props;
@@ -40,23 +45,23 @@ class AddressForm extends React.Component {
             type="text"
             label="Name"
             value={value.name}
-            // onChange={this.handleChange}
+            onChange={this.handleChange}
           />
           <Field
-            name="streetAddress"
+            name="streetAddress1"
             component={RenderField}
             type="textarea"
             label="Street Address-1"
             value={value.streetAddress1}
-            // onChange={this.handleChange}
+            onChange={this.handleChange}
           />
           <Field
-            name="streetAddress"
+            name="streetAddress2"
             component={RenderField}
             type="textarea"
             label="Street Address-2"
             value={value.streetAddress2}
-            // onChange={this.handleChange}
+            onChange={this.handleChange}
           />
           <Field
             name="city"
@@ -64,7 +69,7 @@ class AddressForm extends React.Component {
             type="text"
             label="City"
             value={value.city}
-            // onChange={this.handleChange}
+            onChange={this.handleChange}
           />
           <Field
             name="state"
@@ -72,7 +77,7 @@ class AddressForm extends React.Component {
             type="text"
             label="State"
             value={value.state}
-            // onChange={this.handleChange}
+            onChange={this.handleChange}
           />
           <Field
             name="pinCode"
@@ -80,10 +85,7 @@ class AddressForm extends React.Component {
             type="number"
             label="Pin Code"
             value={value.pinCode}
-            // onChange={value => {
-            //   console.log('value from onChange func', value.target.value);
-            //   // form.setFieldValue(field.name, value);
-            // }}
+            onChange={this.handleChange}
           />
         </Form>
       </Modal>
@@ -114,11 +116,11 @@ const AddressFormWithFormik = withFormik({
   handleSubmit(
     value,
     {
-      props: { onSubmit }
+      props: { handleSubmit }
     }
   ) {
-    // console.log(value);
-    onSubmit(value);
+    console.log('handleSubmit called', value);
+    handleSubmit(value);
   },
   enableReinitialize: true,
   displayName: 'AddressForm' // helps with React DevTools.

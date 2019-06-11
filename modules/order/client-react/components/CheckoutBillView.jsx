@@ -75,6 +75,7 @@ export default class CheckoutBillView extends React.Component {
   };
 
   handleSave = value => {
+    console.log('hadleSave called', value);
     const form = this.formRef.props.form;
     const address = this.state.address;
 
@@ -98,12 +99,13 @@ export default class CheckoutBillView extends React.Component {
   };
 
   handleAddressPush = (addressInDb, address, form, value) => {
+    console.log('handleAddressPush called', addressInDb, address, form, value);
     if (!addressInDb.id && !value.id) {
       addressInDb.id = Date.now().toString();
       address.push(addressInDb);
     } else {
-      const index = address.indexOf(value);
       addressInDb.id = value.id;
+      const index = address.indexOf(value);
       address[index] = { ...addressInDb };
     }
     this.setState({ address });
@@ -123,11 +125,16 @@ export default class CheckoutBillView extends React.Component {
     console.log('This address has been deleted');
   };
 
-  // handleChange = data => {
-  //   const address = this.state.address;
-  //   address[data.id] = data;
-  //   this.setState({ address });
-  // };
+  handleChange = data => {
+    const address = this.state.address;
+    // const index = address.indexOf(data);
+    // console.log('index', index);
+    address[data.id - 1] = { ...data };
+    console.log('handle change called', address[data.id - 1]);
+    console.log('handle change called', address);
+    const value = data;
+    this.setState({ address, value });
+  };
 
   handleAddAddress = () => {
     <AddressForm
@@ -136,7 +143,7 @@ export default class CheckoutBillView extends React.Component {
       onCancel={this.hideModal}
       onSave={this.handleSave}
       value=""
-      // onChange={this.handleChange}
+      onChange={this.handleChange}
       onSelect={this.handleSelected}
     />;
   };
@@ -177,7 +184,7 @@ export default class CheckoutBillView extends React.Component {
                       onShowModal={this.showModal}
                       saveFormRef={this.saveFormRef}
                       value={this.state.value}
-                      // onChange={this.handleChange}
+                      onChange={this.handleChange}
                       onSelect={this.handleSelected}
                     />
                   </Radio.Group>
