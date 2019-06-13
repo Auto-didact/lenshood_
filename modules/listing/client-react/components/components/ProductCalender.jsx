@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Row, Col, Calendar, Card, Icon, Avatar } from "antd";
+import { Row, Col, Calendar, Card, Icon, Avatar, Button } from "antd";
 import moment from "moment";
+import DateRangeCard from "./DateRangeCard";
 
 class ProductCalender extends Component {
   constructor(props) {
@@ -9,14 +10,25 @@ class ProductCalender extends Component {
       items: [],
       myBooks: [],
       bookings: this.props.bookings,
-      name: this.props.name
+      name: this.props.name,
+      modal1Visible: false,
+      currentBooking: {
+        start: Date.now(),
+        end: Date.now(),
+        range: []
+      }
     };
     this.dateArray = this.dateArray.bind(this);
     this.disabledDate = this.disabledDate.bind(this);
+    this.setModal1Visible = this.setModal1Visible.bind(this);
   }
-
+  setModal1Visible() {
+    this.setState({ modal1Visible: !this.state.modal1Visible });
+  }
   dateArray() {
     var i;
+    this.state.items = [];
+    this.state.myBooks = [];
     // var x = moment(Date.now());
     // alert(x.format("YYYY-MM-DD"));
     this.state.bookings.map(book => {
@@ -35,12 +47,16 @@ class ProductCalender extends Component {
 
   disabledDate(current) {
     if (
-      current &&
+      (current && current.valueOf() < Date.now()) ||
       this.state.items.some(
         row =>
           moment(row).format("YYYY-MM-DD") ===
-            moment(current._d).format("YYYY-MM-DD") &&
-          current.valueOf() < Date.now()
+          moment(current._d).format("YYYY-MM-DD")
+      ) ||
+      this.state.myBooks.some(
+        row =>
+          moment(row).format("YYYY-MM-DD") ===
+          moment(current._d).format("YYYY-MM-DD")
       )
     ) {
       return true;
@@ -79,6 +95,18 @@ class ProductCalender extends Component {
       style.background = "#a0f5e4";
       style.color = "#888";
       style.borderRadius = "50%";
+    } else if (
+      current &&
+      current.valueOf() > Date.now() &&
+      this.state.currentBooking.range.some(
+        row =>
+          moment(row, "DD-MM-YY").format("DD-MM-YY") ===
+          moment(current._d).format("DD-MM-YY")
+      )
+    ) {
+      style.background = "yellow";
+      style.color = "#fff";
+      style.borderRadius = "50%";
     }
 
     return (
@@ -98,6 +126,22 @@ class ProductCalender extends Component {
             disabledDate={this.disabledDate}
             dateFullCellRender={this.dateFullCellRender}
             fullscreen={false}
+          />
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => this.setModal1Visible()}
+            block
+          >
+            Book Dates
+          </Button>
+          <DateRangeCard
+            disabledDate={this.disabledDate}
+            setModal1Visible={this.setModal1Visible}
+            modal1Visible={this.state.modal1Visible}
+            currentBooking={this.state.currentBooking}
+            myBooks={this.state.myBooks}
+            items={this.state.items}
           />
         </Col>
         <Col sm={11} className="PadL15">

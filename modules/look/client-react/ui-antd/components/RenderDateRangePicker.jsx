@@ -8,14 +8,24 @@ const FormItem = Form.Item;
 const dateFormat = "DD-MM-YY";
 const { RangePicker } = DatePicker;
 
-const RenderDateRangePicker = ({ input, label, meta: { touched, error } }) => {
+const RenderDateRangePicker = ({
+  input,
+  label,
+  disabledDate,
+  meta: { touched, error }
+}) => {
   let validateStatus = "";
   if (error) {
     validateStatus = "error";
   }
   return (
     <FormItem label={label} validateStatus={validateStatus} help={error}>
-      <RangePicker {...input} size="small" format={dateFormat} />
+      <RangePicker
+        {...input}
+        size="small"
+        disabledDate={disabledDate}
+        format={dateFormat}
+      />
     </FormItem>
   );
 };
