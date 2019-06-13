@@ -3,6 +3,8 @@ import { Layout, Button, Row, Col } from "antd";
 import DetailsCard from "./DetailsCard";
 import { ALL, ONSHELF, ONRENT } from "../../constants/ListingStates";
 
+import { Link } from "react-router-dom";
+
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
@@ -22,7 +24,11 @@ class MyListingProducts extends Component {
     this.setState({ status: e });
   }
   returnItem(item) {
-    return <DetailsCard buttonText="View" item={item} />;
+    return (
+      <Link className="listing-link" to={`/my-listings/${item.id}`}>
+        <DetailsCard buttonText="View" item={item} />
+      </Link>
+    );
   }
   renderItem(item) {
     if (item.status === this.state.status) {
