@@ -19,7 +19,7 @@ class DropDown extends React.Component {
 
     const content = props.content ? props.content : null;
     return (
-      <Dropdown overlay={menu} trigger={['click', 'hover']}>
+      <Dropdown overlay={menu} trigger={['click', 'hover']} placement="bottomCenter">
         <a className="ant-dropdown-link" href="#">
           {content}
           {!props.noicon ? <Icon type={props.type ? props.type : 'down'} /> : null}
