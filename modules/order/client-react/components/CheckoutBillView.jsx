@@ -75,47 +75,24 @@ export default class CheckoutBillView extends React.Component {
   };
 
   handleSave = value => {
-    console.log('hadleSave called', value);
-    const form = this.formRef.props.form;
-    const address = this.state.address;
+    let { address } = this.state;
 
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      //Adding new/ Updating address on the db.
-      let addressInDb = address.find(a => a.id === values.id) || {};
+    //Adding new/Updating address on the db.
+    var addressInDb = address.find(a => a.id === value.id) || {};
+    addressInDb.name = value.name;
+    addressInDb.streetAddress1 = value.streetAddress1;
+    addressInDb.streetAddress2 = value.streetAddress2;
+    addressInDb.city = value.city;
+    addressInDb.state = value.state;
+    addressInDb.pinCode = value.pinCode;
 
-      // Dont write "addressInDb = values;" coz addressInDb.id would be undefined which will break the futher code.
-      addressInDb.name = values.name;
-      addressInDb.streetAddress1 = values.streetAddress1;
-      addressInDb.streetAddress2 = values.streetAddress2;
-      addressInDb.city = values.city;
-      addressInDb.state = values.state;
-      addressInDb.pinCode = values.pinCode;
-
-      this.handleAddressPush(addressInDb, address, form, value);
-    });
-  };
-
-  handleAddressPush = (addressInDb, address, form, value) => {
-    console.log('handleAddressPush called', addressInDb, address, form, value);
-    if (!addressInDb.id && !value.id) {
+    if (!addressInDb.id) {
       addressInDb.id = Date.now().toString();
       address.push(addressInDb);
-    } else {
-      addressInDb.id = value.id;
-      const index = address.indexOf(value);
-      address[index] = { ...addressInDb };
     }
-    this.setState({ address });
+    console.log('addressInDb.id', addressInDb.id);
+    this.setState({ address, visible: false });
     console.log('Received values from state/server: ', this.state.address);
-    form.resetFields();
-    this.setState({ visible: false });
-  };
-
-  saveFormRef = formRef => {
-    this.formRef = formRef;
   };
 
   handleDelete = adres => {
@@ -125,25 +102,11 @@ export default class CheckoutBillView extends React.Component {
     console.log('This address has been deleted');
   };
 
-  handleChange = data => {
-    const address = this.state.address;
-    // const index = address.indexOf(data);
-    // console.log('index', index);
-    address[data.id - 1] = { ...data };
-    console.log('handle change called', address[data.id - 1]);
-    console.log('handle change called', address);
-    const value = data;
-    this.setState({ address, value });
-  };
-
   handleAddAddress = () => {
     <AddressForm
-      wrappedComponentRef={this.saveFormRef}
       visible={this.state.visible}
       onCancel={this.hideModal}
       onSave={this.handleSave}
-      value=""
-      onChange={this.handleChange}
       onSelect={this.handleSelected}
     />;
   };
@@ -182,9 +145,7 @@ export default class CheckoutBillView extends React.Component {
                       onCancel={this.hideModal}
                       onSave={this.handleSave}
                       onShowModal={this.showModal}
-                      saveFormRef={this.saveFormRef}
                       value={this.state.value}
-                      onChange={this.handleChange}
                       onSelect={this.handleSelected}
                     />
                   </Radio.Group>

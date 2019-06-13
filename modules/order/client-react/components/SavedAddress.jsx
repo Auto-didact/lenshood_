@@ -14,24 +14,12 @@ export default class SavedAddress extends React.Component {
       value: PropTypes.any,
       onSave: PropTypes.func,
       visible: PropTypes.any,
-      saveFormRef: PropTypes.func,
       onChange: PropTypes.func
     };
   }
 
   render() {
-    const {
-      address,
-      onShowModal,
-      onDelete,
-      onCancel,
-      value,
-      onSelect,
-      onSave,
-      visible,
-      saveFormRef,
-      onChange
-    } = this.props;
+    const { address, onShowModal, onDelete, onCancel, value, onSelect, onSave, visible } = this.props;
 
     return (
       <React.Fragment>
@@ -59,14 +47,7 @@ export default class SavedAddress extends React.Component {
             </div>
           </Radio.Button>
         ))}
-        <AddressForm
-          wrappedComponentRef={saveFormRef}
-          visible={visible}
-          onCancel={onCancel}
-          onSave={onSave}
-          value={value}
-          onChange={onChange}
-        />
+        <AddressForm visible={visible} onCancel={onCancel} onSave={onSave} address={value} />
       </React.Fragment>
     );
   }

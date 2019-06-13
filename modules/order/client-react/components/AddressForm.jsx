@@ -8,122 +8,82 @@ import { Modal, Form } from 'antd';
 import { RenderField } from '@gqlapp/look-client-react';
 
 const AddressSchema = {
-  name: [required],
+  fullName: [required],
   streetAddress1: [required],
-  state: [required],
+  streetAddress2: [required],
   city: [required],
+  state: [required],
   pinCode: [required]
 };
 
 // eslint-disable-next-line
 class AddressForm extends React.Component {
-  handleChange = value => {
-    const target = value.target;
-    const values = target.value;
-    console.log('value', values);
-    const name = target.name;
-
-    // value.persist();
-    const data = { ...this.props.value };
-    console.log('value.name', name);
-    console.log('data[target.name]', data[target.name]);
-    data[target.name] = values;
-    console.log('data', data);
-    this.props.onChange(data);
-  };
+  static get propTypes() {
+    return {
+      onCancel: PropTypes.func,
+      onSave: PropTypes.func,
+      onChange: PropTypes.func,
+      address: PropTypes.any,
+      values: PropTypes.any,
+      visible: PropTypes.any,
+      form: PropTypes.any
+    };
+  }
 
   render() {
-    const { onCancel, handleSubmit, value, visible } = this.props;
-    // const { getFieldDecorator } = form;
+    const { address, onCancel, onSave, values, visible } = this.props;
+    if (address.id) {
+      values.id = address.id;
+    }
 
     return (
-      <Modal visible={visible} title="Address" okText="Save" onCancel={onCancel} onOk={() => handleSubmit(value)}>
-        <Form name="addNewAddress" onSubmit={handleSubmit} layout="vertical">
-          <Field
-            name="name"
-            component={RenderField}
-            type="text"
-            label="Name"
-            value={value.name}
-            onChange={this.handleChange}
-          />
+      <Modal visible={visible} title="Address" okText="Save" onCancel={onCancel} onOk={() => onSave(values)}>
+        <Form layout="vertical" onSubmit={onSave}>
+          <Field name="name" component={RenderField} type="text" label="Name" value={values.name} />
           <Field
             name="streetAddress1"
             component={RenderField}
-            type="textarea"
-            label="Street Address-1"
-            value={value.streetAddress1}
-            onChange={this.handleChange}
+            type="text"
+            label="Street Address 1"
+            value={values.streetAddress1}
           />
           <Field
             name="streetAddress2"
             component={RenderField}
-            type="textarea"
-            label="Street Address-2"
-            value={value.streetAddress2}
-            onChange={this.handleChange}
-          />
-          <Field
-            name="city"
-            component={RenderField}
             type="text"
-            label="City"
-            value={value.city}
-            onChange={this.handleChange}
+            label="Street Address 2"
+            value={values.streetAddress2}
           />
-          <Field
-            name="state"
-            component={RenderField}
-            type="text"
-            label="State"
-            value={value.state}
-            onChange={this.handleChange}
-          />
-          <Field
-            name="pinCode"
-            component={RenderField}
-            type="number"
-            label="Pin Code"
-            value={value.pinCode}
-            onChange={this.handleChange}
-          />
+          <Field name="city" component={RenderField} type="text" label="City" value={values.city} />
+          <Field name="state" component={RenderField} type="text" label="State" value={values.state} />
+          <Field name="pinCode" component={RenderField} type="text" label="Pin Code" value={values.pinCode} />
         </Form>
       </Modal>
     );
   }
 }
 
-AddressForm.propTypes = {
-  onCancel: PropTypes.func,
-  onSave: PropTypes.func,
-  onChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  value: PropTypes.any,
-  visible: PropTypes.bool,
-  form: PropTypes.any
-};
-
 const AddressFormWithFormik = withFormik({
   mapPropsToValues: props => ({
-    name: (props.value && props.value.name) || '',
-    streetAddress1: (props.value && props.value.streetAddress1) || '',
-    streetAddress2: (props.value && props.value.streetAddress2) || '',
-    city: (props.value && props.value.city) || '',
-    state: (props.value && props.value.state) || '',
-    pinCode: (props.value && props.value.pinCode) || ''
+    name: (props.address && props.address.name) || '',
+    streetAddress1: (props.address && props.address.streetAddress1) || '',
+    streetAddress2: (props.address && props.address.streetAddress2) || '',
+    city: (props.address && props.address.city) || '',
+    state: (props.address && props.address.state) || '',
+    pinCode: (props.address && props.address.pinCode) || ''
   }),
-  validate: value => validate(value, AddressSchema),
+  validate: values => validate(values, AddressSchema),
   handleSubmit(
-    value,
+    values,
     {
-      props: { handleSubmit }
+      props: { onSubmit }
     }
   ) {
-    console.log('handleSubmit called', value);
-    handleSubmit(value);
+    console.log('formik submit called', values);
+    onSubmit && onSubmit(values);
   },
   enableReinitialize: true,
-  displayName: 'AddressForm' // helps with React DevTools.
+  displayName: 'AddressForm' // helps with React DevTools
 });
 
 export default AddressFormWithFormik(AddressForm);
