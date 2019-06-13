@@ -121,7 +121,9 @@ class ProductCalender extends Component {
                     <span className="RateBookIcon">
                       {item.rating} <Icon type="star" theme="filled" />
                     </span>
-                    <span className="CancelBook">Cancel Booking</span>
+                    {item.name === this.state.name ? (
+                      <span className="CancelBook">Cancel Booking</span>
+                    ) : null}
                   </h5>
                 </Col>
               </div>

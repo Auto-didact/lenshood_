@@ -55,7 +55,7 @@ export default new ClientModule({
     <Route exact path="/listing/new" component={ListingAdd} />,
     <Route path="/listing/:id" component={ListingEdit} />,
     <Route exact path="/listing_catalogue" component={ListingCatalogue} />,
-    <Route exact path="/mylisting/" component={MyListingDetail} />,
+    <Route exact path="/my-listings/:id" component={MyListingDetail} />,
 
     // Components
     <Route exact path="/listing-detail/:id" component={ListingDetail} />,

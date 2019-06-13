@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Layout, Row, Col, Breadcrumb, Card } from "antd";
+import Helmet from "react-helmet";
+import PropTypes from "prop-types";
+import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout } from "@gqlapp/look-client-react";
-// import './resources/listingCatalogue.css';
-import AccDetailsMenu from "./components/AccDetailsMenu";
 import DetailsCard from "./components/DetailsCard";
 import ProductCalender from "./components/ProductCalender";
 import ReviewsCard from "./components/ReviewsCard";
@@ -11,10 +12,12 @@ import naruto3 from "./resources/naruto3.jpg";
 
 import { AccountLayout } from "@gqlapp/look-client-react";
 
-class MyListDetails extends Component {
+import settings from "../../../../settings";
+
+class MyListDetailsView extends Component {
   state = {
     name: "Bishal Deb",
-    product: {
+    listing: {
       description: "Blah blah bleh",
       listingRental: { perDay: 1200 },
       listingImages: [naruto4, naruto3],
@@ -74,23 +77,51 @@ class MyListDetails extends Component {
   };
 
   render() {
-    return (
-      <AccountLayout select="/my-listings">
-        {/* <Breadcrumb separator=">">
+    const loading = this.props.loading;
+    const listing = this.props.listing;
+    const t = this.props.t;
+    
+    if (loading && !listing) {
+      return (
+        <PageLayout>
+          <Helmet
+            title={`${settings.app.name} - ${this.props.t("listing.title")}`}
+            meta={[
+              {
+                name: "description",
+                content: this.props.t("listing.meta")
+              }
+            ]}
+          />
+          <div className="text-center">{t("listing.loadMsg")}</div>
+        </PageLayout>
+      );
+    } else {
+      return (
+        <AccountLayout select="/my-listings">
+          {/* <Breadcrumb separator=">">
           <Breadcrumb.Item>Account</Breadcrumb.Item>
           <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
         </Breadcrumb> */}
-        <DetailsCard buttonText="Edit" item={this.state.product} />
-        <Card>
-          <ProductCalender
-            bookings={this.state.bookings}
-            name={this.state.name}
-          />
-        </Card>
-        <ReviewsCard reviews={this.state.reviews} />
-      </AccountLayout>
-    );
+          <DetailsCard buttonText="Edit" item={listing} />
+          <Card>
+            <ProductCalender
+              bookings={this.state.bookings}
+              name={this.state.name}
+            />
+          </Card>
+          <ReviewsCard reviews={this.state.reviews} />
+        </AccountLayout>
+      );
+    }
   }
 }
 
-export default MyListDetails;
+MyListDetailsView.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  listing: PropTypes.object,
+  location: PropTypes.object.isRequired,
+  t: PropTypes.func
+};
+
+export default translate("listing")(MyListDetailsView);
