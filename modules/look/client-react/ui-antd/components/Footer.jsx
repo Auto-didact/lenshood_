@@ -165,8 +165,7 @@ export default class Footer extends React.Component {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
               <h3 onClick={() => this.toggle(1)}>
-                About Lenshood
-                <img src={require('../images/dropdown.png')} width="20px" height="20px" />
+                About Lenshood {this.state.show1 ? <Icon type="caret-up" /> : <Icon type="caret-down" theme="filled" />}
               </h3>
               <div
                 style={
@@ -194,8 +193,8 @@ export default class Footer extends React.Component {
 
             <div>
               <h3 onClick={() => this.toggle(2)}>
-                How It Works
-                <img src={require('../images/dropdown.png')} width="20px" height="20px" />
+                How It Works{' '}
+                {this.state.show2 ? <Icon type="caret-up" theme="filled" /> : <Icon type="caret-down" theme="filled" />}
               </h3>
               <div style={this.state.show2 ? { display: 'block' } : { display: 'none' }}>
                 <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
@@ -216,8 +215,8 @@ export default class Footer extends React.Component {
             </div>
             <div>
               <h3 onClick={() => this.toggle(3)}>
-                Keep In Touch
-                <img src={require('../images/dropdown.png')} width="20px" height="20px" />
+                Keep In Touch{' '}
+                {this.state.show3 ? <Icon type="caret-up" theme="filled" /> : <Icon type="caret-down" theme="filled" />}
               </h3>
               <div style={this.state.show3 ? { display: 'block' } : { display: 'none' }}>
                 <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
@@ -241,8 +240,8 @@ export default class Footer extends React.Component {
 
             <div>
               <h3 onClick={() => this.toggle(4)}>
-                Follow Us
-                <img src={require('../images/dropdown.png')} width="20px" height="20px" />
+                Follow Us{' '}
+                {this.state.show4 ? <Icon type="caret-up" theme="filled" /> : <Icon type="caret-down" theme="filled" />}
               </h3>
               <div style={this.state.show4 ? { display: 'block' } : { display: 'none' }}>
                 <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
