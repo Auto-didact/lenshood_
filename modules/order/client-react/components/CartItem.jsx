@@ -1,69 +1,17 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Icon, DatePicker, Modal } from "antd";
-import PropTypes from "prop-types";
-import moment from "moment";
-import {
-  RenderDateRangePicker,
-  Button as FormButton,
-  Form
-} from "@gqlapp/look-client-react";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { withFormik } from "formik";
-import { required, validate } from "@gqlapp/validation-common-react";
-// const { RangePicker } = DatePicker;
-
-const DateChangeSchema = {
-  dateRange: [required]
-};
+import React from "react";
+import { Row, Col, Button, Icon } from "antd";
 
 const CartItem = props => {
-  const { handleSubmit, submitting, errors } = props;
   let product = props.products;
-  const [dates, setDateRange] = useState([
-    moment(product.date.start, "DD-MM-YY"),
-    moment(product.date.end, "DD-MM-YY")
-  ]);
   return (
     <Row className="cartitem borderRadius9">
       <div className="listcloseicons">
         <Button
-          onClick={() => props.setModal1Visible()}
+          onClick={() => props.cartItemSelect(product.id)}
           className="borderzero listclose"
         >
           <Icon type="edit" />
         </Button>
-
-        <Modal
-          title="Edit Product"
-          centered
-          visible={props.modal1Visible}
-          footer={null}
-          // onOk={() => props.editProduct(product.id, dateRange[0], dateRange[1])}
-          onCancel={() => props.setModal1Visible()}
-        >
-          <Form name="CartItem" onSubmit={handleSubmit}>
-            <h3>
-              <strong>{product.name}</strong>
-            </h3>
-            <h4>Change Dates:</h4>
-            <Field
-              name="dateRange"
-              component={RenderDateRangePicker}
-              value={dates}
-              onChange={v => setDateRange(v)}
-            />
-            <div className="text-center">
-              {errors && errors.errorMsg && (
-                <Alert color="error">{errors.errorMsg}</Alert>
-              )}
-            </div>
-            <h4>No of days : {dates[1].diff(dates[0], "days") + 1}</h4>
-            <FormButton color="primary" type="submit" disabled={submitting}>
-              Submit
-            </FormButton>
-          </Form>
-        </Modal>
-
         <Button
           className="borderzero listclose"
           onClick={() => props.deleteProduct(product.id)}
@@ -117,30 +65,4 @@ const CartItem = props => {
   );
 };
 
-CartItem.propTypes = {
-  handleSubmit: PropTypes.func,
-  submitting: PropTypes.bool,
-  errors: PropTypes.object
-};
-
-const CartItemWithFormik = withFormik({
-  mapPropsToValues: props => ({
-    dateRange: [
-      moment(props.products.date.start, "DD-MM-YY"),
-      moment(props.products.date.end, "DD-MM-YY")
-    ]
-  }),
-  validate: values => validate(values, DateChangeSchema),
-  handleSubmit({ dateRange }, { props }) {
-    console.log(props.products.id);
-    props.editProduct(
-      props.products.id,
-      moment(dateRange[0], "DD-MM-YY"),
-      moment(dateRange[1], "DD-MM-YY")
-    );
-  },
-  enableReinitialize: true,
-  displayName: "DatesChangeForm" // helps with React DevTools
-});
-
-export default CartItemWithFormik(CartItem);
+export default CartItem;
