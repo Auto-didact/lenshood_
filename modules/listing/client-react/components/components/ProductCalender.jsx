@@ -104,8 +104,8 @@ class ProductCalender extends Component {
           moment(current._d).format("DD-MM-YY")
       )
     ) {
-      style.background = "yellow";
-      style.color = "#fff";
+      style.background = "#FFFF99";
+      style.color = "#000";
       style.borderRadius = "50%";
     }
 
@@ -126,15 +126,39 @@ class ProductCalender extends Component {
             disabledDate={this.disabledDate}
             dateFullCellRender={this.dateFullCellRender}
             fullscreen={false}
+            className="marginB20"
           />
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => this.setModal1Visible()}
-            block
-          >
-            Book Dates
-          </Button>
+          <Col span={12}>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => this.setModal1Visible()}
+              block
+            >
+              Book Dates
+            </Button>
+          </Col>
+          {this.state.currentBooking.range.length ? (
+            <Col span={12}>
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    currentBooking: {
+                      start: Date.now(),
+                      end: Date.now(),
+                      range: []
+                    }
+                  });
+                }}
+                block
+                ghost
+              >
+                Reset Dates
+              </Button>
+            </Col>
+          ) : null}
           <DateRangeCard
             disabledDate={this.disabledDate}
             setModal1Visible={this.setModal1Visible}
