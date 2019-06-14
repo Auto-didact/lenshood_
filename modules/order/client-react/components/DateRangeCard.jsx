@@ -59,12 +59,27 @@ const CartItemWithFormik = withFormik({
   }),
   validate: values => validate(values, DateChangeSchema),
   handleSubmit({ dateRange }, { props }) {
-    console.log(props.products.id);
-    props.editProduct(
-      props.products.id,
-      moment(dateRange[0], "DD-MM-YY"),
-      moment(dateRange[1], "DD-MM-YY")
-    );
+    var i,
+      valid = true;
+    for (
+      i = dateRange[0];
+      moment(i, "DD-MM-YY") <= moment(dateRange[1], "DD-MM-YY");
+      i = moment(i, "DD-MM-YY")
+        .add(1, "d")
+        .format("DD-MM-YY")
+    ) {
+      if (props.books.some(item => item === i)) {
+        valid = false;
+        break;
+      }
+    }
+    if (valid === true) {
+      props.editProduct(
+        props.products.id,
+        moment(dateRange[0], "DD-MM-YY"),
+        moment(dateRange[1], "DD-MM-YY")
+      );
+    } else alert("The dates should not include the disabled ones!");
   },
   enableReinitialize: true,
   displayName: "DatesChangeForm" // helps with React DevTools

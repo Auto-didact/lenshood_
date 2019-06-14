@@ -59,11 +59,12 @@
 
 .listcloseicons {
   text-align: center !important;
-  float: right;
-  z-index: 100;
+  float: right !important;
+  z-index: 100 !important;
   background: #fff !important;
   padding: 0 !important;
   margin: 0 !important;
+
 }
 
 .listclose {
@@ -138,6 +139,7 @@
 
 .ColPad {
   padding: 12px 15px !important;
+  padding-top: 0 !important;
 }
 
 .cardFormitem {
