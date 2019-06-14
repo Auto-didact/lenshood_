@@ -4,6 +4,7 @@ import { Icon, Button, Row, Col, Card, Rate, Avatar } from "antd";
 class DetailsCard extends Component {
   render() {
     const item = this.props.item;
+
     return (
       <Card className="boxShadowTheme borderRadius9 marginT20">
         <Row>
@@ -12,7 +13,13 @@ class DetailsCard extends Component {
               <span className="itemName">{item.id}</span>
             </Col>
             <Col sm={5} xs={12}>
-              <Button type="primary" ghost size="small" block>
+              <Button
+                type="primary"
+                ghost
+                size="small"
+                block
+                onClick={e => this.props.setTrackList(item.id)}
+              >
                 {" "}
                 <Icon type="environment" theme="filled" /> Track
               </Button>

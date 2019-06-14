@@ -21,6 +21,7 @@ export default class OrderTrackCard extends React.Component {
     else return <Icon type="clock-circle" style={{color: "#FFCC99"}} />;
   }
   render() {
+    console.log("Hey from Order Card", this.props.status.owner)
     return (
       <Card className="boxShadowTheme borderRadius9">
         <h4>
