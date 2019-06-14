@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Button, Icon } from "antd";
 
 const CartItem = props => {
@@ -51,7 +51,7 @@ const CartItem = props => {
               <strong>{product.days}</strong>
             </Col>
           </Col>
-          <Col md={16} sm={24} className="marginT20">
+          <Col md={16} sm={24}>
             <p className="font11h">
               Rental period <br />
               <strong>

@@ -27,7 +27,6 @@ export default class CheckoutCartView extends React.Component {
   };
   cartItemSelect(id) {
     var i;
-    console.log(this.props.state.products);
     let item = this.props.state.products;
     item.some(item => {
       if (item.id === id) {
@@ -42,17 +41,18 @@ export default class CheckoutCartView extends React.Component {
   dateArray() {
     var i;
     this.state.books = [];
-    this.state.cartItem.bookings.map(book => {
-      for (
-        i = book.start;
-        moment(i, "DD-MM-YY") <= moment(book.end, "DD-MM-YY");
-        i = moment(i, "DD-MM-YY")
-          .add(1, "d")
-          .format("DD-MM-YY")
-      ) {
-        this.state.books.push(i);
-      }
-    });
+    if (this.state.cartItem != null)
+      this.state.cartItem.bookings.map(book => {
+        for (
+          i = book.start;
+          moment(i, "DD-MM-YY") <= moment(book.end, "DD-MM-YY");
+          i = moment(i, "DD-MM-YY")
+            .add(1, "d")
+            .format("DD-MM-YY")
+        ) {
+          this.state.books.push(i);
+        }
+      });
   }
 
   disabledDate(current) {
@@ -114,14 +114,14 @@ export default class CheckoutCartView extends React.Component {
                   footer={null}
                   onCancel={() => this.props.setModal1Visible()}
                 >
+                  {this.dateArray()}
                   {this.state.cartItem != null ? (
                     <DateRangeCard
                       disabledDate={this.disabledDate.bind(this)}
                       products={this.state.cartItem}
                       editProduct={this.props.editProduct}
-                    >
-                      {this.dateArray()}
-                    </DateRangeCard>
+                      books={this.state.books}
+                    />
                   ) : null}
                 </Modal>
                 <Col
