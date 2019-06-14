@@ -1,16 +1,29 @@
 import React, { Component } from "react";
-// import '../resources/listingCatalogue.css';
-import { Layout, Button, Row, Col } from "antd";
+import { Layout, Button, Row, Col, Modal } from "antd";
 import OrderDetails from "./OrderDetails";
 import { LENDED, BORROWED } from "../constants/OrderStates";
+import OrderTrackCard from "./OrderTrackCard";
 
 const { Content } = Layout;
 
 class MyOrder extends Component {
   state = {
+    trackList: null,
     status: BORROWED,
-    listings: this.props.listings
+    listings: this.props.listings,
+    modalVisible: false
   };
+  setTrackList(id) {
+    var i;
+    for (i = 0; i < this.state.listings.length; i++) {
+      if (id === this.state.listings[i].id) {
+        this.state.trackList = this.state.listings[i];
+        break;
+      }
+    }
+    console.log(this.state.trackList);
+    this.setModal1Visible(true);
+  }
   classNamesgroup(e) {
     if (this.state.status === e) {
       return "btnOrderActive";
@@ -22,12 +35,21 @@ class MyOrder extends Component {
     this.setState({ status: e });
   }
   returnItem(item) {
-    return <OrderDetails buttonText="View" item={item} />;
+    return (
+      <OrderDetails
+        buttonText="View"
+        item={item}
+        setTrackList={this.setTrackList.bind(this)}
+      />
+    );
   }
   renderItem(item) {
     if (item.status === this.state.status) {
       return this.returnItem(item);
     }
+  }
+  setModal1Visible(val) {
+    this.setState({ modalVisible: val });
   }
   render() {
     return (
@@ -61,6 +83,21 @@ class MyOrder extends Component {
         {this.state.listings
           ? this.state.listings.map(item => this.renderItem(item))
           : null}
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          footer={null}
+          bodyStyle={{ padding: "0" }}
+          onCancel={() => this.setModal1Visible(false)}
+        >
+          {console.log(this.state.trackList)}
+          {this.state.trackList != null ? (
+            <OrderTrackCard
+              status={this.state.trackList.track}
+              completed={this.state.trackList.track.completed}
+            />
+          ) : null}
+        </Modal>
       </Content>
     );
   }

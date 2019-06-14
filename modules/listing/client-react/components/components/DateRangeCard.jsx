@@ -94,7 +94,6 @@ const DateRangeCardWithFormik = withFormik({
       )
         props.currentBooking.range.push(i);
     }
-    console.log(props.currentBooking.range)
     props.setModal1Visible();
   },
   enableReinitialize: true,
