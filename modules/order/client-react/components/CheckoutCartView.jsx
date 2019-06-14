@@ -4,10 +4,12 @@ import { PageLayout } from "@gqlapp/look-client-react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
 import settings from "../../../../settings";
 import { Link } from "react-router-dom";
-import { Row, Col, Button, Card, Icon } from "antd";
+import { Row, Col, Button, Card, Icon, Modal } from "antd";
 import CheckoutSteps from "./CheckoutSteps";
 import CartItem from "./CartItem";
+import DateRangeCard from "./DateRangeCard";
 import { TotalAmount, TotalRent, Refund } from "../helper/index";
+import moment from "moment";
 
 const renderMetaData = () => (
   <Helmet
@@ -19,6 +21,53 @@ const renderMetaData = () => (
 );
 
 export default class CheckoutCartView extends React.Component {
+  state = {
+    cartItem: null,
+    books: []
+  };
+  cartItemSelect(id) {
+    var i;
+    console.log(this.props.state.products);
+    let item = this.props.state.products;
+    item.some(item => {
+      if (item.id === id) {
+        this.setState({
+          cartItem: item
+        });
+      }
+    });
+    this.props.setModal1Visible();
+  }
+
+  dateArray() {
+    var i;
+    this.state.books = [];
+    this.state.cartItem.bookings.map(book => {
+      for (
+        i = book.start;
+        moment(i, "DD-MM-YY") <= moment(book.end, "DD-MM-YY");
+        i = moment(i, "DD-MM-YY")
+          .add(1, "d")
+          .format("DD-MM-YY")
+      ) {
+        this.state.books.push(i);
+      }
+    });
+  }
+
+  disabledDate(current) {
+    if (
+      (current && current.valueOf() < Date.now()) ||
+      this.state.books.some(
+        row => row === moment(current._d).format("DD-MM-YY")
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     let state = this.props.state;
     return (
@@ -52,13 +101,29 @@ export default class CheckoutCartView extends React.Component {
                     <CartItem
                       key={cartItem.id}
                       products={cartItem}
-                      modal1Visible={state.modal1Visible}
                       deleteProduct={this.props.deleteProduct}
-                      editProduct={this.props.editProduct}
-                      setModal1Visible={this.props.setModal1Visible}
+                      cartItemSelect={this.cartItemSelect.bind(this)}
                     />
                   ))}
                 </Col>
+
+                <Modal
+                  title="Edit Product"
+                  centered
+                  visible={state.modal1Visible}
+                  footer={null}
+                  onCancel={() => this.props.setModal1Visible()}
+                >
+                  {this.state.cartItem != null ? (
+                    <DateRangeCard
+                      disabledDate={this.disabledDate.bind(this)}
+                      products={this.state.cartItem}
+                      editProduct={this.props.editProduct}
+                    >
+                      {this.dateArray()}
+                    </DateRangeCard>
+                  ) : null}
+                </Modal>
                 <Col
                   lg={{ span: 7, offset: 1 }}
                   sm={{ span: 24, offset: 0 }}

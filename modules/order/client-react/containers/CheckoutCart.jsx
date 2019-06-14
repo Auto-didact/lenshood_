@@ -16,36 +16,54 @@ class CheckoutCart extends React.Component {
     this.editProduct = this.editProduct.bind(this);
     this.setModal1Visible = this.setModal1Visible.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
-    this.state = {
-      cart: {
-        name: "Nikon Camera",
-        image: camera,
-        days: 4,
-        date: {
-          start: "04-01-19",
-          end: "07-01-19"
-        },
-        refund: 3000,
-        rent: 200
+    (this.cart = {
+      name: "Nikon Camera",
+      image: camera,
+      days: 4,
+      date: {
+        start: "24-06-19",
+        end: "25-06-19"
       },
-      products: [
+      refund: 3000,
+      rent: 200,
+      bookings: [
         {
-          name: "Nikon Camera",
-          image: camera,
-          id: 1,
-          days: 4,
-          date: {
-            start: "04-01-19",
-            end: "07-01-19"
-          },
-          refund: 3000,
-          rent: 200
+          name: "Bishal Deb",
+          rating: 3.7,
+          start: "20-06-19",
+          end: "22-06-19"
+        },
+        {
+          name: "Rajeev Khanna",
+          rating: 4,
+          start: "03-07-19",
+          end: "12-07-19"
+        },
+        {
+          name: "Mukesh Babu",
+          rating: 2.2,
+          start: "13-06-19",
+          end: "17-06-19"
         }
-      ],
-      deliveryfee: 100,
-      modal1Visible: false,
-      gst: 18
-    };
+      ]
+    }),
+      (this.state = {
+        products: [
+          {
+            id: 1,
+            name: this.cart.name,
+            image: this.cart.image,
+            days: this.cart.days,
+            date: this.cart.date,
+            refund: this.cart.refund,
+            rent: this.cart.rent,
+            bookings: this.cart.bookings
+          }
+        ],
+        deliveryfee: 100,
+        modal1Visible: false,
+        gst: 18
+      });
     this.count = 1;
   }
   setModal1Visible() {
@@ -54,19 +72,19 @@ class CheckoutCart extends React.Component {
 
   Addproducts() {
     this.count = this.count + 1;
+    let item = this.state.products;
+    item.push({
+      id: this.count,
+      name: this.cart.name,
+      image: this.cart.image,
+      days: this.cart.days,
+      date: this.cart.date,
+      refund: this.cart.refund,
+      rent: this.cart.rent,
+      bookings: this.cart.bookings
+    });
     this.setState({
-      products: [
-        ...this.state.products,
-        {
-          id: this.count,
-          name: this.state.cart.name,
-          image: this.state.cart.image,
-          days: this.state.cart.days,
-          date: this.state.cart.date,
-          refund: this.state.cart.refund,
-          rent: this.state.cart.rent
-        }
-      ]
+      products: item
     });
   }
 
@@ -89,20 +107,19 @@ class CheckoutCart extends React.Component {
 
   editProduct(id, startDate, EndDate) {
     // Edit datat goes here
-    if (EndDate.diff(startDate, "days") < 0) {
-      alert("Error in date input");
-    } else {
-      var i;
-      for (i = 0; i < this.state.products.length; i++) {
-        if (this.state.products[i].id === id) {
-          this.state.products[i].date.start = startDate.format("DD-MM-YY");
-          this.state.products[i].date.end = EndDate.format("DD-MM-YY");
-          this.state.products[i].days = EndDate.diff(startDate, "days") + 1;
-          break;
-        }
+    let item = this.state.products;
+    item.some(item => {
+      if (item.id === id) {
+        item.date.start = startDate.format("DD-MM-YY");
+        item.date.end = EndDate.format("DD-MM-YY");
+        item.days = EndDate.diff(startDate, "days") + 1;
       }
-      this.setModal1Visible();
-    }
+    });
+
+    this.setState({
+      products: item
+    });
+    this.setModal1Visible();
   }
   render() {
     return (
