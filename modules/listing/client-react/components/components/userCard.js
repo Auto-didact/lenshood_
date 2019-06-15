@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Rate, Button, Card, Avatar } from "antd";
+import { NavLink } from "react-router-dom";
+
 import { CardText } from "@gqlapp/look-client-react";
 import { ImgUser } from "../../constants/DefaultImages";
 // import '../resources/listingCatalogue.css';
@@ -33,31 +35,35 @@ class UserCard extends Component {
             sm={{ span: 16 }}
             style={{ marginTop: "5px" }}
           >
-            <Meta
-              avatar={
-                <Avatar
-                  size={70}
-                  src={seller.profile.avatar ? seller.profile.avatar : ImgUser}
-                />
-              }
-              title={
-                <div>
-                  <h4 className="UserCardUserName">{sellerName}</h4>
+            <NavLink to={`/public-profile/${seller.id}`}>
+              <Meta
+                avatar={
+                  <Avatar
+                    size={70}
+                    src={
+                      seller.profile.avatar ? seller.profile.avatar : ImgUser
+                    }
+                  />
+                }
+                title={
                   <div>
-                    {seller.profile.rating ? (
-                      <Rate
-                        disabled
-                        defaultValue={seller.profile.rating}
-                        className="font10 mainColor"
-                      />
-                    ) : (
-                      <p>Not Rated</p>
-                    )}
+                    <h4 className="UserCardUserName">{sellerName}</h4>
+                    <div>
+                      {seller.profile.rating ? (
+                        <Rate
+                          disabled
+                          defaultValue={seller.profile.rating}
+                          className="font10 mainColor"
+                        />
+                      ) : (
+                        <p>Not Rated</p>
+                      )}
+                    </div>
+                    <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
                   </div>
-                  <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
-                </div>
-              }
-            />
+                }
+              />
+            </NavLink>
           </Col>
           <Col
             lg={{ span: 6 }}
