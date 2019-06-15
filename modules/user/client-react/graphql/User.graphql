@@ -54,7 +54,7 @@ fragment UserInfo on User {
     }
   }
   following {
-    following {
+    followee {
       profile {
         firstName
         lastName
