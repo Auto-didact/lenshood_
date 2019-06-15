@@ -6,8 +6,61 @@ fragment UserInfo on User {
   role
   isActive
   email
+  listings {
+    id
+    gearCategory
+    gearSubcategory
+    listingImages {
+      id
+      imageUrl
+    }
+    listingContent {
+      gear
+      brand
+      model
+    }
+    listingRental {
+      perDay
+    }
+  }
   profile {
     ...UserProfileInfo
+  }
+  endorsements {
+    endorser {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  endorsed {
+    endorsee {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  followers {
+    follower {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  following {
+    following {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
   }
   addresses {
     streetAddress1
