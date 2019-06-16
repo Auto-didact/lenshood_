@@ -15,7 +15,7 @@ class Button extends React.Component {
     }
 
     return (
-      <ADButton type={color} htmlType={type} size={buttonSize} {...props}>
+      <ADButton type={color} htmlType={type} size={buttonSize} {...props} className="standard">
         {children}
       </ADButton>
     );

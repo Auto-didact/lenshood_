@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../settings';
@@ -15,6 +15,9 @@ const renderMetaData = (t: TranslateFunction) => (
 );
 
 const MissionView = ({ t }: MissionViewProps) => {
+  useEffect(() => {
+    global.window.scrollTo(0, 0);
+  });
   renderMetaData(t);
   return (
     <div

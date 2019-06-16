@@ -149,7 +149,7 @@ input AddListingInput {
 # Input for editListing Mutation
 input EditListingInput {
   id: Int!
-  userId: Int!
+  userId: Int
   gearCategory: String
   gearSubcategory: String
   description: String

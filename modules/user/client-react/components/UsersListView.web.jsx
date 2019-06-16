@@ -1,11 +1,12 @@
 /* eslint-disable react/display-name */
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { translate } from '@gqlapp/i18n-client-react';
-import { Table, Button } from '@gqlapp/look-client-react';
-import UserDrawer from './UserDrawer';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { translate } from "@gqlapp/i18n-client-react";
+import { Table, Button } from "@gqlapp/look-client-react";
+import UserDrawer from "./UserDrawer";
+import { Popconfirm, Icon } from "antd";
 
 const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const [errors, setErrors] = useState([]);
@@ -17,10 +18,13 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
       setErrors([]);
     }
   };
+  const cancel = () => {
+    message.error("Click on No");
+  };
 
   const renderOrderByArrow = name => {
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === 'desc') {
+      if (orderBy.order === "desc") {
         return <span className="badge badge-primary">&#8595;</span>;
       } else {
         return <span className="badge badge-primary">&#8593;</span>;
@@ -33,14 +37,14 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const handleOrderBy = (e, name) => {
     e.preventDefault();
 
-    let order = 'asc';
+    let order = "asc";
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === 'asc') {
-        order = 'desc';
-      } else if (orderBy.order === 'desc') {
+      if (orderBy.order === "asc") {
+        order = "desc";
+      } else if (orderBy.order === "desc") {
         return onOrderBy({
-          column: '',
-          order: ''
+          column: "",
+          order: ""
         });
       }
     }
@@ -51,12 +55,12 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const columns = [
     {
       title: (
-        <a onClick={e => handleOrderBy(e, 'username')} href="#">
-          {t('users.column.name')} {renderOrderByArrow('username')}
+        <a onClick={e => handleOrderBy(e, "username")} href="#">
+          {t("users.column.name")} {renderOrderByArrow("username")}
         </a>
       ),
-      dataIndex: 'username',
-      key: 'username',
+      dataIndex: "username",
+      key: "username",
       render: (text, record) => (
         <Link className="user-link" to={`/users/${record.id}`}>
           {text}
@@ -65,41 +69,49 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
     },
     {
       title: (
-        <a onClick={e => handleOrderBy(e, 'email')} href="#">
-          {t('users.column.email')} {renderOrderByArrow('email')}
+        <a onClick={e => handleOrderBy(e, "email")} href="#">
+          {t("users.column.email")} {renderOrderByArrow("email")}
         </a>
       ),
-      dataIndex: 'email',
-      key: 'email'
+      dataIndex: "email",
+      key: "email"
     },
     {
       title: (
-        <a onClick={e => handleOrderBy(e, 'role')} href="#">
-          {t('users.column.role')} {renderOrderByArrow('role')}
+        <a onClick={e => handleOrderBy(e, "role")} href="#">
+          {t("users.column.role")} {renderOrderByArrow("role")}
         </a>
       ),
-      dataIndex: 'role',
-      key: 'role'
+      dataIndex: "role",
+      key: "role"
     },
     {
       title: (
-        <a onClick={e => handleOrderBy(e, 'isActive')} href="#">
-          {t('users.column.active')} {renderOrderByArrow('isActive')}
+        <a onClick={e => handleOrderBy(e, "isActive")} href="#">
+          {t("users.column.active")} {renderOrderByArrow("isActive")}
         </a>
       ),
-      dataIndex: 'isActive',
-      key: 'isActive',
+      dataIndex: "isActive",
+      key: "isActive",
       render: text => text.toString()
     },
     {
-      title: t('users.column.actions'),
-      key: 'actions',
+      title: t("users.column.actions"),
+      key: "actions",
       render: (text, record) => (
         <div>
           <UserDrawer user={record} />
-          <Button color="primary" size="sm" onClick={() => handleDeleteUser(record.id)}>
-            {t('users.btn.delete')}
-          </Button>
+          <Popconfirm
+            title="Are you sure delete this listing?"
+            onConfirm={() => handleDeleteUser(record.id)}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="danger" shape="circle" size="sm">
+              <Icon type="delete" />
+            </Button>
+          </Popconfirm>
         </div>
       )
     }
@@ -108,12 +120,16 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   return (
     <>
       {loading && !users ? (
-        <div className="text-center">{t('users.loadMsg')}</div>
+        <div className="text-center">{t("users.loadMsg")}</div>
       ) : (
         <>
           {errors &&
             errors.map(error => (
-              <div className="alert alert-danger" role="alert" key={error.field}>
+              <div
+                className="alert alert-danger"
+                role="alert"
+                key={error.field}
+              >
                 {error.message}
               </div>
             ))}
@@ -133,4 +149,4 @@ UsersView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate('user')(UsersView);
+export default translate("user")(UsersView);
