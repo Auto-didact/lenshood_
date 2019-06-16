@@ -87,7 +87,11 @@ class ListingDetailView extends Component {
               }}
               className="gearCat"
             >
-              {listing.gearCategory}
+              {listing && listing.listingContent.length !== 0
+                ? listing.listingContent.map((item, key) => (
+                    <span>{`${item.gear}  `}</span>
+                  ))
+                : listing.gearCategory}
             </h1>
           }
           <Row
