@@ -35,35 +35,31 @@ class UserCard extends Component {
             sm={{ span: 16 }}
             style={{ marginTop: "5px" }}
           >
-            <NavLink to={`/public-profile/${seller.id}`}>
-              <Meta
-                avatar={
-                  <Avatar
-                    size={70}
-                    src={
-                      seller.profile.avatar ? seller.profile.avatar : ImgUser
-                    }
-                  />
-                }
-                title={
+            <Meta
+              avatar={
+                <Avatar
+                  size={70}
+                  src={seller.profile.avatar ? seller.profile.avatar : ImgUser}
+                />
+              }
+              title={
+                <div>
+                  <h4 className="UserCardUserName">{sellerName}</h4>
                   <div>
-                    <h4 className="UserCardUserName">{sellerName}</h4>
-                    <div>
-                      {seller.profile.rating ? (
-                        <Rate
-                          disabled
-                          defaultValue={seller.profile.rating}
-                          className="font10 mainColor"
-                        />
-                      ) : (
-                        <p>Not Rated</p>
-                      )}
-                    </div>
-                    <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
+                    {seller.profile.rating ? (
+                      <Rate
+                        disabled
+                        defaultValue={seller.profile.rating}
+                        className="font10 mainColor"
+                      />
+                    ) : (
+                      <p>Not Rated</p>
+                    )}
                   </div>
-                }
-              />
-            </NavLink>
+                  <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
+                </div>
+              }
+            />
           </Col>
           <Col
             lg={{ span: 6 }}
@@ -100,7 +96,7 @@ class UserCard extends Component {
         <br />
         <br />
         <div align="center">
-          <Button>Contact</Button>
+          <Button href={`/public-profile/${seller.id}`}>View Profile</Button>
         </div>
       </Card>
     );
