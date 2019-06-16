@@ -48,7 +48,7 @@ export default class AddToCartCard extends Component {
     function datediff(first, second) {
       // Take the difference between the dates and divide by milliseconds per day.
       // Round to nearest whole number to deal with DST.
-      console.log(Math.round((second - first) / (1000 * 60 * 60 * 24)));
+
       return Math.round((second - first) / (1000 * 60 * 60 * 24));
     }
     const dayDifference =
