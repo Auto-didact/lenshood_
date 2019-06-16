@@ -31,11 +31,7 @@ const NavLinkAdminWithI18n = translate("listing")(({ t }) => (
   </NavLink>
 ));
 const NavLinkMyListingsWithI18n = translate("listing")(({ t }) => (
-  <NavLink
-    to="/my-listings"
-    className=" AccDetItem"
-    activeClassName="AccDetItemSelected"
-  >
+  <NavLink to="/my-listings" className="nav-link" activeClassName="active">
     <Icon type="solution" />
     {t("listing:navLinkMyListings")}
   </NavLink>
