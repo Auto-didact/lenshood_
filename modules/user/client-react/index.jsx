@@ -33,7 +33,7 @@ const MyProfile = () => {
   return (
     <div>
       <Icon type="user" />
-      {"MyProfile"}
+      {"My Profile"}
     </div>
   );
 };
@@ -51,6 +51,7 @@ const LogoutLink = withRouter(
       }}
       className="nav-link"
     >
+      <Icon type="logout" />
       Logout
     </a>
   ))
@@ -65,7 +66,11 @@ const NavLinkUsersWithI18n = translate("user")(({ t }) => (
   </NavLink>
 ));
 const NavLinkProfileWithI18n = translate("user")(({ t }) => (
-  <NavLink to="/profile">
+  <NavLink
+    to="/profile"
+    className="AccDetItem"
+    activeClassName="AccDetItemSelected"
+  >
     <Icon type="user" />
     {t("navLink.profile")}
   </NavLink>
@@ -163,7 +168,9 @@ export default new ClientModule({
   ],
   navItemAccount: [
     <IfLoggedIn key="/profile">
-      <NavLinkProfileWithI18n />
+      <MenuItem>
+        <NavLinkProfileWithI18n />
+      </MenuItem>
     </IfLoggedIn>
   ],
 

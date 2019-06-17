@@ -13,7 +13,7 @@ import {
 } from "@gqlapp/look-client-react";
 // To Do Abstract Out
 import { Row, Col, Divider, Icon, Button, Tabs } from "antd";
-import PublicProfileHead from "./PublicProfileHead";
+import PublicProfileHead from "./components/PublicProfileHead";
 import PublicUsersCard from "./components/PublicUsersCard";
 import PublicProfileListingCard from "./components/PublicProfileListingCard";
 
@@ -137,38 +137,32 @@ class PublicProfileView extends React.Component {
     } else {
       return (
         <PageLayout select="/profile">
-          <Row style={{ padding: "30px 0px" }}>
-            <Col span={2} />
-
-            <Col span={20}>
-              <Row gutter={5}>
-                <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
-                  <Card>
-                    <PublicProfileHead
-                      profile={user.profile && user.profile}
-                      description={this.userCardData().profileHead}
-                      role={user.role}
-                      username={user.username}
-                      email={user.email}
-                      city={
-                        user.addresses.length !== 0 && user.addresses[0].city
-                          ? user.addresses[0].city
-                          : null
-                      }
-                      portfolios={user.portfolios}
-                    />
-                  </Card>
-                  <div style={{ height: "30px" }} />
-                  <PublicProfileListingCard />
-                </Col>
-                <Col xs={{ span: 24 }} lg={{ span: 8 }}>
-                  <Row
-                    gutter={10}
-                    type="flex"
-                    justify="space-around"
-                    align="middle"
-                  >
-                    {/*Verification
+          <Row>
+            <Col xs={{ span: 24 }} lg={{ span: 15 }} align="center">
+              <Card style={{ margin: "5px" }}>
+                <PublicProfileHead
+                  profile={user.profile && user.profile}
+                  description={this.userCardData().profileHead}
+                  role={user.role}
+                  username={user.username}
+                  email={user.email}
+                  city={
+                    user.addresses.length !== 0 && user.addresses[0].city
+                      ? user.addresses[0].city
+                      : null
+                  }
+                  portfolios={user.portfolios}
+                />
+              </Card>
+            </Col>
+            <Col xs={{ span: 24 }} lg={{ span: 9 }}>
+              <Row
+                gutter={10}
+                type="flex"
+                justify="space-around"
+                align="middle"
+              >
+                {/*Verification
                 <Col
                   xs={{ span: 24 }}
                   md={{ span: 8 }}
@@ -181,48 +175,33 @@ class PublicProfileView extends React.Component {
                   />
                 </Col>*/}
 
-                    <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>
-                      <Card
-                        style={{ width: "300px" }}
-                        bodyStyle={{ margin: "0px" }}
-                      >
-                        <Tabs defaultActiveKey="1">
-                          <TabPane tab="Endorsements" key="1">
-                            <PublicUsersCard
-                              data={this.userCardData().endorsements}
-                            />
-                          </TabPane>
-                          <TabPane tab="Endorsed" key="2">
-                            <PublicUsersCard
-                              data={this.userCardData().endorsed}
-                            />
-                          </TabPane>
-                        </Tabs>
-                      </Card>
-                      <Card
-                        style={{ width: "300px" }}
-                        bodyStyle={{ margin: "0px" }}
-                      >
-                        <Tabs defaultActiveKey="1">
-                          <TabPane tab="followers" key="1">
-                            <PublicUsersCard
-                              data={this.userCardData().followers}
-                            />
-                          </TabPane>
-                          <TabPane tab="following" key="2">
-                            <PublicUsersCard
-                              data={this.userCardData().following}
-                            />
-                          </TabPane>
-                        </Tabs>
-                      </Card>
-                    </Col>
-                  </Row>
+                <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>
+                  <Card
+                    bodyStyle={{ margin: "0px", padding: "0px" }}
+                    style={{ margin: "5px" }}
+                  >
+                    <Tabs tabPosition="left" defaultActiveKey="1">
+                      <TabPane tab="Endorsements" key="1">
+                        <PublicUsersCard
+                          data={this.userCardData().endorsements}
+                        />
+                      </TabPane>
+                      <TabPane tab="Endorsed" key="2">
+                        <PublicUsersCard data={this.userCardData().endorsed} />
+                      </TabPane>
+                      <TabPane tab="followers" key="3">
+                        <PublicUsersCard data={this.userCardData().followers} />
+                      </TabPane>
+                      <TabPane tab="following" key="4">
+                        <PublicUsersCard data={this.userCardData().following} />
+                      </TabPane>
+                    </Tabs>
+                  </Card>
                 </Col>
               </Row>
             </Col>
-            <Col span={2} />
           </Row>
+          <PublicProfileListingCard />
         </PageLayout>
       );
     }
