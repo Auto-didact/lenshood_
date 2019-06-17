@@ -31,7 +31,7 @@ const NavLinkAdminWithI18n = translate("listing")(({ t }) => (
   </NavLink>
 ));
 const NavLinkMyListingsWithI18n = translate("listing")(({ t }) => (
-  <NavLink to="/my-listings" className="nav-link" activeClassName="active">
+  <NavLink to="/my-listings">
     <Icon type="solution" />
     {t("listing:navLinkMyListings")}
   </NavLink>
@@ -81,9 +81,7 @@ export default new ClientModule({
   ],
   navItemAccount: [
     <IfLoggedIn key="/my-listings">
-      <MenuItem>
-        <NavLinkMyListingsWithI18n />
-      </MenuItem>
+      <NavLinkMyListingsWithI18n />
     </IfLoggedIn>
   ],
   navItemRight: [

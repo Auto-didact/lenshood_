@@ -143,19 +143,21 @@ class PublicProfileView extends React.Component {
             <Col span={20}>
               <Row gutter={5}>
                 <Col xs={{ span: 24 }} lg={{ span: 16 }} align="center">
-                  <PublicProfileHead
-                    profile={user.profile && user.profile}
-                    description={this.userCardData().profileHead}
-                    role={user.role}
-                    username={user.username}
-                    email={user.email}
-                    city={
-                      user.addresses.length !== 0 && user.addresses[0].city
-                        ? user.addresses[0].city
-                        : null
-                    }
-                    portfolios={user.portfolios}
-                  />
+                  <Card>
+                    <PublicProfileHead
+                      profile={user.profile && user.profile}
+                      description={this.userCardData().profileHead}
+                      role={user.role}
+                      username={user.username}
+                      email={user.email}
+                      city={
+                        user.addresses.length !== 0 && user.addresses[0].city
+                          ? user.addresses[0].city
+                          : null
+                      }
+                      portfolios={user.portfolios}
+                    />
+                  </Card>
                   <div style={{ height: "30px" }} />
                   <PublicProfileListingCard />
                 </Col>
