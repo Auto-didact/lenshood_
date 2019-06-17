@@ -41,7 +41,7 @@ class PublicProfileListingCard extends Component {
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
         <Card
-          style={{ width: "300px" }}
+          style={{ height: "361px", margin: "5px" }}
           bodyStyle={{ margin: "0px" }}
           hoverable
           cover={

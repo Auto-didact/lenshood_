@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Layout, Row, Col, Menu } from "antd";
 import { MenuItem } from "@gqlapp/look-client-react";
+import PageLayout from "./PageLayout";
 
 import NavBar, { ref } from "./NavBar";
 import Footer from "./Footer";
@@ -15,19 +16,13 @@ class AccountLayout extends React.Component {
   render() {
     const { children, navBar } = this.props;
     return (
-      <Layout className="layoutList">
-        {navBar !== false && (
-          <Header className="header">
-            <NavBar />
-          </Header>
-        )}
+      <PageLayout>
         <Row className="layoutRow" gutter={16}>
           <Col lg={6} md={24} className="SliderStart">
             <h3 className="Pad20">
               <strong>Account Details</strong>
             </h3>
             <Menu
-              theme="dark"
               mode="inline"
               defaultSelectedKeys={[`${this.props.select}`]}
               defaultOpenKeys={["sub1"]}
@@ -47,19 +42,14 @@ class AccountLayout extends React.Component {
                 <Icon type="heart" /> Watchist
               </Item> */}
 
-              {ref.modules.navItemsAccount.map((item, key) => (
-                <MenuItem key={key} align="center">
-                  {item}
-                </MenuItem>
-              ))}
+              {ref.modules.navItemsAccount}
             </Menu>
           </Col>
           <Col lg={15} md={24}>
             <Content id="content">{children}</Content>
           </Col>
         </Row>
-        <Footer />
-      </Layout>
+      </PageLayout>
     );
   }
 }
