@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Layout, Row, Col, Menu } from "antd";
+import { MenuItem } from "@gqlapp/look-client-react";
 
 import NavBar, { ref } from "./NavBar";
 import Footer from "./Footer";
@@ -26,6 +27,7 @@ class AccountLayout extends React.Component {
               <strong>Account Details</strong>
             </h3>
             <Menu
+              theme="dark"
               mode="inline"
               defaultSelectedKeys={[`${this.props.select}`]}
               defaultOpenKeys={["sub1"]}
@@ -45,7 +47,11 @@ class AccountLayout extends React.Component {
                 <Icon type="heart" /> Watchist
               </Item> */}
 
-              {ref.modules.navItemsAccount}
+              {ref.modules.navItemsAccount.map((item, key) => (
+                <MenuItem key={key} align="center">
+                  {item}
+                </MenuItem>
+              ))}
             </Menu>
           </Col>
           <Col lg={15} md={24}>

@@ -6,7 +6,7 @@ import { MenuItem } from "@gqlapp/look-client-react";
 import ClientModule from "@gqlapp/module-client-react";
 
 // To Do
-import { Icon } from "antd";
+import { Icon, Tabs } from "antd";
 
 import resolvers from "./resolvers";
 import resources from "./locales";
@@ -29,9 +29,14 @@ import {
 } from "./containers/Auth";
 import { isAdminFunction } from "./helpers/isAdmin";
 
-const ProfileName = withLoadedUser(({ currentUser }) =>
-  currentUser ? currentUser.fullName || currentUser.username : null
-);
+const MyProfile = () => {
+  return (
+    <div>
+      <Icon type="user" />
+      {"MyProfile"}
+    </div>
+  );
+};
 
 const LogoutLink = withRouter(
   withLogout(({ logout, history }) => (
@@ -60,11 +65,7 @@ const NavLinkUsersWithI18n = translate("user")(({ t }) => (
   </NavLink>
 ));
 const NavLinkProfileWithI18n = translate("user")(({ t }) => (
-  <NavLink
-    to="/profile"
-    className="AccDetItem"
-    activeClassName="AccDetItemSelected"
-  >
+  <NavLink to="/profile">
     <Icon type="user" />
     {t("navLink.profile")}
   </NavLink>
@@ -142,7 +143,7 @@ export default new ClientModule({
     <IfLoggedIn key="/profile">
       <MenuItem>
         <NavLink to="/profile" className="nav-link" activeClassName="active">
-          <ProfileName />
+          <MyProfile />
         </NavLink>
       </MenuItem>
     </IfLoggedIn>,
@@ -162,9 +163,7 @@ export default new ClientModule({
   ],
   navItemAccount: [
     <IfLoggedIn key="/profile">
-      <MenuItem>
-        <NavLinkProfileWithI18n />
-      </MenuItem>
+      <NavLinkProfileWithI18n />
     </IfLoggedIn>
   ],
 
