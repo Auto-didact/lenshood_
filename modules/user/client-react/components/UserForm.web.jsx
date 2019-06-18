@@ -87,12 +87,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
             label={t('userEdit.form.field.email')}
             value={email}
           />
-          {isAdmin && (
-            <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
-              <Option value="user">{t('userEdit.form.field.role.user')}</Option>
-              <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
-            </Field>
-          )}
+
 
           <Field
             name="profile.firstName"
@@ -117,13 +112,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
             value={profile.about}
           />
 
-          <Field
-            name="profile.designation"
-            component={RenderField}
-            type="text"
-            label={t('userEdit.form.field.designation')}
-            value={profile.designation}
-          />
+
 
           <Field
             name="profile.mobile"
@@ -133,15 +122,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
             value={profile.mobile}
           />
 
-          {isAdmin && (
-            <Field
-              name="profile.flag"
-              component={RenderField}
-              type="text"
-              label={t('userEdit.form.field.flag')}
-              value={profile.flag}
-            />
-          )}
+
 
           {isAdmin && (
             <Field
@@ -152,6 +133,30 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
               value={profile.rating}
             />
           )}
+            {isAdmin && (
+            <Field
+              name="profile.flag"
+              component={RenderField}
+              type="text"
+              label={t('userEdit.form.field.flag')}
+              value={profile.flag}
+            />
+          )}
+
+          <Field
+            name="profile.designation"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.designation')}
+            value={profile.designation}
+          />
+
+          {isAdmin && (
+            <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
+              <Option value="user">{t('userEdit.form.field.role.user')}</Option>
+              <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
+            </Field>
+          )}
 
           <Field
             name="profile.website"
@@ -160,7 +165,7 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
             label={t('userEdit.form.field.website')}
             value={profile.website}
           />
-          <div />
+          
           <Field
             name="profile.isAvailable"
             component={RenderCheckBox}
@@ -211,7 +216,8 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
               />
             )}
           />
-
+          </div>
+          <div className="g4">
           <FieldArray
             name="portfolios"
             render={arrayHelpers => (
