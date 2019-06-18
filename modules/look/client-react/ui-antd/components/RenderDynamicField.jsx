@@ -65,7 +65,12 @@ export default class DynamicFieldSet extends React.Component {
             </FormItem>
           ))}
           {keys.length > 1 ? (
-            <Icon title="Remove Address" className="dynamic-delete-button" type="minus-circle-o" onClick={() => arrayHelpers.remove(indexv)} />
+            <Icon
+              title="Remove "
+              className="dynamic-delete-button"
+              type="minus-circle-o"
+              onClick={() => arrayHelpers.remove(indexv)}
+            />
           ) : null}
         </FormItem>
       ));
