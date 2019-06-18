@@ -45,7 +45,7 @@ class AccountLayout extends React.Component {
               {ref.modules.navItemsAccount}
             </Menu>
           </Col>
-          <Col lg={15} md={24}>
+          <Col lg={18} md={24}>
             <Content id="content">{children}</Content>
           </Col>
         </Row>
