@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 // import Helmet from 'react-helmet';
 import { TranslateFunction } from "@gqlapp/i18n-client-react";
 // import settings from '../../../../settings';
@@ -17,6 +17,9 @@ interface LendingViewProps {
 // );
 
 const LendingView = ({ t }: LendingViewProps) => {
+  useEffect(() => {
+    global.window.scrollTo(0, 0);
+  });
   return (
     <div
       style={{

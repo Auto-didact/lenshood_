@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Row, Col } from 'antd';
+import { Menu, Dropdown, Row, Col, Icon } from 'antd';
+
 import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
 import { slide as Burger } from 'react-burger-menu';
 
@@ -18,7 +19,8 @@ class NavBar extends React.Component {
   state = {
     current: '/',
     width: 0,
-    height: 0
+    height: 0,
+    show: false
   };
 
   componentDidMount() {
@@ -43,6 +45,13 @@ class NavBar extends React.Component {
       current: e.key
     });
   };
+
+  toggle = function() {
+    this.setState(state => {
+      return { show: !state.show };
+    });
+  };
+
   //Styling For Burger Menu
   styling = {
     bmBurgerButton: {
@@ -84,6 +93,34 @@ class NavBar extends React.Component {
     }
   };
 
+  menuList = (
+    <Menu style={{ border: 'none' }}>
+      <Menu.Item>
+        <NavLink to="/about-us">About us</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/terms-of-service">Terms of Service</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/privacy-rules">Privacy Rules</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/mission">Mission</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/renting">Renting</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/lending">Lending</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/TrustAndSafety">Trust And Safety</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/faq">FAQ</NavLink>
+      </Menu.Item>
+    </Menu>
+  );
   render() {
     return this.state.width > 800 ? (
       <Row gutter={0}>
@@ -125,6 +162,13 @@ class NavBar extends React.Component {
             mode="horizontal"
             style={{ lineHeight: '60px', float: 'right' }}
           >
+            <Menu.Item>
+              <Dropdown overlay={this.menuList} placement="bottomCenter">
+                <a>
+                  About <Icon type="down" />
+                </a>
+              </Dropdown>
+            </Menu.Item>
             {ref.modules.navItemsRight}
             <IfLoggedIn>
               <MenuItem>
@@ -182,6 +226,27 @@ class NavBar extends React.Component {
               {ref.modules.navItemsRight}
             </Menu>
           </div>
+          <div
+            style={{
+              width: '246px',
+              backgroundColor: '#23b195',
+              marginTop: '2px',
+              fontWeight: 'bold',
+              borderBottom: '2px solid #91d8ca'
+            }}
+          >
+            <a className="nav-link" style={{ color: '#ffffff', height: '30px' }} onClick={() => this.toggle()}>
+              <div style={{ width: '236px', marginLeft: '10px', paddingLeft: '6px' }}>
+                About{' '}
+                {this.state.show ? <Icon type="caret-up" theme="filled" /> : <Icon type="caret-down" theme="filled" />}
+              </div>
+            </a>
+          </div>
+
+          {this.state.show ? this.menuList : null}
+          {this.state.show ? (
+            <div style={{ borderBottom: '2px solid #91d8ca', display: 'block', marginTop: '-15px' }} />
+          ) : null}
 
           {ref.modules.navItemsTest.map(item => {
             return (
