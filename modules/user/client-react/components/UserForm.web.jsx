@@ -73,194 +73,197 @@ const UserForm = ({ values, handleSubmit, errors, setFieldValue, t, shouldDispla
           value={profile.avatar}
         />
         <div className="g2">
-        <Field
-          name="username"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.name')}
-          value={username}
-        />
-        <Field name="email" component={RenderField} type="email" label={t('userEdit.form.field.email')} value={email} />
-        {isAdmin && (
-          <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
-            <Option value="user">{t('userEdit.form.field.role.user')}</Option>
-            <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
-          </Field>
-        )}
-
-        <Field
-          name="profile.firstName"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.firstName')}
-          value={profile.firstName}
-        />
-        <Field
-          name="profile.lastName"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.lastName')}
-          value={profile.lastName}
-        />
-
-        <Field
-          name="profile.about"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.about')}
-          value={profile.about}
-        />
-
-        <Field
-          name="profile.designation"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.designation')}
-          value={profile.designation}
-        />
-
-        <Field
-          name="profile.mobile"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.mobile')}
-          value={profile.mobile}
-        />
-
-        {isAdmin && (
           <Field
-            name="profile.flag"
+            name="username"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.flag')}
-            value={profile.flag}
+            label={t('userEdit.form.field.name')}
+            value={username}
           />
-        )}
-
-        {isAdmin && (
           <Field
-            name="profile.rating"
+            name="email"
+            component={RenderField}
+            type="email"
+            label={t('userEdit.form.field.email')}
+            value={email}
+          />
+          {isAdmin && (
+            <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
+              <Option value="user">{t('userEdit.form.field.role.user')}</Option>
+              <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
+            </Field>
+          )}
+
+          <Field
+            name="profile.firstName"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.rating')}
-            value={profile.rating}
+            label={t('userEdit.form.field.firstName')}
+            value={profile.firstName}
           />
-        )}
-
-        <Field
-          name="profile.website"
-          component={RenderField}
-          type="text"
-          label={t('userEdit.form.field.website')}
-          value={profile.website}
-        />
-        <div></div>
-        <Field
-          name="profile.isAvailable"
-          component={RenderCheckBox}
-          type="checkbox"
-          label={t('userEdit.form.field.available')}
-          checked={profile.isAvailable}
-        />
-
-        {isAdmin && (
           <Field
-            name="isActive"
+            name="profile.lastName"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.lastName')}
+            value={profile.lastName}
+          />
+
+          <Field
+            name="profile.about"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.about')}
+            value={profile.about}
+          />
+
+          <Field
+            name="profile.designation"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.designation')}
+            value={profile.designation}
+          />
+
+          <Field
+            name="profile.mobile"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.mobile')}
+            value={profile.mobile}
+          />
+
+          {isAdmin && (
+            <Field
+              name="profile.flag"
+              component={RenderField}
+              type="text"
+              label={t('userEdit.form.field.flag')}
+              value={profile.flag}
+            />
+          )}
+
+          {isAdmin && (
+            <Field
+              name="profile.rating"
+              component={RenderField}
+              type="text"
+              label={t('userEdit.form.field.rating')}
+              value={profile.rating}
+            />
+          )}
+
+          <Field
+            name="profile.website"
+            component={RenderField}
+            type="text"
+            label={t('userEdit.form.field.website')}
+            value={profile.website}
+          />
+          <div />
+          <Field
+            name="profile.isAvailable"
             component={RenderCheckBox}
             type="checkbox"
-            label={t('userEdit.form.field.active')}
-            checked={isActive}
+            label={t('userEdit.form.field.available')}
+            checked={profile.isAvailable}
           />
-        )}
 
-        {isAdmin && (
-          <Field
-            name="profile.isVerified"
-            component={RenderCheckBox}
-            type="checkbox"
-            label={t('userEdit.form.field.isverified')}
-            checked={profile.isVerified}
-          />
-        )}
+          {isAdmin && (
+            <Field
+              name="isActive"
+              component={RenderCheckBox}
+              type="checkbox"
+              label={t('userEdit.form.field.active')}
+              checked={isActive}
+            />
+          )}
+
+          {isAdmin && (
+            <Field
+              name="profile.isVerified"
+              component={RenderCheckBox}
+              type="checkbox"
+              label={t('userEdit.form.field.isverified')}
+              checked={profile.isVerified}
+            />
+          )}
         </div>
-          <br/>
-          <div className="g3">
-
-
-        <FieldArray
-          name="addresses"
-          render={arrayHelpers => (
-            <RenderDynamicField
-              keys={[
-                { key: 'streetAddress1', type: 'text' },
-                { key: 'streetAddress2', type: 'text' },
-                { key: 'city', type: 'text' },
-                { key: 'state', type: 'text' },
-                { key: 'pinCode', type: 'text' }
-              ]}
-              buttonText="Add Address"
-              style={{ width: '40%' }}
-              arrayHelpers={arrayHelpers}
-              values={addresses}
-              name="addresses"
-              label={t('userEdit.form.field.addresses')}
-            />
-          )}
-        />
-
-        <FieldArray
-          name="portfolios"
-          render={arrayHelpers => (
-            <RenderDynamicField
-              keys={[{ key: 'platform', type: 'text' }, { key: 'portfolioUrl', type: 'text' }]}
-              buttonText="Add Portfolio"
-              style={{ width: '40% !important' }}
-              arrayHelpers={arrayHelpers}
-              values={portfolios}
-              name="portfolios"
-              label={t('userEdit.form.field.portfolios')}
-            />
-          )}
-        />
-
-        {settings.auth.certificate.enabled && (
-          <Field
-            name="serial"
-            component={RenderField}
-            type="text"
-            label={t('userEdit.form.field.serial')}
-            value={auth && auth.certificate && auth.certificate.serial}
-            onChange={value =>
-              setFieldValue('auth', {
-                ...auth,
-                certificate: { ...auth.certificate, serial: value }
-              })
-            }
+        <br />
+        <div className="g3">
+          <FieldArray
+            name="addresses"
+            render={arrayHelpers => (
+              <RenderDynamicField
+                keys={[
+                  { key: 'streetAddress1', type: 'text' },
+                  { key: 'streetAddress2', type: 'text' },
+                  { key: 'city', type: 'text' },
+                  { key: 'state', type: 'text' },
+                  { key: 'pinCode', type: 'text' }
+                ]}
+                buttonText="Add Address"
+                style={{ width: '40%' }}
+                arrayHelpers={arrayHelpers}
+                values={addresses}
+                name="addresses"
+                label={t('userEdit.form.field.addresses')}
+              />
+            )}
           />
-        )}
-        {isAdmin && (
-          <div>
+
+          <FieldArray
+            name="portfolios"
+            render={arrayHelpers => (
+              <RenderDynamicField
+                keys={[{ key: 'platform', type: 'text' }, { key: 'portfolioUrl', type: 'text' }]}
+                buttonText="Add Portfolio"
+                style={{ width: '40% !important' }}
+                arrayHelpers={arrayHelpers}
+                values={portfolios}
+                name="portfolios"
+                label={t('userEdit.form.field.portfolios')}
+              />
+            )}
+          />
+
+          {settings.auth.certificate.enabled && (
             <Field
-              name="password"
+              name="serial"
               component={RenderField}
-              type="password"
-              label={t('userEdit.form.field.pass')}
-              value={password}
+              type="text"
+              label={t('userEdit.form.field.serial')}
+              value={auth && auth.certificate && auth.certificate.serial}
+              onChange={value =>
+                setFieldValue('auth', {
+                  ...auth,
+                  certificate: { ...auth.certificate, serial: value }
+                })
+              }
             />
-            <Field
-              name="passwordConfirmation"
-              component={RenderField}
-              type="password"
-              label={t('userEdit.form.field.passConf')}
-              value={passwordConfirmation}
-            />
-          </div>
-        )}
-        {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
-        <Button color="primary" type="submit">
-          {t('userEdit.form.btnSubmit')}
-        </Button>
-        
+          )}
+          {isAdmin && (
+            <div>
+              <Field
+                name="password"
+                component={RenderField}
+                type="password"
+                label={t('userEdit.form.field.pass')}
+                value={password}
+              />
+              <Field
+                name="passwordConfirmation"
+                component={RenderField}
+                type="password"
+                label={t('userEdit.form.field.passConf')}
+                value={passwordConfirmation}
+              />
+            </div>
+          )}
+          {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
+          <Button color="primary" type="submit">
+            {t('userEdit.form.btnSubmit')}
+          </Button>
         </div>
       </Form>
     </div>
