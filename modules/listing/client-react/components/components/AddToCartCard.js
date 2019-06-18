@@ -21,8 +21,14 @@ export default class AddToCartCard extends Component {
       dd: today.getDate(),
       mm: today.getMonth() + 1,
       yyyy: today.getFullYear(),
-      dateFormat: "YYYY/MM/DD"
+      dateFormat: "YYYY/MM/DD",
+      startDate: null,
+      endDate: null,
+      changed: false
     }
+  };
+  onChange = (dates, dateStrings) => {
+    this.setState({ startDate: dateStrings[0], endDate: dateStrings[1] });
   };
 
   disabledDate = current => {
@@ -34,6 +40,24 @@ export default class AddToCartCard extends Component {
 
     const date = this.state.dateInit;
 
+    function parseDate(str) {
+      var mdy = str.split("-");
+      return new Date(mdy[0], mdy[0] - 1, mdy[2]);
+    }
+
+    function datediff(first, second) {
+      // Take the difference between the dates and divide by milliseconds per day.
+      // Round to nearest whole number to deal with DST.
+
+      return Math.round((second - first) / (1000 * 60 * 60 * 24));
+    }
+    const dayDifference =
+      this.state.startDate && this.state.endDate
+        ? datediff(
+            parseDate(this.state.startDate),
+            parseDate(this.state.endDate)
+          )
+        : 1;
     return (
       <Card style={{ backgroundColor: "#FAFAFA", width: "100%" }}>
         <CardTitle style={{ textAlign: "center" }}>
@@ -81,6 +105,7 @@ export default class AddToCartCard extends Component {
         </div>
         <div align="center">
           <RangePicker
+            onChange={this.onChange}
             defaultValue={[
               moment(`${date.yyyy}/${date.mm}/${date.dd + 1}`, date.dateFormat),
               moment(`${date.yyyy}/${date.mm}/${date.dd + 2}`, date.dateFormat)
@@ -119,11 +144,11 @@ export default class AddToCartCard extends Component {
           </p>*/}
           <Col span={12}>
             &#8377; {listing.listingRental.perDay}/- <Icon type="close" />{" "}
-            {this.props.noOfDays} days{" "}
+            {dayDifference} days{" "}
           </Col>
           <Col span={12}>
             <div className="rightfloat">
-              &#8377; {listing.listingRental.perDay * this.props.noOfDays}
+              &#8377; {listing.listingRental.perDay * dayDifference}
             </div>
           </Col>
           {/* <p>

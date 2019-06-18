@@ -25,6 +25,15 @@ import ListingDynamicFieldFormTest from "./components/ListingDynamicFieldFormTes
 import resources from "./locales";
 // import resolvers from './resolvers';
 
+const MyListingsNavItemAccount = () => {
+  return (
+    <div>
+      <Icon type="solution" />
+      {"My Listings"}
+    </div>
+  );
+};
+
 const NavLinkAdminWithI18n = translate("listing")(({ t }) => (
   <NavLink to="/listings" className="nav-link" activeClassName="active">
     {t("listing:navLinkAdmin")}
@@ -79,7 +88,9 @@ export default new ClientModule({
   navItemUser: [
     <IfLoggedIn key="/my-listings">
       <MenuItem>
-        <NavLinkMyListingsWithI18n />
+        <NavLink to="/my-listings">
+          <MyListingsNavItemAccount />
+        </NavLink>
       </MenuItem>
     </IfLoggedIn>
   ],

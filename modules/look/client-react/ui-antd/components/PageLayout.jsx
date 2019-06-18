@@ -22,7 +22,7 @@ class PageLayout extends React.Component {
           </Header>
         )}
 
-        <Content id="content" style={{ marginTop: "64px" }}>
+        <Content id="content" className="page-content">
           {children}
         </Content>
 

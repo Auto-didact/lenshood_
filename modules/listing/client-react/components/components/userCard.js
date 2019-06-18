@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Rate, Button, Card, Avatar } from "antd";
+import { NavLink } from "react-router-dom";
+
 import { CardText } from "@gqlapp/look-client-react";
 import { ImgUser } from "../../constants/DefaultImages";
 // import '../resources/listingCatalogue.css';
@@ -94,7 +96,7 @@ class UserCard extends Component {
         <br />
         <br />
         <div align="center">
-          <Button>Contact</Button>
+          <Button href={`/public-profile/${seller.id}`}>View Profile</Button>
         </div>
       </Card>
     );
