@@ -48,7 +48,9 @@ class ProductCard extends Component {
       listing.listingImages.length !== 0 ? listing.listingImages : ImgCamera;
     const replacementValue = listing.listingRental.replacementValue;
     const description = listing.description;
-    const packageContents = listing.listingContent;
+    const listingContent = listing.listingContent;
+    const cancellationPolicy = this.props.cancellationPolicy;
+    const damagePolicy = this.props.damagePolicy;
 
     const status = {
       customPaging: function(i) {
@@ -126,19 +128,21 @@ class ProductCard extends Component {
         </div>
         <br />
         <h3 className="font16 blockDisplay fontBold">Gear Components</h3>
-        {packageContents.map((item, key) => (
-          <div>
-            <span className="itemGearPC" />
-            {item.gear} {item.brand} {item.model} {item.serial}
-          </div>
-        ))}
+        {listingContent.length !== 0
+          ? listingContent.map((item, key) => (
+              <div>
+                <span className="itemGearPC" />
+                {item.gear} {item.brand} {item.model}
+              </div>
+            ))
+          : "Gear Components Not Provided"}
         <br />
         <br />
         <h3 className="font16 blockDisplay fontBold">Cancellation Policy</h3>
-        <p className="font14">{listing.cancellationPolicy}</p>
+        <p className="font14">{cancellationPolicy}</p>
         <br />
         <h3 className="font16 blockDisplay fontBold">Damage Policy</h3>
-        <p className="font14">{listing.damagePolicy}</p>
+        <p className="font14">{damagePolicy}</p>
       </div>
     );
   }

@@ -17,11 +17,11 @@ class ListingDetailView extends Component {
 
   renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${this.props.t("listing.title")}`}
+      title={`${settings.app.name} - ${this.props.t("listingDetail.title")}`}
       meta={[
         {
           name: "description",
-          content: this.props.t("listing.meta")
+          content: this.props.t("listingDetail.meta")
         }
       ]}
     />
@@ -39,6 +39,8 @@ class ListingDetailView extends Component {
     const t = this.props.t;
     const seller = this.props.listing && this.props.listing.user;
     const leftGap = "5%";
+    const cancellationPolicy = t("listingDetail.content.cancellationPolicy");
+    const damagePolicy = t("listingDetail.content.damagePolicy");
 
     if (loading && !listing) {
       return (
@@ -60,7 +62,14 @@ class ListingDetailView extends Component {
           >
             <Breadcrumb.Item>{listing.gearCategory}</Breadcrumb.Item>
             <Breadcrumb.Item href="">{listing.gearSubcategory}</Breadcrumb.Item>
-            <Breadcrumb.Item href=""> {listing.description}</Breadcrumb.Item>
+            {listing.listingContent.length !== 0 ? (
+              <Breadcrumb.Item href="">
+                {" "}
+                {listing.listingContent[0].gear}
+              </Breadcrumb.Item>
+            ) : (
+              ""
+            )}
           </Breadcrumb>
 
           {
@@ -72,7 +81,11 @@ class ListingDetailView extends Component {
               }}
               className="gearCat"
             >
-              {listing.gearCategory}
+              {listing && listing.listingContent.length !== 0
+                ? listing.listingContent.map((item, key) => (
+                    <span>{`${item.gear}  `}</span>
+                  ))
+                : listing.gearCategory}
             </h1>
           }
           <Row
@@ -80,7 +93,11 @@ class ListingDetailView extends Component {
             style={{ marginLeft: leftGap, marginRight: leftGap }}
           >
             <Col xl={16} lg={15} md={13} sm={24}>
-              <ProductCard listing={listing} />
+              <ProductCard
+                listing={listing}
+                cancellationPolicy={cancellationPolicy}
+                damagePolicy={damagePolicy}
+              />
               {/*<ReviewsCard reviews={this.state.product.reviews} />*/}
             </Col>
             <Col xl={8} lg={9} md={11} sm={24}>

@@ -1,0 +1,33 @@
+.con{
+    display:flex;
+    flex-direction:colimn;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+
+}
+.con>Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.con>Form>div{
+    display:flex;
+    flex-direction: row;
+}
+.con>Form>div>div:first-child{
+    color:#000;
+    font-size: 20px;
+    font-weight:600;
+    
+}
+.con>Form>div>div>div>div>span>div{
+    border:1px solid #ececed;
+    border-radius:5px;
+    margin:5px !important;
+}
+.con>Form>div>div>div>div>span>div:last-child{
+    border:none;
+}

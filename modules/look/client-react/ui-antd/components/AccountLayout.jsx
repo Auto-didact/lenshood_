@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Layout, Row, Col, Menu } from "antd";
+import { MenuItem } from "@gqlapp/look-client-react";
+import PageLayout from "./PageLayout";
 
 import NavBar, { ref } from "./NavBar";
 import Footer from "./Footer";
@@ -14,13 +16,8 @@ class AccountLayout extends React.Component {
   render() {
     const { children, navBar } = this.props;
     return (
-      <Layout className="layoutList">
-        {navBar !== false && (
-          <Header className="header">
-            <NavBar />
-          </Header>
-        )}
-        <Row className="layoutRow marginT20" gutter={16}>
+      <PageLayout>
+        <Row className="layoutRow" gutter={16}>
           <Col lg={6} md={24} className="SliderStart">
             <h3 className="Pad20">
               <strong>Account Details</strong>
@@ -48,12 +45,11 @@ class AccountLayout extends React.Component {
               {ref.modules.navItemsAccount}
             </Menu>
           </Col>
-          <Col lg={15} md={24}>
+          <Col lg={18} md={24}>
             <Content id="content">{children}</Content>
           </Col>
         </Row>
-        <Footer />
-      </Layout>
+      </PageLayout>
     );
   }
 }
