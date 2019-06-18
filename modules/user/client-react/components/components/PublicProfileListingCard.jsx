@@ -13,35 +13,34 @@ class PublicProfileListingCard extends Component {
   render() {
     // To Do: check if it is not present then set as default value
 
-    // let listing = this.props.relatedListing;
+    let listing = this.props.listing;
 
-    // const listing_id = listing.id;
-    const listing_id = 4;
-    // const listing_img =
-    //   listing.listingImages.length !== 0 && listing.listingImages
-    //     ? listing.listingImages[0].imageUrl
-    //     : ImgCamera[0].imageUrl;
-    const listing_img = ImgCamera[0].imageUrl;
+    const listing_id = listing.id || null;
+    const listing_img =
+      listing.listingImages.length !== 0 && listing.listingImages
+        ? listing.listingImages[0].imageUrl
+        : ImgCamera[0].imageUrl;
 
-    // const rent_per_day = listing.listingRental.perDay || "Not Provided";
-    const rent_per_day = 567;
+    const rent_per_day = listing.listingRental.perDay || null;
 
-    // const title = listing.gearCategory || "Not Provided";
-    const title = "Camera";
+    const title_set =
+      listing && listing.listingContent && listing.listingContent.length !== 0
+        ? listing.listingContent
+        : null;
 
-    const status = {
-      dots: true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-
-      autoplaySpeed: 800
-    };
+    // const status = {
+    //   dots: true,
+    //   infinite: true,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    //
+    //   autoplaySpeed: 800
+    // };
 
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
         <Card
-          style={{ height: "361px", margin: "5px", width: "300px" }}
+          style={{ height: "361px", margin: "5px" }}
           bodyStyle={{ margin: "0px" }}
           hoverable
           cover={
@@ -66,7 +65,7 @@ class PublicProfileListingCard extends Component {
           }
         >
           <Meta
-            title={title.substring(0, 25)}
+            title={title_set.map(title => `${title.gear} ${title.brand} `)}
             description={<h4>&#8377;{rent_per_day} per day</h4>}
           />
         </Card>
@@ -75,8 +74,8 @@ class PublicProfileListingCard extends Component {
   }
 }
 
-// PublicProfileListingCard.propTypes = {
-//   relatedList: PropTypes.object.isRequired
-// };
+PublicProfileListingCard.propTypes = {
+  relatedList: PropTypes.object.isRequired
+};
 
 export default PublicProfileListingCard;
