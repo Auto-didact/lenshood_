@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import {Icon} from 'antd';
+import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
@@ -31,10 +31,14 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
         <div className="text-center">{t('userEdit.loadMsg')}</div>
       ) : (
         <div style={{}}>
-          <Link id="back-button" to={currentUser && currentUser.role === 'admin' ? '/users' : '/profile'} style={{fontSize:'20px',margin:'10px',textDecoration:'underline'}}>
-          <Icon type="arrow-left" /> Back
+          <Link
+            id="back-button"
+            to={currentUser && currentUser.role === 'admin' ? '/users' : '/profile'}
+            style={{ fontSize: '20px', margin: '10px', textDecoration: 'underline' }}
+          >
+            <Icon type="arrow-left" /> Back
           </Link>
-          <h2 style={{textAlign:'center'}}>
+          <h2 style={{ textAlign: 'center' }}>
             {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
           </h2>
           <UserForm
