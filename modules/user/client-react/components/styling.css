@@ -6,8 +6,13 @@
     text-align:center;
     border:1px solid #e8e8e8;
     border-radius: 6px;
-    max-width: 90%;
+    max-width: 50%;
 
+}
+@media only screen and (max-width: 1000px){
+    .con{
+        max-width: 90%;
+    }
 }
 .con>Form{
     display:flex;
