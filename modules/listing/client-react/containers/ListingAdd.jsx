@@ -21,30 +21,29 @@ export default compose(
   graphql(ADD_LISTING, {
     props: ({ ownProps: { history, navigation }, mutate }) => ({
       addListing: async values => {
-        // let listingData = await mutate({
-        //   variables: {
-        //     input: values
-        //   },
-        //   optimisticResponse: {
-        //     __typename: 'Mutation',
-        //     addListing: {
-        //       __typename: 'Listing',
-        //       id: null,
-        //       ...values
-        //     }
-        //   }
-        // });
+        let listingData = await mutate({
+          variables: {
+            input: values
+          },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            addListing: {
+              __typename: 'Listing',
+              id: null,
+              ...values
+            }
+          }
+        });
 
-        // if (history) {
-        //   return history.push('/listing/' + listingData.data.addListing.id, {
-        //     listing: listingData.data.addListing
-        //   });
-        // } else if (navigation) {
-        //   return navigation.navigate('ListingEdit', {
-        //     id: listingData.data.addListing.id
-        //   });
-        // }
-      console.log(values);
+        if (history) {
+          return history.push('/listing-detail/' + listingData.data.addListing.id, {
+            listing: listingData.data.addListing
+          });
+        } else if (navigation) {
+          return navigation.navigate('ListingEdit', {
+            id: listingData.data.addListing.id
+          });
+        }
       }
     })
   }),
