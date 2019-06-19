@@ -4,13 +4,13 @@ import { Row, Col, Button, Card } from 'antd';
 export default class OrderCard extends React.Component {
   render() {
     return (
-      <Card className="boxShadowTheme borderRadius9">
-        <h3 className="OrderHead">Order Status</h3>
+      <Card>
+        <h3 style={{ textShadow: '0.5px 0 0', fontSize: '17px' }}>Order Status</h3>
         <Row>
-          <Col lg={9} sm={7} xs={9}>
+          <Col span={9}>
             <img src={this.props.product.image} alt="" className="orderImage" />
           </Col>
-          <Col lg={15} sm={17} xs={15}>
+          <Col span={13}>
             <h4 className="itemName">{this.props.product.name}</h4>
           </Col>
         </Row>
@@ -34,11 +34,11 @@ export default class OrderCard extends React.Component {
           </Col>
         </Row>
         <br />
-        <h3 className="OrderHead">Cart Summary</h3>
+        <h3 style={{ fontSize: '17px', textShadow: '0.3px 0 0' }}>Cart Summary</h3>
         {this.props.paid === true ? (
           <h5 className="lightText">
             Total rent amount{' '}
-            <strong className="rightfloat">
+            <strong style={{ float: 'right' }}>
               &#8377;
               {this.props.product.totalRent}
             </strong>
@@ -53,19 +53,23 @@ export default class OrderCard extends React.Component {
           </h4>
         )}
         <h5
-          className="RefundOrder"
+          style={{
+            fontSize: '11px',
+            color: '#4a4a4a',
+            letterSpacing: '0.5px'
+          }}
         >
           Refundable deposit{' '}
-          <strong className="ProductRef">&#8377; {this.props.product.refund}</strong>
+          <strong style={{ float: 'right', letterSpacing: '1px' }}>&#8377; {this.props.product.refund}</strong>
         </h5>
         {this.props.paid === true ? (
           <h5 className="lightText">
             You paid <strong className="colorFloat">&#8377; {this.props.product.youPaid.amount}</strong>
-            <h6 className="PaidMethodColor">{this.props.product.youPaid.method}</h6>
+            <h6 style={{ color: '#676767' }}>{this.props.product.youPaid.method}</h6>
           </h5>
         ) : null}
         <br />
-        <Button type="primary" block>
+        <Button className="themeColor" block>
           {this.props.buttonText}
         </Button>
       </Card>

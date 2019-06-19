@@ -1,22 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withApollo } from "react-apollo";
-import faGooglePlusSquare from "@fortawesome/fontawesome-free-brands/faGooglePlusSquare";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-// import { Button } from "@gqlapp/look-client-react";
-import "./GoogleButton.css";
-import { Icon, Button } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withApollo } from 'react-apollo';
+import faGooglePlusSquare from '@fortawesome/fontawesome-free-brands/faGooglePlusSquare';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { Button } from '@gqlapp/look-client-react';
+import './GoogleButton.css';
 
 const googleLogin = () => {
-  window.location = "/auth/google";
+  window.location = '/auth/google';
 };
 
 const GoogleButton = withApollo(({ text }) => {
   return (
-    <Button onClick={googleLogin} className="googleBtn" block>
-      <Icon type="google" />
-      <div className="separator" />
-      <span>Continue with Google</span>
+    <Button type="button" size="lg" onClick={googleLogin} className="googleBtn">
+      <div className="iconContainer">
+        <FontAwesomeIcon icon={faGooglePlusSquare} className="googleIcon" />
+        <div className="separator" />
+      </div>
+      <div className="btnText">
+        <span>{text}</span>
+      </div>
     </Button>
   );
 });
@@ -32,18 +35,18 @@ const GoogleLink = withApollo(({ text }) => {
 const GoogleIcon = () => (
   <FontAwesomeIcon
     icon={faGooglePlusSquare}
-    style={{ marginTop: 10, color: "#c43832", fontSize: 40 }}
+    style={{ marginTop: 10, color: '#c43832', fontSize: 40 }}
     onClick={googleLogin}
   />
 );
 
 const GoogleComponent = ({ type, text }) => {
   switch (type) {
-    case "button":
+    case 'button':
       return <GoogleButton text={text} />;
-    case "link":
+    case 'link':
       return <GoogleLink text={text} />;
-    case "icon":
+    case 'icon':
       return <GoogleIcon />;
     default:
       return <GoogleButton text={text} />;

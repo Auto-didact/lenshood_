@@ -113,7 +113,7 @@ class ListTourGearRental extends Component {
                   </Row>
                 </Form.Item>
                 <Form.Item>
-                  <Button className="uploadButton" type="primary">UPLOAD</Button>
+                  <Button className="themeColor uploadButton">UPLOAD</Button>
                   <Button className="DraftButton">SAVE AS DRAFT</Button>
                 </Form.Item>
               </Form>

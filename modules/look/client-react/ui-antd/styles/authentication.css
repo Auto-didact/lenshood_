@@ -23,20 +23,27 @@
   margin-bottom: 0;
 }
 
-.signinstate {
-  letter-spacing: 2px;
-  text-shadow: 2px 0 0;
-  color: #887373;
-  font-size: 35px
+.viaEmail {
+  color: #999 !important;
+  font-size: 10px !important;
+  padding: 15px 50px 5px 50px !important;
 }
 
-.youcanAlways {
-  padding-top: 9px;
-  margin-top: 8px;
-  border-top: 1px #aaa solid;
-  letter-spacing: 2px;
-  text-shadow: 1.5px 0 0;
-  color: #645757;
+.googlebtn {
+  background: #c55643 !important;
+  color: white !important;
+}
+
+.fbookbtn {
+  background: #3c60a2 !important;
+  color: white !important;
+}
+
+.signinstate {
+  padding-bottom: 4px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  text-shadow: 1px 0 0;
 }
 
 .modalcard {
@@ -45,17 +52,12 @@
 
 .signInimg {
   width: 100%;
-  height: 493px;
+  height: 471px;
 }
 
 .signupImg {
   width: 100%;
-  height: 625px;
-}
-
-.signImg {
-  width: 100%;
-  height: 140px;
+  height: 513px;
 }
 
 .forgotpass {
@@ -65,4 +67,3 @@
   float: right;
   margin-bottom: 10px;
 }
-

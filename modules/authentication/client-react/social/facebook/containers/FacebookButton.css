@@ -1,23 +1,39 @@
 .facebookBtn {
+  min-width: 320px;
+  margin-top: 10px;
+  background-color: #3769ae;
   border-color: #3769ae;
-  background: #3c60a2 !important;
-  color: white !important;
   display: flex;
-  flex: 1 1 10%;
   justify-content: flex-start;
   align-items: center;
-  font-size: 16px !important;
 }
 
 .facebookBtn:hover {
-  background-color: #17427e !important;
-  border-color: #17427e !important;
-  color: white !important;
+   background-color: #17427e;
+    border-color: #17427e;
 }
 
-.separator {
+.iconContainer { 
+  display: flex;
+  flex: 1 1 10%;
+  justify-content: flex-start;
+   align-items: center; 
+}
+
+.separator { 
   height: 28px;
   width: 1px;
   background-color: #fff !important;
-  margin: 0 20px;
+  margin-left: 10px;
+}
+
+.btnText { 
+  display: flex;
+  justify-content: flex-start; 
+  flex: 5
+}
+
+.facebookIcon { 
+  color: #fff;
+  font-size: 30px;
 }
