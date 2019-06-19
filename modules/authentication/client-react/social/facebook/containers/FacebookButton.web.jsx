@@ -1,22 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withApollo } from "react-apollo";
-import faFacebookSquare from "@fortawesome/fontawesome-free-brands/faFacebookSquare";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import { Button, Icon } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withApollo } from 'react-apollo';
+import faFacebookSquare from '@fortawesome/fontawesome-free-brands/faFacebookSquare';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { Button } from '@gqlapp/look-client-react';
 
-import "./FacebookButton.css";
+import './FacebookButton.css';
 
 const facebookLogin = () => {
-  window.location = "/auth/facebook";
+  window.location = '/auth/facebook';
 };
 
 const FacebookButton = withApollo(({ text }) => {
   return (
-    <Button onClick={facebookLogin} className="facebookBtn" block>
-      <Icon type="facebook" theme="filled" />
-      <div className="separator" />
-      <span>Continue with Facebook</span>
+    <Button type="button" size="lg" onClick={facebookLogin} className="facebookBtn">
+      <div className="iconContainer">
+        <FontAwesomeIcon icon={faFacebookSquare} className="facebookIcon" />
+        <div className="separator" />
+      </div>
+      <div className="btnText">
+        <span>{text}</span>
+      </div>
     </Button>
   );
 });
@@ -32,18 +36,18 @@ const FacebookLink = withApollo(({ text }) => {
 const FacebookIcon = () => (
   <FontAwesomeIcon
     icon={faFacebookSquare}
-    style={{ marginTop: 10, color: "#17427e", fontSize: 40 }}
+    style={{ marginTop: 10, color: '#17427e', fontSize: 40 }}
     onClick={facebookLogin}
   />
 );
 
 const FacebookComponent = ({ text, type }) => {
   switch (type) {
-    case "button":
+    case 'button':
       return <FacebookButton text={text} />;
-    case "link":
+    case 'link':
       return <FacebookLink text={text} />;
-    case "icon":
+    case 'icon':
       return <FacebookIcon />;
     default:
       return <FacebookButton text={text} />;

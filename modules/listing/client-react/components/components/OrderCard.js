@@ -70,7 +70,7 @@ export default class OrderCard extends React.Component {
           </h5>
         ) : null}
         <br />
-        <Button type="primary" block>
+        <Button className="themeColor" block>
           {this.props.buttonText}
         </Button>
       </Card>

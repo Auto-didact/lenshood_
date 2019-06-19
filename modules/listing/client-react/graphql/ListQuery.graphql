@@ -1,7 +1,0 @@
-#import "./MyListings.graphql"
-
-query listing($id: Int!) {
-  listing(id: $id) {
-    ...MyListings
-  }
-}

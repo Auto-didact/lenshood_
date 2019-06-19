@@ -10,7 +10,7 @@ import {
   Card,
   Divider
 } from "antd";
-import { CardTitle } from "@gqlapp/look-client-react";
+import { CardTitle, CardText } from "@gqlapp/look-client-react";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
