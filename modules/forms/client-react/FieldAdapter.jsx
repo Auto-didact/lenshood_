@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "formik";
-import { isString } from "util";
-import { PLATFORM } from "../../../packages/common/utils";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'formik';
+import { isString } from 'util';
+import { PLATFORM } from '../../../packages/common/utils';
 
 class FieldAdapter extends Component {
   static propTypes = {
@@ -28,33 +28,25 @@ class FieldAdapter extends Component {
   // To Do - ReConfirm that this works
   onChange = (e, secondArg) => {
     const { onChange } = this.props;
-    console.log(onChange)
+    // console.log(onChange)
     if (onChange) {
       onChange(e);
     }
     if (e._isAMomentObject && secondArg) {
       this.props.formik.setFieldValue(this.props.name, secondArg);
-    } else if (
-      Array.isArray(e) &&
-      e[0]._isAMomentObject &&
-      e[1]._isAMomentObject &&
-      secondArg
-    ) {
+    } else if (Array.isArray(e) && e[0]._isAMomentObject && e[1]._isAMomentObject && secondArg) {
       this.props.formik.setFieldValue(this.props.name, secondArg);
     } else if (isString(e)) {
       // for Option Field
       this.props.formik.setFieldValue(this.props.name, e);
-    } else if (e.target.type == "radio") {
+    } else if (e.target.type == 'radio') {
       this.props.formik.setFieldValue(e.target.name, e.target.value);
     } else if (e.target.checked) {
       this.props.formik.setFieldValue(e.target.name, e.target.checked);
-    } else if (e.target.type == "number") {
+    } else if (e.target.type == 'number') {
       this.props.formik.setFieldValue(e.target.name, parseInt(e.target.value));
     } else {
-      this.props.formik.setFieldValue(
-        this.props.name,
-        e.target.value || e.target.checked
-      );
+      this.props.formik.setFieldValue(this.props.name, e.target.value || e.target.checked);
     }
   };
 
@@ -63,7 +55,7 @@ class FieldAdapter extends Component {
     if (onBlur) {
       onBlur(e);
     } else {
-      if (PLATFORM === "mobile") {
+      if (PLATFORM === 'mobile') {
         formik.setFieldTouched(name, true);
       } else {
         // console.log(name);
@@ -88,7 +80,7 @@ class FieldAdapter extends Component {
     const { formik, component, name, defaultChecked, disabled } = this.props;
     let { defaultValue } = this.props;
     let { value, checked } = this.props;
-    value = value || "";
+    value = value || '';
     // const type = this.props.type;
     // if (type == 'number') {
     //   value = parseInt(value);
@@ -112,7 +104,7 @@ class FieldAdapter extends Component {
       disabled
     };
 
-    const changeEventHandler = PLATFORM === "mobile" ? "onChangeText" : "onChange";
+    const changeEventHandler = PLATFORM === 'mobile' ? 'onChangeText' : 'onChange';
     input[changeEventHandler] = this[changeEventHandler];
 
     return React.createElement(component, {
