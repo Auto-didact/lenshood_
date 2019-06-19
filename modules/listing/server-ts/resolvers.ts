@@ -2,7 +2,7 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
 import { Listing, ListingReview, Identifier } from './sql';
-import withAuth from 'graphql-auth';
+// import withAuth from 'graphql-auth';
 
 interface Edges {
   cursor: number;
