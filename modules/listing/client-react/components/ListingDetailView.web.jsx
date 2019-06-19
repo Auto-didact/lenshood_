@@ -4,7 +4,6 @@ import { translate } from "@gqlapp/i18n-client-react";
 import Helmet from "react-helmet";
 import { Row, Col, Breadcrumb, Card } from "antd";
 import { PageLayout } from "@gqlapp/look-client-react";
-// import './resources/listingCatalogue.css';
 import UserCard from "./components/userCard";
 import ProductCard from "./components/ProductCard";
 import ReviewsCard from "./components/ReviewsCard";
@@ -12,11 +11,6 @@ import AddToCartCard from "./components/AddToCartCard";
 import SuggestedCardList from "./components/SuggestedCardList";
 
 import settings from "../../../../settings";
-
-import naruto from "./resources/naruto.jpg";
-import naruto2 from "./resources/naruto2.jpg";
-import naruto3 from "./resources/naruto3.jpg";
-import naruto4 from "./resources/naruto4.jpg";
 
 class ListingDetailView extends Component {
   state = {};

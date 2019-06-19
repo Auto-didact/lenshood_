@@ -82,12 +82,6 @@
   margin-bottom: 0;
 }
 
-.themeColor,
-.themeColor:hover {
-  background: #23b195 !important;
-  color: white !important;
-  border-radius: 4px;
-}
 
 .belowFormtext {
   color: #4a4a4a;
