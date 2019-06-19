@@ -30,7 +30,7 @@ class SignIn extends Component {
               style={{
                 marginTop: '10px'
               }}
-              type="primary"
+              className="themeColor"
               block
             >
               Sign In
@@ -63,7 +63,7 @@ class SignUp extends Component {
             <Input type="password" placeholder="Password" />
           </Form.Item>
           <Form.Item className="paddingMarginBottom">
-            <Button type="primary" block>
+            <Button className="themeColor" block>
               Sign Up
             </Button>
             <p className="belowFormtext">

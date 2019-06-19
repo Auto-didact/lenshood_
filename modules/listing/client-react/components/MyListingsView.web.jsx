@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { Layout, Row, Col, Breadcrumb } from "antd";
 import { AccountLayout } from "@gqlapp/look-client-react";
+// import './resources/listingCatalogue.css';
 import MyList from "./components/MyList";
+import AccDetailsMenu from "./components/AccDetailsMenu";
 
 class MyListingsView extends Component {
   state = {
