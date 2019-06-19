@@ -15,4 +15,4 @@ public
 *.iml
 .npmrc
 swagger.yml
-node_modules/
+
