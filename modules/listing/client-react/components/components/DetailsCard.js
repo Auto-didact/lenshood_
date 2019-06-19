@@ -7,7 +7,6 @@ import { ImgCamera } from "../../constants/DefaultImages";
 class DetailsCard extends Component {
   render() {
     const item = this.props.item;
-    const buttonText = this.props.buttonText;
     function confirm(e) {
       console.log(e);
       message.success("Click on Yes");
@@ -56,10 +55,12 @@ class DetailsCard extends Component {
                 <h6 className="OnShelfTag">On Shelf</h6>
               )}
               <h3 className="DetailsCardHeading">
-                {item.listingContent.length !== 0
-                  ? item.listingContent.map(gear => (
-                      <span>{`${gear.brand} ${gear.gear} / `}</span>
-                    ))
+                {item.listingContent
+                  ? item.listingContent.length !== 0
+                    ? item.listingContent.map(gear => (
+                        <span>{`${gear.brand} ${gear.gear} / `}</span>
+                      ))
+                    : "Info Not Provided"
                   : "Info Not Provided"}
               </h3>
               {/*<h5>

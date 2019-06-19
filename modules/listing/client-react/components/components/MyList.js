@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-// import '../resources/listingCatalogue.css';
-import { Layout, Button, Row, Col } from 'antd';
-import DetailsCard from './DetailsCard';
-import { ALL, ONSHELF, ONRENT } from '../../constants/ListingStates';
+import React, { Component } from "react";
+import { Layout, Button, Row, Col } from "antd";
+import DetailsCard from "./DetailsCard";
+import { ALL, ONSHELF, ONRENT } from "../../constants/ListingStates";
+
+import { Link } from "react-router-dom";
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
@@ -14,16 +15,20 @@ class MyListingProducts extends Component {
   };
   classNamesgroup(e) {
     if (this.state.status === e) {
-      return 'btnActive';
+      return "btnActive";
     } else {
-      return 'btn';
+      return "btn";
     }
   }
   FilterItems(e) {
     this.setState({ status: e });
   }
   returnItem(item) {
-    return <DetailsCard buttonText="View" item={item} />;
+    return (
+      <Link className="listing-link" to={`/my-listings/${item.id}`}>
+        <DetailsCard buttonText="View" item={item} />
+      </Link>
+    );
   }
   renderItem(item) {
     if (item.status === this.state.status) {
@@ -40,20 +45,33 @@ class MyListingProducts extends Component {
           </Col>
           <Col md={{ span: 10 }} sm={{ span: 24 }} xs={{ span: 24 }}>
             <ButtonGroup className="width100">
-              <Button onClick={() => this.FilterItems(ALL)} className={this.classNamesgroup(ALL)}>
+              <Button
+                onClick={() => this.FilterItems(ALL)}
+                className={this.classNamesgroup(ALL)}
+              >
                 All
               </Button>
-              <Button onClick={() => this.FilterItems(ONSHELF)} className={this.classNamesgroup(ONSHELF)}>
+              <Button
+                onClick={() => this.FilterItems(ONSHELF)}
+                className={this.classNamesgroup(ONSHELF)}
+              >
                 On Shelf
               </Button>
-              <Button onClick={() => this.FilterItems(ONRENT)} className={this.classNamesgroup(ONRENT)}>
+              <Button
+                onClick={() => this.FilterItems(ONRENT)}
+                className={this.classNamesgroup(ONRENT)}
+              >
                 On Rent
               </Button>
             </ButtonGroup>
           </Col>
         </Row>
         {this.state.listings
-          ? this.state.listings.map(item => (this.state.status === ALL ? this.returnItem(item) : this.renderItem(item)))
+          ? this.state.listings.map(item =>
+              this.state.status === ALL
+                ? this.returnItem(item)
+                : this.renderItem(item)
+            )
           : null}
       </Content>
     );
