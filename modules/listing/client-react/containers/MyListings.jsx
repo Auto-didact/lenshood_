@@ -5,79 +5,59 @@ import { graphql, compose } from "react-apollo";
 
 import MyListingsView from "../components/MyListingsView";
 import MY_LISTINGS_QUERY from "../graphql/MyListingsQuery.graphql";
-
+import TOGGLE_LISTING_STATUS from "../graphql/ToggleListingStatus.graphql";
 import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
+import DELETE_LISTING from "../graphql/DeleteListing.graphql";
 
 class MyListings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listings: [
-        {
-          description: "Blah blah bleh",
-          listingRental: {
-            perDay: 1200
-          },
-          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-          rating: 4,
-          reviews: 7,
-          status: ALL
-        },
-        {
-          description: "Blah lah bleh",
-          listingRental: {
-            perDay: 120
-          },
-          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-          rating: 3.7,
-          reviews: 12,
-          status: ONSHELF
-        },
-        {
-          description: "fdgbdfcgmbkmg;ngvjnpcghn",
-          listingRental: {
-            perDay: 200
-          },
-          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-          rating: 3,
-          reviews: 8,
-          status: "On Rent"
-        },
-        {
-          description: "Blah lah bleh",
-          listingRental: {
-            perDay: 120
-          },
-          image: `https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`,
-          rating: 3.9,
-          reviews: 25,
-          status: ONRENT
-        }
-      ]
-    };
+  state = {
+    userListings: this.props.userListings
+  };
+
+  updateComponent() {
+    this.forceUpdate();
   }
+
   render() {
+    const DeleteListing = async id => {
+      const result = await this.props.deleteListing(id);
+      console.log(id);
+      this.updateComponent();
+    };
+    const ToggleListingStatus = async id => {
+      const result = await this.props.toggleListingStatus(id);
+      console.log(id);
+      this.updateComponent();
+    };
     return (
-      // <div className="padA20">
-      //   <Breadcrumb separator=">">
-      //     <Breadcrumb.Item>Account</Breadcrumb.Item>
-      //     <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
-      //   </Breadcrumb>
-      //   <Layout className="layoutList">
-      //     <Row className="layoutRow">
-      //       <Col lg={7} md={24}>
-      //         <AccDetailsMenu select={3} />
-      //       </Col>
-      //       <Col lg={15} md={24}>
-      //         <MyList products={this.state.products} />
-      //       </Col>
-      //     </Row>
-      //   </Layout>
-      // </div>
-      <MyListingsView listings={this.props.userListings} />
+      <MyListingsView
+        userListings={this.state.userListings}
+        DeleteListing={DeleteListing}
+        toggle={ToggleListingStatus}
+      />
     );
   }
 }
+
+const onDeleteListing = (prev, id) => {
+  const index = prev.listings.edges.findIndex(x => x.node.id === id);
+
+  // ignore if not found
+  if (index < 0) {
+    return prev;
+  }
+
+  return update(prev, {
+    listings: {
+      totalCount: {
+        $set: prev.listings.totalCount - 1
+      },
+      edges: {
+        $splice: [[index, 1]]
+      }
+    }
+  });
+};
 
 export default compose(
   graphql(MY_LISTINGS_QUERY, {
@@ -85,5 +65,40 @@ export default compose(
       if (error) throw new Error(error);
       return { loading, userListings };
     }
+  }),
+  graphql(TOGGLE_LISTING_STATUS, {
+    props: ({ mutate }) => ({
+      toggleListingStatus: async id => {
+        try {
+          const {
+            data: { toggleListingStatus }
+          } = await mutate({
+            variables: { id }
+          });
+
+          if (toggleListingStatus.errors) {
+            return { errors: toggleListingStatus.errors };
+          }
+        } catch (e) {
+          log.error(e);
+        }
+      }
+    })
+  }),
+  graphql(DELETE_LISTING, {
+    props: ({ mutate }) => ({
+      deleteListing: id => {
+        mutate({
+          variables: { id },
+          optimisticResponse: {
+            __typename: "Mutation",
+            deleteListing: {
+              id: id,
+              __typename: "Listing"
+            }
+          }
+        });
+      }
+    })
   })
 )(MyListings);
