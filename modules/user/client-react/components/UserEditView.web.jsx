@@ -51,6 +51,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
           </h2>
           <div className="con">
             <UserForm
+              LYGflag = {false}
               onSubmit={onSubmit}
               shouldDisplayRole={isNotSelf}
               shouldDisplayActive={isNotSelf}
