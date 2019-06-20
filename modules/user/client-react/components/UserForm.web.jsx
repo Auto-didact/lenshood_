@@ -86,7 +86,7 @@ const UserForm = ({
 
   return (
     <Form name="user" onSubmit={handleSubmit}>
-      {LYGflag == false ? (
+      {LYGflag == false || !profile.avatar ? (
         <>
           <Field
             name="profile.avatar"
@@ -95,6 +95,10 @@ const UserForm = ({
             label={t("userEdit.form.field.avatar")}
             value={profile.avatar}
           />
+        </>
+      ) : null}
+      {LYGflag == false ? (
+        <>
           <Field
             name="username"
             component={RenderField}
@@ -122,6 +126,10 @@ const UserForm = ({
               </Option>
             </Field>
           )}
+        </>
+      ) : null}
+      {LYGflag == false || !profile.firstName ? (
+        <>
           <Field
             name="profile.firstName"
             component={RenderField}
@@ -129,6 +137,10 @@ const UserForm = ({
             label={t("userEdit.form.field.firstName")}
             value={profile.firstName}
           />
+        </>
+      ) : null}
+      {LYGflag == false || !profile.lastName ? (
+        <>
           <Field
             name="profile.lastName"
             component={RenderField}
@@ -136,7 +148,10 @@ const UserForm = ({
             label={t("userEdit.form.field.lastName")}
             value={profile.lastName}
           />
-
+        </>
+      ) : null}
+      {LYGflag == false || !profile.about ? (
+        <>
           <Field
             name="profile.about"
             component={RenderField}
@@ -144,7 +159,10 @@ const UserForm = ({
             label={t("userEdit.form.field.about")}
             value={profile.about}
           />
-
+        </>
+      ) : null}
+      {LYGflag == false || !profile.designation ? (
+        <>
           <Field
             name="profile.designation"
             component={RenderField}
