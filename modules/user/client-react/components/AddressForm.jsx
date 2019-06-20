@@ -85,6 +85,7 @@ class AddressForm extends React.Component {
     super(props);
     this.props = props;
   }
+
   render() {
     const {
       address,
@@ -98,9 +99,11 @@ class AddressForm extends React.Component {
     // if (address.id) {
     //   values.id = address.id;
     // }
-    console.log('handleSubmit', handleSubmit);
+    // console.log('handleSubmit', handleSubmit);
+    () => this.props.handleSubmit(values);
     return (
       <Modal visible={visible} title="Address" okText="Save" onCancel={onCancel} onOk={() => handleSubmit(values)}>
+        {/* () => handleSubmit(values) */}
         <Form layout="vertical" onSubmit={handleSubmit}>
           {/* {console.log('key in addressForm', key)} */}
           {/* <RenderAddressField
