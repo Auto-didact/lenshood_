@@ -24,7 +24,7 @@ import {
 } from "@gqlapp/look-client-react";
 import { FieldArray } from "formik";
 import settings from "../../../../settings";
-import './styling.css'
+import "./styling.css";
 
 const userFormSchema = {
   username: [required, minLength(3)],
@@ -84,7 +84,6 @@ const UserForm = ({
   const isAdmin = isAdminFunction(userRole);
 
   return (
-    <div className="con">
     <Form name="user" onSubmit={handleSubmit}>
       <Field
         name="profile.avatar"
@@ -226,7 +225,7 @@ const UserForm = ({
               { key: "pinCode", type: "text" }
             ]}
             buttonText="Add Address"
-            style={{width:'40%'}}
+            style={{ width: "40%" }}
             arrayHelpers={arrayHelpers}
             values={addresses}
             name="addresses"
@@ -244,7 +243,7 @@ const UserForm = ({
               { key: "portfolioUrl", type: "text" }
             ]}
             buttonText="Add Portfolio"
-            style={{width:'40% !important'}}
+            style={{ width: "40% !important" }}
             arrayHelpers={arrayHelpers}
             values={portfolios}
             name="portfolios"
@@ -293,7 +292,6 @@ const UserForm = ({
         {t("userEdit.form.btnSubmit")}
       </Button>
     </Form>
-  </div>
   );
 };
 
