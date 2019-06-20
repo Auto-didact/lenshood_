@@ -12,6 +12,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
         <div className="text-center">{t("userEdit.loadMsg")}</div>
       ) : (
         <UserForm
+          LYGflag={true}
           onSubmit={onSubmit}
           shouldDisplayRole={isNotSelf}
           shouldDisplayActive={isNotSelf}
