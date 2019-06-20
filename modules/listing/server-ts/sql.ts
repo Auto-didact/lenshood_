@@ -220,6 +220,15 @@ export default class ListingDAO extends Model {
         rating
       });
   }
+
+  public async patchListing(id, params) {
+    console.log("params", params);
+    const listing = await ListingDAO.query()
+      .patch(params)
+      .findById(id);
+
+    return camelizeKeys(listing);
+  }
 }
 
 // ListingImage model.

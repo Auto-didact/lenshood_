@@ -6,9 +6,6 @@ import MyList from "./components/MyList";
 import AccDetailsMenu from "./components/AccDetailsMenu";
 
 class MyListingsView extends Component {
-  state = {
-    listings: this.props.listings
-  };
   render() {
     return (
       // <div className="padA20">
@@ -28,7 +25,7 @@ class MyListingsView extends Component {
       //   </Layout>
       // </div>
       <AccountLayout select="/my-listings">
-        <MyList listings={this.state.listings} />
+        <MyList {...this.props} />
       </AccountLayout>
     );
   }
