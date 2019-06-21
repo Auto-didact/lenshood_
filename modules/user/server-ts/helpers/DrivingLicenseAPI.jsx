@@ -6,12 +6,12 @@ export default params => {
     // To Do Move paramaters to settings
     var options = {
       method: 'POST',
-      hostname: 'preprod.aadhaarapi.com',
+      hostname: 'prod.aadhaarapi.com',
       path: '/verify-dl',
       headers: {
         'Content-Type': 'application/json',
         // qt_api_key: 'bb130eda-510a-4a4b-9913-bf60ab725018',
-        qt_api_key: '9e78f26b-cce1-4930-ad19-9d298e2f786b',
+        qt_api_key: '48f02fbc-83a0-4374-be0e-670d18f3ca1d',
         qt_agency_id: 'cc1b47d1-4341-4a1b-8b55-a20efa70a523'
       }
     };

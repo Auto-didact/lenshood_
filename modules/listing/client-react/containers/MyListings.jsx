@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // import './resources/listingCatalogue.css';
-import { graphql, compose } from "react-apollo";
+import { graphql, compose } from 'react-apollo';
+
 
 import MyListingsView from "../components/MyListingsView";
 import MY_LISTINGS_QUERY from "../graphql/MyListingsQuery.graphql";
@@ -38,6 +39,7 @@ class MyListings extends Component {
     );
   }
 }
+
 
 const onDeleteListing = (prev, id) => {
   const index = prev.listings.edges.findIndex(x => x.node.id === id);

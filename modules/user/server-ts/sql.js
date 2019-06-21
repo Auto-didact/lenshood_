@@ -3,7 +3,9 @@ import { camelizeKeys, decamelizeKeys, decamelize } from "humps";
 import { has } from "lodash";
 import bcrypt from "bcryptjs";
 import { knex, returnId } from "@gqlapp/database-server-ts";
-import { Model } from "objection";
+
+import { Model, raw } from "objection";
+
 import Listing from "@gqlapp/listing-server-ts/sql";
 
 // Give the knex object to objection.
@@ -200,30 +202,52 @@ export class User extends Model {
     }
 
     // // add filter conditions
-    // if (filter) {
-    //   if (has(filter, 'role') && filter.role !== '') {
-    //     queryBuilder.where(function() {
-    //       this.where('u.role', filter.role);
-    //     });
-    //   }
+    if (filter) {
+      if (has(filter, "role") && filter.role !== "") {
+        queryBuilder.where(function() {
+          this.where("role", filter.role);
+        });
+      }
 
-    //   if (has(filter, 'isActive') && filter.isActive !== null) {
-    //     queryBuilder.where(function() {
-    //       this.where('u.is_active', filter.isActive);
-    //     });
-    //   }
+      if (has(filter, "isActive") && filter.isActive !== null) {
+        queryBuilder.where(function() {
+          this.where("is_active", filter.isActive);
+        });
+      }
 
-    //   if (has(filter, 'searchText') && filter.searchText !== '') {
-    //     queryBuilder.where(function() {
-    //       this.where(knex.raw('LOWER(??) LIKE LOWER(?)', ['username', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['email', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['first_name', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['last_name', `%${filter.searchText}%`]));
-    //     });
-    //   }
-    // }
+      if (has(filter, "searchText") && filter.searchText !== "") {
+        queryBuilder
+          .from("user")
+          .leftJoin("user_profile AS up", "up.user_id", "user.id")
+          .where(function() {
+            this.where(
+              raw("LOWER(??) LIKE LOWER(?)", [
+                "username",
+                `%${filter.searchText}%`
+              ])
+            )
+              .orWhere(
+                raw("LOWER(??) LIKE LOWER(?)", [
+                  "email",
+                  `%${filter.searchText}%`
+                ])
+              )
+              .orWhere(
+                raw("LOWER(??) LIKE LOWER(?)", [
+                  "up.first_name",
+                  `%${filter.searchText}%`
+                ])
+              )
+              .orWhere(
+                raw("LOWER(??) LIKE LOWER(?)", [
+                  "up.last_name",
+                  `%${filter.searchText}%`
+                ])
+              );
+          });
+      }
+    }
     const res = camelizeKeys(await queryBuilder);
-    // console.log(res);
     return res;
   }
 
@@ -232,7 +256,7 @@ export class User extends Model {
       .findById(id)
       .eager(user_eager);
     const res = camelizeKeys(await queryBuilder);
-    // console.log(res);
+    console.log(res);
     return res;
   }
 

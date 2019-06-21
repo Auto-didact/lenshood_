@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { Layout, Row, Col, Breadcrumb } from "antd";
 import { AccountLayout } from "@gqlapp/look-client-react";
@@ -14,6 +15,7 @@ class MyListingsView extends Component {
       
       <AccountLayout select="/my-listings">
         {/* Render metadata */}
+
       <Helmet
         title={`${settings.app.name} - My Listings`}
         meta={[
@@ -23,11 +25,13 @@ class MyListingsView extends Component {
           }
         ]}
       />
+
       {this.props.loading && !this.props.userListings && <div>Loading...</div>}
       {this.props.userListings && <MyList {...this.props}/>}
       </AccountLayout>
     );
   }
 }
+
 
 export default MyListingsView;

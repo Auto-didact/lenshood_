@@ -36,7 +36,7 @@ export default compose(
         });
 
         if (history) {
-          return history.push('/listing/' + listingData.data.addListing.id, {
+          return history.push('/listing-detail/' + listingData.data.addListing.id, {
             listing: listingData.data.addListing
           });
         } else if (navigation) {

@@ -1,12 +1,14 @@
 import { PubSub, withFilter } from "graphql-subscriptions";
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
+
 import { Listing, ListingReview, Identifier } from "./sql";
 import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = "On Shelf";
 const IDLE = "Idle";
 const ONRENT = "On Rent";
+
 interface Edges {
   cursor: number;
   node: Listing & Identifier;
