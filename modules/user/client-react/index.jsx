@@ -51,9 +51,8 @@ const LogoutLink = withRouter(
   ))
 );
 
-export * from './containers/Auth';
-export { default as UserDetails } from './containers/UserDetails';
-export { default as LOGIN } from './graphql/Login.graphql';
+export * from "./containers/Auth";
+export { default as LOGIN } from "./graphql/Login.graphql";
 
 const NavLinkUsersWithI18n = translate('user')(({ t }) => (
   <NavLink to="/users" className="nav-link" activeClassName="active">

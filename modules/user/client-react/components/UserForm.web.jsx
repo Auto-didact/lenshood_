@@ -52,8 +52,7 @@ const UserForm = ({
   setFieldValue,
   t,
   shouldDisplayRole,
-  shouldDisplayActive,
-  LYGflag
+  shouldDisplayActive
 }) => {
   const {
     userRole,
@@ -72,6 +71,7 @@ const UserForm = ({
   const isAdmin = isAdminFunction(userRole);
 
   return (
+    <div className="con">
     <Form name="user" onSubmit={handleSubmit}>
       {LYGflag == false || !profile.avatar ? (
         <>
@@ -241,9 +241,18 @@ const UserForm = ({
         )}
       />
 
-      {LYGflag == false ? (
-        <>
-          <FieldArray
+      <FieldArray
+        name="portfolios"
+        render={arrayHelpers => (
+          <RenderDynamicField
+            keys={[
+              { key: "platform", type: "text" },
+              { key: "portfolioUrl", type: "text" }
+            ]}
+            buttonText="Add Portfolio"
+            style={{width:'40% !important'}}
+            arrayHelpers={arrayHelpers}
+            values={portfolios}
             name="portfolios"
             render={arrayHelpers => (
               <RenderDynamicField
@@ -257,6 +266,8 @@ const UserForm = ({
               />
             )}
           />
+        )}
+      />
 
           {settings.auth.certificate.enabled && (
             <Field
@@ -298,6 +309,7 @@ const UserForm = ({
         {t('userEdit.form.btnSubmit')}
       </Button>
     </Form>
+  </div>
   );
 };
 
