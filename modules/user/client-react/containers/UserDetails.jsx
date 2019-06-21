@@ -51,7 +51,15 @@ const UserEdit = props => {
     // }
   };
 
-  return <UserDetailsView onSubmit={onSubmit} {...props} />;
+  let state = {
+    avatar: props.user.profile.avatar ? true : false,
+    firstName: props.user.profile.firstName ? true : false,
+    lastName: props.user.profile.lastName ? true : false,
+    designation: props.user.profile.designation ? true : false,
+    about: props.user.profile.about ? true : false
+  };
+
+  return <UserDetailsView onSubmit={onSubmit} {...props} {...state} />;
 };
 
 UserEdit.propTypes = {

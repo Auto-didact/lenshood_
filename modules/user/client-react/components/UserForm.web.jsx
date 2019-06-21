@@ -1,10 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
-import { isEmpty } from 'lodash';
-import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
-import { translate } from '@gqlapp/i18n-client-react';
-import { email, minLength, required, match, validate } from '@gqlapp/validation-common-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { withFormik } from "formik";
+import { isEmpty } from "lodash";
+import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
+import { translate } from "@gqlapp/i18n-client-react";
+import {
+  email,
+  minLength,
+  required,
+  match,
+  validate
+} from "@gqlapp/validation-common-react";
 import {
   Form,
   RenderField,
@@ -28,11 +34,15 @@ const userFormSchema = {
 const createUserFormSchema = {
   ...userFormSchema,
   password: [required, minLength(settings.auth.password.minLength)],
-  passwordConfirmation: [required, match('password'), minLength(settings.auth.password.minLength)]
+  passwordConfirmation: [
+    required,
+    match("password"),
+    minLength(settings.auth.password.minLength)
+  ]
 };
 
 const isAdminFunction = role => {
-  if (role === 'admin') {
+  if (role === "admin") {
     return true;
   } else {
     return false;
@@ -42,7 +52,10 @@ const isAdminFunction = role => {
 const updateUserFormSchema = {
   ...userFormSchema,
   password: minLength(settings.auth.password.minLength),
-  passwordConfirmation: [match('password'), minLength(settings.auth.password.minLength)]
+  passwordConfirmation: [
+    match("password"),
+    minLength(settings.auth.password.minLength)
+  ]
 };
 
 const UserForm = ({
@@ -66,14 +79,14 @@ const UserForm = ({
     password,
     passwordConfirmation,
     addresses,
-    portfolios
+    portfolios,
+    state
   } = values;
-
   const isAdmin = isAdminFunction(userRole);
 
   return (
     <Form name="user" onSubmit={handleSubmit}>
-      {LYGflag == false || !profile.avatar ? (
+      {LYGflag == false || !state.avatar ? (
         <>
           <Field
             name="profile.avatar"
@@ -115,7 +128,7 @@ const UserForm = ({
           )}
         </>
       ) : null}
-      {LYGflag == false || !profile.firstName ? (
+      {LYGflag == false || !state.firstName ? (
         <>
           <Field
             name="profile.firstName"
@@ -126,7 +139,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !profile.lastName ? (
+      {LYGflag == false || !state.lastName ? (
         <>
           <Field
             name="profile.lastName"
@@ -137,7 +150,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !profile.about ? (
+      {LYGflag == false || !state.about ? (
         <>
           <Field
             name="profile.about"
@@ -148,7 +161,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !profile.designation ? (
+      {LYGflag == false || !state.designation ? (
         <>
           <Field
             name="profile.designation"
@@ -160,13 +173,15 @@ const UserForm = ({
         </>
       ) : null}
 
-      <Field
-        name="profile.mobile"
-        component={RenderField}
-        type="text"
-        label={t('userEdit.form.field.mobile')}
-        value={profile.mobile}
-      />
+      {isAdmin && (
+        <Field
+          name="profile.mobile"
+          component={RenderField}
+          type="text"
+          label={t("userEdit.form.field.mobile")}
+          value={profile.mobile}
+        />
+      )}
 
       {LYGflag == false ? (
         <>
@@ -232,18 +247,18 @@ const UserForm = ({
         render={arrayHelpers => (
           <RenderDynamicField
             keys={[
-              { key: 'streetAddress1', type: 'text' },
-              { key: 'streetAddress2', type: 'text' },
-              { key: 'city', type: 'text' },
-              { key: 'state', type: 'text' },
-              { key: 'pinCode', type: 'text' }
+              { key: "streetAddress1", type: "text" },
+              { key: "streetAddress2", type: "text" },
+              { key: "city", type: "text" },
+              { key: "state", type: "text" },
+              { key: "pinCode", type: "text" }
             ]}
             buttonText="Add Address"
             style={{ width: "40%" }}
             arrayHelpers={arrayHelpers}
             values={addresses}
             name="addresses"
-            label={t('userEdit.form.field.addresses')}
+            label={t("userEdit.form.field.addresses")}
           />
         )}
       />
@@ -307,7 +322,7 @@ const UserForm = ({
         <Alert color="error">{errors.errorMsg}</Alert>
       )}
       <Button color="primary" type="submit">
-        {t('userEdit.form.btnSubmit')}
+        {t("userEdit.form.btnSubmit")}
       </Button>
     </Form>
   );
@@ -331,7 +346,15 @@ UserForm.propTypes = {
 
 const UserFormWithFormik = withFormik({
   mapPropsToValues: values => {
-    const { username, email, role, isActive, profile, addresses, portfolios } = values.initialValues;
+    const {
+      username,
+      email,
+      role,
+      isActive,
+      profile,
+      addresses,
+      portfolios
+    } = values.initialValues;
 
     const userRole = values.userRole;
 
@@ -356,10 +379,10 @@ const UserFormWithFormik = withFormik({
       userRole: userRole,
       username: username,
       email: email,
-      role: role || 'user',
+      role: role || "user",
       isActive: isActive,
-      password: '',
-      passwordConfirmation: '',
+      password: "",
+      passwordConfirmation: "",
       profile: {
         firstName: profile && profile.firstName,
         lastName: profile && profile.lastName,
@@ -373,8 +396,12 @@ const UserFormWithFormik = withFormik({
         rating: profile && profile.rating,
         website: profile && profile.website
       },
-      addresses: addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
-      portfolios: portfolios && portfolios.length !== 0 ? portfolios.map(getPortfolios) : [],
+      addresses:
+        addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
+      portfolios:
+        portfolios && portfolios.length !== 0
+          ? portfolios.map(getPortfolios)
+          : [],
       auth: {
         ...values.initialValues.auth
       }
@@ -395,9 +422,12 @@ const UserFormWithFormik = withFormik({
       }
     });
   },
-  displayName: 'SignUpForm ', // helps with React DevTools
+  displayName: "SignUpForm ", // helps with React DevTools
   validate: (values, props) =>
-    validate(values, isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema)
+    validate(
+      values,
+      isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema
+    )
 });
 
-export default translate('user')(UserFormWithFormik(UserForm));
+export default translate("user")(UserFormWithFormik(UserForm));
