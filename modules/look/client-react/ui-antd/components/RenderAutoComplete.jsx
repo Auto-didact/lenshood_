@@ -17,6 +17,7 @@ const RenderAutoComplete = ({
   if (touched && error) {
     validateStatus = "error";
   }
+  console.log("RenderField input", input);
   return (
     <FormItem
       label={label}
@@ -26,7 +27,6 @@ const RenderAutoComplete = ({
       <AutoComplete
         {...input}
         dataSource={dataSource}
-        // style={{ width: 200 }}
         onSelect={onSelect}
         onSearch={onSearch}
         placeholder={placeholder || label}
