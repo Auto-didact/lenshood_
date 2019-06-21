@@ -3,7 +3,9 @@ import { camelizeKeys, decamelizeKeys, decamelize } from "humps";
 import { has } from "lodash";
 import bcrypt from "bcryptjs";
 import { knex, returnId } from "@gqlapp/database-server-ts";
+
 import { Model, raw } from "objection";
+
 import Listing from "@gqlapp/listing-server-ts/sql";
 
 // Give the knex object to objection.
@@ -11,20 +13,20 @@ Model.knex(knex);
 
 // Actual query fetching and transformation in DB
 const user_eager = `[
-  listings,
-  profile.[referred_by.profile], 
-  addresses, 
-  identification, 
+  listings.[listing_images,  listing_detail.damages, listing_rental, listing_content],
+  profile.[referred_by.profile],
+  addresses,
+  identification,
   verification,
   driving_license,
   mobile,
-  endorsements.[endorser.profile], 
-  endorsed.[endorsee.profile], 
-  followers.[follower.profile], 
-  following.[followee.profile], 
-  portfolios, 
-  remarks, remarks.admin, 
-  auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate 
+  endorsements.[endorser.profile],
+  endorsed.[endorsee.profile],
+  followers.[follower.profile],
+  following.[followee.profile],
+  portfolios,
+  remarks, remarks.admin,
+  auth_linkedin, auth_github, auth_google, auth_facebook, auth_certificate
 ]`;
 
 export class User extends Model {

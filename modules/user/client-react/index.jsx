@@ -8,20 +8,27 @@ import ClientModule from '@gqlapp/module-client-react';
 // To Do
 import { Icon, Tabs } from 'antd';
 
-import resolvers from './resolvers';
-import resources from './locales';
-import DataRootComponent from './containers/DataRootComponent';
-import Users from './containers/Users';
-import UserEdit from './containers/UserEdit';
-import UserAdd from './containers/UserAdd';
-import Register from './containers/Register';
-import Login from './containers/Login';
-import ForgotPassword from './containers/ForgotPassword';
-import ResetPassword from './containers/ResetPassword';
-import ProfileView from './components/ProfileView';
-import PublicProfile from './containers/PublicProfile';
-import { AuthRoute, IfLoggedIn, IfNotLoggedIn, withLoadedUser, withLogout } from './containers/Auth';
-import { isAdminFunction } from './helpers/isAdmin';
+import resolvers from "./resolvers";
+import resources from "./locales";
+import DataRootComponent from "./containers/DataRootComponent";
+import Users from "./containers/Users";
+import UserEdit from "./containers/UserEdit";
+import UserAdd from "./containers/UserAdd";
+import Register from "./containers/Register";
+import Login from "./containers/Login";
+import ForgotPassword from "./containers/ForgotPassword";
+import ResetPassword from "./containers/ResetPassword";
+import ProfileView from "./components/ProfileView";
+import PublicProfile from "./containers/PublicProfile";
+import DemoRoute from "./containers/DemoRoute";
+import {
+  AuthRoute,
+  IfLoggedIn,
+  IfNotLoggedIn,
+  withLoadedUser,
+  withLogout
+} from "./containers/Auth";
+import { isAdminFunction } from "./helpers/isAdmin";
 
 const MyProfile = () => {
   return (
@@ -90,8 +97,27 @@ export default new ClientModule({
         <Login onLogin={() => history.push('/profile')} />
       ))}
     />,
-    <AuthRoute exact path="/forgot-password" redirectOnLoggedIn redirect="/profile" component={ForgotPassword} />,
-    <AuthRoute exact path="/reset-password/:token" redirectOnLoggedIn redirect="/profile" component={ResetPassword} />
+    <AuthRoute
+      exact
+      path="/forgot-password"
+      redirectOnLoggedIn
+      redirect="/profile"
+      component={ForgotPassword}
+    />,
+    <AuthRoute
+      exact
+      path="/reset-password/:token"
+      redirectOnLoggedIn
+      redirect="/profile"
+      component={ResetPassword}
+    />,
+    // FOR RENDERAUTOCOMPLETE
+    <AuthRoute
+      path="/demo-route"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={DemoRoute}
+    />
   ],
   navItemAdmin: [
     <IfLoggedIn key="/users" role="admin">
