@@ -5,7 +5,6 @@ import { pick } from 'lodash';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FormError } from '@gqlapp/forms-client-react';
 import UserEditView from '../components/UserEditView';
-import { message } from 'antd';
 import USER_QUERY from '../graphql/UserQuery.graphql';
 import EDIT_USER from '../graphql/EditUser.graphql';
 import settings from '../../../../settings';
@@ -31,7 +30,6 @@ const UserEdit = props => {
     } catch (e) {
       throw new FormError(t('userEdit.errorMsg'), e);
     }
-    message.info('Changes saved!');
 
     // if (history) {
     //   return history.goBack();
