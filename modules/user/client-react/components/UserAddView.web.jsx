@@ -31,7 +31,6 @@ const UserAddView = ({ t, onSubmit, currentUser }) => {
         {t("userEdit.form.titleCreate")} {t("userEdit.form.title")}
       </h2>
       <UserForm
-        LYGflag={false}
         onSubmit={onSubmit}
         initialValues={{}}
         shouldDisplayRole={true}
