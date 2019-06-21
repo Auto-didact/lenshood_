@@ -18,10 +18,6 @@ import { Radio, Select } from "antd";
 
 const RadioButton = Radio.Button;
 
-function onSelect(value) {
-  console.log("onSelect", value);
-}
-
 export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
@@ -79,6 +75,9 @@ export default class ProductDetails extends Component {
       this
     );
     this.handleSearch = this.handleSearch.bind(this);
+    // this.renderOption = this.renderOption.bind(this);
+    this.searchResult = this.searchResult.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   handleGearCategoryChange = value => {
@@ -129,9 +128,35 @@ export default class ProductDetails extends Component {
   // };
   handleSearch = value => {
     this.setState({
-      dataSource: !value ? [] : [value, value + value, value + value + value]
+      dataSource: value ? this.searchResult(value) : []
     });
   };
+
+  searchResult(query) {
+    var items = this.props.users.filter(
+      item =>
+        item.username.toUpperCase().includes(query.toUpperCase()) ||
+        item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
+        item.profile.lastName.toUpperCase().includes(query.toUpperCase())
+    );
+    console.log("Filtered Users", items);
+    return items;
+  }
+
+  onSelect(value) {
+    console.log("Selected Value", value);
+    var i;
+    for (i = 0; i < this.props.users.length; i++) {
+      if (this.props.users[i].username === value) {
+        this.props.values.userId = this.props.users[i].id;
+        console.log(this.props.users[i]);
+        // console.log(this.props.values);
+        // this.props.values.Remove(username);
+        // console.log(this.props.values);
+        break;
+      }
+    }
+  }
 
   render() {
     const values = this.props.values;
@@ -142,13 +167,13 @@ export default class ProductDetails extends Component {
         {isAdmin && (
           <>
             <Field
-              name="description"
-              dataSource={this.state.dataSource}
+              name="userId"
+              dataSource={this.state.dataSource.map(item => item.username)}
               component={RenderAutoComplete}
               label={t("listing.field.username")}
-              value={values.description}
-              onSelect={onSelect}
-              onChange={this.handleSearch}
+              value={values.userId}
+              onSelect={this.onSelect}
+              onSearch={this.handleSearch}
             />
           </>
         )}
@@ -301,6 +326,7 @@ export default class ProductDetails extends Component {
             </RadioButton>
           ))}
         </Field>
+
         <FieldArray
           name="listingDetail.damages"
           render={arrayHelpers => (
