@@ -3,18 +3,13 @@ import React, { Component } from 'react';
 // import './resources/listingCatalogue.css';
 import { graphql, compose } from 'react-apollo';
 
-
-import MyListingsView from "../components/MyListingsView";
-import MY_LISTINGS_QUERY from "../graphql/MyListingsQuery.graphql";
-import TOGGLE_LISTING_STATUS from "../graphql/ToggleListingStatus.graphql";
-import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
-import DELETE_LISTING from "../graphql/DeleteListing.graphql";
+import MyListingsView from '../components/MyListingsView';
+import MY_LISTINGS_QUERY from '../graphql/MyListingsQuery.graphql';
+import TOGGLE_LISTING_STATUS from '../graphql/ToggleListingStatus.graphql';
+import { ALL, ONSHELF, ONRENT } from '../constants/ListingStates';
+import DELETE_LISTING from '../graphql/DeleteListing.graphql';
 
 class MyListings extends Component {
-  state = {
-    userListings: this.props.userListings
-  };
-
   updateComponent() {
     this.forceUpdate();
   }
@@ -30,16 +25,9 @@ class MyListings extends Component {
       console.log(id);
       this.updateComponent();
     };
-    return (
-      <MyListingsView
-        userListings={this.state.userListings}
-        DeleteListing={DeleteListing}
-        toggle={ToggleListingStatus}
-      />
-    );
+    return <MyListingsView DeleteListing={DeleteListing} toggle={ToggleListingStatus} {...this.props} />;
   }
 }
-
 
 const onDeleteListing = (prev, id) => {
   const index = prev.listings.edges.findIndex(x => x.node.id === id);
@@ -93,10 +81,10 @@ export default compose(
         mutate({
           variables: { id },
           optimisticResponse: {
-            __typename: "Mutation",
+            __typename: 'Mutation',
             deleteListing: {
               id: id,
-              __typename: "Listing"
+              __typename: 'Listing'
             }
           }
         });
