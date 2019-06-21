@@ -59,7 +59,7 @@ class ListingForm extends Component {
     const isAdmin = this.isAdminFunction(
       currentUser && currentUser.role ? currentUser.role : null
     );
-    console.log("currentUser Listings", this.props.listing);
+    // console.log("currentUser Listings", this.props.listing);
     // const userRole = currentUser.role;
     this.steps = [
       <UserDetails />,
@@ -152,8 +152,9 @@ ListingForm.propTypes = {
 
 const ListingFormWithFormik = withFormik({
   mapPropsToValues: props => ({
-    // username: props.listing && props.listing.user.username,
-    userId: props.listing && props.listing.user.id,
+    // FOR RENDERAUTOCOMPLETE
+    // userId: props.listing && props.listing.user.id,
+    //
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
