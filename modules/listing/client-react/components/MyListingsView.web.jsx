@@ -1,14 +1,21 @@
-import React from 'react';
+
+import React, { Component } from "react";
+import { Layout, Row, Col, Breadcrumb } from "antd";
+import { AccountLayout } from "@gqlapp/look-client-react";
+// import './resources/listingCatalogue.css';
+import MyList from "./components/MyList";
+import AccDetailsMenu from "./components/AccDetailsMenu";
+import settings from '../../../../settings';
 import Helmet from 'react-helmet';
 
-import { AccountLayout } from '@gqlapp/look-client-react';
-import MyList from './components/MyList';
-import settings from '../../../../settings';
 
-const MyListingsView = ({ loading, userListings }) => {
-  return (
-    <AccountLayout select="/my-listings">
-      {/* Render metadata */}
+class MyListingsView extends Component {
+  render() {
+    return (
+      
+      <AccountLayout select="/my-listings">
+        {/* Render metadata */}
+
       <Helmet
         title={`${settings.app.name} - My Listings`}
         meta={[
@@ -18,10 +25,13 @@ const MyListingsView = ({ loading, userListings }) => {
           }
         ]}
       />
-      {loading && !userListings && <div>Loading...</div>}
-      {userListings && <MyList listings={userListings} />}
-    </AccountLayout>
-  );
-};
+
+      {this.props.loading && !this.props.userListings && <div>Loading...</div>}
+      {this.props.userListings && <MyList {...this.props}/>}
+      </AccountLayout>
+    );
+  }
+}
+
 
 export default MyListingsView;
