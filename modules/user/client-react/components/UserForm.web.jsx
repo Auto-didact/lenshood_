@@ -15,10 +15,10 @@ import {
   Option,
   Button,
   Alert
-} from '@gqlapp/look-client-react';
-import { FieldArray } from 'formik';
-import settings from '../../../../settings';
-import './styling.css';
+} from "@gqlapp/look-client-react";
+import { FieldArray } from "formik";
+import settings from "../../../../settings";
+import "./styling.css";
 
 const userFormSchema = {
   username: [required, minLength(3)],
@@ -52,7 +52,8 @@ const UserForm = ({
   setFieldValue,
   t,
   shouldDisplayRole,
-  shouldDisplayActive
+  shouldDisplayActive,
+  LYGflag
 }) => {
   const {
     userRole,
@@ -71,7 +72,6 @@ const UserForm = ({
   const isAdmin = isAdminFunction(userRole);
 
   return (
-    <div className="con">
     <Form name="user" onSubmit={handleSubmit}>
       {LYGflag == false || !profile.avatar ? (
         <>
@@ -79,7 +79,7 @@ const UserForm = ({
             name="profile.avatar"
             component={RenderUpload}
             type="text"
-            label={t('userEdit.form.field.avatar')}
+            label={t("userEdit.form.field.avatar")}
             value={profile.avatar}
           />
         </>
@@ -90,20 +90,27 @@ const UserForm = ({
             name="username"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.name')}
+            label={t("userEdit.form.field.name")}
             value={username}
           />
           <Field
             name="email"
             component={RenderField}
             type="email"
-            label={t('userEdit.form.field.email')}
+            label={t("userEdit.form.field.email")}
             value={email}
           />
           {isAdmin && (
-            <Field name="role" component={RenderSelect} label={t('userEdit.form.field.role.label')} value={role}>
-              <Option value="user">{t('userEdit.form.field.role.user')}</Option>
-              <Option value="admin">{t('userEdit.form.field.role.admin')}</Option>
+            <Field
+              name="role"
+              component={RenderSelect}
+              label={t("userEdit.form.field.role.label")}
+              value={role}
+            >
+              <Option value="user">{t("userEdit.form.field.role.user")}</Option>
+              <Option value="admin">
+                {t("userEdit.form.field.role.admin")}
+              </Option>
             </Field>
           )}
         </>
@@ -114,7 +121,7 @@ const UserForm = ({
             name="profile.firstName"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.firstName')}
+            label={t("userEdit.form.field.firstName")}
             value={profile.firstName}
           />
         </>
@@ -125,7 +132,7 @@ const UserForm = ({
             name="profile.lastName"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.lastName')}
+            label={t("userEdit.form.field.lastName")}
             value={profile.lastName}
           />
         </>
@@ -136,7 +143,7 @@ const UserForm = ({
             name="profile.about"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.about')}
+            label={t("userEdit.form.field.about")}
             value={profile.about}
           />
         </>
@@ -147,7 +154,7 @@ const UserForm = ({
             name="profile.designation"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.designation')}
+            label={t("userEdit.form.field.designation")}
             value={profile.designation}
           />
         </>
@@ -168,7 +175,7 @@ const UserForm = ({
               name="profile.flag"
               component={RenderField}
               type="text"
-              label={t('userEdit.form.field.flag')}
+              label={t("userEdit.form.field.flag")}
               value={profile.flag}
             />
           )}
@@ -178,7 +185,7 @@ const UserForm = ({
               name="profile.rating"
               component={RenderField}
               type="text"
-              label={t('userEdit.form.field.rating')}
+              label={t("userEdit.form.field.rating")}
               value={profile.rating}
             />
           )}
@@ -187,7 +194,7 @@ const UserForm = ({
             name="profile.website"
             component={RenderField}
             type="text"
-            label={t('userEdit.form.field.website')}
+            label={t("userEdit.form.field.website")}
             value={profile.website}
           />
 
@@ -195,7 +202,7 @@ const UserForm = ({
             name="profile.isAvailable"
             component={RenderCheckBox}
             type="checkbox"
-            label={t('userEdit.form.field.available')}
+            label={t("userEdit.form.field.available")}
             checked={profile.isAvailable}
           />
 
@@ -204,7 +211,7 @@ const UserForm = ({
               name="isActive"
               component={RenderCheckBox}
               type="checkbox"
-              label={t('userEdit.form.field.active')}
+              label={t("userEdit.form.field.active")}
               checked={isActive}
             />
           )}
@@ -214,7 +221,7 @@ const UserForm = ({
               name="profile.isVerified"
               component={RenderCheckBox}
               type="checkbox"
-              label={t('userEdit.form.field.isverified')}
+              label={t("userEdit.form.field.isverified")}
               checked={profile.isVerified}
             />
           )}
@@ -232,7 +239,7 @@ const UserForm = ({
               { key: 'pinCode', type: 'text' }
             ]}
             buttonText="Add Address"
-            style={{ width: '40%' }}
+            style={{ width: "40%" }}
             arrayHelpers={arrayHelpers}
             values={addresses}
             name="addresses"
@@ -241,43 +248,35 @@ const UserForm = ({
         )}
       />
 
-      <FieldArray
-        name="portfolios"
-        render={arrayHelpers => (
-          <RenderDynamicField
-            keys={[
-              { key: "platform", type: "text" },
-              { key: "portfolioUrl", type: "text" }
-            ]}
-            buttonText="Add Portfolio"
-            style={{width:'40% !important'}}
-            arrayHelpers={arrayHelpers}
-            values={portfolios}
+      {LYGflag == false ? (
+        <>
+          <FieldArray
             name="portfolios"
             render={arrayHelpers => (
               <RenderDynamicField
-                keys={[{ key: 'platform', type: 'text' }, { key: 'portfolioUrl', type: 'text' }]}
+                keys={[
+                  { key: "platform", type: "text" },
+                  { key: "portfolioUrl", type: "text" }
+                ]}
                 buttonText="Add Portfolio"
-                style={{ width: '40% !important' }}
+                style={{ width: "40% !important" }}
                 arrayHelpers={arrayHelpers}
                 values={portfolios}
                 name="portfolios"
-                label={t('userEdit.form.field.portfolios')}
+                label={t("userEdit.form.field.portfolios")}
               />
             )}
           />
-        )}
-      />
 
           {settings.auth.certificate.enabled && (
             <Field
               name="serial"
               component={RenderField}
               type="text"
-              label={t('userEdit.form.field.serial')}
+              label={t("userEdit.form.field.serial")}
               value={auth && auth.certificate && auth.certificate.serial}
               onChange={value =>
-                setFieldValue('auth', {
+                setFieldValue("auth", {
                   ...auth,
                   certificate: { ...auth.certificate, serial: value }
                 })
@@ -290,26 +289,27 @@ const UserForm = ({
                 name="password"
                 component={RenderField}
                 type="password"
-                label={t('userEdit.form.field.pass')}
+                label={t("userEdit.form.field.pass")}
                 value={password}
               />
               <Field
                 name="passwordConfirmation"
                 component={RenderField}
                 type="password"
-                label={t('userEdit.form.field.passConf')}
+                label={t("userEdit.form.field.passConf")}
                 value={passwordConfirmation}
               />
             </div>
           )}
         </>
       ) : null}
-      {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
+      {errors && errors.errorMsg && (
+        <Alert color="error">{errors.errorMsg}</Alert>
+      )}
       <Button color="primary" type="submit">
         {t('userEdit.form.btnSubmit')}
       </Button>
     </Form>
-  </div>
   );
 };
 
