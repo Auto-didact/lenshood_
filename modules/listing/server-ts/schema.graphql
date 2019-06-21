@@ -101,6 +101,8 @@ extend type Mutation {
   deleteListingReview(input: DeleteListingReviewInput!): ListingReview
   # Edit a listingReview
   editListingReview(input: EditListingReviewInput!): ListingReview
+
+  toggleListingStatus(id: Int!): Listing
 }
 
 # Input for addListing Mutation
