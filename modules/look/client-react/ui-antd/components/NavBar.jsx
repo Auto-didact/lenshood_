@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Drawer,Menu, Dropdown, Row, Col, Icon } from 'antd';
+import { Drawer, Menu, Dropdown, Row, Col, Icon } from 'antd';
 
-import { IfLoggedIn,hasRole } from '@gqlapp/user-client-react/containers/Auth.web';
+import { IfLoggedIn, hasRole } from '@gqlapp/user-client-react/containers/Auth.web';
 import { slide as Burger } from 'react-burger-menu';
 
 import MenuItem from './MenuItem';
 import DropDown from './Dropdown';
 import Avatar from './Avatar';
-import './styles.css'
+import './styles.css';
 
 //import settings from '../../../../../settings';
 
@@ -22,12 +22,11 @@ class NavBar extends React.Component {
     width: 0,
     height: 0,
     show: false,
-    visible:false,
-    mounted:false
+    visible: false,
+    mounted: false
   };
 
   componentDidMount() {
-    
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
   }
@@ -41,7 +40,7 @@ class NavBar extends React.Component {
   }
 
   updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight , mounted: true});
+    this.setState({ width: window.innerWidth, height: window.innerHeight, mounted: true });
   };
 
   handleClick = e => {
@@ -57,19 +56,18 @@ class NavBar extends React.Component {
   };
   showDrawer = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
 
   onClose = () => {
     this.setState({
-      visible: false,
+      visible: false
     });
   };
- 
 
   menuList = (
-    <Menu style={{ border: 'none',fontWeight:'lighter' }}>
+    <Menu style={{ border: 'none', fontWeight: 'lighter' }}>
       <Menu.Item>
         <NavLink to="/about-us">About us</NavLink>
       </Menu.Item>
@@ -170,7 +168,12 @@ class NavBar extends React.Component {
           mode="horizontal"
           style={{ lineHeight: '60px', float: 'right' }}
         >
-          <Icon type="menu" onClick={this.showDrawer} className="hamburg" style={this.state.mounted?null:{display:'none !important'}}/>
+          <Icon
+            type="menu"
+            onClick={this.showDrawer}
+            className="hamburg"
+            style={this.state.mounted ? null : { display: 'none !important' }}
+          />
           {/*ref.modules.navItemsRight*/}
           <IfLoggedIn>
             <MenuItem>
@@ -180,24 +183,34 @@ class NavBar extends React.Component {
             </MenuItem>
           </IfLoggedIn>
         </Menu>
-        
-        <Drawer
-          title="Lenshood" placement="left" closable={true} onClose={this.onClose} visible={this.state.visible}>
-              <Menu style={{ border:'none' }} mode="vertical">
-                {ref.modules.navItemsRight}
-              <Menu.Item className="about" style={{background:'#23b195'}}><a className="nav-link" style={{ color: '#ffffff', height: '30px' }} onClick={() => this.toggle()}>
-                    <div>
-                      About{' '}
-                      {this.state.show ? <Icon type="caret-up" theme="filled" /> : <Icon type="caret-down" theme="filled" />}
-                    </div>
-                    </a></Menu.Item>
-                  {this.state.show ? this.menuList : null}
-                {__DEV__?ref.modules.navItemsTest:null}
-                {__DEV__?<MenuItem><a href="/graphiql">GraphiQL</a></MenuItem>:null}
-                <IfLoggedIn role="admin"><Menu style={{border:'none'}}>{ref.modules.navItemsAdmin}</Menu></IfLoggedIn>
-               </Menu>
-        </Drawer>
 
+        <Drawer title="Lenshood" placement="left" closable={true} onClose={this.onClose} visible={this.state.visible}>
+          <Menu style={{ border: 'none' }} mode="vertical">
+            {ref.modules.navItemsRight}
+            <Menu.Item className="about" style={{ background: '#23b195' }}>
+              <a className="nav-link" style={{ color: '#ffffff', height: '30px' }} onClick={() => this.toggle()}>
+                <div>
+                  About{' '}
+                  {this.state.show ? (
+                    <Icon type="caret-up" theme="filled" />
+                  ) : (
+                    <Icon type="caret-down" theme="filled" />
+                  )}
+                </div>
+              </a>
+            </Menu.Item>
+            {this.state.show ? this.menuList : null}
+            {__DEV__ ? ref.modules.navItemsTest : null}
+            {__DEV__ ? (
+              <MenuItem>
+                <a href="/graphiql">GraphiQL</a>
+              </MenuItem>
+            ) : null}
+            <IfLoggedIn role="admin">
+              <Menu style={{ border: 'none' }}>{ref.modules.navItemsAdmin}</Menu>
+            </IfLoggedIn>
+          </Menu>
+        </Drawer>
       </div>
     );
   }

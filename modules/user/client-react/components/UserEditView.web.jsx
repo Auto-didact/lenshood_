@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
-import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout } from '@gqlapp/look-client-react';
-=======
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
@@ -14,7 +5,6 @@ import { Icon } from "antd";
 import { Link } from "react-router-dom";
 import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout } from "@gqlapp/look-client-react";
->>>>>>> d1198729fe3dd253c3fdeae7630aa33dfcfdd28a
 
 import UserForm from "./UserForm";
 import settings from "../../../../settings";
@@ -43,13 +33,21 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
         <div style={{}}>
           <Link
             id="back-button"
-            to={currentUser && currentUser.role === 'admin' ? '/users' : '/profile'}
-            style={{ fontSize: '20px', margin: '10px', textDecoration: 'underline' }}
+            to={
+              currentUser && currentUser.role === "admin"
+                ? "/users"
+                : "/profile"
+            }
+            style={{
+              fontSize: "20px",
+              margin: "10px",
+              textDecoration: "underline"
+            }}
           >
             <Icon type="arrow-left" /> Back
           </Link>
-          <h2 style={{ textAlign: 'center' }}>
-            {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
+          <h2 style={{ textAlign: "center" }}>
+            {t("userEdit.form.titleEdit")} {t("userEdit.form.title")}
           </h2>
           <div className="con">
             <UserForm
