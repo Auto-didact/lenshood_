@@ -71,7 +71,12 @@ export default new ClientModule({
       role={["user", "admin"]}
       component={ListingAdd}
     />,
-    <Route path="/listing/:id" component={ListingEdit} />,
+    <AuthRoute
+      redirect="/profile"
+      role={["user", "admin"]}
+      path="/listing/:id"
+      component={ListingEdit}
+    />,
     <Route exact path="/listing_catalogue" component={ListingCatalogue} />,
     <Route exact path="/my-listings/:id" component={MyListingDetail} />,
 

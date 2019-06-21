@@ -67,17 +67,24 @@ export default class ProductDetails extends Component {
 
       listingContent: props.values.listingContent,
 
-      isAdmin: false,
-      dataSource: []
+      isAdmin: false
+
+
+      // FOR RENDERAUTOCOMPLETE
+      // dataSource: []
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
     this.handleGearSubCategoryChange = this.handleGearSubCategoryChange.bind(
       this
     );
-    this.handleSearch = this.handleSearch.bind(this);
-    // this.renderOption = this.renderOption.bind(this);
-    this.searchResult = this.searchResult.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+
+
+
+    // FOR RENDERAUTOCOMPLETE
+    // this.handleSearch = this.handleSearch.bind(this);
+    // // this.renderOption = this.renderOption.bind(this);
+    // this.searchResult = this.searchResult.bind(this);
+    // this.onSelect = this.onSelect.bind(this);
   }
 
   handleGearCategoryChange = value => {
@@ -126,37 +133,39 @@ export default class ProductDetails extends Component {
 
   //   return <>{options}</>;
   // };
-  handleSearch = value => {
-    this.setState({
-      dataSource: value ? this.searchResult(value) : []
-    });
-  };
 
-  searchResult(query) {
-    var items = this.props.users.filter(
-      item =>
-        item.username.toUpperCase().includes(query.toUpperCase()) ||
-        item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
-        item.profile.lastName.toUpperCase().includes(query.toUpperCase())
-    );
-    console.log("Filtered Users", items);
-    return items;
-  }
 
-  onSelect(value) {
-    console.log("Selected Value", value);
-    var i;
-    for (i = 0; i < this.props.users.length; i++) {
-      if (this.props.users[i].username === value) {
-        this.props.values.userId = this.props.users[i].id;
-        console.log(this.props.users[i]);
-        // console.log(this.props.values);
-        // this.props.values.Remove(username);
-        // console.log(this.props.values);
-        break;
-      }
-    }
-  }
+
+
+  // FOR RENDERAUTOCOMPLETE
+  // handleSearch = value => {
+  //   this.setState({
+  //     dataSource: value ? this.searchResult(value) : []
+  //   });
+  // };
+  // 
+  // searchResult(query) {
+  //   var items = this.props.users.filter(
+  //     item =>
+  //       item.username.toUpperCase().includes(query.toUpperCase()) ||
+  //       item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
+  //       item.profile.lastName.toUpperCase().includes(query.toUpperCase())
+  //   );
+  //   console.log("Filtered Users", items);
+  //   return items;
+  // }
+  // 
+  // onSelect(value) {
+  //   console.log("Selected Value", value);
+  //   var i;
+  //   for (i = 0; i < this.props.users.length; i++) {
+  //     if (this.props.users[i].username === value) {
+  //       this.props.values.userId = this.props.users[i].id;
+  //       console.log(this.props.users[i]);
+  //       break;
+  //     }
+  //   }
+  // }
 
   render() {
     const values = this.props.values;
@@ -164,6 +173,11 @@ export default class ProductDetails extends Component {
     const isAdmin = this.props.isAdmin;
     return (
       <>
+
+
+
+        {/* 
+        // FOR RENDERAUTOCOMPLETE
         {isAdmin && (
           <>
             <Field
@@ -176,7 +190,11 @@ export default class ProductDetails extends Component {
               onSearch={this.handleSearch}
             />
           </>
-        )}
+        )} */}
+
+
+
+        
         {/* Gear Category */}
         <Field
           name="gearCategory"
