@@ -1,14 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Drawer, Menu, Dropdown, Row, Col, Icon } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { withRouter, NavLink } from "react-router-dom";
+import { Drawer, Menu, Dropdown, Row, Col, Icon } from "antd";
 
-import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
+import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
 
-import MenuItem from './MenuItem';
-import DropDown from './Dropdown';
-import Avatar from './Avatar';
-import './styles.css';
+import MenuItem from "./MenuItem";
+import DropDown from "./Dropdown";
+import Avatar from "./Avatar";
+import "./styles.css";
+import UserAvatar from "@gqlapp/user-client-react/containers/UserAvatar";
 
 //import settings from '../../../../../settings';
 
@@ -17,7 +18,7 @@ export const ref = { modules: null };
 export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
-    current: '/',
+    current: "/",
     width: 0,
     height: 0,
     show: false,
@@ -27,11 +28,11 @@ class NavBar extends React.Component {
 
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    window.addEventListener("resize", this.updateWindowDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
+    window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
   showSettings(event) {
@@ -39,7 +40,11 @@ class NavBar extends React.Component {
   }
 
   updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight, mounted: true });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      mounted: true
+    });
   };
 
   handleClick = e => {
@@ -66,7 +71,7 @@ class NavBar extends React.Component {
   };
 
   menuList = (
-    <Menu style={{ border: 'none', fontWeight: 'lighter' }}>
+    <Menu style={{ border: "none", fontWeight: "lighter" }}>
       <Menu.Item>
         <NavLink to="/about-us">About us</NavLink>
       </Menu.Item>
@@ -101,11 +106,15 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: '60px' }}
+            style={{ lineHeight: "60px" }}
           >
             <MenuItem key="/">
               <NavLink to="/" className="nav-link">
-                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                <img
+                  src={require("../../logo/Logo2.png")}
+                  height="40"
+                  width="40"
+                />
               </NavLink>
             </MenuItem>
             {__DEV__ && (
@@ -121,7 +130,9 @@ class NavBar extends React.Component {
 
             <IfLoggedIn role="admin">
               <MenuItem>
-                <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
+                <DropDown type="safety-certificate">
+                  {ref.modules.navItemsAdmin}
+                </DropDown>
               </MenuItem>
             </IfLoggedIn>
             {ref.modules.navItems}
@@ -132,7 +143,7 @@ class NavBar extends React.Component {
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
             mode="horizontal"
-            style={{ lineHeight: '60px', float: 'right' }}
+            style={{ lineHeight: "60px", float: "right" }}
           >
             <Menu.Item>
               <Dropdown overlay={this.menuList} placement="bottomCenter">
@@ -144,7 +155,7 @@ class NavBar extends React.Component {
             {ref.modules.navItemsRight}
             <IfLoggedIn>
               <MenuItem>
-                <DropDown content={<Avatar />} noicon>
+                <DropDown content={<UserAvatar />} noicon>
                   {ref.modules.navItemsUser}
                 </DropDown>
               </MenuItem>
@@ -156,40 +167,53 @@ class NavBar extends React.Component {
       //Render This if screen width less than 800
 
       <div id="outer-container">
-        <div style={{ float: 'left' }}>
+        <div style={{ float: "left" }}>
           <NavLink to="/" className="nav-link">
-            <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+            <img src={require("../../logo/Logo2.png")} height="40" width="40" />
           </NavLink>
         </div>
         <Menu
           onClick={this.handleClick}
           selectedKeys={[this.props.location.pathname]}
           mode="horizontal"
-          style={{ lineHeight: '60px', float: 'right' }}
+          style={{ lineHeight: "60px", float: "right" }}
         >
           <Icon
             type="menu"
             onClick={this.showDrawer}
             className="hamburg"
-            style={this.state.mounted ? null : { display: 'none !important' }}
+            style={this.state.mounted ? null : { display: "none !important" }}
           />
           {/*ref.modules.navItemsRight*/}
           <IfLoggedIn>
             <MenuItem>
-              <DropDown content={<Avatar />} noicon>
+              <DropDown content={<UserAvatar />} noicon>
                 {ref.modules.navItemsUser}
               </DropDown>
             </MenuItem>
           </IfLoggedIn>
         </Menu>
 
-        <Drawer title="Lenshood" placement="right" closable={true} onClose={this.onClose} visible={this.state.visible}>
-          <Menu style={{ border: 'none', background: '#fff', color: '#23b195' }} mode="vertical">
+        <Drawer
+          title="Lenshood"
+          placement="right"
+          closable={true}
+          onClose={this.onClose}
+          visible={this.state.visible}
+        >
+          <Menu
+            style={{ border: "none", background: "#fff", color: "#23b195" }}
+            mode="vertical"
+          >
             {ref.modules.navItemsRight}
             <Menu.Item className="about" style={{}}>
-              <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle()}>
+              <a
+                className="nav-link"
+                style={{ color: "#23b195", height: "30px" }}
+                onClick={() => this.toggle()}
+              >
                 <div>
-                  About{' '}
+                  About{" "}
                   {this.state.show ? (
                     <Icon type="caret-up" theme="filled" />
                   ) : (
@@ -206,7 +230,11 @@ class NavBar extends React.Component {
               </MenuItem>
             ) : null}
             <IfLoggedIn role="admin">
-              <Menu style={{ border: 'none', background: '#fff', color: '#23b195' }}>{ref.modules.navItemsAdmin}</Menu>
+              <Menu
+                style={{ border: "none", background: "#fff", color: "#23b195" }}
+              >
+                {ref.modules.navItemsAdmin}
+              </Menu>
             </IfLoggedIn>
           </Menu>
         </Drawer>
