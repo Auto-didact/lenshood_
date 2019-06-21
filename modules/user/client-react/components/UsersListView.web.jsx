@@ -102,7 +102,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
         <div>
           <UserDrawer user={record} />
           <Popconfirm
-            title="Are you sure delete this listing?"
+            title="Are you sure delete this User?"
             onConfirm={() => handleDeleteUser(record.id)}
             onCancel={cancel}
             okText="Yes"

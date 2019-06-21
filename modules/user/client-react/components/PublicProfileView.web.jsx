@@ -201,7 +201,15 @@ class PublicProfileView extends React.Component {
               </Row>
             </Col>
           </Row>
-          <PublicProfileListingCard />
+          <Row>
+            {user && user.listings.length !== 0
+              ? user.listings.map((listing, key) => (
+                  <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 6 }}>
+                    <PublicProfileListingCard listing={listing} key={key} />
+                  </Col>
+                ))
+              : "No Listings to show"}
+          </Row>
         </PageLayout>
       );
     }
