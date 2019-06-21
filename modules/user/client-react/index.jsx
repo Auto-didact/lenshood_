@@ -20,6 +20,7 @@ import ForgotPassword from "./containers/ForgotPassword";
 import ResetPassword from "./containers/ResetPassword";
 import ProfileView from "./components/ProfileView";
 import PublicProfile from "./containers/PublicProfile";
+import DemoRoute from "./containers/DemoRoute";
 import {
   AuthRoute,
   IfLoggedIn,
@@ -136,6 +137,13 @@ export default new ClientModule({
       redirectOnLoggedIn
       redirect="/profile"
       component={ResetPassword}
+    />,
+    // FOR RENDERAUTOCOMPLETE
+    <AuthRoute
+      path="/demo-route"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={DemoRoute}
     />
   ],
   navItemAdmin: [
