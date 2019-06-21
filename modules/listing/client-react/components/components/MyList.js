@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-// import '../resources/listingCatalogue.css';
 import { Layout, Button, Row, Col } from 'antd';
 import DetailsCard from './DetailsCard';
 import { ALL, ONSHELF, ONRENT } from '../../constants/ListingStates';
+
+import { Link } from 'react-router-dom';
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;

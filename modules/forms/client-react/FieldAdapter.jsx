@@ -28,10 +28,13 @@ class FieldAdapter extends Component {
   // To Do - ReConfirm that this works
   onChange = (e, secondArg) => {
     const { onChange } = this.props;
+    // console.log(onChange)
     if (onChange) {
       onChange(e);
     }
     if (e._isAMomentObject && secondArg) {
+      this.props.formik.setFieldValue(this.props.name, secondArg);
+    } else if (Array.isArray(e) && e[0]._isAMomentObject && e[1]._isAMomentObject && secondArg) {
       this.props.formik.setFieldValue(this.props.name, secondArg);
     } else if (isString(e)) {
       // for Option Field

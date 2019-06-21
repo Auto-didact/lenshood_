@@ -16,6 +16,7 @@ export { default as RenderUploadMultiple } from './RenderUploadMultiple';
 export { default as RenderUpload } from './RenderUpload';
 export { default as RenderDynamicField } from './RenderDynamicField';
 export { default as RenderDatePicker } from './RenderDatePicker';
+export { default as RenderDateRangePicker } from './RenderDateRangePicker';
 
 export { default as Alert } from './Alert';
 export { default as Container } from './Container';

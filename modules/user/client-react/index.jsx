@@ -1,12 +1,12 @@
 import React from "react";
 import { CookiesProvider } from "react-cookie";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter, Route } from "react-router-dom";
 import { translate } from "@gqlapp/i18n-client-react";
 import { MenuItem } from "@gqlapp/look-client-react";
 import ClientModule from "@gqlapp/module-client-react";
 
 // To Do
-import { Icon } from "antd";
+import { Icon, Tabs } from "antd";
 
 import resolvers from "./resolvers";
 import resources from "./locales";
@@ -19,7 +19,7 @@ import Login from "./containers/Login";
 import ForgotPassword from "./containers/ForgotPassword";
 import ResetPassword from "./containers/ResetPassword";
 import ProfileView from "./components/ProfileView";
-
+import PublicProfile from "./containers/PublicProfile";
 import {
   AuthRoute,
   IfLoggedIn,
@@ -29,9 +29,14 @@ import {
 } from "./containers/Auth";
 import { isAdminFunction } from "./helpers/isAdmin";
 
-const ProfileName = withLoadedUser(({ currentUser }) =>
-  currentUser ? currentUser.fullName || currentUser.username : null
-);
+const MyProfile = () => {
+  return (
+    <div>
+      <Icon type="user" />
+      {"My Profile"}
+    </div>
+  );
+};
 
 const LogoutLink = withRouter(
   withLogout(({ logout, history }) => (
@@ -46,12 +51,14 @@ const LogoutLink = withRouter(
       }}
       className="nav-link"
     >
+      <Icon type="logout" />
       Logout
     </a>
   ))
 );
 
 export * from "./containers/Auth";
+export { default as UserDetails } from "./containers/UserDetails";
 export { default as LOGIN } from "./graphql/Login.graphql";
 
 const NavLinkUsersWithI18n = translate("user")(({ t }) => (
@@ -78,6 +85,7 @@ const NavLinkLoginWithI18n = translate("user")(({ t }) => (
 
 export default new ClientModule({
   route: [
+    <Route exact path="/public-profile/:id" component={PublicProfile} />,
     <AuthRoute
       exact
       path="/profile"
@@ -141,7 +149,7 @@ export default new ClientModule({
     <IfLoggedIn key="/profile">
       <MenuItem>
         <NavLink to="/profile" className="nav-link" activeClassName="active">
-          <ProfileName />
+          <MyProfile />
         </NavLink>
       </MenuItem>
     </IfLoggedIn>,
