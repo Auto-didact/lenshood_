@@ -17,7 +17,7 @@ const RenderAutoComplete = ({
   if (touched && error) {
     validateStatus = "error";
   }
-  console.log("RenderField input", input);
+  // console.log("RenderField input", input);
   return (
     <FormItem
       label={label}
