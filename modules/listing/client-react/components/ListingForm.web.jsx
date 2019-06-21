@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
-import { translate } from '@gqlapp/i18n-client-react';
-import { required, validate } from '@gqlapp/validation-common-react';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withFormik } from "formik";
+import { translate } from "@gqlapp/i18n-client-react";
+import { required, validate } from "@gqlapp/validation-common-react";
 
-import { Form, Button } from '@gqlapp/look-client-react';
+import { Form, Button } from "@gqlapp/look-client-react";
 // Abstract Out
-import { Row, Col, Icon, message } from 'antd';
+import { Row, Col, Icon, message } from "antd";
 
-import ProductDetails from './components/ListingForm/ProductDetails';
-import RentalDetails from './components/ListingForm/RentalDetails';
-import ListYGSteps from './components/ListYGSteps';
+import ProductDetails from "./components/ListingForm/ProductDetails";
+import RentalDetails from "./components/ListingForm/RentalDetails";
+import ListYGSteps from "./components/ListYGSteps";
+import { UserDetails } from "@gqlapp/user-client-react";
 
 const ProductDetailsSchema = {
   gearCategory: [required],
@@ -24,6 +25,7 @@ class ListingForm extends Component {
 
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
+    this.secondstep = this.secondstep.bind(this);
   }
 
   nextStep = async () => {
@@ -32,7 +34,7 @@ class ListingForm extends Component {
     // console.log(errors);
     // console.log(this.props.values);
     if (isErrorsEmpty) this.setState(state => ({ step: state.step + 1 }));
-    else message.info('Fill in the Required details before moving on!');
+    else message.info("Fill in the Required details before moving on!");
 
     // set errors and touched
   };
@@ -40,8 +42,12 @@ class ListingForm extends Component {
     this.setState(state => ({ step: state.step - 1 }));
   };
 
+  secondstep = () => {
+    this.setState(state => ({ step: state.step + 1 }));
+  };
+
   isAdminFunction = role => {
-    if (role === 'admin') {
+    if (role === "admin") {
       return true;
     } else {
       return false;
@@ -50,10 +56,13 @@ class ListingForm extends Component {
 
   render() {
     const { values, handleSubmit, submitting, t, currentUser } = this.props;
-    const isAdmin = this.isAdminFunction(currentUser && currentUser.role ? currentUser.role : null);
+    const isAdmin = this.isAdminFunction(
+      currentUser && currentUser.role ? currentUser.role : null
+    );
     // console.log("currentUser", this.props);
     // const userRole = currentUser.role;
     this.steps = [
+      <UserDetails />,
       <ProductDetails values={values} t={t} isAdmin={isAdmin} />,
       <RentalDetails values={values} t={t} isAdmin={isAdmin} />
     ];
@@ -61,30 +70,60 @@ class ListingForm extends Component {
     return (
       <div className="Listyourgearcards">
         <Row>
-          <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
-            <ListYGSteps step={this.state.step + 1} />
+          <Col
+            md={{ span: 14, offset: 5 }}
+            sm={{ span: 20, offset: 2 }}
+            className="LYGcol1"
+          >
+            <ListYGSteps step={this.state.step} />
 
             <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
               {this.steps[this.state.step]}
 
-              {this.state.step === this.steps.length - 1 ? (
+              {this.state.step == 0 ? (
+                <Button
+                  color="primary"
+                  onClick={this.secondstep}
+                  style={{ float: "right" }}
+                >
+                  {t("listing.btn.next")}
+                  <Icon type="right-circle" />
+                </Button>
+              ) : this.state.step == this.steps.length - 1 ? (
                 <>
                   <Button color="secondary" onClick={this.prevStep}>
                     <Icon type="left-circle" />
-                    {t('listing.btn.prev')}
+                    {t("listing.btn.prev")}
                   </Button>
 
                   {/* abstract out styles To Do, and arrows to button */}
-                  <Button color="primary" type="submit" disabled={submitting} style={{ float: 'right' }}>
-                    {t('listing.btn.submit')}
+                  <Button
+                    color="primary"
+                    type="submit"
+                    disabled={submitting}
+                    style={{ float: "right" }}
+                  >
+                    {t("listing.btn.submit")}
                     <Icon type="enter" />
                   </Button>
                 </>
               ) : (
-                <Button color="primary" onClick={this.nextStep} style={{ float: 'right' }}>
-                  {t('listing.btn.next')}
-                  <Icon type="right-circle" />
-                </Button>
+                <>
+                  <Button color="secondary" onClick={this.prevStep}>
+                    <Icon type="left-circle" />
+                    {t("listing.btn.prev")}
+                  </Button>
+
+                  {/* abstract out styles To Do, and arrows to button */}
+                  <Button
+                    color="primary"
+                    onClick={this.secondstep}
+                    style={{ float: "right" }}
+                  >
+                    {t("listing.btn.next")}
+                    <Icon type="right-circle" />
+                  </Button>
+                </>
               )}
             </Form>
           </Col>
@@ -110,7 +149,7 @@ const ListingFormWithFormik = withFormik({
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
-    status: (props.listing && props.listing.status) || 'Idle',
+    status: (props.listing && props.listing.status) || "Idle",
     isActive: (props.listing && props.listing.isActive) || true,
     listingImages: props.listing && props.listing.listingImages,
     listingDetail: (props.listing && props.listing.listingDetail) || {},
@@ -128,7 +167,7 @@ const ListingFormWithFormik = withFormik({
     onSubmit(values);
   },
   enableReinitialize: true,
-  displayName: 'ListingForm' // helps with React DevTools
+  displayName: "ListingForm" // helps with React DevTools
 });
 
-export default translate('listing')(ListingFormWithFormik(ListingForm));
+export default translate("listing")(ListingFormWithFormik(ListingForm));

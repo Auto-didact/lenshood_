@@ -4,9 +4,10 @@ import { compose, graphql } from "react-apollo";
 import { pick } from "lodash";
 import { translate } from "@gqlapp/i18n-client-react";
 import { FormError } from "@gqlapp/forms-client-react";
-import UserEditView from "../components/UserEditView";
+import UserDetailsView from "../components/UserDetailsView";
 import { message } from "antd";
 import USER_QUERY from "../graphql/UserQuery.graphql";
+import CURRENT_USER_QUERY from "../graphql/CurrentUserQuery.graphql";
 import EDIT_USER from "../graphql/EditUser.graphql";
 import settings from "../../../../settings";
 import UserFormatter from "../helpers/UserFormatter";
@@ -39,8 +40,8 @@ const UserEdit = props => {
     } catch (e) {
       throw new FormError(t("userEdit.errorMsg"), e);
     }
-    message.info("Changes saved!");
 
+    message.info("Changes saved! Click on Next to continue!");
     // if (history) {
     //   return history.goBack();
     // }
@@ -50,7 +51,7 @@ const UserEdit = props => {
     // }
   };
 
-  return <UserEditView onSubmit={onSubmit} {...props} />;
+  return <UserDetailsView onSubmit={onSubmit} {...props} />;
 };
 
 UserEdit.propTypes = {
@@ -64,14 +65,21 @@ UserEdit.propTypes = {
 
 export default compose(
   translate("user"),
+  graphql(CURRENT_USER_QUERY, {
+    props({ data: { loading, error, currentUser } }) {
+      if (error) throw new Error(error);
+      return { loading, currentUser };
+    }
+  }),
   graphql(USER_QUERY, {
     options: props => {
-      let id = 0;
-      if (props.match) {
-        id = props.match.params.id;
-      } else if (props.navigation) {
-        id = props.navigation.state.params.id;
-      }
+      let id = props.currentUser.id;
+      //   let id = 0;
+      //   if (props.match) {
+      //     id = props.match.params.id;
+      //   } else if (props.navigation) {
+      //     id = props.navigation.state.params.id;
+      //   }
       return {
         variables: { id: Number(id) }
       };
