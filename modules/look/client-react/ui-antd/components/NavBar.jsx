@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Drawer, Menu, Dropdown, Row, Col, Icon } from 'antd';
 
-import { IfLoggedIn, hasRole } from '@gqlapp/user-client-react/containers/Auth.web';
-import { slide as Burger } from 'react-burger-menu';
+import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
 
 import MenuItem from './MenuItem';
 import DropDown from './Dropdown';
@@ -184,11 +183,11 @@ class NavBar extends React.Component {
           </IfLoggedIn>
         </Menu>
 
-        <Drawer title="Lenshood" placement="left" closable={true} onClose={this.onClose} visible={this.state.visible}>
-          <Menu style={{ border: 'none' }} mode="vertical">
+        <Drawer title="Lenshood" placement="right" closable={true} onClose={this.onClose} visible={this.state.visible}>
+          <Menu style={{ border: 'none', background: '#fff', color: '#23b195' }} mode="vertical">
             {ref.modules.navItemsRight}
-            <Menu.Item className="about" style={{ background: '#23b195' }}>
-              <a className="nav-link" style={{ color: '#ffffff', height: '30px' }} onClick={() => this.toggle()}>
+            <Menu.Item className="about" style={{}}>
+              <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle()}>
                 <div>
                   About{' '}
                   {this.state.show ? (
@@ -207,7 +206,7 @@ class NavBar extends React.Component {
               </MenuItem>
             ) : null}
             <IfLoggedIn role="admin">
-              <Menu style={{ border: 'none' }}>{ref.modules.navItemsAdmin}</Menu>
+              <Menu style={{ border: 'none', background: '#fff', color: '#23b195' }}>{ref.modules.navItemsAdmin}</Menu>
             </IfLoggedIn>
           </Menu>
         </Drawer>
