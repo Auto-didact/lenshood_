@@ -1,0 +1,5 @@
+mutation toggleListingStatus($id: Int!) {
+  toggleListingStatus(id: $id) {
+    id
+  }
+}

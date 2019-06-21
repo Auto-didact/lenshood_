@@ -7,15 +7,15 @@ import { ImgCamera } from '../../constants/DefaultImages';
 class DetailsCard extends Component {
   render() {
     const item = this.props.item;
-    function confirm(e) {
-      console.log(e);
-      message.success('Click on Yes');
-    }
+
+    const buttonText = this.props.buttonText;
+
 
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
     }
+
     return (
       <Card
         className="DetailsCard"
@@ -65,8 +65,8 @@ class DetailsCard extends Component {
                 </Col>
                 <Col span={12} align="right" style={{ paddingRight: '20px' }}>
                   <Popconfirm
-                    title="Are you sure delete this listing?"
-                    onConfirm={confirm}
+                    title="Are you sure to delete this listing?"
+                    onConfirm={e => this.props.DeleteListing(item.id, e)}
                     onCancel={cancel}
                     okText="Yes"
                     cancelText="No"
@@ -79,13 +79,21 @@ class DetailsCard extends Component {
               </Row>
               <Row gutter={13} align="center">
                 <Col span={12}>
-                  <Link className="listing-link" to={`/my-listings/${item.id}`}>
-                    <Button block>View Listing</Button>
-                  </Link>
+
+                  <Button
+                    type="primary"
+                    block
+                    onClick={e => this.props.toggle(item.id, e)}
+                  >
+                    {item.status === "On Shelf"
+                      ? "Move to Idle"
+                      : "Move to Shelf"}
+                  </Button>
+
                 </Col>
                 <Col span={12}>
                   <Button type="primary" block>
-                    Rent Now
+                    View Listing
                   </Button>
                 </Col>
               </Row>

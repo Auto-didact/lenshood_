@@ -56,7 +56,7 @@ export interface Identifier {
 }
 
 const eager =
-  "[user.[profile], listing_images, listing_detail, listing_detail.damages, listing_rental, listing_content]";
+  "[user.[profile], listing_images, listing_detail.damages, listing_rental, listing_content]";
 export default class ListingDAO extends Model {
   private id: any;
 
@@ -219,6 +219,15 @@ export default class ListingDAO extends Model {
         comment,
         rating
       });
+  }
+
+  public async patchListing(id, params) {
+    console.log("params", params);
+    const listing = await ListingDAO.query()
+      .patch(params)
+      .findById(id);
+
+    return camelizeKeys(listing);
   }
 }
 
