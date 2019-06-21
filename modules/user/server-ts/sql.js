@@ -3,7 +3,7 @@ import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import { has } from 'lodash';
 import bcrypt from 'bcryptjs';
 import { knex, returnId } from '@gqlapp/database-server-ts';
-import { Model } from 'objection';
+import { Model, raw } from 'objection';
 import Listing from '@gqlapp/listing-server-ts/sql';
 
 // Give the knex object to objection.
@@ -200,30 +200,32 @@ export class User extends Model {
     }
 
     // // add filter conditions
-    // if (filter) {
-    //   if (has(filter, 'role') && filter.role !== '') {
-    //     queryBuilder.where(function() {
-    //       this.where('u.role', filter.role);
-    //     });
-    //   }
+    if (filter) {
+      if (has(filter, 'role') && filter.role !== '') {
+        queryBuilder.where(function() {
+          this.where('role', filter.role);
+        });
+      }
 
-    //   if (has(filter, 'isActive') && filter.isActive !== null) {
-    //     queryBuilder.where(function() {
-    //       this.where('u.is_active', filter.isActive);
-    //     });
-    //   }
+      if (has(filter, 'isActive') && filter.isActive !== null) {
+        queryBuilder.where(function() {
+          this.where('is_active', filter.isActive);
+        });
+      }
 
-    //   if (has(filter, 'searchText') && filter.searchText !== '') {
-    //     queryBuilder.where(function() {
-    //       this.where(knex.raw('LOWER(??) LIKE LOWER(?)', ['username', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['email', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['first_name', `%${filter.searchText}%`]))
-    //         .orWhere(knex.raw('LOWER(??) LIKE LOWER(?)', ['last_name', `%${filter.searchText}%`]));
-    //     });
-    //   }
-    // }
+      if (has(filter, 'searchText') && filter.searchText !== '') {
+        queryBuilder
+          .from('user')
+          .leftJoin('user_profile AS up', 'up.user_id', 'user.id')
+          .where(function() {
+            this.where(raw('LOWER(??) LIKE LOWER(?)', ['username', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['email', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['up.first_name', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['up.last_name', `%${filter.searchText}%`]));
+          });
+      }
+    }
     const res = camelizeKeys(await queryBuilder);
-    // console.log(res);
     return res;
   }
 
@@ -232,7 +234,7 @@ export class User extends Model {
       .findById(id)
       .eager(user_eager);
     const res = camelizeKeys(await queryBuilder);
-    // console.log(res);
+    console.log(res);
     return res;
   }
 
@@ -283,19 +285,35 @@ export class User extends Model {
   }
 
   createFacebookAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_facebook')).insert({ fb_id: id, display_name: displayName, user_id: userId });
+    return returnId(knex('auth_facebook')).insert({
+      fb_id: id,
+      display_name: displayName,
+      user_id: userId
+    });
   }
 
   createGithubAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_github')).insert({ gh_id: id, display_name: displayName, user_id: userId });
+    return returnId(knex('auth_github')).insert({
+      gh_id: id,
+      display_name: displayName,
+      user_id: userId
+    });
   }
 
   createGoogleOAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_google')).insert({ google_id: id, display_name: displayName, user_id: userId });
+    return returnId(knex('auth_google')).insert({
+      google_id: id,
+      display_name: displayName,
+      user_id: userId
+    });
   }
 
   createLinkedInAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_linkedin')).insert({ ln_id: id, display_name: displayName, user_id: userId });
+    return returnId(knex('auth_linkedin')).insert({
+      ln_id: id,
+      display_name: displayName,
+      user_id: userId
+    });
   }
 
   async editUser(params) {
@@ -329,7 +347,9 @@ export class User extends Model {
   }
 
   async updateUserMobileVerified(id) {
-    const mobile = await UserMobile.query().patchAndFetchById(id, { is_verified: true });
+    const mobile = await UserMobile.query().patchAndFetchById(id, {
+      is_verified: true
+    });
     return camelizeKeys(mobile);
   }
 

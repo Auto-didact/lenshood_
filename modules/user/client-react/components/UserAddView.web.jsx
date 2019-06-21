@@ -1,21 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout } from '@gqlapp/look-client-react';
 
-import UserForm from "./UserForm";
-import settings from "../../../../settings";
+import UserForm from './UserForm';
+import settings from '../../../../settings';
 
 const UserAddView = ({ t, onSubmit, currentUser }) => {
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("userEdit.title")}`}
+      title={`${settings.app.name} - ${t('userEdit.title')}`}
       meta={[
         {
-          name: "description",
-          content: `${settings.app.name} - ${t("userEdit.meta")}`
+          name: 'description',
+          content: `${settings.app.name} - ${t('userEdit.meta')}`
         }
       ]}
     />
@@ -28,9 +28,10 @@ const UserAddView = ({ t, onSubmit, currentUser }) => {
         Back
       </Link>
       <h2>
-        {t("userEdit.form.titleCreate")} {t("userEdit.form.title")}
+        {t('userEdit.form.titleCreate')} {t('userEdit.form.title')}
       </h2>
       <UserForm
+        LYGflag={false}
         onSubmit={onSubmit}
         initialValues={{}}
         shouldDisplayRole={true}
@@ -46,4 +47,4 @@ UserAddView.propTypes = {
   onSubmit: PropTypes.func
 };
 
-export default translate("user")(UserAddView);
+export default translate('user')(UserAddView);
