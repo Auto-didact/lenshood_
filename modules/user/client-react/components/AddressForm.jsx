@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
 
-import { Modal, Form } from 'antd';
+import { Modal } from 'antd';
 import { RenderField } from '@gqlapp/look-client-react';
 // import RenderAddressField from './RenderAddressField';
 
@@ -81,63 +81,46 @@ const AddressSchema = {
 // eslint - disable - next - line;
 
 class AddressForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.props = props;
+  // }
 
   render() {
-    const {
-      address,
-      onCancel,
-      values,
-      visible,
-      handleSubmit
-      // key,
-      // onSave
-    } = this.props;
+    const { values, onCancel, visible } = this.props;
     // if (address.id) {
     //   values.id = address.id;
     // }
-    // console.log('handleSubmit', handleSubmit);
-    () => this.props.handleSubmit(values);
+    // console.log('key in AddressForm outsider render', key);
     return (
-      <Modal visible={visible} title="Address" okText="Save" onCancel={onCancel} onOk={() => handleSubmit(values)}>
+      <Modal visible={visible} title="Address" okText="Save" onCancel={onCancel} onOk={onCancel}>
         {/* () => handleSubmit(values) */}
-        <Form layout="vertical" onSubmit={handleSubmit}>
-          {/* {console.log('key in addressForm', key)} */}
-          {/* <RenderAddressField
-          address={address}
-          //  key={key}
-          label="Address Form"
-        /> */}
-          {address.name && <Field name="name" component={RenderField} type="text" label="Name" value={values.name} />}
-          {address.streetAddress1 && (
-            <Field
-              name="streetAddress1"
-              component={RenderField}
-              type="text"
-              label="Street Address 1"
-              value={values.streetAddress1}
-            />
-          )}
-          {address.streetAddress2 && (
-            <Field
-              name="streetAddress2"
-              component={RenderField}
-              type="text"
-              label="Street Address 2"
-              value={values.streetAddress2}
-            />
-          )}
-          {address.city && <Field name="city" component={RenderField} type="text" label="City" value={values.city} />}
-          {address.state && (
-            <Field name="state" component={RenderField} type="text" label="State" value={values.state} />
-          )}
-          {address.pinCode && (
-            <Field name="pinCode" component={RenderField} type="text" label="Pin Code" value={values.pinCode} />
-          )}
-        </Form>
+        {/* <div layout="vertical" onSubmit={handleSubmit}> */}
+        {/* {console.log('key in addressForm render', key)} */}
+        {/* <RenderAddressField
+            address={address}
+            key={key}
+            label="Address Form"
+          /> */}
+        <Field name="name" component={RenderField} type="text" label="Name" value={values.name} />
+        <Field
+          name="streetAddress1"
+          component={RenderField}
+          type="text"
+          label="Street Address 1"
+          value={values.streetAddress1}
+        />
+        <Field
+          name="streetAddress2"
+          component={RenderField}
+          type="text"
+          label="Street Address 2"
+          value={values.streetAddress2}
+        />
+        <Field name="city" component={RenderField} type="text" label="City" value={values.city} />
+        <Field name="state" component={RenderField} type="text" label="State" value={values.state} />
+        <Field name="pinCode" component={RenderField} type="text" label="Pin Code" value={values.pinCode} />
+        {/* </div> */}
       </Modal>
     );
   }
@@ -145,15 +128,9 @@ class AddressForm extends React.Component {
 
 AddressForm.propTypes = {
   onCancel: PropTypes.func,
-  onSave: PropTypes.func,
-  onChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  // key: PropTypes.any,
-  address: PropTypes.any,
-  index: PropTypes.any,
+  // onSave: PropTypes.func,
   values: PropTypes.any,
-  visible: PropTypes.any,
-  form: PropTypes.any
+  visible: PropTypes.any
 };
 
 const AddressFormWithFormik = withFormik({
@@ -169,11 +146,11 @@ const AddressFormWithFormik = withFormik({
   handleSubmit(
     values,
     {
-      props: { onSave }
+      props: { onSave, index, addresses }
     }
   ) {
     console.log('formik submit called', values);
-    onSave(values);
+    onSave(values, addresses, index);
   },
   enableReinitialize: true,
   displayName: 'AddressForm' // helps with React DevTools
