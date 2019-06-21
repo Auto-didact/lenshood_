@@ -59,11 +59,17 @@ class ListingForm extends Component {
     const isAdmin = this.isAdminFunction(
       currentUser && currentUser.role ? currentUser.role : null
     );
-    // console.log("currentUser", this.props);
+    // console.log("currentUser Listings", this.props.listing);
     // const userRole = currentUser.role;
     this.steps = [
       <UserDetails />,
-      <ProductDetails values={values} t={t} isAdmin={isAdmin} />,
+      <ProductDetails
+        values={values}
+        t={t}
+        User={currentUser}
+        users={this.props.users}
+        isAdmin={isAdmin}
+      />,
       <RentalDetails values={values} t={t} isAdmin={isAdmin} />
     ];
 
@@ -117,7 +123,7 @@ class ListingForm extends Component {
                   {/* abstract out styles To Do, and arrows to button */}
                   <Button
                     color="primary"
-                    onClick={this.secondstep}
+                    onClick={this.nextStep}
                     style={{ float: "right" }}
                   >
                     {t("listing.btn.next")}
@@ -146,6 +152,9 @@ ListingForm.propTypes = {
 
 const ListingFormWithFormik = withFormik({
   mapPropsToValues: props => ({
+    // FOR RENDERAUTOCOMPLETE
+    // userId: props.listing && props.listing.user.id,
+    //
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
@@ -163,7 +172,7 @@ const ListingFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    // console.log(values);
+    console.log(values);
     onSubmit(values);
   },
   enableReinitialize: true,
