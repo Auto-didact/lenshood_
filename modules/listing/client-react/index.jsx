@@ -2,7 +2,10 @@ import React from "react";
 
 import ClientModule from "@gqlapp/module-client-react";
 import { translate } from "@gqlapp/i18n-client-react";
-import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
+import {
+  IfLoggedIn,
+  AuthRoute
+} from "@gqlapp/user-client-react/containers/Auth.web";
 import { Route, NavLink } from "react-router-dom";
 import { MenuItem } from "@gqlapp/look-client-react";
 
@@ -61,7 +64,13 @@ export default new ClientModule({
     <Route exact path="/" component={ListingCatalogue} />,
 
     <Route exact path="/listings" component={Listings} />,
-    <Route exact path="/listing/new" component={ListingAdd} />,
+    <AuthRoute
+      exact
+      path="/listing/new"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={ListingAdd}
+    />,
     <Route path="/listing/:id" component={ListingEdit} />,
     <Route exact path="/listing_catalogue" component={ListingCatalogue} />,
     <Route exact path="/my-listings/:id" component={MyListingDetail} />,
