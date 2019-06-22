@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Button, Card } from "antd";
 import ReferModal from "./ReferModal";
 
-export default class OrderCard extends React.Component {
+export default class ReferDetailsCard extends React.Component {
   state = {
     ...this.props.state,
     modal1Visible: false
@@ -12,7 +12,6 @@ export default class OrderCard extends React.Component {
     this.setState({ modal1Visible });
   }
   render() {
-    console.log(this.state);
     return (
       <div>
         <Card className="boxShadowTheme borderRadius9 marginB20">

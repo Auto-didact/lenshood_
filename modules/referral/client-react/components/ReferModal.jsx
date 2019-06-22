@@ -1,10 +1,8 @@
 import React from "react";
 import { Modal, Badge, Card } from "antd";
-import ReferModal from "./ReferModal";
 
-export default class OrderCard extends React.Component {
+export default class ReferModal extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <Modal
         style={{ top: 20 }}
@@ -17,8 +15,8 @@ export default class OrderCard extends React.Component {
           <h1>
             <strong>Referral Details</strong>
           </h1>
-          <p>
-            When your friends register with Fat Llama they will appear here so
+          <p className="justifyAlign">
+            When your friends register with LensHood they will appear here so
             you can track your earnings
           </p>
           <p className="marginB20">

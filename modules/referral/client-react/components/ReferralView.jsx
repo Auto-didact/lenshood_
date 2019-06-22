@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout } from "@gqlapp/look-client-react";
 import settings from "../../../../settings";
-// import InviteDetailsCard from "./InviteDetailsCard";
+import InviteDetailsCard from "./InviteDetailsCard";
 import ReferDetailsCard from "./ReferDetailsCard";
 import { Row, Col } from "antd";
 
@@ -31,7 +31,7 @@ const ReferralView = ({ t, state }) => {
               xs={{ span: 24, offset: 0 }}
               className="margin20"
             >
-              {/* <InviteDetailsCard username={state.username}/> */}
+              <InviteDetailsCard username={state.username} />
             </Col>
             <Col
               lg={{ span: 8, offset: 2 }}
