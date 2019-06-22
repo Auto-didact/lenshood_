@@ -1,3 +1,4 @@
+import referral from '@gqlapp/referral-server-ts';
 import listing from '@gqlapp/listing-server-ts';
 import order from '@gqlapp/order-server-ts';
 import core from '@gqlapp/core-server-ts';
@@ -22,6 +23,7 @@ import ServerModule from '@gqlapp/module-server-ts';
 const user = require('@gqlapp/user-server-ts').default;
 
 const modules: ServerModule = new ServerModule(
+  referral,
   listing,
   order,
   authentication,

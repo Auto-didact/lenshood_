@@ -61,6 +61,7 @@
     "@gqlapp/database-server-ts": "^0.1.0",
     "@gqlapp/listing-server-ts": "^1.0.0",
     "@gqlapp/order-server-ts": "^1.0.0",
+    "@gqlapp/referral-server-ts": "^1.0.0",
     "@gqlapp/testing-server-ts": "^0.1.0",
     "@types/pdfmake": "^0.1.3",
     "apollo-cache-inmemory": "1.4.2",

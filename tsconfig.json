@@ -22,7 +22,7 @@
     "**/typings.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.vue", "modules/order/client-react/components/OrderCard.jsx", "modules/order/client-react/components/CheckoutSteps.jsx", "modules/order/client-react/components/CheckoutPayView.jsx", "modules/order/client-react/components/CheckoutOrderView.jsx", "modules/order/client-react/components/CheckoutCartView.jsx", "modules/order/client-react/components/CheckoutBillView.jsx", "modules/order/client-react/containers/CheckoutPay.jsx"
+    "**/*.vue", "modules/order/client-react/components/OrderCard.jsx", "modules/order/client-react/components/CheckoutSteps.jsx", "modules/order/client-react/components/CheckoutPayView.jsx", "modules/order/client-react/components/CheckoutOrderView.jsx", "modules/order/client-react/components/CheckoutCartView.jsx", "modules/order/client-react/components/CheckoutBillView.jsx", "modules/order/client-react/containers/CheckoutPay.jsx", "modules/referral/client-react/index.jsx", "modules/referral/client-react/components/ReferralView.jsx", "modules/referral/client-react/containers/Referral.jsx"
   ],
   "exclude": [
     "node_modules"
