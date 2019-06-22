@@ -66,7 +66,8 @@ const UserForm = ({
   t,
   shouldDisplayRole,
   shouldDisplayActive,
-  LYGflag
+  LYGflag,
+  valueCheck
 }) => {
   const {
     userRole,
@@ -79,14 +80,12 @@ const UserForm = ({
     password,
     passwordConfirmation,
     addresses,
-    portfolios,
-    state
+    portfolios
   } = values;
   const isAdmin = isAdminFunction(userRole);
-
   return (
     <Form name="user" onSubmit={handleSubmit}>
-      {LYGflag == false || !state.avatar ? (
+      {LYGflag == false || !valueCheck.avatar ? (
         <>
           <Field
             name="profile.avatar"
@@ -128,7 +127,7 @@ const UserForm = ({
           )}
         </>
       ) : null}
-      {LYGflag == false || !state.firstName ? (
+      {LYGflag == false || !valueCheck.firstName ? (
         <>
           <Field
             name="profile.firstName"
@@ -139,7 +138,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !state.lastName ? (
+      {LYGflag == false || !valueCheck.lastName ? (
         <>
           <Field
             name="profile.lastName"
@@ -150,7 +149,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !state.about ? (
+      {LYGflag == false || !valueCheck.about ? (
         <>
           <Field
             name="profile.about"
@@ -161,7 +160,7 @@ const UserForm = ({
           />
         </>
       ) : null}
-      {LYGflag == false || !state.designation ? (
+      {LYGflag == false || !valueCheck.designation ? (
         <>
           <Field
             name="profile.designation"
