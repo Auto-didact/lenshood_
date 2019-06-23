@@ -397,7 +397,11 @@ export default pubsub => ({
           throw e;
         }
       }
-    )
+    ),
+    endorseUnendorseUser: (obj, input, { User, identity, req: { t } }) =>
+      User.endorseOrUnEndorse(input.endorseeId, input.endorserId),
+    followUnFollowUser: (obj, input, { User, identity, req: { t } }) =>
+      User.followUnFollowUser(input.userId, input.followerId)
   },
   Subscription: {
     usersUpdated: {

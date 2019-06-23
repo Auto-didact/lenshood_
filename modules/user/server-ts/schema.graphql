@@ -210,6 +210,16 @@ type UserPayload {
   user: User
 }
 
+type endorseUnEndorse {
+  endorsecount: Int
+  isEndorsed: Boolean
+}
+
+type follwUnFollw {
+  follwerCount: Int
+  isFollwed: Boolean
+}
+
 extend type Mutation {
   # Create new user
   addUser(input: AddUserInput!): User!
@@ -221,6 +231,10 @@ extend type Mutation {
   addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
   # Add Mobile for a user
   addUserMobile(input: AddMobileInput!): UserMobile!
+  #Endorse/UnEndorse user
+  endorseUnendorseUser(endorseeId: Int, endorserId: Int): endorseUnEndorse!
+  #Follow/UnFollow user
+  followUnFollowUser(userId: Int, followerId: Int): follwUnFollw!
 }
 
 # Input for ordering users
