@@ -330,11 +330,13 @@
   padding: 10px 5px;
 }
 
+
 @media only screen and (min-width: 769px) {
   .gearCat {
     margin: 5px -4vw 5px -4vw;
     padding: 10px 4vw 10px 4vw !important;
   }
+ 
 }
 @media only screen and (min-width: 1025px) {
   .gearCat {
