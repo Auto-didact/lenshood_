@@ -20,7 +20,7 @@ class MyListingsView extends Component {
             }
           ]}
         />
-        {/*this.props.loading && (!this.props.userListings && <div>Loading...</div>)*/}
+        {this.props.loading && (!this.props.userListings && <div>Loading...</div>)}
         {this.props.userListings && this.props.userListings.length !== 0 ? (
           <MyList {...this.props} />
         ) : (
