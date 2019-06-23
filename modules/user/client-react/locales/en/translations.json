@@ -135,7 +135,8 @@
         "name": "Username",
         "email": "Email",
         "pass": "Password",
-        "passConf": "Password Confirmation"
+        "passConf": "Password Confirmation",
+        "referral": "Referral ID"
       },
       "btnSubmit": "Register"
     }

@@ -45,7 +45,6 @@ class UserDemoView extends Component {
         item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
         item.profile.lastName.toUpperCase().includes(query.toUpperCase())
     );
-    console.log("Filtered Users", items);
     return items;
   }
 

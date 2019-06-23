@@ -95,7 +95,13 @@ const { github, facebook, linkedin, google } = settings.auth.social;
 //   );
 // };
 
-const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
+const RegisterForm = ({
+  values,
+  handleSubmit,
+  submitting,
+  errors,
+  t
+}) => {
   return (
     <Modal
       centered
@@ -115,7 +121,7 @@ const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
         </Col>
         <Col sm={16} xs={24}>
           <Card className="modalcard">
-          <h1 className="signinstate">Sign up...</h1>
+            <h1 className="signinstate">Sign up...</h1>
             <Row>
               <Col span={24}>
                 {facebook.enabled && (
@@ -168,24 +174,29 @@ const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
                 placeholder={t("reg.form.field.passConf")}
                 value={values.passwordConfirmation}
               />
+              <Col span={12}>
+                <Field
+                  label={<strong>Referral (optional)</strong>}
+                  name="referredBy"
+                  component={RenderField}
+                  type="text"
+                  placeholder={t("reg.form.field.referral")}
+                  value={values.referredBy}
+                />
+              </Col>
               <div className="text-center">
                 {errors && errors.errorMsg && (
                   <Alert color="error">{errors.errorMsg}</Alert>
                 )}
               </div>
-              <Button
-                color="primary"
-                block
-                type="submit"
-                disabled={submitting}
-              >
+              <Button color="primary" block type="submit" disabled={submitting}>
                 {t("reg.form.btnSubmit")}
               </Button>
               <p className="belowFormtext marginT20">
                 Already have an account?{" "}
                 <NavLink to="/login">{t("login.form.btnSubmit")}</NavLink>
               </p>
-              <hr></hr>
+              <hr />
               <p className="belowFormtext">
                 By signing up you agree to our{" "}
                 <NavLink to="/terms-of-service">terms of service</NavLink>
@@ -207,11 +218,12 @@ RegisterForm.propTypes = {
 };
 
 const RegisterFormWithFormik = withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ referredUsername }) => ({
     username: "",
     email: "",
     password: "",
-    passwordConfirmation: ""
+    passwordConfirmation: "",
+    referredBy: referredUsername || ""
   }),
   validate: values => validate(values, registerFormSchema),
   async handleSubmit(

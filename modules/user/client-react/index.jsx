@@ -139,10 +139,8 @@ export default new ClientModule({
       component={ResetPassword}
     />,
     // FOR RENDERAUTOCOMPLETE
-    <AuthRoute
-      path="/demo-route"
-      redirect="/profile"
-      role={["user", "admin"]}
+    <Route
+      path="/demo-path"
       component={DemoRoute}
     />
   ],

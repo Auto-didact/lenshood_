@@ -19,30 +19,24 @@ const ReferralView = ({ t, state }) => {
   return (
     <PageLayout>
       {renderMetaData()}
-      <div className="checkoutDiv">
+      {/* <div className="checkoutDiv"> */}
         <Row>
           <Col
-            lg={{ span: 22, offset: 1 }}
-            md={{ span: 22, offset: 1 }}
+            lg={{ span: 14, offset: 0 }}
             xs={{ span: 24, offset: 0 }}
+            className="margin20"
           >
-            <Col
-              lg={{ span: 14, offset: 0 }}
-              xs={{ span: 24, offset: 0 }}
-              className="margin20"
-            >
-              <InviteDetailsCard username={state.username} />
-            </Col>
-            <Col
-              lg={{ span: 8, offset: 2 }}
-              xs={{ span: 24, offset: 0 }}
-              className="marginT20"
-            >
-              <ReferDetailsCard state={state} />
-            </Col>
+            <InviteDetailsCard username={state.username} />
+          </Col>
+          <Col
+            lg={{ span: 8, offset: 1 }}
+            xs={{ span: 24, offset: 0 }}
+            className="marginT20"
+          >
+            <ReferDetailsCard state={state} />
           </Col>
         </Row>
-      </div>
+      {/* </div> */}
     </PageLayout>
   );
 };
