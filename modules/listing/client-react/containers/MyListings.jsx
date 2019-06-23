@@ -25,7 +25,7 @@ class MyListings extends Component {
       console.log(id);
       this.updateComponent();
     };
-    return <MyListingsView DeleteListing={DeleteListing} toggle={ToggleListingStatus}  />;
+    return <MyListingsView DeleteListing={DeleteListing} toggle={ToggleListingStatus} {...this.props} />;
   }
 }
 
