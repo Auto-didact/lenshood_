@@ -3,11 +3,15 @@ import React from "react";
 import ClientModule from "@gqlapp/module-client-react";
 
 import { translate } from "@gqlapp/i18n-client-react";
-import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
+import {
+  IfLoggedIn,
+  AuthRoute
+} from "@gqlapp/user-client-react/containers/Auth.web";
 import { MenuItem } from "@gqlapp/look-client-react";
 import { Route, NavLink } from "react-router-dom";
 import { Icon } from "antd";
 import Referral from "./containers/Referral";
+import ReferredRedirect from "./containers/ReferredRedirect";
 import resources from "./locales";
 
 const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
@@ -20,7 +24,17 @@ const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
 ));
 
 export default new ClientModule({
-  route: [<Route exact path="/invites" component={Referral} />],
+  route: [
+    <Route exact path="/invites" component={Referral} />,
+    <AuthRoute
+      exact
+      path="/invite/:id"
+      redirectOnLoggedIn
+      redirect="/"
+      component={ReferredRedirect}
+      // invite={true}
+    />
+  ],
   navItemUser: [
     <IfLoggedIn key="/invites">
       <MenuItem>
