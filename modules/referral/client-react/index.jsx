@@ -17,7 +17,7 @@ import resources from "./locales";
 const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
   <NavLink to="/invites">
     <div>
-      {/* <Icon type="solution" /> */}
+      <Icon type="money-collect" />
       {t("referral:navLink")}
     </div>
   </NavLink>
