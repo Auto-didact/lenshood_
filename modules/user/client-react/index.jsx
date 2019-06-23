@@ -1,12 +1,12 @@
-import React from 'react';
-import { CookiesProvider } from 'react-cookie';
-import { NavLink, withRouter, Route } from 'react-router-dom';
-import { translate } from '@gqlapp/i18n-client-react';
-import { MenuItem } from '@gqlapp/look-client-react';
-import ClientModule from '@gqlapp/module-client-react';
+import React from "react";
+import { CookiesProvider } from "react-cookie";
+import { NavLink, withRouter, Route } from "react-router-dom";
+import { translate } from "@gqlapp/i18n-client-react";
+import { MenuItem } from "@gqlapp/look-client-react";
+import ClientModule from "@gqlapp/module-client-react";
 
 // To Do
-import { Icon, Tabs } from 'antd';
+import { Icon, Tabs } from "antd";
 
 import resolvers from "./resolvers";
 import resources from "./locales";
@@ -34,7 +34,7 @@ const MyProfile = () => {
   return (
     <div>
       <Icon type="user" />
-      {'My Profile'}
+      {"My Profile"}
     </div>
   );
 };
@@ -47,7 +47,7 @@ const LogoutLink = withRouter(
         e.preventDefault();
         (async () => {
           await logout();
-          history.push('/');
+          history.push("/");
         })();
       }}
       className="nav-link"
@@ -62,39 +62,66 @@ export * from "./containers/Auth";
 export { default as UserDetails } from "./containers/UserDetails";
 export { default as LOGIN } from "./graphql/Login.graphql";
 
-const NavLinkUsersWithI18n = translate('user')(({ t }) => (
+const NavLinkUsersWithI18n = translate("user")(({ t }) => (
   <NavLink to="/users" className="nav-link" activeClassName="active">
-    {t('navLink.users')}
+    {t("navLink.users")}
   </NavLink>
 ));
-const NavLinkProfileWithI18n = translate('user')(({ t }) => (
-  <NavLink to="/profile" className="AccDetItem" activeClassName="AccDetItemSelected">
+const NavLinkProfileWithI18n = translate("user")(({ t }) => (
+  <NavLink
+    to="/profile"
+    className="AccDetItem"
+    activeClassName="AccDetItemSelected"
+  >
     <Icon type="user" />
-    {t('navLink.profile')}
+    {t("navLink.profile")}
   </NavLink>
 ));
 
-const NavLinkLoginWithI18n = translate('user')(({ t }) => (
+const NavLinkLoginWithI18n = translate("user")(({ t }) => (
   <NavLink to="/login" className="nav-link" activeClassName="active">
-    {t('navLink.signIn')}
+    {t("navLink.signIn")}
   </NavLink>
 ));
 
 export default new ClientModule({
   route: [
     <Route exact path="/public-profile/:id" component={PublicProfile} />,
-    <AuthRoute exact path="/profile" role={['user', 'admin']} redirect="/login" component={ProfileView} />,
-    <AuthRoute exact path="/users" redirect="/profile" role="admin" component={Users} />,
-    <AuthRoute exact path="/users/new" role={['admin']} component={UserAdd} />,
-    <AuthRoute path="/users/:id" redirect="/profile" role={['user', 'admin']} component={UserEdit} />,
-    <AuthRoute exact path="/register" redirectOnLoggedIn redirect="/profile" component={Register} />,
+    <AuthRoute
+      exact
+      path="/profile"
+      role={["user", "admin"]}
+      redirect="/login"
+      component={ProfileView}
+    />,
+    <AuthRoute
+      exact
+      path="/users"
+      redirect="/profile"
+      role="admin"
+      component={Users}
+    />,
+    <AuthRoute exact path="/users/new" role={["admin"]} component={UserAdd} />,
+    <AuthRoute
+      path="/users/:id"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={UserEdit}
+    />,
+    <AuthRoute
+      exact
+      path="/register"
+      redirectOnLoggedIn
+      redirect="/profile"
+      component={Register}
+    />,
     <AuthRoute
       exact
       path="/login"
       redirectOnLoggedIn
       redirect="/"
       component={withRouter(({ history }) => (
-        <Login onLogin={() => history.push('/profile')} />
+        <Login onLogin={() => history.push("/profile")} />
       ))}
     />,
     <AuthRoute
@@ -157,8 +184,15 @@ export default new ClientModule({
   ],
 
   resolver: [resolvers],
-  localization: [{ ns: 'user', resources }],
+  localization: [{ ns: "user", resources }],
   dataRootComponent: [DataRootComponent],
   // eslint-disable-next-line react/display-name
-  rootComponentFactory: [req => (req ? <CookiesProvider cookies={req.universalCookies} /> : <CookiesProvider />)]
+  rootComponentFactory: [
+    req =>
+      req ? (
+        <CookiesProvider cookies={req.universalCookies} />
+      ) : (
+        <CookiesProvider />
+      )
+  ]
 });
