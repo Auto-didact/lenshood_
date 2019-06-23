@@ -4,7 +4,14 @@ import { translate } from "@gqlapp/i18n-client-react";
 
 import UserForm from "./UserForm";
 
-const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
+const UserEditView = ({
+  loading,
+  user,
+  t,
+  currentUser,
+  onSubmit,
+  valueCheck
+}) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
   return (
     <div>
@@ -12,6 +19,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
         <div className="text-center">{t("userEdit.loadMsg")}</div>
       ) : (
         <UserForm
+          valueCheck={valueCheck}
           LYGflag={true}
           onSubmit={onSubmit}
           shouldDisplayRole={isNotSelf}
