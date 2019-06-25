@@ -97,7 +97,7 @@ class NavBar extends React.Component {
   };
 
   menuList = (
-    <Menu style={{ fontWeight: 'lighter' }} selectedKeys={[this.props.location.pathname]} mode="vertical">
+    <Menu style={{ fontWeight: 'lighter' }} selectedKeys={[this.props.location.pathname]} mode="inline">
       <Menu.Item key="/about-us">
         <NavLink to="/about-us">About us</NavLink>
       </Menu.Item>
@@ -218,7 +218,7 @@ class NavBar extends React.Component {
         <Drawer title="Lenshood" placement="right" closable={true} onClose={this.onClose} visible={this.state.visible}>
           <Menu
             style={{ background: '#fff', color: '#23b195' }}
-            mode="vertical"
+            mode="inline"
             selectedKeys={[this.props.location.pathname]}
           >
             {ref.modules.navItemsRight}
@@ -237,7 +237,7 @@ class NavBar extends React.Component {
             {this.state.show1 ? this.menuList : null}
 
             {__DEV__ ? (
-              <Menu style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }} mode="vertical">
+              <Menu style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }} mode="inline">
                 <Menu.Item className="about" style={{ fontWeight: 'bolder' }} key="dev">
                   <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle(2)}>
                     <div>
@@ -264,7 +264,7 @@ class NavBar extends React.Component {
               <Menu
                 style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }}
                 selectedKeys={[this.props.location.pathname]}
-                mode="vertical"
+                mode="inline"
               >
                 <Menu.Item className="about" style={{ fontWeight: 'bolder' }} key="admin">
                   <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle(3)}>
