@@ -5,15 +5,12 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Table, Button, Pagination ,Loader} from '@gqlapp/look-client-react';
+import { PageLayout, Table, Button, Pagination, Loader } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
 
 const { itemsNumber, type } = settings.pagination.web;
 
-const Loading = ({ t }) => (
-  
-   <Loader text={t('post.loadMsg')} />
-);
+const Loading = ({ t }) => <Loader text={t('post.loadMsg')} />;
 Loading.propTypes = { t: PropTypes.func };
 
 const NoPostsMessage = ({ t }) => <div className="text-center">{t('post.noPostsMsg')}</div>;

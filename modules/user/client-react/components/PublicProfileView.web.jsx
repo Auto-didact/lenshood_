@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, CardTitle, PageLayout,Loader } from '@gqlapp/look-client-react';
+import { Card, CardGroup, CardText, CardTitle, PageLayout, Loader } from '@gqlapp/look-client-react';
 // To Do Abstract Out
 import { Row, Col, Divider, Icon, Button, Tabs } from 'antd';
 import PublicProfileHead from './components/PublicProfileHead';

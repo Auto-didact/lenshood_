@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import {Loader} from '@gqlapp/look-client-react';
-import { Alert, Button, Spin } from 'antd';
+import { Loader } from '@gqlapp/look-client-react';
+import { Alert, Button } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
 import MobileVerificationForm from '../../components/verification/MobileVerificationForm';
 import Mobile from '../../components/verification/Mobile';
@@ -76,11 +76,7 @@ class MobileAdd extends Component {
   render() {
     return (
       <VerificationModal button="Mobile" title="Mobile Verification" vStatus={this.state.vStatus}>
-        {this.state.loading ? (
-          <Loader text="Loading..."/>
-        ) : (
-          ''
-        )}
+        {this.state.loading ? <Loader text="Loading..." /> : ''}
         {this.state.otp ? <Alert message={`An OTP has been sent to ${this.state.mobileNo}`} /> : ''}
         {this.state.error ? <Alert type="error" message={`Error Occurred: `} description={this.state.error} /> : ''}
         {this.state.form ? <MobileVerificationForm otp={this.state.otp} onSubmit={this.onChange} /> : ''}

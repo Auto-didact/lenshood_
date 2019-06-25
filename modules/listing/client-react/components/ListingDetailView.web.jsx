@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import Helmet from 'react-helmet';
-import { Row, Col, Breadcrumb, Card, Spin } from 'antd';
-import { PageLayout,Loader } from '@gqlapp/look-client-react';
+import { Row, Col, Breadcrumb, Card } from 'antd';
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
 import UserCard from './components/userCard';
 import ProductCard from './components/ProductCard';
 import ReviewsCard from './components/ReviewsCard';
@@ -46,7 +46,8 @@ class ListingDetailView extends Component {
       return (
         <PageLayout>
           {this.renderMetaData()}
-          const Loading = ({ t }) => (<Loader text={t('listing.loadMsg')} />);
+          const Loading = ({t}) => (<Loader text={t('listing.loadMsg')} />
+          );
         </PageLayout>
       );
     } else {

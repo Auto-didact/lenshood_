@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import filesize from 'filesize';
-import { PageLayout, Row, Col, Table, Button, Alert,Loader } from '@gqlapp/look-client-react';
+import { PageLayout, Row, Col, Table, Button, Alert, Loader } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
 
 const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile, t }) => {
@@ -59,9 +59,7 @@ const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile
             </Dropzone>
           </Col>
           <Col xs={8}>
-            {loading && (
-              <Loader text="Loading..." />
-            )}
+            {loading && <Loader text="Loading..." />}
             {error && <Alert color="error">{error}</Alert>}
             {files && <Table dataSource={files} columns={columns} />}
           </Col>

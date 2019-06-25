@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Table, Button ,Loader} from '@gqlapp/look-client-react';
+import { Table, Button, Loader } from '@gqlapp/look-client-react';
 import UserDrawer from './UserDrawer';
-import { Popconfirm, Icon, Spin } from 'antd';
+import { Popconfirm, Icon } from 'antd';
 
 const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const [errors, setErrors] = useState([]);

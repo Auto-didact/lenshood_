@@ -2,8 +2,8 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Pagination,Loader } from '@gqlapp/look-client-react';
-import { Row, Col, Button, Switch, Spin } from 'antd';
+import { PageLayout, Pagination, Loader } from '@gqlapp/look-client-react';
+import { Row, Col, Button, Switch } from 'antd';
 import settings from '../../../../settings';
 
 import SuggestedCardList from './components/SuggestedCardList';
@@ -11,7 +11,7 @@ import SuggestedCardList from './components/SuggestedCardList';
 const { itemsNumber, type } = settings.pagination.web;
 const margin = '5%';
 
-const Loading = ({ t }) => (<Loader text={t('listing.loadMsg')} />);
+const Loading = ({ t }) => <Loader text={t('listing.loadMsg')} />;
 
 Loading.propTypes = { t: PropTypes.func };
 
