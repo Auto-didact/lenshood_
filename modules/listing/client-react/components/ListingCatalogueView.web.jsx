@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout, Pagination } from "@gqlapp/look-client-react";
-import { Row, Col, Button, Switch } from "antd";
+import { Row, Col, Button, Switch , Spin} from "antd";
 import settings from "../../../../settings";
 
 import SuggestedCardList from "./components/SuggestedCardList";
@@ -12,7 +12,7 @@ const { itemsNumber, type } = settings.pagination.web;
 const margin = "5%";
 
 const Loading = ({ t }) => (
-  <div className="text-center">{t("listing.loadMsg")}</div>
+  <div className="text-center" style={{marginTop:'50%',textAlign:'center'}}><Spin size="large"/><br/>{t("listing.loadMsg")}</div>
 );
 Loading.propTypes = { t: PropTypes.func };
 
@@ -68,7 +68,7 @@ const ListingList = ({ loading, listings, t, loadData }) => {
       {listings && listings.totalCount ? (
         <RenderListings />
       ) : (
-        <NoListingsMessage t={t} />
+        !loading?<NoListingsMessage t={t} />:null
       )}
     </PageLayout>
   );

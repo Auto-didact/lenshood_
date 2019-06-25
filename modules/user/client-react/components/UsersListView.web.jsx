@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { translate } from "@gqlapp/i18n-client-react";
 import { Table, Button } from "@gqlapp/look-client-react";
 import UserDrawer from "./UserDrawer";
-import { Popconfirm, Icon } from "antd";
+import { Popconfirm, Icon,Spin } from "antd";
 
 const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const [errors, setErrors] = useState([]);
@@ -120,7 +120,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   return (
     <>
       {loading && !users ? (
-        <div className="text-center">{t("users.loadMsg")}</div>
+        <div className="text-center" style={{marginTop:'50%',textAlign:'center'}}><Spin size="large"/><br/>{t('users.loadMsg')}</div>
       ) : (
         <>
           {errors &&

@@ -11,7 +11,7 @@ import {
   CardTitle,
   AccountLayout
 } from "@gqlapp/look-client-react";
-import { Row, Col, Divider, Icon, Button } from "antd";
+import { Row, Col, Divider, Icon, Button,Spin } from "antd";
 import UserVerifications from "./verification/UserVerifications";
 import ProfileHead from "./ProfileHead";
 import UsersCard from "./UsersCard";
@@ -139,7 +139,7 @@ class ProfileView extends React.Component {
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">
-          <div className="text-center">{t("profile.loadMsg")}</div>
+         <div className="text-center" style={{marginTop:'50%',textAlign:'center'}}><Spin size="large"/><br/>{t('profile.loadMsg')}</div>
         </AccountLayout>
       );
     } else if (currentUser) {

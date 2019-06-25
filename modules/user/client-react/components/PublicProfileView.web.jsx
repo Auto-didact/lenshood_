@@ -12,7 +12,7 @@ import {
   PageLayout
 } from "@gqlapp/look-client-react";
 // To Do Abstract Out
-import { Row, Col, Divider, Icon, Button, Tabs } from "antd";
+import { Row, Col, Divider, Icon, Button, Tabs ,Spin} from "antd";
 import PublicProfileHead from "./components/PublicProfileHead";
 import PublicUsersCard from "./components/PublicUsersCard";
 import PublicProfileListingCard from "./components/PublicProfileListingCard";
@@ -131,7 +131,7 @@ class PublicProfileView extends React.Component {
     if (loading && !user) {
       return (
         <PageLayout select="/profile">
-          <div className="text-center">{t("profile.loadMsg")}</div>
+          <div className="text-center" style={{marginTop:'50%',textAlign:'center'}}><Spin size="large"/><br/>{t('profile.loadMsg')}</div>
         </PageLayout>
       );
     } else {
