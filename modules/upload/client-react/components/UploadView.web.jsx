@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import filesize from 'filesize';
-
-import { PageLayout, Row, Col, Table, Button, Alert, Spin } from '@gqlapp/look-client-react';
+import { Spin } from 'antd';
+import { PageLayout, Row, Col, Table, Button, Alert } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
 
 const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile, t }) => {
