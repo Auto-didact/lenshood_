@@ -13,7 +13,7 @@ import {
   FacebookButton
 } from "@gqlapp/authentication-client-react";
 import { Divider, Row, Col, Card, Modal } from "antd";
-import camera from "../resources/camera.jpg";
+import { camera1, camera2 } from "../constants/DefaultImages";
 
 import settings from "../../../../settings";
 
@@ -85,21 +85,13 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
   //   button => button
   // ).length;
   return (
-    <Modal
-      centered
-      width={700}
-      bodyStyle={{ padding: "0" }}
-      visible={true}
-      footer={null}
-      closable={false}
-      // onCancel={() => this.setModal1Visible(false)}
-    >
-      <Row>
+    <div className="signInoOuter">
+      <Row className="SignInComp">
         <Col sm={8} xs={0}>
-          <img src={camera} alt="" className="signInimg" />
+          <img src={camera1} alt="" className="signInimg" />
         </Col>
         <Col sm={0} xs={24}>
-          <img src={camera} alt="" className="signImg" />
+          <img src={camera2} alt="" className="signImg" />
         </Col>
         <Col sm={16} xs={24}>
           <Card className="modalcard">
@@ -153,12 +145,7 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
                   <Alert color="error">{errors.errorMsg}</Alert>
                 )}
               </div>
-              <Button
-                color="primary"
-                block
-                type="submit"
-                disabled={submitting}
-              >
+              <Button color="primary" block type="submit" disabled={submitting}>
                 {t("login.form.btnSubmit")}
               </Button>
               <p className="belowFormtext marginT20">
@@ -169,7 +156,7 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
           </Card>
         </Col>
       </Row>
-    </Modal>
+    </div>
   );
 };
 

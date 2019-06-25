@@ -194,7 +194,10 @@ const TrustAndSafetyView = ({ t }: TrustAndSafetyViewProps) => {
                 lineHeight: '29px'
               }}
             >
-              We keep an Original Government ID Card of the renter during the rental period.
+
+              We keep an Original Government ID Card of the Borrower during the
+              rental period.
+
             </h2>
           </div>
         </div>
@@ -251,172 +254,7 @@ const TrustAndSafetyView = ({ t }: TrustAndSafetyViewProps) => {
           }}
         />
 
-        <h1
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            fontWeight: 900,
-            textAlign: 'center',
-            color: '#767676',
-            fontSize: '55px',
-            marginTop: '150px'
-          }}
-        >
-          Equipment coverage policy
-        </h1>
 
-        <h2
-          style={{
-            maxWidth: '550px',
-            fontWeight: 'normal',
-            textAlign: 'center',
-            marginTop: '-20px',
-            fontSize: '30px',
-            color: '#767676'
-          }}
-        >
-          What happens in case of theft or damage? Don’t worry! We have got your back!
-        </h2>
-        <div style={{ maxWidth: '1200px' }}>
-          <h1
-            style={{
-              fontWeight: 'bold',
-              fontSize: '37px',
-              margin: '50px 0 0 0',
-              color: '#767676',
-              textAlign: 'left'
-            }}
-          >
-            In case of Theft
-          </h1>
-
-          <ul
-            style={{
-              listStyle: 'none',
-              textAlign: 'left',
-              padding: '0 0 0 4px'
-            }}
-          >
-            <li style={{ fontSize: '30px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> The person who invited the
-                defaulter will be contacted and will be asked for more information.
-              </span>
-            </li>
-            <li style={{ fontSize: '30px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> Original ID Card, verication
-                photos, undertaking in our possession will be used to le a legal case.
-              </span>
-            </li>
-            <li style={{ fontSize: '30px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> LensHood will buy a brand new
-                equipment as soon as possible once theft is veried.We don’t want our lenders to suffer because of
-                someone else fault.{' '}
-              </span>
-            </li>
-          </ul>
-
-          <h1
-            style={{
-              fontWeight: 'bold',
-              fontSize: '37px',
-              margin: '50px 0 0 0',
-              color: '#767676',
-              textAlign: 'left'
-            }}
-          >
-            In case of Damage
-          </h1>
-          <ul
-            style={{
-              listStyle: 'none',
-              textAlign: 'left',
-              padding: '0 0 0 4px'
-            }}
-          >
-            <li style={{ fontSize: '30px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> LensHood will service the
-                equipment before returning
-              </span>
-            </li>
-          </ul>
-
-          <h1
-            style={{
-              fontWeight: 'bold',
-              fontSize: '37px',
-              margin: '50px 0 0 0',
-              color: '#767676',
-              textAlign: 'left'
-            }}
-          >
-            LensHood Insurance
-          </h1>
-          <ul
-            style={{
-              listStyle: 'none',
-              textAlign: 'left',
-              padding: '0 0 0 4px',
-              fontWeight: 'bold'
-            }}
-          >
-            <li style={{ fontSize: '28px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> Lender Insurance Fee
-              </span>
-            </li>
-          </ul>
-
-          <h3
-            style={{
-              color: '#767676',
-              textAlign: 'left',
-              fontSize: '25px',
-              margin: '-15px 0 0 32px'
-            }}
-          >
-            Pay just <strong>1% of your equipment</strong> worth as monthly insurance of the device/equipment.
-          </h3>
-          <h3
-            style={{
-              color: '#767676',
-              textAlign: 'left',
-              fontSize: '25px',
-              margin: '-5px 0 0 32px'
-            }}
-          >
-            Amount will be deducted from your earnings.
-          </h3>
-
-          <ul
-            style={{
-              listStyle: 'none',
-              textAlign: 'left',
-              padding: '0 0 0 4px',
-              fontWeight: 'bold'
-            }}
-          >
-            <li style={{ fontSize: '28px' }}>
-              <span>
-                <img src={require('../images/tick.svg')} width="30px" height="30px" /> Renter Convenience Fee
-              </span>
-            </li>
-          </ul>
-          <h3
-            style={{
-              color: '#767676',
-              textAlign: 'left',
-              fontSize: '25px',
-              margin: '-5px 0 0 32px'
-            }}
-          >
-            8% of the rental value will be charged for the coverage.
-          </h3>
-        </div>
 
         <div
           style={{

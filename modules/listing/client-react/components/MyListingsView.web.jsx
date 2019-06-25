@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+
+import PropTypes from 'prop-types';
+
 import { Spin } from 'antd';
+
 import { AccountLayout } from '@gqlapp/look-client-react';
 import MyList from './components/MyList';
 import settings from '../../../../settings';
@@ -10,7 +14,6 @@ class MyListingsView extends Component {
     return (
       <AccountLayout select="/my-listings">
         {/* Render metadata */}
-
         <Helmet
           title={`${settings.app.name} - My Listings`}
           meta={[
@@ -21,6 +24,7 @@ class MyListingsView extends Component {
           ]}
         />
 
+
         {this.props.loading &&
           (!this.props.userListings && (
             <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
@@ -30,10 +34,16 @@ class MyListingsView extends Component {
             </div>
           ))}
 
+
         {this.props.userListings && <MyList {...this.props} />}
       </AccountLayout>
     );
   }
 }
+
+MyListingsView.propTypes = {
+  userListings: PropTypes.object,
+  loading: PropTypes.object
+};
 
 export default MyListingsView;
