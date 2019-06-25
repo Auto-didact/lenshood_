@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import { Icon, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout } from '@gqlapp/look-client-react';
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
 
 import UserForm from './UserForm';
 import settings from '../../../../settings';
@@ -28,11 +28,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
     <PageLayout>
       {renderMetaData()}
       {loading && !user ? (
-        <div className="loader">
-          <Spin size="large" />
-          <br />
-          {t('userEdit.loadMsg')}
-        </div>
+        <Loader text={t('userEdit.loadMsg')} />
       ) : (
         <div style={{}}>
           <Link

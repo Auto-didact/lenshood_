@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { Spin } from 'antd';
-import { AccountLayout } from '@gqlapp/look-client-react';
+import { AccountLayout,Loader } from '@gqlapp/look-client-react';
 import MyList from './components/MyList';
 import settings from '../../../../settings';
 
@@ -23,11 +23,7 @@ class MyListingsView extends Component {
 
         {this.props.loading &&
           (!this.props.userListings && (
-            <div className="loader">
-              <Spin size="large" />
-              <br />
-              Loading...
-            </div>
+            <Loader text="Loading..." />
           ))}
 
         {this.props.userListings && <MyList {...this.props} />}

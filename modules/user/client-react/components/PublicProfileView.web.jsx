@@ -4,9 +4,9 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, CardTitle, PageLayout } from '@gqlapp/look-client-react';
+import { Card, CardGroup, CardText, CardTitle, PageLayout,Loader } from '@gqlapp/look-client-react';
 // To Do Abstract Out
-import { Row, Col, Divider, Icon, Button, Tabs, Spin } from 'antd';
+import { Row, Col, Divider, Icon, Button, Tabs } from 'antd';
 import PublicProfileHead from './components/PublicProfileHead';
 import PublicUsersCard from './components/PublicUsersCard';
 import PublicProfileListingCard from './components/PublicProfileListingCard';
@@ -125,11 +125,7 @@ class PublicProfileView extends React.Component {
     if (loading && !user) {
       return (
         <PageLayout select="/profile">
-          <div className="loader">
-            <Spin size="large" />
-            <br />
-            {t('profile.loadMsg')}
-          </div>
+          <Loader text={t('profile.loadMsg')} />
         </PageLayout>
       );
     } else {

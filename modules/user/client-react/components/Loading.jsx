@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin } from 'antd';
 import { translate } from '@gqlapp/i18n-client-react';
-import { LayoutCenter } from '@gqlapp/look-client-react';
+import { LayoutCenter,Loader } from '@gqlapp/look-client-react';
 
 const Loading = ({ t }) => (
   <LayoutCenter>
-    <div className="loader">
-      <Spin size="large" />
-      <br />
-      {t('loading')}
-    </div>
+  <Loader text={t('loading')} />
   </LayoutCenter>
 );
 
