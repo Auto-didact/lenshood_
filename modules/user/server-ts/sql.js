@@ -576,7 +576,7 @@ export class User extends Model {
     )['count(`u`.`id`)'];
   }
 
-  async endorseOrUnEndorse(endorsee_id, endorser_id) {
+  async toggleEndorse(endorsee_id, endorser_id) {
     const count = camelizeKeys(
       await knex
         .count('u.id')
@@ -617,7 +617,7 @@ export class User extends Model {
     )['count(`u`.`id`)'];
   }
 
-  async followUnFollowUser(userId, followerId) {
+  async toggleFollow(userId, followerId) {
     const count = camelizeKeys(
       await knex
         .count('u.id')
@@ -646,6 +646,21 @@ export class User extends Model {
       follwerCount: follwerCount,
       isFollwed: isFollowed
     };
+  }
+
+  async toggleIsFeatured(userId, isFeatured) {
+    return knex('user')
+      .where({ id: userId })
+      .update({ is_featured: isFeatured });
+  }
+
+  async featuredUsers() {
+    const res = camelizeKeys(
+      await knex('user')
+        .where('is_featured', true)
+        .orderBy('id', 'desc')
+    );
+    return res;
   }
 }
 

@@ -9,6 +9,7 @@ type Listing {
   description: String
   status: String
   isActive: Boolean
+  isFeatured: Boolean
   listingImages: [ListingImage]
   listingDetail: ListingDetail
   listingRental: ListingRental
@@ -81,10 +82,20 @@ type ListingReview {
   rating: String!
 }
 
+type WatchList {
+  id: Int!
+  listingId: Int!
+  userId: Int!
+  shouldNotify: String!
+}
+
 extend type Query {
   listings(limit: Int, after: Int): Listings
   listing(id: Int!): Listing
   userListings(userId: Int): [Listing]
+  watchlist(userId: Int!): [WatchList]
+  watchStatus(listingId: Int!, userId: Int): Boolean
+  featuredListings: [Listing]
 }
 
 extend type Mutation {
@@ -103,6 +114,16 @@ extend type Mutation {
   editListingReview(input: EditListingReviewInput!): ListingReview
 
   toggleListingStatus(id: Int!): Listing
+
+  #toggle isFeatured
+  toggleListingIsFeatured(id: Int!, isFeatured: Boolean!): Boolean
+
+  # to Add/Remove from watchlist
+  addOrRemoveWatchList(
+    user_id: Int!
+    listing_id: Int!
+    should_notify: Boolean
+  ): String
 }
 
 # Input for addListing Mutation
@@ -142,6 +163,7 @@ input AddListingInput {
   description: String
   status: String
   isActive: Boolean
+  isFeatured: Boolean
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput
@@ -157,6 +179,7 @@ input EditListingInput {
   description: String
   status: String
   isActive: Boolean
+  isFeatured: Boolean
   listingImages: [ListingImageInput]
   listingDetail: ListingDetailInput
   listingRental: ListingRentalInput

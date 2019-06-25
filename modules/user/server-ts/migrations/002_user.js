@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
-    knex.schema.hasTable('users').then(function(exists) {
+    knex.schema.hasTable('user').then(function(exists) {
       if (!exists)
         knex.schema.createTable('user', table => {
           table.increments();
@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
           table.string('password_hash');
           table.string('role').defaultTo('user');
           table.boolean('is_active').defaultTo(false);
+          table.boolean('is_featured').defaultTo(false);
           table.timestamps(false, true);
         });
     }),
