@@ -97,7 +97,7 @@ class NavBar extends React.Component {
   };
 
   menuList = (
-    <Menu style={{ fontWeight: 'lighter' }} selectedKeys={[this.props.location.pathname]}>
+    <Menu style={{ fontWeight: 'lighter' }} selectedKeys={[this.props.location.pathname]} mode="vertical">
       <Menu.Item key="/about-us">
         <NavLink to="/about-us">About us</NavLink>
       </Menu.Item>
@@ -237,7 +237,7 @@ class NavBar extends React.Component {
             {this.state.show1 ? this.menuList : null}
 
             {__DEV__ ? (
-              <Menu style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }}>
+              <Menu style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }} mode="vertical">
                 <Menu.Item className="about" style={{ fontWeight: 'bolder' }} key="dev">
                   <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle(2)}>
                     <div>
@@ -264,6 +264,7 @@ class NavBar extends React.Component {
               <Menu
                 style={{ background: '#fff', color: '#23b195', fontWeight: 'lighter' }}
                 selectedKeys={[this.props.location.pathname]}
+                mode="vertical"
               >
                 <Menu.Item className="about" style={{ fontWeight: 'bolder' }} key="admin">
                   <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle(3)}>
