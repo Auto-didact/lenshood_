@@ -38,7 +38,7 @@ const ListingEditView = ({ loading, listing, location, editListing, t, currentUs
     return (
       <PageLayout>
         {renderMetaData()}
-        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+        <div className="loader">
           <Spin size="large" />
           <br />
           {t('listing.loadMsg')}

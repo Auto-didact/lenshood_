@@ -52,7 +52,7 @@ class EmailAdd extends Component {
     return (
       <VerificationModal button="Email" title="Email Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? (
-          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+          <div className="loader" >
             <Spin size="large" />
             <br />
             Loading...

@@ -28,7 +28,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
     <PageLayout>
       {renderMetaData()}
       {loading && !user ? (
-        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+        <div className="loader">
           <Spin size="large" />
           <br />
           {t('userEdit.loadMsg')}

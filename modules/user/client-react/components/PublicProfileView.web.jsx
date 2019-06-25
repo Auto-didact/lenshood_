@@ -125,7 +125,7 @@ class PublicProfileView extends React.Component {
     if (loading && !user) {
       return (
         <PageLayout select="/profile">
-          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+          <div className="loader">
             <Spin size="large" />
             <br />
             {t('profile.loadMsg')}

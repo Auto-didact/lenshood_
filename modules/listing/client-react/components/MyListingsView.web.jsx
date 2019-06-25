@@ -23,7 +23,7 @@ class MyListingsView extends Component {
 
         {this.props.loading &&
           (!this.props.userListings && (
-            <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+            <div className="loader">
               <Spin size="large" />
               <br />
               Loading...

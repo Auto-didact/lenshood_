@@ -6,7 +6,7 @@ import { LayoutCenter } from '@gqlapp/look-client-react';
 
 const Loading = ({ t }) => (
   <LayoutCenter>
-    <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+    <div className="loader">
       <Spin size="large" />
       <br />
       {t('loading')}
