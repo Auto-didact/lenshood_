@@ -48,7 +48,7 @@ class MyList extends Component {
         ? parsedListings.push(item)
         : item.status === this.state.status && parsedListings.push(item);
     });
-    console.log(parsedListings);
+
     return parsedListings;
   }
   renderNoListings() {
