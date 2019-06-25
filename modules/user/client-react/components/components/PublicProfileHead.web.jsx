@@ -1,9 +1,10 @@
 import React from 'react';
-import { CardGroup } from '@gqlapp/look-client-react';
-import { Avatar, Icon, Row, Col, Divider, Button } from 'antd';
+import PropTypes from 'prop-types';
+
+import { Avatar, Icon } from 'antd';
 import { ImgUser } from '../../constants/DefaultImages';
 
-const PublicProfileHead = ({ profile, description, role, username, email, city, portfolios }) => {
+const PublicProfileHead = ({ profile, description, role, portfolios }) => {
   return (
     <div className="public-profilehead-container">
       <div className="public-profile-avatar">
@@ -49,9 +50,15 @@ const PublicProfileHead = ({ profile, description, role, username, email, city, 
             : ''}
         </div>
       </div>
-      <div className="public-profile-ops"><Button>Follow<Button><Button>Endorse<Button><div>
     </div>
   );
+};
+PublicProfileHead.propTypes = {
+  profile: PropTypes.object,
+  description: PropTypes.string,
+  t: PropTypes.func,
+  role: PropTypes.string,
+  portfolios: PropTypes.object
 };
 
 export default PublicProfileHead;

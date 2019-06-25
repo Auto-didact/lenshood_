@@ -6,6 +6,11 @@
 .public-profile-ops{
 
 }
+.public-profile-connections{
+  text-align: right ;
+  margin-top: 15px;
+
+}
 
 
 .public-profile-avatar{
@@ -33,8 +38,32 @@
 .public-profile-userInfo{
 
   margin:0px 5px !important;
-  width:450px !important;
+  width:550px !important;
   text-align: left !important;
 
 }
+.public-profile-connections{
+  text-align: left !important;
+
+
+}
+}
+
+@media only screen and (min-width: 1023px){
+  .public-profile-userInfo{
+
+    margin:0px 5px !important;
+    width:450px !important;
+    text-align: left !important;
+  
+  }
+}
+@media only screen and (min-width: 1223px){
+  .public-profile-userInfo{
+
+    margin:0px 5px !important;
+    width:550px !important;
+    text-align: left !important;
+  
+  }
 }

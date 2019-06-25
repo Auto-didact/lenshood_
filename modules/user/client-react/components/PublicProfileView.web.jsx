@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
-import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, CardTitle, PageLayout } from '@gqlapp/look-client-react';
+import { PageLayout } from '@gqlapp/look-client-react';
 // To Do Abstract Out
-import { Row, Col, Divider, Icon, Button, Tabs } from 'antd';
+import { Row, Col, Divider, Tabs } from 'antd';
 import PublicProfileHead from './components/PublicProfileHead';
 import PublicUsersCard from './components/PublicUsersCard';
 import PublicProfileListingCard from './components/PublicProfileListingCard';
@@ -17,7 +15,7 @@ const { TabPane } = Tabs;
 
 class PublicProfileView extends React.Component {
   userCardData = () => {
-    const { user, loading } = this.props;
+    const { user } = this.props;
     const { t } = this.props;
     const endorsements = user.endorsements;
 
@@ -158,8 +156,8 @@ class PublicProfileView extends React.Component {
                   />
                 </Col>*/}
 
-                <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>
-                  <div bodyStyle={{ margin: '0px', padding: '0px' }} style={{ margin: '5px' }}>
+                <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
+                  <div className="public-profile-connections">
                     <Tabs tabPosition="left" defaultActiveKey="1">
                       <TabPane tab="Endorsements" key="1">
                         <PublicUsersCard data={this.userCardData().endorsements} />
@@ -179,6 +177,9 @@ class PublicProfileView extends React.Component {
               </Row>
             </Col>
           </Row>
+          <Divider />
+          <h2 style={{ marginLeft: '10px' }}>Listings</h2>
+          <Divider />
           <Row>
             {user && user.listings.length !== 0
               ? user.listings.map((listing, key) => (
@@ -195,8 +196,8 @@ class PublicProfileView extends React.Component {
 }
 
 PublicProfileView.propTypes = {
-  UserLoading: PropTypes.bool,
-  User: PropTypes.object,
+  loading: PropTypes.bool,
+  user: PropTypes.object,
   t: PropTypes.func
 };
 export default translate('user')(PublicProfileView);
