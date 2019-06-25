@@ -67,7 +67,7 @@ const InviteDetailsCard = ({
         </Col>
         <Col sm={4} xs={7}>
           <div>
-            {document.queryCommandSupported("copy") && (
+            {/* {document.queryCommandSupported("copy") && (
               <div>
                 <Button
                   onClick={copyToClipboard}
@@ -78,7 +78,7 @@ const InviteDetailsCard = ({
                   Copy
                 </Button>
               </div>
-            )}
+            )} */}
           </div>
         </Col>
         <br />

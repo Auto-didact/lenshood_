@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
@@ -37,7 +38,11 @@ const ListingEditView = ({ loading, listing, location, editListing, t, currentUs
     return (
       <PageLayout>
         {renderMetaData()}
-        <div className="text-center">{t('listing.loadMsg')}</div>
+        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+          <Spin size="large" />
+          <br />
+          {t('listing.loadMsg')}
+        </div>
       </PageLayout>
     );
   } else {

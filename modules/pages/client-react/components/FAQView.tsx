@@ -70,21 +70,17 @@ const FAQView = ({ t }: FAQViewProps) => {
         <h3>How do I contact the LensHood team?</h3>
         <p>
           A good customer experience is our top priority. If you have any issues, you can contact us via our Instagram
-          page @we_are_lenshood, via mail at lenshoodiitguwahati@gmail.com, or through phone on 7896889029/8811093811.
+          page @we_are_lenshood, via mail at reachus@lenshood.in, or through phone on 7896889029/8811093811.
         </p>
         <h3>Cancellation Policy</h3>
-        <strong>As a borrower, you can cancel your order without any fine given that:</strong>
+        <h4><strong>For Borrowers:</strong></h4>
         <ul>
-          <li>The order has not been accepted by the lender yet.</li>
-          <li>It is cancelled within 48 hours of booking.</li>
+          <li>Borrowers can cancel a rental request before it is accepted, or within 2 hours of rental acceptance for free.</li>
+          <li>If the Borrower cancels within 48 hours of the rental pick-up date, they will receive a 50% refund.</li>
           <li>
-            If it is cancelled after 48 hours of booking, you have to pay a cancellation charge of 30% of the rental -
-            price.
+            If the Borrower cancels within 24 hours of the rental pick-up date, the rental is non-refundable.
           </li>
-          <li>
-            If it is cancelled anytime in the 48 hours before the start of the rental, you may be subject to pay the
-            full rental price.
-          </li>
+
         </ul>
         <p>
           If LensHood believes that you intend to cause harm to any items you rent through the platform, or believe you
@@ -92,24 +88,12 @@ const FAQView = ({ t }: FAQViewProps) => {
           and charge you an appropriate sum. This sum will be up to but not more than the total value of the items in
           question. It is at LensHood's discretion to determine what is an appropriate sum in each instance.
         </p>
-        <strong>As a lender, you can cancel your order without a fine given that:</strong>
-        <ul>
-          <li>This is your first time cancelling.</li>
-          <li>The borrower's order has not been accepted yet.</li>
-          <li>It is cancelled within 48 hours of accepting the request.</li>
-          <li>
-            If it is cancelled after 48 hours of booking, you have to pay a cancellation charge of 30% of the rental
-            price.
-          </li>
-          <li>
-            If it is cancelled anytime in the 48 hours before the start of the rental, you may be subject to pay the
-            full rental price.
-          </li>
-        </ul>
+        <h4><strong>For Lenders:</strong></h4>
+
         <p>
           We highly discourage owners from cancelling—you should never accept a rental unless you are certain you can
           fulfill it. However, if you are an owner and need to cancel because of an unforeseen event, email us at
-          lenshoodiitguwahati@gmail.com. Whenever you cancel a rental, you'll get an automated review on your profile
+          reachus@lenshood.in. Whenever you cancel a rental, you'll get an automated review on your profile
           saying that you cancelled. Any applicable cancellation fees are automatically deducted from your next rental
           payout.
         </p>

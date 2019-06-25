@@ -20,17 +20,17 @@ export default class ReferModal extends React.Component {
             you can track your earnings
           </p>
           <p className="marginB20">
-            {this.props.referredUserList.length > 0
-              ? this.props.referredUserList.map(item => (
-                  <div>
+            {this.props.referrals
+              ? this.props.referrals.map(item => (
+                  <div key={item.id}>
                     <Badge
                       status="success"
                       text={
                         <span>
-                          <strong>{`${item.firstname} ${
-                            item.lastname
+                          <strong>{`${item.referredUser.profile.firstname} ${
+                            item.referredUser.profile.lastname
                           }`}</strong>{" "}
-                          {`(${item.username})`}
+                          {`(${item.referredUser.username})`}
                         </span>
                       }
                     />

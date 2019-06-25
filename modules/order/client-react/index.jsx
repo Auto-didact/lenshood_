@@ -42,21 +42,21 @@ export default new ClientModule({
     <Route path="/checkout-pay" exact component={CheckoutPay} />,
     <Route path="/checkout-order" exact component={CheckoutOrder} />
   ],
-  navItemAccount: [
-    <IfLoggedIn key="/my-orders">
-      <MenuItem>
-        <NavLinkMyOrdersWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
-  ],
-  navItemUser: [
-    <IfLoggedIn key="/my-orders">
-      <MenuItem>
-        <NavLink to="/my-orders">
-          <MyOrdersNavItemAccount />
-        </NavLink>
-      </MenuItem>
-    </IfLoggedIn>
-  ],
-  localization: [{ ns: "order", resources }]
+  // navItemUser: [
+  //   <IfLoggedIn key="/my-orders">
+  //     <MenuItem>
+  //       <NavLink to="/my-orders">
+  //         <MyOrdersNavItemAccount />
+  //       </NavLink>
+  //     </MenuItem>
+  //   </IfLoggedIn>
+  // ],
+  // navItemAccount: [
+  //   <IfLoggedIn key="/my-orders">
+  //     <MenuItem>
+  //       <NavLinkMyOrdersWithI18n />
+  //     </MenuItem>
+  //   </IfLoggedIn>
+  // ],
+  localization: [{ ns: 'order', resources }]
 });

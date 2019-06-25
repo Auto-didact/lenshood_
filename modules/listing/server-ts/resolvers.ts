@@ -3,11 +3,11 @@ import { PubSub, withFilter } from "graphql-subscriptions";
 // interfaces
 
 import { Listing, ListingReview, Identifier } from "./sql";
-import withAuth from "graphql-auth";
+// import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = "On Shelf";
 const IDLE = "Idle";
-const ONRENT = "On Rent";
+// const ONRENT = "On Rent";
 
 interface Edges {
   cursor: number;
@@ -82,7 +82,7 @@ export default (pubsub: PubSub) => ({
       input.userId = context.identity.id;
       const id = await context.Listing.addListing(input);
       const listing = await context.Listing.listing(id);
-      // publish for listing list
+      // publish for liswting list
       pubsub.publish(LISTINGS_SUBSCRIPTION, {
         listingsUpdated: {
           mutation: "CREATED",

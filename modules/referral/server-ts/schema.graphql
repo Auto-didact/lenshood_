@@ -1,16 +1,31 @@
 # Entity
-type TypeName {
-  typeName: String!
+type Referral {
+  id: Int
+  referredUser: User
+  createdAt: String
+  updatedAt: String
 }
 
 extend type Query {
-  queryName: TypeName
+  referrals(userId: Int): [Referral]
 }
 
 extend type Mutation {
-  mutationName(varName: Int!): TypeName
+  addReferred(Userinput: AddReferralInput!): Referral
+}
+
+input AddReferralInput {
+  userId: Int
+  referral: String!
+  referredIUserd: Int
 }
 
 extend type Subscription {
-  subscriptionName: TypeName
+  referredUUserpdated(id: Int!): UpdateReferredPUserayload
+}
+
+type UpdateReferredPUserayload {
+  mutation: String!
+  id: Int!
+  node: Referral!
 }

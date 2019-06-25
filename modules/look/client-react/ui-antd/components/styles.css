@@ -89,14 +89,13 @@ overflow-x:hidden;
 .ant-drawer-body ul{
   background:#fff;
 }
-.ant-drawer-body li{
-  border-left:2px solid #23b195;
-}
+
 .ant-drawer-body>ul>li:nth-child(2){
   height:100%;
 }
 .ant-drawer-body>ul>li:nth-child(2)>a{
   margin-top:10px;
+  margin-bottom:10px;
 }
 .ant-drawer-body>ul>li:nth-child(3){
   margin-top:10px;
@@ -106,4 +105,7 @@ overflow-x:hidden;
 }
 .ant-drawer-body a{
 color:#23b195;
+}
+.ant-menu-item-selected{
+  border-left:2px solid #23b195 ;
 }

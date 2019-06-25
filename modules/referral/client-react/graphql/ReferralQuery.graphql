@@ -1,6 +1,7 @@
-# GraphQL queries
-query queryNameQuery {
-  queryName {
-    typename
+#import "./Referral.graphql"
+
+query myReferrals {
+  referrals {
+    ...ReferralInfo
   }
 }

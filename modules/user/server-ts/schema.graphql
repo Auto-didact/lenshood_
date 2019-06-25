@@ -20,6 +20,9 @@ type User {
   # Listing Module
   listings: [Listing]
 
+  # Referral Module
+  referrals: [Referral!]!
+
   authCertificate: CertificateAuth
   authFacebook: FacebookAuth
   authGoogle: GoogleAuth

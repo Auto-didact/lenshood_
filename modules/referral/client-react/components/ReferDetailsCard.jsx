@@ -37,7 +37,7 @@ export default class ReferDetailsCard extends React.Component {
             modal1Visible={this.state.modal1Visible}
             setModal1Visible={this.setModal1Visible.bind(this)}
             cashEarned={this.state.cashEarned}
-            referredUserList={this.state.referredUserList}
+            referrals={this.props.referrals}
           />
         </Card>
         <Card className="boxShadowTheme borderRadius9">
