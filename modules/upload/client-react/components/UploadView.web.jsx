@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import filesize from 'filesize';
 
-import { PageLayout, Row, Col, Table, Button, Alert,Spin } from '@gqlapp/look-client-react';
+import { PageLayout, Row, Col, Table, Button, Alert, Spin } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
 
 const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile, t }) => {
@@ -60,7 +60,13 @@ const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile
             </Dropzone>
           </Col>
           <Col xs={8}>
-            {loading && <div className="text-center" style={{marginTop:'50%',textAlign:'center'}}><Spin size="large"/><br/>Loading...</div>}
+            {loading && (
+              <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+                <Spin size="large" />
+                <br />
+                Loading...
+              </div>
+            )}
             {error && <Alert color="error">{error}</Alert>}
             {files && <Table dataSource={files} columns={columns} />}
           </Col>
