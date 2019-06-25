@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+
+import { Link } from 'react-router-dom';
+import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout } from '@gqlapp/look-client-react';
+import { Card, CardGroup, CardText, CardTitle, PageLayout } from '@gqlapp/look-client-react';
 // To Do Abstract Out
-import { Row, Col, Divider, Tabs } from 'antd';
+import { Row, Col, Divider, Icon, Button, Tabs, Spin } from 'antd';
+
 import PublicProfileHead from './components/PublicProfileHead';
 import PublicUsersCard from './components/PublicUsersCard';
 import PublicProfileListingCard from './components/PublicProfileListingCard';
@@ -123,20 +127,29 @@ class PublicProfileView extends React.Component {
     if (loading && !user) {
       return (
         <PageLayout select="/profile">
-          <div className="text-center">{t('profile.loadMsg')}</div>
+
+          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
+            <Spin size="large" />
+            <br />
+            {t('profile.loadMsg')}
+          </div>
+
         </PageLayout>
       );
     } else {
       return (
         <PageLayout select="/profile">
+
           <Row style={{ margin: '40px 0px ' }}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <div style={{ margin: '5px' }}>
+
                 <PublicProfileHead
                   profile={user.profile && user.profile}
                   description={this.userCardData().profileHead}
                   role={user.role}
                   username={user.username}
+
                   portfolios={user.portfolios}
                 />
               </div>
@@ -156,8 +169,10 @@ class PublicProfileView extends React.Component {
                   />
                 </Col>*/}
 
+
                 <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
                   <div className="public-profile-connections">
+
                     <Tabs tabPosition="left" defaultActiveKey="1">
                       <TabPane tab="Endorsements" key="1">
                         <PublicUsersCard data={this.userCardData().endorsements} />
