@@ -3,7 +3,6 @@ import { Modal, Badge, Card } from "antd";
 
 export default class ReferModal extends React.Component {
   render() {
-    console.log("REFERRALSSSSSSS---->", this.props.referrals);
     return (
       <Modal
         style={{ top: 20 }}

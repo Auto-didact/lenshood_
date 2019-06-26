@@ -48,14 +48,12 @@ export default class ReferralDao extends Model {
   }
 
   public async referrals(userId: number) {
-    console.log("USER ID",userId)
     const res = camelizeKeys(
       await ReferralDao.query()
         .where("user_id", userId)
         .eager(eager)
         .orderBy("id", "desc")
     );
-    console.log("res ID",res)
     return res;
   }
 

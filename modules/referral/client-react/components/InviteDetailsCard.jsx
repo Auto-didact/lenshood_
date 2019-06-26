@@ -67,7 +67,7 @@ const InviteDetailsCard = ({
         </Col>
         <Col sm={4} xs={7}>
           <div>
-            {/* {document.queryCommandSupported("copy") && (
+            {document.queryCommandSupported("copy") && (
               <div>
                 <Button
                   onClick={copyToClipboard}
@@ -78,7 +78,7 @@ const InviteDetailsCard = ({
                   Copy
                 </Button>
               </div>
-            )} */}
+            )}
           </div>
         </Col>
         <br />
@@ -212,6 +212,10 @@ const InviteDetailsCardWithFormik = withFormik({
     // }
   ) {
     console.log(values);
+
+    if (!values.inviteVal.number && !values.inviteVal.email) {
+      message.warn("No One to invite!");
+    }
 
     if (values.inviteVal.number) {
       let x = values.inviteVal.number.toString();

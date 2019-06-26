@@ -8,16 +8,8 @@ class Referral extends React.Component {
     username: "theZalophus",
     cashEarned: 50,
     totalCredit: 27
-    // referredUserList: [
-    //   { id: 5, firstname: "Natsu", lastname: "Dragneel", username: "natsu" },
-    //   { id: 1, firstname: "Naruto", lastname: "Uzumaki", username: "naruto" },
-    //   { id: 4, firstname: "Monkey", lastname: "D. Luffy", username: "luffy" },
-    //   { id: 8, firstname: "Asta", lastname: "BlackBull", username: "asta" },
-    //   { id: 13, firstname: "Edward", lastname: "Erlic", username: "edward" }
-    // ]
   };
   render() {
-    console.log(this.props);
     return <ReferralView state={this.state} referrals={this.props.referrals} />;
   }
 }

@@ -12,8 +12,6 @@ const REFERRED_SUBSCRIPTION = "referred_subscription";
 export default (pubsub: PubSub) => ({
   Query: {
     referrals(obj: any, { userId }: any, context: any) {
-      console.log("USER ID Query", userId);
-      console.log("USER ID Query", context.identity.id);
       return context.Referral.referrals(userId || context.identity.id);
     }
   },
