@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
+import { Spin } from 'antd';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import { LayoutCenter, Loader } from '@gqlapp/look-client-react';
+import { LayoutCenter } from '@gqlapp/look-client-react';
 
 import settings from '../../../../../../settings';
 
@@ -15,7 +16,13 @@ interface SubscribersOnlyViewProps {
 
 export default ({ loading, subscriberNumber, t }: SubscribersOnlyViewProps) => {
   if (loading) {
-    return <Loader text={t('loading')} />;
+    return (
+      <div className="loader">
+        <Spin size="large" />
+        <br />
+        {t('loading')}
+      </div>
+    );
   }
 
   return (

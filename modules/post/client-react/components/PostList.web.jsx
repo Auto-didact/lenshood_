@@ -3,16 +3,20 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Table, Button, Pagination ,Loader} from '@gqlapp/look-client-react';
+import { PageLayout, Table, Button, Pagination } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
 
 const { itemsNumber, type } = settings.pagination.web;
 
 const Loading = ({ t }) => (
-  
-   <Loader text={t('post.loadMsg')} />
+  <div className="loader" >
+    <Spin size="large" />
+    <br />
+    {t('post.loadMsg')}
+  </div>
 );
 Loading.propTypes = { t: PropTypes.func };
 

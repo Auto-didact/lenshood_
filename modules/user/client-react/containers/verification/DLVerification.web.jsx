@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import{Loader} from  '@gqlapp/look-client-react';
+import { Spin } from 'antd';
 import VerificationModal from '../../components/verification/VerificationModal';
 import DLVerificationForm from '../../components/verification/DLVerificationForm';
 import DrivingLicense from '../../components/verification/DrivingLicense';
@@ -49,7 +49,11 @@ class DLAdd extends Component {
     return (
       <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? (
-          <Loader text="Loading..." />
+          <div className="loader">
+            <Spin size="large" />
+            <br />
+            Loading...
+          </div>
         ) : (
           ''
         )}

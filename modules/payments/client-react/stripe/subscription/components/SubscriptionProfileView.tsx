@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
+import { Spin } from 'antd';
 import CreditCardInfo from '../containers/CreditCardInfo';
 import CancelSubscription from '../containers/CancelSubscription';
-import { CardGroup, CardText, CardTitle, Loader } from '@gqlapp/look-client-react';
+import { CardGroup, CardText, CardTitle } from '@gqlapp/look-client-react';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 
 interface SubscriptionProfileViewProps {
@@ -14,7 +15,13 @@ interface SubscriptionProfileViewProps {
 
 export default ({ t, loading, stripeSubscription }: SubscriptionProfileViewProps) => {
   if (loading) {
-    return <Loader text={t('loading')} />;
+    return (
+      <div className="loader">
+        <Spin size="large" />
+        <br />
+        {t('loading')}
+      </div>
+    );
   }
 
   return (
