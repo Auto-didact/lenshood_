@@ -61,7 +61,7 @@ const UploadView = ({ files, error, loading, handleUploadFiles, handleRemoveFile
           </Col>
           <Col xs={8}>
             {loading && (
-              <div className="loader">
+              <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
                 <Spin size="large" />
                 <br />
                 Loading...

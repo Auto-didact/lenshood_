@@ -12,7 +12,7 @@ const { itemsNumber, type } = settings.pagination.web;
 const margin = '5%';
 
 const Loading = ({ t }) => (
-  <div className="loader">
+  <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
     <Spin size="large" />
     <br />
     {t('listing.loadMsg')}

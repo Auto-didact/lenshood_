@@ -37,7 +37,7 @@ const PostEditView = ({ loading, post, match, location, subscribeToMore, editPos
     return (
       <PageLayout>
         {renderMetaData()}
-        <div className="loader" >
+        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
           <Spin size="large" />
           <br />
           {t('post.loadMsg')}

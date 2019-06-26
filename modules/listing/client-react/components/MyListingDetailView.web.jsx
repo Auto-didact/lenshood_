@@ -90,7 +90,7 @@ class MyListDetailsView extends Component {
               }
             ]}
           />
-          <div className="loader">
+          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
             <Spin size="large" />
             <br />
             {t('listing.loadMsg')}

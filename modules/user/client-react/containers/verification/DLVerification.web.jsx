@@ -49,7 +49,7 @@ class DLAdd extends Component {
     return (
       <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? (
-          <div className="loader">
+          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
             <Spin size="large" />
             <br />
             Loading...

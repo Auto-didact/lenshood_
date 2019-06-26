@@ -120,7 +120,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   return (
     <>
       {loading && !users ? (
-        <div className="loader">
+        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
           <Spin size="large" />
           <br />
           {t('users.loadMsg')}

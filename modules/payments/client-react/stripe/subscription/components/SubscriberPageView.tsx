@@ -17,7 +17,7 @@ interface SubscribersOnlyViewProps {
 export default ({ loading, subscriberNumber, t }: SubscribersOnlyViewProps) => {
   if (loading) {
     return (
-      <div className="loader">
+      <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
         <Spin size="large" />
         <br />
         {t('loading')}

@@ -76,7 +76,7 @@ class MobileAdd extends Component {
     return (
       <VerificationModal button="Mobile" title="Mobile Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? (
-          <div className="loader" >
+          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
             <Spin size="large" />
             <br />
             Loading...

@@ -12,7 +12,7 @@ import settings from '../../../../settings';
 const { itemsNumber, type } = settings.pagination.web;
 
 const Loading = ({ t }) => (
-  <div className="loader" >
+  <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
     <Spin size="large" />
     <br />
     {t('post.loadMsg')}
