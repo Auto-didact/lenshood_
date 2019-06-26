@@ -5,7 +5,6 @@ import {
   Icon,
   DatePicker,
   // Checkbox,
-  Slider,
   Button,
   Card,
   Divider
