@@ -3,9 +3,7 @@ import Helmet from 'react-helmet';
 
 import PropTypes from 'prop-types';
 
-import { Spin } from 'antd';
-
-import { AccountLayout } from '@gqlapp/look-client-react';
+import { AccountLayout, Loader } from '@gqlapp/look-client-react';
 import MyList from './components/MyList';
 import settings from '../../../../settings';
 
@@ -24,16 +22,7 @@ class MyListingsView extends Component {
           ]}
         />
 
-
-        {this.props.loading &&
-          (!this.props.userListings && (
-            <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-              <Spin size="large" />
-              <br />
-              Loading...
-            </div>
-          ))}
-
+        {this.props.loading && (!this.props.userListings && <Loader text="Loading..." />)}
 
         {this.props.userListings && <MyList {...this.props} />}
       </AccountLayout>

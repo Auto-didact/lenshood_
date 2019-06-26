@@ -85,6 +85,7 @@ const UserForm = ({
   const isAdmin = isAdminFunction(userRole);
   return (
     <Form name="user" onSubmit={handleSubmit}>
+      
       {LYGflag == false || !valueCheck.avatar ? (
         <>
           <Field
@@ -96,6 +97,7 @@ const UserForm = ({
           />
         </>
       ) : null}
+      <div className="g2">
       {LYGflag == false ? (
         <>
           <Field
@@ -241,6 +243,8 @@ const UserForm = ({
           )}
         </>
       ) : null}
+      </div>
+      <div className="g3">
       <FieldArray
         name="addresses"
         render={arrayHelpers => (
@@ -261,7 +265,8 @@ const UserForm = ({
           />
         )}
       />
-
+    </div>
+    <div className="g4">
       {LYGflag == false ? (
         <>
           <FieldArray
@@ -323,6 +328,7 @@ const UserForm = ({
       <Button color="primary" type="submit">
         {t("userEdit.form.btnSubmit")}
       </Button>
+      </div>
     </Form>
   );
 };

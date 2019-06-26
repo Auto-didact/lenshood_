@@ -33,12 +33,12 @@ export default new ClientModule({
     <Route path="/checkout-pay" exact component={CheckoutPay} />,
     <Route path="/checkout-order" exact component={CheckoutOrder} />
   ],
-  navItemAccount: [
-    <IfLoggedIn key="/my-orders">
-      <MenuItem>
-        <NavLinkMyOrdersWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
-  ],
+  // navItemAccount: [
+  //   <IfLoggedIn key="/my-orders">
+  //     <MenuItem>
+  //       <NavLinkMyOrdersWithI18n />
+  //     </MenuItem>
+  //   </IfLoggedIn>
+  // ],
   localization: [{ ns: 'order', resources }]
 });
