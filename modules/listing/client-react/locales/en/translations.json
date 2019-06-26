@@ -83,7 +83,7 @@
     "title": "Listing Detail Page",
     "meta": "Detailed View of Listing",
     "content": {
-      "cancellationPolicy": "Borrowers can cancel a rental request before it is accepted, or within 2 hours of rental acceptance for free. If the Renter cancels within 48 hours of the rental pick-up date, they will receive a 50% refund. If the Renter cancels within 24 hours of the rental pick-up date, the rental is non-refundable.",
+      "cancellationPolicy": "Borrowers can cancel a rental request before it is accepted, or within 2 hours of rental acceptance for free. If the Borrower cancels within 48 hours of the rental pick-up date, they will receive a 50% refund. If the Borrower cancels within 24 hours of the rental pick-up date, the rental is non-refundable.",
       "damagePolicy": "Borrower will liable for any damages that happen during the period of the rental. Please get in touch with the LensHood team and let them know what happened; also take photographs of the damage."
     }
   }

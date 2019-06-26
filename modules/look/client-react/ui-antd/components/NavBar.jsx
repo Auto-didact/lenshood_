@@ -7,7 +7,7 @@ import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
 
 import MenuItem from './MenuItem';
 import DropDown from './Dropdown';
-import Avatar from './Avatar';
+import UserAvatar from "@gqlapp/user-client-react/containers/UserAvatar";
 import './styles.css';
 
 //import settings from '../../../../../settings';
@@ -176,7 +176,7 @@ class NavBar extends React.Component {
             {ref.modules.navItemsRight}
             <IfLoggedIn>
               <MenuItem>
-                <DropDown content={<Avatar />} noicon>
+                <DropDown content={<UserAvatar />} noicon>
                   {ref.modules.navItemsUser}
                 </DropDown>
               </MenuItem>
@@ -208,7 +208,7 @@ class NavBar extends React.Component {
           {/*ref.modules.navItemsRight*/}
           <IfLoggedIn>
             <MenuItem>
-              <DropDown content={<Avatar />} noicon>
+              <DropDown content={<UserAvatar />} noicon>
                 {ref.modules.navItemsUser}
               </DropDown>
             </MenuItem>
