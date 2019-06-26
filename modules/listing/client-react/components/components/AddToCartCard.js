@@ -7,7 +7,8 @@ import {
   // Checkbox,
   Button,
   Card,
-  Divider
+  Divider,
+  Tooltip
 } from 'antd';
 import { CardTitle } from '@gqlapp/look-client-react';
 import moment from 'moment';
@@ -160,16 +161,19 @@ export default class AddToCartCard extends Component {
             &#8377; {this.props.product.refundableDeposit}
           </div>
         </CardText>*/}
-        <div style={{ margin: '5px 0px 5px 0px' }}>
-          <Button size="large" block>
-            BOOK NOW
-          </Button>
-        </div>
-        <div style={{ margin: '5px 0px 5px 0px' }}>
-          <Button type="primary" size="large" block>
-            ADD TO BAG <Icon type="shopping" />
-          </Button>
-        </div>
+        <Tooltip title="We are not accepting orders yet">
+          <div style={{ margin: '5px 0px 5px 0px' }}>
+            <Button size="large" block disabled>
+              BOOK NOW
+            </Button>
+          </div>
+
+          <div style={{ margin: '5px 0px 5px 0px' }}>
+            <Button type="primary" size="large" block disabled>
+              ADD TO BAG <Icon type="shopping" />
+            </Button>
+          </div>
+        </Tooltip>
       </Card>
     );
   }
