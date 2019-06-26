@@ -1,6 +1,6 @@
 #import "./Referral.graphql"
 
-mutation addListing($input: AddReferralInput!) {
+mutation addReferred($input: AddReferralInput!) {
   addReferred(input: $input) {
     ...ReferralInfo
   }

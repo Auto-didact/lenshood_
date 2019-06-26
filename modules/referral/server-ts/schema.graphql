@@ -11,20 +11,20 @@ extend type Query {
 }
 
 extend type Mutation {
-  addReferred(Userinput: AddReferralInput!): Referral
+  addReferred(input: AddReferralInput!): Referral
 }
 
 input AddReferralInput {
   userId: Int
   referral: String!
-  referredIUserd: Int
+  referredId: Int
 }
 
 extend type Subscription {
-  referredUUserpdated(id: Int!): UpdateReferredPUserayload
+  referredUserUpdated(id: Int!): UpdateReferredUserPayload
 }
 
-type UpdateReferredPUserayload {
+type UpdateReferredUserPayload {
   mutation: String!
   id: Int!
   node: Referral!

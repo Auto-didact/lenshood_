@@ -3,6 +3,7 @@ import { Modal, Badge, Card } from "antd";
 
 export default class ReferModal extends React.Component {
   render() {
+    console.log("REFERRALSSSSSSS---->", this.props.referrals);
     return (
       <Modal
         style={{ top: 20 }}
@@ -27,8 +28,8 @@ export default class ReferModal extends React.Component {
                       status="success"
                       text={
                         <span>
-                          <strong>{`${item.referredUser.profile.firstname} ${
-                            item.referredUser.profile.lastname
+                          <strong>{`${item.referredUser.profile.firstName} ${
+                            item.referredUser.profile.lastName
                           }`}</strong>{" "}
                           {`(${item.referredUser.username})`}
                         </span>

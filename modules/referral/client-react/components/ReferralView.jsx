@@ -7,7 +7,7 @@ import InviteDetailsCard from "./InviteDetailsCard";
 import ReferDetailsCard from "./ReferDetailsCard";
 import { Row, Col } from "antd";
 
-const ReferralView = ({ t, state, props }) => {
+const ReferralView = ({ t, state, props, referrals }) => {
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t("title")}`}
@@ -33,7 +33,7 @@ const ReferralView = ({ t, state, props }) => {
           xs={{ span: 24, offset: 0 }}
           className="marginT20"
         >
-          <ReferDetailsCard state={state} {...props} />
+          <ReferDetailsCard state={state} referrals={referrals} />
         </Col>
       </Row>
       {/* </div> */}

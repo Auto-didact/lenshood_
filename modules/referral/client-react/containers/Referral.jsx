@@ -17,8 +17,8 @@ class Referral extends React.Component {
     // ]
   };
   render() {
-    console.log(this.props)
-    return <ReferralView state={this.state} {...this.props} />;
+    console.log(this.props);
+    return <ReferralView state={this.state} referrals={this.props.referrals} />;
   }
 }
 
