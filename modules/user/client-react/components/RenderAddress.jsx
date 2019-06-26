@@ -54,6 +54,13 @@ export default class RenderAddress extends React.Component {
     const isSelectable = this.props.isSelectable || false;
     //Form field Section-->>
     const keys = ['streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode'];
+    // const keys = [
+    //   { key: 'streetAddress1', label: 'Street Address 1' },
+    //   { key: 'streetAddress2', label: 'Street Address 2' },
+    //   { key: 'city', label: 'City' },
+    //   { key: 'state', label: 'State' },
+    //   { key: 'pinCode', label: 'Pin Code' }
+    // ];
     let formItems = [];
     let addressCard = [];
     {
@@ -75,17 +82,14 @@ export default class RenderAddress extends React.Component {
           //Geting all the addressCard.
           (addressCard[indexa] = (
             <div style={{ marginTop: 16 }} className="HomeAddress" key={indexa}>
-              <div className="HomeAddressBlock">
-                Home Address <Icon type="home" className="homeicon" />
-              </div>
+              <div className="HomeAddressBlock">Home Address {/* <Icon type="home" className="homeicon" /> */}</div>
               <br />
               <div className="addressLines">
-                <h4>{address.name && address.name + ','}</h4>
                 <h4>{address.streetAddress1 && address.streetAddress1 + ','}</h4>
-                <h4>{address.streetAddress2 && address.streetAddress2}</h4>
+                <h4>{address.streetAddress2 && address.streetAddress2 + ','}</h4>
+                <h4>{address.city && address.city + ','}</h4>
                 <h4>{address.state && address.state + ','}</h4>
                 <h4>{address.pinCode && address.pinCode + ','}</h4>
-                <h4>Mobile: {address.mobile && address.mobile}</h4>
               </div>
               <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(indexa)}>
                 <Icon type="delete" />
@@ -96,7 +100,7 @@ export default class RenderAddress extends React.Component {
               <Modal
                 visible={this.state.visible[indexa]}
                 title="Address"
-                okText="Save"
+                okText="Ok"
                 onCancel={() => this.modalControl(indexa, false)}
                 onOk={() => this.modalControl(indexa, false)}
               >
@@ -112,13 +116,13 @@ export default class RenderAddress extends React.Component {
 
     return (
       <>
-        <Row gutter={32}>
+        <Row gutter={32} align="top">
           <Col span={24}>
-            <h3 className="billingAddress">Billing Address</h3>
+            <h3 className="Addresses">Address</h3>
             <br />
           </Col>
-          <Col lg={14} sm={24}>
-            <Row gutter={32}>
+          <Col lg={14} sm={24} align="top">
+            <Row gutter={32} align="top">
               <Col
                 xs={{ span: 18, offset: 3 }}
                 sm={{ span: 12, offset: 0 }}

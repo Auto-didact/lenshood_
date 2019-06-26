@@ -1,17 +1,19 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { PageLayout } from '@gqlapp/look-client-react';
-import RenderAddress from '@gqlapp/user-client-react';
+// import RenderAddress from '@gqlapp/user-client-react';
 // import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import {
   Row,
-  Col
-  // , Icon, Radio, Button
+  Col,
+  Icon,
+  // Radio,
+  Button
 } from 'antd';
-import {
-  // withFormik,
-  FieldArray
-} from 'formik';
+// import {
+//   // withFormik,
+//   FieldArray
+// } from 'formik';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
@@ -61,7 +63,7 @@ export default class CheckoutBillView extends React.Component {
               <br />
             </Col>
             <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              {/* <Row gutter={16}>
+              <Row gutter={16}>
                 <Col
                   xs={{ span: 24, offset: 0 }}
                   sm={{ span: 12, offset: 0 }}
@@ -105,8 +107,8 @@ export default class CheckoutBillView extends React.Component {
                     <h5>Add a new address</h5>
                   </div>
                 </Col>
-              </Row> */}
-              <FieldArray
+              </Row>
+              {/* <FieldArray
                 name="addresses"
                 render={arrayHelpers => (
                   <RenderAddress
@@ -119,7 +121,7 @@ export default class CheckoutBillView extends React.Component {
                     // isSelectable={true}
                   />
                 )}
-              />
+              /> */}
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />
