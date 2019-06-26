@@ -4,8 +4,8 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Card, CardGroup, CardText, CardTitle, AccountLayout, Loader } from '@gqlapp/look-client-react';
-import { Row, Col, Divider, Icon, Button } from 'antd';
+import { Card, CardGroup, CardText, CardTitle, AccountLayout ,Loader } from '@gqlapp/look-client-react';
+import { Row, Col, Divider, Icon, Button, Spin } from 'antd';
 import UserVerifications from './verification/UserVerifications';
 import ProfileHead from './ProfileHead';
 import UsersCard from './UsersCard';
@@ -123,7 +123,7 @@ class ProfileView extends React.Component {
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">
-          <Loader text={t('profile.loadMsg')} />
+         <Loader text={t('profile.loadMsg')} />
         </AccountLayout>
       );
     } else if (currentUser) {

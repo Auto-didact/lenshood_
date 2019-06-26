@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import { Loader } from '@gqlapp/look-client-react';
+import{Loader} from  '@gqlapp/look-client-react';
 import VerificationModal from '../../components/verification/VerificationModal';
 import DLVerificationForm from '../../components/verification/DLVerificationForm';
 import DrivingLicense from '../../components/verification/DrivingLicense';
@@ -48,7 +48,11 @@ class DLAdd extends Component {
   render() {
     return (
       <VerificationModal button="Identification" title="Driving License Verification" vStatus={this.state.vStatus}>
-        {this.state.loading ? <Loader text="Loading..." /> : ''}
+        {this.state.loading ? (
+          <Loader text="Loading..." />
+        ) : (
+          ''
+        )}
         {this.state.form ? <DLVerificationForm onSubmit={this.onChange} /> : ''}
         {this.state.verified ? <DrivingLicense dl={this.state.dl} /> : ''}
       </VerificationModal>

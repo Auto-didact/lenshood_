@@ -3,17 +3,21 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Popconfirm, Icon } from 'antd';
+import { Spin, Popconfirm, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Table, Button, Pagination, Loader } from '@gqlapp/look-client-react';
+import { PageLayout, Table, Button, Pagination,Loader } from '@gqlapp/look-client-react';
 import ListingDrawer from './ListingDrawer';
 import settings from '../../../../settings';
 
 const { itemsNumber, type } = settings.pagination.web;
 
-const Loading = ({ t }) => <Loader text={t('listing.loadMsg')} />;
+const Loading = ({ t }) => (
+  
+    <Loader text={t('listing.loadMsg')} />
+  
+);
 Loading.propTypes = { t: PropTypes.func };
 
 const NoListingsMessage = ({ t }) => <div className="text-center">{t('listing.noListingsMsg')}</div>;

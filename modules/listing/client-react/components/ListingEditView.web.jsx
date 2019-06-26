@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import { PageLayout,Loader } from '@gqlapp/look-client-react';
 
 import ListingForm from './ListingForm';
 import settings from '../../../../settings';
@@ -37,8 +38,7 @@ const ListingEditView = ({ loading, listing, location, editListing, t, currentUs
     return (
       <PageLayout>
         {renderMetaData()}
-        const Loading = ({t}) => (<Loader text={t('listing.loadMsg')} />
-        );
+        const Loading = ({ t }) => (<Loader text={t('listing.loadMsg')} />);
       </PageLayout>
     );
   } else {
