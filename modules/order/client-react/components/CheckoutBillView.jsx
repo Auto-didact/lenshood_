@@ -1,14 +1,21 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { PageLayout } from '@gqlapp/look-client-react';
+import RenderAddress from '@gqlapp/user-client-react';
 // import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import { Row, Col, Icon, Radio } from 'antd';
+import {
+  Row,
+  Col
+  // , Icon, Radio, Button
+} from 'antd';
+import {
+  // withFormik,
+  FieldArray
+} from 'formik';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
-import SavedAddress from './SavedAddress';
 import naruto2 from '../resources/naruto2.jpg';
-import AddressForm from './AddressForm';
 
 const renderMetaData = () => (
   <Helmet
@@ -30,90 +37,14 @@ export default class CheckoutBillView extends React.Component {
       refund: 5000,
       totalRent: 1300
     },
-    address: [],
-    visible: false,
-    value: []
-  };
-
-  //Storing values in state.
-  componentDidMount() {
-    const address = this.state.address;
-    const obj = {};
-    const obj1 = {};
-    obj.id = 1;
-    obj.name = 'Ankit Jain';
-    obj.streetAddress1 = 'Room A308, Manas Hostel, IITG';
-    obj.streetAddress2 = 'Guwahati, North Guwahati';
-    obj.city = 'Guwahati';
-    obj.state = 'Assam';
-    obj.pinCode = '7810390';
-    address.push(obj);
-
-    obj1.id = 2;
-    obj1.name = 'Ankit Jain-2';
-    obj1.streetAddress1 = 'Room A308, Manas Hostel, IITG-2';
-    obj1.streetAddress2 = 'Guwahati, North Guwahati-2';
-    obj1.city = 'Guwahati-2';
-    obj1.state = 'Assam-2';
-    obj1.pinCode = '7810390';
-    address.push(obj1);
-
-    this.setState({ address });
-  }
-
-  showModal = adres => {
-    if (adres) {
-      this.setState({ visible: true, value: adres });
-    } else {
-      this.setState({ visible: true });
-      this.handleAddAddress;
+    address: {
+      name: 'Ankit Jain',
+      address1: 'Room A308, Manas Hostel, IITG',
+      address2: 'Guwahati, North Guwahati',
+      state: 'Assam',
+      PIN: '7810390',
+      mobile: '+91-9085626859'
     }
-  };
-
-  hideModal = () => {
-    this.setState({ visible: false });
-  };
-
-  handleSave = value => {
-    let { address } = this.state;
-
-    //Adding new/Updating address on the db.
-    var addressInDb = address.find(a => a.id === value.id) || {};
-    addressInDb.name = value.name;
-    addressInDb.streetAddress1 = value.streetAddress1;
-    addressInDb.streetAddress2 = value.streetAddress2;
-    addressInDb.city = value.city;
-    addressInDb.state = value.state;
-    addressInDb.pinCode = value.pinCode;
-
-    if (!addressInDb.id) {
-      addressInDb.id = Date.now().toString();
-      address.push(addressInDb);
-    }
-    console.log('addressInDb.id', addressInDb.id);
-    this.setState({ address, visible: false });
-    console.log('Received values from state/server: ', this.state.address);
-  };
-
-  handleDelete = adres => {
-    const address = this.state.address;
-    const newAddress = address.filter(m => m.id !== adres.id);
-    this.setState({ address: newAddress });
-    console.log('This address has been deleted');
-  };
-
-  handleAddAddress = () => {
-    <AddressForm
-      visible={this.state.visible}
-      onCancel={this.hideModal}
-      onSave={this.handleSave}
-      onSelect={this.handleSelected}
-    />;
-  };
-
-  handleSelected = adres => {
-    this.setState({ value: adres });
-    console.log('selected value', adres);
   };
 
   render() {
@@ -129,26 +60,34 @@ export default class CheckoutBillView extends React.Component {
               <h3 className="billingAddress">Billing Address</h3>
               <br />
             </Col>
-            <Col lg={14} sm={24}>
-              <Row gutter={32}>
+            <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
+              {/* <Row gutter={16}>
                 <Col
-                  xs={{ span: 18, offset: 3 }}
+                  xs={{ span: 24, offset: 0 }}
                   sm={{ span: 12, offset: 0 }}
-                  md={{ span: 10, offset: 0 }}
+                  md={{ span: 8, offset: 0 }}
                   className="PadB30"
                 >
-                  <Radio.Group defaultValue={this.state.address[0]}>
-                    <SavedAddress
-                      address={this.state.address}
-                      onDelete={this.handleDelete}
-                      visible={this.state.visible}
-                      onCancel={this.hideModal}
-                      onSave={this.handleSave}
-                      onShowModal={this.showModal}
-                      value={this.state.value}
-                      onSelect={this.handleSelected}
-                    />
-                  </Radio.Group>
+                  <div className="HomeAddress">
+                    <div className="HomeAddressBlock">
+                      Home Address <Icon type="home" className="homeicon" />
+                    </div>
+                    <br />
+                    <div className="addressLines">
+                      <h4>{this.state.address.name},</h4>
+                      <h4>{this.state.address.address1},</h4>
+                      <h4>{this.state.address.address2},</h4>
+                      <h4>{this.state.address.state}.</h4>
+                      <h4>{this.state.address.PIN}</h4>
+                      <h4>Mobile: {this.state.address.mobile}</h4>
+                    </div>
+                    <Button className="addressIcons" ghost>
+                      <Icon type="delete" />
+                    </Button>
+                    <Button className="addressIcons" ghost>
+                      <Icon type="edit" />
+                    </Button>
+                  </div>
                 </Col>
                 <Col
                   xs={{ span: 14, offset: 5 }}
@@ -156,14 +95,31 @@ export default class CheckoutBillView extends React.Component {
                   md={{ span: 6, offset: 0 }}
                   className="PadB30"
                 >
-                  <div className="AddNewAddressBlock" onClick={this.showModal}>
+                  <div
+                    className="AddNewAddressBlock"
+                    //   onClick={}
+                  >
                     <div className="AddNewAddress">
                       <Icon type="plus" />
                     </div>
                     <h5>Add a new address</h5>
                   </div>
                 </Col>
-              </Row>
+              </Row> */}
+              <FieldArray
+                name="addresses"
+                render={arrayHelpers => (
+                  <RenderAddress
+                    name="addresses"
+                    addresses={
+                      // addresses ||
+                      this.state.address
+                    }
+                    arrayHelpers={arrayHelpers}
+                    // isSelectable={true}
+                  />
+                )}
+              />
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />

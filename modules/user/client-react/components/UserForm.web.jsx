@@ -50,7 +50,8 @@ const UserForm = ({
   errors,
   setFieldValue,
   t,
-  // shouldDisplayRole, shouldDisplayActive,
+  // shouldDisplayRole,
+  // shouldDisplayActive,
   LYGflag,
   valueCheck
 }) => {

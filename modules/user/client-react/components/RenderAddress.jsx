@@ -1,61 +1,80 @@
 import React from 'react';
-import { Icon, Button, Radio } from 'antd';
+import { Row, Col, Icon, Button, Form, Radio, Modal } from 'antd';
+import { RenderField } from '@gqlapp/look-client-react';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
-import AddressComponent from './AddressComponent';
-import AddressForm from './AddressForm';
 
-export default class SavedAddress extends AddressComponent {
-  static get propTypes() {
-    return {
-      addresses: PropTypes.any,
-      arrayHelpers: PropTypes.object,
-      onShowModal: PropTypes.func
-      // onDelete: PropTypes.func,
-      // onCancel: PropTypes.func,
-      // onSelect: PropTypes.func,
-      // value: PropTypes.any,
-      // onSave: PropTypes.func,
-      // visible: PropTypes.any,
-      // onChange: PropTypes.func
-    };
-  }
+const FormItem = Form.Item;
+
+export default class RenderAddress extends React.Component {
+  state = {
+    visible: []
+  };
 
   componentDidMount() {
-    // console.log('CMD called');
     const visible = this.state.visible;
-    // console.log('visible', visible);
-    this.props.addresses.map((ad, index) => {
-      // console.log('ad', ad);
-      visible[index] = false;
-      // visible.push(index);
-      // this.state.addressCount++;
+    this.props.addresses.map((a, indexa) => {
+      visible[indexa] = false;
     });
-    console.log('count after map inside cmd', this.props.addresses.length);
-    // console.log('this.state.visible before', this.state.visible);
     this.setState({ visible });
-    // console.log('this.state.visible after', this.state.visible);
+    console.log('state.visible', this.state.visible);
   }
 
-  render() {
-    const {
-      arrayHelpers,
-      //  onCancel,
-      onSelect,
-      onSave
-    } = this.props;
-    const key = ['name', 'streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode', 'mobile'];
-    // const key = this.state.key;
-    // console.log('key in renderAddress', key);
-    const addresses = this.props.addresses;
-    // console.log('state in render with index 0', this.state.visible[0]);
-    // console.log('state in render with index 1', this.state.visible[1]);
+  modalControl = (index, visiblity) => {
+    console.log('index, visiblity', index, visiblity);
+    let visible = this.state.visible;
+    visible[index] = visiblity;
+    this.setState({ visible });
+    console.log('state.visible', this.state.visible);
+  };
 
-    return (
-      <React.Fragment>
-        {addresses.map((address, index) => (
-          <Radio.Button key={index} value={address} onClick={() => onSelect(address)}>
-            {/* {console.log('this.state.visible[index]', this.state.visible[index])} */}
-            <div style={{ marginTop: 16 }} className="HomeAddress">
+  handleAddAddress = () => {
+    const { arrayHelpers, addresses } = this.props;
+    const obj = {};
+    // const keys = ['name', 'streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode', 'mobile'];
+    const keys = [
+      { key: 'streetAddress1' },
+      { key: 'streetAddress2' },
+      { key: 'city' },
+      { key: 'state' },
+      { key: 'pinCode' }
+    ];
+    keys.map(k => (obj[k.key] = ''));
+    arrayHelpers.push(obj);
+
+    //Setting the visiblity
+    const visible = this.state.visible;
+    visible[addresses.length] = true;
+    this.setState({ visible });
+  };
+
+  render() {
+    const { arrayHelpers, name, addresses } = this.props;
+
+    const isSelectable = this.props.isSelectable || false;
+    //Form field Section-->>
+    const keys = ['streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode'];
+    let formItems = [];
+    let addressCard = [];
+    {
+      //Geting all the fields for the form.
+      this.props.addresses.map(
+        (address, indexa) => (
+          (formItems[indexa] = keys.map((k, indexk) => (
+            <FormItem style={{ display: 'inline-block', margin: '0px 5px', width: '75%' }} key={indexk}>
+              <Field
+                name={`${name}[${indexa}].${k}`}
+                component={RenderField}
+                placeholder={k}
+                type="text"
+                label={`${k}`}
+                value={address[k]}
+              />
+            </FormItem>
+          ))),
+          //Geting all the addressCard.
+          (addressCard[indexa] = (
+            <div style={{ marginTop: 16 }} className="HomeAddress" key={indexa}>
               <div className="HomeAddressBlock">
                 Home Address <Icon type="home" className="homeicon" />
               </div>
@@ -68,33 +87,87 @@ export default class SavedAddress extends AddressComponent {
                 <h4>{address.pinCode && address.pinCode + ','}</h4>
                 <h4>Mobile: {address.mobile && address.mobile}</h4>
               </div>
-              <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(index)}>
+              <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(indexa)}>
                 <Icon type="delete" />
               </Button>
-              <Button className="addressIcons" onClick={() => this.modalControl(index, true)} ghost>
+              <Button className="addressIcons" onClick={() => this.modalControl(indexa, true)} ghost>
                 <Icon type="edit" />
               </Button>
-              {/* {console.log('addressform key', key)} */}
-              <AddressForm
-                visible={this.state.visible[index]}
-                onCancel={() => this.modalControl(index, false)}
-                onSave={onSave}
-                address={address}
-                // key={key}
-              />
+              <Modal
+                visible={this.state.visible[indexa]}
+                title="Address"
+                okText="Save"
+                onCancel={() => this.modalControl(indexa, false)}
+                onOk={() => this.modalControl(indexa, false)}
+              >
+                <div>
+                  <FormItem>{formItems[indexa]}</FormItem>
+                </div>
+              </Modal>
             </div>
-          </Radio.Button>
-        ))}
-        <div
-          className="AddNewAddressBlock"
-          onClick={() => this.handleAddAddress(arrayHelpers, true, addresses.length, key)}
-        >
-          <div className="AddNewAddress">
-            <Icon type="plus" />
-          </div>
-          <h5>Add a new address</h5>
-        </div>
-      </React.Fragment>
+          ))
+        )
+      );
+    }
+
+    return (
+      <>
+        <Row gutter={32}>
+          <Col span={24}>
+            <h3 className="billingAddress">Billing Address</h3>
+            <br />
+          </Col>
+          <Col lg={14} sm={24}>
+            <Row gutter={32}>
+              <Col
+                xs={{ span: 18, offset: 3 }}
+                sm={{ span: 12, offset: 0 }}
+                md={{ span: 10, offset: 0 }}
+                className="PadB30"
+              >
+                {addresses.map((address, indexas) =>
+                  isSelectable ? (
+                    <Radio.Button
+                      key={indexas}
+                      value={address}
+                      // onClick={() => onSelect(address)}
+                    >
+                      addressCard[indexas]
+                    </Radio.Button>
+                  ) : (
+                    addressCard[indexas]
+                  )
+                )}
+              </Col>
+              <Col
+                xs={{ span: 14, offset: 5 }}
+                sm={{ span: 10, offset: 0 }}
+                md={{ span: 8, offset: 0 }}
+                className="PadB30"
+              >
+                <div className="AddNewAddressBlock" onClick={this.handleAddAddress}>
+                  <div className="AddNewAddress">
+                    <Icon type="plus" />
+                  </div>
+                  <h5>Add a new address</h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </>
     );
   }
+
+  // render() {
+  //   return <Button style={{ width: '30%' }} onClick={this.add} />;
+  // }
 }
+
+RenderAddress.propTypes = {
+  addresses: PropTypes.any,
+  name: PropTypes.any,
+  keys: PropTypes.any,
+  isSelectable: PropTypes.bool,
+  arrayHelpers: PropTypes.object
+};
