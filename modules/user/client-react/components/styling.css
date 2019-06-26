@@ -33,7 +33,7 @@
     width:auto;
 }
 .g2{
-    display: inline-grid;
+    display: inline-grid !important;
     grid-template-columns: 48% 48%;
     justify-content: space-evenly;
 }
