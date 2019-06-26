@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Icon} from 'antd';
+import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout ,Loader} from '@gqlapp/look-client-react';
-
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import './styling.css'
 import UserForm from './UserForm';
 import settings from '../../../../settings';
 
@@ -28,9 +28,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
     <PageLayout>
       {renderMetaData()}
       {loading && !user ? (
-        
-        <Loader text= {t('userEdit.loadMsg')} />
-      
+        <Loader text={t('userEdit.loadMsg')} />
       ) : (
         <div style={{}}>
           <Link

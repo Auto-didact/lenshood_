@@ -37,9 +37,8 @@ const ListingEditView = ({ loading, listing, location, editListing, t, currentUs
     return (
       <PageLayout>
         {renderMetaData()}
-        
-        <Loader text={t('listing.loadMsg')}/>
-        
+
+        <Loader text={t('listing.loadMsg')} />
       </PageLayout>
     );
   } else {
