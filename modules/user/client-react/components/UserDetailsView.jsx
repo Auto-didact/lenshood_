@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Spin } from 'antd';
+import { Loader } from '@gqlapp/look-client-react';
 import UserForm from './UserForm';
 
 const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
@@ -9,11 +9,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) =
   return (
     <div>
       {loading && !user ? (
-        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-          <Spin size="large" />
-          <br />
-          {t('userEdit.loadMsg')}
-        </div>
+        <Loader text={t('userEdit.loadMsg')} />
       ) : (
         <UserForm
           valueCheck={valueCheck}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Breadcrumb, Card, Spin } from 'antd';
+import { Layout, Row, Col, Breadcrumb, Card } from 'antd';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, AccountLayout } from '@gqlapp/look-client-react';
+import { PageLayout, AccountLayout, Loader } from '@gqlapp/look-client-react';
 import DetailsCard from './components/DetailsCard';
 import ProductCalender from './components/ProductCalender';
 import ReviewsCard from './components/ReviewsCard';
@@ -90,11 +90,8 @@ class MyListDetailsView extends Component {
               }
             ]}
           />
-          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-            <Spin size="large" />
-            <br />
-            {t('listing.loadMsg')}
-          </div>
+
+          <Loader text={t('listing.loadMsg')} />
         </PageLayout>
       );
     } else {
