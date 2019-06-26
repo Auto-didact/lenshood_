@@ -1,22 +1,13 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
+import { PageLayout, Loader } from "@gqlapp/look-client-react";
 import settings from "../../../../settings";
 import InviteDetailsCard from "./InviteDetailsCard";
 import ReferDetailsCard from "./ReferDetailsCard";
-import { Row, Col, Spin } from "antd";
+import { Row, Col } from "antd";
 
-const Loading = () => (
-  <div
-    className="text-center"
-    style={{ marginTop: "50%", textAlign: "center" }}
-  >
-    <Spin size="large" />
-    <br />
-    {"Loading..."}
-  </div>
-);
+const Loading = () => <Loader text={"Loading..."} />;
 
 const ReferralView = ({ t, state, loading, referralUser }) => {
   const renderMetaData = () => (
