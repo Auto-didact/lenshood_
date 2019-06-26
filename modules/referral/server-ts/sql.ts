@@ -15,6 +15,11 @@ export interface Referral {
   referredId: number;
 }
 
+export interface ReferralInput {
+  userId: number;
+  referredId: number;
+}
+
 export default class ReferralDao extends Model {
   // private id: any;
 
@@ -68,17 +73,14 @@ export default class ReferralDao extends Model {
     return res;
   }
 
-  public async addReferred(params: Referral) {
-    console.log("params----------------", params);
-    delete params["referral"];
-    console.log(params);
+  public async addReferred(userId: number, referredId: number) {
+    console.log(userId, referredId);
     const res = await returnId(
-      knex("user_follower").insert({
-        user_id: params.userId,
-        referred_id: params.referredId
+      knex("referral").insert({
+        user_id: userId,
+        referred_id: referredId
       })
     );
-    //  = await ReferralDao.query().insertGraph(decamelizeKeys(params));
-    return res.id;
+    return res;
   }
 }

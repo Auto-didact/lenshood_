@@ -8,6 +8,7 @@ type Referral {
 
 extend type Query {
   referrals(userId: Int): [Referral]
+  referralUser(userId: Int): User
 }
 
 extend type Mutation {
@@ -16,7 +17,7 @@ extend type Mutation {
 
 input AddReferralInput {
   userId: Int
-  referral: String!
+  referral: String
   referredId: Int
 }
 

@@ -5,9 +5,20 @@ import { PageLayout } from "@gqlapp/look-client-react";
 import settings from "../../../../settings";
 import InviteDetailsCard from "./InviteDetailsCard";
 import ReferDetailsCard from "./ReferDetailsCard";
-import { Row, Col } from "antd";
+import { Row, Col, Spin } from "antd";
 
-const ReferralView = ({ t, state, props, referrals }) => {
+const Loading = () => (
+  <div
+    className="text-center"
+    style={{ marginTop: "50%", textAlign: "center" }}
+  >
+    <Spin size="large" />
+    <br />
+    {"Loading..."}
+  </div>
+);
+
+const ReferralView = ({ t, state, loading, referralUser }) => {
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t("title")}`}
@@ -19,24 +30,28 @@ const ReferralView = ({ t, state, props, referrals }) => {
   return (
     <PageLayout>
       {renderMetaData()}
-      {/* <div className="checkoutDiv"> */}
-      <Row>
-        <Col
-          lg={{ span: 14, offset: 0 }}
-          xs={{ span: 24, offset: 0 }}
-          className="margin20"
-        >
-          <InviteDetailsCard username={state.username} />
-        </Col>
-        <Col
-          lg={{ span: 8, offset: 1 }}
-          xs={{ span: 24, offset: 0 }}
-          className="marginT20"
-        >
-          <ReferDetailsCard state={state} referrals={referrals} />
-        </Col>
-      </Row>
-      {/* </div> */}
+      {loading && !referralUser && <Loading />}
+      {referralUser ? (
+        <Row>
+          <Col
+            lg={{ span: 14, offset: 0 }}
+            xs={{ span: 24, offset: 0 }}
+            className="margin20"
+          >
+            <InviteDetailsCard username={referralUser.username} />
+          </Col>
+          <Col
+            lg={{ span: 8, offset: 1 }}
+            xs={{ span: 24, offset: 0 }}
+            className="marginT20"
+          >
+            <ReferDetailsCard
+              state={state}
+              referrals={referralUser.referrals}
+            />
+          </Col>
+        </Row>
+      ) : null}
     </PageLayout>
   );
 };

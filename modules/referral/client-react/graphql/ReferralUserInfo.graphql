@@ -1,0 +1,27 @@
+fragment ReferralUserInfo on User {
+  id
+  username
+  profile {
+    firstName
+    lastName
+    # referredBy {
+    #   id
+    #   username
+    #   profile {
+    #     firstName
+    #     lastName
+    #   }
+    # }
+  }
+  referrals {
+    id
+    referredUser {
+      id
+      username
+      profile {
+        firstName
+        lastName
+      }
+    }
+  }
+}

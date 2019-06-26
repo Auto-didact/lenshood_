@@ -1,24 +1,25 @@
 import React from "react";
 import ReferralView from "../components/ReferralView";
 import { graphql, compose } from "react-apollo";
-import REFERRAL_QUERY from "../graphql/ReferralQuery.graphql";
+import REFERRAL_QUERY from "../graphql/ReferralUserQuery.graphql";
 
 class Referral extends React.Component {
   state = {
-    username: "theZalophus",
     cashEarned: 50,
     totalCredit: 27
   };
   render() {
-    return <ReferralView state={this.state} referrals={this.props.referrals} />;
+    return (
+      <ReferralView state={this.state} referralUser={this.props.referralUser} />
+    );
   }
 }
 
 export default compose(
   graphql(REFERRAL_QUERY, {
-    props({ data: { loading, error, referrals } }) {
+    props({ data: { loading, error, referralUser } }) {
       if (error) throw new Error(error);
-      return { loading, referrals };
+      return { loading, referralUser };
     }
   })
 )(Referral);
