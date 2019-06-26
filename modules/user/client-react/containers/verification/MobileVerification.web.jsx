@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import { Alert, Button, Spin } from 'antd';
+import { Alert, Button } from 'antd';
+import {Loader} from '@gqlapp/look-client-react'
 import VerificationModal from '../../components/verification/VerificationModal';
 import MobileVerificationForm from '../../components/verification/MobileVerificationForm';
 import Mobile from '../../components/verification/Mobile';
@@ -76,11 +77,9 @@ class MobileAdd extends Component {
     return (
       <VerificationModal button="Mobile" title="Mobile Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? (
-          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-            <Spin size="large" />
-            <br />
-            Loading...
-          </div>
+          
+          <Loader text="Loading..." />
+          
         ) : (
           ''
         )}

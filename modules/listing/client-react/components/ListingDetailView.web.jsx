@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import Helmet from 'react-helmet';
 
-import { Row, Col, Breadcrumb, Card, Spin } from 'antd';
-import { PageLayout } from '@gqlapp/look-client-react';
+import { Row, Col, Breadcrumb, Card } from 'antd';
+import { PageLayout,Loader } from '@gqlapp/look-client-react';
 import UserCard from './components/userCard';
 import ProductCard from './components/ProductCard';
 import ReviewsCard from './components/ReviewsCard';
@@ -51,11 +51,9 @@ class ListingDetailView extends Component {
         <PageLayout>
           {this.renderMetaData()}
 
-          <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-            <Spin size="large" />
-            <br />
-            {t('listing.loadMsg')}
-          </div>
+          
+          <Loader text={t('listing.loadMsg')} />
+         
 
         </PageLayout>
       );
