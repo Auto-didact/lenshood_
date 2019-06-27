@@ -8,6 +8,7 @@ import UserAddView from "../components/UserAddView";
 import ADD_USER from "../graphql/AddUser.graphql";
 import settings from "../../../../settings";
 import UserFormatter from "../helpers/UserFormatter";
+import { message } from "antd";
 
 const UserAdd = props => {
   const { addUser, t, history, navigation } = props;
@@ -36,9 +37,11 @@ const UserAdd = props => {
     try {
       await addUser(userValues);
     } catch (e) {
+      message.error(t("userAdd.errorMsg"));
       throw new FormError(t("userAdd.errorMsg"), e);
     }
 
+    message.info("New User Added!");
     if (history) {
       return history.push("/users/");
     }

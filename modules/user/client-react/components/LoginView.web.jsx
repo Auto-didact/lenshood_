@@ -31,7 +31,7 @@ const LoginView = ({ onSubmit, t }) => {
     <PageLayout>
       {renderMetaData()}
       <div align="center">
-        <h1 className="text-center">{t("login.form.title")}</h1>
+        {/* <h1 className="text-center">{t("login.form.title")}</h1> */}
         <LoginForm onSubmit={onSubmit} />
         {/* <hr />
         <Card>
