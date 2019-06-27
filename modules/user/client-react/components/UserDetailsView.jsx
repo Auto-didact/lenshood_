@@ -1,24 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
-import { Loader } from "@gqlapp/look-client-react";
-import UserForm from "./UserForm";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Loader } from '@gqlapp/look-client-react';
+import UserForm from './UserForm';
 
-const UserEditView = ({
-  loading,
-  user,
-  t,
-  currentUser,
-  onSubmit,
-  valueCheck
-}) => {
+const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
   return (
     <div>
-      {loading && !user && <Loader text={t("userEdit.loadMsg")} />}
-      {!loading && !user && (
-        <h1 className="text-center"> Please refresh the page!!!! </h1>
-      )}
+      {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
+      {!loading && !user && <h1 className="text-center"> Please refresh the page!!!! </h1>}
       {user && (
         <UserForm
           valueCheck={valueCheck}
@@ -42,4 +33,4 @@ UserEditView.propTypes = {
   onSubmit: PropTypes.func
 };
 
-export default translate("user")(UserEditView);
+export default translate('user')(UserEditView);

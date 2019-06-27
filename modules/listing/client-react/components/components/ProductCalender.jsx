@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Row, Col, Calendar, Card, Icon, Avatar, Button } from "antd";
-import moment from "moment";
-import DateRangeCard from "./DateRangeCard";
+import React, { Component } from 'react';
+import { Row, Col, Calendar, Card, Icon, Avatar, Button } from 'antd';
+import moment from 'moment';
+import DateRangeCard from './DateRangeCard';
 
 class ProductCalender extends Component {
   constructor(props) {
@@ -36,8 +36,8 @@ class ProductCalender extends Component {
         i = book.start;
         moment(i) <= moment(book.end);
         i = moment(i)
-          .add(1, "d")
-          .format("YYYY-MM-DD")
+          .add(1, 'd')
+          .format('YYYY-MM-DD')
       ) {
         if (book.name === this.state.name) this.state.myBooks.push(i);
         else this.state.items.push(i);
@@ -48,16 +48,8 @@ class ProductCalender extends Component {
   disabledDate(current) {
     if (
       (current && current.valueOf() < Date.now()) ||
-      this.state.items.some(
-        row =>
-          moment(row).format("YYYY-MM-DD") ===
-          moment(current._d).format("YYYY-MM-DD")
-      ) ||
-      this.state.myBooks.some(
-        row =>
-          moment(row).format("YYYY-MM-DD") ===
-          moment(current._d).format("YYYY-MM-DD")
-      )
+      this.state.items.some(row => moment(row).format('YYYY-MM-DD') === moment(current._d).format('YYYY-MM-DD')) ||
+      this.state.myBooks.some(row => moment(row).format('YYYY-MM-DD') === moment(current._d).format('YYYY-MM-DD'))
     ) {
       return true;
     } else {
@@ -67,46 +59,36 @@ class ProductCalender extends Component {
   dateFullCellRender = current => {
     const style = {};
     if (current && current.valueOf() < Date.now()) {
-      style.background = "#ddd";
-      style.borderRadius = "50%";
-      style.color = "white";
-      style.cursor = "not-allowed";
+      style.background = '#ddd';
+      style.borderRadius = '50%';
+      style.color = 'white';
+      style.cursor = 'not-allowed';
     } else if (
       current &&
       current.valueOf() > Date.now() &&
-      this.state.items.some(
-        row =>
-          moment(row).format("YYYY-MM-DD") ===
-          moment(current._d).format("YYYY-MM-DD")
-      )
+      this.state.items.some(row => moment(row).format('YYYY-MM-DD') === moment(current._d).format('YYYY-MM-DD'))
     ) {
-      style.background = "#23b195";
-      style.color = "white";
-      style.borderRadius = "50%";
+      style.background = '#23b195';
+      style.color = 'white';
+      style.borderRadius = '50%';
     } else if (
       current &&
       current.valueOf() > Date.now() &&
-      this.state.myBooks.some(
-        row =>
-          moment(row).format("YYYY-MM-DD") ===
-          moment(current._d).format("YYYY-MM-DD")
-      )
+      this.state.myBooks.some(row => moment(row).format('YYYY-MM-DD') === moment(current._d).format('YYYY-MM-DD'))
     ) {
-      style.background = "#a0f5e4";
-      style.color = "#888";
-      style.borderRadius = "50%";
+      style.background = '#a0f5e4';
+      style.color = '#888';
+      style.borderRadius = '50%';
     } else if (
       current &&
       current.valueOf() > Date.now() &&
       this.state.currentBooking.range.some(
-        row =>
-          moment(row, "DD-MM-YY").format("DD-MM-YY") ===
-          moment(current._d).format("DD-MM-YY")
+        row => moment(row, 'DD-MM-YY').format('DD-MM-YY') === moment(current._d).format('DD-MM-YY')
       )
     ) {
-      style.background = "#FFFF99";
-      style.color = "#000";
-      style.borderRadius = "50%";
+      style.background = '#FFFF99';
+      style.color = '#000';
+      style.borderRadius = '50%';
     }
 
     return (
@@ -129,12 +111,7 @@ class ProductCalender extends Component {
             className="marginB20"
           />
           <Col span={12}>
-            <Button
-              type="primary"
-              size="small"
-              onClick={() => this.setModal1Visible()}
-              block
-            >
+            <Button type="primary" size="small" onClick={() => this.setModal1Visible()} block>
               Book Dates
             </Button>
           </Col>
@@ -189,9 +166,7 @@ class ProductCalender extends Component {
                     <span className="RateBookIcon">
                       {item.rating} <Icon type="star" theme="filled" />
                     </span>
-                    {item.name === this.state.name ? (
-                      <span className="CancelBook">Cancel Booking</span>
-                    ) : null}
+                    {item.name === this.state.name ? <span className="CancelBook">Cancel Booking</span> : null}
                   </h5>
                 </Col>
               </div>
