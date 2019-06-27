@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Icon, Button, Form, Radio, Modal } from 'antd';
+import { Row, Col, Icon, Button, Form, Radio, Modal, Popconfirm, message } from 'antd';
 import { RenderField } from '@gqlapp/look-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
@@ -51,6 +51,11 @@ export default class RenderAddress extends React.Component {
   render() {
     const { arrayHelpers, name, addresses } = this.props;
 
+    function cancel(e) {
+      console.log(e);
+      message.error('Click on No');
+    }
+
     const isSelectable = this.props.isSelectable || false;
     //Form field Section-->>
     const keys = ['streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode'];
@@ -91,10 +96,45 @@ export default class RenderAddress extends React.Component {
                 <h4>{address.state && address.state + ','}</h4>
                 <h4>{address.pinCode && address.pinCode + ','}</h4>
               </div>
-              <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(indexa)}>
+
+              <Row style={{ marginBottom: '8px' }}>
+                <Col span={12} align="left" style={{ paddingLeft: '20px' }}>
+                  <Button shape="circle" size="large" onClick={() => this.modalControl(indexa, true)}>
+                    <Icon type="edit" />
+                  </Button>
+                  <Modal
+                    visible={this.state.visible[indexa]}
+                    title="Address"
+                    okText="Ok"
+                    onCancel={() => this.modalControl(indexa, false)}
+                    onOk={() => this.modalControl(indexa, false)}
+                  >
+                    <div>
+                      <FormItem>{formItems[indexa]}</FormItem>
+                    </div>
+                  </Modal>
+                  {/* <Link to={`/listing/${item.id}`}>
+                  </Link> */}
+                </Col>
+                <Col span={12} align="right" style={{ paddingRight: '20px' }}>
+                  <Popconfirm
+                    title="Are you sure to delete this address?"
+                    onConfirm={() => arrayHelpers.remove(indexa)}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="danger" shape="circle" size="large">
+                      <Icon type="delete" />
+                    </Button>
+                  </Popconfirm>
+                </Col>
+              </Row>
+
+              {/* <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(indexa)}>
                 <Icon type="delete" />
               </Button>
-              <Button className="addressIcons" onClick={() => this.modalControl(indexa, true)} ghost>
+              <Button className="addressIcons" ghost onClick={() => this.modalControl(indexa, true)}>
                 <Icon type="edit" />
               </Button>
               <Modal
@@ -107,7 +147,7 @@ export default class RenderAddress extends React.Component {
                 <div>
                   <FormItem>{formItems[indexa]}</FormItem>
                 </div>
-              </Modal>
+              </Modal> */}
             </div>
           ))
         )

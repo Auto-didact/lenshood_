@@ -16,6 +16,7 @@ import {
   Button,
   Alert
 } from '@gqlapp/look-client-react';
+import RenderAddress from './RenderAddress';
 import settings from '../../../../settings';
 import './styling.css';
 
@@ -230,6 +231,18 @@ const UserForm = ({
             values={addresses}
             name="addresses"
             label={t('userEdit.form.field.addresses')}
+          />
+        )}
+      />
+
+      <FieldArray
+        name="addresses"
+        render={arrayHelpers => (
+          <RenderAddress
+            name="addresses"
+            addresses={addresses}
+            arrayHelpers={arrayHelpers}
+            // isSelectable={true}
           />
         )}
       />
