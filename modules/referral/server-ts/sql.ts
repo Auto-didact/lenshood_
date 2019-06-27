@@ -74,7 +74,6 @@ export default class ReferralDao extends Model {
   }
 
   public async addReferred(userId: number, referredId: number) {
-    console.log(userId, referredId);
     const res = await returnId(
       knex("referral").insert({
         user_id: userId,

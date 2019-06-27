@@ -49,7 +49,7 @@ const UserEdit = props => {
     //   return navigation.goBack();
     // }
   };
-
+  console.log(props)
   return <UserEditView onSubmit={onSubmit} {...props} />;
 };
 

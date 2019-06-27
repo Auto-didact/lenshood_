@@ -82,8 +82,8 @@ class UserCard extends Component {
         <p className="font12">{seller.profile.about}</p>
         <h4 className="font14">Web references</h4>
         {portfolios ? (
-          portfolios.map(item => (
-            <strong>
+          portfolios.map((item, id) => (
+            <strong key={id}>
               <a href={item.portfolioUrl} className="font12 itemLink">
                 {item.portfolioUrl}
                 <br />

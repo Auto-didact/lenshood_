@@ -22,9 +22,19 @@
     "**/typings.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.vue", "modules/order/client-react/components/OrderCard.jsx", "modules/order/client-react/components/CheckoutSteps.jsx", "modules/order/client-react/components/CheckoutPayView.jsx", "modules/order/client-react/components/CheckoutOrderView.jsx", "modules/order/client-react/components/CheckoutCartView.jsx", "modules/order/client-react/components/CheckoutBillView.jsx", "modules/order/client-react/containers/CheckoutPay.jsx", "modules/referral/client-react/index.jsx", "modules/referral/client-react/components/ReferralView.jsx", "modules/referral/client-react/containers/Referral.jsx", "modules/referral/server-ts/sql.js", "modules/referral/server-ts/resolvers.js"
+    "**/*.vue",
+    "modules/order/client-react/components/OrderCard.jsx",
+    "modules/order/client-react/components/CheckoutSteps.jsx",
+    "modules/order/client-react/components/CheckoutPayView.jsx",
+    "modules/order/client-react/components/CheckoutOrderView.jsx",
+    "modules/order/client-react/components/CheckoutCartView.jsx",
+    "modules/order/client-react/components/CheckoutBillView.jsx",
+    "modules/order/client-react/containers/CheckoutPay.jsx",
+    "modules/referral/client-react/index.jsx",
+    "modules/referral/client-react/components/ReferralView.jsx",
+    "modules/referral/client-react/containers/Referral.jsx",
+    "modules/user/server-ts/sql.js",
+    "modules/user/server-ts/resolvers.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

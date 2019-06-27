@@ -221,7 +221,7 @@ export default class ListingDAO extends Model {
       });
   }
 
-  public async patchListing(id, params) {
+  public async patchListing(id: any, params: any) {
     console.log("params", params);
     const listing = await ListingDAO.query()
       .patch(params)

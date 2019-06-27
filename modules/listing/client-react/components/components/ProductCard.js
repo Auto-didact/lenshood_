@@ -77,8 +77,8 @@ class ProductCard extends Component {
       <div style={{ paddingRight: "4px", paddingTop: "5px" }}>
         <div style={{ marginLeft: "10px", marginRight: "10px" }}>
           <Carousel autoplay ref={node => (this.carousel = node)} {...status}>
-            {images.map(item => (
-              <div align="center">
+            {images.map((item, id) => (
+              <div key={id} align="center">
                 <img src={item.imageUrl} style={{ height: "300px" }} />
               </div>
             ))}
@@ -129,8 +129,8 @@ class ProductCard extends Component {
         <br />
         <h3 className="font16 blockDisplay fontBold">Gear Components</h3>
         {listingContent.length !== 0
-          ? listingContent.map((item, key) => (
-              <div>
+          ? listingContent.map((item, id) => (
+              <div key={id}>
                 <span className="itemGearPC" />
                 {item.gear} {item.brand} {item.model}
               </div>

@@ -171,8 +171,8 @@ class ProductCalender extends Component {
         <Col sm={11} className="PadL15">
           <h3 className="Bookings">Bookings</h3>
           <Card className="BookingsCard">
-            {this.state.bookings.map(item => (
-              <div>
+            {this.state.bookings.map((item, id) => (
+              <div key={id}>
                 <Row>
                   <Col md={5} sm={7}>
                     <Avatar />
