@@ -7,8 +7,6 @@ import InviteDetailsCard from "./InviteDetailsCard";
 import ReferDetailsCard from "./ReferDetailsCard";
 import { Row, Col } from "antd";
 
-const Loading = () => <Loader text={"Loading..."} />;
-
 const ReferralView = ({ t, state, loading, referralUser }) => {
   const renderMetaData = () => (
     <Helmet
@@ -21,8 +19,8 @@ const ReferralView = ({ t, state, loading, referralUser }) => {
   return (
     <PageLayout>
       {renderMetaData()}
-      {loading && !referralUser && <Loading />}
-      {referralUser ? (
+      {loading && !referralUser && <Loader text={"Loading..."} />}
+      {referralUser && (
         <Row>
           <Col
             lg={{ span: 14, offset: 0 }}
@@ -42,7 +40,7 @@ const ReferralView = ({ t, state, loading, referralUser }) => {
             />
           </Col>
         </Row>
-      ) : null}
+      )}
     </PageLayout>
   );
 };

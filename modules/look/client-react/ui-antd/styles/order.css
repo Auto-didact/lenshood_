@@ -64,7 +64,6 @@
   background: #fff !important;
   padding: 0 !important;
   margin: 0 !important;
-
 }
 
 .listclose {
@@ -222,7 +221,7 @@
   border-radius: 4px !important;
 }
 
-.itemDetails{
+.itemDetails {
   font-size: 11px;
   line-height: 11px !important;
 }
@@ -240,8 +239,7 @@
 .btnOrder {
   color: #23b195;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }
 
 .btnOrderActive,
@@ -249,6 +247,5 @@
   background-color: #23b195 !important;
   color: white !important;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }

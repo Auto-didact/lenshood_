@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Button, Row, Col, Card, Rate, Avatar } from "antd";
+import { BORROWED } from "../constants/OrderStates";
 
 class DetailsCard extends Component {
   render() {
@@ -81,11 +82,17 @@ class DetailsCard extends Component {
           <Col span={24} className="orderTotalDate">
             <h4>
               <Col sm={17} xs={24}>
-                <span className="orderGrey">Ordered on</span> {item.orderDate}{" "}
+                <span className="orderGrey">
+                  {item.status === BORROWED ? "Ordered" : "Lended"} on
+                </span>{" "}
+                {item.orderDate}{" "}
               </Col>
               <Col sm={7} xs={24}>
                 <span className="orderGrey">
-                  <span>Order Total</span> &#8377; {item.orderTotal}
+                  <span>
+                    {item.status === BORROWED ? "Order" : "Lend"} Total
+                  </span>{" "}
+                  &#8377; {item.orderTotal}
                 </span>
               </Col>
             </h4>

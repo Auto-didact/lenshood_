@@ -4,6 +4,7 @@ import OrderDetails from "./OrderDetails";
 import { LENDED, BORROWED } from "../constants/OrderStates";
 import OrderTrackCard from "./OrderTrackCard";
 
+const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
 class MyOrder extends Component {
@@ -54,30 +55,26 @@ class MyOrder extends Component {
   render() {
     return (
       <Content className="myListContent">
-        <Row>
+        <Row className="marginV15">
           <Col md={{ span: 16 }} sm={{ span: 10 }} xs={{ span: 24 }}>
             <h2 className="MyListHead">My Orders</h2>
             <br />
           </Col>
           <Col md={{ span: 8 }} sm={{ span: 14 }} xs={{ span: 24 }}>
-            <Col span={12}>
+            <ButtonGroup className="width100">
               <Button
                 onClick={() => this.FilterItems(LENDED)}
                 className={this.classNamesgroup(LENDED)}
-                block
               >
                 Lended
               </Button>
-            </Col>
-            <Col span={12}>
               <Button
                 onClick={() => this.FilterItems(BORROWED)}
                 className={this.classNamesgroup(BORROWED)}
-                block
               >
                 Borrowed
               </Button>
-            </Col>
+            </ButtonGroup>
           </Col>
         </Row>
         {this.state.listings

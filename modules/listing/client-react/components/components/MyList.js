@@ -70,12 +70,12 @@ class MyList extends Component {
   render() {
     return (
       <Content className="myListContent">
-        <Row className="margin15">
-          <Col md={{ span: 14 }} sm={{ span: 24 }} xs={{ span: 24 }}>
+        <Row className="marginV15">
+          <Col md={{ span: 14 }} sm={{ span: 9 }} xs={{ span: 24 }}>
             <h2 className="MyListHead">My Listings</h2>
             <br />
           </Col>
-          <Col md={{ span: 10 }} sm={{ span: 24 }} xs={{ span: 24 }}>
+          <Col md={{ span: 10 }} sm={{ span: 15 }} xs={{ span: 24 }}>
             <ButtonGroup className="width100">
               <Button onClick={() => this.FilterItems(ALL)} className={this.classNamesgroup(ALL)}>
                 All
