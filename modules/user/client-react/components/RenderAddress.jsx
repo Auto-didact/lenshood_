@@ -49,23 +49,31 @@ export default class RenderAddress extends React.Component {
   };
 
   render() {
-    const { arrayHelpers, name, addresses } = this.props;
-
+    const { arrayHelpers, name, addresses, t } = this.props;
+    const label = 'profile.card.group.addresses';
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
     }
 
     const isSelectable = this.props.isSelectable || false;
+    // {
+    //   // console.log('t in renderAddress', t);
+    //   // console.log('t(label) in renderAddress', t(`${label}`));
+    //   console.log('t(label.city) in renderAddress', t(`${label}.city`));
+    //   console.log('t(label.pinCode) in renderAddress', t(`${label}.pinCode`));
+    //   console.log('t(label.state) in renderAddress', t(`${label}.state`));
+    //   console.log('t(label.streetAddress) in renderAddress', t(`${label}.streetAddress`));
+    //   // console.log('t(label.city) in renderAddress', t('label.city'));
+    // }
     //Form field Section-->>
-    const keys = ['streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode'];
-    // const keys = [
-    //   { key: 'streetAddress1', label: 'Street Address 1' },
-    //   { key: 'streetAddress2', label: 'Street Address 2' },
-    //   { key: 'city', label: 'City' },
-    //   { key: 'state', label: 'State' },
-    //   { key: 'pinCode', label: 'Pin Code' }
-    // ];
+    const keys = [
+      { key: 'streetAddress1', label: 'streetAddress' },
+      { key: 'streetAddress2', label: 'streetAddress' },
+      { key: 'city', label: 'city' },
+      { key: 'state', label: 'state' },
+      { key: 'pinCode', label: 'pinCode' }
+    ];
     let formItems = [];
     let addressCard = [];
     {
@@ -75,12 +83,12 @@ export default class RenderAddress extends React.Component {
           (formItems[indexa] = keys.map((k, indexk) => (
             <FormItem style={{ display: 'inline-block', margin: '0px 5px', width: '75%' }} key={indexk}>
               <Field
-                name={`${name}[${indexa}].${k}`}
+                name={`${name}[${indexa}].${k.key}`}
                 component={RenderField}
-                placeholder={k}
+                placeholder={k.label}
                 type="text"
-                label={`${k}`}
-                value={address[k]}
+                label={t(`${label}.${k.label}`)}
+                value={address[k.key]}
               />
             </FormItem>
           ))),
@@ -209,8 +217,10 @@ export default class RenderAddress extends React.Component {
 }
 
 RenderAddress.propTypes = {
+  t: PropTypes.func,
   addresses: PropTypes.any,
   name: PropTypes.any,
+  label: PropTypes.any,
   keys: PropTypes.any,
   isSelectable: PropTypes.bool,
   arrayHelpers: PropTypes.object
