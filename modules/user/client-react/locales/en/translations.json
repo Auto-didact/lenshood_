@@ -129,6 +129,7 @@
     "title": "Register",
     "meta": "A Registration page example",
     "errorMsg": "Registration failed!",
+    "confirmMsg": "A Confirmation Email has been sent. Please check your mail inbox.",
     "form": {
       "title": "Sign Up",
       "field": {
