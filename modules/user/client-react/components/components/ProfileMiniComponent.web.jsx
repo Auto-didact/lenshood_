@@ -2,7 +2,7 @@ import React from "react";
 import { CardText } from "@gqlapp/look-client-react";
 import { Avatar, Row, Col } from "antd";
 
-const ProfileMini = ({ item }) => {
+const ProfileMiniComponent = ({ item }) => {
   return (
     <Row>
       <Col span={4}>
@@ -17,4 +17,4 @@ const ProfileMini = ({ item }) => {
   );
 };
 
-export default ProfileMini;
+export default ProfileMiniComponent;

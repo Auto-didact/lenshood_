@@ -9,10 +9,10 @@ class CheckoutStepsComponent extends Component {
       <Col lg={20} md={24}>
         <div className="CheckoutStepsComponent">Checkout</div>
         <Steps current={this.props.step} size="small">
-          <Step title={<span style={{ fontSize: '13px' }}>Cart</span>} />
-          <Step title={<span style={{ fontSize: '13px' }}>Billing Address</span>} />
-          <Step title={<span style={{ fontSize: '13px' }}>Payment options</span>} />
-          <Step title={<span style={{ fontSize: '13px' }}>Order Status</span>} />
+          <Step title={<span className="font13">Cart</span>} />
+          <Step title={<span className="font13">Billing Address</span>} />
+          <Step title={<span className="font13">Payment options</span>} />
+          <Step title={<span className="font13">Order Status</span>} />
         </Steps>
         <br/>
         <br/>

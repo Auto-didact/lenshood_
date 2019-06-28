@@ -11,12 +11,12 @@ import { placeholderColor, submit } from '@gqlapp/look-client-react-native/style
 import { required, minLength, validate, match } from '@gqlapp/validation-common-react';
 import settings from '../../../../settings';
 
-const resetPasswordFormSchema = {
+const ResetPasswordFormComponentSchema = {
   password: [required, minLength(settings.auth.password.minLength)],
   passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
-const ResetPasswordForm = ({ values, handleSubmit, t }) => {
+const ResetPasswordFormComponent = ({ values, handleSubmit, t }) => {
   return (
     <View style={styles.formContainer}>
       <Field
@@ -47,7 +47,7 @@ const ResetPasswordForm = ({ values, handleSubmit, t }) => {
   );
 };
 
-ResetPasswordForm.propTypes = {
+ResetPasswordFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   t: PropTypes.func,
   values: PropTypes.object,
@@ -55,7 +55,7 @@ ResetPasswordForm.propTypes = {
   submitting: PropTypes.bool
 };
 
-const ResetPasswordFormWithFormik = withFormik({
+const ResetPasswordFormComponentWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({ password: '', passwordConfirmation: '' }),
   async handleSubmit(
@@ -76,8 +76,8 @@ const ResetPasswordFormWithFormik = withFormik({
         }
       });
   },
-  validate: values => validate(values, resetPasswordFormSchema),
-  displayName: 'LoginForm' // helps with React DevTools
+  validate: values => validate(values, ResetPasswordFormComponentSchema),
+  displayName: 'LoginFormComponent' // helps with React DevTools
 });
 
 const styles = StyleSheet.create({
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default translate('user')(ResetPasswordFormWithFormik(ResetPasswordForm));
+export default translate('user')(ResetPasswordFormComponentWithFormik(ResetPasswordFormComponent));

@@ -11,14 +11,14 @@ import { placeholderColor, submit } from '@gqlapp/look-client-react-native/style
 import { match, email, minLength, required, validate } from '@gqlapp/validation-common-react';
 import settings from '../../../../settings';
 
-const registerFormSchema = {
+const RegisterFormComponentSchema = {
   username: [required, minLength(3)],
   email: [required, email],
   password: [required, minLength(settings.auth.password.minLength)],
   passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
-const RegisterForm = ({ values, handleSubmit, t }) => {
+const RegisterFormComponent = ({ values, handleSubmit, t }) => {
   return (
     <FormView contentContainerStyle={{ flexGrow: 1 }} style={styles.formView}>
       <View style={styles.formContainer}>
@@ -68,7 +68,7 @@ const RegisterForm = ({ values, handleSubmit, t }) => {
   );
 };
 
-RegisterForm.propTypes = {
+RegisterFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   t: PropTypes.func,
   submitting: PropTypes.bool,
@@ -76,9 +76,9 @@ RegisterForm.propTypes = {
   values: PropTypes.object
 };
 
-const RegisterFormWithFormik = withFormik({
+const RegisterFormComponentWithFormik = withFormik({
   mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '' }),
-  validate: values => validate(values, registerFormSchema),
+  validate: values => validate(values, RegisterFormComponentSchema),
   async handleSubmit(
     values,
     {
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default translate('user')(RegisterFormWithFormik(RegisterForm));
+export default translate('user')(RegisterFormComponentWithFormik(RegisterFormComponent));

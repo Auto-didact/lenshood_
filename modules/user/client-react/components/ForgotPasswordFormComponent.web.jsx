@@ -6,11 +6,11 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { Form, RenderField, Button, Alert } from '@gqlapp/look-client-react';
 import { required, email, validate } from '@gqlapp/validation-common-react';
 
-const forgotPasswordFormSchema = {
+const ForgotPasswordFormComponentSchema = {
   email: [required, email]
 };
 
-const ForgotPasswordForm = ({ handleSubmit, errors, sent, values, t }) => {
+const ForgotPasswordFormComponent = ({ handleSubmit, errors, sent, values, t }) => {
   return (
     <Form name="forgotPassword" onSubmit={handleSubmit}>
       {sent && <Alert color="success">{t('forgotPass.form.submitMsg')}</Alert>}
@@ -31,7 +31,7 @@ const ForgotPasswordForm = ({ handleSubmit, errors, sent, values, t }) => {
   );
 };
 
-ForgotPasswordForm.propTypes = {
+ForgotPasswordFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   errors: PropTypes.object,
@@ -40,7 +40,7 @@ ForgotPasswordForm.propTypes = {
   t: PropTypes.func
 };
 
-const ForgotPasswordFormWithFormik = withFormik({
+const ForgotPasswordFormComponentWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({ email: '' }),
   async handleSubmit(
@@ -61,8 +61,8 @@ const ForgotPasswordFormWithFormik = withFormik({
         }
       });
   },
-  validate: values => validate(values, forgotPasswordFormSchema),
-  displayName: 'ForgotPasswordForm' // helps with React DevTools
+  validate: values => validate(values, ForgotPasswordFormComponentSchema),
+  displayName: 'ForgotPasswordFormComponent' // helps with React DevTools
 });
 
-export default translate('user')(ForgotPasswordFormWithFormik(ForgotPasswordForm));
+export default translate('user')(ForgotPasswordFormComponentWithFormik(ForgotPasswordFormComponent));

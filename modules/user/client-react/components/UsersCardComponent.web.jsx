@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, CardText } from "@gqlapp/look-client-react";
-import ProfileMini from "./components/ProfileMini";
+import ProfileMiniComponent from "./components/ProfileMiniComponent";
 
-const UsersCard = ({ data }) => {
+const UsersCardComponent = ({ data }) => {
   if (data.list.length === 0) {
     return (
       <Card>
@@ -18,7 +18,7 @@ const UsersCard = ({ data }) => {
         <h3>{data.title}</h3>
         <div style={{ height: "70px", overflow: "auto" }}>
           {data.list.map((item, key) => (
-            <ProfileMini item={item} key={key} />
+            <ProfileMiniComponent item={item} key={key} />
             // <Divider />
           ))}
         </div>
@@ -27,4 +27,4 @@ const UsersCard = ({ data }) => {
   }
 };
 
-export default UsersCard;
+export default UsersCardComponent;

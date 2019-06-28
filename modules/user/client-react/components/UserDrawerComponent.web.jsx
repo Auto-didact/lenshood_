@@ -35,7 +35,7 @@ const DescriptionItem = ({ title, content }) => (
   </div>
 );
 
-export default class UserDrawer extends Component {
+export default class UserDrawerComponent extends Component {
   state = { visible: false };
 
   showDrawer = () => {
@@ -175,7 +175,7 @@ export default class UserDrawer extends Component {
   }
 }
 
-UserDrawer.propTypes = {
+UserDrawerComponent.propTypes = {
   user: PropTypes.object.isRequired
 };
 

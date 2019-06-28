@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Avatar, Icon } from 'antd';
 import { ImgUser } from '../../constants/DefaultImages';
 
-const PublicProfileHead = ({ profile, description, role, portfolios }) => {
+const PublicProfileHeadComponent = ({ profile, description, role, portfolios }) => {
   return (
     <div className="public-profilehead-container">
       <div className="public-profile-avatar">
@@ -53,7 +53,7 @@ const PublicProfileHead = ({ profile, description, role, portfolios }) => {
     </div>
   );
 };
-PublicProfileHead.propTypes = {
+PublicProfileHeadComponent.propTypes = {
   profile: PropTypes.object,
   description: PropTypes.string,
   t: PropTypes.func,
@@ -61,4 +61,4 @@ PublicProfileHead.propTypes = {
   portfolios: PropTypes.object
 };
 
-export default PublicProfileHead;
+export default PublicProfileHeadComponent;

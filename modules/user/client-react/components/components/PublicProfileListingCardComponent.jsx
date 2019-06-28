@@ -9,7 +9,7 @@ import { ImgCamera } from "../../constants/DefaultImages";
 
 const { Meta } = Card;
 
-class PublicProfileListingCard extends Component {
+class PublicProfileListingCardComponent extends Component {
   render() {
     // To Do: check if it is not present then set as default value
 
@@ -74,8 +74,8 @@ class PublicProfileListingCard extends Component {
   }
 }
 
-PublicProfileListingCard.propTypes = {
+PublicProfileListingCardComponent.propTypes = {
   relatedList: PropTypes.object.isRequired
 };
 
-export default PublicProfileListingCard;
+export default PublicProfileListingCardComponent;

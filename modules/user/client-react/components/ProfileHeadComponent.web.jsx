@@ -3,7 +3,7 @@ import { CardGroup } from "@gqlapp/look-client-react";
 import { Avatar, Icon, Row, Col, Divider } from "antd";
 import { ImgUser } from "../constants/DefaultImages";
 
-const ProfileHead = ({ profile, description }) => {
+const ProfileHeadComponent = ({ profile, description }) => {
   return (
     <div align="center" style={{ marginBottom: "10px" }}>
       <Avatar
@@ -73,4 +73,4 @@ const ProfileHead = ({ profile, description }) => {
   );
 };
 
-export default ProfileHead;
+export default ProfileHeadComponent;

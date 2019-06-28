@@ -8,12 +8,12 @@ import { Form, RenderField, Button, Alert } from '@gqlapp/look-client-react';
 
 import settings from '../../../../settings';
 
-const resetPasswordFormSchema = {
+const ResetPasswordFormComponentSchema = {
   password: [required, minLength(settings.auth.password.minLength)],
   passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
-const ResetPasswordForm = ({ values, handleSubmit, errors, t }) => (
+const ResetPasswordFormComponent = ({ values, handleSubmit, errors, t }) => (
   <Form name="resetPassword" onSubmit={handleSubmit}>
     <Field
       name="password"
@@ -36,7 +36,7 @@ const ResetPasswordForm = ({ values, handleSubmit, errors, t }) => (
   </Form>
 );
 
-ResetPasswordForm.propTypes = {
+ResetPasswordFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   values: PropTypes.object,
   onSubmit: PropTypes.func,
@@ -45,7 +45,7 @@ ResetPasswordForm.propTypes = {
   t: PropTypes.func
 };
 
-const ResetPasswordFormWithFormik = withFormik({
+const ResetPasswordFormComponentWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({ password: '', passwordConfirmation: '' }),
   async handleSubmit(
@@ -66,8 +66,8 @@ const ResetPasswordFormWithFormik = withFormik({
         }
       });
   },
-  validate: values => validate(values, resetPasswordFormSchema),
-  displayName: 'LoginForm' // helps with React DevTools
+  validate: values => validate(values, ResetPasswordFormComponentSchema),
+  displayName: 'LoginFormComponent' // helps with React DevTools
 });
 
-export default translate('user')(ResetPasswordFormWithFormik(ResetPasswordForm));
+export default translate('user')(ResetPasswordFormComponentWithFormik(ResetPasswordFormComponent));

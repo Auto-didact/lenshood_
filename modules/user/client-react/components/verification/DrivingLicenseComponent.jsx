@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { CardText, Row, Col } from "@gqlapp/look-client-react";
 import { Card, Avatar } from "antd";
 
-const DrivingLicense = ({ dl }) => {
+const DrivingLicenseComponent = ({ dl }) => {
   if (!dl) {
     return <h4>Unavailable</h4>;
   } else {
@@ -75,4 +75,4 @@ const DrivingLicense = ({ dl }) => {
   }
 };
 
-export default DrivingLicense;
+export default DrivingLicenseComponent;

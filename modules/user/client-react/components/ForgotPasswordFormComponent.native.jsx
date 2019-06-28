@@ -10,11 +10,11 @@ import { placeholderColor, submit } from '@gqlapp/look-client-react-native/style
 import { required, email, validate } from '@gqlapp/validation-common-react';
 import { translate } from '@gqlapp/i18n-client-react';
 
-const forgotPasswordFormSchema = {
+const ForgotPasswordFormComponentSchema = {
   email: [required, email]
 };
 
-const ForgotPasswordForm = ({ handleSubmit, values, sent, t }) => {
+const ForgotPasswordFormComponent = ({ handleSubmit, values, sent, t }) => {
   return (
     <View style={styles.formContainer}>
       <View style={styles.alertContainer}>
@@ -52,14 +52,14 @@ const ForgotPasswordForm = ({ handleSubmit, values, sent, t }) => {
   );
 };
 
-ForgotPasswordForm.propTypes = {
+ForgotPasswordFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   t: PropTypes.func,
   values: PropTypes.object,
   sent: PropTypes.bool
 };
 
-const ForgotPasswordFormWithFormik = withFormik({
+const ForgotPasswordFormComponentWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({ email: '' }),
   async handleSubmit(
@@ -83,8 +83,8 @@ const ForgotPasswordFormWithFormik = withFormik({
         }
       });
   },
-  validate: values => validate(values, forgotPasswordFormSchema),
-  displayName: 'ForgotPasswordForm' // helps with React DevTools
+  validate: values => validate(values, ForgotPasswordFormComponentSchema),
+  displayName: 'ForgotPasswordFormComponent' // helps with React DevTools
 });
 
 const styles = StyleSheet.create({
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default translate('user')(ForgotPasswordFormWithFormik(ForgotPasswordForm));
+export default translate('user')(ForgotPasswordFormComponentWithFormik(ForgotPasswordFormComponent));

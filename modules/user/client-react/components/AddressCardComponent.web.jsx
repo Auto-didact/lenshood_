@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardText } from '@gqlapp/look-client-react';
 
-const AddressCard = ({ address, subTitle, index }) => {
+const AddressCardComponent = ({ address, subTitle, index }) => {
   return (
     <div
       style={{
@@ -21,4 +21,4 @@ const AddressCard = ({ address, subTitle, index }) => {
   );
 };
 
-export default AddressCard;
+export default AddressCardComponent;

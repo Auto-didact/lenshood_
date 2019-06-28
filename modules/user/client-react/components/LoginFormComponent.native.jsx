@@ -12,7 +12,7 @@ import { LinkedInButton, GoogleButton, GitHubButton, FacebookButton } from '@gql
 
 import settings from '../../../../settings';
 
-const loginFormSchema = {
+const LoginFormComponentSchema = {
   usernameOrEmail: [required, minLength(3)],
   password: [required, minLength(settings.auth.password.minLength)]
 };
@@ -36,7 +36,7 @@ const renderSocialButtons = (buttonsLength, t) => {
   ) : null;
 };
 
-const LoginForm = ({ handleSubmit, valid, values, navigation, t }) => {
+const LoginFormComponent = ({ handleSubmit, valid, values, navigation, t }) => {
   const buttonsLength = [facebook.enabled, linkedin.enabled, google.enabled, github.enabled].filter(button => button)
     .length;
   return (
@@ -93,7 +93,7 @@ const LoginForm = ({ handleSubmit, valid, values, navigation, t }) => {
   );
 };
 
-LoginForm.propTypes = {
+LoginFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   valid: PropTypes.bool,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const LoginFormWithFormik = withFormik({
+const LoginFormComponentWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({ usernameOrEmail: '', password: '' }),
 
@@ -159,8 +159,8 @@ const LoginFormWithFormik = withFormik({
       }
     });
   },
-  validate: values => validate(values, loginFormSchema),
-  displayName: 'LoginForm' // helps with React DevTools
+  validate: values => validate(values, LoginFormComponentSchema),
+  displayName: 'LoginFormComponent' // helps with React DevTools
 });
 
-export default translate('user')(LoginFormWithFormik(LoginForm));
+export default translate('user')(LoginFormComponentWithFormik(LoginFormComponent));

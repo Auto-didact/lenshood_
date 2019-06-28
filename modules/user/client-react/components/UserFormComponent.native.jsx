@@ -11,7 +11,7 @@ import { placeholderColor, submit } from '@gqlapp/look-client-react-native/style
 import { email, minLength, required, match, validate } from '@gqlapp/validation-common-react';
 import settings from '../../../../settings';
 
-const userFormSchema = {
+const UserFormComponentSchema = {
   username: [required, minLength(3)],
   email: [required, email],
   password: [required, minLength(settings.auth.password.minLength)],
@@ -23,7 +23,7 @@ const handleRoleChange = (type, value, setFieldValue) => {
   setFieldValue(type, preparedValue);
 };
 
-const UserForm = ({ values, handleSubmit, setFieldValue, t, shouldDisplayRole, shouldDisplayActive }) => {
+const UserFormComponent = ({ values, handleSubmit, setFieldValue, t, shouldDisplayRole, shouldDisplayActive }) => {
   const options = [
     {
       value: 'user',
@@ -135,7 +135,7 @@ const UserForm = ({ values, handleSubmit, setFieldValue, t, shouldDisplayRole, s
   );
 };
 
-UserForm.propTypes = {
+UserFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   t: PropTypes.func,
   handleChange: PropTypes.func,
@@ -152,7 +152,7 @@ UserForm.propTypes = {
   touched: PropTypes.object
 };
 
-const UserFormWithFormik = withFormik({
+const UserFormComponentWithFormik = withFormik({
   mapPropsToValues: values => {
     const { username, email, role, isActive, profile } = values.initialValues;
     return {
@@ -187,7 +187,7 @@ const UserFormWithFormik = withFormik({
     });
   },
   displayName: 'SignUpForm ', // helps with React DevTools
-  validate: values => validate(values, userFormSchema)
+  validate: values => validate(values, UserFormComponentSchema)
 });
 
 const styles = StyleSheet.create({
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default translate('user')(UserFormWithFormik(UserForm));
+export default translate('user')(UserFormComponentWithFormik(UserFormComponent));

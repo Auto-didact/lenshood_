@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 // To Do Abstract Out
 import { Modal, Button } from 'antd';
-import VerificationIcon from './VerificationIcon';
+import VerificationIconComponent from './VerificationIconComponent';
 
-class VerificationModal extends React.Component {
+class VerificationModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class VerificationModal extends React.Component {
       <div>
         <Button block type="dashed" onClick={this.showModal} disabled={this.props.vStatus}>
           {this.props.button}
-          <VerificationIcon vStatus={this.props.vStatus} />
+          <VerificationIconComponent vStatus={this.props.vStatus} />
         </Button>
         <Modal title={this.props.title} visible={visible} onCancel={this.handleCancel} footer={null}>
           {this.props.children}
@@ -40,7 +40,7 @@ class VerificationModal extends React.Component {
   }
 }
 
-VerificationModal.propTypes = {
+VerificationModalComponent.propTypes = {
   children: PropTypes.object.isRequired,
   button: PropTypes.string,
   title: PropTypes.string,
@@ -53,4 +53,4 @@ VerificationModal.propTypes = {
   t: PropTypes.func
 };
 
-export default translate('user')(VerificationModal);
+export default translate('user')(VerificationModalComponent);

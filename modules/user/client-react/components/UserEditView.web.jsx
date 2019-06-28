@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
 import './styling.css';
-import UserForm from './UserForm';
+import UserFormComponent from './UserFormComponent';
 import settings from '../../../../settings';
 
 const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
@@ -46,7 +46,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
             {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
           </h2>
           <div className="con">
-            <UserForm
+            <UserFormComponent
               LYGflag={false}
               onSubmit={onSubmit}
               shouldDisplayRole={isNotSelf}

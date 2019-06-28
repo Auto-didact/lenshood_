@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Loader } from '@gqlapp/look-client-react';
-import UserForm from './UserForm';
+import UserFormComponent from './UserFormComponent';
 
 const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
@@ -11,7 +11,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) =
       {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
       {!loading && !user && <h1 className="text-center"> Please refresh the page!!!! </h1>}
       {user && (
-        <UserForm
+        <UserFormComponent
           valueCheck={valueCheck}
           LYGflag={true}
           onSubmit={onSubmit}

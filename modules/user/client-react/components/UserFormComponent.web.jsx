@@ -26,13 +26,13 @@ import { FieldArray } from "formik";
 import settings from "../../../../settings";
 import "./styling.css";
 
-const userFormSchema = {
+const UserFormComponentSchema = {
   username: [required, minLength(3)],
   email: [required, email]
 };
 
-const createUserFormSchema = {
-  ...userFormSchema,
+const createUserFormComponentSchema = {
+  ...UserFormComponentSchema,
   password: [required, minLength(settings.auth.password.minLength)],
   passwordConfirmation: [
     required,
@@ -49,8 +49,8 @@ const isAdminFunction = role => {
   }
 };
 
-const updateUserFormSchema = {
-  ...userFormSchema,
+const updateUserFormComponentSchema = {
+  ...UserFormComponentSchema,
   password: minLength(settings.auth.password.minLength),
   passwordConfirmation: [
     match("password"),
@@ -58,7 +58,7 @@ const updateUserFormSchema = {
   ]
 };
 
-const UserForm = ({
+const UserFormComponent = ({
   values,
   handleSubmit,
   errors,
@@ -333,7 +333,7 @@ const UserForm = ({
   );
 };
 
-UserForm.propTypes = {
+UserFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
   setFieldValue: PropTypes.func,
@@ -349,7 +349,7 @@ UserForm.propTypes = {
   t: PropTypes.func
 };
 
-const UserFormWithFormik = withFormik({
+const UserFormComponentWithFormik = withFormik({
   mapPropsToValues: values => {
     const {
       username,
@@ -431,8 +431,8 @@ const UserFormWithFormik = withFormik({
   validate: (values, props) =>
     validate(
       values,
-      isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema
+      isEmpty(props.initialValues) ? createUserFormComponentSchema : updateUserFormComponentSchema
     )
 });
 
-export default translate("user")(UserFormWithFormik(UserForm));
+export default translate("user")(UserFormComponentWithFormik(UserFormComponent));

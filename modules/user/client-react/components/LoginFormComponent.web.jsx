@@ -1,41 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withFormik } from "formik";
-import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { NavLink, Link } from "react-router-dom";
+import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { translate } from "@gqlapp/i18n-client-react";
-
-import {
-  match,
-  email,
-  minLength,
-  required,
-  validate
-} from "@gqlapp/validation-common-react";
-import { Form, RenderField, Button, Alert } from "@gqlapp/look-client-react";
+import { required, minLength, validate } from "@gqlapp/validation-common-react";
+import { Form, RenderField, Alert, Button } from "@gqlapp/look-client-react";
 import {
   // LinkedInButton,
   GoogleButton,
   // GitHubButton,
   FacebookButton
 } from "@gqlapp/authentication-client-react";
-
 import { Divider, Row, Col, Card, Modal } from "antd";
-import camera from "../resources/camera.jpg";
+import { camera1, camera2 } from "../constants/DefaultImages";
 
 import settings from "../../../../settings";
 
-const registerFormSchema = {
-  username: [required, minLength(3)],
-  email: [required, email],
-  password: [required, minLength(settings.auth.password.minLength)],
-  passwordConfirmation: [
-    match("password"),
-    required,
-    minLength(settings.auth.password.minLength)
-  ]
+const LoginFormComponentSchema = {
+  usernameOrEmail: [required, minLength(3)],
+  password: [required, minLength(8)]
 };
-
 const { github, facebook, linkedin, google } = settings.auth.social;
 
 // const renderSocialButtons = (buttonsLength, t) => {
@@ -95,33 +80,22 @@ const { github, facebook, linkedin, google } = settings.auth.social;
 //   );
 // };
 
-const RegisterForm = ({
-  values,
-  handleSubmit,
-  submitting,
-  errors,
-  t
-}) => {
+const LoginFormComponent = ({ handleSubmit, submitting, errors, values, t }) => {
+  // const buttonsLength = [facebook.enabled, google.enabled].filter(
+  //   button => button
+  // ).length;
   return (
-    <Modal
-      centered
-      width={700}
-      bodyStyle={{ padding: "0" }}
-      visible={true}
-      footer={null}
-      closable={false}
-      // onCancel={() => this.setModal1Visible(false)}
-    >
-      <Row>
+    <div className="signInoOuter">
+      <Row className="SignInComp">
         <Col sm={8} xs={0}>
-          <img src={camera} alt="" className="signupImg" />
+          <img src={camera1} alt="" className="signInimg" />
         </Col>
         <Col sm={0} xs={24}>
-          <img src={camera} alt="" className="signImg" />
+          <img src={camera2} alt="" className="signImg" />
         </Col>
         <Col sm={16} xs={24}>
           <Card className="modalcard">
-            <h1 className="signinstate">Sign up...</h1>
+            <h1 className="signinstate">Let's Go...</h1>
             <Row>
               <Col span={24}>
                 {facebook.enabled && (
@@ -139,94 +113,67 @@ const RegisterForm = ({
               </Col>
             </Row>
             <h2 className="youcanAlways">Or you can always...</h2>
-            {/* <p className="signInForm">Let me help you sign up</p> */}
+            {/* <p className="signInForm">Let me help you sign in</p> */}
             <Form
               className="paddingMarginBottom"
-              name="register"
+              name="login"
               onSubmit={handleSubmit}
             >
-              <Field
-                name="username"
-                component={RenderField}
-                type="text"
-                placeholder={t("reg.form.field.name")}
-                value={values.username}
-              />
-              <Field
-                name="email"
-                component={RenderField}
-                type="text"
-                placeholder={t("reg.form.field.email")}
-                value={values.email}
-              />
-
+              <div>
+                <Field
+                  name="usernameOrEmail"
+                  component={RenderField}
+                  type="text"
+                  placeholder={t("login.form.field.usernameOrEmail")}
+                  value={values.usernameOrEmail}
+                />
+              </div>
+              {/* <div className="paddingMarginBottom"> */}
               <Field
                 name="password"
                 component={RenderField}
                 type="password"
-                placeholder={t("reg.form.field.pass")}
+                placeholder={t("login.form.field.pass")}
+                // label={t("login.form.field.pass")}
                 value={values.password}
               />
-              <Field
-                name="passwordConfirmation"
-                component={RenderField}
-                type="password"
-                placeholder={t("reg.form.field.passConf")}
-                value={values.passwordConfirmation}
-              />
-              <Col span={12}>
-                <Field
-                  label={<strong>Referral (optional)</strong>}
-                  name="referredBy"
-                  component={RenderField}
-                  type="text"
-                  placeholder={t("reg.form.field.referral")}
-                  value={values.referredBy}
-                />
-              </Col>
+              <Link className="forgotpass" to="/forgot-password">
+                {t("login.btn.forgotPass")}
+              </Link>
               <div className="text-center">
                 {errors && errors.errorMsg && (
                   <Alert color="error">{errors.errorMsg}</Alert>
                 )}
               </div>
               <Button color="primary" block type="submit" disabled={submitting}>
-                {t("reg.form.btnSubmit")}
+                {t("login.form.btnSubmit")}
               </Button>
               <p className="belowFormtext marginT20">
-                Already have an account?{" "}
-                <NavLink to="/login">{t("login.form.btnSubmit")}</NavLink>
-              </p>
-              <hr />
-              <p className="belowFormtext">
-                By signing up you agree to our{" "}
-                <NavLink to="/terms-of-service">terms of service</NavLink>
+                New to LensHood?{" "}
+                <NavLink to="/register">{t("login.btn.sign")}</NavLink>
               </p>
             </Form>
           </Card>
         </Col>
       </Row>
-    </Modal>
+    </div>
   );
 };
 
-RegisterForm.propTypes = {
+LoginFormComponent.propTypes = {
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object,
   values: PropTypes.object,
   t: PropTypes.func
 };
 
-const RegisterFormWithFormik = withFormik({
-  mapPropsToValues: ({ referredUsername }) => ({
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    referredBy: referredUsername || ""
-  }),
-  validate: values => validate(values, registerFormSchema),
-  async handleSubmit(
+const LoginFormComponentWithFormik = withFormik({
+  enableReinitialize: true,
+  mapPropsToValues: () => ({ usernameOrEmail: "", password: "" }),
+
+  handleSubmit(
     values,
     {
       setErrors,
@@ -241,8 +188,8 @@ const RegisterFormWithFormik = withFormik({
       }
     });
   },
-  enableReinitialize: true,
-  displayName: "SignUpForm" // helps with React DevTools
+  validate: values => validate(values, LoginFormComponentSchema),
+  displayName: "LoginFormComponent" // helps with React DevTools
 });
 
-export default translate("user")(RegisterFormWithFormik(RegisterForm));
+export default translate("user")(LoginFormComponentWithFormik(LoginFormComponent));
