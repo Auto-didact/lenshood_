@@ -44,28 +44,7 @@ class NavBar extends React.Component {
     mounted: false
   };
 
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-
-  showSettings(event) {
-    event.preventDefault();
-  }
-
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight, mounted: true });
-  };
-
-  handleClick = e => {
-    this.setState({
-      current: e.key
-    });
-  };
 
   toggle = function(val) {
     /*Function to Toggle State of Dropdowns in Side Drawer*/
@@ -126,8 +105,9 @@ class NavBar extends React.Component {
   );
 
   render() {
-    return this.state.width > 800 ? (
-      <Row gutter={0}>
+    return  (
+      <div>
+      <Row gutter={0} className="screen_width_more_than_800">
         <Col span={14}>
           <Menu
             onClick={this.handleClick}
@@ -184,10 +164,10 @@ class NavBar extends React.Component {
           </Menu>
         </Col>
       </Row>
-    ) : (
-      //Render This if screen width less than 800
+    
+            {/*Render This if screen width less than 800*/}
 
-      <div id="outer-container">
+      <div id="outer-container" className="screen_width_less_than_800">
         <div style={{ float: 'left' }}>
           <NavLink to="/" className="nav-link">
             <img src={require('../../logo/Logo2.png')} height="40" width="40" />
@@ -203,7 +183,7 @@ class NavBar extends React.Component {
             type="menu"
             onClick={this.showDrawer}
             className="hamburg"
-            style={this.state.mounted ? null : { display: 'none !important' }}
+            
           />
           {/*ref.modules.navItemsRight*/}
           <IfLoggedIn>
@@ -284,6 +264,7 @@ class NavBar extends React.Component {
           </Menu>
         </Drawer>
       </div>
+    </div>
     );
   }
 }
