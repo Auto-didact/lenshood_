@@ -3,8 +3,8 @@ import Helmet from "react-helmet";
 import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout, Loader } from "@gqlapp/look-client-react";
 import settings from "../../../../settings";
-import InviteDetailsCard from "./InviteDetailsCard";
-import ReferDetailsCard from "./ReferDetailsCard";
+import InviteDetailsCardComponent from "./InviteDetailsCardComponent";
+import ReferDetailsCardComponent from "./ReferDetailsCardComponent";
 import { Row, Col } from "antd";
 
 const ReferralView = ({ t, state, loading, referralUser }) => {
@@ -27,14 +27,14 @@ const ReferralView = ({ t, state, loading, referralUser }) => {
             xs={{ span: 24, offset: 0 }}
             className="margin20"
           >
-            <InviteDetailsCard username={referralUser.username} />
+            <InviteDetailsCardComponent username={referralUser.username} />
           </Col>
           <Col
             lg={{ span: 8, offset: 1 }}
             xs={{ span: 24, offset: 0 }}
             className="marginT20"
           >
-            <ReferDetailsCard
+            <ReferDetailsCardComponent
               state={state}
               referrals={referralUser.referrals}
             />

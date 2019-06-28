@@ -13,11 +13,11 @@ import {
   number
 } from "@gqlapp/validation-common-react";
 
-const InviteDetailsCardSchema = {
+const InviteDetailsCardComponentSchema = {
   inviteVal: [required]
 };
 
-const InviteDetailsCard = ({
+const InviteDetailsCardComponent = ({
   values,
   handleSubmit,
   submitting,
@@ -191,7 +191,7 @@ const InviteDetailsCard = ({
   );
 };
 
-InviteDetailsCard.propTypes = {
+InviteDetailsCardComponent.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object,
@@ -199,11 +199,11 @@ InviteDetailsCard.propTypes = {
   username: PropTypes.string
 };
 
-const InviteDetailsCardWithFormik = withFormik({
+const InviteDetailsCardComponentWithFormik = withFormik({
   mapPropsToValues: () => ({
     inviteVal: []
   }),
-  validate: values => validate(values, InviteDetailsCardSchema),
+  validate: values => validate(values, InviteDetailsCardComponentSchema),
   async handleSubmit(
     values
     // {
@@ -237,4 +237,4 @@ const InviteDetailsCardWithFormik = withFormik({
   displayName: "inviteForm" // helps with React DevTools
 });
 
-export default InviteDetailsCardWithFormik(InviteDetailsCard);
+export default InviteDetailsCardComponentWithFormik(InviteDetailsCardComponent);

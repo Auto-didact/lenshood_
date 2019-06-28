@@ -1,8 +1,8 @@
 import React from "react";
 import { Row, Col, Button, Card } from "antd";
-import ReferModal from "./ReferModal";
+import ReferModalComponent from "./ReferModalComponent";
 
-export default class ReferDetailsCard extends React.Component {
+export default class ReferDetailsCardComponent extends React.Component {
   state = {
     ...this.props.state,
     modal1Visible: false
@@ -33,7 +33,7 @@ export default class ReferDetailsCard extends React.Component {
           >
             View referral details
           </Button>
-          <ReferModal
+          <ReferModalComponent
             modal1Visible={this.state.modal1Visible}
             setModal1Visible={this.setModal1Visible.bind(this)}
             cashEarned={this.state.cashEarned}

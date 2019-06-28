@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Badge, Card } from "antd";
 
-export default class ReferModal extends React.Component {
+export default class ReferModalComponent extends React.Component {
   render() {
     return (
       <Modal
