@@ -16,7 +16,7 @@ class PageLayout extends React.Component {
         {navBar !== false && (
           <Header
             className="header"
-            style={{ position: "fixed", zIndex: 1, width: "100%" }}
+            style={{ position: "fixed", zIndex: 1000, width: "100%" }}
           >
             <NavBar />
           </Header>
