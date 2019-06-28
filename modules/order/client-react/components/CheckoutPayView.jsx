@@ -4,8 +4,8 @@ import { PageLayout } from "@gqlapp/look-client-react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
 import settings from "../../../../settings";
 import { Layout, Menu, Row, Col, Card, Form, Input, Button } from "antd";
-import CheckoutSteps from "./CheckoutSteps";
-import OrderCard from "./OrderCard";
+import CheckoutStepsComponent from "./CheckoutStepsComponent";
+import OrderCardComponent from "./OrderCardComponent";
 import naruto2 from "../resources/naruto2.jpg";
 
 const { Item } = Menu;
@@ -42,7 +42,7 @@ export default class CheckoutPay extends React.Component {
         {renderMetaData()}
         <div className="checkoutDiv">
           <Row gutter={16}>
-            <CheckoutSteps step={2} />
+            <CheckoutStepsComponent step={2} />
             <Col lg={6} sm={10} className="ColMenu checkSlider">
               <h4>
                 <strong>Choose payment option</strong>
@@ -136,7 +136,7 @@ export default class CheckoutPay extends React.Component {
               sm={{ span: 18, offset: 3 }}
               xs={{ span: 22, offset: 1 }}
             >
-              <OrderCard
+              <OrderCardComponent
                 product={this.state.product}
                 paid={false}
                 buttonText={"Place order"}

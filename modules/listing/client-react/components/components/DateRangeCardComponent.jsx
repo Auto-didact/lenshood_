@@ -15,7 +15,7 @@ const DateChangeSchema = {
   dateRange: [required]
 };
 
-const DateRangeCard = props => {
+const DateRangeCardComponent = props => {
   const currentBooking = props.currentBooking;
   const { handleSubmit, submitting, errors } = props;
   const [dates, setDateRange] = useState([
@@ -30,7 +30,7 @@ const DateRangeCard = props => {
       footer={null}
       onCancel={() => props.setModal1Visible()}
     >
-      <Form name="DateRangeCard" onSubmit={handleSubmit}>
+      <Form name="DateRangeCardComponent" onSubmit={handleSubmit}>
         <h4>Book Dates:</h4>
         <Field
           disabledDate={props.disabledDate}
@@ -52,13 +52,13 @@ const DateRangeCard = props => {
   );
 };
 
-DateRangeCard.propTypes = {
+DateRangeCardComponent.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object
 };
 
-const DateRangeCardWithFormik = withFormik({
+const DateRangeCardComponentWithFormik = withFormik({
   mapPropsToValues: props => ({
     dateRange: [
       moment(props.currentBooking.start, "DD-MM-YY"),
@@ -100,4 +100,4 @@ const DateRangeCardWithFormik = withFormik({
   displayName: "DatesChangeForm" // helps with React DevTools
 });
 
-export default DateRangeCardWithFormik(DateRangeCard);
+export default DateRangeCardComponentWithFormik(DateRangeCardComponent);

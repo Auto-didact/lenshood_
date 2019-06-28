@@ -4,9 +4,9 @@ import { PageLayout } from "@gqlapp/look-client-react";
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
 import settings from "../../../../settings";
 import { Row, Col } from "antd";
-import CheckoutSteps from "./CheckoutSteps";
-import OrderCard from "./OrderCard";
-import OrderTrackCard from "./OrderTrackCard";
+import CheckoutStepsComponent from "./CheckoutStepsComponent";
+import OrderCardComponent from "./OrderCardComponent";
+import OrderTrackCardComponent from "./OrderTrackCardComponent";
 import naruto2 from "../resources/naruto2.jpg";
 
 const renderMetaData = t => (
@@ -58,7 +58,7 @@ export default class CheckoutOrderView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <Col lg={{ span: 22, offset: 2 }} xs={{ span: 24, offset: 0 }}>
-              <CheckoutSteps step={3} />
+              <CheckoutStepsComponent step={3} />
             </Col>
             <Col lg={{ span: 22, offset: 1 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }}>
               <Col
@@ -66,7 +66,7 @@ export default class CheckoutOrderView extends React.Component {
                 xs={{ span: 24, offset: 0 }}
                 className="margin20"
               >
-                <OrderTrackCard
+                <OrderTrackCardComponent
                   status={this.state.status}
                   completed={this.state.completed}
                 />
@@ -76,7 +76,7 @@ export default class CheckoutOrderView extends React.Component {
                 xs={{ span: 24, offset: 0 }}
                 className="marginT20"
               >
-                <OrderCard
+                <OrderCardComponent
                   product={this.state.product}
                   paid={true}
                   buttonText={"Cancel order"}

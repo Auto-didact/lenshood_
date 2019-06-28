@@ -3,7 +3,7 @@ import { Steps, Card, Icon } from "antd";
 
 const { Step } = Steps;
 
-export default class OrderTrackCard extends React.Component {
+export default class OrderTrackCardComponent extends React.Component {
   dateCheck(val, date, date2) {
     if (val <= this.props.completed) {
       if (date2 == 0) return <strong className="rightfloat">{date}</strong>;

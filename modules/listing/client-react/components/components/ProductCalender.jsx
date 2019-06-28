@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Calendar, Card, Icon, Avatar, Button } from 'antd';
 import moment from 'moment';
-import DateRangeCard from './DateRangeCard';
+import DateRangeCardComponent from './DateRangeCardComponent';
 
 class ProductCalender extends Component {
   constructor(props) {
@@ -136,7 +136,7 @@ class ProductCalender extends Component {
               </Button>
             </Col>
           ) : null}
-          <DateRangeCard
+          <DateRangeCardComponent
             disabledDate={this.disabledDate}
             setModal1Visible={this.setModal1Visible}
             modal1Visible={this.state.modal1Visible}

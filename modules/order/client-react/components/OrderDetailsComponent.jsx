@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Icon, Button, Row, Col, Card, Rate, Avatar } from "antd";
 import { BORROWED } from "../constants/OrderStates";
 
-class DetailsCard extends Component {
+class OrderDetailsComponent extends Component {
   render() {
     const item = this.props.item;
 
@@ -103,4 +103,4 @@ class DetailsCard extends Component {
   }
 }
 
-export default DetailsCard;
+export default OrderDetailsComponent;

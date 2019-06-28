@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Layout, Button, Row, Col, Modal } from "antd";
-import OrderDetails from "./OrderDetails";
+import OrderDetailsComponent from "./OrderDetailsComponent";
 import { LENDED, BORROWED } from "../constants/OrderStates";
-import OrderTrackCard from "./OrderTrackCard";
+import OrderTrackCardComponent from "./OrderTrackCardComponent";
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
-class MyOrder extends Component {
+class MyOrderComponent extends Component {
   state = {
     trackList: null,
     status: BORROWED,
@@ -37,7 +37,7 @@ class MyOrder extends Component {
   }
   returnItem(item) {
     return (
-      <OrderDetails
+      <OrderDetailsComponent
         buttonText="View"
         item={item}
         setTrackList={this.setTrackList.bind(this)}
@@ -89,7 +89,7 @@ class MyOrder extends Component {
         >
           {console.log(this.state.trackList)}
           {this.state.trackList != null ? (
-            <OrderTrackCard
+            <OrderTrackCardComponent
               status={this.state.trackList.track}
               completed={this.state.trackList.track.completed}
             />
@@ -100,4 +100,4 @@ class MyOrder extends Component {
   }
 }
 
-export default MyOrder;
+export default MyOrderComponent;

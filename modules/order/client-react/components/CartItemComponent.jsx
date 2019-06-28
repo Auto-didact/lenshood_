@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Icon } from "antd";
 
-const CartItem = props => {
+const CartItemComponent = props => {
   let product = props.products;
   return (
     <Row className="cartitem borderRadius9">
@@ -65,4 +65,4 @@ const CartItem = props => {
   );
 };
 
-export default CartItem;
+export default CartItemComponent;

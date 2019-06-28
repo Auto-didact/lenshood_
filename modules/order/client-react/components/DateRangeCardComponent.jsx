@@ -14,7 +14,7 @@ const DateChangeSchema = {
   dateRange: [required]
 };
 
-const DateRangeCard = props => {
+const DateRangeCardComponent = props => {
   const { handleSubmit, submitting, errors } = props;
   let product = props.products;
   const [dates, setDateRange] = useState([
@@ -44,7 +44,7 @@ const DateRangeCard = props => {
   );
 };
 
-DateRangeCard.propTypes = {
+DateRangeCardComponent.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object
@@ -85,4 +85,4 @@ const CartItemWithFormik = withFormik({
   displayName: "DatesChangeForm" // helps with React DevTools
 });
 
-export default CartItemWithFormik(DateRangeCard);
+export default CartItemWithFormik(DateRangeCardComponent);
