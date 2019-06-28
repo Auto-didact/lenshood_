@@ -186,13 +186,7 @@ class NavBar extends React.Component {
             
           />
           {/*ref.modules.navItemsRight*/}
-          <IfLoggedIn>
-            <MenuItem>
-              <DropDown content={<UserAvatar />} noicon>
-                {ref.modules.navItemsUser}
-              </DropDown>
-            </MenuItem>
-          </IfLoggedIn>
+          
         </Menu>
 
         <Drawer title="Lenshood" placement="right" closable={true} onClose={this.onClose} visible={this.state.visible}>
@@ -201,6 +195,13 @@ class NavBar extends React.Component {
             mode="inline"
             selectedKeys={[this.props.location.pathname]}
           >
+            <IfLoggedIn>
+            <MenuItem className="forUser">
+              < UserAvatar className="avatar" />
+              
+              <Menu mode="inline" className="userItems">{ref.modules.navItemsUser}</Menu>
+            </MenuItem>
+          </IfLoggedIn>
             {ref.modules.navItemsRight}
             <Menu.Item className="about" style={{}} key="about">
               <a className="nav-link" style={{ color: '#23b195', height: '30px' }} onClick={() => this.toggle(1)}>
