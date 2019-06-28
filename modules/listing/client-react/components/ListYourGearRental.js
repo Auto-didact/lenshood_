@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Form, Input, Button, Checkbox } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
 // import "./resources/listingCatalogue.css";
-import ListYGSteps from './components/ListYGSteps';
+import ListYGStepsComponent from './components/ListYGStepsComponent';
 
 class ListTourGearRental extends Component {
   state = {
@@ -24,7 +24,7 @@ class ListTourGearRental extends Component {
         <div className="Listyourgearcards">
           <Row>
             <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
-              <ListYGSteps step={2} />
+              <ListYGStepsComponent step={2} />
               <Form layout="vertical">
                 <Form.Item label={<strong>Expected Rent</strong>}>
                   <Row gutter={16}>

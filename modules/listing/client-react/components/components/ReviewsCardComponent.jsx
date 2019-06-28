@@ -4,7 +4,7 @@ import { Rate, List, Row, Col, Avatar } from 'antd';
 import { Card } from '@gqlapp/look-client-react';
 // import '../resources/listingCatalogue.css';
 
-class ReviewsCard extends Component {
+class ReviewsCardComponent extends Component {
   averageReviews(array) {
     var total = 0,
       len = 0;
@@ -62,4 +62,4 @@ class ReviewsCard extends Component {
   }
 }
 
-export default ReviewsCard;
+export default ReviewsCardComponent;

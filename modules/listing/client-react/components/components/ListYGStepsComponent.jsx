@@ -4,7 +4,7 @@ import { Steps } from 'antd';
 
 const Step = Steps.Step;
 
-class ListYGSteps extends Component {
+class ListYGStepsComponent extends Component {
   render() {
     return (
       <div>
@@ -22,4 +22,4 @@ class ListYGSteps extends Component {
   }
 }
 
-export default ListYGSteps;
+export default ListYGStepsComponent;

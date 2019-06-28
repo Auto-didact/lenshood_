@@ -15,7 +15,7 @@ import moment from "moment";
 
 const { RangePicker } = DatePicker;
 var today = new Date();
-export default class AddToCartCard extends Component {
+export default class AddToCartCardComponent extends Component {
   state = {
     dateInit: {
       dd: today.getDate(),

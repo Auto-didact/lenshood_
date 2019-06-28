@@ -5,11 +5,11 @@ import Helmet from 'react-helmet';
 
 import { Row, Col, Breadcrumb, Card } from 'antd';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
-import UserCard from './components/userCard';
-import ProductCard from './components/ProductCard';
-import ReviewsCard from './components/ReviewsCard';
-import AddToCartCard from './components/AddToCartCard';
-import SuggestedCardList from './components/SuggestedCardList';
+import UserCardComponent from './components/UserCardComponent';
+import ProductCardComponent from './components/ProductCardComponent';
+import ReviewsCardComponent from './components/ReviewsCardComponent';
+import AddToCartCardComponent from './components/AddToCartCardComponent';
+import SuggestedCardListComponent from './components/SuggestedCardListComponent';
 
 import settings from '../../../../settings';
 
@@ -83,13 +83,13 @@ class ListingDetailView extends Component {
           }
           <Row gutter={10} style={{ marginLeft: leftGap, marginRight: leftGap }}>
             <Col xl={16} lg={15} md={13} sm={24}>
-              <ProductCard listing={listing} cancellationPolicy={cancellationPolicy} damagePolicy={damagePolicy} />
-              {/*<ReviewsCard reviews={this.state.product.reviews} />*/}
+              <ProductCardComponent listing={listing} cancellationPolicy={cancellationPolicy} damagePolicy={damagePolicy} />
+              {/*<ReviewsCardComponent reviews={this.state.product.reviews} />*/}
             </Col>
             <Col xl={8} lg={9} md={11} sm={24}>
               <Row>
                 <Col span={24}>
-                  <AddToCartCard
+                  <AddToCartCardComponent
                     onChange={this.onChange.bind(this)}
                     noOfDays={this.state.noOfDays}
                     product={this.state.product}
@@ -97,20 +97,20 @@ class ListingDetailView extends Component {
                   />
                 </Col>
                 <Col span={24}>
-                  <UserCard seller={seller} />
+                  <UserCardComponent seller={seller} />
                 </Col>
               </Row>
             </Col>
             {/* <Col span={24}>
             <Card>
               <h2 className="fontBold">Other listings by {this.state.product.seller.name}</h2>
-              <SuggestedCardList relatedList={this.state.product.relatedList} />
+              <SuggestedCardListComponent relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
             {/* <Col span={24}>
             <Card>
               <h2 className="fontBold">Frequently rented along with {this.state.product.title}</h2>
-              <SuggestedCardList relatedList={this.state.product.relatedList} />
+              <SuggestedCardListComponent relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
           </Row>

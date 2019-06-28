@@ -3,7 +3,7 @@ import { Row, Col, Calendar, Card, Icon, Avatar, Button } from 'antd';
 import moment from 'moment';
 import DateRangeCardComponent from './DateRangeCardComponent';
 
-class ProductCalender extends Component {
+class ProductCalenderComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -178,4 +178,4 @@ class ProductCalender extends Component {
   }
 }
 
-export default ProductCalender;
+export default ProductCalenderComponent;

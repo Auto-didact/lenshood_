@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Table, Button, Pagination, Loader } from '@gqlapp/look-client-react';
-import ListingDrawer from './ListingDrawer';
+import ListingDrawerComponent from './ListingDrawerComponent';
 import settings from '../../../../settings';
 
 const { itemsNumber, type } = settings.pagination.web;
@@ -23,7 +23,7 @@ const cancel = () => {
   message.error('Click on No');
 };
 
-const ListingList = ({ loading, listings, t, loadData, deleteListing }) => {
+const ListingListComponent = ({ loading, listings, t, loadData, deleteListing }) => {
   const columns = [
     {
       title: t('list.column.gearCategory'),
@@ -60,7 +60,7 @@ const ListingList = ({ loading, listings, t, loadData, deleteListing }) => {
               Edit
             </Button>
           </Link> */}
-          <ListingDrawer listing={record} />
+          <ListingDrawerComponent listing={record} />
           <Popconfirm
             title="Are you sure delete this listing?"
             onConfirm={() => deleteListing(record.id)}
@@ -123,7 +123,7 @@ const ListingList = ({ loading, listings, t, loadData, deleteListing }) => {
   );
 };
 
-ListingList.propTypes = {
+ListingListComponent.propTypes = {
   loading: PropTypes.bool.isRequired,
   listings: PropTypes.object,
   deleteListing: PropTypes.func.isRequired,
@@ -131,4 +131,4 @@ ListingList.propTypes = {
   t: PropTypes.func
 };
 
-export default translate('listing')(ListingList);
+export default translate('listing')(ListingListComponent);

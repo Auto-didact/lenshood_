@@ -10,7 +10,7 @@ import { Row, Col, Icon, message } from "antd";
 
 import ProductDetails from "./components/ListingForm/ProductDetails";
 import RentalDetails from "./components/ListingForm/RentalDetails";
-import ListYGSteps from "./components/ListYGSteps";
+import ListYGStepsComponent from "./components/ListYGStepsComponent";
 import { UserDetails } from "@gqlapp/user-client-react";
 
 const ProductDetailsSchema = {
@@ -18,7 +18,7 @@ const ProductDetailsSchema = {
   gearSubcategory: [required]
 };
 
-class ListingForm extends Component {
+class ListingFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { step: 0 };
@@ -81,7 +81,7 @@ class ListingForm extends Component {
             sm={{ span: 20, offset: 2 }}
             className="LYGcol1"
           >
-            <ListYGSteps step={this.state.step} />
+            <ListYGStepsComponent step={this.state.step} />
 
             <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
               {this.steps[this.state.step]}
@@ -139,7 +139,7 @@ class ListingForm extends Component {
   }
 }
 
-ListingForm.propTypes = {
+ListingFormComponent.propTypes = {
   validateForm: PropTypes.func,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -150,7 +150,7 @@ ListingForm.propTypes = {
   t: PropTypes.func
 };
 
-const ListingFormWithFormik = withFormik({
+const ListingFormComponentWithFormik = withFormik({
   mapPropsToValues: props => ({
     // FOR RENDERAUTOCOMPLETE
     // userId: props.listing && props.listing.user.id,
@@ -176,7 +176,7 @@ const ListingFormWithFormik = withFormik({
     onSubmit(values);
   },
   enableReinitialize: true,
-  displayName: "ListingForm" // helps with React DevTools
+  displayName: "ListingFormComponent" // helps with React DevTools
 });
 
-export default translate("listing")(ListingFormWithFormik(ListingForm));
+export default translate("listing")(ListingFormComponentWithFormik(ListingFormComponent));

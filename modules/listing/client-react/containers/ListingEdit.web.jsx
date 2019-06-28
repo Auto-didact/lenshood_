@@ -106,7 +106,7 @@ export default compose(
           return history.push('/listings');
         }
         if (navigation) {
-          return navigation.navigate('ListingList');
+          return navigation.navigate('ListingListComponent');
         }
       }
     })

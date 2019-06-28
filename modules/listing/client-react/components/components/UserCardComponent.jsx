@@ -7,7 +7,7 @@ import { ImgUser } from '../../constants/DefaultImages';
 // import '../resources/listingCatalogue.css';
 const { Meta } = Card;
 
-class UserCard extends Component {
+class UserCardComponent extends Component {
   render() {
     let seller = this.props.seller;
     const portfolios = this.props.seller && this.props.seller.portfolios;
@@ -86,4 +86,4 @@ class UserCard extends Component {
   }
 }
 
-export default UserCard;
+export default UserCardComponent;

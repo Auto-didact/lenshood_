@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'antd';
 // import '../resources/listingCatalogue.css';
-import RelatedCard from './RelatedCard';
+import RelatedCardComponent from './RelatedCardComponent';
 
-class SuggestedCardList extends Component {
+class SuggestedCardListComponent extends Component {
   render() {
     return (
       <List
@@ -20,7 +20,7 @@ class SuggestedCardList extends Component {
         dataSource={this.props.relatedList}
         renderItem={item => (
           <List.Item key={item.id}>
-            <RelatedCard key={item.id} relatedListing={item} />
+            <RelatedCardComponent key={item.id} relatedListing={item} />
           </List.Item>
         )}
       />
@@ -28,8 +28,8 @@ class SuggestedCardList extends Component {
   }
 }
 
-SuggestedCardList.propTypes = {
+SuggestedCardListComponent.propTypes = {
   relatedList: PropTypes.object.isRequired
 };
 
-export default SuggestedCardList;
+export default SuggestedCardListComponent;

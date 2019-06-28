@@ -4,7 +4,7 @@ import { Icon, Button, Row, Col, Card, Popconfirm, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { ImgCamera } from '../../constants/DefaultImages';
 
-class DetailsCard extends Component {
+class DetailsCardComponent extends Component {
   render() {
     const item = this.props.item;
 
@@ -105,4 +105,4 @@ class DetailsCard extends Component {
   }
 }
 
-export default DetailsCard;
+export default DetailsCardComponent;

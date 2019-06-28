@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Layout, Button, Row, Col, Empty } from 'antd';
 import PropTypes from 'prop-types';
 
-import DetailsCard from './DetailsCard';
+import DetailsCardComponent from './DetailsCardComponent';
 import { ALL, ONSHELF, IDLE } from '../../constants/ListingStates';
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
-class MyList extends Component {
+class MyListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ class MyList extends Component {
 
   returnItem(item, key) {
     return (
-      <DetailsCard
+      <DetailsCardComponent
         buttonText="View"
         item={item}
         key={key}
@@ -98,8 +98,8 @@ class MyList extends Component {
     );
   }
 }
-MyList.propTypes = {
+MyListComponent.propTypes = {
   userListings: PropTypes.object
 };
 
-export default MyList;
+export default MyListComponent;

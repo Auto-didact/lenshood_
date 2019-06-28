@@ -33,7 +33,7 @@ const DescriptionItem = ({ title, content }) => (
   </div>
 );
 
-export default class ListingDrawer extends Component {
+export default class ListingDrawerComponent extends Component {
   state = { visible: false };
 
   showDrawer = () => {
@@ -208,7 +208,7 @@ export default class ListingDrawer extends Component {
   }
 }
 
-ListingDrawer.propTypes = {
+ListingDrawerComponent.propTypes = {
   listing: PropTypes.object.isRequired
 };
 

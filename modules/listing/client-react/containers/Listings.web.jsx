@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 import { PLATFORM } from '@gqlapp/core-common';
 
-import ListingList from '../components/ListingList';
+import ListingListComponent from '../components/ListingListComponent';
 
 import LISTINGS_QUERY from '../graphql/ListingsQuery.graphql';
 import LISTINGS_SUBSCRIPTION from '../graphql/ListingsSubscription.graphql';
@@ -112,7 +112,7 @@ const Listing = props => {
     }
   });
 
-  return <ListingList {...props} />;
+  return <ListingListComponent {...props} />;
 };
 
 Listing.propTypes = {

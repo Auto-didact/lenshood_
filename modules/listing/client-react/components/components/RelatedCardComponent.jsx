@@ -9,7 +9,7 @@ import { ImgCamera } from "../../constants/DefaultImages";
 
 const { Meta } = Card;
 
-class RelatedCard extends Component {
+class RelatedCardComponent extends Component {
   constructor(props) {
     super(props);
     this.carousel = React.createRef();
@@ -130,8 +130,8 @@ class RelatedCard extends Component {
   }
 }
 
-RelatedCard.propTypes = {
+RelatedCardComponent.propTypes = {
   relatedList: PropTypes.object.isRequired
 };
 
-export default RelatedCard;
+export default RelatedCardComponent;

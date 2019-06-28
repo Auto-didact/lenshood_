@@ -4,11 +4,12 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, AccountLayout, Loader } from '@gqlapp/look-client-react';
-import DetailsCard from './components/DetailsCard';
-import ProductCalender from './components/ProductCalender';
-import ReviewsCard from './components/ReviewsCard';
+import DetailsCardComponent from './components/DetailsCardComponent';
+import ProductCalenderComponent from './components/ProductCalenderComponent';
+import ReviewsCardComponent from './components/ReviewsCardComponent';
 import naruto4 from './resources/naruto4.jpg';
 import naruto3 from './resources/naruto3.jpg';
+
 
 import settings from '../../../../settings';
 
@@ -101,11 +102,11 @@ class MyListDetailsView extends Component {
           <Breadcrumb.Item>Account</Breadcrumb.Item>
           <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
         </Breadcrumb> */}
-          <DetailsCard buttonText="Edit" item={listing} />
+          <DetailsCardComponent buttonText="Edit" item={listing} />
           <Card>
-            <ProductCalender bookings={this.state.bookings} name={this.state.name} />
+            <ProductCalenderComponent bookings={this.state.bookings} name={this.state.name} />
           </Card>
-          <ReviewsCard reviews={this.state.reviews} />
+          <ReviewsCardComponent reviews={this.state.reviews} />
         </AccountLayout>
       );
     }

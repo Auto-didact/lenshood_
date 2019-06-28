@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
-import ListingForm from "./ListingForm";
+import ListingFormComponent from "./ListingFormComponent";
 
 import settings from "../../../../settings";
 import { translate } from "@gqlapp/i18n-client-react";
@@ -11,6 +11,7 @@ import { PageLayout } from "@gqlapp/look-client-react";
 const onSubmit = addListing => values => {
   addListing(values);
 };
+
 
 const ListingAddView = ({ addListing, t, currentUser, users }) => {
   const renderMetaData = () => (
@@ -30,7 +31,7 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
       {/* <Link id="back-button" to="/listings">
         {t('listing.btn.back')}
       </Link> */}
-      <ListingForm onSubmit={onSubmit(addListing)} currentUser={currentUser} users={users}/>
+      <ListingFormComponent onSubmit={onSubmit(addListing)} currentUser={currentUser} users={users}/>
       <br />
     </PageLayout>
   );

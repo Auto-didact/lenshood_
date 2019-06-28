@@ -18,7 +18,7 @@ import { ImgCamera } from '../../constants/DefaultImages';
 //   );
 // }
 
-class ProductCard extends Component {
+class ProductCardComponent extends Component {
   constructor(props) {
     super(props);
     this.next = this.next.bind(this);
@@ -132,4 +132,4 @@ class ProductCard extends Component {
   }
 }
 
-export default ProductCard;
+export default ProductCardComponent;
