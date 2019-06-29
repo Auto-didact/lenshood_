@@ -12,15 +12,12 @@ import {
 } from 'antd';
 import { CardTitle } from '@gqlapp/look-client-react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const { RangePicker } = DatePicker;
-var today = new Date();
-export default class AddToCartCard extends Component {
+class AddToCart extends Component {
   state = {
     dateInit: {
-      dd: today.getDate(),
-      mm: today.getMonth() + 1,
-      yyyy: today.getFullYear(),
       dateFormat: 'YYYY/MM/DD',
       startDate: null,
       endDate: null,
@@ -36,6 +33,10 @@ export default class AddToCartCard extends Component {
     return current && current < moment().endOf('day');
   };
   render() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
     const listing = this.props.listing;
 
     const date = this.state.dateInit;
@@ -99,8 +100,8 @@ export default class AddToCartCard extends Component {
           <RangePicker
             onChange={this.onChange}
             defaultValue={[
-              moment(`${date.yyyy}/${date.mm}/${date.dd + 1}`, date.dateFormat),
-              moment(`${date.yyyy}/${date.mm}/${date.dd + 2}`, date.dateFormat)
+              moment(`${yyyy}/${mm}/${dd + 1}`, date.dateFormat),
+              moment(`${yyyy}/${mm}/${dd + 2}`, date.dateFormat)
             ]}
             disabledDate={this.disabledDate}
             dateRender={current => {
@@ -178,3 +179,9 @@ export default class AddToCartCard extends Component {
     );
   }
 }
+
+AddToCart.propTypes = {
+  listing: PropTypes.object
+};
+
+export default AddToCart;
