@@ -126,6 +126,6 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('listing_damage'),
     knex.schema.dropTable('listing_rental'),
     knex.schema.dropTable('listing_content'),
-    knex.schema.dropTable('review')
+    knex.schema.dropTable('listing_review')
   ]);
 };
