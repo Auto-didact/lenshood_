@@ -85,7 +85,6 @@ const UserFormComponent = ({
   const isAdmin = isAdminFunction(userRole);
   return (
     <Form name="user" onSubmit={handleSubmit}>
-      
       {LYGflag == false || !valueCheck.avatar ? (
         <>
           <Field
@@ -98,236 +97,238 @@ const UserFormComponent = ({
         </>
       ) : null}
       <div className="g2">
-      {LYGflag == false ? (
-        <>
-          <Field
-            name="username"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.name")}
-            value={username}
-          />
-          <Field
-            name="email"
-            component={RenderField}
-            type="email"
-            label={t("userEdit.form.field.email")}
-            value={email}
-          />
-          {isAdmin && (
+        {LYGflag == false ? (
+          <>
             <Field
-              name="role"
-              component={RenderSelect}
-              label={t("userEdit.form.field.role.label")}
-              value={role}
-            >
-              <Option value="user">{t("userEdit.form.field.role.user")}</Option>
-              <Option value="admin">
-                {t("userEdit.form.field.role.admin")}
-              </Option>
-            </Field>
-          )}
-        </>
-      ) : null}
-      {LYGflag == false || !valueCheck.firstName ? (
-        <>
-          <Field
-            name="profile.firstName"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.firstName")}
-            value={profile.firstName}
-          />
-        </>
-      ) : null}
-      {LYGflag == false || !valueCheck.lastName ? (
-        <>
-          <Field
-            name="profile.lastName"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.lastName")}
-            value={profile.lastName}
-          />
-        </>
-      ) : null}
-      {LYGflag == false || !valueCheck.about ? (
-        <>
-          <Field
-            name="profile.about"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.about")}
-            value={profile.about}
-          />
-        </>
-      ) : null}
-      {LYGflag == false || !valueCheck.designation ? (
-        <>
-          <Field
-            name="profile.designation"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.designation")}
-            value={profile.designation}
-          />
-        </>
-      ) : null}
-
-      {isAdmin && (
-        <Field
-          name="profile.mobile"
-          component={RenderField}
-          type="text"
-          label={t("userEdit.form.field.mobile")}
-          value={profile.mobile}
-        />
-      )}
-
-      {LYGflag == false ? (
-        <>
-          {isAdmin && (
-            <Field
-              name="profile.flag"
+              name="username"
               component={RenderField}
               type="text"
-              label={t("userEdit.form.field.flag")}
-              value={profile.flag}
+              label={t("userEdit.form.field.name")}
+              value={username}
             />
-          )}
-
-          {isAdmin && (
             <Field
-              name="profile.rating"
+              name="email"
+              component={RenderField}
+              type="email"
+              label={t("userEdit.form.field.email")}
+              value={email}
+            />
+            {isAdmin && (
+              <Field
+                name="role"
+                component={RenderSelect}
+                label={t("userEdit.form.field.role.label")}
+                value={role}
+              >
+                <Option value="user">
+                  {t("userEdit.form.field.role.user")}
+                </Option>
+                <Option value="admin">
+                  {t("userEdit.form.field.role.admin")}
+                </Option>
+              </Field>
+            )}
+          </>
+        ) : null}
+        {LYGflag == false || !valueCheck.firstName ? (
+          <>
+            <Field
+              name="profile.firstName"
               component={RenderField}
               type="text"
-              label={t("userEdit.form.field.rating")}
-              value={profile.rating}
+              label={t("userEdit.form.field.firstName")}
+              value={profile.firstName}
             />
-          )}
+          </>
+        ) : null}
+        {LYGflag == false || !valueCheck.lastName ? (
+          <>
+            <Field
+              name="profile.lastName"
+              component={RenderField}
+              type="text"
+              label={t("userEdit.form.field.lastName")}
+              value={profile.lastName}
+            />
+          </>
+        ) : null}
+        {LYGflag == false || !valueCheck.about ? (
+          <>
+            <Field
+              name="profile.about"
+              component={RenderField}
+              type="text"
+              label={t("userEdit.form.field.about")}
+              value={profile.about}
+            />
+          </>
+        ) : null}
+        {LYGflag == false ? (
+          <>
+            <Field
+              name="profile.designation"
+              component={RenderField}
+              type="text"
+              label={t("userEdit.form.field.designation")}
+              value={profile.designation}
+            />
+          </>
+        ) : null}
 
+        {isAdmin && (
           <Field
-            name="profile.website"
+            name="profile.mobile"
             component={RenderField}
             type="text"
-            label={t("userEdit.form.field.website")}
-            value={profile.website}
-          />
-
-          <Field
-            name="profile.isAvailable"
-            component={RenderCheckBox}
-            type="checkbox"
-            label={t("userEdit.form.field.available")}
-            checked={profile.isAvailable}
-          />
-
-          {isAdmin && (
-            <Field
-              name="isActive"
-              component={RenderCheckBox}
-              type="checkbox"
-              label={t("userEdit.form.field.active")}
-              checked={isActive}
-            />
-          )}
-
-          {isAdmin && (
-            <Field
-              name="profile.isVerified"
-              component={RenderCheckBox}
-              type="checkbox"
-              label={t("userEdit.form.field.isverified")}
-              checked={profile.isVerified}
-            />
-          )}
-        </>
-      ) : null}
-      </div>
-      <div className="g3">
-      <FieldArray
-        name="addresses"
-        render={arrayHelpers => (
-          <RenderDynamicField
-            keys={[
-              { key: "streetAddress1", type: "text" },
-              { key: "streetAddress2", type: "text" },
-              { key: "city", type: "text" },
-              { key: "state", type: "text" },
-              { key: "pinCode", type: "text" }
-            ]}
-            buttonText="Add Address"
-            style={{ width: "40%" }}
-            arrayHelpers={arrayHelpers}
-            values={addresses}
-            name="addresses"
-            label={t("userEdit.form.field.addresses")}
+            label={t("userEdit.form.field.mobile")}
+            value={profile.mobile}
           />
         )}
-      />
-    </div>
-    <div className="g4">
-      {LYGflag == false ? (
-        <>
-          <FieldArray
-            name="portfolios"
-            render={arrayHelpers => (
-              <RenderDynamicField
-                keys={[
-                  { key: "platform", type: "text" },
-                  { key: "portfolioUrl", type: "text" }
-                ]}
-                buttonText="Add Portfolio"
-                style={{ width: "40% !important" }}
-                arrayHelpers={arrayHelpers}
-                values={portfolios}
-                name="portfolios"
-                label={t("userEdit.form.field.portfolios")}
+
+        {LYGflag == false ? (
+          <>
+            {isAdmin && (
+              <Field
+                name="profile.flag"
+                component={RenderField}
+                type="text"
+                label={t("userEdit.form.field.flag")}
+                value={profile.flag}
               />
             )}
-          />
 
-          {settings.auth.certificate.enabled && (
+            {isAdmin && (
+              <Field
+                name="profile.rating"
+                component={RenderField}
+                type="text"
+                label={t("userEdit.form.field.rating")}
+                value={profile.rating}
+              />
+            )}
+
             <Field
-              name="serial"
+              name="profile.website"
               component={RenderField}
               type="text"
-              label={t("userEdit.form.field.serial")}
-              value={auth && auth.certificate && auth.certificate.serial}
-              onChange={value =>
-                setFieldValue("auth", {
-                  ...auth,
-                  certificate: { ...auth.certificate, serial: value }
-                })
-              }
+              label={t("userEdit.form.field.website")}
+              value={profile.website}
+            />
+
+            <Field
+              name="profile.isAvailable"
+              component={RenderCheckBox}
+              type="checkbox"
+              label={t("userEdit.form.field.available")}
+              checked={profile.isAvailable}
+            />
+
+            {isAdmin && (
+              <Field
+                name="isActive"
+                component={RenderCheckBox}
+                type="checkbox"
+                label={t("userEdit.form.field.active")}
+                checked={isActive}
+              />
+            )}
+
+            {isAdmin && (
+              <Field
+                name="profile.isVerified"
+                component={RenderCheckBox}
+                type="checkbox"
+                label={t("userEdit.form.field.isverified")}
+                checked={profile.isVerified}
+              />
+            )}
+          </>
+        ) : null}
+      </div>
+      <div className="g3">
+        <FieldArray
+          name="addresses"
+          render={arrayHelpers => (
+            <RenderDynamicField
+              keys={[
+                { key: "streetAddress1", type: "text" },
+                { key: "streetAddress2", type: "text" },
+                { key: "city", type: "text" },
+                { key: "state", type: "text" },
+                { key: "pinCode", type: "text" }
+              ]}
+              buttonText="Add Address"
+              style={{ width: "40%" }}
+              arrayHelpers={arrayHelpers}
+              values={addresses}
+              name="addresses"
+              label={t("userEdit.form.field.addresses")}
             />
           )}
-          {isAdmin && (
-            <div>
+        />
+      </div>
+      <div className="g4">
+        {LYGflag == false ? (
+          <>
+            <FieldArray
+              name="portfolios"
+              render={arrayHelpers => (
+                <RenderDynamicField
+                  keys={[
+                    { key: "platform", type: "text" },
+                    { key: "portfolioUrl", type: "text" }
+                  ]}
+                  buttonText="Add Portfolio"
+                  style={{ width: "40% !important" }}
+                  arrayHelpers={arrayHelpers}
+                  values={portfolios}
+                  name="portfolios"
+                  label={t("userEdit.form.field.portfolios")}
+                />
+              )}
+            />
+
+            {settings.auth.certificate.enabled && (
               <Field
-                name="password"
+                name="serial"
                 component={RenderField}
-                type="password"
-                label={t("userEdit.form.field.pass")}
-                value={password}
+                type="text"
+                label={t("userEdit.form.field.serial")}
+                value={auth && auth.certificate && auth.certificate.serial}
+                onChange={value =>
+                  setFieldValue("auth", {
+                    ...auth,
+                    certificate: { ...auth.certificate, serial: value }
+                  })
+                }
               />
-              <Field
-                name="passwordConfirmation"
-                component={RenderField}
-                type="password"
-                label={t("userEdit.form.field.passConf")}
-                value={passwordConfirmation}
-              />
-            </div>
-          )}
-        </>
-      ) : null}
-      {errors && errors.errorMsg && (
-        <Alert color="error">{errors.errorMsg}</Alert>
-      )}
-      <Button color="primary" type="submit">
-        {t("userEdit.form.btnSubmit")}
-      </Button>
+            )}
+            {isAdmin && (
+              <div>
+                <Field
+                  name="password"
+                  component={RenderField}
+                  type="password"
+                  label={t("userEdit.form.field.pass")}
+                  value={password}
+                />
+                <Field
+                  name="passwordConfirmation"
+                  component={RenderField}
+                  type="password"
+                  label={t("userEdit.form.field.passConf")}
+                  value={passwordConfirmation}
+                />
+              </div>
+            )}
+          </>
+        ) : null}
+        {errors && errors.errorMsg && (
+          <Alert color="error">{errors.errorMsg}</Alert>
+        )}
+        <Button color="primary" type="submit">
+          {t("userEdit.form.btnSubmit")}
+        </Button>
       </div>
     </Form>
   );
@@ -431,8 +432,12 @@ const UserFormComponentWithFormik = withFormik({
   validate: (values, props) =>
     validate(
       values,
-      isEmpty(props.initialValues) ? createUserFormComponentSchema : updateUserFormComponentSchema
+      isEmpty(props.initialValues)
+        ? createUserFormComponentSchema
+        : updateUserFormComponentSchema
     )
 });
 
-export default translate("user")(UserFormComponentWithFormik(UserFormComponent));
+export default translate("user")(
+  UserFormComponentWithFormik(UserFormComponent)
+);
