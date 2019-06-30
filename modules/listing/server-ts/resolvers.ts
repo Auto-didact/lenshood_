@@ -79,7 +79,7 @@ export default (pubsub: PubSub) => ({
   // },
   Mutation: {
     async addListing(obj: any, { input }: ListingInput, context: any) {
-      input.userId = context.identity.id;
+      if (!input.userId) input.userId = context.identity.id;
       const id = await context.Listing.addListing(input);
       const listing = await context.Listing.listing(id);
       // publish for liswting list
@@ -155,6 +155,7 @@ export default (pubsub: PubSub) => ({
       }
     },
     async editListing(obj: any, { input }: ListingInputWithId, context: any) {
+      console.log(input);
       await context.Listing.editListing(input);
       const listing = await context.Listing.listing(input.id);
       // publish for listing list

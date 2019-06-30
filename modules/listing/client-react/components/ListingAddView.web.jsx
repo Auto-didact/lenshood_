@@ -40,7 +40,8 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
 ListingAddView.propTypes = {
   addListing: PropTypes.func.isRequired,
   t: PropTypes.func,
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  users: PropTypes.object
 };
 
 export default translate("listing")(ListingAddView);

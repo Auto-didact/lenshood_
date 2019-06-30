@@ -153,8 +153,7 @@ ListingFormComponent.propTypes = {
 const ListingFormComponentWithFormik = withFormik({
   mapPropsToValues: props => ({
     // FOR RENDERAUTOCOMPLETE
-    // userId: props.listing && props.listing.user.id,
-    //
+    username: props.listing && props.listing.user.username,
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
     description: props.listing && props.listing.description,
@@ -169,14 +168,27 @@ const ListingFormComponentWithFormik = withFormik({
   handleSubmit(
     values,
     {
-      props: { onSubmit }
+      props: { onSubmit, users }
     }
   ) {
-    console.log(values);
-    onSubmit(values);
+    console.log("values", values);
+    let listingUser;
+    if (values.username) {
+      listingUser = users.find(user => user.username === values.username);
+      if (listingUser) {
+        values.userId = listingUser.id;
+        delete values["username"];
+        onSubmit(values);
+      } else message.info("Please provide a valid username!!");
+    } else {
+      delete values["username"];
+      onSubmit(values);
+    }
   },
   enableReinitialize: true,
   displayName: "ListingFormComponent" // helps with React DevTools
 });
 
-export default translate("listing")(ListingFormComponentWithFormik(ListingFormComponent));
+export default translate("listing")(
+  ListingFormComponentWithFormik(ListingFormComponent)
+);
