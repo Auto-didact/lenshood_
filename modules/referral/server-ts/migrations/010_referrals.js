@@ -8,13 +8,13 @@ exports.up = function(knex, Promise) {
         .references("id")
         .inTable("user")
         .onDelete("CASCADE");
+      table.boolean("is_verified").defaultTo(false);
       table
         .integer("referred_id")
         .unsigned()
         .references("id")
         .inTable("user")
         .onDelete("CASCADE");
-      table.boolean("is_verified").defaultTo(false);
       table.timestamps(false, true);
     })
   ]);

@@ -21,6 +21,7 @@ fragment ReferralUserInfo on User {
       profile {
         firstName
         lastName
+        isVerified
       }
     }
   }

@@ -14,7 +14,7 @@ extend type Query {
 
 extend type Mutation {
   addReferred(input: AddReferralInput!): Referral
-  verifyReferral(id: Int!): Referral
+  verifyReferral(referredId: Int!, userId: Int): Referral
 }
 
 input AddReferralInput {

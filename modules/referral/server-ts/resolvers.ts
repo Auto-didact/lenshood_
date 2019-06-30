@@ -60,6 +60,13 @@ export default (pubsub: PubSub) => ({
       //   }
       // });
       return referral;
+    },
+    async verifyReferral(obj: any, { userId, referredId }: any, context: any) {
+      userId = userId || context.identity.id;
+      const res = await context.Referral.verifyReferral(userId, referredId);
+      console.log(res);
+      const referral = await context.Referral.referral(res);
+      return referral;
     }
   }
   // Subscription: {
