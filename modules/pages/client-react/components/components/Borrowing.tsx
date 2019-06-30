@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 // import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../../settings';
-import Helmet from 'react-helmet';
 
 interface BorrowingProps {
   t: TranslateFunction;
@@ -56,7 +55,7 @@ const Borrowing = ({ t }: BorrowingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
               fontSize: '30px'
             }}
@@ -91,7 +90,7 @@ const Borrowing = ({ t }: BorrowingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
               fontSize: '30px'
             }}
@@ -127,7 +126,7 @@ const Borrowing = ({ t }: BorrowingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
               fontSize: '30px'
             }}
@@ -163,7 +162,7 @@ const Borrowing = ({ t }: BorrowingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               fontSize: '30px',
 
               maxWidth: '500px'

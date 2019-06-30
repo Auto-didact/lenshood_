@@ -466,7 +466,7 @@
         "text": "Lenshood",
         "active": "false",
         "content": {
-          "p1": "lenshood makes it easy for you to borrow photography equipment from the comfort of your home No security deposite required."
+          "p1": "lenshood makes it easy for you to borrow photography equipment from the comfort of your home. No security deposite required."
         }
       },
       "p1": {
@@ -498,7 +498,7 @@
         "text": "4. Use And Return",
         "active": "false",
         "content": {
-          "l1": "Happy clicking, our hustler will meet you once the rental period is over to collect the gear."
+          "l1": "Happy clicking! Our hustler will meet you once the rental period is over to collect the gear."
         }
       }
       }
@@ -522,7 +522,7 @@
         "text": "1. List",
         "active": "false",
         "content": {
-          "l1": "List your equipment for rental and we will call you to schedule your verificaon."
+          "l1": "List your equipment for rental and we will call you to schedule your verification."
         }
       },
       "p2": {

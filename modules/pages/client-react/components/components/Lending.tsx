@@ -55,7 +55,7 @@ const Lending = ({ t }: LendingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
               fontSize: '30px'
             }}
@@ -90,7 +90,7 @@ const Lending = ({ t }: LendingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
 
               fontSize: '30px'
@@ -127,7 +127,7 @@ const Lending = ({ t }: LendingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
 
               fontSize: '30px'
@@ -164,7 +164,7 @@ const Lending = ({ t }: LendingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               maxWidth: '500px',
               fontSize: '30px'
             }}
@@ -200,7 +200,7 @@ const Lending = ({ t }: LendingProps) => {
           <h2
             style={{
               margin: '0 0 0 0',
-              padding: '0 0 10px 40px',
+              padding: '0 0 10px 50px',
               fontSize: '30px',
 
               maxWidth: '500px'

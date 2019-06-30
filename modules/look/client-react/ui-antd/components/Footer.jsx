@@ -79,7 +79,7 @@ export default class Footer extends React.Component {
                 <ul>
                   <h3>How It Works</h3>
                   <li>
-                    <Link to="/renting">Renting</Link>
+                    <Link to="/renting">Borrowing</Link>
                   </li>
                   <li>
                     <Link to="/lending">Lending</Link>
@@ -199,7 +199,7 @@ export default class Footer extends React.Component {
               <div style={this.state.show2 ? { display: 'block' } : { display: 'none' }}>
                 <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                   <li>
-                    <Link to="/renting">Renting</Link>
+                    <Link to="/renting">Borrowing</Link>
                   </li>
                   <li>
                     <Link to="/lending">Lending</Link>

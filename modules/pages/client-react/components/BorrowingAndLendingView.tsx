@@ -8,10 +8,6 @@ import settings from '../../../../settings';
 
 const { TabPane } = Tabs;
 
-interface BorrowingAndLendingViewProps {
-  t: TranslateFunction;
-}
-
 const renderMetaData = (t: TranslateFunction) => (
   <Helmet
     title={`${settings.app.name} - ${t('lending.title')}`}
@@ -19,10 +15,20 @@ const renderMetaData = (t: TranslateFunction) => (
   />
 );
 
-const BorrowingAndLendingView = ({ t }: BorrowingAndLendingViewProps) => {
+const BorrowingAndLendingView = props => {
   useEffect(() => {
     global.window.scrollTo(0, 0);
   });
+  const keyParser = () {
+    if(props.match.path === '/renting'){
+      return(1);
+    }
+    else{
+      return(2);
+    }
+  }
+  const t = props.t;
+  
   return (
     <div
       style={{
@@ -62,7 +68,7 @@ const BorrowingAndLendingView = ({ t }: BorrowingAndLendingViewProps) => {
           {t('lending.title')}
         </h1>
         <Tabs
-          defaultActiveKey="2"
+          defaultActiveKey={`${keyParser()}`}
           size="large"
           tabBarStyle={{
             maxWidth: '1000px',
