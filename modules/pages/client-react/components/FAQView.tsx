@@ -136,7 +136,7 @@ const FAQView = ({ t }: FAQViewProps) => {
         </p> */}
         <p>
           <strong>{t('faqs.meta.better_lender.content.p1.p12.head')}</strong>
-          {t('faqs.meta.content.p1.p12.p121')}
+          {t('faqs.meta.better_lender.content.p1.p12.p121')}
         </p>
         {/* <p>
           <strong>Repeat borrowers</strong> - If borrowers rent from you more than once, this demonstrates to us that

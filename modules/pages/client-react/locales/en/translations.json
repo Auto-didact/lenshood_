@@ -453,5 +453,139 @@
         }
       }
     }
+  },
+
+  "lending": {
+    "navlink": {
+      "lending": "/lending"
+    },
+    "title": "How LensHood Works",
+    "meta": {
+      "lenshood": {
+        "key": 1,
+        "text": "Lenshood",
+        "active": "false",
+        "content": {
+          "p1": "LensHood provides a safe and secure way to earn money from the equipments you own and save money by renting equipments at the comfort of your home"
+        }
+      },
+      "search1": {
+        "key": 2,
+        "text": "1. Search",
+        "active": "false",
+        "content": {
+          "p1": "Search for the Photography gear you are looking for."
+        }
+      },
+      "book": {
+        "key": 2,
+        "text": "2. Book",
+        "active": "false",
+        "content": {
+          "p1": "Book the desired gear, for the dates you want to rent out and pay upfront."
+        }
+      },
+      "id_proof": {
+        "key": 3,
+        "text": "3. ID Proof",
+        "active": "false",
+        "content": {
+          "p1": "Get ready with your ID Proofs for LensHood KYC."
+        }
+      },
+      "search2": {
+        "key": 4,
+        "text": "4. Search",
+        "active": "false",
+        "content": {
+          "p1": "Sit back & Relax ll our hustler comes to your doorstep."
+        }
+      },
+      "list": {
+        "key": 5,
+        "text": "1. List",
+        "active": "false",
+        "content": {
+          "p1": "List your equipment for rental and we will call you to schedule your verificaon."
+        }
+      },
+      "verification": {
+        "key": 6,
+        "text": "2. Verification",
+        "active": "false",
+        "content": {
+          "p1": "Get your lisng verified by our hustler."
+        }
+      },
+      "notification": {
+        "key": 7,
+        "text": "3. Notification",
+        "active": "false",
+        "content": {
+          "p1": "Get nofied in case of an order and wait for our hustler to pick it up."
+        }
+      },
+      "earn": {
+        "key": 8,
+        "text": "4. Earn",
+        "active": "false",
+        "content": {
+          "p1": "Earn extra money while we have got your equipments covered."
+        }
+      },
+      "return": {
+        "key": 9,
+        "text": "9. Return",
+        "active": "false",
+        "content": {
+          "p1": "Finally, Get your gear back as the rental gets over."
+        }
+      }
+    }
+  },
+  "privacy_rules": {
+    "navlink": {
+      "privacy_rules": "/privacy-rules"
+    },
+    "title": "LensHood Privacy Policy",
+    "meta": {
+      "privacy_policy": {
+        "key": 1,
+        "text": "Privacy Policy",
+        "active": "false",
+        "content": {
+          "p1": "When you join the LensHood community, you trust us with your information. That’s not something we take lightly. We’ve written this Privacy Policy to help you know what data we collect from you, how we use it and how we protect it for you. If you have any questions, please do get in touch at",
+          "strong": "reachus@lenshood.in"
+        }
+      },
+      "who_are_we": {
+        "key": 2,
+        "text": "Who are we?",
+        "active": "false",
+        "content": {
+          "p1": "We are Unihood Service Private Limited (that’s “we”, “our”, “us”) and operate under the name of LensHood. Our registered office address is Rd No.3, Banjara Hills, Hyderabad. Our CIN is U74999TG2018PTC128488."
+        }
+      },
+      "info_hold": {
+        "key": 3,
+        "text": "Info Hold",
+        "active": "false",
+        "content": {
+          "head1": "What information do we hold about you?",
+          "head2": "Information you submit through our app or website",
+          "l1": "To help keep LensHood a safe place to lend and borrow, we require certain information to verify your account. This will be some or all of the following: your name, ID, email address, phone number, a selfie photograph, address or information about your employment or studies.",
+          "l2": "We might also collect information from communications you make through the platform and other information about how you use the app and website."
+        }
+      },
+      "ph_info": {
+        "key": 4,
+        "text": "Ph Info",
+        "active": "false",
+        "content": {
+          "head": "Information on how you use your phone",
+          "l1": "This might include your mobile network, IP address or operating system and your phone settings."
+        }
+      }
+    }
   }
 }
