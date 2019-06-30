@@ -1,10 +1,5 @@
-#import "./Listing.graphql"
-
-query listing($id: Int!) {
-  listing(id: $id) {
-    ...ListingInfo
-  }
-  reviews(listing_id: $id) {
+mutation addListingReview($input: AddListingReviewInput!) {
+  addListingReview(input: $input) {
     id
     reviewer {
       id

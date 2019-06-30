@@ -1,7 +1,7 @@
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
-import { User } from '@gqlapp/user-server-ts/sql';
+import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -50,6 +50,7 @@ export interface ListingReview {
   listingId: number;
   rating: string;
   comment: string;
+  reviewerId: number;
 }
 
 export interface Identifier {
@@ -194,35 +195,55 @@ export default class ListingDAO extends Model {
     return res.id;
   }
 
-  public addListingReviewDAO({ comment, rating, listingId }: ListingReview) {
-    return returnId(knex('listing_review')).insert({
+  public async addListingReviewDAO({ rating, comment, reviewerId, listingId }: ListingReview) {
+    const listingAdd = await returnId(knex('listing_review')).insert({
       comment,
       rating,
+      reviewer_id: reviewerId,
       listing_id: listingId
     });
+    if (listingAdd) {
+      await this.updateUserProfile(listingId);
+    }
+    return listingAdd;
   }
 
-  public getListingReviewDAO(id: number) {
-    return knex
-      .select('id', 'comment', 'rating')
-      .from('listing_review')
+  public async getListingReviewDAO(id: number) {
+    return ListingReviewDAO.query()
+      .eager('reviewer')
       .where('id', '=', id)
       .first();
   }
 
-  public deleteListingReviewDAO(id: number) {
-    return knex('listing_review')
+  public async deleteListingReviewDAO(id: number) {
+    let listing = await this.getListingReviewDAO(id);
+    await ListingReviewDAO.query()
+      .eager('reviewer')
       .where('id', '=', id)
       .del();
+    if (listing && listing.hasOwnProperty('listing_id')) {
+      await this.updateUserProfile(listing.listing_id);
+    } else {
+      listing = null;
+    }
+    return listing;
   }
 
-  public editListingReviewDAO({ id, comment, rating }: ListingReview & Identifier) {
-    return knex('listing_review')
+  public async editListingReviewDAO({ id, comment, rating }: ListingReview & Identifier) {
+    await ListingReviewDAO.query()
+      .eager('reviewer')
       .where('id', '=', id)
       .update({
         comment,
         rating
       });
+    let listing = await this.getListingReviewDAO(id);
+    if (listing && listing.hasOwnProperty('listing_id')) {
+      await this.updateUserProfile(listing.listing_id);
+    } else {
+      listing = null;
+    }
+    return listing;
   }
 
   public async patchListing(id, params) {
@@ -286,6 +307,41 @@ export default class ListingDAO extends Model {
         .orderBy('id', 'desc')
     );
     return res;
+  }
+
+  public async reviews(input: { reviewer_id: number; reviewee_id: number; listing_id: number }) {
+    const whereCond = {};
+    if (input.listing_id) {
+      whereCond.listing_id = input.listing_id;
+    }
+    if (input.reviewer_id) {
+      whereCond.reviewer_id = input.reviewer_id;
+    }
+
+    const res = camelizeKeys(
+      await ListingReviewDAO.query()
+        .eager('reviewer')
+        .where(whereCond)
+        .orderBy('id', 'desc')
+    );
+    return res;
+  }
+
+  public async updateUserProfile(listingId: number) {
+    const userIdObj = await ListingDAO.query()
+      .select('user_id')
+      .where('id', listingId)
+      .first();
+
+    const userId = userIdObj.user_id;
+    if (userId) {
+      const avg = await knex('listing_review')
+        .avg({ a: 'rating' })
+        .where('listing_id', listingId);
+      await knex('user_profile')
+        .update({ rating: avg[0].a })
+        .where({ user_id: userId });
+    }
   }
 }
 
@@ -430,11 +486,19 @@ class ListingReviewDAO extends Model {
   static get relationMappings() {
     return {
       listing: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasManyRelation,
         modelClass: ListingDAO,
         join: {
           from: 'listing_review.listing_id',
           to: 'listing.id'
+        }
+      },
+      reviewer: {
+        relation: Model.HasManyRelation,
+        modelClass: UserProfile,
+        join: {
+          from: 'listing_review.reviewer_id',
+          to: 'user_profile.user_id'
         }
       }
     };

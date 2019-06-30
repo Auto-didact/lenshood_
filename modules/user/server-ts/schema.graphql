@@ -205,7 +205,7 @@ extend type Query {
   currentUser: User
   # Get user's driving license info
   userDrivingLicense(id: Int!): UserDrivingLicense
-
+  userProfile(userId: Int!): UserProfile
   featuredUsers: [User]
 }
 

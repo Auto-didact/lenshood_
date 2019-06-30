@@ -1,27 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
-import Helmet from "react-helmet";
-import { Row, Col, Breadcrumb, Card } from "antd";
-import { PageLayout } from "@gqlapp/look-client-react";
-import UserCard from "./components/userCard";
-import ProductCard from "./components/ProductCard";
-import ReviewsCard from "./components/ReviewsCard";
-import AddToCartCard from "./components/AddToCartCard";
-import SuggestedCardList from "./components/SuggestedCardList";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import Helmet from 'react-helmet';
+import { Row, Col, Breadcrumb } from 'antd';
+import { PageLayout } from '@gqlapp/look-client-react';
+import UserCard from './components/userCard';
+import ProductCard from './components/ProductCard';
+import ReviewsCard from './components/ReviewsCard';
+import AddToCartCard from './components/AddToCartCard';
 
-import settings from "../../../../settings";
+import settings from '../../../../settings';
 
 class ListingDetailView extends Component {
   state = {};
 
   renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${this.props.t("listingDetail.title")}`}
+      title={`${settings.app.name} - ${this.props.t('listingDetail.title')}`}
       meta={[
         {
-          name: "description",
-          content: this.props.t("listingDetail.meta")
+          name: 'description',
+          content: this.props.t('listingDetail.meta')
         }
       ]}
     />
@@ -35,18 +34,19 @@ class ListingDetailView extends Component {
   render() {
     const loading = this.props.loading;
     const listing = this.props.listing;
+    const reviews = this.props.reviews;
 
     const t = this.props.t;
     const seller = this.props.listing && this.props.listing.user;
-    const leftGap = "5%";
-    const cancellationPolicy = t("listingDetail.content.cancellationPolicy");
-    const damagePolicy = t("listingDetail.content.damagePolicy");
+    const leftGap = '5%';
+    const cancellationPolicy = t('listingDetail.content.cancellationPolicy');
+    const damagePolicy = t('listingDetail.content.damagePolicy');
 
     if (loading && !listing) {
       return (
         <PageLayout>
           {this.renderMetaData()}
-          <div className="text-center">{t("listing.loadMsg")}</div>
+          <div className="text-center">{t('listing.loadMsg')}</div>
         </PageLayout>
       );
     } else {
@@ -56,19 +56,16 @@ class ListingDetailView extends Component {
             separator=">"
             style={{
               marginLeft: leftGap,
-              marginTop: "5px",
-              marginBottom: "5px"
+              marginTop: '5px',
+              marginBottom: '5px'
             }}
           >
             <Breadcrumb.Item>{listing.gearCategory}</Breadcrumb.Item>
             <Breadcrumb.Item href="">{listing.gearSubcategory}</Breadcrumb.Item>
             {listing.listingContent.length !== 0 ? (
-              <Breadcrumb.Item href="">
-                {" "}
-                {listing.listingContent[0].gear}
-              </Breadcrumb.Item>
+              <Breadcrumb.Item href=""> {listing.listingContent[0].gear}</Breadcrumb.Item>
             ) : (
-              ""
+              ''
             )}
           </Breadcrumb>
 
@@ -76,29 +73,20 @@ class ListingDetailView extends Component {
             <h1
               style={{
                 paddingLeft: leftGap,
-                paddingTop: "10px",
-                paddingBottom: "10px"
+                paddingTop: '10px',
+                paddingBottom: '10px'
               }}
               className="gearCat"
             >
               {listing && listing.listingContent.length !== 0
-                ? listing.listingContent.map((item, key) => (
-                    <span>{`${item.gear}  `}</span>
-                  ))
+                ? listing.listingContent.map(item => <span>{`${item.gear}  `}</span>)
                 : listing.gearCategory}
             </h1>
           }
-          <Row
-            gutter={10}
-            style={{ marginLeft: leftGap, marginRight: leftGap }}
-          >
+          <Row gutter={10} style={{ marginLeft: leftGap, marginRight: leftGap }}>
             <Col xl={16} lg={15} md={13} sm={24}>
-              <ProductCard
-                listing={listing}
-                cancellationPolicy={cancellationPolicy}
-                damagePolicy={damagePolicy}
-              />
-              {/*<ReviewsCard reviews={this.state.product.reviews} />*/}
+              <ProductCard listing={listing} cancellationPolicy={cancellationPolicy} damagePolicy={damagePolicy} />
+              <ReviewsCard listing={listing} reviews={reviews} />
             </Col>
             <Col xl={8} lg={9} md={11} sm={24}>
               <Row>
@@ -137,8 +125,9 @@ class ListingDetailView extends Component {
 ListingDetailView.propTypes = {
   loading: PropTypes.bool.isRequired,
   listing: PropTypes.object,
+  reviews: PropTypes.object,
   location: PropTypes.object.isRequired,
   t: PropTypes.func
 };
 
-export default translate("listing")(ListingDetailView);
+export default translate('listing')(ListingDetailView);

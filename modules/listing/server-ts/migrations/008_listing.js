@@ -88,6 +88,12 @@ exports.up = function(knex, Promise) {
           .references('id')
           .inTable('listing')
           .onDelete('CASCADE');
+        table
+          .integer('reviewer_id')
+          .unsigned()
+          .references('id')
+          .inTable('user')
+          .onDelete('CASCADE');
         table.string('comment');
         table.string('rating');
         table.timestamps(false, true);

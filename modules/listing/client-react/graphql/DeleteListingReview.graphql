@@ -1,0 +1,5 @@
+mutation deleteListingReview($input: DeleteListingReviewInput!) {
+  deleteListingReview(input: $input) {
+    id
+  }
+}
