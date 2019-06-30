@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
         .references("id")
         .inTable("user")
         .onDelete("CASCADE");
+      table.boolean("is_verified").defaultTo(false);
       table.timestamps(false, true);
     })
   ]);
