@@ -1,21 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withFormik } from "formik";
-import { NavLink, Link } from "react-router-dom";
-import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { translate } from "@gqlapp/i18n-client-react";
-import { required, minLength, validate } from "@gqlapp/validation-common-react";
-import { Form, RenderField, Alert, Button } from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withFormik } from 'formik';
+import { NavLink, Link } from 'react-router-dom';
+import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { translate } from '@gqlapp/i18n-client-react';
+import { required, minLength, validate } from '@gqlapp/validation-common-react';
+import { Form, RenderField, Alert, Button } from '@gqlapp/look-client-react';
 import {
   // LinkedInButton,
   GoogleButton,
   // GitHubButton,
   FacebookButton
-} from "@gqlapp/authentication-client-react";
-import { Divider, Row, Col, Card, Modal } from "antd";
-import { camera1, camera2 } from "../constants/DefaultImages";
+} from '@gqlapp/authentication-client-react';
+import { Divider, Row, Col, Card, Modal } from 'antd';
+import { camera1, camera2 } from '../constants/DefaultImages';
 
-import settings from "../../../../settings";
+import settings from '../../../../settings';
 
 const loginFormSchema = {
   usernameOrEmail: [required, minLength(3)],
@@ -86,45 +86,43 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
   // ).length;
   return (
     <div className="signInoOuter">
-      <Row className="SignInComp">
-        <Col sm={8} xs={0}>
-          <img src={camera1} alt="" className="signInimg" />
-        </Col>
-        <Col sm={0} xs={24}>
-          <img src={camera2} alt="" className="signImg" />
-        </Col>
-        <Col sm={16} xs={24}>
-          <Card className="modalcard">
+      <Card className="modalcard" bodyStyle={{ borderRadius: '0px', padding: '0px', margin: '0px' }}>
+        <Row className="SignInComp">
+          <Col sm={0} xs={0} md={8} align="left" style={{ overflow: 'hidden' }}>
+            <img src={camera1} alt="" className="signInimg" />
+          </Col>
+          <Col sm={24} xs={24} md={0}>
+            <img src={camera2} alt="" className="signImg" />
+          </Col>
+          <Col md={16} sm={15} xs={24} className="sign-in-Form">
             <h1 className="signinstate">Let's Go...</h1>
             <Row>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {facebook.enabled && (
-                  <div className="text-center">
-                    <FacebookButton text={t("login.fbBtn")} type={"button"} />
+                  <div style={{ margin: '2px' }}>
+                    <FacebookButton text={t('login.fbBtn')} type={'button'} />
                   </div>
                 )}
               </Col>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {google.enabled && (
-                  <div className="text-center">
-                    <GoogleButton text={t("login.googleBtn")} type={"button"} />
+                  <div style={{ margin: '2px' }}>
+                    <GoogleButton text={t('login.googleBtn')} type={'button'} />
                   </div>
                 )}
               </Col>
             </Row>
-            <h2 className="youcanAlways">Or you can always...</h2>
+            <Divider style={{ marginBottom: '10px' }} />
+
+            <h2 className="form-element-heading">Or you can always...</h2>
             {/* <p className="signInForm">Let me help you sign in</p> */}
-            <Form
-              className="paddingMarginBottom"
-              name="login"
-              onSubmit={handleSubmit}
-            >
+            <Form className="paddingMarginBottom" name="login" onSubmit={handleSubmit}>
               <div>
                 <Field
                   name="usernameOrEmail"
                   component={RenderField}
                   type="text"
-                  placeholder={t("login.form.field.usernameOrEmail")}
+                  placeholder={t('login.form.field.usernameOrEmail')}
                   value={values.usernameOrEmail}
                 />
               </div>
@@ -133,29 +131,28 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
                 name="password"
                 component={RenderField}
                 type="password"
-                placeholder={t("login.form.field.pass")}
+                placeholder={t('login.form.field.pass')}
                 // label={t("login.form.field.pass")}
                 value={values.password}
               />
               <Link className="forgotpass" to="/forgot-password">
-                {t("login.btn.forgotPass")}
+                {t('login.btn.forgotPass')}
               </Link>
+              <Divider style={{ margin: '5px 0px' }} />
               <div className="text-center">
-                {errors && errors.errorMsg && (
-                  <Alert color="error">{errors.errorMsg}</Alert>
-                )}
+                {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
               </div>
               <Button color="primary" block type="submit" disabled={submitting}>
-                {t("login.form.btnSubmit")}
+                {t('login.form.btnSubmit')}
               </Button>
-              <p className="belowFormtext marginT20">
-                New to LensHood?{" "}
-                <NavLink to="/register">{t("login.btn.sign")}</NavLink>
+
+              <p className="belowFormtext  marginT20">
+                New to LensHood? <Link to="/register">{t('login.btn.sign')}</Link>
               </p>
             </Form>
-          </Card>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Card>
     </div>
   );
 };
@@ -171,7 +168,7 @@ LoginForm.propTypes = {
 
 const LoginFormWithFormik = withFormik({
   enableReinitialize: true,
-  mapPropsToValues: () => ({ usernameOrEmail: "", password: "" }),
+  mapPropsToValues: () => ({ usernameOrEmail: '', password: '' }),
 
   handleSubmit(
     values,
@@ -189,7 +186,7 @@ const LoginFormWithFormik = withFormik({
     });
   },
   validate: values => validate(values, loginFormSchema),
-  displayName: "LoginForm" // helps with React DevTools
+  displayName: 'LoginForm' // helps with React DevTools
 });
 
-export default translate("user")(LoginFormWithFormik(LoginForm));
+export default translate('user')(LoginFormWithFormik(LoginForm));
