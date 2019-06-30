@@ -147,7 +147,7 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
               </Button>
 
               <p className="belowFormtext  marginT20">
-                New to LensHood? <Link to="/register">{t('login.btn.sign')}</Link>
+                New to LensHood? <Button href="/register">{t('login.btn.sign')}</Button>
               </p>
             </Form>
           </Col>

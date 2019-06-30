@@ -16,7 +16,6 @@ import {
 import { camera1, camera2 } from '../constants/DefaultImages';
 
 import { Divider, Row, Col, Card, Modal } from 'antd';
-import camera from '../resources/camera.jpg';
 
 import settings from '../../../../settings';
 
@@ -158,7 +157,7 @@ const RegisterForm = ({ values, handleSubmit, submitting, errors, t }) => {
               </Button>
 
               <p className="belowFormtext marginT20">
-                Already have an account? <NavLink to="/login">{t('login.form.btnSubmit')}</NavLink>
+                Already have an account? <Button href="/login">{t('login.form.btnSubmit')}</Button>
               </p>
               <Divider style={{ margin: '5px 0px' }} />
               <p className="belowFormtext">

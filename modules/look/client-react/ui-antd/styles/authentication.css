@@ -48,11 +48,11 @@
 
 .signInimg {
   
-  height:434px;
+  height:444px;
   
 }
 .signUpImg{
-  height:550px;
+  height:570px;
 }
 
 .SignInComp {
@@ -61,13 +61,13 @@
 
 .sign-in-Form{
   padding:10px !important;
-  height: 460px;
+  height: 480px;
   width:520px;
 }
 .sign-up-form{
   
     padding:10px !important;
-    height: 590px;
+    height: 600px;
     width:520px;
   
 }
@@ -109,7 +109,7 @@
   }
   .sign-in-Form{
     padding:10px !important;
-    height: 444px;
+    height: 484px;
     width:520px;
   }
   .SignInComp {
