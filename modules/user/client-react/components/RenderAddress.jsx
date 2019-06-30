@@ -5,6 +5,7 @@ import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
+// const RadioButton = Radio.Button;
 
 export default class RenderAddress extends React.Component {
   state = {
@@ -31,7 +32,6 @@ export default class RenderAddress extends React.Component {
   handleAddAddress = () => {
     const { arrayHelpers, addresses } = this.props;
     const obj = {};
-    // const keys = ['name', 'streetAddress1', 'streetAddress2', 'city', 'state', 'pinCode', 'mobile'];
     const keys = [
       { key: 'streetAddress1' },
       { key: 'streetAddress2' },
@@ -57,15 +57,7 @@ export default class RenderAddress extends React.Component {
     }
 
     const isSelectable = this.props.isSelectable || false;
-    // {
-    //   // console.log('t in renderAddress', t);
-    //   // console.log('t(label) in renderAddress', t(`${label}`));
-    //   console.log('t(label.city) in renderAddress', t(`${label}.city`));
-    //   console.log('t(label.pinCode) in renderAddress', t(`${label}.pinCode`));
-    //   console.log('t(label.state) in renderAddress', t(`${label}.state`));
-    //   console.log('t(label.streetAddress) in renderAddress', t(`${label}.streetAddress`));
-    //   // console.log('t(label.city) in renderAddress', t('label.city'));
-    // }
+
     //Form field Section-->>
     const keys = [
       { key: 'streetAddress1', label: 'streetAddress' },
@@ -106,7 +98,11 @@ export default class RenderAddress extends React.Component {
               </div>
 
               <Row style={{ marginBottom: '8px' }}>
-                <Col span={12} align="left" style={{ paddingLeft: '20px' }}>
+                <Col
+                  span={12}
+                  align="left"
+                  // style={{ paddingRight: '20px' }}
+                >
                   <Button shape="circle" size="large" onClick={() => this.modalControl(indexa, true)}>
                     <Icon type="edit" />
                   </Button>
@@ -121,10 +117,12 @@ export default class RenderAddress extends React.Component {
                       <FormItem>{formItems[indexa]}</FormItem>
                     </div>
                   </Modal>
-                  {/* <Link to={`/listing/${item.id}`}>
-                  </Link> */}
                 </Col>
-                <Col span={12} align="right" style={{ paddingRight: '20px' }}>
+                <Col
+                  span={12}
+                  align="right"
+                  //  style={{ paddingRight: '20px' }}
+                >
                   <Popconfirm
                     title="Are you sure to delete this address?"
                     onConfirm={() => arrayHelpers.remove(indexa)}
@@ -138,24 +136,6 @@ export default class RenderAddress extends React.Component {
                   </Popconfirm>
                 </Col>
               </Row>
-
-              {/* <Button className="addressIcons" ghost onClick={() => arrayHelpers.remove(indexa)}>
-                <Icon type="delete" />
-              </Button>
-              <Button className="addressIcons" ghost onClick={() => this.modalControl(indexa, true)}>
-                <Icon type="edit" />
-              </Button>
-              <Modal
-                visible={this.state.visible[indexa]}
-                title="Address"
-                okText="Ok"
-                onCancel={() => this.modalControl(indexa, false)}
-                onOk={() => this.modalControl(indexa, false)}
-              >
-                <div>
-                  <FormItem>{formItems[indexa]}</FormItem>
-                </div>
-              </Modal> */}
             </div>
           ))
         )
@@ -177,19 +157,21 @@ export default class RenderAddress extends React.Component {
                 md={{ span: 10, offset: 0 }}
                 className="PadB30"
               >
-                {addresses.map((address, indexas) =>
-                  isSelectable ? (
-                    <Radio.Button
-                      key={indexas}
-                      value={address}
-                      // onClick={() => onSelect(address)}
-                    >
+                <Radio.Group>
+                  {addresses.map((address, indexas) =>
+                    isSelectable ? (
+                      <Radio
+                        key={indexas}
+                        value={address}
+                        // onClick={() => onSelect(address)}
+                      >
+                        {addressCard[indexas]}
+                      </Radio>
+                    ) : (
                       addressCard[indexas]
-                    </Radio.Button>
-                  ) : (
-                    addressCard[indexas]
-                  )
-                )}
+                    )
+                  )}
+                </Radio.Group>
               </Col>
               <Col
                 xs={{ span: 14, offset: 5 }}
