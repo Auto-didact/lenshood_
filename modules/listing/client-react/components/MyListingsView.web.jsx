@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { AccountLayout } from '@gqlapp/look-client-react';
+
+import PropTypes from 'prop-types';
+
+import { AccountLayout, Loader } from '@gqlapp/look-client-react';
 import MyList from './components/MyList';
 import settings from '../../../../settings';
 
@@ -9,7 +12,6 @@ class MyListingsView extends Component {
     return (
       <AccountLayout select="/my-listings">
         {/* Render metadata */}
-
         <Helmet
           title={`${settings.app.name} - My Listings`}
           meta={[
@@ -20,12 +22,17 @@ class MyListingsView extends Component {
           ]}
         />
 
-        {this.props.loading && (!this.props.userListings && <div>Loading...</div>)}
+        {this.props.loading && (!this.props.userListings && <Loader text="Loading..." />)}
 
         {this.props.userListings && <MyList {...this.props} />}
       </AccountLayout>
     );
   }
 }
+
+MyListingsView.propTypes = {
+  userListings: PropTypes.object,
+  loading: PropTypes.object
+};
 
 export default MyListingsView;

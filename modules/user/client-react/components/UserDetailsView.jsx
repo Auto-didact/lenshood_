@@ -1,17 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Loader } from '@gqlapp/look-client-react';
+import UserForm from './UserForm';
 
-import UserForm from "./UserForm";
-
-const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
+const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
   return (
     <div>
       {loading && !user ? (
-        <div className="text-center">{t("userEdit.loadMsg")}</div>
+        <Loader text={t('userEdit.loadMsg')} />
       ) : (
         <UserForm
+          valueCheck={valueCheck}
           LYGflag={true}
           onSubmit={onSubmit}
           shouldDisplayRole={isNotSelf}
@@ -32,4 +33,4 @@ UserEditView.propTypes = {
   onSubmit: PropTypes.func
 };
 
-export default translate("user")(UserEditView);
+export default translate('user')(UserEditView);

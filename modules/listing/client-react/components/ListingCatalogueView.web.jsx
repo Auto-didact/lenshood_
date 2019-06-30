@@ -1,24 +1,20 @@
-import React, { Fragment, Component } from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout, Pagination } from "@gqlapp/look-client-react";
-import { Row, Col, Button, Switch } from "antd";
-import settings from "../../../../settings";
+import React, { Fragment, Component } from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout, Pagination, Loader } from '@gqlapp/look-client-react';
+import { Row, Col, Button, Switch } from 'antd';
+import settings from '../../../../settings';
 
-import SuggestedCardList from "./components/SuggestedCardList";
+import SuggestedCardList from './components/SuggestedCardList';
 
 const { itemsNumber, type } = settings.pagination.web;
-const margin = "5%";
+const margin = '5%';
 
-const Loading = ({ t }) => (
-  <div className="text-center">{t("listing.loadMsg")}</div>
-);
+const Loading = ({ t }) => <Loader text={t('listing.loadMsg')} />;
 Loading.propTypes = { t: PropTypes.func };
 
-const NoListingsMessage = ({ t }) => (
-  <div className="text-center">{t("listing.noListingsMsg")}</div>
-);
+const NoListingsMessage = ({ t }) => <div className="text-center">{t('listing.noListingsMsg')}</div>;
 NoListingsMessage.propTypes = { t: PropTypes.func };
 
 const ListingList = ({ loading, listings, t, loadData }) => {
@@ -26,24 +22,20 @@ const ListingList = ({ loading, listings, t, loadData }) => {
     const {
       pageInfo: { endCursor }
     } = listings;
-    pagination === "relay"
-      ? loadData(endCursor + 1, "add")
-      : loadData((pageNumber - 1) * itemsNumber, "replace");
+    pagination === 'relay' ? loadData(endCursor + 1, 'add') : loadData((pageNumber - 1) * itemsNumber, 'replace');
   };
 
   const RenderListings = () => (
     <Fragment>
       <div>
-        <ListingCatalogueView
-          listings={listings.edges.map(({ node }) => node)}
-        />
+        <ListingCatalogueView listings={listings.edges.map(({ node }) => node)} />
         <Pagination
           itemsPerPage={listings.edges.length}
           handlePageChange={handlePageChange}
           hasNextPage={listings.pageInfo.hasNextPage}
           pagination={type}
           total={listings.totalCount}
-          loadMoreText={t("list.btn.more")}
+          loadMoreText={t('list.btn.more')}
           defaultPageSize={itemsNumber}
         />
       </div>
@@ -54,22 +46,18 @@ const ListingList = ({ loading, listings, t, loadData }) => {
     <PageLayout>
       {/* Render metadata */}
       <Helmet
-        title={`${settings.app.name} - ${t("list.title")}`}
+        title={`${settings.app.name} - ${t('list.title')}`}
         meta={[
           {
-            name: "description",
-            content: `${settings.app.name} - ${t("list.meta")}`
+            name: 'description',
+            content: `${settings.app.name} - ${t('list.meta')}`
           }
         ]}
       />
       {/* Render loader */}
       {loading && !listings && <Loading t={t} />}
       {/* Render main listing content */}
-      {listings && listings.totalCount ? (
-        <RenderListings />
-      ) : (
-        <NoListingsMessage t={t} />
-      )}
+      {listings && listings.totalCount ? <RenderListings /> : !loading ? <NoListingsMessage t={t} /> : null}
     </PageLayout>
   );
 };
@@ -168,4 +156,4 @@ ListingCatalogueView.propTypes = {
   ).isRequired
 };
 
-export default translate("listing")(ListingList);
+export default translate('listing')(ListingList);
