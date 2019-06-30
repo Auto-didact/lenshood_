@@ -37,6 +37,10 @@
   cursor: pointer;
 }
 
+.AddNewAddressBlock:hover {
+  border: 1px solid #23b159;
+}
+
 .addressIcons,
 .addressIcons:hover {
   border: 0;
@@ -64,7 +68,6 @@
   background: #fff !important;
   padding: 0 !important;
   margin: 0 !important;
-
 }
 
 .listclose {
@@ -222,7 +225,7 @@
   border-radius: 4px !important;
 }
 
-.itemDetails{
+.itemDetails {
   font-size: 11px;
   line-height: 11px !important;
 }

@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
-// import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-// import settings from '../../../../settings';
+import settings from '../../../../settings';
 import { Tabs } from 'antd';
+
 const { TabPane } = Tabs;
 
 interface LendingViewProps {
   t: TranslateFunction;
 }
 
-// const renderMetaData = (t: TranslateFunction) => (
-//   <Helmet
-//     title={`${settings.app.name} - ${t('title')}`}
-//     meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
-//   />
-// );
+const renderMetaData = (t: TranslateFunction) => (
+  <Helmet
+    title={`${settings.app.name} - ${t('title')}`}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
+  />
+);
 
 const LendingView = ({ t }: LendingViewProps) => {
   useEffect(() => {
@@ -55,7 +56,7 @@ const LendingView = ({ t }: LendingViewProps) => {
             textAlign: 'center'
           }}
         >
-          How LensHood works
+          {t('lending.title')}
         </h1>
         <Tabs
           defaultActiveKey="2"
@@ -85,8 +86,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                   fontSize: '30px'
                 }}
               >
-                LensHood provides a safe and secure way to earn money from the equipments you own and save money by
-                renting equipments at the comfort of your home
+                {t('lending.meta.lenshood.content.p1')}
               </h2>
 
               <div
@@ -107,7 +107,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    1. Search
+                    {t('lending.meta.search1.text')}
                   </h1>
                   <h2
                     style={{
@@ -117,7 +117,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Search for the Photography gear you are looking for.
+                    {t('lending.meta.search1.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -142,7 +142,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    2. Book
+                    {t('lending.meta.book.text')}
                   </h1>
                   <h2
                     style={{
@@ -152,7 +152,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Book the desired gear, for the dates you want to rent out and pay upfront.
+                    {t('lending.meta.book.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -178,7 +178,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    3. ID Proof
+                    {t('lending.meta.id_proof.text')}
                   </h1>
                   <h2
                     style={{
@@ -188,7 +188,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Get ready with your ID Proofs for LensHood KYC.
+                    {t('lending.meta.id_proof.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -214,7 +214,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    4. Search
+                    {t('lending.meta.search2.text')}
                   </h1>
                   <h2
                     style={{
@@ -225,7 +225,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       maxWidth: '500px'
                     }}
                   >
-                    Sit back & Relax ll our hustler comes to your doorstep.
+                    {t('lending.meta.search2.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -253,8 +253,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                   fontSize: '30px'
                 }}
               >
-                LensHood provides a safe and secure way to earn money from the equipments you own and save money by
-                renting equipments at the comfort of your home
+                {t('lending.meta.lenshood.content.p1')}
               </h2>
 
               <div
@@ -275,7 +274,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    1. List
+                    {t('lending.meta.list.text')}
                   </h1>
                   <h2
                     style={{
@@ -285,7 +284,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    List your equipment for rental and we will call you to schedule your verificaon.
+                    {t('lending.meta.list.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -314,7 +313,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    2. Verification
+                    {t('lending.meta.verification.text')}
                   </h1>
                   <h2
                     style={{
@@ -325,7 +324,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Get your lisng verified by our hustler.
+                    {t('lending.meta.verification.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -351,7 +350,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    3. Notification
+                    {t('lending.meta.notification.text')}
                   </h1>
                   <h2
                     style={{
@@ -362,7 +361,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Get nofied in case of an order and wait for our hustler to pick it up.
+                    {t('lending.meta.notification.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -388,7 +387,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    4. Earn
+                    {t('lending.meta.earn.text')}
                   </h1>
                   <h2
                     style={{
@@ -398,7 +397,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       fontSize: '30px'
                     }}
                   >
-                    Earn extra money while we have got your equipments covered.
+                    {t('lending.meta.earn.content.p1')}
                   </h2>
                 </div>
                 <div>
@@ -424,7 +423,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       margin: '0 0 0 0'
                     }}
                   >
-                    5. Return
+                    {t('lending.meta.return.text')}
                   </h1>
                   <h2
                     style={{
@@ -435,7 +434,7 @@ const LendingView = ({ t }: LendingViewProps) => {
                       maxWidth: '500px'
                     }}
                   >
-                    Finally, Get your gear back as the rental gets over.
+                    {t('lending.meta.return.content.p1')}
                   </h2>
                 </div>
                 <div>
