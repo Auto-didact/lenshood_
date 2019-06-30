@@ -23,7 +23,8 @@ class ReviewsCard extends Component {
       editcomment: '',
       addcomment: '',
       editrating: 0,
-      addrating: 0
+      addrating: 0,
+      reviews: props.reviews
     };
   }
 
@@ -78,15 +79,16 @@ class ReviewsCard extends Component {
     });
   };
 
-  deleteReviews = async (input, userId) => {
+  deleteReviews = async (input, userId, index) => {
     await this.setState({ loading: true });
-    if (this.props.listing.user.id == userId) {
+    if (this.props.listing.user.id == parseInt(userId)) {
       try {
         await this.props.client.mutate({
           mutation: DELETE_LISTING_REVIEW,
           variables: { input }
         });
-        await this.setState({ visible: false, result: 'triggered', loading: false });
+        this.props.reviews.splice(index, 1);
+        await this.setState({ visible: false, result: 'triggered', loading: false, reviews: this.props.reviews });
       } catch (error) {
         console.warn(error.message);
         await this.setState({ error: true, loading: false, visible: false });
@@ -95,25 +97,38 @@ class ReviewsCard extends Component {
     }
   };
 
-  editReviews = async (id, listing_id, userId) => {
+  editReviews = async (id, listing_id, userId, index) => {
     let input = {};
     input['id'] = id;
     input['listingId'] = parseInt(listing_id);
     input['rating'] = this.state.editrating + '';
     input['comment'] = this.state.editcomment;
-    if (this.props.listing.user.id == userId) {
-      await this.setState({ loading: true });
+    await this.setState({ loading: true });
+    if (this.props.listing.user.id == parseInt(userId)) {
       try {
         await this.props.client.mutate({
           mutation: EDITI_LISTING_REVIEW,
           variables: { input }
+        });
+        this.props.reviews[index]['rating'] = this.state.editrating;
+        this.props.reviews[index]['comment'] = this.state.editcomment;
+        console.log(this.props.reviews[index]);
+        this.setState({
+          reviews: this.props.reviews
         });
         await this.setState({ result: 'triggered', loading: false, editvisible: false });
       } catch (error) {
         console.warn(error.message);
         await this.setState({ error: true, loading: false, editvisible: false });
       }
+      Modal.destroyAll();
     }
+  };
+
+  handleAddReviews = r => {
+    this.setState(prevState => ({
+      reviews: [r, ...prevState.reviews]
+    }));
   };
 
   addReviews = async () => {
@@ -124,10 +139,12 @@ class ReviewsCard extends Component {
     input['reviewerId'] = this.props.listing.user.id;
     await this.setState({ loading: true });
     try {
-      await this.props.client.mutate({
+      let results = await this.props.client.mutate({
         mutation: ADD_LISTING_REVIEW,
         variables: { input }
       });
+      results.data.addListingReview['reviewer'] = [this.props.listing.user.profile];
+      await this.handleAddReviews(results.data.addListingReview);
       await this.setState({ result: 'triggered', loading: false, addvisible: false });
     } catch (error) {
       console.warn(error.message);
@@ -135,13 +152,13 @@ class ReviewsCard extends Component {
     }
   };
 
-  editModal = (reviewId, listingId, userId) => {
+  editModal = (reviewId, listingId, userId, index) => {
     return (
       <Modal
         title={'Edit Review'}
         visible={this.state.editvisible}
         onOk={() => {
-          this.editReviews(reviewId, listingId, userId);
+          this.editReviews(reviewId, listingId, userId, index);
         }}
         onCancel={this.edithandleCancel}
         destroyOnClose={true}
@@ -192,7 +209,7 @@ class ReviewsCard extends Component {
     message.error('Click on No');
   }
 
-  getCard = reviewe => {
+  getCard = (reviewe, index) => {
     return (
       <Card>
         <Row>
@@ -229,7 +246,7 @@ class ReviewsCard extends Component {
         <Col span={12} align="right" style={{ paddingRight: '20px' }}>
           <Popconfirm
             title="Are you sure to delete this reiview?"
-            onConfirm={() => this.deleteReviews({ id: reviewe.id }, reviewe.reviewer[0].id)}
+            onConfirm={() => this.deleteReviews({ id: reviewe.id }, reviewe.reviewer[0].id, index)}
             onCancel={this.cancel}
             okText="Yes"
             cancelText="No"
@@ -243,16 +260,15 @@ class ReviewsCard extends Component {
           <Button type="danger" shape="circle" size="large" onClick={this.editshowModal}>
             <Icon type="edit" />
           </Button>
-          {this.editModal(reviewe.id, reviewe.listingId, reviewe.reviewer[0].id)}
+          {this.editModal(reviewe.id, reviewe.listingId, reviewe.reviewer[0].id, index)}
         </Col>
       </Card>
     );
   };
 
   render() {
-    let reviews = this.props.reviews;
     return (
-      <div>
+      <div id="listing_user_reviews">
         <h3 className="font16 blockDisplay fontBold">User Reviews</h3>
         <Button
           type="danger"
@@ -264,8 +280,8 @@ class ReviewsCard extends Component {
           <Icon type="edit" />
         </Button>
         {this.addModal()}
-        {reviews.map(reviewe => {
-          return this.getCard(reviewe);
+        {this.state.reviews.map((reviewe, index) => {
+          return this.getCard(reviewe, index);
         })}
       </div>
     );
