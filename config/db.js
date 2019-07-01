@@ -8,7 +8,7 @@ const db = {
     socketPath: process.env.DB_SOCKET_PATH,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    // ssl: process.env.DB_SSL,
+    ssl: process.env.DB_SSL,
     multipleStatements: true,
     charset: 'utf8'
   }
