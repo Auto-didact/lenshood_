@@ -138,7 +138,7 @@ export default class ListingDAO extends Model {
       }
 
       queryBuilder.orderBy(decamelize(column), order);
-    } else queryBuilder.orderBy("id", "desc")
+    } else queryBuilder.orderBy("id", "desc");
 
     if (filter) {
       if (has(filter, "gearCategory") && filter.gearCategory !== "") {
@@ -164,18 +164,6 @@ export default class ListingDAO extends Model {
                 `%${filter.searchText}%`
               ])
             )
-              .orWhere(
-                raw("LOWER(??) LIKE LOWER(?)", [
-                  "gear_category",
-                  `%${filter.searchText}%`
-                ])
-              )
-              .orWhere(
-                raw("LOWER(??) LIKE LOWER(?)", [
-                  "gear_subcategory",
-                  `%${filter.searchText}%`
-                ])
-              )
               .orWhere(
                 raw("LOWER(??) LIKE LOWER(?)", [
                   "ld.model",
