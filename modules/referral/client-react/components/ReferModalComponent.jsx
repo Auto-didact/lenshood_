@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Badge, Card } from "antd";
+import { Link } from "react-router-dom";
 
 export default class ReferModalComponent extends React.Component {
   render() {
@@ -24,15 +25,23 @@ export default class ReferModalComponent extends React.Component {
               ? this.props.referrals.map(item => (
                   <div key={item.id}>
                     <Badge
-                      status="success"
+                      status={item.isVerified ? "success" : "error"}
                       text={
                         <span>
                           <strong>{`${item.referredUser.profile.firstName} ${
                             item.referredUser.profile.lastName
                           }`}</strong>{" "}
                           {`(${item.referredUser.username})`}
+                          <span className="rightfloat">
+                            {item.isVerified ? (
+                              "verified"
+                            ) : (
+                              <Link to="/invites">verify</Link>
+                            )}
+                          </span>
                         </span>
                       }
+                      className="width100"
                     />
                   </div>
                 ))

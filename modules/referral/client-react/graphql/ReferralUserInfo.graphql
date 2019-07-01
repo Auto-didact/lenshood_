@@ -15,13 +15,13 @@ fragment ReferralUserInfo on User {
   }
   referrals {
     id
+    isVerified
     referredUser {
       id
       username
       profile {
         firstName
         lastName
-        isVerified
       }
     }
   }
