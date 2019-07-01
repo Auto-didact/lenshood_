@@ -162,7 +162,8 @@ class AddToCart extends Component {
             &#8377; {this.props.product.refundableDeposit}
           </div>
         </CardText>*/}
-        <Tooltip title="We are not accepting orders yet">
+        <h2 style={{ textAlign: 'center' }}>We Are Not Accepting Orders Yet.</h2>
+        {/*<Tooltip title="We are not accepting orders yet">
           <div style={{ margin: '5px 0px 5px 0px' }}>
             <Button size="large" block disabled>
               BOOK NOW
@@ -174,7 +175,7 @@ class AddToCart extends Component {
               ADD TO BAG <Icon type="shopping" />
             </Button>
           </div>
-        </Tooltip>
+      </Tooltip>*/}
       </Card>
     );
   }
