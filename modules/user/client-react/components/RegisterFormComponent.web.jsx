@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withFormik } from "formik";
 import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { translate } from "@gqlapp/i18n-client-react";
 
 import {
@@ -12,7 +12,7 @@ import {
   required,
   validate
 } from "@gqlapp/validation-common-react";
-import { Form, RenderField, Button, Alert } from "@gqlapp/look-client-react";
+import { Form, RenderField, Button } from "@gqlapp/look-client-react";
 import {
   // LinkedInButton,
   GoogleButton,
@@ -20,7 +20,7 @@ import {
   FacebookButton
 } from "@gqlapp/authentication-client-react";
 
-import { Divider, Row, Col, Card, Modal } from "antd";
+import { Row, Col, Card, Modal, message } from "antd";
 import camera from "../resources/camera.jpg";
 
 import settings from "../../../../settings";
@@ -155,7 +155,7 @@ const RegisterFormComponent = ({
               <Field
                 name="email"
                 component={RenderField}
-                type="text"
+                type="email"
                 placeholder={t("reg.form.field.email")}
                 value={values.email}
               />
@@ -185,9 +185,9 @@ const RegisterFormComponent = ({
                 />
               </Col>
               <div className="text-center">
-                {errors && errors.errorMsg && (
-                  <Alert color="error">{errors.errorMsg}</Alert>
-                )}
+                {errors &&
+                  errors.errorMsg &&
+                  message.error(errors.referral || errors.errorMsg)}
               </div>
               <Button color="primary" block type="submit" disabled={submitting}>
                 {t("reg.form.btnSubmit")}
@@ -233,6 +233,7 @@ const RegisterFormComponentWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
+    if (values.referredBy === false) values.referredBy = "";
     onSubmit(values).catch(e => {
       if (isFormError(e)) {
         setErrors(e.errors);
@@ -245,4 +246,6 @@ const RegisterFormComponentWithFormik = withFormik({
   displayName: "SignUpForm" // helps with React DevTools
 });
 
-export default translate("user")(RegisterFormComponentWithFormik(RegisterFormComponent));
+export default translate("user")(
+  RegisterFormComponentWithFormik(RegisterFormComponent)
+);

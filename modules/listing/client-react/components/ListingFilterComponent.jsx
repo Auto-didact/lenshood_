@@ -18,7 +18,6 @@ const ListingFilterComponent = props => {
     ongearSubcategoryChange,
     t
   } = props;
-  console.log(props);
   let state = {
     gearCategory: ["", "Cameras", "Lenses"],
     gearSubcategory: {
@@ -48,7 +47,6 @@ const ListingFilterComponent = props => {
   const [activeGearCategory, setActiveGearCategory] = useState(gearCategory);
 
   const handlegearCategoryChange = value => {
-    console.log(value);
     ongearCategoryChange(value);
     ongearSubcategoryChange("");
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
@@ -56,7 +54,6 @@ const ListingFilterComponent = props => {
 
   return (
     <Form layout="inline">
-      {console.log(gearCategory, searchText, gearSubcategory)}
       <FormItem label="Filter">
         <DebounceInput
           minLength={2}

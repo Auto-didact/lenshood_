@@ -1,10 +1,10 @@
-import bcrypt from 'bcryptjs';
-import { pick, isEmpty } from 'lodash';
-import jwt from 'jsonwebtoken';
-import { UserInputError } from 'apollo-server-errors';
-import { access } from '@gqlapp/authentication-server-ts';
-import User from '../../sql';
-import settings from '../../../../../settings';
+import bcrypt from "bcryptjs";
+import { pick, isEmpty } from "lodash";
+import jwt from "jsonwebtoken";
+import { UserInputError } from "apollo-server-errors";
+import { access } from "@gqlapp/authentication-server-ts";
+import User from "../../sql";
+import settings from "../../../../../settings";
 
 const createPasswordHash = password => {
   return bcrypt.hash(password, 12) || false;
@@ -12,17 +12,17 @@ const createPasswordHash = password => {
 const validateUserPassword = async (user, password, t) => {
   if (!user) {
     // user with provided email not found
-    return { usernameOrEmail: t('user:auth.password.validPasswordEmail') };
+    return { usernameOrEmail: t("user:auth.password.validPasswordEmail") };
   }
 
   if (settings.auth.password.confirm && !user.isActive) {
-    return { usernameOrEmail: t('user:auth.password.emailConfirmation') };
+    return { usernameOrEmail: t("user:auth.password.emailConfirmation") };
   }
 
   const valid = await bcrypt.compare(password, user.passwordHash);
   if (!valid) {
     // bad password
-    return { usernameOrEmail: t('user:auth.password.validPassword') };
+    return { usernameOrEmail: t("user:auth.password.validPassword") };
   }
 };
 
@@ -38,33 +38,43 @@ export default () => ({
       const user = await User.getUserByUsernameOrEmail(usernameOrEmail);
 
       const errors = await validateUserPassword(user, password, req.t);
-      if (!isEmpty(errors)) throw new UserInputError('Failed valid user password', { errors });
+      if (!isEmpty(errors))
+        throw new UserInputError("Failed valid user password", { errors });
 
       const tokens = await access.grantAccess(user, req, user.passwordHash);
 
       return { user, tokens };
     },
-    async register(obj, { input }, { mailer, User, req }) {
+    async register(obj, { input }, { mailer, User, req, Referral }) {
       const { t } = req;
       const errors = {};
+      let referral = null;
+      if (input.referredBy) {
+        referral = await User.getUserByUsername(input.referredBy);
+        if (!referral) {
+          errors.referral = "Referral is incorrect";
+        }
+      }
+      delete input["referredBy"];
       const userExists = await User.getUserByUsername(input.username);
       if (userExists) {
-        errors.username = t('user:auth.password.usernameIsExisted');
+        errors.username = t("user:auth.password.usernameIsExisted");
       }
 
       const emailExists = await User.getUserByEmail(input.email);
       if (emailExists) {
-        errors.email = t('user:auth.password.emailIsExisted');
+        errors.email = t("user:auth.password.emailIsExisted");
       }
 
-      if (!isEmpty(errors)) throw new UserInputError('Failed reset password', { errors });
+      if (!isEmpty(errors))
+        throw new UserInputError("Failed reset password", { errors });
 
       let userId = 0;
       const password = input.password;
       if (!emailExists) {
         const passwordHash = await createPasswordHash(input.password);
-        input['password_hash'] = passwordHash;
-        delete input['password'];
+        input["password_hash"] = passwordHash;
+        delete input["password"];
         let isActive = !settings.auth.password.confirm;
         userId = await User.register({ ...input, isActive });
 
@@ -75,30 +85,48 @@ export default () => ({
       }
 
       const user = await User.getUser(userId);
-      if (mailer && settings.auth.password.sendConfirmationEmail && !emailExists && req) {
+      if (
+        mailer &&
+        settings.auth.password.sendConfirmationEmail &&
+        !emailExists &&
+        req
+      ) {
         // async email
-        jwt.sign({ identity: pick(user, 'id') }, settings.auth.secret, { expiresIn: '1d' }, (err, emailToken) => {
-          const encodedToken = Buffer.from(emailToken).toString('base64');
-          const url = `${__WEBSITE_URL__}/confirmation/${encodedToken}`;
-          mailer.sendMail({
-            from: `${settings.app.name} <${process.env.EMAIL_USER}>`,
-            to: user.email,
-            subject: 'Confirm Email',
-            html: `<p>Hi, ${user.username}!</p>
-              <p>Welcome to ${settings.app.name}. Please click the following link to confirm your email:</p>
+        jwt.sign(
+          { identity: pick(user, "id") },
+          settings.auth.secret,
+          { expiresIn: "1d" },
+          (err, emailToken) => {
+            const encodedToken = Buffer.from(emailToken).toString("base64");
+            const url = `${__WEBSITE_URL__}/confirmation/${encodedToken}`;
+            mailer.sendMail({
+              from: `${settings.app.name} <${process.env.EMAIL_USER}>`,
+              to: user.email,
+              subject: "Confirm Email",
+              html: `<p>Hi, ${user.username}!</p>
+              <p>Welcome to ${
+                settings.app.name
+              }. Please click the following link to confirm your email:</p>
               <p><a href="${url}">${url}</a></p>
               <p>Below are your login information</p>
               <p>Your email is: ${user.email}</p>
               <p>Your password is: ${password}</p>`
-          });
-        });
+            });
+          }
+        );
       }
-
+      console.log("referral", referral);
+      console.log("user", user);
+      let idx;
+      if (referral) {
+        idx = await Referral.addReferred(referral.id, user.id);
+      }
+      console.log(idx);
       return { user };
     },
     async forgotPassword(obj, { input }, { User, mailer }) {
       try {
-        const localAuth = pick(input, 'email');
+        const localAuth = pick(input, "email");
         const user = await User.getUserByEmail(localAuth.email);
 
         if (user && mailer) {
@@ -106,15 +134,15 @@ export default () => ({
           jwt.sign(
             { email: user.email, password: user.passwordHash },
             settings.auth.secret,
-            { expiresIn: '1d' },
+            { expiresIn: "1d" },
             (err, emailToken) => {
               // encoded token since react router does not match dots in params
-              const encodedToken = Buffer.from(emailToken).toString('base64');
+              const encodedToken = Buffer.from(emailToken).toString("base64");
               const url = `${__WEBSITE_URL__}/reset-password/${encodedToken}`;
               mailer.sendMail({
                 from: `${settings.app.name} <${process.env.EMAIL_USER}>`,
                 to: user.email,
-                subject: 'Reset Password',
+                subject: "Reset Password",
                 html: `Please click this link to reset your password: <a href="${url}">${url}</a>`
               });
             }
@@ -134,22 +162,25 @@ export default () => ({
     ) {
       const errors = {};
 
-      const reset = pick(input, ['password', 'passwordConfirmation', 'token']);
+      const reset = pick(input, ["password", "passwordConfirmation", "token"]);
       if (reset.password !== reset.passwordConfirmation) {
-        errors.password = t('user:auth.password.passwordsIsNotMatch');
+        errors.password = t("user:auth.password.passwordsIsNotMatch");
       }
 
       if (reset.password.length < settings.auth.password.minLength) {
-        errors.password = t('user:auth.password.passwordLength', { length: settings.auth.password.minLength });
+        errors.password = t("user:auth.password.passwordLength", {
+          length: settings.auth.password.minLength
+        });
       }
 
-      if (!isEmpty(errors)) throw new UserInputError('Failed reset password', { errors });
+      if (!isEmpty(errors))
+        throw new UserInputError("Failed reset password", { errors });
 
-      const token = Buffer.from(reset.token, 'base64').toString();
+      const token = Buffer.from(reset.token, "base64").toString();
       const { email, password } = jwt.verify(token, settings.auth.secret);
       const user = await User.getUserByEmail(email);
       if (user.passwordHash !== password) {
-        throw new Error(t('user:auth.password.invalidToken'));
+        throw new Error(t("user:auth.password.invalidToken"));
       }
       if (user) {
         await User.updatePassword(user.id, reset.password);

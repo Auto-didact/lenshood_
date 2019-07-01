@@ -28,10 +28,14 @@ export default class ReferModalComponent extends React.Component {
                       status={item.isVerified ? "success" : "error"}
                       text={
                         <span>
-                          <strong>{`${item.referredUser.profile.firstName} ${
-                            item.referredUser.profile.lastName
-                          }`}</strong>{" "}
-                          {`(${item.referredUser.username})`}
+                          <strong>{`${item.referredUser.username}`}</strong>{" "}
+                          {item.referredUser.profile &&
+                          item.referredUser.profile.firstName &&
+                          item.referredUser.profile.lastName
+                            ? `(${item.referredUser.profile.firstName} ${
+                                item.referredUser.profile.lastName
+                              })`
+                            : "(Name not provided yet)"}
                           <span className="rightfloat">
                             {item.isVerified ? (
                               "verified"
