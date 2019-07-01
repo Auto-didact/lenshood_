@@ -14,6 +14,11 @@
         max-width: 95%;
     }
 }
+@media only screen and (min-width: 1400px){
+    .con{
+        max-width:50%
+    }
+}
 .con>Form{
     display:flex;
     flex-direction:column;
@@ -89,7 +94,7 @@ display:block !important;
 border:1px solid #e8e8e8;
 border-radius: 5px;
 box-shadow: 1px 1px #e8e8e8;
-width:89%;
+width:100%;
 
 margin-bottom: 5px !important;
 }
