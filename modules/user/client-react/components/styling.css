@@ -6,12 +6,12 @@
     text-align:center;
     border:1px solid #e8e8e8;
     border-radius: 6px;
-    max-width: 50%;
+    max-width: 60%;
 
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 700px){
     .con{
-        max-width: 90%;
+        max-width: 95%;
     }
 }
 .con>Form{
@@ -20,9 +20,10 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    width:90%;
 }
 .con>Form>div:nth-child(1){
- border-bottom: 1px solid #e8e8e8;
+ 
  width:90%;
  display: flex;
  align-items: center;
@@ -45,7 +46,7 @@
     font-size: 15px !important;
 }
 .g3>div>div>div:first-child>label{
-    font-size: 20px !important;
+    font-size: 17px !important;
 }
 .g3>div>div>div>div>span>div{
 border:1px solid #e8e8e8;
@@ -56,10 +57,11 @@ margin-left:auto !important;
 margin-right: auto !important;
 margin-bottom: 5px !important;
 }
-.g3>div>div>div>div>span>div>div>div>span{
-display: inline-grid;
-grid-template-columns: auto auto;
-
+.g3>div>div>div>div>span>div>div>div>span>div:nth-child(1) {
+display: block !important;
+}
+.g3>div>div>div>div>span>div>div>div>span>div:nth-child(2){
+display:block !important;
 }
 .g3>div>div>div>div>span>div:last-child{
     border:none !important;
@@ -69,6 +71,9 @@ grid-template-columns: auto auto;
 .g3>div>div>div>div>span>div:last-child>div>div>span{
     display:block !important;
 }
+.g3>div>div>div:nth-child(2){
+    margin-left: -5.5%;
+}
 .g4>div:nth-child(3){
     width:50%;
     margin:auto !important;
@@ -77,15 +82,15 @@ grid-template-columns: auto auto;
     font-size: 15px !important;
 }
 .g4>div>div>div:first-child>label{
-    font-size: 20px !important;
+    font-size: 15px !important;
+    
 }
 .g4>div>div>div>div>span>div{
 border:1px solid #e8e8e8;
 border-radius: 5px;
 box-shadow: 1px 1px #e8e8e8;
 width:89%;
-margin-left:auto !important;
-margin-right: auto !important;
+
 margin-bottom: 5px !important;
 }
 .g4>div>div>div>div>span>div>div>div>span{
@@ -97,4 +102,65 @@ margin-bottom: 5px !important;
 }
 .g4>div>div>div>div>span>div:last-child>div>div>span{
     display: block !important;
+}
+
+
+.heading{
+    text-align: left;
+    width:100%;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left:10px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+}
+.row2{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-around;
+}
+.row3{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-around;
+}
+@media only screen and (max-width: 700px){
+    .row3>div:nth-child(2){
+        width:40%;
+        padding-left:5px;
+    }
+}
+
+.about{
+    width:100%;
+    text-align: left;
+}
+.about textarea{
+    height:100px !important;
+}
+.about .ant-form-item-label{
+padding-left:5px;
+}
+.ant-form-item{
+    text-align: left;
+}
+.ant-form-item-label{
+    padding-left:5px;
+}
+.ant-select-selection{
+    width:200px;
+}
+.vgap{
+    margin-top:30px;
+}
+.mobile{
+    width:60% !important;
+}
+.save{
+    width:100% !important;
 }

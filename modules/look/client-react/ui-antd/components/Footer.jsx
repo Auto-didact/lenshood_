@@ -9,30 +9,13 @@ import './styles.css';
 
 export default class Footer extends React.Component {
   state = {
-    width: 0,
-    height: 0,
     show1: false,
     show2: false,
     show3: false,
     show4: false
   };
 
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-
-  showSettings(event) {
-    event.preventDefault();
-  }
-
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  };
   toggle = function(det) {
     if (det == 1)
       this.setState(state => {
@@ -53,8 +36,10 @@ export default class Footer extends React.Component {
   };
 
   render() {
-    return this.state.width > 800 ? (
-      <Container className="no-print" align="center">
+    return  (
+     <div> 
+       {/*------#For Large Screen Devices---#Render this for screen width more than 800px--*/}
+      <Container className="no-print screen_width_more_than_800" align="center">
         <Row className="footer" gutter={16}>
           <Col lg={12} sm={24}>
             <Row>
@@ -159,8 +144,12 @@ export default class Footer extends React.Component {
           </Col>
         </Row>
       </Container>
-    ) : (
-      <Container className="no-print" align="center">
+
+
+          {/*------#For Small screen Device----#Render this For Screen width less than 800px */}
+
+
+      <Container className="no-print screen_width_less_than_800" align="center">
         <Row className="footer" gutter={16}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
@@ -287,6 +276,7 @@ export default class Footer extends React.Component {
           </Col>
         </Row>
       </Container>
+    </div>
     );
   }
 }
