@@ -14,10 +14,10 @@ interface Edges {
   node: Listing & Identifier;
 }
 
-interface ListingsParams {
-  limit: number;
-  after: number;
-}
+// interface ListingsParams {
+//   limit: number;
+//   after: number;
+// }
 
 interface ListingInput {
   input: Listing;
@@ -41,9 +41,18 @@ const LISTINGREVIEW_SUBSCRIPTION = "listing_review_subscription";
 
 export default (pubsub: PubSub) => ({
   Query: {
-    async listings(obj: any, { limit, after }: ListingsParams, context: any) {
+    async listings(
+      obj: any,
+      { limit, after, orderBy, filter }: any,
+      context: any
+    ) {
       const edgesArray: Edges[] = [];
-      const listings = await context.Listing.listingsPagination(limit, after);
+      const listings = await context.Listing.listingsPagination(
+        limit,
+        after,
+        orderBy,
+        filter
+      );
       const total = (await context.Listing.getTotal()).count;
       const hasNextPage = total > after + limit;
 

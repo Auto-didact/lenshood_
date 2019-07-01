@@ -82,9 +82,27 @@ type ListingReview {
 }
 
 extend type Query {
-  listings(limit: Int, after: Int): Listings
+  listings(
+    limit: Int
+    after: Int
+    orderBy: OrderByListInput
+    filter: FilterListInput
+  ): Listings
   listing(id: Int!): Listing
   userListings(userId: Int): [Listing]
+}
+
+input FilterListInput {
+  searchText: String
+  gearCategory: String
+  gearSubcategory: String
+}
+
+# Input for ordering listings
+input OrderByListInput {
+  column: String
+  # asc | desc
+  order: String
 }
 
 extend type Mutation {
