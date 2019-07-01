@@ -1,0 +1,7 @@
+#import "./ListsState.client.graphql"
+
+query ListsState {
+  listsState @client {
+    ...ListsStateInfo
+  }
+}

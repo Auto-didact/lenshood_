@@ -209,7 +209,10 @@ extend type Subscription {
   # Subscription for when editing a listing
   listingUpdated(id: Int!): UpdateListingPayload
   # Subscription for listing list
-  listingsUpdated(endCursor: Int!): UpdateListingPayload
+  listingsUpdated(
+    endCursor: Int!
+    filter: FilterListInput
+  ): UpdateListingPayload
   # Subscription for listingReviews
   listingReviewUpdated(listingId: Int!): UpdateListingReviewPayload
 }

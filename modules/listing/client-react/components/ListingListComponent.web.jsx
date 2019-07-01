@@ -2,20 +2,11 @@
 
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import Helmet from "react-helmet";
 import { Popconfirm, Icon } from "antd";
-import { Link } from "react-router-dom";
 
 import { translate } from "@gqlapp/i18n-client-react";
-import {
-  PageLayout,
-  Table,
-  Button,
-  Pagination,
-  Loader
-} from "@gqlapp/look-client-react";
+import { Table, Button, Pagination, Loader } from "@gqlapp/look-client-react";
 import ListingDrawerComponent from "./ListingDrawerComponent";
-import ListingFilterView from "./ListingFilterView";
 import settings from "../../../../settings";
 
 const { itemsNumber, type } = settings.pagination.web;
@@ -55,7 +46,6 @@ const ListingListComponent = props => {
   };
   const handleOrderBy = (e, name) => {
     e.preventDefault();
-
     let order = "asc";
     if (orderBy && orderBy.column === name) {
       if (orderBy.order === "asc") {
@@ -67,7 +57,6 @@ const ListingListComponent = props => {
         });
       }
     }
-
     return onOrderBy({ column: name, order });
   };
   const columns = [
@@ -168,24 +157,7 @@ const ListingListComponent = props => {
   );
 
   return (
-    <PageLayout>
-      {/* Render metadata */}
-      <Helmet
-        title={`${settings.app.name} - ${t("list.title")}`}
-        meta={[
-          {
-            name: "description",
-            content: `${settings.app.name} - ${t("list.meta")}`
-          }
-        ]}
-      />
-      <h2>{t("list.subTitle")}</h2>
-      <Link to="/listing/new">
-        <Button color="primary">{t("list.btn.add")}</Button>
-      </Link>
-      <hr />
-      <ListingFilterView {...props} />
-      <hr />
+    <div>
       {/* Render loader */}
       {loading && !listings && <Loading t={t} />}
       {/* Render main listing content */}
@@ -194,7 +166,7 @@ const ListingListComponent = props => {
       ) : (
         <NoListingsMessage t={t} />
       )}
-    </PageLayout>
+    </div>
   );
 };
 

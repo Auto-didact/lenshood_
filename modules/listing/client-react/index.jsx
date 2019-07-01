@@ -26,7 +26,7 @@ import ListYourGearRental from "./components/ListYourGearRental";
 import ListingDynamicFieldFormTest from "./components/ListingDynamicFieldFormTest";
 
 import resources from "./locales";
-// import resolvers from './resolvers';
+import resolvers from "./resolvers";
 
 const MyListingsNavItemAccount = () => {
   return (
@@ -62,8 +62,13 @@ export default new ClientModule({
   route: [
     // Home
     <Route exact path="/" component={ListingCatalogue} />,
-
-    <Route exact path="/listings" component={Listings} />,
+    <AuthRoute
+      exact
+      path="/listings"
+      redirect="/profile"
+      role="admin"
+      component={Listings}
+    />,
     <AuthRoute
       exact
       path="/listing/new"
@@ -122,5 +127,6 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
+  resolver: [resolvers],
   localization: [{ ns: "listing", resources }]
 });

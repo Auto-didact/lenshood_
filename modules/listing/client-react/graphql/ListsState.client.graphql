@@ -1,0 +1,11 @@
+fragment ListsStateInfo on ListsState {
+  orderBy {
+    column
+    order
+  }
+  filter {
+    searchText
+    gearCategory
+    gearSubcategory
+  }
+}

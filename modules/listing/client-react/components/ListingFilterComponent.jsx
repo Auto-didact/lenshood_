@@ -7,19 +7,18 @@ import {
   FormItem,
   Select,
   Option,
-  Label,
   Input
 } from "@gqlapp/look-client-react";
 
-const ListingFilterView = ({
-  // filter: { searchText, gearSubcategory, gearCategory },
-  searchText,
-  gearSubcategory,
-  gearCategory,
-  onSearchTextChange,
-  onRoleChange,
-  t
-}) => {
+const ListingFilterComponent = props => {
+  const {
+    filter: { searchText, gearSubcategory, gearCategory },
+    onSearchTextChange,
+    ongearCategoryChange,
+    ongearSubcategoryChange,
+    t
+  } = props;
+  console.log(props);
   let state = {
     gearCategory: ["", "Cameras", "Lenses"],
     gearSubcategory: {
@@ -46,25 +45,18 @@ const ListingFilterView = ({
     }
   };
 
-  const [activeGearCategory, setActiveGearCategory] = useState(
-    state.gearSubcategory[state.gearCategory[0]]
-  );
-  const [activegearSubcategory, setActivegearSubcategory] = useState(
-    state.gearSubcategory[state.gearCategory[1]][0]
-  );
+  const [activeGearCategory, setActiveGearCategory] = useState(gearCategory);
 
   const handlegearCategoryChange = value => {
+    console.log(value);
+    ongearCategoryChange(value);
+    ongearSubcategoryChange("");
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
-    setActivegearSubcategory(value ? state.gearSubcategory[value][0] : null);
   };
 
-  const handlegearSubCategoryChange = value => {
-    setActivegearSubcategory(value);
-  };
-
-  console.log(activeGearCategory, activegearSubcategory);
   return (
     <Form layout="inline">
+      {console.log(gearCategory, searchText, gearSubcategory)}
       <FormItem label="Filter">
         <DebounceInput
           minLength={2}
@@ -79,8 +71,10 @@ const ListingFilterView = ({
       <FormItem label="gearCategory">
         <Select
           name="gearCategory"
-          defaultValue={state.gearCategory[0]}
-          onChange={handlegearCategoryChange}
+          defaultValue={gearCategory}
+          onChange={value => {
+            handlegearCategoryChange(value);
+          }}
           style={{ width: 110 }}
         >
           {state.gearCategory.map((item, key) => (
@@ -95,8 +89,10 @@ const ListingFilterView = ({
         <FormItem label="gearSubcategory">
           <Select
             name="gearSubcategory"
-            value={activegearSubcategory}
-            onChange={handlegearSubCategoryChange}
+            value={gearSubcategory}
+            onChange={value => {
+              ongearSubcategoryChange(value);
+            }}
             style={{ width: 190 }}
           >
             {activeGearCategory.map((item, key) => (
@@ -111,12 +107,12 @@ const ListingFilterView = ({
   );
 };
 
-ListingFilterView.propTypes = {
+ListingFilterComponent.propTypes = {
   filter: PropTypes.object.isRequired,
   onSearchTextChange: PropTypes.func.isRequired,
-  onRoleChange: PropTypes.func.isRequired,
-  onIsActiveChange: PropTypes.func.isRequired,
+  ongearCategoryChange: PropTypes.func.isRequired,
+  ongearSubcategoryChange: PropTypes.func.isRequired,
   t: PropTypes.func
 };
 
-export default translate("user")(ListingFilterView);
+export default translate("listing")(ListingFilterComponent);

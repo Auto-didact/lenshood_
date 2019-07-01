@@ -34,7 +34,7 @@
     "modules/referral/client-react/components/ReferralView.jsx",
     "modules/referral/client-react/containers/Referral.jsx",
     "modules/user/server-ts/sql.js",
-    "modules/user/server-ts/resolvers.js"
+    "modules/user/server-ts/resolvers.js", "modules/listing/client-react/components/ListingFilterComponent.jsx"
   ],
   "exclude": ["node_modules"]
 }

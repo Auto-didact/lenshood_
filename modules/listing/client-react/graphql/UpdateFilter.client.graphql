@@ -1,0 +1,5 @@
+#import "./ListsState.client.graphql"
+
+mutation updateFilter($filter: FilterListInput!) {
+  updateFilter(filter: $filter) @client
+}
