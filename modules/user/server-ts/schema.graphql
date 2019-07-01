@@ -232,9 +232,9 @@ extend type Mutation {
   # Add Mobile for a user
   addUserMobile(input: AddMobileInput!): UserMobile!
   #Endorse/UnEndorse user
-  endorseUnendorseUser(endorseeId: Int, endorserId: Int): endorseUnEndorse!
+  toggleEndorse(endorseeId: Int, endorserId: Int): endorseUnEndorse!
   #Follow/UnFollow user
-  followUnFollowUser(userId: Int, followerId: Int): follwUnFollw!
+  toggleFollow(userId: Int, followerId: Int): follwUnFollw!
 }
 
 # Input for ordering users

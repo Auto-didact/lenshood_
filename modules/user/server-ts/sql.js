@@ -576,7 +576,7 @@ export class User extends Model {
     )['count(`u`.`id`)'];
   }
 
-  async endorseOrUnEndorse(endorsee_id, endorser_id) {
+  async toggleEndorse(endorsee_id, endorser_id) {
     const count = camelizeKeys(
       await knex
         .count('u.id')
@@ -617,7 +617,7 @@ export class User extends Model {
     )['count(`u`.`id`)'];
   }
 
-  async followUnFollowUser(userId, followerId) {
+  async toggleFollow(userId, followerId) {
     const count = camelizeKeys(
       await knex
         .count('u.id')

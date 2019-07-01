@@ -398,10 +398,9 @@ export default pubsub => ({
         }
       }
     ),
-    endorseUnendorseUser: (obj, input, { User, identity, req: { t } }) =>
-      User.endorseOrUnEndorse(input.endorseeId, input.endorserId),
-    followUnFollowUser: (obj, input, { User, identity, req: { t } }) =>
-      User.followUnFollowUser(input.userId, input.followerId)
+    toggleEndorse: (obj, input, { User, identity, req: { t } }) =>
+      User.toggleEndorse(input.endorseeId, input.endorserId),
+    toggleFollow: (obj, input, { User, identity, req: { t } }) => User.toggleFollow(input.userId, input.followerId)
   },
   Subscription: {
     usersUpdated: {
