@@ -86,7 +86,7 @@ const UserForm = ({
       ) : null}
 
       {/*----------Personal Information-----------*/}
-      <h1 className="heading ">Personal</h1>
+      <h1 className="heading vgap">Personal</h1>
 
       <div className="row">
         {LYGflag == false || !valueCheck.firstName ? (
