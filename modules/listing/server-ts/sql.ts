@@ -128,9 +128,17 @@ export default class ListingDAO extends Model {
     orderBy: any,
     filter: any
   ) {
-    const queryBuilder = ListingDAO.query()
-      .eager(eager)
-      .orderBy("id", "desc");
+    const queryBuilder = ListingDAO.query().eager(eager);
+
+    if (orderBy && orderBy.column) {
+      let column = orderBy.column;
+      let order = "asc";
+      if (orderBy.order) {
+        order = orderBy.order;
+      }
+
+      queryBuilder.orderBy(decamelize(column), order);
+    } else queryBuilder.orderBy("id", "desc")
 
     if (filter) {
       if (has(filter, "gearCategory") && filter.gearCategory !== "") {
@@ -148,7 +156,7 @@ export default class ListingDAO extends Model {
       if (has(filter, "searchText") && filter.searchText !== "") {
         queryBuilder
           .from("listing")
-          .leftJoin("listing_content AS ld", "ld.listing_id", "listing_id.id")
+          .leftJoin("listing_content AS ld", "ld.listing_id", "listing.id")
           .where(function() {
             this.where(
               raw("LOWER(??) LIKE LOWER(?)", [
@@ -190,19 +198,7 @@ export default class ListingDAO extends Model {
       }
     }
 
-    queryBuilder.limit(limit).offset(after);
-
-    if (orderBy && orderBy.column) {
-      let column = orderBy.column;
-      let order = "asc";
-      if (orderBy.order) {
-        order = orderBy.order;
-      }
-
-      queryBuilder.orderBy(decamelize(column), order);
-    }
-    const res = camelizeKeys(await queryBuilder);
-    // console.log(res);
+    const res = camelizeKeys(await queryBuilder.limit(limit).offset(after));
     return res;
   }
 
