@@ -46,10 +46,20 @@ const ListingFilterComponent = props => {
 
   const [activeGearCategory, setActiveGearCategory] = useState(gearCategory);
 
+  const [activeGearSubCategory, setActiveGearSubCategory] = useState(
+    gearSubcategory
+  );
+
   const handlegearCategoryChange = value => {
     ongearCategoryChange(value);
     ongearSubcategoryChange("");
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
+    setActiveGearSubCategory(value ? state.gearSubcategory[value][0] : null);
+  };
+
+  const handlegearSubCategoryChange = value => {
+    ongearSubcategoryChange(value);
+    setActiveGearSubCategory(value);
   };
 
   return (
@@ -86,9 +96,9 @@ const ListingFilterComponent = props => {
         <FormItem label="gearSubcategory">
           <Select
             name="gearSubcategory"
-            value={gearSubcategory}
+            value={activeGearSubCategory}
             onChange={value => {
-              ongearSubcategoryChange(value);
+              handlegearSubCategoryChange(value);
             }}
             style={{ width: 190 }}
           >
