@@ -28,7 +28,7 @@ export default new ClientModule({
     <Route exact path="/invites" component={Referral} />,
     <AuthRoute
       exact
-      path="/invite/:id"
+      path="/invites/:id"
       redirectOnLoggedIn
       redirect="/"
       component={ReferredRedirect}

@@ -12,6 +12,7 @@ import {
   validate,
   number
 } from "@gqlapp/validation-common-react";
+import settings from "../../../../settings";
 
 const InviteDetailsCardComponentSchema = {
   inviteVal: [required]
@@ -33,7 +34,7 @@ const InviteDetailsCardComponent = ({
     message.info("Copied to Clipboard!");
   }
 
-  const inviteUrl = `https://lenshood.in/invite/${username}`;
+  const inviteUrl = `${window.location}/${username}`;
   const whatsappMessage = `Earn cash when you sign-up using the following link: ${inviteUrl} Use the referral code - ${username} while signing up to earn cash.`;
   const twitterMessage = {
     text: `Use the referral code - ${username} while signing up to earn cash.`,
@@ -41,11 +42,11 @@ const InviteDetailsCardComponent = ({
     link: inviteUrl
   };
 
-  const [inputForm, setInputForm] = useState("num");
+  const [inputForm, setInputForm] = useState("email");
   function handleChangeInput(e) {
-    console.log(e);
     setInputForm(e.target.value);
   }
+
   return (
     <div>
       <Card className="boxShadowTheme borderRadius9 marginB20">
@@ -193,6 +194,7 @@ const InviteDetailsCardComponent = ({
 
 InviteDetailsCardComponent.propTypes = {
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object,
   values: PropTypes.object,
@@ -205,14 +207,11 @@ const InviteDetailsCardComponentWithFormik = withFormik({
   }),
   validate: values => validate(values, InviteDetailsCardComponentSchema),
   async handleSubmit(
-    values
-    // {
-    //   setErrors,
-    //   props: { onSubmit }
-    // }
+    values,
+    {
+      props: { username, onSubmit }
+    }
   ) {
-    console.log(values);
-
     if (!values.inviteVal.number && !values.inviteVal.email) {
       message.warn("No One to invite!");
     }
@@ -220,18 +219,15 @@ const InviteDetailsCardComponentWithFormik = withFormik({
     if (values.inviteVal.number) {
       let x = values.inviteVal.number.toString();
       x.length >= 10
-        ? console.log(x)
+        ? message.warn("Function not defined yet!")
         : message.warn("Enter a valid Phone Number");
     }
 
-    if (values.inviteVal.email) console.log(values.inviteVal.email);
-    // onSubmit(values).catch(e => {
-    //   if (isFormError(e)) {
-    //     setErrors(e.errors);
-    //   } else {
-    //     throw e;
-    //   }
-    // });
+    if (values.inviteVal.email) {
+      // delete values["inviteVal"];
+      onSubmit({ username: username, email: values.inviteVal.email });
+    }
+    console.log(values);
   },
   enableReinitialize: true,
   displayName: "inviteForm" // helps with React DevTools

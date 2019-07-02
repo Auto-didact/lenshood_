@@ -2,8 +2,10 @@ import {
   PubSub
   //  withFilter
 } from "graphql-subscriptions";
+// import jwt from "jsonwebtoken";
 import { UserInputError } from "apollo-server-errors";
 import { Referral } from "./sql";
+import settings from "../../../settings";
 
 interface ReferralInput {
   input: Referral;
@@ -67,6 +69,23 @@ export default (pubsub: PubSub) => ({
       console.log(res);
       const referral = await context.Referral.referral(res);
       return referral;
+    },
+    async sendRefEmail(obj: any, { input }: any, { mailer }: any) {
+      const url = `${__WEBSITE_URL__}/invites/${input.username}`;
+      if (mailer) {
+        const sent = await mailer.sendMail({
+          from: `${settings.app.name} <${process.env.EMAIL_USER}>`,
+          to: input.email,
+          subject: "LeensHood Invitation",
+          html: `Earn cash when you sign-up using the following link: <a href="${url}">${url}</a> Use the referral code - <strong>"${
+            input.username
+          }"</strong> while signing up to earn cash.`
+        });
+        console.log(sent);
+        if (!sent) throw "Invitation couldn't be sent";
+        else return true;
+      }
+      throw "Invitation couldn't be sent";
     }
   }
   // Subscription: {

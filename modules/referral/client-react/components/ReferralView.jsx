@@ -7,7 +7,7 @@ import InviteDetailsCardComponent from "./InviteDetailsCardComponent";
 import ReferDetailsCardComponent from "./ReferDetailsCardComponent";
 import { Row, Col } from "antd";
 
-const ReferralView = ({ t, state, loading, referralUser }) => {
+const ReferralView = ({ t, state, loading, referralUser, onSubmit }) => {
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t("title")}`}
@@ -27,7 +27,10 @@ const ReferralView = ({ t, state, loading, referralUser }) => {
             xs={{ span: 24, offset: 0 }}
             className="margin20"
           >
-            <InviteDetailsCardComponent username={referralUser.username} />
+            <InviteDetailsCardComponent
+              username={referralUser.username}
+              onSubmit={onSubmit}
+            />
           </Col>
           <Col
             lg={{ span: 8, offset: 1 }}
