@@ -64,7 +64,8 @@ export default class RenderAddress extends React.Component {
       { key: 'streetAddress2', label: 'streetAddress' },
       { key: 'city', label: 'city' },
       { key: 'state', label: 'state' },
-      { key: 'pinCode', label: 'pinCode' }
+      { key: 'pinCode', label: 'pinCode' },
+      { key: 'primeAddress', label: 'primeAddress' }
     ];
     let formItems = [];
     let addressCard = [];
@@ -115,6 +116,16 @@ export default class RenderAddress extends React.Component {
                   >
                     <div>
                       <FormItem>{formItems[indexa]}</FormItem>
+                      <FormItem>
+                        {/* <Radio.Group> */}
+                        <Radio
+                          // checked={}
+                          value={addresses.address}
+                        >
+                          {t(`${label}.${keys[5].label}`)}
+                        </Radio>
+                        {/* </Radio.Group> */}
+                      </FormItem>
                     </div>
                   </Modal>
                 </Col>
@@ -161,6 +172,7 @@ export default class RenderAddress extends React.Component {
                   {addresses.map((address, indexas) =>
                     isSelectable ? (
                       <Radio
+                        name={indexas}
                         key={indexas}
                         value={address}
                         // onClick={() => onSelect(address)}

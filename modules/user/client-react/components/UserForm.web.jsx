@@ -244,7 +244,7 @@ const UserForm = ({
             arrayHelpers={arrayHelpers}
             label={t('profile.card.group.addresses')}
             t={t}
-            // isSelectable={true}
+            isSelectable={true}
           />
         )}
       />
