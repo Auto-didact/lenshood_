@@ -24,7 +24,6 @@ export default (pubsub: PubSub) => ({
   Mutation: {
     async addReferred(obj: any, { input }: ReferralInput, context: any) {
       var errors = {};
-      console.log("INPUT", input);
       const errMsg = {
         referral: "referral is invalid"
       };
@@ -63,12 +62,14 @@ export default (pubsub: PubSub) => ({
       // });
       return referral;
     },
-    async verifyReferral(obj: any, { userId, referredId }: any, context: any) {
-      userId = userId || context.identity.id;
-      const res = await context.Referral.verifyReferral(userId, referredId);
-      console.log(res);
-      const referral = await context.Referral.referral(res);
-      return referral;
+    async verifyReferral(obj: any, { input }: any, context: any) {
+      if (!input.userId) input.userId = context.identity.id;
+      const res = await context.Referral.verifyReferral(
+        input.userId,
+        input.referredId
+      );
+      if (res) return true;
+      else throw "Couldn't verify the user";
     },
     async sendRefEmail(obj: any, { input }: any, { mailer }: any) {
       const url = `${__WEBSITE_URL__}/invites/${input.username}`;
@@ -81,7 +82,6 @@ export default (pubsub: PubSub) => ({
             input.username
           }"</strong> while signing up to earn cash.`
         });
-        console.log(sent);
         if (!sent) throw "Invitation couldn't be sent";
         else return true;
       }

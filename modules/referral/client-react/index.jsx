@@ -12,6 +12,7 @@ import { Route, NavLink } from "react-router-dom";
 import { Icon } from "antd";
 import Referral from "./containers/Referral";
 import ReferredRedirect from "./containers/ReferredRedirect";
+import ReferralVerify from "./containers/ReferralVerify";
 import resources from "./locales";
 
 const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
@@ -25,14 +26,26 @@ const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
 
 export default new ClientModule({
   route: [
-    <Route exact path="/invites" component={Referral} />,
     <AuthRoute
       exact
       path="/invites/:id"
       redirectOnLoggedIn
-      redirect="/"
+      redirect="/profile"
       component={ReferredRedirect}
-      // invite={true}
+    />,
+    <AuthRoute
+      exact
+      path="/invites"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={Referral}
+    />,
+    <AuthRoute
+      exact
+      path="/invites/verify/:id"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={ReferralVerify}
     />
   ],
   navItemUser: [

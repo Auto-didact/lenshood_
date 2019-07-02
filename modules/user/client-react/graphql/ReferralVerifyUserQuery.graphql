@@ -1,0 +1,7 @@
+#import "./ReferralVerifyUser.graphql"
+
+query user($id: Int!) {
+  user(id: $id) {
+    ...ReferralVerifyUserInfo
+  }
+}

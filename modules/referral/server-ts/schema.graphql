@@ -14,13 +14,18 @@ extend type Query {
 
 extend type Mutation {
   addReferred(input: AddReferralInput!): Referral
-  verifyReferral(referredId: Int!, userId: Int): Referral
+  verifyReferral(input: verifyReferralInput!): Boolean
   sendRefEmail(input: sendRefEmailInput!): Boolean
 }
 
 input sendRefEmailInput {
   email: String!
   username: String!
+}
+
+input verifyReferralInput {
+  referredId: Int!
+  userId: Int
 }
 
 input AddReferralInput {

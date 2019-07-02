@@ -98,12 +98,11 @@ export default class ReferralDao extends Model {
         .andWhere("referred_id", "=", referredId)
         .update("is_verified", true)
     );
-    const verified = await returnId(
+    await returnId(
       knex("user_profile")
         .where("user_id", "=", referredId)
         .update("is_verified", true)
     );
-    console.log("verified", verified);
     return res;
   }
 }

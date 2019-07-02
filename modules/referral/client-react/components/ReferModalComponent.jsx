@@ -40,7 +40,11 @@ export default class ReferModalComponent extends React.Component {
                             {item.isVerified ? (
                               "verified"
                             ) : (
-                              <Link to="/invites">verify</Link>
+                              <Link
+                                to={`/invites/verify/${item.referredUser.id}`}
+                              >
+                                verify
+                              </Link>
                             )}
                           </span>
                         </span>
