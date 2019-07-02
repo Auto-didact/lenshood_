@@ -7,7 +7,7 @@ import { message } from "antd";
 import { FormError } from "@gqlapp/forms-client-react";
 
 const Referral = props => {
-  const { sendRefEmail } = props;
+  const { sendRefEmail, loading } = props;
   let state = {
     cashEarned: 50,
     totalCredit: 27
@@ -28,6 +28,7 @@ const Referral = props => {
       state={state}
       referralUser={props.referralUser}
       onSubmit={onSubmit}
+      loading={loading}
     />
   );
 };

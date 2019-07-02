@@ -8,7 +8,7 @@ import { FormError } from "@gqlapp/forms-client-react";
 import { message } from "antd";
 
 const ReferralVerify = props => {
-  const { verifyReferral, user, currentUser } = props;
+  const { verifyReferral, user, currentUser, loading } = props;
   let code = false;
   if (props.match) {
     code = props.match.params.id;
@@ -34,6 +34,7 @@ const ReferralVerify = props => {
       onSubmit={onSubmit}
       currentUser={currentUser}
       user={user}
+      loading={loading}
     />
   );
 };

@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import { translate } from "@gqlapp/i18n-client-react";
 import { PageLayout, Loader } from "@gqlapp/look-client-react";
 import settings from "../../../../settings";
-import { Button, Icon } from "antd";
+import { Button, Icon, Empty } from "antd";
 import { Link } from "react-router-dom";
 
-const ReferralVerifyView = ({ t, onSubmit, currentUser, user, loading }) => {
+const ReferralVerifyView = props => {
+  const { t, onSubmit, currentUser, user, loading } = props;
+  // console.log(props);
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t("title")}`}
@@ -31,7 +33,7 @@ const ReferralVerifyView = ({ t, onSubmit, currentUser, user, loading }) => {
       >
         <Icon type="arrow-left" /> Back
       </Link>
-      {loading && !listings && <Loading text={"Loading..."} />}
+      {loading && !user && <Loader text={"Loading..."} />}
       {user && user.profile && currentUser ? (
         user.profile.referredBy &&
         currentUser.id === user.profile.referredBy.id ? (
@@ -46,8 +48,14 @@ const ReferralVerifyView = ({ t, onSubmit, currentUser, user, loading }) => {
           )
         ) : (
           <div className="width100 centerAlign">
-            <h1>The User wasn't referred by You.</h1>
-            <h2>Please go back!</h2>
+            <Empty
+              description={
+                <span className="themeColor">
+                  <h3>The User wasn't referred by You.</h3>
+                  <h4>Please go back!</h4>
+                </span>
+              }
+            />
           </div>
         )
       ) : null}
