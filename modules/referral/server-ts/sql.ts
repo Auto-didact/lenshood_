@@ -82,8 +82,8 @@ export default class ReferralDao extends Model {
     );
     const ref = await returnId(
       knex("user_profile")
-        .where("user_id", "=", referredId)
-        .update({
+        .insert({
+          user_id: referredId,
           referrer_id: userId
         })
     );

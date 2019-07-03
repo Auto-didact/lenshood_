@@ -20,7 +20,6 @@ const ReferralVerify = props => {
     let values = {
       referredId: Number(code)
     };
-    console.log(values);
     try {
       await verifyReferral(values);
     } catch (e) {
@@ -28,6 +27,7 @@ const ReferralVerify = props => {
       throw new FormError("Couldn't verify the user", e);
     }
     message.info("User Verified. You may go back now.");
+    window.location.reload();
   };
   return (
     <ReferralVerifyView
