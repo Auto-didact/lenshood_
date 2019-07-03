@@ -214,7 +214,8 @@ const UserForm = ({
           )}
         </>
       ) : null}
-      <FieldArray
+
+      {/* <FieldArray
         name="addresses"
         render={arrayHelpers => (
           <RenderDynamicField
@@ -233,7 +234,7 @@ const UserForm = ({
             label={t('userEdit.form.field.addresses')}
           />
         )}
-      />
+      /> */}
 
       <FieldArray
         name="addresses"
@@ -380,6 +381,7 @@ const UserFormWithFormik = withFormik({
     }
   ) {
     await onSubmit(values).catch(e => {
+      // console.log('addresses', values);
       if (isFormError(e)) {
         setErrors(e.errors);
       } else {

@@ -3,6 +3,7 @@ import { Row, Col, Icon, Button, Form, Radio, Modal, Popconfirm, message } from 
 import { RenderField } from '@gqlapp/look-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
+// import RadioGroup from 'antd/lib/radio/group';
 
 const FormItem = Form.Item;
 // const RadioButton = Radio.Button;
@@ -10,6 +11,7 @@ const FormItem = Form.Item;
 export default class RenderAddress extends React.Component {
   state = {
     visible: []
+    // primeAddress: [true, false]
   };
 
   componentDidMount() {
@@ -67,22 +69,35 @@ export default class RenderAddress extends React.Component {
       { key: 'pinCode', label: 'pinCode' },
       { key: 'primeAddress', label: 'primeAddress' }
     ];
+
     let formItems = [];
     let addressCard = [];
+
     {
       //Geting all the fields for the form.
       this.props.addresses.map(
         (address, indexa) => (
           (formItems[indexa] = keys.map((k, indexk) => (
             <FormItem style={{ display: 'inline-block', margin: '0px 5px', width: '75%' }} key={indexk}>
-              <Field
-                name={`${name}[${indexa}].${k.key}`}
-                component={RenderField}
-                placeholder={k.label}
-                type="text"
-                label={t(`${label}.${k.label}`)}
-                value={address[k.key]}
-              />
+              {k.key != 'primeAddress' ? (
+                <Field
+                  name={`${name}[${indexa}].${k.key}`}
+                  component={RenderField}
+                  placeholder={k.label}
+                  type="text"
+                  label={t(`${label}.${k.label}`)}
+                  value={address[k.key]}
+                />
+              ) : (
+                <Radio
+                  value={
+                    // this.state.primeAddress[indexa]
+                    address
+                  }
+                >
+                  {t(`${label}.${keys[5].label}`)}
+                </Radio>
+              )}
             </FormItem>
           ))),
           //Geting all the addressCard.
@@ -116,16 +131,6 @@ export default class RenderAddress extends React.Component {
                   >
                     <div>
                       <FormItem>{formItems[indexa]}</FormItem>
-                      <FormItem>
-                        {/* <Radio.Group> */}
-                        <Radio
-                          // checked={}
-                          value={addresses.address}
-                        >
-                          {t(`${label}.${keys[5].label}`)}
-                        </Radio>
-                        {/* </Radio.Group> */}
-                      </FormItem>
                     </div>
                   </Modal>
                 </Col>
@@ -168,22 +173,23 @@ export default class RenderAddress extends React.Component {
                 md={{ span: 10, offset: 0 }}
                 className="PadB30"
               >
-                <Radio.Group>
-                  {addresses.map((address, indexas) =>
-                    isSelectable ? (
+                {isSelectable ? (
+                  <Radio.Group name="addresses">
+                    {addresses.map((address, indexas) => (
                       <Radio
-                        name={indexas}
                         key={indexas}
-                        value={address}
-                        // onClick={() => onSelect(address)}
+                        value={
+                          // this.state.primeAddress[indexas]
+                          address
+                        }
                       >
                         {addressCard[indexas]}
                       </Radio>
-                    ) : (
-                      addressCard[indexas]
-                    )
-                  )}
-                </Radio.Group>
+                    ))}
+                  </Radio.Group>
+                ) : (
+                  addresses.map((address, indexas) => addressCard[indexas])
+                )}
               </Col>
               <Col
                 xs={{ span: 14, offset: 5 }}
@@ -204,10 +210,6 @@ export default class RenderAddress extends React.Component {
       </>
     );
   }
-
-  // render() {
-  //   return <Button style={{ width: '30%' }} onClick={this.add} />;
-  // }
 }
 
 RenderAddress.propTypes = {
