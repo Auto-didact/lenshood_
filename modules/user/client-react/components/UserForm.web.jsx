@@ -17,6 +17,8 @@ import {
   Alert
 } from '@gqlapp/look-client-react';
 
+import RenderAddress from './RenderAddress';
+
 import settings from '../../../../settings';
 import './styling.css';
 
@@ -51,8 +53,8 @@ const UserForm = ({
   errors,
   setFieldValue,
   t,
-  shouldDisplayRole,
-  shouldDisplayActive,
+  // shouldDisplayRole,
+  // shouldDisplayActive,
   LYGflag,
   valueCheck
 }) => {
@@ -85,6 +87,7 @@ const UserForm = ({
         </>
       ) : null}
 
+
       {/*----------Personal Information-----------*/}
       <h1 className="heading vgap">Personal</h1>
 
@@ -113,17 +116,21 @@ const UserForm = ({
         ) : null}
       </div>
 
+
       {LYGflag == false || !valueCheck.about ? (
         <div className="about">
           <Field
             name="profile.about"
             component={RenderField}
+
             type="textarea"
+
             label={t('userEdit.form.field.about')}
             value={profile.about}
           />
         </div>
       ) : null}
+
 
       {LYGflag == false ? (
         <div className="g4 about">
@@ -140,9 +147,12 @@ const UserForm = ({
                 label={t('userEdit.form.field.portfolios')}
               />
             )}
+
           />
         </div>
       ) : null}
+
+
 
       {LYGflag == false ? (
         <div className="row">
@@ -161,16 +171,19 @@ const UserForm = ({
               value={profile.flag}
             />
           )}
+
         </div>
       ) : null}
 
       <div className="row">
         {LYGflag == false || !valueCheck.designation ? (
           <>
+
             <Field
               name="profile.designation"
               component={RenderField}
               type="text"
+
               label={t('userEdit.form.field.designation')}
               value={profile.designation}
             />
@@ -198,10 +211,12 @@ const UserForm = ({
 
       {LYGflag == false ? (
         <div className="about">
+
           <Field
             name="username"
             component={RenderField}
             type="text"
+
             label={t('userEdit.form.field.name')}
             value={username}
           />
@@ -221,6 +236,7 @@ const UserForm = ({
 
       {LYGflag == false ? (
         <div className="about">
+
           {isAdmin && (
             <div>
               <Field
@@ -320,6 +336,7 @@ const UserForm = ({
         </>
       ) : null}
 
+
       <div className="g4 save">
         {LYGflag == false ? (
           <>
@@ -344,11 +361,11 @@ const UserForm = ({
         <Button color="primary" type="submit">
           {t('userEdit.form.btnSubmit')}
         </Button>
+
       </div>
     </Form>
   );
 };
-
 UserForm.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
@@ -356,21 +373,21 @@ UserForm.propTypes = {
   onSubmit: PropTypes.func,
   setTouched: PropTypes.func,
   isValid: PropTypes.bool,
+  LYGflag: PropTypes.bool,
   shouldDisplayRole: PropTypes.bool,
   shouldDisplayActive: PropTypes.bool,
   values: PropTypes.object,
   errors: PropTypes.object,
   initialValues: PropTypes.object.isRequired,
   touched: PropTypes.object,
+  valueCheck: PropTypes.object,
   t: PropTypes.func
 };
-
 const UserFormWithFormik = withFormik({
   mapPropsToValues: values => {
     const { username, email, role, isActive, profile, addresses, portfolios } = values.initialValues;
 
     const userRole = values.userRole;
-
     function getAddresses(address) {
       return {
         streetAddress1: address.streetAddress1,
@@ -380,14 +397,12 @@ const UserFormWithFormik = withFormik({
         pinCode: address.pinCode
       };
     }
-
     function getPortfolios(portfolio) {
       return {
         platform: portfolio.platform,
         portfolioUrl: portfolio.portfolioUrl
       };
     }
-
     return {
       userRole: userRole,
       username: username,
