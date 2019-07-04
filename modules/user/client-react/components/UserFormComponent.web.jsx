@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withFormik } from "formik";
+import { withFormik, FieldArray } from "formik";
 import { isEmpty } from "lodash";
 import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { translate } from "@gqlapp/i18n-client-react";
@@ -22,17 +22,19 @@ import {
   Button,
   Alert
 } from "@gqlapp/look-client-react";
-import { FieldArray } from "formik";
+
+import RenderAddress from "./RenderAddress";
+
 import settings from "../../../../settings";
 import "./styling.css";
 
-const UserFormComponentSchema = {
+const userFormSchema = {
   username: [required, minLength(3)],
   email: [required, email]
 };
 
-const createUserFormComponentSchema = {
-  ...UserFormComponentSchema,
+const createUserFormSchema = {
+  ...userFormSchema,
   password: [required, minLength(settings.auth.password.minLength)],
   passwordConfirmation: [
     required,
@@ -49,8 +51,8 @@ const isAdminFunction = role => {
   }
 };
 
-const updateUserFormComponentSchema = {
-  ...UserFormComponentSchema,
+const updateUserFormSchema = {
+  ...userFormSchema,
   password: minLength(settings.auth.password.minLength),
   passwordConfirmation: [
     match("password"),
@@ -58,14 +60,14 @@ const updateUserFormComponentSchema = {
   ]
 };
 
-const UserFormComponent = ({
+const UserForm = ({
   values,
   handleSubmit,
   errors,
   setFieldValue,
   t,
-  shouldDisplayRole,
-  shouldDisplayActive,
+  // shouldDisplayRole,
+  // shouldDisplayActive,
   LYGflag,
   valueCheck
 }) => {
@@ -85,6 +87,7 @@ const UserFormComponent = ({
   const isAdmin = isAdminFunction(userRole);
   return (
     <Form name="user" onSubmit={handleSubmit}>
+      {/*-----------Avatar-------------------*/}
       {LYGflag == false || !valueCheck.avatar ? (
         <>
           <Field
@@ -96,40 +99,11 @@ const UserFormComponent = ({
           />
         </>
       ) : null}
-      <div className="g2">
-        {LYGflag == false ? (
-          <>
-            <Field
-              name="username"
-              component={RenderField}
-              type="text"
-              label={t("userEdit.form.field.name")}
-              value={username}
-            />
-            <Field
-              name="email"
-              component={RenderField}
-              type="email"
-              label={t("userEdit.form.field.email")}
-              value={email}
-            />
-            {isAdmin && (
-              <Field
-                name="role"
-                component={RenderSelect}
-                label={t("userEdit.form.field.role.label")}
-                value={role}
-              >
-                <Option value="user">
-                  {t("userEdit.form.field.role.user")}
-                </Option>
-                <Option value="admin">
-                  {t("userEdit.form.field.role.admin")}
-                </Option>
-              </Field>
-            )}
-          </>
-        ) : null}
+
+      {/*----------Personal Information-----------*/}
+      <h1 className="heading vgap">Personal</h1>
+
+      <div className="row">
         {LYGflag == false || !valueCheck.firstName ? (
           <>
             <Field
@@ -152,18 +126,71 @@ const UserFormComponent = ({
             />
           </>
         ) : null}
-        {LYGflag == false || !valueCheck.about ? (
-          <>
+      </div>
+
+      {LYGflag == false || !valueCheck.about ? (
+        <div className="about">
+          <Field
+            name="profile.about"
+            component={RenderField}
+            type="textarea"
+            label={t("userEdit.form.field.about")}
+            value={profile.about}
+          />
+        </div>
+      ) : null}
+
+      {LYGflag == false ? (
+        <div className="g4 about">
+          <FieldArray
+            name="portfolios"
+            render={arrayHelpers => (
+              <RenderDynamicField
+                keys={[
+                  { key: "platform", type: "text" },
+                  { key: "portfolioUrl", type: "text" }
+                ]}
+                buttonText="Add Portfolio"
+                style={{ width: "40% !important" }}
+                arrayHelpers={arrayHelpers}
+                values={portfolios}
+                name="portfolios"
+                label={t("userEdit.form.field.portfolios")}
+              />
+            )}
+          />
+        </div>
+      ) : null}
+
+      {LYGflag == false ? (
+        <div className="row">
+          {isAdmin && (
             <Field
-              name="profile.about"
+              name="role"
+              component={RenderSelect}
+              label={t("userEdit.form.field.role.label")}
+              value={role}
+            >
+              <Option value="user">{t("userEdit.form.field.role.user")}</Option>
+              <Option value="admin">
+                {t("userEdit.form.field.role.admin")}
+              </Option>
+            </Field>
+          )}
+          {isAdmin && (
+            <Field
+              name="profile.flag"
               component={RenderField}
               type="text"
-              label={t("userEdit.form.field.about")}
-              value={profile.about}
+              label={t("userEdit.form.field.flag")}
+              value={profile.flag}
             />
-          </>
-        ) : null}
-        {LYGflag == false ? (
+          )}
+        </div>
+      ) : null}
+
+      <div className="row">
+        {LYGflag == false || !valueCheck.designation ? (
           <>
             <Field
               name="profile.designation"
@@ -174,29 +201,8 @@ const UserFormComponent = ({
             />
           </>
         ) : null}
-
-        {isAdmin && (
-          <Field
-            name="profile.mobile"
-            component={RenderField}
-            type="text"
-            label={t("userEdit.form.field.mobile")}
-            value={profile.mobile}
-          />
-        )}
-
         {LYGflag == false ? (
           <>
-            {isAdmin && (
-              <Field
-                name="profile.flag"
-                component={RenderField}
-                type="text"
-                label={t("userEdit.form.field.flag")}
-                value={profile.flag}
-              />
-            )}
-
             {isAdmin && (
               <Field
                 name="profile.rating"
@@ -206,46 +212,74 @@ const UserFormComponent = ({
                 value={profile.rating}
               />
             )}
-
-            <Field
-              name="profile.website"
-              component={RenderField}
-              type="text"
-              label={t("userEdit.form.field.website")}
-              value={profile.website}
-            />
-
-            <Field
-              name="profile.isAvailable"
-              component={RenderCheckBox}
-              type="checkbox"
-              label={t("userEdit.form.field.available")}
-              checked={profile.isAvailable}
-            />
-
-            {isAdmin && (
-              <Field
-                name="isActive"
-                component={RenderCheckBox}
-                type="checkbox"
-                label={t("userEdit.form.field.active")}
-                checked={isActive}
-              />
-            )}
-
-            {isAdmin && (
-              <Field
-                name="profile.isVerified"
-                component={RenderCheckBox}
-                type="checkbox"
-                label={t("userEdit.form.field.isverified")}
-                checked={profile.isVerified}
-              />
-            )}
           </>
         ) : null}
       </div>
-      <div className="g3">
+      {/*---------------Personal Information Ends Here---------------*/}
+
+      {/*---------------Account Information Begin Here---------------*/}
+
+      <h1 className="heading vgap">Account</h1>
+
+      {LYGflag == false ? (
+        <div className="about">
+          <Field
+            name="username"
+            component={RenderField}
+            type="text"
+            label={t("userEdit.form.field.name")}
+            value={username}
+          />
+          <Field
+            name="email"
+            component={RenderField}
+            type="email"
+            label={t("userEdit.form.field.email")}
+            value={email}
+          />
+        </div>
+      ) : null}
+
+      {/*------------Account Info End here-------------------------*/}
+      {/*-----------------For Admin---------------------*/}
+      {isAdmin && <h1 className="heading vgap">**For Admin</h1>}
+
+      {LYGflag == false ? (
+        <div className="about">
+          {isAdmin && (
+            <div>
+              <Field
+                name="password"
+                component={RenderField}
+                type="password"
+                label={t("userEdit.form.field.pass")}
+                value={password}
+              />
+              <Field
+                name="passwordConfirmation"
+                component={RenderField}
+                type="password"
+                label={t("userEdit.form.field.passConf")}
+                value={passwordConfirmation}
+              />
+              <div className="mobile">
+                <Field
+                  name="profile.mobile"
+                  component={RenderField}
+                  type="text"
+                  label={t("userEdit.form.field.mobile")}
+                  value={profile.mobile}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      ) : null}
+      {/*-------------For Admin Ends Here---------------------*/}
+      {/*---------------Contact Starts------------------------*/}
+      <h1 className="heading vgap">Contact</h1>
+
+      <div className="g3 about">
         <FieldArray
           name="addresses"
           render={arrayHelpers => (
@@ -267,27 +301,53 @@ const UserFormComponent = ({
           )}
         />
       </div>
-      <div className="g4">
-        {LYGflag == false ? (
-          <>
-            <FieldArray
-              name="portfolios"
-              render={arrayHelpers => (
-                <RenderDynamicField
-                  keys={[
-                    { key: "platform", type: "text" },
-                    { key: "portfolioUrl", type: "text" }
-                  ]}
-                  buttonText="Add Portfolio"
-                  style={{ width: "40% !important" }}
-                  arrayHelpers={arrayHelpers}
-                  values={portfolios}
-                  name="portfolios"
-                  label={t("userEdit.form.field.portfolios")}
-                />
-              )}
+
+      {LYGflag == false ? (
+        <>
+          <div className="row3">
+            <Field
+              name="profile.website"
+              component={RenderField}
+              type="text"
+              label={t("userEdit.form.field.website")}
+              value={profile.website}
             />
 
+            <Field
+              name="profile.isAvailable"
+              component={RenderCheckBox}
+              type="checkbox"
+              label={t("userEdit.form.field.available")}
+              checked={profile.isAvailable}
+            />
+          </div>
+          <div className="row2">
+            {isAdmin && (
+              <Field
+                name="isActive"
+                component={RenderCheckBox}
+                type="checkbox"
+                label={t("userEdit.form.field.active")}
+                checked={isActive}
+              />
+            )}
+
+            {isAdmin && (
+              <Field
+                name="profile.isVerified"
+                component={RenderCheckBox}
+                type="checkbox"
+                label={t("userEdit.form.field.isverified")}
+                checked={profile.isVerified}
+              />
+            )}
+          </div>
+        </>
+      ) : null}
+
+      <div className="g4 save">
+        {LYGflag == false ? (
+          <>
             {settings.auth.certificate.enabled && (
               <Field
                 name="serial"
@@ -303,24 +363,6 @@ const UserFormComponent = ({
                 }
               />
             )}
-            {isAdmin && (
-              <div>
-                <Field
-                  name="password"
-                  component={RenderField}
-                  type="password"
-                  label={t("userEdit.form.field.pass")}
-                  value={password}
-                />
-                <Field
-                  name="passwordConfirmation"
-                  component={RenderField}
-                  type="password"
-                  label={t("userEdit.form.field.passConf")}
-                  value={passwordConfirmation}
-                />
-              </div>
-            )}
           </>
         ) : null}
         {errors && errors.errorMsg && (
@@ -333,24 +375,24 @@ const UserFormComponent = ({
     </Form>
   );
 };
-
-UserFormComponent.propTypes = {
+UserForm.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
   setFieldValue: PropTypes.func,
   onSubmit: PropTypes.func,
   setTouched: PropTypes.func,
   isValid: PropTypes.bool,
+  LYGflag: PropTypes.bool,
   shouldDisplayRole: PropTypes.bool,
   shouldDisplayActive: PropTypes.bool,
   values: PropTypes.object,
   errors: PropTypes.object,
   initialValues: PropTypes.object.isRequired,
   touched: PropTypes.object,
+  valueCheck: PropTypes.object,
   t: PropTypes.func
 };
-
-const UserFormComponentWithFormik = withFormik({
+const UserFormWithFormik = withFormik({
   mapPropsToValues: values => {
     const {
       username,
@@ -363,7 +405,6 @@ const UserFormComponentWithFormik = withFormik({
     } = values.initialValues;
 
     const userRole = values.userRole;
-
     function getAddresses(address) {
       return {
         streetAddress1: address.streetAddress1,
@@ -373,14 +414,12 @@ const UserFormComponentWithFormik = withFormik({
         pinCode: address.pinCode
       };
     }
-
     function getPortfolios(portfolio) {
       return {
         platform: portfolio.platform,
         portfolioUrl: portfolio.portfolioUrl
       };
     }
-
     return {
       userRole: userRole,
       username: username,
@@ -432,12 +471,8 @@ const UserFormComponentWithFormik = withFormik({
   validate: (values, props) =>
     validate(
       values,
-      isEmpty(props.initialValues)
-        ? createUserFormComponentSchema
-        : updateUserFormComponentSchema
+      isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema
     )
 });
 
-export default translate("user")(
-  UserFormComponentWithFormik(UserFormComponent)
-);
+export default translate("user")(UserFormWithFormik(UserForm));

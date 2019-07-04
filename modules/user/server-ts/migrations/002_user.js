@@ -55,22 +55,22 @@ exports.up = function(knex, Promise) {
         .onDelete('CASCADE');
       table.timestamps(false, true);
     }),
-    // // knex.schema.createTable('user_payment', table => {
-    // //   table.increments();
-    // //   table
-    // //     .integer('address_id')
-    // //     .unsigned()
-    // //     .references('id')
-    // //     .inTable('user_address')
-    // //     .onDelete('CASCADE');
-    // //   table.timestamps(false, true);
-    // //   table
-    // //     .integer('user_id')
-    // //     .unsigned()
-    // //     .references('id')
-    // //     .inTable('user')
-    // //     .onDelete('CASCADE');
-    // //   table.timestamps(false, true);
+    // knex.schema.createTable('user_payment', table => {
+    //   table.increments();
+    //   table
+    //     .integer('address_id')
+    //     .unsigned()
+    //     .references('id')
+    //     .inTable('user_address')
+    //     .onDelete('CASCADE');
+    //   table.timestamps(false, true);
+    //   table
+    //     .integer('user_id')
+    //     .unsigned()
+    //     .references('id')
+    //     .inTable('user')
+    //     .onDelete('CASCADE');
+    //   table.timestamps(false, true);
     // }),
     knex.schema.createTable('user_identification', table => {
       table.increments();
@@ -134,7 +134,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('user_mobile', table => {
       table.increments();
       table.string('mobile');
-      table.int('otp');
+      table.integer('otp');
       table.boolean('is_verified').defaultTo(false);
 
       table

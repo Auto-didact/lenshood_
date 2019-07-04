@@ -86,7 +86,7 @@ class ListingFormComponent extends Component {
             <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
               {this.steps[this.state.step]}
 
-              {this.state.step == 0 ? (
+              {this.state.step === 0 && (
                 <Button
                   color="primary"
                   onClick={this.secondstep}
@@ -95,7 +95,26 @@ class ListingFormComponent extends Component {
                   {t("listing.btn.next")}
                   <Icon type="right-circle" />
                 </Button>
-              ) : this.state.step == this.steps.length - 1 ? (
+              )}
+              {this.state.step === 1 && (
+                <>
+                  <Button color="secondary" onClick={this.prevStep}>
+                    <Icon type="left-circle" />
+                    {t("listing.btn.prev")}
+                  </Button>
+
+                  {/* abstract out styles To Do, and arrows to button */}
+                  <Button
+                    color="primary"
+                    onClick={this.nextStep}
+                    style={{ float: "right" }}
+                  >
+                    {t("listing.btn.next")}
+                    <Icon type="right-circle" />
+                  </Button>
+                </>
+              )}
+              {this.state.step === 2 && (
                 <>
                   <Button color="secondary" onClick={this.prevStep}>
                     <Icon type="left-circle" />
@@ -111,23 +130,6 @@ class ListingFormComponent extends Component {
                   >
                     {t("listing.btn.submit")}
                     <Icon type="enter" />
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button color="secondary" onClick={this.prevStep}>
-                    <Icon type="left-circle" />
-                    {t("listing.btn.prev")}
-                  </Button>
-
-                  {/* abstract out styles To Do, and arrows to button */}
-                  <Button
-                    color="primary"
-                    onClick={this.nextStep}
-                    style={{ float: "right" }}
-                  >
-                    {t("listing.btn.next")}
-                    <Icon type="right-circle" />
                   </Button>
                 </>
               )}

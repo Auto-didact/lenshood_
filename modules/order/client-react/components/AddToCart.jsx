@@ -1,27 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Row,
   Col,
   Icon,
   DatePicker,
   // Checkbox,
-  Slider,
   Button,
   Card,
-  Divider
-} from "antd";
-import { CardTitle } from "@gqlapp/look-client-react";
-import moment from "moment";
+  Divider,
+  Tooltip
+} from 'antd';
+import { CardTitle } from '@gqlapp/look-client-react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const { RangePicker } = DatePicker;
-var today = new Date();
-export default class AddToCartCardComponent extends Component {
+class AddToCart extends Component {
   state = {
     dateInit: {
-      dd: today.getDate(),
-      mm: today.getMonth() + 1,
-      yyyy: today.getFullYear(),
-      dateFormat: "YYYY/MM/DD",
+      dateFormat: 'YYYY/MM/DD',
       startDate: null,
       endDate: null,
       changed: false
@@ -33,36 +30,32 @@ export default class AddToCartCardComponent extends Component {
 
   disabledDate = current => {
     // Can not select days before today and today
-    return current && current < moment().endOf("day");
+    return current && current < moment().endOf('day');
   };
   render() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
     const listing = this.props.listing;
 
     const date = this.state.dateInit;
 
-    function parseDate(str) {
-      var mdy = str.split("-");
-      return new Date(mdy[0], mdy[0] - 1, mdy[2]);
-    }
-
-    function datediff(first, second) {
+    function datediff(start, end) {
       // Take the difference between the dates and divide by milliseconds per day.
       // Round to nearest whole number to deal with DST.
+      var startDate = new Date(start);
+      var endDate = new Date(end);
 
-      return Math.round((second - first) / (1000 * 60 * 60 * 24));
+      var timeDiff = endDate.getTime() - startDate.getTime();
+      var DaysDiff = timeDiff / (1000 * 3600 * 24);
+      return DaysDiff;
     }
     const dayDifference =
-      this.state.startDate && this.state.endDate
-        ? datediff(
-            parseDate(this.state.startDate),
-            parseDate(this.state.endDate)
-          )
-        : 1;
+      this.state.startDate && this.state.endDate ? datediff(this.state.startDate, this.state.endDate) : 1;
     return (
-      <Card style={{ backgroundColor: "#FAFAFA", width: "100%" }}>
-        <CardTitle style={{ textAlign: "center" }}>
-          Select your rental period
-        </CardTitle>
+      <Card style={{ backgroundColor: '#FAFAFA', width: '100%' }}>
+        <CardTitle style={{ textAlign: 'center' }}>Select your rental period</CardTitle>
         {/*<h5>
           Price per day <h4>&#8377; {listing.listingRental.perDay}</h4>
         </h5>
@@ -101,21 +94,21 @@ export default class AddToCartCardComponent extends Component {
 
         <Divider />
         <div align="center">
-          <strong style={{ textAlign: "center" }}>Dates</strong>
+          <strong style={{ textAlign: 'center' }}>Dates</strong>
         </div>
         <div align="center">
           <RangePicker
             onChange={this.onChange}
             defaultValue={[
-              moment(`${date.yyyy}/${date.mm}/${date.dd + 1}`, date.dateFormat),
-              moment(`${date.yyyy}/${date.mm}/${date.dd + 2}`, date.dateFormat)
+              moment(`${yyyy}/${mm}/${dd + 1}`, date.dateFormat),
+              moment(`${yyyy}/${mm}/${dd + 2}`, date.dateFormat)
             ]}
             disabledDate={this.disabledDate}
             dateRender={current => {
               const style = {};
               if (current.date() === 1) {
-                style.border = "1px solid #23b195";
-                style.borderRadius = "50%";
+                style.border = '1px solid #23b195';
+                style.borderRadius = '50%';
               }
               return (
                 <div className="ant-calendar-date" style={style}>
@@ -130,9 +123,7 @@ export default class AddToCartCardComponent extends Component {
         <Row>
           <Col span={12}>Rent per day </Col>
           <Col span={12}>
-            <div className="rightfloat">
-              &#8377; {listing.listingRental.perDay}
-            </div>
+            <div className="rightfloat">&#8377; {listing.listingRental.perDay}</div>
           </Col>
           <br />
           <br />
@@ -143,13 +134,10 @@ export default class AddToCartCardComponent extends Component {
             </div>
           </p>*/}
           <Col span={12}>
-            &#8377; {listing.listingRental.perDay}/- <Icon type="close" />{" "}
-            {dayDifference} days{" "}
+            &#8377; {listing.listingRental.perDay}/- <Icon type="close" /> {dayDifference} days{' '}
           </Col>
           <Col span={12}>
-            <div className="rightfloat">
-              &#8377; {listing.listingRental.perDay * dayDifference}
-            </div>
+            <div className="rightfloat">&#8377; {listing.listingRental.perDay * dayDifference}</div>
           </Col>
           {/* <p>
               25% Multi day discount{" "}
@@ -174,17 +162,27 @@ export default class AddToCartCardComponent extends Component {
             &#8377; {this.props.product.refundableDeposit}
           </div>
         </CardText>*/}
-        <div style={{ margin: "5px 0px 5px 0px" }}>
-          <Button size="large" block>
-            BOOK NOW
-          </Button>
-        </div>
-        <div style={{ margin: "5px 0px 5px 0px" }}>
-          <Button type="primary" size="large" block>
-            ADD TO BAG <Icon type="shopping" />
-          </Button>
-        </div>
+        <h2 style={{ textAlign: 'center' }}>We Are Not Accepting Orders Yet.</h2>
+        {/*<Tooltip title="We are not accepting orders yet">
+          <div style={{ margin: '5px 0px 5px 0px' }}>
+            <Button size="large" block disabled>
+              BOOK NOW
+            </Button>
+          </div>
+
+          <div style={{ margin: '5px 0px 5px 0px' }}>
+            <Button type="primary" size="large" block disabled>
+              ADD TO BAG <Icon type="shopping" />
+            </Button>
+          </div>
+      </Tooltip>*/}
       </Card>
     );
   }
 }
+
+AddToCart.propTypes = {
+  listing: PropTypes.object
+};
+
+export default AddToCart;

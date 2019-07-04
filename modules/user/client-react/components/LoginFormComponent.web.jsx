@@ -80,39 +80,50 @@ const { github, facebook, linkedin, google } = settings.auth.social;
 //   );
 // };
 
-const LoginFormComponent = ({ handleSubmit, submitting, errors, values, t }) => {
+const LoginFormComponent = ({
+  handleSubmit,
+  submitting,
+  errors,
+  values,
+  t
+}) => {
   // const buttonsLength = [facebook.enabled, google.enabled].filter(
   //   button => button
   // ).length;
   return (
     <div className="signInoOuter">
-      <Row className="SignInComp">
-        <Col sm={8} xs={0}>
-          <img src={camera1} alt="" className="signInimg" />
-        </Col>
-        <Col sm={0} xs={24}>
-          <img src={camera2} alt="" className="signImg" />
-        </Col>
-        <Col sm={16} xs={24}>
-          <Card className="modalcard">
+      <Card
+        className="modalcard"
+        bodyStyle={{ borderRadius: "0px", padding: "0px", margin: "0px" }}
+      >
+        <Row className="SignInComp">
+          <Col sm={0} xs={0} md={8} align="left" style={{ overflow: "hidden" }}>
+            <img src={camera1} alt="" className="signInimg" />
+          </Col>
+          <Col sm={24} xs={24} md={0}>
+            <img src={camera2} alt="" className="signImg" />
+          </Col>
+          <Col md={16} sm={15} xs={24} className="sign-in-Form">
             <h1 className="signinstate">Let's Go...</h1>
             <Row>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {facebook.enabled && (
-                  <div className="text-center">
+                  <div style={{ margin: "2px" }}>
                     <FacebookButton text={t("login.fbBtn")} type={"button"} />
                   </div>
                 )}
               </Col>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {google.enabled && (
-                  <div className="text-center">
+                  <div style={{ margin: "2px" }}>
                     <GoogleButton text={t("login.googleBtn")} type={"button"} />
                   </div>
                 )}
               </Col>
             </Row>
-            <h2 className="youcanAlways">Or you can always...</h2>
+            <Divider style={{ marginBottom: "10px" }} />
+
+            <h2 className="form-element-heading">Or you can always...</h2>
             {/* <p className="signInForm">Let me help you sign in</p> */}
             <Form
               className="paddingMarginBottom"
@@ -140,6 +151,7 @@ const LoginFormComponent = ({ handleSubmit, submitting, errors, values, t }) => 
               <Link className="forgotpass" to="/forgot-password">
                 {t("login.btn.forgotPass")}
               </Link>
+              <Divider style={{ margin: "5px 0px" }} />
               <div className="text-center">
                 {errors && errors.errorMsg && (
                   <Alert color="error">{errors.errorMsg}</Alert>
@@ -148,14 +160,15 @@ const LoginFormComponent = ({ handleSubmit, submitting, errors, values, t }) => 
               <Button color="primary" block type="submit" disabled={submitting}>
                 {t("login.form.btnSubmit")}
               </Button>
-              <p className="belowFormtext marginT20">
+
+              <p className="belowFormtext  marginT20">
                 New to LensHood?{" "}
-                <NavLink to="/register">{t("login.btn.sign")}</NavLink>
+                <Button href="/register">{t("login.btn.sign")}</Button>
               </p>
             </Form>
-          </Card>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Card>
     </div>
   );
 };
@@ -192,4 +205,6 @@ const LoginFormComponentWithFormik = withFormik({
   displayName: "LoginFormComponent" // helps with React DevTools
 });
 
-export default translate("user")(LoginFormComponentWithFormik(LoginFormComponent));
+export default translate("user")(
+  LoginFormComponentWithFormik(LoginFormComponent)
+);

@@ -24,10 +24,12 @@ const RegisterView = ({ t, onSubmit, referredUsername }) => {
   return (
     <PageLayout>
       {renderMetaData(t)}
-      <LayoutCenter>
-        <h1 className="text-center">{t("reg.form.title")}</h1>
-        <RegisterFormComponent onSubmit={onSubmit} referredUsername={referredUsername} />
-      </LayoutCenter>
+      <div align="center">
+        <RegisterFormComponent
+          onSubmit={onSubmit}
+          referredUsername={referredUsername}
+        />
+      </div>
     </PageLayout>
   );
 };

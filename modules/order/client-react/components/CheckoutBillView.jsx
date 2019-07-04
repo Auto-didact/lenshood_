@@ -1,12 +1,17 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { PageLayout } from "@gqlapp/look-client-react";
+// import RenderAddress from '@gqlapp/user-client-react';
 // import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from "../../../../settings";
 import { Row, Col, Icon, Button } from "antd";
 import CheckoutStepsComponent from "./CheckoutStepsComponent";
 import OrderCardComponent from "./OrderCardComponent";
 import naruto2 from "../resources/naruto2.jpg";
+// import {
+//   // withFormik,
+//   FieldArray
+// } from 'formik';
 
 const renderMetaData = () => (
   <Helmet
@@ -100,6 +105,20 @@ export default class CheckoutBillView extends React.Component {
                   </div>
                 </Col>
               </Row>
+              {/* <FieldArray
+                name="addresses"
+                render={arrayHelpers => (
+                  <RenderAddress
+                    name="addresses"
+                    addresses={
+                      // addresses ||
+                      this.state.address
+                    }
+                    arrayHelpers={arrayHelpers}
+                    // isSelectable={true}
+                  />
+                )}
+              /> */}
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCardComponent

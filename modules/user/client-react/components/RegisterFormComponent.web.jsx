@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withFormik } from "formik";
 import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { translate } from "@gqlapp/i18n-client-react";
 
 import {
@@ -12,16 +12,16 @@ import {
   required,
   validate
 } from "@gqlapp/validation-common-react";
-import { Form, RenderField, Button } from "@gqlapp/look-client-react";
+import { Form, RenderField, Button, Alert } from "@gqlapp/look-client-react";
 import {
   // LinkedInButton,
   GoogleButton,
   // GitHubButton,
   FacebookButton
 } from "@gqlapp/authentication-client-react";
+import { camera1, camera2 } from "../constants/DefaultImages";
 
-import { Row, Col, Card, Modal, message } from "antd";
-import camera from "../resources/camera.jpg";
+import { Divider, Row, Col, Card, Modal } from "antd";
 
 import settings from "../../../../settings";
 
@@ -103,42 +103,38 @@ const RegisterFormComponent = ({
   t
 }) => {
   return (
-    <Modal
-      centered
-      width={700}
-      bodyStyle={{ padding: "0" }}
-      visible={true}
-      footer={null}
-      closable={false}
-      // onCancel={() => this.setModal1Visible(false)}
-    >
-      <Row>
-        <Col sm={8} xs={0}>
-          <img src={camera} alt="" className="signupImg" />
-        </Col>
-        <Col sm={0} xs={24}>
-          <img src={camera} alt="" className="signImg" />
-        </Col>
-        <Col sm={16} xs={24}>
-          <Card className="modalcard">
+    <div className="signOutOuter">
+      <Card
+        className="modalcard"
+        bodyStyle={{ borderRadius: "0px", padding: "0px", margin: "0px" }}
+      >
+        <Row>
+          <Col sm={8} xs={0} style={{ overflow: "hidden" }}>
+            <img src={camera1} alt="" className="signUpImg" />
+          </Col>
+          <Col sm={0} xs={24}>
+            <img src={camera2} alt="" className="signImg" />
+          </Col>
+          <Col sm={16} xs={24} className="sign-up-form">
             <h1 className="signinstate">Sign up...</h1>
             <Row>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {facebook.enabled && (
-                  <div className="text-center">
+                  <div style={{ margin: "2px" }}>
                     <FacebookButton text={t("login.fbBtn")} type={"button"} />
                   </div>
                 )}
               </Col>
-              <Col span={24}>
+              <Col xs={24} sm={12}>
                 {google.enabled && (
-                  <div className="text-center">
+                  <div style={{ margin: "2px" }}>
                     <GoogleButton text={t("login.googleBtn")} type={"button"} />
                   </div>
                 )}
               </Col>
             </Row>
-            <h2 className="youcanAlways">Or you can always...</h2>
+            <Divider style={{ marginBottom: "10px" }} />
+            <h2 className="form-element-heading">Or you can always...</h2>
             {/* <p className="signInForm">Let me help you sign up</p> */}
             <Form
               className="paddingMarginBottom"
@@ -174,6 +170,7 @@ const RegisterFormComponent = ({
                 placeholder={t("reg.form.field.passConf")}
                 value={values.passwordConfirmation}
               />
+              <Divider style={{ margin: "5px 0px" }} />
               <Col span={12}>
                 <Field
                   label={<strong>Referral (optional)</strong>}
@@ -192,20 +189,21 @@ const RegisterFormComponent = ({
               <Button color="primary" block type="submit" disabled={submitting}>
                 {t("reg.form.btnSubmit")}
               </Button>
+
               <p className="belowFormtext marginT20">
                 Already have an account?{" "}
-                <NavLink to="/login">{t("login.form.btnSubmit")}</NavLink>
+                <Button href="/login">{t("login.form.btnSubmit")}</Button>
               </p>
-              <hr />
+              <Divider style={{ margin: "5px 0px" }} />
               <p className="belowFormtext">
                 By signing up you agree to our{" "}
-                <NavLink to="/terms-of-service">terms of service</NavLink>
+                <Link to="/terms-of-service">terms of service</Link>
               </p>
             </Form>
-          </Card>
-        </Col>
-      </Row>
-    </Modal>
+          </Col>
+        </Row>
+      </Card>
+    </div>
   );
 };
 
