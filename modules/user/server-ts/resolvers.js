@@ -397,7 +397,10 @@ export default pubsub => ({
           throw e;
         }
       }
-    )
+    ),
+    toggleEndorse: (obj, input, { User, identity, req: { t } }) =>
+      User.toggleEndorse(input.endorseeId, input.endorserId),
+    toggleFollow: (obj, input, { User, identity, req: { t } }) => User.toggleFollow(input.userId, input.followerId)
   },
   Subscription: {
     usersUpdated: {
