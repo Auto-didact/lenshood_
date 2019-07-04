@@ -14,7 +14,6 @@ class MyList extends Component {
     super(props);
     this.state = {
       status: ALL,
-      listings: props.userListings,
       noListingsStatus: props.userListings.length !== 0 ? false : true
     };
   }
@@ -43,7 +42,7 @@ class MyList extends Component {
 
   listingParser() {
     var parsedListings = [];
-    this.state.listings.map((item, key) => {
+    this.props.userListings.map((item, key) => {
       this.state.status === ALL
         ? parsedListings.push(item)
         : item.status === this.state.status && parsedListings.push(item);
@@ -89,7 +88,7 @@ class MyList extends Component {
             </ButtonGroup>
           </Col>
         </Row>
-        {this.state.listings && this.state.listings.length !== 0
+        {this.props.userListings && this.props.userListings.length !== 0
           ? this.listingParser().length !== 0
             ? this.listingParser().map((item, key) => this.returnItem(item, key))
             : this.renderNoListings()
