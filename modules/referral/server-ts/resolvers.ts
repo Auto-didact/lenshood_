@@ -1,6 +1,6 @@
 import {
   PubSub
-  //  withFilter
+  // withFilter
 } from "graphql-subscriptions";
 // import jwt from "jsonwebtoken";
 import { UserInputError } from "apollo-server-errors";
@@ -53,13 +53,6 @@ export default (pubsub: PubSub) => ({
         input.referredId
       );
       const referral = await context.Referral.referral(id);
-      // pubsub.publish(REFERRED_SUBSCRIPTION, {
-      //   referredUpdated: {
-      //     mutation: "CREATED",
-      //     id,
-      //     node: referral
-      //   }
-      // });
       return referral;
     },
     async verifyReferral(obj: any, { input }: any, context: any) {
@@ -68,8 +61,18 @@ export default (pubsub: PubSub) => ({
         input.userId,
         input.referredId
       );
-      if (res) return true;
-      else throw "Couldn't verify the user";
+      if (res) {
+        // let id = input.userId;
+        // const user = await context.User.getUser(id);
+        // pubsub.publish(REFERRED_SUBSCRIPTION, {
+        //   referredUpdated: {
+        //     mutation: "CREATED",
+        //     id,
+        //     node: user
+        //   }
+        // });
+        return true;
+      } else throw "Couldn't verify the user";
     },
     async sendRefEmail(obj: any, { input }: any, { mailer }: any) {
       const url = `${__WEBSITE_URL__}/invites/${input.username}`;

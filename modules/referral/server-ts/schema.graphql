@@ -41,5 +41,5 @@ extend type Subscription {
 type UpdateReferredUserPayload {
   mutation: String!
   id: Int!
-  node: Referral!
+  node: User!
 }

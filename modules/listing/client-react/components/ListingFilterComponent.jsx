@@ -18,6 +18,7 @@ const ListingFilterComponent = props => {
     ongearSubcategoryChange,
     t
   } = props;
+  console.log(props);
   let state = {
     gearCategory: ["", "Cameras", "Lenses"],
     gearSubcategory: {
