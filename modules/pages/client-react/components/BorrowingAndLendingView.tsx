@@ -19,16 +19,15 @@ const BorrowingAndLendingView = props => {
   useEffect(() => {
     global.window.scrollTo(0, 0);
   });
-  const keyParser = () {
-    if(props.match.path === '/renting'){
-      return(1);
+  const keyParser = () => {
+    if (props.match.path === '/renting') {
+      return 1;
+    } else {
+      return 2;
     }
-    else{
-      return(2);
-    }
-  }
+  };
   const t = props.t;
-  
+
   return (
     <div
       style={{
