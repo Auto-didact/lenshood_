@@ -380,8 +380,8 @@ const UserFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
+    // console.log('values', values);
     await onSubmit(values).catch(e => {
-      // console.log('addresses', values);
       if (isFormError(e)) {
         setErrors(e.errors);
       } else {

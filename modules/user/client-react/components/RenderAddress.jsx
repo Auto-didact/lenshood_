@@ -3,15 +3,13 @@ import { Row, Col, Icon, Button, Form, Radio, Modal, Popconfirm, message } from 
 import { RenderField } from '@gqlapp/look-client-react';
 import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
-// import RadioGroup from 'antd/lib/radio/group';
 
 const FormItem = Form.Item;
-// const RadioButton = Radio.Button;
 
 export default class RenderAddress extends React.Component {
   state = {
     visible: []
-    // primeAddress: [true, false]
+    // ,primeAddress: [false, true]
   };
 
   componentDidMount() {
@@ -48,6 +46,24 @@ export default class RenderAddress extends React.Component {
     const visible = this.state.visible;
     visible[addresses.length] = true;
     this.setState({ visible });
+  };
+
+  handleSelect = index => {
+    console.log('handleSelect called');
+    // const primeAddress = this.state.primeAddress;
+    // console.log('primeAddress before', primeAddress);
+
+    // primeAddress.map();
+    // primeAddress[index] == true ? (primeAddress[index] = false) : (primeAddress[index] = true);
+    // this.setState({ primeAddress });
+
+    // console.log('primeAddress after', this.state.primeAddress);
+
+    this.props.addresses.map(address => {
+      address.primeAddress = false;
+    });
+
+    this.props.addresses[index].primeAddress = true;
   };
 
   render() {
@@ -94,6 +110,7 @@ export default class RenderAddress extends React.Component {
                     // this.state.primeAddress[indexa]
                     address
                   }
+                  // onClick={() => this.handleSelect(indexk)}
                 >
                   {t(`${label}.${keys[5].label}`)}
                 </Radio>
@@ -103,7 +120,7 @@ export default class RenderAddress extends React.Component {
           //Geting all the addressCard.
           (addressCard[indexa] = (
             <div style={{ marginTop: 16 }} className="HomeAddress" key={indexa}>
-              <div className="HomeAddressBlock">Home Address {/* <Icon type="home" className="homeicon" /> */}</div>
+              <div className="HomeAddressBlock">Home Address</div>
               <br />
               <div className="addressLines">
                 <h4>{address.streetAddress1 && address.streetAddress1 + ','}</h4>
@@ -114,11 +131,7 @@ export default class RenderAddress extends React.Component {
               </div>
 
               <Row style={{ marginBottom: '8px' }}>
-                <Col
-                  span={12}
-                  align="left"
-                  // style={{ paddingRight: '20px' }}
-                >
+                <Col span={12} align="left">
                   <Button shape="circle" size="large" onClick={() => this.modalControl(indexa, true)}>
                     <Icon type="edit" />
                   </Button>
@@ -134,11 +147,7 @@ export default class RenderAddress extends React.Component {
                     </div>
                   </Modal>
                 </Col>
-                <Col
-                  span={12}
-                  align="right"
-                  //  style={{ paddingRight: '20px' }}
-                >
+                <Col span={12} align="right">
                   <Popconfirm
                     title="Are you sure to delete this address?"
                     onConfirm={() => arrayHelpers.remove(indexa)}
@@ -174,14 +183,16 @@ export default class RenderAddress extends React.Component {
                 className="PadB30"
               >
                 {isSelectable ? (
-                  <Radio.Group name="addresses">
+                  <Radio.Group name="addresses" defaultValue={addresses[0]}>
                     {addresses.map((address, indexas) => (
                       <Radio
                         key={indexas}
-                        value={
-                          // this.state.primeAddress[indexas]
-                          address
-                        }
+                        value={address}
+                        // checked={
+                        //   // this.state.primeAddress[indexas]
+                        //   address.primeAddress
+                        // }
+                        // onClick={() => this.handleSelect(indexas)}
                       >
                         {addressCard[indexas]}
                       </Radio>
