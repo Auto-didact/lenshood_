@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Layout } from "antd";
+import { Layout, BackTop, Icon, Button, Tooltip } from "antd";
 
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -25,7 +25,20 @@ class PageLayout extends React.Component {
         <Content id="content" className="page-content">
           {children}
         </Content>
-
+        <BackTop>
+          <Tooltip
+            placement="bottom"
+            title="Back to Top"
+            autoAdjustOverflow={true}
+          >
+            <Button
+              icon="arrow-up"
+              type="primary"
+              shape="circle-outline"
+              size="large"
+            />
+          </Tooltip>
+        </BackTop>
         <Footer />
       </Layout>
     );
