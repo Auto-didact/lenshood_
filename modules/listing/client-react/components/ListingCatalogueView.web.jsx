@@ -43,7 +43,7 @@ const ListingList = ({ loading, listings, t, loadData }) => {
   );
 
   return (
-    <PageLayout>
+    <div style={{ padding: '5px' }}>
       {/* Render metadata */}
       <Helmet
         title={`${settings.app.name} - ${t('list.title')}`}
@@ -58,7 +58,7 @@ const ListingList = ({ loading, listings, t, loadData }) => {
       {loading && !listings && <Loading t={t} />}
       {/* Render main listing content */}
       {listings && listings.totalCount ? <RenderListings /> : !loading ? <NoListingsMessage t={t} /> : null}
-    </PageLayout>
+    </div>
   );
 };
 

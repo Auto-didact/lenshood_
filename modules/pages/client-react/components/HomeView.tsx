@@ -4,6 +4,8 @@ import { PageLayout } from '@gqlapp/look-client-react';
 
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../settings';
+import HomeHead from './components/HomeHead';
+import ListingCatalogue from '@gqlapp/listing-client-react/containers/ListingCatalogue';
 
 interface HomeViewProps {
   t: TranslateFunction;
@@ -22,12 +24,8 @@ const HomeView = ({ t }: HomeViewProps) => {
   return (
     <PageLayout>
       {renderMetaData(t)}
-      <div className="home-head">
-        <img className="home-head-image" src={img1} alt="" />
-        <div className="home-image-content">
-          <div className="home-image-contentText">This is text</div>
-        </div>
-      </div>
+      <HomeHead t={t} image={img1}/>
+      <ListingCatalogue/>
     </PageLayout>
   );
 };
