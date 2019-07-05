@@ -141,8 +141,14 @@ export default class ProductDetails extends Component {
       item =>
         item.username.toUpperCase().includes(query.toUpperCase()) ||
         (item.profile &&
-          (item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
-            item.profile.lastName.toUpperCase().includes(query.toUpperCase())))
+          ((item.profile.firstName &&
+            item.profile.firstName
+              .toUpperCase()
+              .includes(query.toUpperCase())) ||
+            (item.profile.lastName &&
+              item.profile.lastName
+                .toUpperCase()
+                .includes(query.toUpperCase()))))
     );
     return items;
   }
@@ -151,6 +157,7 @@ export default class ProductDetails extends Component {
     const values = this.props.values;
     const t = this.props.t;
     const isAdmin = this.props.isAdmin;
+    console.log(this.props);
     return (
       <>
         {/* // FOR RENDERAUTOCOMPLETE */}

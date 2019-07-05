@@ -190,7 +190,7 @@ const UserForm = ({
       ) : null}
 
       <div className="row">
-        {LYGflag == false || !valueCheck.designation ? (
+        {LYGflag == false ? (
           <>
             <Field
               name="profile.designation"
