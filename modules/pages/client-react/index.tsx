@@ -5,11 +5,13 @@ import ClientModule from '@gqlapp/module-client-react';
 import { Route } from 'react-router-dom';
 
 import Static from './containers/Static';
+import Home from './containers/Home';
 
 import resources from './locales';
 
 export default new ClientModule({
   route: [
+    <Route exact path="/" component={Home} />,
     <Route exact path="/mission" component={Static} />,
     <Route exact path="/about-us" component={Static} />,
     <Route exact path="/terms-of-service" component={Static} />,
