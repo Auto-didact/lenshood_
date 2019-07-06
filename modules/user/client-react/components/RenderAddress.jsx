@@ -119,10 +119,24 @@ export default class RenderAddress extends React.Component {
           ))),
           //Geting all the addressCard.
           (addressCard[indexa] = (
-            <div style={{ marginTop: 16 }} className="HomeAddress" key={indexa}>
-              <div className="HomeAddressBlock">Home Address</div>
+            <div className="HomeAddress" key={indexa}>
+              <div
+                className="HomeAddressBlock"
+                style={{
+                  position: 'relative',
+                  bottom: '13px'
+                }}
+              >
+                Home Address
+              </div>
               <br />
-              <div className="addressLines">
+              <div
+                className="addressLines"
+                style={{
+                  position: 'relative',
+                  bottom: '20px'
+                }}
+              >
                 <h4>{address.streetAddress1 && address.streetAddress1 + ','}</h4>
                 <h4>{address.streetAddress2 && address.streetAddress2 + ','}</h4>
                 <h4>{address.city && address.city + ','}</h4>
@@ -132,7 +146,12 @@ export default class RenderAddress extends React.Component {
 
               <Row style={{ marginBottom: '8px' }}>
                 <Col span={12} align="left">
-                  <Button shape="circle" size="large" onClick={() => this.modalControl(indexa, true)}>
+                  <Button
+                    style={{ position: 'relative', bottom: '10px', right: '6px' }}
+                    shape="circle"
+                    size="large"
+                    onClick={() => this.modalControl(indexa, true)}
+                  >
                     <Icon type="edit" />
                   </Button>
                   <Modal
@@ -155,7 +174,12 @@ export default class RenderAddress extends React.Component {
                     okText="Yes"
                     cancelText="No"
                   >
-                    <Button type="danger" shape="circle" size="large">
+                    <Button
+                      style={{ position: 'relative', bottom: '10px', left: '6px' }}
+                      type="danger"
+                      shape="circle"
+                      size="large"
+                    >
                       <Icon type="delete" />
                     </Button>
                   </Popconfirm>
@@ -188,6 +212,11 @@ export default class RenderAddress extends React.Component {
                       <Radio
                         key={indexas}
                         value={address}
+                        style={{
+                          backgroundColor: '#d5f0eb',
+                          height: '31px',
+                          paddingTop: '10px'
+                        }}
                         // checked={
                         //   // this.state.primeAddress[indexas]
                         //   address.primeAddress
@@ -208,7 +237,7 @@ export default class RenderAddress extends React.Component {
                 md={{ span: 8, offset: 0 }}
                 className="PadB30"
               >
-                <div style={{ marginTop: 16 }} className="AddNewAddressBlock" onClick={this.handleAddAddress}>
+                <div className="AddNewAddressBlock" onClick={this.handleAddAddress}>
                   <div className="AddNewAddress">
                     <Icon type="plus" />
                   </div>
