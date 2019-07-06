@@ -50,6 +50,7 @@
     "@gqlapp/i18n-client-react": "^0.1.0",
     "@gqlapp/i18n-common-react": "^0.1.0",
     "@gqlapp/listing-client-react": "^0.1.0",
+    "@gqlapp/live_search-client-react": "^1.0.0",
     "@gqlapp/module-client-react": "^0.1.0",
     "@gqlapp/order-client-react": "^1.0.0",
     "@gqlapp/pages-client-react": "^1.0.0",

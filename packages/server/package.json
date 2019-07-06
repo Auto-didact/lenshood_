@@ -60,6 +60,7 @@
     "@gqlapp/core-common": "^0.1.0",
     "@gqlapp/database-server-ts": "^0.1.0",
     "@gqlapp/listing-server-ts": "^1.0.0",
+    "@gqlapp/live_search-server-ts": "^1.0.0",
     "@gqlapp/order-server-ts": "^1.0.0",
     "@gqlapp/referral-server-ts": "^1.0.0",
     "@gqlapp/testing-server-ts": "^0.1.0",

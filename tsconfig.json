@@ -34,7 +34,11 @@
     "modules/referral/client-react/components/ReferralView.jsx",
     "modules/referral/client-react/containers/Referral.jsx",
     "modules/user/server-ts/sql.js",
-    "modules/user/server-ts/resolvers.js", "modules/listing/client-react/components/ListingFilterComponent.jsx"
+    "modules/user/server-ts/resolvers.js",
+    "modules/liveSearch/client-react/containers/LiveSearch.jsx",
+    "modules/liveSearch/client-react/components/LiveSearchView.jsx",
+    "modules/listing/client-react/components/ListingFilterComponent.jsx",
+    "modules/liveSearch/client-react/index.jsx"
   ],
   "exclude": ["node_modules"]
 }

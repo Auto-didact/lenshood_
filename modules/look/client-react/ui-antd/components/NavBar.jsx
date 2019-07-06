@@ -115,42 +115,49 @@ class NavBar extends React.Component {
         <Row gutter={0} className="screen_width_more_than_800">
           <Form layout="inline">
             <Col span={14}>
-              <Menu
-                onClick={this.handleClick}
-                selectedKeys={[this.props.location.pathname]}
-                mode="horizontal"
-                className="line_height60"
-              >
-                <MenuItem key="/">
-                  <NavLink to="/" className="nav-link">
-                    <img
-                      src={require("../../logo/Logo2.png")}
-                      height="40"
-                      width="40"
-                    />
-                  </NavLink>
-                </MenuItem>
-                {__DEV__ && (
-                  <MenuItem>
-                    <DropDown type="deployment-unit">
-                      {ref.modules.navItemsTest}
-                      <MenuItem>
-                        <a href="/graphiql">GraphiQL</a>
-                      </MenuItem>
-                    </DropDown>
+              <Col span={8}>
+                <Menu
+                  onClick={this.handleClick}
+                  selectedKeys={[this.props.location.pathname]}
+                  mode="horizontal"
+                  className="line_height60"
+                >
+                  <MenuItem key="/">
+                    <NavLink to="/" className="nav-link">
+                      <img
+                        src={require("../../logo/Logo2.png")}
+                        height="40"
+                        width="40"
+                      />
+                    </NavLink>
                   </MenuItem>
-                )}
-
-                <IfLoggedIn role="admin">
-                  <MenuItem>
-                    <DropDown type="safety-certificate">
-                      {ref.modules.navItemsAdmin}
-                    </DropDown>
-                  </MenuItem>
-                </IfLoggedIn>
-                {ref.modules.navItems}
-                <AutoCompleteNavbar history={this.props.history} />
-              </Menu>
+                  {__DEV__ && (
+                    <MenuItem>
+                      <DropDown type="deployment-unit">
+                        {ref.modules.navItemsTest}
+                        <MenuItem>
+                          <a href="/graphiql">GraphiQL</a>
+                        </MenuItem>
+                      </DropDown>
+                    </MenuItem>
+                  )}
+                  <IfLoggedIn role="admin">
+                    <MenuItem>
+                      <DropDown type="safety-certificate">
+                        {ref.modules.navItemsAdmin}
+                      </DropDown>
+                    </MenuItem>
+                  </IfLoggedIn>
+                  {ref.modules.navItems}
+                </Menu>
+              </Col>
+              <Col span={16}>
+                <Menu mode="horizontal" className="line_height60">
+                  {/* <MenuItem> */}
+                    <AutoCompleteNavbar history={this.props.history} />
+                  {/* </MenuItem> */}
+                </Menu>
+              </Col>
             </Col>
             <Col span={10}>
               <Menu
