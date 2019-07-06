@@ -3,11 +3,11 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // interfaces
 
 import { Listing, ListingReview, Identifier } from './sql';
-// import withAuth from 'graphql-auth';
+import withAuth from 'graphql-auth';
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = 'On Shelf';
 const IDLE = 'Idle';
-// const ONRENT = 'On Rent';
+const ONRENT = 'On Rent';
 
 interface Edges {
   cursor: number;
@@ -190,8 +190,8 @@ export default (pubsub: PubSub) => ({
       return listing;
     },
     async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
-      const [id] = await context.Listing.addListingReviewDAO(input);
-      const listingReview = await context.Listing.getListingReviewDAO(id);
+      const [id] = await context.Listing.addListingReview(input);
+      const listingReview = await context.Listing.getListingReview(id);
       // publish for edit listing page
       listingReview.listingId = listingReview.listing_id;
       listingReview.reviewerId = listingReview.reviewer_id;

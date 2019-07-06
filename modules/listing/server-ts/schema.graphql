@@ -100,6 +100,13 @@ type UserReviewsLikes {
   isReply: Boolean!
 }
 
+type WatchList {
+  id: Int!
+  listingId: Int!
+  userId: Int!
+  shouldNotify: String!
+}
+
 extend type Query {
   listings(limit: Int, after: Int): Listings
   listing(id: Int!): Listing
@@ -142,7 +149,6 @@ extend type Mutation {
     listing_id: Int!
     should_notify: Boolean
   ): String
-
   addReview(
     listing_id: Int!
     reviewer_id: Int!

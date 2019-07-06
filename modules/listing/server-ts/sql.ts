@@ -198,7 +198,7 @@ export default class ListingDAO extends Model {
     const res = await ListingDAO.query().upsertGraph(decamelizeKeys(params));
     return res.id;
   }
-
+  
   public async updateUserReviewLikes(input: {
     userId: number;
     listing_review_id: number;
@@ -413,7 +413,6 @@ export default class ListingDAO extends Model {
     );
     return res;
   }
-
   public async reviews(input: {
     reviewer_id: number;
     reviewee_id: number;
@@ -622,6 +621,30 @@ class UserReviewLikesDAO extends Model {
 class ListingReviewDAO extends Model {
   static get tableName() {
     return 'listing_review';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      listing: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ListingDAO,
+        join: {
+          from: 'listing_review.listing_id',
+          to: 'listing.id'
+        }
+      }
+    };
+  }
+}
+
+// ListingWatchListDAO model.
+class ListingWatchListDAO extends Model {
+  static get tableName() {
+    return 'watchlist';
   }
 
   static get idColumn() {
