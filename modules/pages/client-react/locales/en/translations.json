@@ -167,12 +167,12 @@
 
     "welcomeText": "Hello, This is the Pages module"
   },
-  "mission":{
+  "mission": {
     "navLink": {
       "mission": "/mission"
     },
-    "title":"Mission",
-    "meta":{
+    "title": "Mission",
+    "meta": {
       "visionMission": {
         "key": 1,
         "text": "LensHood's Vision & Mission",
@@ -182,47 +182,425 @@
           "p1": {
             "head": "LensHood's Vision & Mission",
 
-            "p11":"Our vision is to build a sustainable future where people collaboratively consume various equipments, resources and thereby making anything affordable and accessible.",
-            "p12":"The most important part of LensHood is you folks, our beloved community.",
-            "p13":"We are building a world in which every content creator has the access to resources they need to pursue their passion and tell their story, regardless of budget, background, or location. Because we believe everyone has something to say and deserves to have their story heard."
+            "p11": "Our vision is to build a sustainable future where people collaboratively consume various equipments, resources and thereby making anything affordable and accessible.",
+            "p12": "The most important part of LensHood is you folks, our beloved community.",
+            "p13": "We are building a world in which every content creator has the access to resources they need to pursue their passion and tell their story, regardless of budget, background, or location. Because we believe everyone has something to say and deserves to have their story heard."
           }
         }
       },
-      "coreValues":{
+      "coreValues": {
         "key": 2,
-        "text":"LensHood's Core Values",
-        "active":"false",
-        "content":{
-          "p1":{
-            "head":"Support and Empower",
-            "p11":"We believe nothing should come between you and your dreams! Our aim is to help you achieve it by giving you access to great tools at affordable rates. So everything we do is focused on enabling creators to to make great content by providing them with the right tools, resources, and education."
+        "text": "LensHood's Core Values",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "Support and Empower",
+            "p11": "We believe nothing should come between you and your dreams! Our aim is to help you achieve it by giving you access to great tools at affordable rates. So everything we do is focused on enabling creators to to make great content by providing them with the right tools, resources, and education."
           },
-          "p2":{
-            "head":"Be Inclusive",
-            "p21":"We seek to create a workplace and community where everyone feels welcome and all voices are heard. We value and promote the diversity in our workforce, our community, and beyond."
+          "p2": {
+            "head": "Be Inclusive",
+            "p21": "We seek to create a workplace and community where everyone feels welcome and all voices are heard. We value and promote the diversity in our workforce, our community, and beyond."
           },
-          "p3":{
-            "head":"Learn and Act",
-            "p31":"We seek to continuously learn, keep an ear to the ground, and both listen to and start new trends. We don't fear change, and we are always ready to take action."
+          "p3": {
+            "head": "Learn and Act",
+            "p31": "We seek to continuously learn, keep an ear to the ground, and both listen to and start new trends. We don't fear change, and we are always ready to take action."
           },
-          "p4":{
-            "head":"Create and Be Curious",
-            "p41":" We believe creativity makes the world a more interesting and fun place. We aren't afraid of obstacles and constraints - they make us more agile and able to invent new things and look for new approaches."
+          "p4": {
+            "head": "Create and Be Curious",
+            "p41": " We believe creativity makes the world a more interesting and fun place. We aren't afraid of obstacles and constraints - they make us more agile and able to invent new things and look for new approaches."
           },
-          "p5":{
-            "head":"Trust and be Trustworthy",
-            "p51":"Trust is the foundation on which LendHood is built. At LensHood, relationships are built on openness integrity, honesty and an eagerness to help one another."
+          "p5": {
+            "head": "Trust and be Trustworthy",
+            "p51": "Trust is the foundation on which LendHood is built. At LensHood, relationships are built on openness integrity, honesty and an eagerness to help one another."
           },
-          "p6":{
-            "head":"Take Ownership",
-            "p61":"We take responsibility for our actions and think on behalf of the larger team and community. We think about resources as if they were our own, and are always on the lookout for better ways to serve members"
+          "p6": {
+            "head": "Take Ownership",
+            "p61": "We take responsibility for our actions and think on behalf of the larger team and community. We think about resources as if they were our own, and are always on the lookout for better ways to serve members"
           }
         }
       }
-
-
-
     }
+  },
 
+  "faqs": {
+    "navlink": {
+      "faqs": "/faq"
+    },
+    "title": "FAQs",
+    "meta": {
+      "safe_submit_id": {
+        "key": 1,
+        "text": "Safe Submit id",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "Is it safe to submit my ID to LensHood?",
+            "p11": "In order to keep LensHood a safe place to lend and borrow, we ask all users to upload photo ID and a selfie image with the said ID. We do this to make sure everyone is who they say they are, so that you can rent with peace of mind."
+          }
+        }
+      },
+      "storing_info": {
+        "key": 2,
+        "text": "Storing Info",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How do you store my information?",
+            "p11": "We take your privacy seriously. That’s why the information you give us is transmitted using SSL, the secure encryption which websites use to transmit credit card numbers. We store your verification information in an encrypted form and only authorised LensHood employees are given access to your original documentation, to help them do their jobs."
+          }
+        }
+      },
+      "security_deposits": {
+        "key": 3,
+        "text": "Security Deposits",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "Do you take security deposits?",
+            "p11": "No, we do not take deposits, but you need to pay the entire value upfront."
+          }
+        }
+      },
+      "lenshood_operational": {
+        "key": 4,
+        "text": "Lenshood Operational",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "Where is LensHood operational?",
+            "p11": "We are currently operational in IIT Guwahati only. We will soon expand to Guwahati city."
+          }
+        }
+      },
+      "handover_camera": {
+        "key": 5,
+        "text": "Handover Camera",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How does the handover of the camera take place?",
+            "p11": "You just need to sit back and let us know your time of availability. Our hustlers will verify, collect and deliver the camera."
+          }
+        }
+      },
+      "lenshood_contact": {
+        "key": 6,
+        "text": "Lenshood Contact",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How do I contact the LensHood team?",
+            "p11": "A good customer experience is our top priority. If you have any issues, you can contact us via our Instagram page @we_are_lenshood, via mail at reachus@lenshood.in, or through phone on 7896889029/8811093811."
+          }
+        }
+      },
+      "cancellation_policy": {
+        "key": 7,
+        "text": "Cancellation Policy",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "Cancellation Policy",
+            "p11": {
+              "head": "For Borrowers:",
+              "l1": "Borrowers can cancel a rental request before it is accepted, or within 2 hours of rental acceptance for free.",
+              "l2": "If the Borrower cancels within 48 hours of the rental pick-up date, they will receive a 50% refund.",
+              "l3": "If the Borrower cancels within 24 hours of the rental pick-up date, the rental is non-refundable."
+            },
+            "p12": "If LensHood believes that you intend to cause harm to any items you rent through the platform, or believe you are borrowing with intent to steal; we reserve the right to cancel your rental immediately and without warning, and charge you an appropriate sum. This sum will be up to but not more than the total value of the items in question. It is at LensHood's discretion to determine what is an appropriate sum in each instance.",
+            "p13": {
+              "head": "For Lenders:",
+              "p131": "We highly discourage owners from cancelling—you should never accept a rental unless you are certain you can fulfill it. However, if you are an owner and need to cancel because of an unforeseen event, email us at reachus@lenshood.in. Whenever you cancel a rental, you'll get an automated review on your profile saying that you cancelled. Any applicable cancellation fees are automatically deducted from your next rental payout."
+            }
+          }
+        }
+      },
+      "better_lender": {
+        "key": 8,
+        "text": "Better Lender",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How do I become a better Lender and increase my LensHood earnings?",
+            "p11": "We take 4 metrics into account when assessing our lenders.",
+            "p12": {
+              "head": "Response time",
+              "p121": " - Borrowers expect answers quickly. The faster you respond, the more likely you are to guarantee a rental. This also includes leaving reviews for borrowers in a timely manner."
+            },
+            "p13": {
+              "head": "Repeat borrowers",
+              "p131": " - If borrowers rent from you more than once, this demonstrates to us that you are delivering an excellent service and customer experience."
+            },
+            "p14": {
+              "head": "Top quality listings",
+              "p141": " - Improving the image quality and description of the items can drastically improve your chances of a rental. Listings with original photos earn 2.4x as much as those with stock images."
+            },
+            "p15": {
+              "head": "Promoting your brand",
+              "p151": " - Our algorithm tracks lender visibility both on and off platform. Improve this by sharing your listings and lender profile page via social media and instant messengers."
+            },
+            "p16": "If you follow these you’ll consistently be ranked highly as a lender and so your items will appear more prominently in search results!"
+          }
+        }
+      },
+      "optimising_listing": {
+        "key": 9,
+        "text": "Optimising Listing",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How do I optimise my listings?",
+            "p11": "Here are four ways to make your listings stand out from the crowd:",
+            "p12": {
+              "head": "Pricing Is Key",
+              "p121": " : Put simply, lower prices generate more rentals and more money in the long run. Be reasonable when choosing the price at which to list your item. Have a browse, see what the going rate is for similar items and use that as a benchmark."
+            },
+            "p13": {
+              "head": "Photos Make A Difference",
+              "p131": " : Listings with clear, good quality images consistently get a better response than those that don't. Make sure all the equipment available to rent is on show (remember, there's no limit on how many photos you can add, the more the better). It doesn't have to be anything professional, but make your items look real and try to avoid using stock images where possible."
+            },
+            "p14": {
+              "head": "Make Your Description Comprehensive",
+              "p141": " : This is your opportunity to put everything down in one place. Outline what is included in the rental, the spec of the item, the size, the colour. Let potential borrowers know if you are willing to lower the price for longer rentals, how flexible you are with handover, what they can expect if they rent from you. Do mention if you have similar items up for rent or would consider bundle deals."
+            },
+            "p15": {
+              "head": "Leave Reviews",
+              "p151": " : LensHood users are more likely to rent from a product with good reviews. If you have had a pleasant experience with the product – leave it a review to let others know and they'll most likely return the favour."
+            }
+          }
+        }
+      },
+      "setting_price": {
+        "key": 10,
+        "text": "Setting Price",
+        "acitve": "false",
+        "content": {
+          "p1": {
+            "head": "How should I set the price for my camera?",
+            "p11": "Feel free to use our suggested daily/weekly rental price as a benchmark. You could also have a look to see what similar items are currently borrowing for. In addition, if you're looking to rent for a longer period of time, we suggest lowering the daily price further.",
+            "p12": "Discount the daily price when people take it for longer durations. Research and data shows that this type of pricing strategies have the highest conversion rate."
+          }
+        }
+      },
+      "vetting": {
+        "key": 11,
+        "text": "Vetting",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "How does the vetting process work?",
+            "p11": {
+              "head": "Trust and safety is at the core of our offering. Users are free to browse the site without having been vetted, however, a one time physical verification of the following is required in order to lend or rent:",
+              "l1": "Government ID Proof - PAN, Aadhaar, Voter ID, Passport Address Proof - Passport/ Voter ID/ Electricity bill/ Landline Bill",
+              "l2": "Proof of work or University confirmation.",
+              "l3": "For lenders only, a verification of the equipment and their Unique Serial Number."
+            },
+            "p12": {
+              "head": "Further, for borrowers, the following checks will be done by our hustlers during every rental:",
+              "l1": "A photograph of the user with the equipment and a LensHood sticker.",
+              "l2": "Submission of an original Government ID of the person who is borrowing.",
+              "l3": "Photo of equipment (body & lenses) with Unique Serial Number"
+            }
+          }
+        }
+      },
+      "paid": {
+        "key": 12,
+        "text": "Paid",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "When do I get paid?",
+            "p11": "It may take 4 - 7 business days to receive your money."
+          }
+        }
+      },
+      "rental_day": {
+        "key": 13,
+        "text": "Rental Day",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "What is a rental 'day' ?",
+            "p11": "If you have made a request for one day it means that the item is in your possession for 24hr.",
+            "p12": "E.g If you've picked up the item at 10AM, then 10AM the next morning would be the time to handover the item back to the lender.",
+            "p13": "Also, some lenders can be very flexible - speak to them about the handover times :)"
+          }
+        }
+      },
+      "damage": {
+        "key": 14,
+        "text": "Damage",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "What if item was damaged during the rental?",
+            "p11": "This happens, but not to worry. While you're liable for up to the full value of the rented item, we will help you to resolve the matter. You definitely want to get in touch with the lender and let them know what happened; also take photographs of the damage."
+          }
+        }
+      },
+      "return_late": {
+        "key": 15,
+        "text": "Return Late",
+        "active": "false",
+        "content": {
+          "p1": {
+            "head": "My item was returned late.",
+            "p11": "We're sorry to hear that your item has been returned late. Please contact us as soon as possible.",
+            "p12": "As a lender you're eligible for the late return fees, which are calculated on a double rate. Whilst, we don't guarantee late return fees, we do promise to pursue payment from the borrower on your behalf.",
+            "p13": "If you and the borrower are not able to find the common agreement, we'll proceed with a formal case. You will need to document a short written account of events from your perspective, attach any evidence to support your claims (e.g. photos/videos/screenshot of communication with the borrower), and also provide proof of purchase documentation for the equipment."
+          }
+        }
+      }
+    }
+  },
+
+  "borrowing": {
+    "navlink": {
+      "borrowing": "/renting"
+    },
+    "title": "How LensHood Works",
+    "meta": {
+      "lenshood": {
+        "key": 1,
+        "text": "Lenshood",
+        "active": "false",
+        "content": {
+          "p1": "lenshood makes it easy for you to borrow photography equipment from the comfort of your home. No security deposite required."
+        }
+      },
+      "p1": {
+        "key": 2,
+        "text": "1. Search",
+        "active": "false",
+        "content": {
+          "l1": "Search for the gear you are looking for."
+        }
+      },
+      "p2": {
+        "key": 2,
+        "text": "2. Book",
+        "active": "false",
+        "content": {
+          "l1": "Book the desired gear, for the dates you want and pay upfront."
+        }
+      },
+      "p3": {
+        "key": 3,
+        "text": "3. ID Proof",
+        "active": "false",
+        "content": {
+          "l1": "Our hustler will deliver the gear to your doorstep. keep any original gov id card ready as we will hold on to it for you, during rental period."
+        }
+      },
+      "p4": {
+        "key": 4,
+        "text": "4. Use And Return",
+        "active": "false",
+        "content": {
+          "l1": "Happy clicking! Our hustler will meet you once the rental period is over to collect the gear."
+        }
+      }
+      }
+    
+  },
+  "lending":{
+    "navlink": {
+      "lending": "/renting"
+    },
+    "title": "How LensHood Works",
+    "meta": {
+      "lenshood": {
+        "key": 1,
+        "text": "Lenshood",
+        "active": "false",
+        "content": {
+          "p1": "LensHood provides a safe and secure way to earn money from the equipments you own. All our users are thoroughly verified and our insurence policy will take care of the rest."
+       } },
+      "p1": {
+        "key": 5,
+        "text": "1. List",
+        "active": "false",
+        "content": {
+          "l1": "List your equipment for rental and we will call you to schedule your verification."
+        }
+      },
+      "p2": {
+        "key": 6,
+        "text": "2. Verification",
+        "active": "false",
+        "content": {
+          "l1": "Get your listing verified by our hustler."
+        }
+      },
+      "p3": {
+        "key": 7,
+        "text": "3. Notification",
+        "active": "false",
+        "content": {
+          "l1": "Get nofied in case of an order and wait for our hustler to pick it up."
+        }
+      },
+      "p4": {
+        "key": 8,
+        "text": "4. Earn",
+        "active": "false",
+        "content": {
+          "l1": "Sit back and relax as we earn your money for you."
+        }
+      },
+      "p5": {
+        "key": 9,
+        "text": "5. Return",
+        "active": "false",
+        "content": {
+          "l1": "As soon as the order is done,  our hustlers will return your gear back to you."
+        }
+      }}
+  },
+  "privacy_rules": {
+    "navlink": {
+      "privacy_rules": "/privacy-rules"
+    },
+    "title": "LensHood Privacy Policy",
+    "meta": {
+      "privacy_policy": {
+        "key": 1,
+        "text": "Privacy Policy",
+        "active": "false",
+        "content": {
+          "p1": "When you join the LensHood community, you trust us with your information. That’s not something we take lightly. We’ve written this Privacy Policy to help you know what data we collect from you, how we use it and how we protect it for you. If you have any questions, please do get in touch at",
+          "strong": "reachus@lenshood.in"
+        }
+      },
+      "who_are_we": {
+        "key": 2,
+        "text": "Who are we?",
+        "active": "false",
+        "content": {
+          "p1": "We are Unihood Service Private Limited (that’s “we”, “our”, “us”) and operate under the name of LensHood. Our registered office address is Rd No.3, Banjara Hills, Hyderabad. Our CIN is U74999TG2018PTC128488."
+        }
+      },
+      "info_hold": {
+        "key": 3,
+        "text": "Info Hold",
+        "active": "false",
+        "content": {
+          "head1": "What information do we hold about you?",
+          "head2": "Information you submit through our app or website",
+          "l1": "To help keep LensHood a safe place to lend and borrow, we require certain information to verify your account. This will be some or all of the following: your name, ID, email address, phone number, a selfie photograph, address or information about your employment or studies.",
+          "l2": "We might also collect information from communications you make through the platform and other information about how you use the app and website."
+        }
+      },
+      "ph_info": {
+        "key": 4,
+        "text": "Ph Info",
+        "active": "false",
+        "content": {
+          "head": "Information on how you use your phone",
+          "l1": "This might include your mobile network, IP address or operating system and your phone settings."
+        }
+      }
+    }
   }
 }

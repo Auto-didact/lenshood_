@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-// import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-// import settings from '../../../../settings';
+import settings from '../../../../settings';
 import './pageStyle.css';
 
 interface PrivacyRulesViewProps {
   t: TranslateFunction;
 }
 
-// const renderMetaData = (t: TranslateFunction) => (
-//   <Helmet
-//     title={`${settings.app.name} - ${t('title')}`}
-//     meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
-//   />
-// );
+const renderMetaData = (t: TranslateFunction) => (
+  <Helmet
+    title={`${settings.app.name} - ${t('title')}`}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
+  />
+);
 
 /* eslint-disable no-unused-expressions */
 
@@ -48,12 +48,17 @@ const PrivacyRulesView = ({ t }: PrivacyRulesViewProps) => {
         }}
       >
         <h1>LensHood Privacy Policy</h1>
+        {/* <h1>{t('privacy_rules.title')} </h1> */}
         <p>
           When you join the LensHood community, you trust us with your information. That’s not something we take
           lightly. We’ve written this Privacy Policy to help you know what data we collect from you, how we use it and
           how we protect it for you. If you have any questions, please do get in touch at{' '}
           <strong>reachus@lenshood.in</strong>
         </p>
+        {/* <p>
+          {t('privacy_rules.meta.privacy_policy.content.p1')}
+          <strong>{t('privacy_rule.meta.privacy_policy.content.strong')} </strong>
+        </p> */}
         <br />
         <h2>Who are we?</h2>
         <p>

@@ -24,10 +24,9 @@ const RegisterView = ({ t, onSubmit }) => {
   return (
     <PageLayout>
       {renderMetaData(t)}
-      <LayoutCenter>
-        <h1 className="text-center">{t('reg.form.title')}</h1>
+      <div align="center">
         <RegisterForm onSubmit={onSubmit} />
-      </LayoutCenter>
+      </div>
     </PageLayout>
   );
 };
