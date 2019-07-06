@@ -2,7 +2,6 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
-import { debug } from 'util';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -270,10 +269,12 @@ export default class ListingDAO extends Model {
   public async updateLiskesDisLikes(input: { ld: string; review_id: number; reviewer_id: number }) {
     const lkDk = await this.getIsLikeOrDisLike(input);
     if (lkDk && lkDk.length > 0) {
+      const up = {};
+      up.like_dislike = input.ld;
       await UserReviewLikesDAO.query()
+        .update(up)
         .where('listing_review_id', '=', input.review_id)
-        .where('user_id', '=', input.reviewer_id)
-        .update({ like_dislike: input.ld });
+        .where('user_id', '=', input.reviewer_id);
     } else {
       await returnId(knex('user_reviews_likes')).insert({
         user_id: input.reviewer_id,

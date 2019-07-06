@@ -29,11 +29,15 @@ class ReviewsCard extends Component {
     });
   };
 
-  handleAddReviews = r => {
+  handleAddReviews = async r => {
     if (this.state.is_reply) {
       return null;
     } else {
-      this.setState(prevState => ({
+      return await this.setState(prevState => ({
+        result: 'triggered',
+        loading: false,
+        visible: false,
+        reply_id: null,
         reviews: [r, ...prevState.reviews]
       }));
     }
@@ -54,8 +58,7 @@ class ReviewsCard extends Component {
         variables: { input }
       });
       results.data.addListingReview['reviewer'] = [this.props.listing.user.profile];
-      await this.handleAddReviews(results.data.addListingReview);
-      await this.setState({ result: 'triggered', loading: false, visible: false, reply_id: null });
+      await this.handleAddReviews(Object.assign(results.data.addListingReview, {}));
     } catch (error) {
       console.warn(error.message);
       await this.setState({ error: true, loading: false, visible: false, reply_id: null });
