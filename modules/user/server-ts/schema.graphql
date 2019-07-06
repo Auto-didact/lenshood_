@@ -3,6 +3,7 @@ type User {
   username: String!
   role: String
   isActive: Boolean
+  isFeatured: Boolean
   email: String!
   profile: UserProfile
   addresses: [UserAddress]
@@ -207,6 +208,8 @@ extend type Query {
   currentUser: User
   # Get user's driving license info
   userDrivingLicense(id: Int!): UserDrivingLicense
+
+  featuredUsers: [User]
 }
 
 type UserPayload {
@@ -238,6 +241,8 @@ extend type Mutation {
   toggleEndorse(endorseeId: Int, endorserId: Int): endorseUnEndorse!
   #Follow/UnFollow user
   toggleFollow(userId: Int, followerId: Int): follwUnFollw!
+  #toggle isFeatured
+  toggleIsFeatured(userId: Int, isFeatured: Boolean): Boolean
 }
 
 # Input for ordering users
@@ -298,6 +303,7 @@ input AddUserInput {
   password: String!
   role: String
   isActive: Boolean
+  isFeatured: Boolean
   profile: ProfileInput
   addresses: [AddressInput]
   portfolios: [PortfolioInput]
@@ -310,6 +316,7 @@ input EditUserInput {
   username: String!
   role: String!
   isActive: Boolean
+  isFeatured: Boolean
   email: String!
   password: String
   profile: ProfileInput

@@ -47,6 +47,9 @@ export default pubsub => ({
       } else {
         return null;
       }
+    },
+    featuredUsers(obj, args, { User, identity }) {
+      return User.featuredUsers();
     }
   },
   // User: {
@@ -400,7 +403,9 @@ export default pubsub => ({
     ),
     toggleEndorse: (obj, input, { User, identity, req: { t } }) =>
       User.toggleEndorse(input.endorseeId, input.endorserId),
-    toggleFollow: (obj, input, { User, identity, req: { t } }) => User.toggleFollow(input.userId, input.followerId)
+    toggleFollow: (obj, input, { User, identity, req: { t } }) => User.toggleFollow(input.userId, input.followerId),
+    toggleIsFeatured: (obj, input, { User, identity, req: { t } }) =>
+      User.toggleIsFeatured(input.userId, input.isFeatured)
   },
   Subscription: {
     usersUpdated: {

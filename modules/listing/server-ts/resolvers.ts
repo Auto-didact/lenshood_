@@ -1,7 +1,6 @@
 import { PubSub, withFilter } from "graphql-subscriptions";
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
-
 import { Listing, ListingReview, Identifier } from "./sql";
 // import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
@@ -83,6 +82,18 @@ export default (pubsub: PubSub) => ({
     },
     userListings(obj: any, { userId }: any, context: any) {
       return context.Listing.userListings(userId || context.identity.id);
+    },
+    watchlist(obj: any, { userId }: any, context: any) {
+      return context.Listing.watchlist(userId || context.identity.id);
+    },
+    watchStatus(obj: any, input: any, context: any) {
+      return context.Listing.watchStatus(
+        input.listingId,
+        input.userId || context.identity.id
+      );
+    },
+    featuredListings(obj: any, input: any, context: any) {
+      return context.Listing.featuredListings();
     }
   },
   // Listing: {
@@ -241,6 +252,20 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listingReview;
+    },
+    async toggleListingIsFeatured(
+      obj: any,
+      input: { id: number; isFeatured: boolean },
+      context: any
+    ) {
+      return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
+    },
+    async addOrRemoveWatchList(
+      obj: any,
+      input: { user_id: number; listing_id: number; should_notify: boolean },
+      context: any
+    ) {
+      return context.Listing.addOrRemoveWatchList(input);
     }
   },
   Subscription: {

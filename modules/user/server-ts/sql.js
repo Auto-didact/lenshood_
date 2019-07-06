@@ -657,6 +657,21 @@ export class User extends Model {
       isFollwed: isFollowed
     };
   }
+
+  async toggleIsFeatured(userId, isFeatured) {
+    return knex('user')
+      .where({ id: userId })
+      .update({ is_featured: isFeatured });
+  }
+
+  async featuredUsers() {
+    const res = camelizeKeys(
+      await knex('user')
+        .where('is_featured', true)
+        .orderBy('id', 'desc')
+    );
+    return res;
+  }
 }
 
 const UserDAO = new User();
