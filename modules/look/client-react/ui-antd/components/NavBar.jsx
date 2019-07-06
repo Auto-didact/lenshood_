@@ -1,14 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Drawer, Menu, Dropdown, Row, Col, Icon } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { withRouter, NavLink } from "react-router-dom";
+import { Drawer, Menu, Dropdown, Row, Col, Icon } from "antd";
 
-import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
-import UserAvatar from '@gqlapp/user-client-react/containers/UserAvatar';
-import MenuItem from './MenuItem';
-import DropDown from './Dropdown';
+import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
+import UserAvatar from "@gqlapp/user-client-react/containers/UserAvatar";
+import AutoCompleteNavbar from "@gqlapp/listing-client-react/containers/AutoCompleteNavbar";
+import MenuItem from "./MenuItem";
+import DropDown from "./Dropdown";
 
-import './styles.css';
+import "./styles.css";
 
 //import settings from '../../../../../settings';
 
@@ -17,29 +18,31 @@ export const ref = { modules: null };
 export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
-    current: '/',
+    current: "/",
     width: 0,
     height: 0,
     show1:
-      this.props.location.pathname == '/about-us' ||
-      this.props.location.pathname == '/terms-of-service' ||
-      this.props.location.pathname == '/privacy-rules' ||
-      this.props.location.pathname == '/mission' ||
-      this.props.location.pathname == '/renting' ||
-      this.props.location.pathname == '/lending' ||
-      this.props.location.pathname == '/TrustAndSafety' ||
-      this.props.location.pathname == '/faq',
+      this.props.location.pathname == "/about-us" ||
+      this.props.location.pathname == "/terms-of-service" ||
+      this.props.location.pathname == "/privacy-rules" ||
+      this.props.location.pathname == "/mission" ||
+      this.props.location.pathname == "/renting" ||
+      this.props.location.pathname == "/lending" ||
+      this.props.location.pathname == "/TrustAndSafety" ||
+      this.props.location.pathname == "/faq",
 
     show2:
-      this.props.location.pathname == '/counter' ||
-      this.props.location.pathname == '/posts' ||
-      this.props.location.pathname == '/upload' ||
-      this.props.location.pathname == '/contact' ||
-      this.props.location.pathname == '/pagination' ||
-      this.props.location.pathname == '/report' ||
-      this.props.location.pathname == '/graphql',
+      this.props.location.pathname == "/counter" ||
+      this.props.location.pathname == "/posts" ||
+      this.props.location.pathname == "/upload" ||
+      this.props.location.pathname == "/contact" ||
+      this.props.location.pathname == "/pagination" ||
+      this.props.location.pathname == "/report" ||
+      this.props.location.pathname == "/graphql",
 
-    show3: this.props.location.pathname == '/listings' || this.props.location.pathname == '/users',
+    show3:
+      this.props.location.pathname == "/listings" ||
+      this.props.location.pathname == "/users",
     visible: false,
     mounted: false
   };
@@ -74,7 +77,11 @@ class NavBar extends React.Component {
   };
 
   menuList = (
-    <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
+    <Menu
+      className="light_font"
+      selectedKeys={[this.props.location.pathname]}
+      mode="inline"
+    >
       <Menu.Item key="/about-us">
         <NavLink to="/about-us">About us</NavLink>
       </Menu.Item>
@@ -115,7 +122,11 @@ class NavBar extends React.Component {
             >
               <MenuItem key="/">
                 <NavLink to="/" className="nav-link">
-                  <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                  <img
+                    src={require("../../logo/Logo2.png")}
+                    height="40"
+                    width="40"
+                  />
                 </NavLink>
               </MenuItem>
               {__DEV__ && (
@@ -131,10 +142,13 @@ class NavBar extends React.Component {
 
               <IfLoggedIn role="admin">
                 <MenuItem>
-                  <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
+                  <DropDown type="safety-certificate">
+                    {ref.modules.navItemsAdmin}
+                  </DropDown>
                 </MenuItem>
               </IfLoggedIn>
               {ref.modules.navItems}
+              <AutoCompleteNavbar history={this.props.history} />
             </Menu>
           </Col>
           <Col span={10}>
@@ -168,9 +182,14 @@ class NavBar extends React.Component {
         <div id="outer-container" className="screen_width_less_than_800">
           <div className="left">
             <NavLink to="/" className="nav-link">
-              <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+              <img
+                src={require("../../logo/Logo2.png")}
+                height="40"
+                width="40"
+              />
             </NavLink>
           </div>
+          <AutoCompleteNavbar history={this.props.history} />
           <Menu
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
@@ -202,7 +221,7 @@ class NavBar extends React.Component {
               <Menu.Item className="about" key="about">
                 <a className="nav-link-drop" onClick={() => this.toggle(1)}>
                   <div>
-                    About{' '}
+                    About{" "}
                     {this.state.show1 ? (
                       <Icon type="caret-up" theme="filled" />
                     ) : (
@@ -218,7 +237,7 @@ class NavBar extends React.Component {
                   <Menu.Item className="about bold_font" key="dev">
                     <a className="nav-link-drop" onClick={() => this.toggle(2)}>
                       <div>
-                        Dev{' '}
+                        Dev{" "}
                         {this.state.show2 ? (
                           <Icon type="caret-up" theme="filled" />
                         ) : (
@@ -238,11 +257,15 @@ class NavBar extends React.Component {
               ) : null}
 
               <IfLoggedIn role="admin">
-                <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
+                <Menu
+                  className="light_font"
+                  selectedKeys={[this.props.location.pathname]}
+                  mode="inline"
+                >
                   <Menu.Item className="about bold_font" key="admin">
                     <a className="nav-link-drop" onClick={() => this.toggle(3)}>
                       <div>
-                        Admin{' '}
+                        Admin{" "}
                         {this.state.show3 ? (
                           <Icon type="caret-up" theme="filled" />
                         ) : (

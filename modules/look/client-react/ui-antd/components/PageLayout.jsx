@@ -27,7 +27,7 @@ class PageLayout extends React.Component {
         </Content>
         <BackTop>
           <Tooltip
-            placement="bottom"
+            placement="left"
             title="Back to Top"
             autoAdjustOverflow={true}
           >

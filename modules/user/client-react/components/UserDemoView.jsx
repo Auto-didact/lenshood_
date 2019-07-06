@@ -4,6 +4,7 @@ import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { withFormik } from "formik";
 import { RenderAutoComplete, Form, Button } from "@gqlapp/look-client-react";
 import { Icon } from "antd";
+import AutoCompleteNavbar from "@gqlapp/listing-client-react/containers/AutoCompleteNavbar";
 
 class UserDemoView extends Component {
   constructor(props) {
@@ -45,21 +46,24 @@ class UserDemoView extends Component {
   render() {
     const { values, handleSubmit, submitting } = this.props;
     return (
-      <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
-        {/* // FOR RENDERAUTOCOMPLETE */}
-        <Field
-          name="userId"
-          dataSource={this.state.dataSource.map(item => item.username)}
-          component={RenderAutoComplete}
-          label="UserName"
-          value={values.userId}
-          onSearch={this.handleSearch}
-        />
-        <Button color="primary" type="submit" disabled={submitting}>
-          Submit
-          <Icon type="enter" />
-        </Button>
-      </Form>
+      <div>
+        <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
+          {/* // FOR RENDERAUTOCOMPLETE */}
+          <Field
+            name="userId"
+            dataSource={this.state.dataSource.map(item => item.username)}
+            component={RenderAutoComplete}
+            label="UserName"
+            value={values.userId}
+            onSearch={this.handleSearch}
+          />
+          <Button color="primary" type="submit" disabled={submitting}>
+            Submit
+            <Icon type="enter" />
+          </Button>
+        </Form>
+        <AutoCompleteNavbar history={this.props.history} />
+      </div>
     );
   }
 }

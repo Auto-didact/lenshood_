@@ -88,6 +88,7 @@ extend type Query {
     orderBy: OrderByListInput
     filter: FilterListInput
   ): Listings
+  listingsList: [Listing]
   listing(id: Int!): Listing
   userListings(userId: Int): [Listing]
 }

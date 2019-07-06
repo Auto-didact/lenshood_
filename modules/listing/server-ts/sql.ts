@@ -189,6 +189,14 @@ export default class ListingDAO extends Model {
     const res = camelizeKeys(await queryBuilder.limit(limit).offset(after));
     return res;
   }
+  
+  public async listingsList() {
+    return camelizeKeys(
+      await ListingDAO.query()
+        .eager(eager)
+        .orderBy("id", "desc")
+    );
+  }
 
   public async getReviewsForListingIds(listingIds: number[]) {
     const res = camelizeKeys(

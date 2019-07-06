@@ -77,6 +77,10 @@ export default (pubsub: PubSub) => ({
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
     },
+
+    listingsList(obj: any, args: any, context: any) {
+      return context.Listing.listingsList();
+    },
     userListings(obj: any, { userId }: any, context: any) {
       return context.Listing.userListings(userId || context.identity.id);
     }
