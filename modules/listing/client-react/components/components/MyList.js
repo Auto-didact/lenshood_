@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 // import '../resources/listingCatalogue.css';
-import { Layout, Button, Row, Col } from 'antd';
-import DetailsCard from './DetailsCard';
-import { ALL, ONSHELF, ONRENT } from '../../constants/ListingStates';
+import { Layout, Button, Row, Col, Empty } from 'antd';
+import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
+import DetailsCard from './DetailsCard';
+import { ALL, ONSHELF, IDLE } from '../../constants/ListingStates';
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
-class MyListingProducts extends Component {
+class MyList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       status: ALL,
-      listings: props.userListings
+      listings: props.userListings,
+      noListingsStatus: props.userListings.length !== 0 ? false : true
     };
   }
   classNamesgroup(e) {
@@ -39,11 +40,33 @@ class MyListingProducts extends Component {
       />
     );
   }
-  renderItem(item) {
-    if (item.status === this.state.status) {
-      return this.returnItem(item);
-    }
+
+  listingParser() {
+    var parsedListings = [];
+    this.state.listings.map((item, key) => {
+      this.state.status === ALL
+        ? parsedListings.push(item)
+        : item.status === this.state.status && parsedListings.push(item);
+    });
+
+    return parsedListings;
   }
+  renderNoListings() {
+    return (
+      <Empty
+        description={
+          <span>{this.state.noListingsStatus ? 'No Listings To Show' : `No listings on ${this.state.status}`}</span>
+        }
+      >
+        <Button type="primary" href={!this.state.noListingsStatus ? `` : `/listing/new`} style={{ width: '200px' }}>
+          {this.state.noListingsStatus
+            ? 'Create One Now'
+            : `Move Some to ${this.state.status === ONSHELF ? 'Shelf' : 'Idle'}`}
+        </Button>
+      </Empty>
+    );
+  }
+
   render() {
     return (
       <Content className="myListContent">
@@ -60,20 +83,23 @@ class MyListingProducts extends Component {
               <Button onClick={() => this.FilterItems(ONSHELF)} className={this.classNamesgroup(ONSHELF)}>
                 On Shelf
               </Button>
-              <Button onClick={() => this.FilterItems(ONRENT)} className={this.classNamesgroup(ONRENT)}>
-                On Rent
+              <Button onClick={() => this.FilterItems(IDLE)} className={this.classNamesgroup(IDLE)}>
+                Idle
               </Button>
             </ButtonGroup>
           </Col>
         </Row>
-        {this.state.listings
-          ? this.state.listings.map((item, key) =>
-              this.state.status === ALL ? this.returnItem(item, key) : this.renderItem(item, key)
-            )
-          : null}
+        {this.state.listings && this.state.listings.length !== 0
+          ? this.listingParser().length !== 0
+            ? this.listingParser().map((item, key) => this.returnItem(item, key))
+            : this.renderNoListings()
+          : this.renderNoListings()}
       </Content>
     );
   }
 }
+MyList.propTypes = {
+  userListings: PropTypes.object
+};
 
-export default MyListingProducts;
+export default MyList;

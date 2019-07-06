@@ -2,6 +2,7 @@
 
 /* SIGN-IN PAGES */
 
+
 .signInForm {
   color: #4a4a4a;
   font-size: 11px;
@@ -24,38 +25,105 @@
 }
 
 .signinstate {
+  text-align: left;
   letter-spacing: 2px;
   text-shadow: 2px 0 0;
   color: #887373;
-  font-size: 35px
+  font-size: 35px;
 }
 
-.youcanAlways {
-  padding-top: 9px;
-  margin-top: 8px;
-  border-top: 1px #aaa solid;
+.form-element-heading {
+  text-align: left;
   letter-spacing: 2px;
   text-shadow: 1.5px 0 0;
   color: #645757;
 }
 
+
 .modalcard {
   padding: 0 10px 0 25px;
+  border-radius: 0px !important;
+  background-color: #FAFAFA !important;
 }
 
 .signInimg {
-  width: 100%;
-  height: 493px;
+  
+  height:444px;
+  
+}
+.signUpImg{
+  height:570px;
 }
 
-.signupImg {
+.SignInComp {
   width: 100%;
-  height: 625px;
 }
+
+.sign-in-Form{
+  padding:10px !important;
+  height: 480px;
+  width:520px;
+}
+.sign-up-form{
+  
+    padding:10px !important;
+    height: 600px;
+    width:520px;
+  
+}
+
+
+@media only screen and (min-width: 576px) {
+  .signInoOuter {
+    margin-top: 10vh;
+    
+  }
+  .signOutOuter{
+    margin-top: 10vh;
+
+  }
+  .sign-in-Form{
+    height:434px !important;
+    padding:10px 20px 0px 20px !important;
+  }
+  .sign-up-form{
+  
+    padding:10px 20px 0px 20px !important;
+    height: 550px;
+    width:520px;
+  
+}
+}
+
+
+@media only screen and (min-width: 769px) {
+  .signInoOuter {
+    width: 850px;
+    margin-top: 10vh !important;
+
+   }
+  .signOutOuter{
+    width: 880px;
+    margin-top: 10vh;
+
+  }
+  .sign-in-Form{
+    padding:10px !important;
+    height: 484px;
+    width:520px;
+  }
+  .SignInComp {
+    width: 100% !important;
+  }
+}
+
+
+
+
 
 .signImg {
   width: 100%;
-  height: 140px;
+  height: 200px;
 }
 
 .forgotpass {
@@ -65,4 +133,3 @@
   float: right;
   margin-bottom: 10px;
 }
-

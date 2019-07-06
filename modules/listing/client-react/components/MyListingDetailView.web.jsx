@@ -1,77 +1,74 @@
-import React, { Component } from "react";
-import { Layout, Row, Col, Breadcrumb, Card } from "antd";
-import Helmet from "react-helmet";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
-import DetailsCard from "./components/DetailsCard";
-import ProductCalender from "./components/ProductCalender";
-import ReviewsCard from "./components/ReviewsCard";
-import naruto4 from "./resources/naruto4.jpg";
-import naruto3 from "./resources/naruto3.jpg";
+import React, { Component } from 'react';
+import { Layout, Row, Col, Breadcrumb, Card } from 'antd';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout, AccountLayout, Loader } from '@gqlapp/look-client-react';
+import DetailsCard from './components/DetailsCard';
+import ProductCalender from './components/ProductCalender';
+import ReviewsCard from './components/ReviewsCard';
+import naruto4 from './resources/naruto4.jpg';
+import naruto3 from './resources/naruto3.jpg';
 
-import { AccountLayout } from "@gqlapp/look-client-react";
-
-import settings from "../../../../settings";
+import settings from '../../../../settings';
 
 class MyListDetailsView extends Component {
   state = {
-    name: "Bishal Deb",
+    name: 'Bishal Deb',
     listing: {
-      description: "Blah blah bleh",
+      description: 'Blah blah bleh',
       listingRental: { perDay: 1200 },
       listingImages: [naruto4, naruto3],
       rating: 4,
       reviews: 7,
-      status: "On Rent"
+      status: 'On Rent'
     },
     reviews: {
       properties: {
-        "image quality": 5.0,
-        "Auto focus and lighting": 3.7,
+        'image quality': 5.0,
+        'Auto focus and lighting': 3.7,
         Performance: 4.0,
         Features: 5.0,
         Design: 4.0
       },
       reviewers: [
         {
-          name: "Sree Bhargav",
-          Date: "18th Aug 2018",
+          name: 'Sree Bhargav',
+          Date: '18th Aug 2018',
           word:
-            "Really an awesome experience with this DSLR. Photo quality is too good. Zoom capability is also awesome, especially at 250mm. Wifi function along with canon app in android simply makes the product must to buy."
+            'Really an awesome experience with this DSLR. Photo quality is too good. Zoom capability is also awesome, especially at 250mm. Wifi function along with canon app in android simply makes the product must to buy.'
         },
         {
-          name: "Ankit Jain",
-          Date: "18th Dec 2018",
-          word:
-            "Really an awesome experience with this DSLR. Photo quality is too good"
+          name: 'Ankit Jain',
+          Date: '18th Dec 2018',
+          word: 'Really an awesome experience with this DSLR. Photo quality is too good'
         }
       ]
     },
     bookings: [
       {
-        name: "Bishal Deb",
+        name: 'Bishal Deb',
         rating: 3.7,
-        start: "2019-06-20",
-        end: "2019-06-22"
+        start: '2019-06-20',
+        end: '2019-06-22'
       },
       {
-        name: "Rajeev Khanna",
+        name: 'Rajeev Khanna',
         rating: 4,
-        start: "2019-07-03",
-        end: "2019-07-12"
+        start: '2019-07-03',
+        end: '2019-07-12'
       },
       {
-        name: "Mukesh Babu",
+        name: 'Mukesh Babu',
         rating: 2.2,
-        start: "2019-06-15",
-        end: "2019-06-16"
+        start: '2019-06-15',
+        end: '2019-06-16'
       },
       {
-        name: "Bishal Deb",
+        name: 'Bishal Deb',
         rating: 3.7,
-        start: "2019-06-25",
-        end: "2019-06-30"
+        start: '2019-06-25',
+        end: '2019-06-30'
       }
     ]
   };
@@ -80,20 +77,21 @@ class MyListDetailsView extends Component {
     const loading = this.props.loading;
     const listing = this.props.listing;
     const t = this.props.t;
-    
+
     if (loading && !listing) {
       return (
         <PageLayout>
           <Helmet
-            title={`${settings.app.name} - ${this.props.t("listing.title")}`}
+            title={`${settings.app.name} - ${this.props.t('listing.title')}`}
             meta={[
               {
-                name: "description",
-                content: this.props.t("listing.meta")
+                name: 'description',
+                content: this.props.t('listing.meta')
               }
             ]}
           />
-          <div className="text-center">{t("listing.loadMsg")}</div>
+
+          <Loader text={t('listing.loadMsg')} />
         </PageLayout>
       );
     } else {
@@ -105,10 +103,7 @@ class MyListDetailsView extends Component {
         </Breadcrumb> */}
           <DetailsCard buttonText="Edit" item={listing} />
           <Card>
-            <ProductCalender
-              bookings={this.state.bookings}
-              name={this.state.name}
-            />
+            <ProductCalender bookings={this.state.bookings} name={this.state.name} />
           </Card>
           <ReviewsCard reviews={this.state.reviews} />
         </AccountLayout>
@@ -124,4 +119,4 @@ MyListDetailsView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("listing")(MyListDetailsView);
+export default translate('listing')(MyListDetailsView);

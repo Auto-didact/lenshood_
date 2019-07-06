@@ -81,7 +81,7 @@ export default class DynamicFieldSet extends React.Component {
         <FormItem label={this.props.label}>
           {formItems}
           <FormItem>
-            <Button style={{ width: '40%' }} onClick={this.add}>
+            <Button style={{ width: '200px' }} onClick={this.add}>
               <Icon type="plus" /> {this.props.buttonText || 'Add Field'}
             </Button>
           </FormItem>
