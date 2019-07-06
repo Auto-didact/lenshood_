@@ -48,7 +48,6 @@ class UserDemoView extends Component {
     return (
       <div>
         <Form name="listing" layout="vertical" onSubmit={handleSubmit}>
-          {/* // FOR RENDERAUTOCOMPLETE */}
           <Field
             name="userId"
             dataSource={this.state.dataSource.map(item => item.username)}
@@ -61,8 +60,8 @@ class UserDemoView extends Component {
             Submit
             <Icon type="enter" />
           </Button>
+          <AutoCompleteNavbar history={this.props.history} />
         </Form>
-        <AutoCompleteNavbar history={this.props.history} />
       </div>
     );
   }

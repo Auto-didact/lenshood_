@@ -33,12 +33,14 @@ class AutoCompleteNavbarComponent extends React.Component {
   renderOption(item) {
     return (
       <Option key={item.id} text={item.description}>
-        <span>
-          Found in{" "}
-          <Link to={`/listing-detail/${item.id}`}>{item.description}</Link> in{" "}
-          {item.gearSubcategory}
-        </span>
-        <span className="rightfloat">{item.gearCategory}</span>
+        <div>
+          <span>
+            Found in{" "}
+            <Link to={`/listing-detail/${item.id}`}>{item.description}</Link> in{" "}
+            {item.gearSubcategory}
+          </span>
+          <span className="rightfloat">{item.gearCategory}</span>
+        </div>
       </Option>
     );
   }
