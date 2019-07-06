@@ -81,6 +81,9 @@ export default (pubsub: PubSub) => ({
     },
     reviews(obj: any, input: any, context: any) {
       return context.Listing.reviews(input);
+    },
+    childReviews(obj: any, input: number, context: any) {
+      return context.Listing.childReviews(input);
     }
   },
   // Listing: {
@@ -192,6 +195,7 @@ export default (pubsub: PubSub) => ({
       // publish for edit listing page
       listingReview.listingId = listingReview.listing_id;
       listingReview.reviewerId = listingReview.reviewer_id;
+      listingReview.createdAt = listingReview.reviewer_id;
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
           mutation: 'CREATED',
@@ -247,6 +251,12 @@ export default (pubsub: PubSub) => ({
       context: any
     ) {
       return context.Listing.addOrRemoveWatchList(input);
+    },
+    async addLikesDisLikes(obj: any, input: { ld: string; review_id: number; reviewer_id: number }, context: any) {
+      return context.Listing.updateLiskesDisLikes(input);
+    },
+    async countLikesDisLikes(obj: any, input: { review_id: number }, context: any) {
+      return context.Listing.getLikesDisLikesCount(input);
     }
   },
   Subscription: {

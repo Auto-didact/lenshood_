@@ -81,6 +81,8 @@ type ListingReview {
   listingId: String!
   comment: String!
   rating: String!
+  createdAt: String!
+  likesReplies: [UserReviewsLikes]
 }
 
 type WatchList {
@@ -88,6 +90,14 @@ type WatchList {
   listingId: Int!
   userId: Int!
   shouldNotify: String!
+}
+
+type UserReviewsLikes {
+  id: Int!
+  userId: Int!
+  listingReviewId: Int!
+  likeDisLike: String
+  isReply: Boolean!
 }
 
 extend type Query {
@@ -98,6 +108,12 @@ extend type Query {
   watchStatus(listingId: Int!, userId: Int): Boolean
   featuredListings: [Listing]
   reviews(reviewer_id: Int, reviewee_id: Int, listing_id: Int): [ListingReview]
+  childReviews(id: Int!): [ListingReview]
+}
+
+type CountOFLikesDisLikes {
+  likes: Int!
+  disLikes: Int!
 }
 
 extend type Mutation {
@@ -133,6 +149,9 @@ extend type Mutation {
     rating: Int!
     comment: String!
   ): Boolean
+
+  addLikesDisLikes(ld: String!, review_id: Int!, reviewer_id: Int!): Boolean
+  countLikesDisLikes(review_id: Int!): CountOFLikesDisLikes!
 }
 
 # Input for addListing Mutation
@@ -202,6 +221,8 @@ input AddListingReviewInput {
   reviewerId: Int!
   # Needed for listingReviewUpdated Subscription filter
   listingId: Int!
+  isReply: Boolean
+  id: Int
 }
 
 # Input for editListingReview Mutation

@@ -1,5 +1,5 @@
-mutation addListingReview($input: AddListingReviewInput!) {
-  addListingReview(input: $input) {
+query childReviews($id: Int!) {
+  childReviews(id: $id) {
     id
     reviewer {
       id
