@@ -1,16 +1,60 @@
 # Entity
-type TypeName {
-  typeName: String!
+type LiveSearch {
+  id: Int
+  users: [LiveSearchUser]
+  gearCategory: String
+  queryItem: String
+  createdAt: String
+  updatedAt: String
+}
+
+type LiveSearchUser {
+  id: Int
+  user: User
+  createdAt: String
+  updatedAt: String
 }
 
 extend type Query {
-  queryName: TypeName
+  liveSearches(
+    orderBy: OrderBySearchInput
+    filter: FilterSearchInput
+  ): [LiveSearch]
+}
+
+input OrderBySearchInput {
+  column: String
+  # asc | desc
+  order: String
+}
+
+input FilterSearchInput {
+  searchText: String
+  gearCategory: String
 }
 
 extend type Mutation {
-  mutationName(varName: Int!): TypeName
+  addSearchItem(input: AddSearchQueryInput!): LiveSearch
+  increSearchItem(input: IncreDecreInput!): LiveSearch
+  decreSearchItem(input: IncreDecreInput!): Boolean
+}
+
+input AddSearchQueryInput {
+  userId: Int
+  gearCategory: String!
+  queryItem: String!
+}
+
+input IncreDecreInput {
+  searchId: Int!
+  userId: Int
 }
 
 extend type Subscription {
-  subscriptionName: TypeName
+  searchUpdated(filter: FilterSearchInput): UpdateSearchPayload
+}
+
+type UpdateSearchPayload {
+  mutation: String!
+  node: LiveSearch!
 }

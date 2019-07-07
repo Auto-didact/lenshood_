@@ -3,14 +3,16 @@ import AutoCompleteNavbarComponent from "../components/AutoCompleteNavbarCompone
 import { graphql, compose } from "react-apollo";
 import LIST_QUERY from "../graphql/AutoSearchListingsQuery.graphql";
 
-const AutoCompleteNavbar = props => {
-  return (
-    <AutoCompleteNavbarComponent
-      listings={props.listingsList}
-      history={props.history}
-    />
-  );
-};
+class AutoCompleteNavbar extends React.Component {
+  render() {
+    return (
+      <AutoCompleteNavbarComponent
+        listings={this.props.listingsList}
+        history={this.props.history}
+      />
+    );
+  }
+}
 
 export default compose(
   graphql(LIST_QUERY, {
