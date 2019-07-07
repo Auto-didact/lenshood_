@@ -1,0 +1,10 @@
+fragment LiveSearchStateInfo on LiveSearchState {
+  orderBy {
+    column
+    order
+  }
+  filter {
+    searchText
+    gearCategory
+  }
+}

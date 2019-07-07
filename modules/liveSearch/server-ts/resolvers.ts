@@ -18,7 +18,7 @@ export default (pubsub: PubSub) => ({
       );
       const item = await context.LiveSearch.liveSearchItem(id);
       pubsub.publish(SEARCH_SUBSCRIPTION, {
-        searchUpdated: {
+        liveSearchUpdated: {
           mutation: "CREATED",
           node: item
         }
@@ -28,11 +28,11 @@ export default (pubsub: PubSub) => ({
     async increSearchItem(obj: any, { input }: any, context: any) {
       if (!input.userId) input.userId = context.identity.id;
 
-      await context.LiveSearch.increSearchItem(input.userId, input.searchId);
+      await context.LiveSearch.increSearchItem(input.userId, input.id);
 
-      const item = await context.LiveSearch.liveSearchItem(input.searchId);
+      const item = await context.LiveSearch.liveSearchItem(input.id);
       pubsub.publish(SEARCH_SUBSCRIPTION, {
-        searchUpdated: {
+        liveSearchUpdated: {
           mutation: "UPDATED",
           node: item
         }
@@ -43,20 +43,20 @@ export default (pubsub: PubSub) => ({
       if (!input.userId) input.userId = context.identity.id;
       const isDeleted = await context.LiveSearch.decreSearchItem(
         input.userId,
-        input.searchId
+        input.id
       );
       if (isDeleted) {
-        const item = await context.LiveSearch.liveSearchItem(input.searchId);
+        const item = await context.LiveSearch.liveSearchItem(input.id);
         if (item) {
           pubsub.publish(SEARCH_SUBSCRIPTION, {
-            searchUpdated: {
+            liveSearchUpdated: {
               mutation: "UPDATED",
               node: item
             }
           });
         } else {
           pubsub.publish(SEARCH_SUBSCRIPTION, {
-            searchUpdated: {
+            liveSearchUpdated: {
               mutation: "DELETED",
               node: item
             }
@@ -67,11 +67,11 @@ export default (pubsub: PubSub) => ({
     }
   },
   Subscription: {
-    searchUpdated: {
+    liveSearchUpdated: {
       subscribe: withFilter(
         () => pubsub.asyncIterator(SEARCH_SUBSCRIPTION),
         (payload, variables) => {
-          const { mutation, node } = payload.searchUpdated;
+          const { mutation, node } = payload.liveSearchUpdated;
           const {
             filter: { gearCategory, searchText }
           } = variables;

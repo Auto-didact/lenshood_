@@ -1,0 +1,13 @@
+fragment LiveSearchInfo on LiveSearch {
+  id
+  gearCategory
+  queryItem
+  users {
+    id
+    user {
+      id
+      username
+    }
+  }
+  createdAt
+}

@@ -1,129 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { compose } from "react-apollo";
 import { translate } from "@gqlapp/i18n-client-react";
-import LiveSearchView from "../components/LiveSearchView";
+import { PageLayout } from "@gqlapp/look-client-react";
+
+import settings from "../../../../settings";
+import LiveSearchComponent from "../components/LiveSearchComponent";
+import LiveSearchFilterComponent from "../components/LiveSearchFilterComponent";
+import { useLiveSearchWithSubscription } from "./withSubscription";
+import {
+  withFilterUpdating,
+  withOrderByUpdating,
+  withLiveSearch,
+  // withIncreSearchItem,
+  // withdecreSearchItem,
+  withLiveSearchState,
+  updateLiveSearchState
+} from "./LiveSearchOperations";
 
 const LiveSearch = props => {
-  // const { sendRefEmail, loading } = props;
-  let state = {
-    liveSearchList: [
-      {
-        id: 1,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 1",
-        gearCategory: "Cameras"
-      },
-      {
-        id: 2,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 2",
-        gearCategory: "Cameras"
-      },
-      {
-        id: 3,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 3",
-        gearCategory: "Lenses"
-      },
-      {
-        id: 4,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 12",
-        gearCategory: "Cameras"
-      },
-      {
-        id: 5,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 1",
-        gearCategory: "Lenses"
-      },
-      {
-        id: 6,
-        users: [
-          {
-            id: 1,
-            username: "theZalophus"
-          },
-          {
-            id: 2,
-            username: "thebishaldeb"
-          },
-          {
-            id: 3,
-            username: "zalo"
-          }
-        ],
-        itemName: "Assumption 1234",
-        gearCategory: "Lenses"
-      }
-    ]
-  };
+  const { t, updateQuery, subscribeToMore, filter } = props;
+  const liveSearchUpdated = useLiveSearchWithSubscription(
+    subscribeToMore,
+    filter
+  );
 
-  return <LiveSearchView {...props} state={state} />;
+  useEffect(() => {
+    if (liveSearchUpdated) {
+      updateLiveSearchState(liveSearchUpdated, updateQuery);
+    }
+  });
+
+  const renderMetaData = () => (
+    <Helmet
+      title={`${settings.app.name} - ${t("title")}`}
+      meta={[
+        {
+          name: "description",
+          content: `${settings.app.name} - ${t("meta")}`
+        }
+      ]}
+    />
+  );
+
+  console.log(props);
+  return (
+    <PageLayout>
+      {renderMetaData()}
+      <h1>Live searches</h1>
+      <h2>See if someone needs something you have…</h2>
+      <hr />
+      <LiveSearchFilterComponent {...props} />
+      <hr />
+      <LiveSearchComponent {...props} />
+    </PageLayout>
+  );
 };
 
-export default translate("liveSearch")(LiveSearch);
+LiveSearch.propTypes = {
+  liveSearchUpdated: PropTypes.object,
+  updateQuery: PropTypes.func,
+  t: PropTypes.func,
+  subscribeToMore: PropTypes.func,
+  filter: PropTypes.object
+};
+
+export default compose(
+  withLiveSearchState,
+  withLiveSearch,
+  // withIncreSearchItem,
+  // withdecreSearchItem,
+  withOrderByUpdating,
+  withFilterUpdating
+)(translate("liveSearch")(LiveSearch));

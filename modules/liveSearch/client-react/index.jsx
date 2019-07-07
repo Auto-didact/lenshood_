@@ -12,6 +12,7 @@ import { MenuItem } from "@gqlapp/look-client-react";
 import { Icon } from "antd";
 import LiveSearch from "./containers/LiveSearch";
 import resources from "./locales";
+import resolvers from "./resolvers/index";
 
 const NavLinkLiveSearchWithI18n = translate("liveSearch")(({ t }) => (
   <NavLink to="/live-search" className="nav-link" activeClassName="active">
@@ -39,5 +40,6 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
+  resolver: [resolvers],
   localization: [{ ns: "liveSearch", resources }]
 });

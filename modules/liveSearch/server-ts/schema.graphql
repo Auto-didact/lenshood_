@@ -46,12 +46,12 @@ input AddSearchQueryInput {
 }
 
 input IncreDecreInput {
-  searchId: Int!
+  id: Int!
   userId: Int
 }
 
 extend type Subscription {
-  searchUpdated(filter: FilterSearchInput): UpdateSearchPayload
+  liveSearchUpdated(filter: FilterSearchInput): UpdateSearchPayload
 }
 
 type UpdateSearchPayload {
