@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { translate } from "@gqlapp/i18n-client-react";
-import { Input, Icon, AutoComplete, Button } from "antd";
+import { Input, Icon, AutoComplete } from "antd";
 import { Link } from "react-router-dom";
 
 const { Option } = AutoComplete;
 
-class AutoCompleteNavbarComponent extends React.Component {
+class AutoCompleteNavbarComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +23,6 @@ class AutoCompleteNavbarComponent extends React.Component {
     }
   }
 
-  // FOR RENDERAUTOCOMPLETE
   handleSearch = value => {
     this.setState({
       dataSource: value ? this.searchResult(value) : []

@@ -154,7 +154,7 @@ class NavBar extends React.Component {
               <Col span={16}>
                 <Menu mode="horizontal" className="line_height60">
                   {/* <MenuItem> */}
-                    <AutoCompleteNavbar history={this.props.history} />
+                  <AutoCompleteNavbar history={this.props.history} />
                   {/* </MenuItem> */}
                 </Menu>
               </Col>
