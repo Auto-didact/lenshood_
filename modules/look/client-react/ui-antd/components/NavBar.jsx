@@ -5,7 +5,7 @@ import { Drawer, Menu, Dropdown, Row, Col, Icon, Form } from "antd";
 
 import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
 import UserAvatar from "@gqlapp/user-client-react/containers/UserAvatar";
-import AutoCompleteNavbar from "@gqlapp/listing-client-react/containers/AutoCompleteNavbar";
+import SearchNavbar from "@gqlapp/listing-client-react/containers/SearchNavbar";
 import MenuItem from "./MenuItem";
 import DropDown from "./Dropdown";
 
@@ -154,7 +154,7 @@ class NavBar extends React.Component {
               <Col span={16}>
                 <Menu mode="horizontal" className="line_height60">
                   {/* <MenuItem> */}
-                  <AutoCompleteNavbar history={this.props.history} />
+                  <SearchNavbar history={this.props.history} />
                   {/* </MenuItem> */}
                 </Menu>
               </Col>
@@ -199,7 +199,7 @@ class NavBar extends React.Component {
               />
             </NavLink>
           </div>
-          <AutoCompleteNavbar history={this.props.history} />
+          <SearchNavbar history={this.props.history} />
           <Menu
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}

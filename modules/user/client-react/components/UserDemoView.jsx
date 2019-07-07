@@ -4,7 +4,7 @@ import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { withFormik } from "formik";
 import { RenderAutoComplete, Form, Button } from "@gqlapp/look-client-react";
 import { Icon } from "antd";
-import AutoCompleteNavbar from "@gqlapp/listing-client-react/containers/AutoCompleteNavbar";
+import SearchNavbar from "@gqlapp/listing-client-react/containers/SearchNavbar";
 
 class UserDemoView extends Component {
   constructor(props) {
@@ -60,7 +60,7 @@ class UserDemoView extends Component {
             Submit
             <Icon type="enter" />
           </Button>
-          <AutoCompleteNavbar history={this.props.history} />
+          <SearchNavbar history={this.props.history} />
         </Form>
       </div>
     );

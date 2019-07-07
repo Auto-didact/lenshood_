@@ -9,7 +9,7 @@ const AutoCompleteNavbar = props => (
     history={props.history}
   />
 );
-
+ 
 export default compose(
   graphql(LIST_QUERY, {
     props({ data: { loading, error, listingsList } }) {
