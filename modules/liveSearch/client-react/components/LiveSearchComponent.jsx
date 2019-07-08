@@ -60,7 +60,9 @@ const LiveSearchComponent = ({ orderBy, onOrderBy, loading, liveSearches, curren
         </a>
       ),
       dataIndex: 'queryItem',
-      key: 'queryItem'
+      key: 'queryItem',
+      sorter: (a, b) => a.queryItem.length - b.queryItem.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: (
@@ -69,30 +71,24 @@ const LiveSearchComponent = ({ orderBy, onOrderBy, loading, liveSearches, curren
         </a>
       ),
       dataIndex: 'gearCategory',
-      key: 'gearCategory'
+      key: 'gearCategory',
+      sorter: (a, b) => a.gearCategory.length - b.gearCategory.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: "Requested by",
       dataIndex: 'users',
       key: 'users',
+      sorter: (a, b) => a.users.length - b.users.length,
+      sortDirections: ['descend', 'ascend'],
       render: (text) => (
         <div>
           <strong>{text[0].user.username}</strong>{text.length > 1 ? <span>{` and ${text.length} others`}</span> : null}
         </div>
       )
     },
-    // {
-    //   title: (
-    //     <a onClick={e => handleOrderBy(e, 'isActive')} href="#">
-    //       {t('users.column.active')} {renderOrderByArrow('isActive')}
-    //     </a>
-    //   ),
-    //   dataIndex: 'isActive',
-    //   key: 'isActive',
-    //   render: text => text.toString()
-    // },
     {
-      title: "Add/Cancel Request",
+      title: "Add / Cancel Request",
       dataIndex: 'users',
       key: 'actions',
       render: (text, record) => (

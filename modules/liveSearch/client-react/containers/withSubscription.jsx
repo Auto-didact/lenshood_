@@ -8,11 +8,11 @@ export const useLiveSearchWithSubscription = (subscribeToMore, filter) => {
   const [liveSearchUpdated, setLiveSearchUpdated] = useState(null);
 
   useEffect(() => {
-    const subscribe = subscribeToUsers();
+    const subscribe = subscribeToLiveSearch();
     return () => subscribe();
   });
 
-  const subscribeToUsers = () => {
+  const subscribeToLiveSearch = () => {
     return subscribeToMore({
       document: LIVESEARCH_SUBSCRIPTION,
       variables: { filter },
