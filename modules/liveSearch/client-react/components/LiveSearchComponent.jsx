@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Table, Loader } from "@gqlapp/look-client-react";
-import { Popconfirm, Button, message } from "antd";
+import { Popconfirm, Button, message, Modal } from "antd";
+import { FormError } from "@gqlapp/forms-client-react";
+import LiveSearchFormComponent from "./LiveSearchFormComponent";
 
 const LiveSearchComponent = ({
   orderBy,
@@ -13,9 +15,11 @@ const LiveSearchComponent = ({
   liveSearches,
   currentUser,
   increSearchItem,
-  decreSearchItem
+  decreSearchItem,
+  addSearchItem
 }) => {
   const [errors, setErrors] = useState([]);
+  const [visible, setVisible] = useState(false);
   // const handleDeleteUser = async id => {
   //   const result = await deleteUser(id);
   //   if (result && result.errors) {
@@ -24,6 +28,11 @@ const LiveSearchComponent = ({
   //     setErrors([]);
   //   }
   // };
+
+  const setModalVisible = () => {
+    setVisible(!visible);
+  };
+
   const cancel = () => {
     message.error("Task cancelled");
   };
@@ -66,7 +75,15 @@ const LiveSearchComponent = ({
     return decreSearchItem({ id: id });
   };
 
-  // console.log(liveSearches)
+  const onSubmit = async values => {
+    try {
+      await addSearchItem(values);
+    } catch (e) {
+      message.error("Couldn't add the Item. Please try again.");
+      throw new FormError("Couldn't add the Item. Please try again.", e);
+    }
+    setModalVisible();
+  };
 
   const columns = [
     {
@@ -162,8 +179,23 @@ const LiveSearchComponent = ({
             dataSource={liveSearches}
             columns={columns}
             bordered
-            title={() => <Button type="primary">Add a Query</Button>}
+            title={() => (
+              <Button
+                type="primary"
+                onClick={() => setModalVisible()}
+              >
+                Request an Item
+              </Button>
+            )}
           />
+          <Modal
+            title={<strong>Add an Item Request</strong>}
+            visible={visible}
+            onCancel={() => setModalVisible()}
+            footer={null}
+          >
+            <LiveSearchFormComponent onSubmit={onSubmit} />
+          </Modal>
         </>
       )}
     </>

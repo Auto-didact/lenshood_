@@ -1,6 +1,7 @@
 import { graphql } from "react-apollo";
 import update from "immutability-helper";
 import { removeTypename, log } from "@gqlapp/core-common";
+import ADD_ITEM from "../graphql/AddQueryItem.graphql";
 import LIVESEARCH_STATE_QUERY from "../graphql/LiveSearchStateQuery.client.graphql";
 import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
 import LIVESEARCH_QUERY from "../graphql/LiveSearchQuery.graphql";
@@ -13,6 +14,18 @@ const withLiveSearchState = Component =>
     props({ data: { liveSearchState } }) {
       return removeTypename(liveSearchState);
     }
+  })(Component);
+
+const withSearchItemAdd = Component =>
+  graphql(ADD_ITEM, {
+    props: ({ mutate }) => ({
+      addSearchItem: async input => {
+        const { data: addSearchItem } = await mutate({
+          variables: { input }
+        });
+        return addSearchItem;
+      }
+    })
   })(Component);
 
 const withLiveSearch = Component =>
@@ -151,6 +164,7 @@ function deleteLiveSearch(prev, id) {
 
 export {
   withLiveSearchState,
+  withSearchItemAdd,
   withLiveSearch,
   withIncreSearchItem,
   withdecreSearchItem,

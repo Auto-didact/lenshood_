@@ -16,6 +16,7 @@ import {
   withIncreSearchItem,
   withdecreSearchItem,
   withLiveSearchState,
+  withSearchItemAdd,
   updateLiveSearchState
 } from "./LiveSearchOperations";
 
@@ -72,5 +73,6 @@ export default compose(
   withIncreSearchItem,
   withdecreSearchItem,
   withOrderByUpdating,
-  withFilterUpdating
+  withFilterUpdating,
+  withSearchItemAdd
 )(translate("liveSearch")(LiveSearch));

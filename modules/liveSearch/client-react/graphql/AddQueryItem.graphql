@@ -1,0 +1,7 @@
+#import "./LiveSearch.graphql"
+
+mutation addSearchItem($input: AddSearchQueryInput!) {
+  addSearchItem(input: $input) {
+    ...LiveSearchInfo
+  }
+}
