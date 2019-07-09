@@ -4,7 +4,7 @@ import { PageLayout } from '@gqlapp/look-client-react';
 
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import settings from '../../../../../settings';
-import { Button, Divider } from 'antd';
+import { Button, Divider, Card } from 'antd';
 
 interface HomeHeadProps {
   t: TranslateFunction;

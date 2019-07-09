@@ -33,7 +33,7 @@ const BorrowingAndLendingView = props => {
       style={{
         width: '100%',
         alignItems: 'center',
-        fontFamily: 'Avenir Next',
+
         display: 'flex',
         flexDirection: 'column',
         border: 'none'

@@ -12,7 +12,7 @@ class PageLayout extends React.Component {
     const { children, navBar } = this.props;
 
     return (
-      <Layout>
+      <Layout className="main-layout">
         {navBar !== false && (
           <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <NavBar />
