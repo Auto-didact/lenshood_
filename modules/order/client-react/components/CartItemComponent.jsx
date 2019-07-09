@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Icon } from "antd";
+import { Row, Col, Button, Icon, Card } from "antd";
 
 const CartItemComponent = props => {
   let product = props.products;
   return (
-    <Row className="cartitem borderRadius9">
+    <Card
+      className="cartitem borderRadius9"
+      bodyStyle={{
+        padding: "0px"
+      }}
+    >
       <div className="listcloseicons">
         <Button
           onClick={() => props.cartItemSelect(product.id)}
@@ -61,7 +66,7 @@ const CartItemComponent = props => {
           </Col>
         </Row>
       </Col>
-    </Row>
+    </Card>
   );
 };
 
