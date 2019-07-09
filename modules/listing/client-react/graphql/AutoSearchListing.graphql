@@ -1,0 +1,11 @@
+fragment AutoSearchListingInfo on Listing {
+  id
+  gearCategory
+  gearSubcategory
+  description
+  listingContent {
+    gear
+    brand
+    model
+  }
+}

@@ -6,7 +6,7 @@ import { PageLayout, Pagination, Loader } from '@gqlapp/look-client-react';
 import { Row, Col, Button, Switch } from 'antd';
 import settings from '../../../../settings';
 
-import SuggestedCardList from './components/SuggestedCardList';
+import SuggestedCardListComponent from './components/SuggestedCardListComponent';
 
 const { itemsNumber, type } = settings.pagination.web;
 const margin = '5%';
@@ -136,7 +136,7 @@ class ListingCatalogueView extends Component {
                 <h2 className="headingTop">
                   <strong>All listings</strong>
                 </h2>
-                <SuggestedCardList relatedList={this.props.listings} />
+                <SuggestedCardListComponent relatedList={this.props.listings} />
               </Col>
             </div>
           </Row>

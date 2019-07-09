@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { Alert } from 'antd';
 import { Loader } from '@gqlapp/look-client-react';
-import VerificationModal from '../../components/verification/VerificationModal';
-import EmailVerificationForm from '../../components/verification/EmailVerificationForm';
+import VerificationModalComponent from '../../components/verification/VerificationModalComponent';
+import EmailVerificationFormComponent from '../../components/verification/EmailVerificationFormComponent';
 import Email from '../../components/verification/Email';
 
 import ADD_Email from '../../graphql/AddEmail.graphql';
@@ -51,15 +51,15 @@ class EmailAdd extends Component {
 
   render() {
     return (
-      <VerificationModal button="Email" title="Email Verification" vStatus={this.state.vStatus}>
+      <VerificationModalComponent button="Email" title="Email Verification" vStatus={this.state.vStatus}>
         {this.state.loading ? <Loader text="Loading..." /> : ''}
         {this.state.form && !this.state.sent ? (
-          <EmailVerificationForm otp={this.state.otp} onSubmit={this.onChange} />
+          <EmailVerificationFormComponent otp={this.state.otp} onSubmit={this.onChange} />
         ) : (
           ''
         )}
         {this.state.vStatus ? <Email email={this.state.email} sentStatus={this.state.sent} /> : ''}
-      </VerificationModal>
+      </VerificationModalComponent>
     );
   }
 }

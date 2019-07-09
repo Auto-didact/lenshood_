@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
 
-import UserForm from './UserForm';
+import UserFormComponent from './UserFormComponent';
 import settings from '../../../../settings';
 
 const UserAddView = ({ t, onSubmit, currentUser }) => {
@@ -30,7 +30,7 @@ const UserAddView = ({ t, onSubmit, currentUser }) => {
       <h2>
         {t('userEdit.form.titleCreate')} {t('userEdit.form.title')}
       </h2>
-      <UserForm
+      <UserFormComponent
         LYGflag={false}
         onSubmit={onSubmit}
         initialValues={{}}

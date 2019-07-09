@@ -6,7 +6,7 @@ import ListingAddView from "../components/ListingAddView";
 
 import ADD_LISTING from "../graphql/AddListing.graphql";
 
-import USERS_QUERY from "@gqlapp/user-client-react/graphql/UsersQuery.graphql";
+import USERS_QUERY from "@gqlapp/user-client-react/graphql/ListingUserQuery.graphql";
 
 class ListingAdd extends React.Component {
   constructor(props) {
