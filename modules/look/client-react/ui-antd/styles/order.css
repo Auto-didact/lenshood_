@@ -154,7 +154,7 @@
   padding-bottom: 20px;
 }
 
-.checkoutSteps {
+.CheckoutStepsComponent {
   text-align: center;
   text-shadow: 1px 0 0;
   font-size: 30px;
@@ -222,7 +222,6 @@
 
 .CancelRequest {
   margin-top: 10px !important;
-  border-radius: 4px !important;
 }
 
 .itemDetails {
@@ -243,8 +242,7 @@
 .btnOrder {
   color: #23b195;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }
 
 .btnOrderActive,

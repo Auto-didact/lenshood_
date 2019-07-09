@@ -37,10 +37,11 @@ const UserEdit = props => {
     try {
       await editUser({ id: user.id, ...userValues });
     } catch (e) {
+      message.error(t("userEdit.errorMsg"));
       throw new FormError(t("userEdit.errorMsg"), e);
     }
-    message.info("Changes saved!");
 
+    message.info("Changes saved!");
     // if (history) {
     //   return history.goBack();
     // }
@@ -49,7 +50,7 @@ const UserEdit = props => {
     //   return navigation.goBack();
     // }
   };
-
+  console.log(props);
   return <UserEditView onSubmit={onSubmit} {...props} />;
 };
 

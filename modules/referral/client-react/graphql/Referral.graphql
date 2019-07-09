@@ -1,0 +1,13 @@
+fragment ReferralInfo on Referral {
+  id
+  createdAt
+  updatedAt
+  referredUser {
+    id
+    username
+    profile {
+      firstName
+      lastName
+    }
+  }
+}

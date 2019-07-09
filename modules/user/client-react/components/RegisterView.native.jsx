@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-import RegisterForm from '../components/RegisterForm';
+import RegisterFormComponent from '../components/RegisterFormComponent';
 
 class RegisterView extends React.PureComponent {
   static propTypes = {
@@ -13,7 +13,7 @@ class RegisterView extends React.PureComponent {
     const { onSubmit } = this.props;
     return (
       <View style={styles.container}>
-        <RegisterForm onSubmit={onSubmit} />
+        <RegisterFormComponent onSubmit={onSubmit} />
       </View>
     );
   }

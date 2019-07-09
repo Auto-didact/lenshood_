@@ -1,0 +1,10 @@
+#import "./LiveSearch.graphql"
+
+subscription onLiveSearchUpdatedUpdated($filter: FilterSearchInput) {
+  liveSearchUpdated(filter: $filter) {
+    mutation
+    node {
+      ...LiveSearchInfo
+    }
+  }
+}

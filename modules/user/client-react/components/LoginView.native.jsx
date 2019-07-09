@@ -7,7 +7,7 @@ import { placeholderColor } from '@gqlapp/look-client-react-native/styles';
 import { setItem } from '@gqlapp/core-common/clientStorage';
 import authentication from '@gqlapp/authentication-client-react';
 
-import LoginForm from './LoginForm';
+import LoginFormComponent from './LoginFormComponent';
 
 class LoginView extends React.PureComponent {
   componentDidMount() {
@@ -53,7 +53,7 @@ class LoginView extends React.PureComponent {
       <View style={styles.container}>
         <View style={styles.examplesContainer}>{this.renderAvailableLogins()}</View>
         <View style={styles.loginContainer}>
-          <LoginForm onSubmit={onSubmit} navigation={navigation} />
+          <LoginFormComponent onSubmit={onSubmit} navigation={navigation} />
         </View>
       </View>
     );

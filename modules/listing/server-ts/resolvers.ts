@@ -1,23 +1,22 @@
-import { PubSub, withFilter } from 'graphql-subscriptions';
+import { PubSub, withFilter } from "graphql-subscriptions";
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
-
-import { Listing, ListingReview, Identifier } from './sql';
-import withAuth from 'graphql-auth';
+import { Listing, ListingReview, Identifier } from "./sql";
+// import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
-const ONSHELF = 'On Shelf';
-const IDLE = 'Idle';
-const ONRENT = 'On Rent';
+const ONSHELF = "On Shelf";
+const IDLE = "Idle";
+// const ONRENT = "On Rent";
 
 interface Edges {
   cursor: number;
   node: Listing & Identifier;
 }
 
-interface ListingsParams {
-  limit: number;
-  after: number;
-}
+// interface ListingsParams {
+//   limit: number;
+//   after: number;
+// }
 
 interface ListingInput {
   input: Listing;
@@ -35,15 +34,24 @@ interface ListingReviewInputWithId {
   input: ListingReview & Identifier;
 }
 
-const LISTING_SUBSCRIPTION = 'listing_subscription';
-const LISTINGS_SUBSCRIPTION = 'listings_subscription';
-const LISTINGREVIEW_SUBSCRIPTION = 'listing_review_subscription';
+const LISTING_SUBSCRIPTION = "listing_subscription";
+const LISTINGS_SUBSCRIPTION = "listings_subscription";
+const LISTINGREVIEW_SUBSCRIPTION = "listing_review_subscription";
 
 export default (pubsub: PubSub) => ({
   Query: {
-    async listings(obj: any, { limit, after }: ListingsParams, context: any) {
+    async listings(
+      obj: any,
+      { limit, after, orderBy, filter }: any,
+      context: any
+    ) {
       const edgesArray: Edges[] = [];
-      const listings = await context.Listing.listingsPagination(limit, after);
+      const listings = await context.Listing.listingsPagination(
+        limit,
+        after,
+        orderBy,
+        filter
+      );
       const total = (await context.Listing.getTotal()).count;
       const hasNextPage = total > after + limit;
 
@@ -53,7 +61,8 @@ export default (pubsub: PubSub) => ({
           node: listing
         });
       });
-      const endCursor = edgesArray.length > 0 ? edgesArray[edgesArray.length - 1].cursor : 0;
+      const endCursor =
+        edgesArray.length > 0 ? edgesArray[edgesArray.length - 1].cursor : 0;
 
       return {
         totalCount: total,
@@ -67,6 +76,10 @@ export default (pubsub: PubSub) => ({
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
     },
+
+    listingsList(obj: any, args: any, context: any) {
+      return context.Listing.listingsList();
+    },
     userListings(obj: any, { userId }: any, context: any) {
       return context.Listing.userListings(userId || context.identity.id);
     },
@@ -74,7 +87,10 @@ export default (pubsub: PubSub) => ({
       return context.Listing.watchlist(userId || context.identity.id);
     },
     watchStatus(obj: any, input: any, context: any) {
-      return context.Listing.watchStatus(input.listingId, input.userId || context.identity.id);
+      return context.Listing.watchStatus(
+        input.listingId,
+        input.userId || context.identity.id
+      );
     },
     featuredListings(obj: any, input: any, context: any) {
       return context.Listing.featuredListings();
@@ -87,13 +103,13 @@ export default (pubsub: PubSub) => ({
   // },
   Mutation: {
     async addListing(obj: any, { input }: ListingInput, context: any) {
-      input.userId = context.identity.id;
+      if (!input.userId) input.userId = context.identity.id;
       const id = await context.Listing.addListing(input);
       const listing = await context.Listing.listing(id);
-      // publish for listing list
+      // publish for liswting list
       pubsub.publish(LISTINGS_SUBSCRIPTION, {
         listingsUpdated: {
-          mutation: 'CREATED',
+          mutation: "CREATED",
           id,
           node: listing
         }
@@ -107,7 +123,7 @@ export default (pubsub: PubSub) => ({
         // publish for listing list
         pubsub.publish(LISTINGS_SUBSCRIPTION, {
           listingsUpdated: {
-            mutation: 'DELETED',
+            mutation: "DELETED",
             id,
             node: listing
           }
@@ -115,7 +131,7 @@ export default (pubsub: PubSub) => ({
         // publish for edit listing page
         pubsub.publish(LISTING_SUBSCRIPTION, {
           listingUpdated: {
-            mutation: 'DELETED',
+            mutation: "DELETED",
             id, // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
             node: listing
           }
@@ -132,7 +148,7 @@ export default (pubsub: PubSub) => ({
 
       if (listing.status === ONSHELF) {
         stat = IDLE;
-      } else if (listing.status === 'idle' || listing.status === IDLE) {
+      } else if (listing.status === "idle" || listing.status === IDLE) {
         stat = ONSHELF;
       }
       const isToggled = await context.Listing.patchListing(id, {
@@ -163,12 +179,13 @@ export default (pubsub: PubSub) => ({
       }
     },
     async editListing(obj: any, { input }: ListingInputWithId, context: any) {
+      console.log(input);
       await context.Listing.editListing(input);
       const listing = await context.Listing.listing(input.id);
       // publish for listing list
       pubsub.publish(LISTINGS_SUBSCRIPTION, {
         listingsUpdated: {
-          mutation: 'UPDATED',
+          mutation: "UPDATED",
           id: listing.id,
           node: listing
         }
@@ -176,20 +193,24 @@ export default (pubsub: PubSub) => ({
       // publish for edit listing page
       pubsub.publish(LISTING_SUBSCRIPTION, {
         listingUpdated: {
-          mutation: 'UPDATED',
+          mutation: "UPDATED",
           id: listing.id,
           node: listing
         }
       });
       return listing;
     },
-    async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
+    async addListingReview(
+      obj: any,
+      { input }: ListingReviewInput,
+      context: any
+    ) {
       const [id] = await context.Listing.addListingReview(input);
       const listingReview = await context.Listing.getListingReview(id);
       // publish for edit listing page
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
-          mutation: 'CREATED',
+          mutation: "CREATED",
           id: listingReview.id,
           listingId: input.listingId,
           node: listingReview
@@ -197,12 +218,16 @@ export default (pubsub: PubSub) => ({
       });
       return listingReview;
     },
-    async deleteListingReview(obj: any, { input: { id, listingId } }: ListingReviewInputWithId, context: any) {
+    async deleteListingReview(
+      obj: any,
+      { input: { id, listingId } }: ListingReviewInputWithId,
+      context: any
+    ) {
       await context.Listing.deleteListingReview(id);
       // publish for edit listing page
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
-          mutation: 'DELETED',
+          mutation: "DELETED",
           id,
           listingId,
           node: null
@@ -210,13 +235,17 @@ export default (pubsub: PubSub) => ({
       });
       return { id };
     },
-    async editListingReview(obj: any, { input }: ListingReviewInputWithId, context: any) {
+    async editListingReview(
+      obj: any,
+      { input }: ListingReviewInputWithId,
+      context: any
+    ) {
       await context.Listing.editListingReview(input);
       const listingReview = await context.Listing.getListingReview(input.id);
       // publish for edit listing page
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
-          mutation: 'UPDATED',
+          mutation: "UPDATED",
           id: input.id,
           listingId: input.listingId,
           node: listingReview
@@ -224,7 +253,11 @@ export default (pubsub: PubSub) => ({
       });
       return listingReview;
     },
-    async toggleListingIsFeatured(obj: any, input: { id: number; isFeatured: boolean }, context: any) {
+    async toggleListingIsFeatured(
+      obj: any,
+      input: { id: number; isFeatured: boolean },
+      context: any
+    ) {
       return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
     },
     async addOrRemoveWatchList(

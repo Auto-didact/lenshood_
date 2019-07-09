@@ -17,6 +17,7 @@ input RegisterUserInput {
   username: String!
   email: String!
   password: String!
+  referredBy: String
 }
 
 input ForgotPasswordInput {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Table, Button, Loader } from '@gqlapp/look-client-react';
-import UserDrawer from './UserDrawer';
+import UserDrawerComponent from './UserDrawerComponent';
 import { Popconfirm, Icon } from 'antd';
 
 const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
@@ -100,7 +100,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
       key: 'actions',
       render: (text, record) => (
         <div>
-          <UserDrawer user={record} />
+          <UserDrawerComponent user={record} />
           <Popconfirm
             title="Are you sure delete this User?"
             onConfirm={() => handleDeleteUser(record.id)}

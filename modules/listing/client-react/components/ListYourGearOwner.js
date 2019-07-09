@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
 // import "./resources/listingCatalogue.css";
-import ListYGSteps from './components/ListYGSteps';
+import ListYGStepsComponent from './components/ListYGStepsComponent';
 
 const { TextArea } = Input;
 
@@ -13,7 +13,7 @@ class ListYourGearOwner extends Component {
         <div className="Listyourgearcards">
           <Row>
             <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
-              <ListYGSteps step={0} />
+              <ListYGStepsComponent step={0} />
               <Form layout="vertical">
                 <Form.Item label={<strong>Email ID</strong>}>
                   <Input placeholder="Email Address" type="email" />
