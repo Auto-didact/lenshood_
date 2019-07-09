@@ -1,12 +1,12 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
-import CURRENT_USER_QUERY from "@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql";
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import CURRENT_USER_QUERY from '@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql';
 
-import ListingAddView from "../components/ListingAddView";
+import ListingAddView from '../components/ListingAddView';
 
-import ADD_LISTING from "../graphql/AddListing.graphql";
+import ADD_LISTING from '../graphql/AddListing.graphql';
 
-import USERS_QUERY from "@gqlapp/user-client-react/graphql/ListingUserQuery.graphql";
+import USERS_QUERY from '@gqlapp/user-client-react/graphql/ListingUserQuery.graphql';
 
 class ListingAdd extends React.Component {
   constructor(props) {
@@ -28,9 +28,9 @@ export default compose(
             input: values
           },
           optimisticResponse: {
-            __typename: "Mutation",
+            __typename: 'Mutation',
             addListing: {
-              __typename: "Listing",
+              __typename: 'Listing',
               id: null,
               ...values
             }
@@ -38,14 +38,11 @@ export default compose(
         });
 
         if (history) {
-          return history.push(
-            "/listing-detail/" + listingData.data.addListing.id,
-            {
-              listing: listingData.data.addListing
-            }
-          );
+          return history.push('/listing-detail/' + listingData.data.addListing.id, {
+            listing: listingData.data.addListing
+          });
         } else if (navigation) {
-          return navigation.navigate("ListingEdit", {
+          return navigation.navigate('ListingEdit', {
             id: listingData.data.addListing.id
           });
         }
@@ -55,13 +52,11 @@ export default compose(
   graphql(USERS_QUERY, {
     options: ({ orderBy, filter }) => {
       return {
-        fetchPolicy: "network-only",
+        fetchPolicy: 'network-only',
         variables: { orderBy, filter }
       };
     },
-    props({
-      data: { loading, users, refetch, error, updateQuery, subscribeToMore }
-    }) {
+    props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
       return {
         loading,
         users,

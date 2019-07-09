@@ -1,50 +1,35 @@
-import React from "react";
+import React from 'react';
 
-import ClientModule from "@gqlapp/module-client-react";
+import ClientModule from '@gqlapp/module-client-react';
 
-import { translate } from "@gqlapp/i18n-client-react";
-import {
-  IfLoggedIn,
-  AuthRoute
-} from "@gqlapp/user-client-react/containers/Auth.web";
-import { MenuItem } from "@gqlapp/look-client-react";
-import { Route, NavLink } from "react-router-dom";
-import { Icon } from "antd";
-import Referral from "./containers/Referral";
-import ReferredRedirect from "./containers/ReferredRedirect";
-import ReferralVerify from "./containers/ReferralVerify";
-import resources from "./locales";
+import { translate } from '@gqlapp/i18n-client-react';
+import { IfLoggedIn, AuthRoute } from '@gqlapp/user-client-react/containers/Auth.web';
+import { MenuItem } from '@gqlapp/look-client-react';
+import { Route, NavLink } from 'react-router-dom';
+import { Icon } from 'antd';
+import Referral from './containers/Referral';
+import ReferredRedirect from './containers/ReferredRedirect';
+import ReferralVerify from './containers/ReferralVerify';
+import resources from './locales';
 
-const NavLinkMyInvitesWithI18n = translate("referral")(({ t }) => (
+const NavLinkMyInvitesWithI18n = translate('referral')(({ t }) => (
   <NavLink to="/invites">
     <div>
       <Icon type="money-collect" />
-      {t("referral:navLink")}
+      {t('referral:navLink')}
     </div>
   </NavLink>
 ));
 
 export default new ClientModule({
   route: [
-    <AuthRoute
-      exact
-      path="/invites/:id"
-      redirectOnLoggedIn
-      redirect="/profile"
-      component={ReferredRedirect}
-    />,
-    <AuthRoute
-      exact
-      path="/invites"
-      redirect="/profile"
-      role={["user", "admin"]}
-      component={Referral}
-    />,
+    <AuthRoute exact path="/invites/:id" redirectOnLoggedIn redirect="/profile" component={ReferredRedirect} />,
+    <AuthRoute exact path="/invites" redirect="/profile" role={['user', 'admin']} component={Referral} />,
     <AuthRoute
       exact
       path="/invites/verify/:id"
       redirect="/profile"
-      role={["user", "admin"]}
+      role={['user', 'admin']}
       component={ReferralVerify}
     />
   ],
@@ -55,5 +40,5 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
-  localization: [{ ns: "referral", resources }]
+  localization: [{ ns: 'referral', resources }]
 });

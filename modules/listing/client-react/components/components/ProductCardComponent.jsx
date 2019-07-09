@@ -1,16 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Carousel,
-  Icon,
-  Divider,
-  CardText,
-  Card,
-  Button
-} from "antd";
-import { ImgCamera } from "../../constants/DefaultImages";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Row, Col, Carousel, Icon, Divider, CardText, Card, Button } from 'antd';
+import { ImgCamera } from '../../constants/DefaultImages';
 // import '../resources/listingCatalogue.css';
 // To Do Carousel Arrows;
 // function SampleNextArrow(props) {
@@ -45,14 +36,8 @@ class ProductCardComponent extends Component {
   render() {
     const listing = this.props.listing;
     const images =
-      listing && listing.listingImages && listing.listingImages.length !== 0
-        ? listing.listingImages
-        : ImgCamera;
-    const replacementValue =
-      (listing &&
-        listing.listingRental &&
-        listing.listingRental.replacementValue) ||
-      null;
+      listing && listing.listingImages && listing.listingImages.length !== 0 ? listing.listingImages : ImgCamera;
+    const replacementValue = (listing && listing.listingRental && listing.listingRental.replacementValue) || null;
     const description = (listing && listing.description) || null;
     const listingContent = (listing && listing.listingContent) || null;
     const cancellationPolicy = this.props.cancellationPolicy;
@@ -62,10 +47,7 @@ class ProductCardComponent extends Component {
       customPaging: function(i) {
         return (
           <a>
-            <img
-              src={images[i].imageUrl}
-              style={{ width: "30px", height: "30px" }}
-            />
+            <img src={images[i].imageUrl} style={{ width: '30px', height: '30px' }} />
           </a>
         );
       },
@@ -80,12 +62,12 @@ class ProductCardComponent extends Component {
       // prevArrow: <SamplePrevArrow />
     };
     return (
-      <div style={{ paddingRight: "4px", paddingTop: "5px" }}>
-        <div style={{ marginLeft: "10px", marginRight: "10px" }}>
+      <div style={{ paddingRight: '4px', paddingTop: '5px' }}>
+        <div style={{ marginLeft: '10px', marginRight: '10px' }}>
           <Carousel autoplay ref={node => (this.carousel = node)} {...status}>
             {images.map((item, id) => (
               <div key={id} align="center">
-                <img src={item.imageUrl} style={{ height: "300px" }} />
+                <img src={item.imageUrl} style={{ height: '300px' }} />
               </div>
             ))}
           </Carousel>
@@ -95,10 +77,7 @@ class ProductCardComponent extends Component {
           {replacementValue && (
             <Col span={12}>
               <strong className="mainColor font12">Replacement Value</strong>
-              <span className="mainColor font14">
-                {" "}
-                &#8377; {replacementValue} /-{" "}
-              </span>
+              <span className="mainColor font14"> &#8377; {replacementValue} /- </span>
             </Col>
           )}
           {/* <Col span={12}>
@@ -151,7 +130,7 @@ class ProductCardComponent extends Component {
                 {item.gear} {item.brand} {item.model}
               </div>
             ))
-          : "Gear Components Not Provided"}
+          : 'Gear Components Not Provided'}
         <br />
         <br />
         <h3 className="font16 blockDisplay fontBold">Cancellation Policy</h3>

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { withFormik } from "formik";
-import { RenderAutoComplete, Form, Button } from "@gqlapp/look-client-react";
-import { Icon } from "antd";
-import SearchNavbar from "@gqlapp/listing-client-react/containers/SearchNavbar";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { withFormik } from 'formik';
+import { RenderAutoComplete, Form, Button } from '@gqlapp/look-client-react';
+import { Icon } from 'antd';
+import SearchNavbar from '@gqlapp/listing-client-react/containers/SearchNavbar';
 
 class UserDemoView extends Component {
   constructor(props) {
@@ -31,14 +31,8 @@ class UserDemoView extends Component {
       item =>
         item.username.toUpperCase().includes(query.toUpperCase()) ||
         (item.profile &&
-          ((item.profile.firstName &&
-            item.profile.firstName
-              .toUpperCase()
-              .includes(query.toUpperCase())) ||
-            (item.profile.lastName &&
-              item.profile.lastName
-                .toUpperCase()
-                .includes(query.toUpperCase()))))
+          ((item.profile.firstName && item.profile.firstName.toUpperCase().includes(query.toUpperCase())) ||
+            (item.profile.lastName && item.profile.lastName.toUpperCase().includes(query.toUpperCase()))))
     );
     return items;
   }
@@ -83,7 +77,7 @@ const ListingFormWithFormik = withFormik({
     console.log(values);
   },
   enableReinitialize: true,
-  displayName: "ListingForm" // helps with React DevTools
+  displayName: 'ListingForm' // helps with React DevTools
 });
 
 export default ListingFormWithFormik(UserDemoView);

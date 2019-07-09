@@ -1,6 +1,6 @@
-import React from "react";
-import { CardText } from "@gqlapp/look-client-react";
-import { Avatar, Row, Col } from "antd";
+import React from 'react';
+import { CardText } from '@gqlapp/look-client-react';
+import { Avatar, Row, Col } from 'antd';
 
 const ProfileMiniComponent = ({ item }) => {
   return (
@@ -9,7 +9,7 @@ const ProfileMiniComponent = ({ item }) => {
         <Avatar size={30} src={item.avatar} />
       </Col>
       <Col span={18}>
-        <CardText style={{ margin: "2px 0px" }}>
+        <CardText style={{ margin: '2px 0px' }}>
           {item.firstName} {item.lastName}
         </CardText>
       </Col>

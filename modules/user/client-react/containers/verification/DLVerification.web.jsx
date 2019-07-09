@@ -47,7 +47,11 @@ class DLAdd extends Component {
 
   render() {
     return (
-      <VerificationModalComponent button="Identification" title="Driving License Verification" vStatus={this.state.vStatus}>
+      <VerificationModalComponent
+        button="Identification"
+        title="Driving License Verification"
+        vStatus={this.state.vStatus}
+      >
         {this.state.loading ? <Loader text="Loading..." /> : ''}
         {this.state.form ? <DLVerificationFormComponent onSubmit={this.onChange} /> : ''}
         {this.state.verified ? <DrivingLicenseComponent dl={this.state.dl} /> : ''}

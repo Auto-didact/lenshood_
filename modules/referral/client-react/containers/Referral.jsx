@@ -1,10 +1,10 @@
-import React from "react";
-import ReferralView from "../components/ReferralView";
-import { graphql, compose } from "react-apollo";
-import REFERRAL_QUERY from "../graphql/ReferralUserQuery.graphql";
-import SEND_REF_EMAIL from "../graphql/RefEmail.graphql";
-import { message } from "antd";
-import { FormError } from "@gqlapp/forms-client-react";
+import React from 'react';
+import ReferralView from '../components/ReferralView';
+import { graphql, compose } from 'react-apollo';
+import REFERRAL_QUERY from '../graphql/ReferralUserQuery.graphql';
+import SEND_REF_EMAIL from '../graphql/RefEmail.graphql';
+import { message } from 'antd';
+import { FormError } from '@gqlapp/forms-client-react';
 
 const Referral = props => {
   const { sendRefEmail, loading } = props;
@@ -17,20 +17,13 @@ const Referral = props => {
     try {
       await sendRefEmail(values);
     } catch (e) {
-      message.error("Invition sending failed");
-      throw new FormError("Invition sending failed", e);
+      message.error('Invition sending failed');
+      throw new FormError('Invition sending failed', e);
     }
-    message.info("Invitation sent!");
+    message.info('Invitation sent!');
   };
 
-  return (
-    <ReferralView
-      state={state}
-      referralUser={props.referralUser}
-      onSubmit={onSubmit}
-      loading={loading}
-    />
-  );
+  return <ReferralView state={state} referralUser={props.referralUser} onSubmit={onSubmit} loading={loading} />;
 };
 
 export default compose(

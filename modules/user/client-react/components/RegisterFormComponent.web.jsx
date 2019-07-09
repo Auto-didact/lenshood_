@@ -1,39 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withFormik } from "formik";
-import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { NavLink, Link } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withFormik } from 'formik';
+import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { NavLink, Link } from 'react-router-dom';
+import { translate } from '@gqlapp/i18n-client-react';
 
-import {
-  match,
-  email,
-  minLength,
-  required,
-  validate
-} from "@gqlapp/validation-common-react";
-import { Form, RenderField, Button, Alert } from "@gqlapp/look-client-react";
+import { match, email, minLength, required, validate } from '@gqlapp/validation-common-react';
+import { Form, RenderField, Button, Alert } from '@gqlapp/look-client-react';
 import {
   // LinkedInButton,
   GoogleButton,
   // GitHubButton,
   FacebookButton
-} from "@gqlapp/authentication-client-react";
-import { camera1, camera2 } from "../constants/DefaultImages";
+} from '@gqlapp/authentication-client-react';
+import { camera1, camera2 } from '../constants/DefaultImages';
 
-import { Divider, Row, Col, Card, Modal } from "antd";
+import { Divider, Row, Col, Card, Modal } from 'antd';
 
-import settings from "../../../../settings";
+import settings from '../../../../settings';
 
 const RegisterFormComponentSchema = {
   username: [required, minLength(3)],
   email: [required, email],
   password: [required, minLength(settings.auth.password.minLength)],
-  passwordConfirmation: [
-    match("password"),
-    required,
-    minLength(settings.auth.password.minLength)
-  ]
+  passwordConfirmation: [match('password'), required, minLength(settings.auth.password.minLength)]
 };
 
 const { github, facebook, linkedin, google } = settings.auth.social;
@@ -95,21 +85,12 @@ const { github, facebook, linkedin, google } = settings.auth.social;
 //   );
 // };
 
-const RegisterFormComponent = ({
-  values,
-  handleSubmit,
-  submitting,
-  errors,
-  t
-}) => {
+const RegisterFormComponent = ({ values, handleSubmit, submitting, errors, t }) => {
   return (
     <div className="signOutOuter">
-      <Card
-        className="modalcard"
-        bodyStyle={{ borderRadius: "0px", padding: "0px", margin: "0px" }}
-      >
+      <Card className="modalcard" bodyStyle={{ borderRadius: '0px', padding: '0px', margin: '0px' }}>
         <Row>
-          <Col sm={8} xs={0} style={{ overflow: "hidden" }}>
+          <Col sm={8} xs={0} style={{ overflow: 'hidden' }}>
             <img src={camera1} alt="" className="signUpImg" />
           </Col>
           <Col sm={0} xs={24}>
@@ -120,39 +101,35 @@ const RegisterFormComponent = ({
             <Row>
               <Col xs={24} sm={12}>
                 {facebook.enabled && (
-                  <div style={{ margin: "2px" }}>
-                    <FacebookButton text={t("login.fbBtn")} type={"button"} />
+                  <div style={{ margin: '2px' }}>
+                    <FacebookButton text={t('login.fbBtn')} type={'button'} />
                   </div>
                 )}
               </Col>
               <Col xs={24} sm={12}>
                 {google.enabled && (
-                  <div style={{ margin: "2px" }}>
-                    <GoogleButton text={t("login.googleBtn")} type={"button"} />
+                  <div style={{ margin: '2px' }}>
+                    <GoogleButton text={t('login.googleBtn')} type={'button'} />
                   </div>
                 )}
               </Col>
             </Row>
-            <Divider style={{ marginBottom: "10px" }} />
+            <Divider style={{ marginBottom: '10px' }} />
             <h2 className="form-element-heading">Or you can always...</h2>
             {/* <p className="signInForm">Let me help you sign up</p> */}
-            <Form
-              className="paddingMarginBottom"
-              name="register"
-              onSubmit={handleSubmit}
-            >
+            <Form className="paddingMarginBottom" name="register" onSubmit={handleSubmit}>
               <Field
                 name="username"
                 component={RenderField}
                 type="text"
-                placeholder={t("reg.form.field.name")}
+                placeholder={t('reg.form.field.name')}
                 value={values.username}
               />
               <Field
                 name="email"
                 component={RenderField}
                 type="email"
-                placeholder={t("reg.form.field.email")}
+                placeholder={t('reg.form.field.email')}
                 value={values.email}
               />
 
@@ -160,44 +137,40 @@ const RegisterFormComponent = ({
                 name="password"
                 component={RenderField}
                 type="password"
-                placeholder={t("reg.form.field.pass")}
+                placeholder={t('reg.form.field.pass')}
                 value={values.password}
               />
               <Field
                 name="passwordConfirmation"
                 component={RenderField}
                 type="password"
-                placeholder={t("reg.form.field.passConf")}
+                placeholder={t('reg.form.field.passConf')}
                 value={values.passwordConfirmation}
               />
-              <Divider style={{ margin: "5px 0px" }} />
+              <Divider style={{ margin: '5px 0px' }} />
               <Col span={12}>
                 <Field
                   label={<strong>Referral (optional)</strong>}
                   name="referredBy"
                   component={RenderField}
                   type="text"
-                  placeholder={t("reg.form.field.referral")}
+                  placeholder={t('reg.form.field.referral')}
                   value={values.referredBy}
                 />
               </Col>
               <div className="text-center">
-                {errors &&
-                  errors.errorMsg &&
-                  message.error(errors.referral || errors.errorMsg)}
+                {errors && errors.errorMsg && message.error(errors.referral || errors.errorMsg)}
               </div>
               <Button color="primary" block type="submit" disabled={submitting}>
-                {t("reg.form.btnSubmit")}
+                {t('reg.form.btnSubmit')}
               </Button>
 
               <p className="belowFormtext marginT20">
-                Already have an account?{" "}
-                <Button href="/login">{t("login.form.btnSubmit")}</Button>
+                Already have an account? <Button href="/login">{t('login.form.btnSubmit')}</Button>
               </p>
-              <Divider style={{ margin: "5px 0px" }} />
+              <Divider style={{ margin: '5px 0px' }} />
               <p className="belowFormtext">
-                By signing up you agree to our{" "}
-                <Link to="/terms-of-service">terms of service</Link>
+                By signing up you agree to our <Link to="/terms-of-service">terms of service</Link>
               </p>
             </Form>
           </Col>
@@ -217,11 +190,11 @@ RegisterFormComponent.propTypes = {
 
 const RegisterFormComponentWithFormik = withFormik({
   mapPropsToValues: ({ referredUsername }) => ({
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    referredBy: referredUsername || ""
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+    referredBy: referredUsername || ''
   }),
   validate: values => validate(values, RegisterFormComponentSchema),
   async handleSubmit(
@@ -231,7 +204,7 @@ const RegisterFormComponentWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    if (values.referredBy === false) values.referredBy = "";
+    if (values.referredBy === false) values.referredBy = '';
     onSubmit(values).catch(e => {
       if (isFormError(e)) {
         setErrors(e.errors);
@@ -241,9 +214,7 @@ const RegisterFormComponentWithFormik = withFormik({
     });
   },
   enableReinitialize: true,
-  displayName: "SignUpForm" // helps with React DevTools
+  displayName: 'SignUpForm' // helps with React DevTools
 });
 
-export default translate("user")(
-  RegisterFormComponentWithFormik(RegisterFormComponent)
-);
+export default translate('user')(RegisterFormComponentWithFormik(RegisterFormComponent));

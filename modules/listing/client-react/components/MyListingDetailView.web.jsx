@@ -10,7 +10,6 @@ import ReviewsCardComponent from './components/ReviewsCardComponent';
 import naruto4 from './resources/naruto4.jpg';
 import naruto3 from './resources/naruto3.jpg';
 
-
 import settings from '../../../../settings';
 
 class MyListDetailsView extends Component {

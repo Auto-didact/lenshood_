@@ -1,23 +1,22 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { graphql, compose } from "react-apollo";
-import update from "immutability-helper";
-import { PLATFORM } from "@gqlapp/core-common";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { graphql, compose } from 'react-apollo';
+import update from 'immutability-helper';
+import { PLATFORM, removeTypename } from '@gqlapp/core-common';
 
-import { removeTypename } from "@gqlapp/core-common";
-import ListingListView from "../components/ListingListView";
+import ListingListView from '../components/ListingListView';
 
-import LISTS_STATE_QUERY from "../graphql/ListsStateQuery.client.graphql";
-import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
-import UPDATE_FILTER from "../graphql/UpdateFilter.client.graphql";
+import LISTS_STATE_QUERY from '../graphql/ListsStateQuery.client.graphql';
+import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
+import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
 
-import LISTINGS_QUERY from "../graphql/ListingsQuery.graphql";
-import LISTINGS_SUBSCRIPTION from "../graphql/ListingsSubscription.graphql";
-import DELETE_LISTING from "../graphql/DeleteListing.graphql";
-import settings from "../../../../settings";
+import LISTINGS_QUERY from '../graphql/ListingsQuery.graphql';
+import LISTINGS_SUBSCRIPTION from '../graphql/ListingsSubscription.graphql';
+import DELETE_LISTING from '../graphql/DeleteListing.graphql';
+import settings from '../../../../settings';
 
 const limit =
-  PLATFORM === "web" || PLATFORM === "server"
+  PLATFORM === 'web' || PLATFORM === 'server'
     ? settings.pagination.web.itemsNumber
     : settings.pagination.mobile.itemsNumber;
 
@@ -36,14 +35,12 @@ export const onAddListing = (prev, node) => {
     });
   }
 
-  const filteredListings = prev.listings.edges.filter(
-    listing => listing.node.id !== null
-  );
+  const filteredListings = prev.listings.edges.filter(listing => listing.node.id !== null);
 
   const edge = {
     cursor: node.id,
     node: node,
-    __typename: "ListingEdges"
+    __typename: 'ListingEdges'
   };
 
   return update(prev, {
@@ -94,9 +91,9 @@ const subscribeToListingList = (subscribeToMore, endCursor, filter) =>
     ) => {
       let newResult = prev;
 
-      if (mutation === "CREATED") {
+      if (mutation === 'CREATED') {
         newResult = onAddListing(prev, node);
-      } else if (mutation === "DELETED") {
+      } else if (mutation === 'DELETED') {
         newResult = onDeleteListing(prev, node.id);
       }
 
@@ -114,11 +111,7 @@ const Listing = props => {
         }
       } = props;
       const endCursor = listings ? propsEndCursor : 0;
-      const subscribe = subscribeToListingList(
-        props.subscribeToMore,
-        endCursor,
-        props.filter
-      );
+      const subscribe = subscribeToListingList(props.subscribeToMore, endCursor, props.filter);
       return () => subscribe();
     }
   });
@@ -142,7 +135,7 @@ export default compose(
     options: ({ orderBy, filter }) => {
       return {
         variables: { limit: limit, after: 0, orderBy, filter },
-        fetchPolicy: "network-only"
+        fetchPolicy: 'network-only'
       };
     },
     props: ({ data }) => {
@@ -156,10 +149,7 @@ export default compose(
             const totalCount = fetchMoreResult.listings.totalCount;
             const newEdges = fetchMoreResult.listings.edges;
             const pageInfo = fetchMoreResult.listings.pageInfo;
-            const displayedEdges =
-              dataDelivery === "add"
-                ? [...previousResult.listings.edges, ...newEdges]
-                : newEdges;
+            const displayedEdges = dataDelivery === 'add' ? [...previousResult.listings.edges, ...newEdges] : newEdges;
 
             return {
               // By returning `cursor` here, we update the `fetchMore` function
@@ -168,7 +158,7 @@ export default compose(
                 totalCount,
                 edges: displayedEdges,
                 pageInfo,
-                __typename: "Listings"
+                __typename: 'Listings'
               }
             };
           }
@@ -184,10 +174,10 @@ export default compose(
         mutate({
           variables: { id },
           optimisticResponse: {
-            __typename: "Mutation",
+            __typename: 'Mutation',
             deleteListing: {
               id: id,
-              __typename: "Listing"
+              __typename: 'Listing'
             }
           },
 
@@ -201,10 +191,7 @@ export default compose(
               }
             });
 
-            const newListListings = onDeleteListing(
-              prevListings,
-              deleteListing.id
-            );
+            const newListListings = onDeleteListing(prevListings, deleteListing.id);
 
             // Write listings to cache
             cache.writeQuery({
@@ -216,7 +203,7 @@ export default compose(
               data: {
                 listings: {
                   ...newListListings.listings,
-                  __typename: "Listings"
+                  __typename: 'Listings'
                 }
               }
             });

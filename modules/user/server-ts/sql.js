@@ -6,8 +6,8 @@ import { knex, returnId } from '@gqlapp/database-server-ts';
 
 import { Model, raw } from 'objection';
 
-import Listing from "@gqlapp/listing-server-ts/sql";
-import Referral from "@gqlapp/referral-server-ts/sql";
+import Listing from '@gqlapp/listing-server-ts/sql';
+import Referral from '@gqlapp/referral-server-ts/sql';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -62,8 +62,8 @@ export class User extends Model {
         relation: Model.HasManyRelation,
         modelClass: Referral,
         join: {
-          from: "user.id",
-          to: "referral.user_id"
+          from: 'user.id',
+          to: 'referral.user_id'
         }
       },
       addresses: {
@@ -679,88 +679,6 @@ export class User extends Model {
         .first()
     );
     return res;
-  }
-
-  async endorseCount(endorsee_id) {
-    return camelizeKeys(
-      await knex
-        .count('u.id')
-        .from('user_endorsement as u')
-        .where('u.endorsee_id', '=', endorsee_id)
-        .first()
-    )['count(`u`.`id`)'];
-  }
-
-  async toggleEndorse(endorsee_id, endorser_id) {
-    const count = camelizeKeys(
-      await knex
-        .count('u.id')
-        .from('user_endorsement as u')
-        .where('u.endorser_id', '=', endorser_id)
-        .andWhere('u.endorsee_id', '=', endorsee_id)
-        .first()
-    )['count(`u`.`id`)'];
-    let isEndorsed = false;
-    if (count == 0) {
-      await returnId(
-        knex('user_endorsement').insert({
-          endorser_id: endorser_id,
-          endorsee_id: endorsee_id
-        })
-      );
-      isEndorsed = true;
-    } else {
-      await knex('user_endorsement')
-        .where('endorser_id', '=', endorser_id)
-        .andWhere('endorsee_id', '=', endorsee_id)
-        .del();
-    }
-    let endorseCount = await this.endorseCount(endorsee_id);
-    return {
-      endorsecount: endorseCount,
-      isEndorsed: isEndorsed
-    };
-  }
-
-  async follwersCount(userId) {
-    return camelizeKeys(
-      await knex
-        .count('u.id')
-        .from('user_follower as u')
-        .where('u.followee_id', '=', userId)
-        .first()
-    )['count(`u`.`id`)'];
-  }
-
-  async toggleFollow(userId, followerId) {
-    const count = camelizeKeys(
-      await knex
-        .count('u.id')
-        .from('user_follower as u')
-        .where('u.followee_id', '=', userId)
-        .andWhere('u.follower_id', '=', followerId)
-        .first()
-    )['count(`u`.`id`)'];
-    let isFollowed = false;
-    if (count == 0) {
-      await returnId(
-        knex('user_follower').insert({
-          followee_id: userId,
-          follower_id: followerId
-        })
-      );
-      isFollowed = true;
-    } else {
-      await knex('user_follower')
-        .where('followee_id', '=', userId)
-        .andWhere('follower_id', '=', followerId)
-        .del();
-    }
-    let follwerCount = await this.follwersCount(userId);
-    return {
-      follwerCount: follwerCount,
-      isFollwed: isFollowed
-    };
   }
 }
 

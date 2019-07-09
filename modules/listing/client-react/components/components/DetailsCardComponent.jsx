@@ -10,7 +10,6 @@ class DetailsCardComponent extends Component {
 
     const buttonText = this.props.buttonText;
 
-
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
@@ -79,17 +78,9 @@ class DetailsCardComponent extends Component {
               </Row>
               <Row gutter={13} align="center">
                 <Col span={12}>
-
-                  <Button
-                    type="primary"
-                    block
-                    onClick={e => this.props.toggle(item.id, e)}
-                  >
-                    {item.status === "On Shelf"
-                      ? "Move to Idle"
-                      : "Move to Shelf"}
+                  <Button type="primary" block onClick={e => this.props.toggle(item.id, e)}>
+                    {item.status === 'On Shelf' ? 'Move to Idle' : 'Move to Shelf'}
                   </Button>
-
                 </Col>
                 <Col span={12}>
                   <Button type="primary" block>

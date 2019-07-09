@@ -232,7 +232,10 @@ class ProfileView extends React.Component {
               <Row gutter={10} type="flex" justify="space-around" align="middle">
                 {/*Verification*/}
                 <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 24 }} style={{ height: '100%' }}>
-                  <UserVerificationsComponent data={currentUser.verification} verification={this.userCardData().verification} />
+                  <UserVerificationsComponent
+                    data={currentUser.verification}
+                    verification={this.userCardData().verification}
+                  />
                 </Col>
 
                 <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>

@@ -1,21 +1,19 @@
-import React from "react";
-import Helmet from "react-helmet";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout, Loader } from "@gqlapp/look-client-react";
-import settings from "../../../../settings";
-import { Button, Icon, Empty } from "antd";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import settings from '../../../../settings';
+import { Button, Icon, Empty } from 'antd';
+import { Link } from 'react-router-dom';
 
 const ReferralVerifyView = props => {
   const { t, onSubmit, currentUser, user, loading } = props;
   // console.log(props);
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("title")}`}
-      meta={[
-        { name: "description", content: `${settings.app.name} - ${t("meta")}` }
-      ]}
+      title={`${settings.app.name} - ${t('title')}`}
+      meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
     />
   );
 
@@ -26,17 +24,16 @@ const ReferralVerifyView = props => {
         id="back-button"
         to="/invites"
         style={{
-          fontSize: "20px",
-          margin: "10px",
-          textDecoration: "underline"
+          fontSize: '20px',
+          margin: '10px',
+          textDecoration: 'underline'
         }}
       >
         <Icon type="arrow-left" /> Back
       </Link>
-      {loading && !user && <Loader text={"Loading..."} />}
+      {loading && !user && <Loader text={'Loading...'} />}
       {user && user.profile && currentUser ? (
-        user.profile.referredBy &&
-        currentUser.id === user.profile.referredBy.id ? (
+        user.profile.referredBy && currentUser.id === user.profile.referredBy.id ? (
           !user.profile.isVerified ? (
             <Button type="primary" onClick={() => onSubmit()}>
               Verify User
@@ -71,4 +68,4 @@ ReferralVerifyView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("referral")(ReferralVerifyView);
+export default translate('referral')(ReferralVerifyView);
