@@ -1,19 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { PageLayout } from '@gqlapp/look-client-react';
-// import RenderAddress from '@gqlapp/user-client-react';
-// import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import {
-  Row,
-  Col,
-  Icon,
-  // Radio,
-  Button
-} from 'antd';
-// import {
-//   // withFormik,
-//   FieldArray
-// } from 'formik';
+import RenderAddress, { PageLayout } from '@gqlapp/look-client-react';
+import { FieldArray } from 'formik';
+import { Row, Col, Icon, Button } from 'antd';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
@@ -39,17 +28,20 @@ export default class CheckoutBillView extends React.Component {
       refund: 5000,
       totalRent: 1300
     },
-    address: {
-      name: 'Ankit Jain',
-      address1: 'Room A308, Manas Hostel, IITG',
-      address2: 'Guwahati, North Guwahati',
-      state: 'Assam',
-      PIN: '7810390',
-      mobile: '+91-9085626859'
-    }
+    address: [
+      {
+        name: 'Ankit Jain',
+        streetaddress1: 'Room A308, Manas Hostel, IITG',
+        streetaddress2: 'Guwahati, North Guwahati',
+        state: 'Assam',
+        pinCode: '7810390',
+        mobile: '+91-9085626859'
+      }
+    ]
   };
 
   render() {
+    const { t } = this.props;
     return (
       <PageLayout>
         {renderMetaData()}
@@ -113,12 +105,12 @@ export default class CheckoutBillView extends React.Component {
                 render={arrayHelpers => (
                   <RenderAddress
                     name="addresses"
-                    addresses={
-                      // addresses ||
-                      this.state.address
-                    }
+                    addresses={this.state.address}
+                    // addresses={addresses}
                     arrayHelpers={arrayHelpers}
-                    // isSelectable={true}
+                    label={t('addresses')}
+                    t={t}
+                    isSelectable={true}
                   />
                 )}
               /> */}

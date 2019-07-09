@@ -11,12 +11,12 @@ import {
   RenderSelect,
   RenderUpload,
   RenderCheckBox,
+  RenderAddress,
   RenderDynamicField,
   Option,
   Button,
   Alert
 } from '@gqlapp/look-client-react';
-import RenderAddress from './RenderAddress';
 import settings from '../../../../settings';
 import './styling.css';
 
