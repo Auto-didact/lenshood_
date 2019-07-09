@@ -117,18 +117,27 @@
 }
 
 .page-content {
-  width: 100vw;
+  max-width: 100%;
   padding: 69px 5px 10px 5px;
   min-height: 100vh;
 }
+//Home-Page{--
+
+.home-head-container{
+  margin-bottom:95vh;
+  
+}
 .home-head{
-  margin: -65px -5px -10px -5px;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100vw;
   height: 100vh;
   overflow: hidden;
-
+  
 }
 .home-head-image{
-  margin-left: -300px;
+  margin-left: -45vh;
   
   height:100vh;
   
@@ -138,59 +147,123 @@
   top: 100px;
   left:7vw;
   right:7vw;
-  height:400px;
+  
   width:86vw;
+  
 }
 .home-image-contentText{
   color: rgba(255,250,250, 0.9) !important;
   font-family: Avenir Next;
-  font-size: 8vh;
+  font-size: 50px;
+  
 }
 
 .home-image-contentText2{
-  margin-top: 20px;
+  
   color: rgba(255,250,250, 0.9) !important;
   font-family: Avenir Next;
-  font-size: 3vh;
+  font-size: 15px;
   width:70%;
 }
-.home-image-content-button{
-  margin-top: 30px;
+.home-image-content-button-login{
+  margin-top:30px;
 }
 
 .home-image-content-question{
-  margin-top: 30px;
+  
   color: rgba(255,250,250, 0.9) !important;
   font-family: Avenir Next;
-  font-size: 3vh;
+  font-size: 15px;
+}
+
+.home-image-divider-1{
+
+}
+.home-image-divider-2{
+  width:55%;
+}
+.home-image-divider-3{
+  width:55%;
+}
+//--}Home-Page
+
+@media only screen and (min-width: 768px) {
+  .home-head-image{
+    margin-left: -10vh;
+    
+    height:100vh;
+    
+  }
+  .home-image-contentText{
+  
+    font-size: 60px;
+  }
+  .home-image-contentText2{
+  
+   
+    font-size: 20px;
+  }
+  .home-image-content-question{
+  
+    
+    font-size: 20px;
+  }
+  .home-content-divider-margin{
+    padding: 10px 0px;
+  }
+  
 }
 
 @media only screen and (min-width: 769px) {
   .page-content {
     padding: 69px 4vw 20px 4vw;
   }
-  .home-head{
-    margin: -8px -4vw 5px -4vw;
+  
+}
 
+@media only screen and (min-width: 1024px) {
+  .home-image-contentText2{
+    width:50%;
+  }
+  .home-image-content-button{
+    width: 180px;
+  }
+  .home-image-divider-2{
+    width:35%;
+  }
+  .home-image-divider-3{
+    width:35%;
+  }
+  .home-head-image{
+    margin-left: 0vh;
+    height:100vh;
+
+        
   }
 }
+
 @media only screen and (min-width: 1025px) {
   .page-content {
     padding: 69px 5vw 20px 5vw;
   }
-  .home-head{
-    margin: -8px -5vw 5px -5vw;
+  
+}
 
+@media only screen and (min-width: 1440px) {
+
+  
+  .home-image-content{
+    padding-left: 50px;
+  }
+  .home-content-divider-margin{
+    padding: 20px 0px;
   }
 }
 @media only screen and (min-width: 1441px) {
   .page-content {
     padding: 69px 8vw 20px 8vw;
   }
-  .home-head{
-    margin: -8px -8vw 5px -8vw;
-
-  }
+  
 }
 
 #content {

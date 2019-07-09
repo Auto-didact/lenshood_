@@ -10,7 +10,7 @@ import { MenuItem } from '@gqlapp/look-client-react';
 import { Icon } from 'antd';
 
 import Listings from './containers/Listings';
-import ListingCatalogue from './containers/ListingCatalogue';
+import ListingCatalogueView from './components/ListingCatalogueView';
 import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
@@ -58,7 +58,7 @@ export default new ClientModule({
     <Route exact path="/listings" component={Listings} />,
     <AuthRoute exact path="/listing/new" redirect="/profile" role={['user', 'admin']} component={ListingAdd} />,
     <AuthRoute redirect="/profile" role={['user', 'admin']} path="/listing/:id" component={ListingEdit} />,
-    <Route exact path="/listing_catalogue" component={ListingCatalogue} />,
+    <Route exact path="/listing_catalogue" component={ListingCatalogueView} />,
     <Route exact path="/my-listings/:id" component={MyListingDetail} />,
 
     // Components
