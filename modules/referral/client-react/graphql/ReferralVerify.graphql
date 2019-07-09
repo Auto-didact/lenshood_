@@ -1,0 +1,3 @@
+mutation verifyReferral($input: verifyReferralInput!) {
+  verifyReferral(input: $input)
+}

@@ -100,8 +100,21 @@ type UserReviewsLikes {
   isReply: Boolean!
 }
 
+type WatchList {
+  id: Int!
+  listingId: Int!
+  userId: Int!
+  shouldNotify: String!
+}
+
 extend type Query {
-  listings(limit: Int, after: Int): Listings
+  listings(
+    limit: Int
+    after: Int
+    orderBy: OrderByListInput
+    filter: FilterListInput
+  ): Listings
+  listingsList: [Listing]
   listing(id: Int!): Listing
   userListings(userId: Int): [Listing]
   watchlist(userId: Int!): [WatchList]
@@ -114,6 +127,19 @@ extend type Query {
 type CountOFLikesDisLikes {
   likes: Int!
   disLikes: Int!
+}
+
+input FilterListInput {
+  searchText: String
+  gearCategory: String
+  gearSubcategory: String
+}
+
+# Input for ordering listings
+input OrderByListInput {
+  column: String
+  # asc | desc
+  order: String
 }
 
 extend type Mutation {
@@ -142,7 +168,6 @@ extend type Mutation {
     listing_id: Int!
     should_notify: Boolean
   ): String
-
   addReview(
     listing_id: Int!
     reviewer_id: Int!
@@ -243,7 +268,10 @@ extend type Subscription {
   # Subscription for when editing a listing
   listingUpdated(id: Int!): UpdateListingPayload
   # Subscription for listing list
-  listingsUpdated(endCursor: Int!): UpdateListingPayload
+  listingsUpdated(
+    endCursor: Int!
+    filter: FilterListInput
+  ): UpdateListingPayload
   # Subscription for listingReviews
   listingReviewUpdated(listingId: Int!): UpdateListingReviewPayload
 }

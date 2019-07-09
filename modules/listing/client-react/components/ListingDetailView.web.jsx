@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import Helmet from 'react-helmet';
-import { Row, Col, Breadcrumb, Card } from 'antd';
+
 import AddToCartCard from '@gqlapp/order-client-react/containers/AddToCartCard';
+
+import { Row, Col, Breadcrumb } from 'antd';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
 
-import UserCard from './components/userCard';
-import ProductCard from './components/ProductCard';
-import ReviewsCard from './components/ReviewsCard';
-import SuggestedCardList from './components/SuggestedCardList';
+import UserCardComponent from './components/UserCardComponent';
+import ProductCardComponent from './components/ProductCardComponent';
+import ReviewsCard from './components/ReviewsCardComponent';
+// import SuggestedCardList from './components/SuggestedCardList';
 
 import settings from '../../../../settings';
 
@@ -27,7 +29,7 @@ class ListingDetailView extends Component {
       ]}
     />
   );
-
+  UserForm;
   onChange = value => {
     this.setState({
       noOfDays: value
@@ -42,6 +44,7 @@ class ListingDetailView extends Component {
     const seller = this.props.listing && this.props.listing.user;
 
     const leftGap = '0%';
+
     const cancellationPolicy = t('listingDetail.content.cancellationPolicy');
     const damagePolicy = t('listingDetail.content.damagePolicy');
 
@@ -82,7 +85,11 @@ class ListingDetailView extends Component {
           }
           <Row gutter={10} style={{ marginLeft: leftGap, marginRight: leftGap }}>
             <Col xl={16} lg={15} md={13} sm={24}>
-              <ProductCard listing={listing} cancellationPolicy={cancellationPolicy} damagePolicy={damagePolicy} />
+              <ProductCardComponent
+                listing={listing}
+                cancellationPolicy={cancellationPolicy}
+                damagePolicy={damagePolicy}
+              />
               <ReviewsCard listing={listing} reviews={reviews} />
             </Col>
             <Col xl={8} lg={9} md={11} sm={24}>
@@ -96,20 +103,20 @@ class ListingDetailView extends Component {
                   />
                 </Col>
                 <Col span={24}>
-                  <UserCard seller={seller} />
+                  <UserCardComponent seller={seller} />
                 </Col>
               </Row>
             </Col>
             {/* <Col span={24}>
             <Card>
               <h2 className="fontBold">Other listings by {this.state.product.seller.name}</h2>
-              <SuggestedCardList relatedList={this.state.product.relatedList} />
+              <SuggestedCardListComponent relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
             {/* <Col span={24}>
             <Card>
               <h2 className="fontBold">Frequently rented along with {this.state.product.title}</h2>
-              <SuggestedCardList relatedList={this.state.product.relatedList} />
+              <SuggestedCardListComponent relatedList={this.state.product.relatedList} />
             </Card>
           </Col> */}
           </Row>

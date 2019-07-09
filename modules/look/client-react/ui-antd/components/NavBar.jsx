@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Drawer, Menu, Dropdown, Row, Col, Icon } from 'antd';
+import { Drawer, Menu, Dropdown, Row, Col, Icon, Form } from 'antd';
 
 import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
 import UserAvatar from '@gqlapp/user-client-react/containers/UserAvatar';
+// import SearchNavbar from "@gqlapp/listing-client-react/containers/SearchNavbar";
 import MenuItem from './MenuItem';
 import DropDown from './Dropdown';
 
@@ -106,71 +107,83 @@ class NavBar extends React.Component {
     return (
       <div>
         <Row gutter={0} className="screen_width_more_than_800">
-          <Col span={14}>
-            <Menu
-              onClick={this.handleClick}
-              selectedKeys={[this.props.location.pathname]}
-              mode="horizontal"
-              className="line_height60"
-            >
-              <MenuItem key="/">
-                <NavLink to="/" className="nav-link">
-                  <img src={require('../../logo/Logo2.png')} height="40" width="40" />
-                </NavLink>
-              </MenuItem>
-              {__DEV__ && (
-                <MenuItem>
-                  <DropDown type="deployment-unit">
-                    {ref.modules.navItemsTest}
+          <Form layout="inline">
+            <Col span={14}>
+              <Col span={8}>
+                <Menu
+                  onClick={this.handleClick}
+                  selectedKeys={[this.props.location.pathname]}
+                  mode="horizontal"
+                  className="line_height60"
+                >
+                  <MenuItem key="/">
+                    <NavLink to="/" className="nav-link">
+                      <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                    </NavLink>
+                  </MenuItem>
+                  {__DEV__ && (
                     <MenuItem>
-                      <a href="/graphiql">GraphiQL</a>
+                      <DropDown type="deployment-unit">
+                        {ref.modules.navItemsTest}
+                        <MenuItem>
+                          <a href="/graphiql">GraphiQL</a>
+                        </MenuItem>
+                      </DropDown>
                     </MenuItem>
-                  </DropDown>
-                </MenuItem>
-              )}
-
-              <IfLoggedIn role="admin">
-                <MenuItem>
-                  <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
-                </MenuItem>
-              </IfLoggedIn>
-              {ref.modules.navItems}
-            </Menu>
-          </Col>
-          <Col span={10}>
-            <Menu
-              onClick={this.handleClick}
-              selectedKeys={[this.props.location.pathname]}
-              mode="horizontal"
-              className="right line_height60"
-            >
-              <Menu.Item>
-                <Dropdown overlay={this.menuList} placement="bottomCenter">
-                  <a>
-                    About <Icon type="down" />
-                  </a>
-                </Dropdown>
-              </Menu.Item>
-              {ref.modules.navItemsRight}
-              <IfLoggedIn>
-                <MenuItem>
-                  <DropDown content={<UserAvatar />} noicon>
-                    {ref.modules.navItemsUser}
-                  </DropDown>
-                </MenuItem>
-              </IfLoggedIn>
-            </Menu>
-          </Col>
+                  )}
+                  <IfLoggedIn role="admin">
+                    <MenuItem>
+                      <DropDown type="safety-certificate">{ref.modules.navItemsAdmin}</DropDown>
+                    </MenuItem>
+                  </IfLoggedIn>
+                  {ref.modules.navItems}
+                </Menu>
+              </Col>
+              <Col span={16}>
+                <Menu mode="horizontal" className="line_height60">
+                  {/* <MenuItem> */}
+                  {/* <SearchNavbar history={this.props.history} /> */}
+                  {/* </MenuItem> */}
+                </Menu>
+              </Col>
+            </Col>
+            <Col span={10}>
+              <Menu
+                onClick={this.handleClick}
+                selectedKeys={[this.props.location.pathname]}
+                mode="horizontal"
+                className="right line_height60"
+              >
+                <Menu.Item>
+                  <Dropdown overlay={this.menuList} placement="bottomCenter">
+                    <a>
+                      About <Icon type="down" />
+                    </a>
+                  </Dropdown>
+                </Menu.Item>
+                {ref.modules.navItemsRight}
+                <IfLoggedIn>
+                  <MenuItem>
+                    <DropDown content={<UserAvatar />} noicon>
+                      {ref.modules.navItemsUser}
+                    </DropDown>
+                  </MenuItem>
+                </IfLoggedIn>
+              </Menu>
+            </Col>
+          </Form>
         </Row>
 
         {/*Render This if screen width less than 800*/}
 
-        <div id="outer-container" className="screen_width_less_than_800">
+        <Row id="outer-container" className="screen_width_less_than_800">
+          {/* <Form layout="inline"> */}
           <div className="left">
             <NavLink to="/" className="nav-link">
               <img src={require('../../logo/Logo2.png')} height="40" width="40" />
             </NavLink>
           </div>
+          {/* <SearchNavbar history={this.props.history} /> */}
           <Menu
             onClick={this.handleClick}
             selectedKeys={[this.props.location.pathname]}
@@ -180,7 +193,6 @@ class NavBar extends React.Component {
             <Icon type="menu" onClick={this.showDrawer} className="hamburg" />
             {/*ref.modules.navItemsRight*/}
           </Menu>
-
           <Drawer
             title="Lenshood"
             placement="right"
@@ -256,7 +268,8 @@ class NavBar extends React.Component {
               </IfLoggedIn>
             </Menu>
           </Drawer>
-        </div>
+          {/* </Form> */}
+        </Row>
       </div>
     );
   }

@@ -6,11 +6,11 @@ import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Card, CardGroup, CardText, CardTitle, AccountLayout, Loader } from '@gqlapp/look-client-react';
 import { Row, Col, Divider, Icon, Button } from 'antd';
-import UserVerifications from './verification/UserVerifications';
-import ProfileHead from './ProfileHead';
-import UsersCard from './UsersCard';
+import UserVerificationsComponent from './verification/UserVerificationsComponent';
+import ProfileHeadComponent from './ProfileHeadComponent';
+import UsersCardComponent from './UsersCardComponent';
 import settings from '../../../../settings';
-import AddressCard from './AddressCard';
+import AddressCardComponent from './AddressCardComponent';
 
 // To Do Abstract Out
 
@@ -140,7 +140,7 @@ class ProfileView extends React.Component {
                   </Link>
                 </div>
 
-                <ProfileHead
+                <ProfileHeadComponent
                   profile={currentUser.profile && currentUser.profile}
                   description={this.userCardData().profileHead}
                 />
@@ -212,7 +212,7 @@ class ProfileView extends React.Component {
                   {currentUser.addresses && currentUser.addresses.length !== 0
                     ? currentUser.addresses.map((address, key) => (
                         <Col xs={{ span: 24 }} md={{ span: 12 }} key={key}>
-                          <AddressCard
+                          <AddressCardComponent
                             address={address}
                             subTitle={t('profile.card.group.addresses.subTitle')}
                             index={key}
@@ -232,26 +232,29 @@ class ProfileView extends React.Component {
               <Row gutter={10} type="flex" justify="space-around" align="middle">
                 {/*Verification*/}
                 <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 24 }} style={{ height: '100%' }}>
-                  <UserVerifications data={currentUser.verification} verification={this.userCardData().verification} />
+                  <UserVerificationsComponent
+                    data={currentUser.verification}
+                    verification={this.userCardData().verification}
+                  />
                 </Col>
 
                 <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>
                   <Row>
                     {/*endorsements*/}
                     <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
-                      <UsersCard data={this.userCardData().endorsements} />
+                      <UsersCardComponent data={this.userCardData().endorsements} />
                     </Col>
                     {/*endorsed*/}
                     <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
-                      <UsersCard data={this.userCardData().endorsed} />
+                      <UsersCardComponent data={this.userCardData().endorsed} />
                     </Col>
                     {/*followers*/}
                     <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
-                      <UsersCard data={this.userCardData().followers} />
+                      <UsersCardComponent data={this.userCardData().followers} />
                     </Col>
                     {/*following*/}
                     <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 24 }}>
-                      <UsersCard data={this.userCardData().following} />
+                      <UsersCardComponent data={this.userCardData().following} />
                     </Col>
                   </Row>
                 </Col>

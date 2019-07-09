@@ -1,0 +1,60 @@
+# Entity
+type LiveSearch {
+  id: Int
+  users: [LiveSearchUser]
+  gearCategory: String
+  queryItem: String
+  createdAt: String
+  updatedAt: String
+}
+
+type LiveSearchUser {
+  id: Int
+  user: User
+  createdAt: String
+  updatedAt: String
+}
+
+extend type Query {
+  liveSearches(
+    orderBy: OrderBySearchInput
+    filter: FilterSearchInput
+  ): [LiveSearch]
+}
+
+input OrderBySearchInput {
+  column: String
+  # asc | desc
+  order: String
+}
+
+input FilterSearchInput {
+  searchText: String
+  gearCategory: String
+}
+
+extend type Mutation {
+  addSearchItem(input: AddSearchQueryInput!): LiveSearch
+  increSearchItem(input: IncreDecreInput!): LiveSearch
+  decreSearchItem(input: IncreDecreInput!): LiveSearch
+}
+
+input AddSearchQueryInput {
+  userId: Int
+  gearCategory: String!
+  queryItem: String!
+}
+
+input IncreDecreInput {
+  id: Int!
+  userId: Int
+}
+
+extend type Subscription {
+  liveSearchUpdated(filter: FilterSearchInput): UpdateSearchPayload
+}
+
+type UpdateSearchPayload {
+  mutation: String!
+  node: LiveSearch!
+}

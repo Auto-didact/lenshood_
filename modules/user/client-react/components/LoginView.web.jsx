@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import { LayoutCenter, PageLayout, Card, CardGroup, CardTitle, CardText } from '@gqlapp/look-client-react';
 
-import LoginForm from './LoginForm';
+import LoginFormComponent from './LoginFormComponent';
 import settings from '../../../../settings';
 
 const LoginView = ({ onSubmit, t }) => {
@@ -24,7 +24,8 @@ const LoginView = ({ onSubmit, t }) => {
     <PageLayout>
       {renderMetaData()}
       <div align="center">
-        <LoginForm onSubmit={onSubmit} />
+        {/* <h1 className="text-center">{t("login.form.title")}</h1> */}
+        <LoginFormComponent onSubmit={onSubmit} />
         {/* <hr />
         <Card>
           <CardGroup>

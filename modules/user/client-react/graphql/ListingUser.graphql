@@ -1,0 +1,9 @@
+fragment ListingUserInfo on User {
+  id
+  username
+  email
+  profile {
+    firstName
+    lastName
+  }
+}

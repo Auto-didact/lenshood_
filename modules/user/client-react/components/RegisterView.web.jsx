@@ -4,11 +4,11 @@ import Helmet from 'react-helmet';
 import { translate } from '@gqlapp/i18n-client-react';
 import { LayoutCenter, PageLayout } from '@gqlapp/look-client-react';
 
-import RegisterForm from '../components/RegisterForm';
+import RegisterFormComponent from '../components/RegisterFormComponent';
 
 import settings from '../../../../settings';
 
-const RegisterView = ({ t, onSubmit }) => {
+const RegisterView = ({ t, onSubmit, referredUsername }) => {
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t('reg.title')}`}
@@ -25,7 +25,7 @@ const RegisterView = ({ t, onSubmit }) => {
     <PageLayout>
       {renderMetaData(t)}
       <div align="center">
-        <RegisterForm onSubmit={onSubmit} />
+        <RegisterFormComponent onSubmit={onSubmit} referredUsername={referredUsername} />
       </div>
     </PageLayout>
   );

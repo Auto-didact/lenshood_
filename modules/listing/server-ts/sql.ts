@@ -1,8 +1,7 @@
-import { camelizeKeys, decamelizeKeys } from 'humps';
+import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
-import { debug } from 'util';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -135,16 +134,57 @@ export default class ListingDAO extends Model {
     };
   }
 
-  public async listingsPagination(limit: number, after: number) {
-    const res = camelizeKeys(
+  public async listingsPagination(limit: number, after: number, orderBy: any, filter: any) {
+    const queryBuilder = ListingDAO.query().eager(eager);
+
+    if (orderBy && orderBy.column) {
+      const column = orderBy.column;
+      let order = 'asc';
+      if (orderBy.order) {
+        order = orderBy.order;
+      }
+
+      queryBuilder.orderBy(decamelize(column), order);
+    } else {
+      queryBuilder.orderBy('id', 'desc');
+    }
+
+    if (filter) {
+      if (has(filter, 'gearCategory') && filter.gearCategory !== '') {
+        queryBuilder.where(function() {
+          this.where('gear_category', filter.gearCategory);
+        });
+      }
+
+      if (has(filter, 'gearSubcategory') && filter.gearSubcategory !== '') {
+        queryBuilder.where(function() {
+          this.where('gear_subcategory', filter.gearSubcategory);
+        });
+      }
+
+      if (has(filter, 'searchText') && filter.searchText !== '') {
+        queryBuilder
+          .from('listing')
+          .leftJoin('listing_content AS ld', 'ld.listing_id', 'listing.id')
+          .where(function() {
+            this.where(raw('LOWER(??) LIKE LOWER(?)', ['description', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.model', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.gear', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.brand', `%${filter.searchText}%`]));
+          });
+      }
+    }
+
+    const res = camelizeKeys(await queryBuilder.limit(limit).offset(after));
+    return res;
+  }
+
+  public async listingsList() {
+    return camelizeKeys(
       await ListingDAO.query()
         .eager(eager)
         .orderBy('id', 'desc')
-        .limit(limit)
-        .offset(after)
     );
-    // console.log(res);
-    return res;
   }
 
   public async getReviewsForListingIds(listingIds: number[]) {
@@ -270,10 +310,12 @@ export default class ListingDAO extends Model {
   public async updateLiskesDisLikes(input: { ld: string; review_id: number; reviewer_id: number }) {
     const lkDk = await this.getIsLikeOrDisLike(input);
     if (lkDk && lkDk.length > 0) {
+      const up = {};
+      up.like_dislike = input.ld;
       await UserReviewLikesDAO.query()
+        .update(up)
         .where('listing_review_id', '=', input.review_id)
-        .where('user_id', '=', input.reviewer_id)
-        .update({ like_dislike: input.ld });
+        .where('user_id', '=', input.reviewer_id);
     } else {
       await returnId(knex('user_reviews_likes')).insert({
         user_id: input.reviewer_id,
@@ -350,7 +392,7 @@ export default class ListingDAO extends Model {
     return camelizeKeys(res.flat());
   }
 
-  public async patchListing(id, params) {
+  public async patchListing(id: any, params: any) {
     const listing = await ListingDAO.query()
       .patch(params)
       .findById(id);
@@ -412,7 +454,6 @@ export default class ListingDAO extends Model {
     );
     return res;
   }
-
   public async reviews(input: {
     reviewer_id: number;
     reviewee_id: number;
@@ -621,6 +662,30 @@ class UserReviewLikesDAO extends Model {
 class ListingReviewDAO extends Model {
   static get tableName() {
     return 'listing_review';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      listing: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ListingDAO,
+        join: {
+          from: 'listing_review.listing_id',
+          to: 'listing.id'
+        }
+      }
+    };
+  }
+}
+
+// ListingWatchListDAO model.
+class ListingWatchListDAO extends Model {
+  static get tableName() {
+    return 'watchlist';
   }
 
   static get idColumn() {

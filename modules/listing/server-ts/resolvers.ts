@@ -1,23 +1,22 @@
 import { PubSub, withFilter } from 'graphql-subscriptions';
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
-
 import { Listing, ListingReview, Identifier } from './sql';
-// import withAuth from 'graphql-auth';
+// import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = 'On Shelf';
 const IDLE = 'Idle';
-// const ONRENT = 'On Rent';
+// const ONRENT = "On Rent";
 
 interface Edges {
   cursor: number;
   node: Listing & Identifier;
 }
 
-interface ListingsParams {
-  limit: number;
-  after: number;
-}
+// interface ListingsParams {
+//   limit: number;
+//   after: number;
+// }
 
 interface ListingInput {
   input: Listing;
@@ -41,9 +40,9 @@ const LISTINGREVIEW_SUBSCRIPTION = 'listing_review_subscription';
 
 export default (pubsub: PubSub) => ({
   Query: {
-    async listings(obj: any, { limit, after }: ListingsParams, context: any) {
+    async listings(obj: any, { limit, after, orderBy, filter }: any, context: any) {
       const edgesArray: Edges[] = [];
-      const listings = await context.Listing.listingsPagination(limit, after);
+      const listings = await context.Listing.listingsPagination(limit, after, orderBy, filter);
       const total = (await context.Listing.getTotal()).count;
       const hasNextPage = total > after + limit;
 
@@ -66,6 +65,10 @@ export default (pubsub: PubSub) => ({
     },
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
+    },
+
+    listingsList(obj: any, args: any, context: any) {
+      return context.Listing.listingsList();
     },
     userListings(obj: any, { userId }: any, context: any) {
       return context.Listing.userListings(userId || context.identity.id);
@@ -93,10 +96,12 @@ export default (pubsub: PubSub) => ({
   // },
   Mutation: {
     async addListing(obj: any, { input }: ListingInput, context: any) {
-      input.userId = context.identity.id;
+      if (!input.userId) {
+        input.userId = context.identity.id;
+      }
       const id = await context.Listing.addListing(input);
       const listing = await context.Listing.listing(id);
-      // publish for listing list
+      // publish for liswting list
       pubsub.publish(LISTINGS_SUBSCRIPTION, {
         listingsUpdated: {
           mutation: 'CREATED',
@@ -190,8 +195,8 @@ export default (pubsub: PubSub) => ({
       return listing;
     },
     async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
-      const [id] = await context.Listing.addListingReviewDAO(input);
-      const listingReview = await context.Listing.getListingReviewDAO(id);
+      const [id] = await context.Listing.addListingReview(input);
+      const listingReview = await context.Listing.getListingReview(id);
       // publish for edit listing page
       listingReview.listingId = listingReview.listing_id;
       listingReview.reviewerId = listingReview.reviewer_id;
@@ -206,8 +211,8 @@ export default (pubsub: PubSub) => ({
       });
       return listingReview;
     },
-    async deleteListingReview(obj: any, { input: { id } }: ListingReviewInputWithId, context: any) {
-      const listingReview = await context.Listing.deleteListingReviewDAO(id);
+    async deleteListingReview(obj: any, { input: { id, listingId } }: ListingReviewInputWithId, context: any) {
+      await context.Listing.deleteListingReview(id);
       // publish for edit listing page
       let listingId = null;
       if (listingReview) {
@@ -226,7 +231,8 @@ export default (pubsub: PubSub) => ({
       return listingReview;
     },
     async editListingReview(obj: any, { input }: ListingReviewInputWithId, context: any) {
-      const listingReview = await context.Listing.editListingReviewDAO(input);
+      await context.Listing.editListingReview(input);
+      const listingReview = await context.Listing.getListingReview(input.id);
       // publish for edit listing page
       if (listingReview) {
         listingReview.listingId = listingReview.listing_id;

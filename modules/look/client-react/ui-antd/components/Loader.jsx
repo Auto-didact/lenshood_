@@ -15,6 +15,6 @@ export default class Loader extends React.Component {
   }
 }
 
-Loader.PropTypes = {
+Loader.propTypes = {
   text: PropTypes.string
 };

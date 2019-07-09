@@ -44,9 +44,17 @@ export default () => ({
 
       return { user, tokens };
     },
-    async register(obj, { input }, { mailer, User, req }) {
+    async register(obj, { input }, { mailer, User, req, Referral }) {
       const { t } = req;
       const errors = {};
+      let referral = null;
+      if (input.referredBy) {
+        referral = await User.getUserByUsername(input.referredBy);
+        if (!referral) {
+          errors.referral = 'Referral is incorrect';
+        }
+      }
+      delete input['referredBy'];
       const userExists = await User.getUserByUsername(input.username);
       if (userExists) {
         errors.username = t('user:auth.password.usernameIsExisted');
@@ -93,7 +101,13 @@ export default () => ({
           });
         });
       }
-
+      console.log('referral', referral);
+      console.log('user', user);
+      let idx;
+      if (referral) {
+        idx = await Referral.addReferred(referral.id, user.id);
+      }
+      console.log(idx);
       return { user };
     },
     async forgotPassword(obj, { input }, { User, mailer }) {
@@ -140,7 +154,9 @@ export default () => ({
       }
 
       if (reset.password.length < settings.auth.password.minLength) {
-        errors.password = t('user:auth.password.passwordLength', { length: settings.auth.password.minLength });
+        errors.password = t('user:auth.password.passwordLength', {
+          length: settings.auth.password.minLength
+        });
       }
 
       if (!isEmpty(errors)) throw new UserInputError('Failed reset password', { errors });

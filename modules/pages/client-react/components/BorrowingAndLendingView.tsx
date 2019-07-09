@@ -15,7 +15,7 @@ const renderMetaData = (t: TranslateFunction) => (
   />
 );
 
-const BorrowingAndLendingView = props => {
+const BorrowingAndLendingView = (props: any) => {
   useEffect(() => {
     global.window.scrollTo(0, 0);
   });

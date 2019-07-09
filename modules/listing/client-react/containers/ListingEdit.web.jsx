@@ -7,6 +7,7 @@ import ListingEditView from '../components/ListingEditView';
 import LISTING_QUERY from '../graphql/ListingQuery.graphql';
 import EDIT_LISTING from '../graphql/EditListing.graphql';
 import LISTING_SUBSCRIPTION from '../graphql/ListingSubscription.graphql';
+import USERS_QUERY from '@gqlapp/user-client-react/graphql/ListingUserQuery.graphql';
 
 const removeTypename = value => {
   if (value === null || value === undefined) {
@@ -94,6 +95,24 @@ export default compose(
       return { loading, listing, subscribeToMore };
     }
   }),
+  graphql(USERS_QUERY, {
+    options: ({ orderBy, filter }) => {
+      return {
+        fetchPolicy: 'network-only',
+        variables: { orderBy, filter }
+      };
+    },
+    props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
+      return {
+        loading,
+        users,
+        refetch,
+        subscribeToMore,
+        updateQuery,
+        errors: error ? error.graphQLErrors : null
+      };
+    }
+  }),
   graphql(EDIT_LISTING, {
     props: ({ ownProps: { history, navigation }, mutate }) => ({
       editListing: async values => {
@@ -106,7 +125,7 @@ export default compose(
           return history.push('/listings');
         }
         if (navigation) {
-          return navigation.navigate('ListingList');
+          return navigation.navigate('ListingListComponent');
         }
       }
     })

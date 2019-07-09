@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { AccountLayout } from "@gqlapp/look-client-react";
+import React, { Component } from 'react';
+import { AccountLayout } from '@gqlapp/look-client-react';
 // import './resources/listingCatalogue.css';
-import MyOrder from "./MyOrder";
+import MyOrderComponent from './MyOrderComponent';
 
 class MyListingsView extends Component {
   state = {
@@ -10,7 +10,7 @@ class MyListingsView extends Component {
   render() {
     return (
       <AccountLayout select="/my-orders">
-        <MyOrder listings={this.state.listings} />
+        <MyOrderComponent listings={this.state.listings} />
       </AccountLayout>
     );
   }

@@ -2,9 +2,13 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
-import { PLATFORM } from '@gqlapp/core-common';
+import { PLATFORM, removeTypename } from '@gqlapp/core-common';
 
-import ListingList from '../components/ListingList';
+import ListingListView from '../components/ListingListView';
+
+import LISTS_STATE_QUERY from '../graphql/ListsStateQuery.client.graphql';
+import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
+import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
 
 import LISTINGS_QUERY from '../graphql/ListingsQuery.graphql';
 import LISTINGS_SUBSCRIPTION from '../graphql/ListingsSubscription.graphql';
@@ -71,10 +75,10 @@ const onDeleteListing = (prev, id) => {
   });
 };
 
-const subscribeToListingList = (subscribeToMore, endCursor) =>
+const subscribeToListingList = (subscribeToMore, endCursor, filter) =>
   subscribeToMore({
     document: LISTINGS_SUBSCRIPTION,
-    variables: { endCursor },
+    variables: { endCursor, filter },
     updateQuery: (
       prev,
       {
@@ -107,12 +111,12 @@ const Listing = props => {
         }
       } = props;
       const endCursor = listings ? propsEndCursor : 0;
-      const subscribe = subscribeToListingList(props.subscribeToMore, endCursor);
+      const subscribe = subscribeToListingList(props.subscribeToMore, endCursor, props.filter);
       return () => subscribe();
     }
   });
 
-  return <ListingList {...props} />;
+  return <ListingListView {...props} />;
 };
 
 Listing.propTypes = {
@@ -122,10 +126,15 @@ Listing.propTypes = {
 };
 
 export default compose(
+  graphql(LISTS_STATE_QUERY, {
+    props({ data: { listsState } }) {
+      return removeTypename(listsState);
+    }
+  }),
   graphql(LISTINGS_QUERY, {
-    options: () => {
+    options: ({ orderBy, filter }) => {
       return {
-        variables: { limit: limit, after: 0 },
+        variables: { limit: limit, after: 0, orderBy, filter },
         fetchPolicy: 'network-only'
       };
     },
@@ -200,6 +209,26 @@ export default compose(
             });
           }
         });
+      }
+    })
+  }),
+  graphql(UPDATE_ORDER_BY, {
+    props: ({ mutate }) => ({
+      onOrderBy: orderBy => {
+        mutate({ variables: { orderBy } });
+      }
+    })
+  }),
+  graphql(UPDATE_FILTER, {
+    props: ({ mutate }) => ({
+      onSearchTextChange(searchText) {
+        mutate({ variables: { filter: { searchText } } });
+      },
+      ongearSubcategoryChange(gearSubcategory) {
+        mutate({ variables: { filter: { gearSubcategory } } });
+      },
+      ongearCategoryChange(gearCategory) {
+        mutate({ variables: { filter: { gearCategory } } });
       }
     })
   })

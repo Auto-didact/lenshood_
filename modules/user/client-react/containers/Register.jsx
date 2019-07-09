@@ -11,9 +11,10 @@ import RegisterView from '../components/RegisterView';
 
 import REGISTER from '../graphql/Register.graphql';
 
+import { message } from 'antd';
+
 const Register = props => {
   const { t, register, history, navigation } = props;
-
   const onSubmit = async values => {
     try {
       await register(values);
@@ -21,6 +22,7 @@ const Register = props => {
       throw new FormError(t('reg.errorMsg'), e);
     }
 
+    message.info(t('reg.confirmMsg'));
     if (history) {
       history.push('/profile');
     } else if (navigation) {
@@ -43,10 +45,12 @@ const RegisterWithApollo = compose(
 
   graphql(REGISTER, {
     props: ({ mutate }) => ({
-      register: async ({ username, email, password }) => {
+      register: async ({ username, email, password, referredBy }) => {
         const {
           data: { register }
-        } = await mutate({ variables: { input: { username, email, password } } });
+        } = await mutate({
+          variables: { input: { username, email, password, referredBy } }
+        });
         return register;
       }
     })

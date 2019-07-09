@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { translate } from '@gqlapp/i18n-client-react';
 
-import UserForm from './UserForm';
+import UserFormComponent from './UserFormComponent';
 import { withLoadedUser } from '../containers/Auth';
 
 class UserAddView extends React.PureComponent {
@@ -15,7 +15,7 @@ class UserAddView extends React.PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <UserForm
+        <UserFormComponent
           onSubmit={this.props.onSubmit}
           initialValues={{}}
           shouldDisplayRole={true}

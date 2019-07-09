@@ -2,24 +2,29 @@ import React from 'react';
 
 import ClientModule from '@gqlapp/module-client-react';
 
-import { translate } from "@gqlapp/i18n-client-react";
-import { IfLoggedIn } from "@gqlapp/user-client-react/containers/Auth.web";
-import { MenuItem } from "@gqlapp/look-client-react";
+import { translate } from '@gqlapp/i18n-client-react';
+import { IfLoggedIn } from '@gqlapp/user-client-react/containers/Auth.web';
+import { MenuItem } from '@gqlapp/look-client-react';
 import { Route, NavLink } from 'react-router-dom';
 import CheckoutCart from './containers/CheckoutCart';
 import CheckoutBill from './containers/CheckoutBill';
 import CheckoutPay from './containers/CheckoutPay';
 import CheckoutOrder from './containers/CheckoutOrder';
 import MyOrders from './containers/MyOrders';
-import { Icon } from "antd";
+import { Icon } from 'antd';
 import resources from './locales';
 
-const NavLinkMyOrdersWithI18n = translate("order")(({ t }) => (
-  <NavLink
-    to="/my-orders"
-    className=" AccDetItem"
-    activeClassName="AccDetItemSelected"
-  >
+const MyOrdersNavItemAccount = () => {
+  return (
+    <div>
+      <Icon type="shopping-cart" />
+      My Orders
+    </div>
+  );
+};
+
+const NavLinkMyOrdersWithI18n = translate('order')(({ t }) => (
+  <NavLink to="/my-orders" className=" AccDetItem" activeClassName="AccDetItemSelected">
     <Icon type="shopping-cart" />
     My Orders
   </NavLink>
@@ -33,6 +38,15 @@ export default new ClientModule({
     <Route path="/checkout-pay" exact component={CheckoutPay} />,
     <Route path="/checkout-order" exact component={CheckoutOrder} />
   ],
+  // navItemUser: [
+  //   <IfLoggedIn key="/my-orders">
+  //     <MenuItem>
+  //       <NavLink to="/my-orders">
+  //         <MyOrdersNavItemAccount />
+  //       </NavLink>
+  //     </MenuItem>
+  //   </IfLoggedIn>
+  // ],
   // navItemAccount: [
   //   <IfLoggedIn key="/my-orders">
   //     <MenuItem>

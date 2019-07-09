@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
 
-import ListingForm from './ListingForm';
+import ListingFormComponent from './ListingFormComponent';
 import settings from '../../../../settings';
 
 const onSubmit = (listing, editListing) => values => {
@@ -14,7 +14,7 @@ const onSubmit = (listing, editListing) => values => {
   editListing(values);
 };
 
-const ListingEditView = ({ loading, listing, location, editListing, t, currentUser }) => {
+const ListingEditView = ({ loading, listing, location, editListing, t, currentUser, users }) => {
   let listingObj = listing;
   // if new listing was just added read it from router
   if (!listingObj && location.state) {
@@ -51,7 +51,12 @@ const ListingEditView = ({ loading, listing, location, editListing, t, currentUs
         <h2>
           {t(`listing.label.edit`)} {t('listing.label.listing')}
         </h2> */}
-        <ListingForm onSubmit={onSubmit(listingObj, editListing)} listing={listing} currentUser={currentUser} />
+        <ListingFormComponent
+          onSubmit={onSubmit(listingObj, editListing)}
+          listing={listing}
+          currentUser={currentUser}
+          users={users}
+        />
       </PageLayout>
     );
   }
@@ -62,6 +67,7 @@ ListingEditView.propTypes = {
   listing: PropTypes.object,
   editListing: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
+  users: PropTypes.object,
   t: PropTypes.func
 };
 

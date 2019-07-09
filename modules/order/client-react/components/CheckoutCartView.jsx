@@ -1,22 +1,20 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from "../../../../settings";
-import { Link } from "react-router-dom";
-import { Row, Col, Button, Card, Icon, Modal } from "antd";
-import CheckoutSteps from "./CheckoutSteps";
-import CartItem from "./CartItem";
-import DateRangeCard from "./DateRangeCard";
-import { TotalAmount, TotalRent, Refund } from "../helper/index";
-import moment from "moment";
+import settings from '../../../../settings';
+import { Link } from 'react-router-dom';
+import { Row, Col, Button, Card, Icon, Modal } from 'antd';
+import CheckoutStepsComponent from './CheckoutStepsComponent';
+import CartItemComponent from './CartItemComponent';
+import DateRangeCardComponent from './DateRangeCardComponent';
+import { TotalAmount, TotalRent, Refund } from '../helper/index';
+import moment from 'moment';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Cart`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
@@ -45,10 +43,10 @@ export default class CheckoutCartView extends React.Component {
       this.state.cartItem.bookings.map(book => {
         for (
           i = book.start;
-          moment(i, "DD-MM-YY") <= moment(book.end, "DD-MM-YY");
-          i = moment(i, "DD-MM-YY")
-            .add(1, "d")
-            .format("DD-MM-YY")
+          moment(i, 'DD-MM-YY') <= moment(book.end, 'DD-MM-YY');
+          i = moment(i, 'DD-MM-YY')
+            .add(1, 'd')
+            .format('DD-MM-YY')
         ) {
           this.state.books.push(i);
         }
@@ -58,9 +56,7 @@ export default class CheckoutCartView extends React.Component {
   disabledDate(current) {
     if (
       (current && current.valueOf() < Date.now()) ||
-      this.state.books.some(
-        row => row === moment(current._d).format("DD-MM-YY")
-      )
+      this.state.books.some(row => row === moment(current._d).format('DD-MM-YY'))
     ) {
       return true;
     } else {
@@ -76,7 +72,7 @@ export default class CheckoutCartView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <Col lg={{ span: 22, offset: 2 }} xs={{ span: 24, offset: 0 }}>
-              <CheckoutSteps step={0} />
+              <CheckoutStepsComponent step={0} />
             </Col>
             <Col lg={{ span: 23, offset: 1 }} xs={{ span: 24, offset: 0 }}>
               <Col span={24} className="font14">
@@ -85,20 +81,15 @@ export default class CheckoutCartView extends React.Component {
                   {state.products.length} items
                 </div>
                 <div>
-                  Total rent:{" "}
-                  <strong>&#8377; {TotalRent(state.products)} </strong>
+                  Total rent: <strong>&#8377; {TotalRent(state.products)} </strong>
                 </div>
               </Col>
               <br />
               <br />
               <Row>
-                <Col
-                  lg={{ span: 14, offset: 0 }}
-                  xs={{ span: 24, offset: 0 }}
-                  className="margin20"
-                >
+                <Col lg={{ span: 14, offset: 0 }} xs={{ span: 24, offset: 0 }} className="margin20">
                   {state.products.map(cartItem => (
-                    <CartItem
+                    <CartItemComponent
                       key={cartItem.id}
                       products={cartItem}
                       deleteProduct={this.props.deleteProduct}
@@ -116,7 +107,7 @@ export default class CheckoutCartView extends React.Component {
                 >
                   {this.dateArray()}
                   {this.state.cartItem != null ? (
-                    <DateRangeCard
+                    <DateRangeCardComponent
                       disabledDate={this.disabledDate.bind(this)}
                       products={this.state.cartItem}
                       editProduct={this.props.editProduct}
@@ -124,18 +115,9 @@ export default class CheckoutCartView extends React.Component {
                     />
                   ) : null}
                 </Modal>
-                <Col
-                  lg={{ span: 7, offset: 1 }}
-                  sm={{ span: 24, offset: 0 }}
-                  xs={{ span: 24, offset: 0 }}
-                >
+                <Col lg={{ span: 7, offset: 1 }} sm={{ span: 24, offset: 0 }} xs={{ span: 24, offset: 0 }}>
                   <Card className="margin20 boxShadowTheme borderRadius9">
-                    <Button
-                      type="primary"
-                      ghost
-                      onClick={() => this.props.Addproducts()}
-                      block
-                    >
+                    <Button type="primary" ghost onClick={() => this.props.Addproducts()} block>
                       Add more products
                     </Button>
                     <Button type="primary" className="margin20" block>
@@ -147,16 +129,10 @@ export default class CheckoutCartView extends React.Component {
                         <div key={key}>
                           <strong>Item {key + 1}:</strong>
                           <p>
-                            Rent per day{" "}
-                            <div className="rightfloat">
-                              &#8377; {item.rent}
-                            </div>
+                            Rent per day <div className="rightfloat">&#8377; {item.rent}</div>
                             <br />
-                            &#8377; {item.rent}/- <Icon type="close" />{" "}
-                            {item.days} days
-                            <div className="rightfloat">
-                              &#8377; {item.rent * item.days}
-                            </div>
+                            &#8377; {item.rent}/- <Icon type="close" /> {item.days} days
+                            <div className="rightfloat">&#8377; {item.rent * item.days}</div>
                           </p>
                         </div>
                       ))}
@@ -170,29 +146,20 @@ export default class CheckoutCartView extends React.Component {
                     </p> */}
 
                       <p>
-                        Delivery fee (Drop and Pick Up){" "}
-                        <div className="rightfloat">
-                          &#8377; {state.deliveryfee}
-                        </div>
+                        Delivery fee (Drop and Pick Up) <div className="rightfloat">&#8377; {state.deliveryfee}</div>
                       </p>
                       <hr />
                       <p>
                         GST ({state.gst}%)
                         <div className="rightfloat">
-                          &#8377;{" "}
-                          {(state.gst * TotalAmount(state.products, 0, 0)) /
-                            100}
+                          &#8377; {(state.gst * TotalAmount(state.products, 0, 0)) / 100}
                         </div>
                       </p>
                       <h3>
-                        Total rent amount{" "}
+                        Total rent amount{' '}
                         <strong className="colorFloat">
                           &#8377;
-                          {TotalAmount(
-                            state.products,
-                            state.gst,
-                            state.deliveryfee
-                          )}
+                          {TotalAmount(state.products, state.gst, state.deliveryfee)}
                         </strong>
                       </h3>
                       {/* <p>
