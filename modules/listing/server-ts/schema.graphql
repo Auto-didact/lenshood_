@@ -137,7 +137,7 @@ extend type Mutation {
   toggleListingIsFeatured(id: Int!, isFeatured: Boolean!): Boolean
 
   # to Add/Remove from watchlist
-  addOrRemoveWatchList(
+  toggleWatchList(
     user_id: Int!
     listing_id: Int!
     should_notify: Boolean

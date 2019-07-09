@@ -245,7 +245,7 @@ export default (pubsub: PubSub) => ({
     async toggleListingIsFeatured(obj: any, input: { id: number; isFeatured: boolean }, context: any) {
       return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
     },
-    async addOrRemoveWatchList(
+    async toggleWatchList(
       obj: any,
       input: { user_id: number; listing_id: number; should_notify: boolean },
       context: any
