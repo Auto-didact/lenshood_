@@ -100,13 +100,6 @@ type UserReviewsLikes {
   isReply: Boolean!
 }
 
-type WatchList {
-  id: Int!
-  listingId: Int!
-  userId: Int!
-  shouldNotify: String!
-}
-
 extend type Query {
   listings(
     limit: Int

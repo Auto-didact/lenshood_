@@ -677,6 +677,22 @@ class ListingReviewDAO extends Model {
           from: 'listing_review.listing_id',
           to: 'listing.id'
         }
+      },
+      reviewer: {
+        relation: Model.HasManyRelation,
+        modelClass: UserProfile,
+        join: {
+          from: 'listing_review.reviewer_id',
+          to: 'user_profile.user_id'
+        }
+      },
+      likedislikes: {
+        relation: Model.HasManyRelation,
+        modelClass: UserReviewLikesDAO,
+        join: {
+          from: 'listing_review.id',
+          to: 'user_reviews_likes.listing_review_id'
+        }
       }
     };
   }
