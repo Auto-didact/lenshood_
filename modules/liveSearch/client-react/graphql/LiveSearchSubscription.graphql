@@ -1,6 +1,6 @@
 #import "./LiveSearch.graphql"
 
-subscription onLiveSearchUpdatedUpdated($filter: FilterSearchInput) {
+subscription onLiveSearchUpdated($filter: FilterSearchInput) {
   liveSearchUpdated(filter: $filter) {
     mutation
     node {

@@ -10,7 +10,7 @@ import {
   Input
 } from "@gqlapp/look-client-react";
 
-const activeGearCategory = ["", "Cameras", "Lenses"];
+const activeGearCategory = ["", "Cameras", "Lenses","Drones","Lighting"];
 
 const LiveSearchFilterComponent = ({
   filter: { searchText, gearCategory },
@@ -51,8 +51,7 @@ const LiveSearchFilterComponent = ({
 LiveSearchFilterComponent.propTypes = {
   filter: PropTypes.object.isRequired,
   onSearchTextChange: PropTypes.func.isRequired,
-  onGearCategoryChange: PropTypes.func.isRequired,
-  onIsActiveChange: PropTypes.func.isRequired
+  onGearCategoryChange: PropTypes.func.isRequired
 };
 
 export default LiveSearchFilterComponent;

@@ -44,8 +44,7 @@ const LiveSearch = props => {
       ]}
     />
   );
-
-  console.log(props);
+  
   return (
     <PageLayout>
       {renderMetaData()}

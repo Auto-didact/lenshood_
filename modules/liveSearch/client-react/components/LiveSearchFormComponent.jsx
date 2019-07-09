@@ -18,7 +18,7 @@ const LiveSearchFormComponentSchema = {
   queryItem: [required]
 };
 
-const activeGearCategory = ["Cameras", "Lenses"];
+const activeGearCategory = ["Cameras", "Lenses", "Drones", "Lighting"];
 
 const LiveSearchFormComponent = ({ values, handleSubmit, errors, t }) => {
   return (
@@ -70,7 +70,6 @@ const LiveSearchFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
-    console.log(values);
     onSubmit(values).catch(e => {
       if (isFormError(e)) {
         setErrors(e.errors);
@@ -78,7 +77,6 @@ const LiveSearchFormWithFormik = withFormik({
         throw e;
       }
     });
-    values = { gearCategory: "", queryItem: "" };
   },
   validate: values => validate(values, LiveSearchFormComponentSchema),
   displayName: "LiveSearchForm " // helps with React DevTools

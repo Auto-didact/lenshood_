@@ -144,7 +144,7 @@ function addLiveSearch(prev, node) {
 
   return update(prev, {
     liveSearches: {
-      $set: [...prev.liveSearches, node]
+      $set: [node, ...prev.liveSearches]
     }
   });
 }

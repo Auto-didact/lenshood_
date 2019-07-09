@@ -20,14 +20,6 @@ const LiveSearchComponent = ({
 }) => {
   const [errors, setErrors] = useState([]);
   const [visible, setVisible] = useState(false);
-  // const handleDeleteUser = async id => {
-  //   const result = await deleteUser(id);
-  //   if (result && result.errors) {
-  //     setErrors(result.errors);
-  //   } else {
-  //     setErrors([]);
-  //   }
-  // };
 
   const setModalVisible = () => {
     setVisible(!visible);
@@ -116,7 +108,11 @@ const LiveSearchComponent = ({
       sortDirections: ["descend", "ascend"],
       render: text => (
         <div>
-          <strong>{text[0].user.username}</strong>
+          <strong>
+            {text.some(item => item.user.id === currentUser.id)
+              ? "You"
+              : text[0].user.username}
+          </strong>
           {text.length > 1 ? (
             <span>{` and ${text.length - 1} others`}</span>
           ) : null}
@@ -180,10 +176,7 @@ const LiveSearchComponent = ({
             columns={columns}
             bordered
             title={() => (
-              <Button
-                type="primary"
-                onClick={() => setModalVisible()}
-              >
+              <Button type="primary" onClick={() => setModalVisible()}>
                 Request an Item
               </Button>
             )}
