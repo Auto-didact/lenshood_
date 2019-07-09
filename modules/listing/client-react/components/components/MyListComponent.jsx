@@ -98,7 +98,7 @@ class MyListComponent extends Component {
   }
 }
 MyListComponent.propTypes = {
-  userListings: PropTypes.object
+  userListings: PropTypes.array
 };
 
 export default MyListComponent;

@@ -5,7 +5,7 @@ const CartItemComponent = props => {
   let product = props.products;
   return (
     <Card
-      className="cartitem borderRadius9"
+      className="cartitem borderRadius9 marginB20"
       bodyStyle={{
         padding: "0px"
       }}
