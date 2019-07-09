@@ -22,7 +22,6 @@ export default class RenderAddress extends React.Component {
   }
 
   modalControl = (index, visiblity) => {
-    console.log('index, visiblity', index, visiblity);
     let visible = this.state.visible;
     visible[index] = visiblity;
     this.setState({ visible });
@@ -73,7 +72,6 @@ export default class RenderAddress extends React.Component {
       console.log(e);
       message.error('Click on No');
     }
-
     const isSelectable = this.props.isSelectable || false;
 
     //Form field Section-->>
@@ -223,6 +221,7 @@ export default class RenderAddress extends React.Component {
                         // }
                         // onClick={() => this.handleSelect(indexas)}
                       >
+                        <b>Make {t(`${label}.${keys[5].label}`)}</b>
                         {addressCard[indexas]}
                       </Radio>
                     ))}
