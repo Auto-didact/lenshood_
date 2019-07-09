@@ -25,14 +25,14 @@ export default new ClientModule(counters, {
       <NavLinkWithI18n />
     </MenuItem>
   ],
-  navItemRight: [
-    <IfLoggedIn key="/my-orders">
-      <MenuItem>
-        <NavLink to="/my-orders" className="nav-link" activeClassName="active">
-          <CartCounter />
-        </NavLink>
-      </MenuItem>
-    </IfLoggedIn>
-  ],
+  // navItemRight: [
+  //   <IfLoggedIn key="/my-orders">
+  //     <MenuItem>
+  //       <NavLink to="/my-orders" className="nav-link" activeClassName="active">
+  //         <CartCounter />
+  //       </NavLink>
+  //     </MenuItem>
+  //   </IfLoggedIn>
+  // ],
   localization: [{ ns: "counter", resources }]
 });

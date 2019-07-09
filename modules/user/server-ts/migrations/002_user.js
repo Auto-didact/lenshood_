@@ -56,22 +56,22 @@ exports.up = function(knex, Promise) {
         .onDelete('CASCADE');
       table.timestamps(false, true);
     }),
-    // // knex.schema.createTable('user_payment', table => {
-    // //   table.increments();
-    // //   table
-    // //     .integer('address_id')
-    // //     .unsigned()
-    // //     .references('id')
-    // //     .inTable('user_address')
-    // //     .onDelete('CASCADE');
-    // //   table.timestamps(false, true);
-    // //   table
-    // //     .integer('user_id')
-    // //     .unsigned()
-    // //     .references('id')
-    // //     .inTable('user')
-    // //     .onDelete('CASCADE');
-    // //   table.timestamps(false, true);
+    // knex.schema.createTable('user_payment', table => {
+    //   table.increments();
+    //   table
+    //     .integer('address_id')
+    //     .unsigned()
+    //     .references('id')
+    //     .inTable('user_address')
+    //     .onDelete('CASCADE');
+    //   table.timestamps(false, true);
+    //   table
+    //     .integer('user_id')
+    //     .unsigned()
+    //     .references('id')
+    //     .inTable('user')
+    //     .onDelete('CASCADE');
+    //   table.timestamps(false, true);
     // }),
     knex.schema.createTable('user_identification', table => {
       table.increments();

@@ -3,11 +3,11 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // interfaces
 
 import { Listing, ListingReview, Identifier } from './sql';
-// import withAuth from 'graphql-auth';
+import withAuth from 'graphql-auth';
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = 'On Shelf';
 const IDLE = 'Idle';
-// const ONRENT = 'On Rent';
+const ONRENT = 'On Rent';
 
 interface Edges {
   cursor: number;
@@ -81,6 +81,9 @@ export default (pubsub: PubSub) => ({
     },
     reviews(obj: any, input: any, context: any) {
       return context.Listing.reviews(input);
+    },
+    childReviews(obj: any, input: number, context: any) {
+      return context.Listing.childReviews(input);
     }
   },
   // Listing: {
@@ -187,11 +190,12 @@ export default (pubsub: PubSub) => ({
       return listing;
     },
     async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
-      const [id] = await context.Listing.addListingReviewDAO(input);
-      const listingReview = await context.Listing.getListingReviewDAO(id);
+      const [id] = await context.Listing.addListingReview(input);
+      const listingReview = await context.Listing.getListingReview(id);
       // publish for edit listing page
       listingReview.listingId = listingReview.listing_id;
       listingReview.reviewerId = listingReview.reviewer_id;
+      listingReview.createdAt = listingReview.reviewer_id;
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
           mutation: 'CREATED',
@@ -241,12 +245,18 @@ export default (pubsub: PubSub) => ({
     async toggleListingIsFeatured(obj: any, input: { id: number; isFeatured: boolean }, context: any) {
       return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
     },
-    async addOrRemoveWatchList(
+    async toggleWatchList(
       obj: any,
       input: { user_id: number; listing_id: number; should_notify: boolean },
       context: any
     ) {
       return context.Listing.addOrRemoveWatchList(input);
+    },
+    async addLikesDisLikes(obj: any, input: { ld: string; review_id: number; reviewer_id: number }, context: any) {
+      return context.Listing.updateLiskesDisLikes(input);
+    },
+    async countLikesDisLikes(obj: any, input: { review_id: number }, context: any) {
+      return context.Listing.getLikesDisLikesCount(input);
     }
   },
   Subscription: {

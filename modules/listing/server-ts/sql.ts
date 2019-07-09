@@ -51,6 +51,10 @@ export interface ListingReview {
   rating: string;
   comment: string;
   reviewerId: number;
+  createdAt: string;
+  isReply: boolean;
+  likeDislike: string;
+  id: number;
 }
 
 export interface Identifier {
@@ -194,18 +198,91 @@ export default class ListingDAO extends Model {
     const res = await ListingDAO.query().upsertGraph(decamelizeKeys(params));
     return res.id;
   }
+  
+  public async updateUserReviewLikes(input: {
+    userId: number;
+    listing_review_id: number;
+    isReply: boolean;
+    reply_review_id: number;
+  }) {
+    await returnId(knex('user_reviews_likes')).insert({
+      user_id: input.userId,
+      listing_review_id: input.listing_review_id,
+      is_reply: input.isReply || false,
+      reply_review_id: input.reply_review_id || null
+    });
+  }
 
-  public async addListingReviewDAO({ rating, comment, reviewerId, listingId }: ListingReview) {
+  public async addListingReviewDAO({ rating, comment, reviewerId, listingId, isReply, id }: ListingReview) {
     const listingAdd = await returnId(knex('listing_review')).insert({
       comment,
       rating,
       reviewer_id: reviewerId,
-      listing_id: listingId
+      listing_id: listingId,
+      is_reply: isReply
     });
     if (listingAdd) {
       await this.updateUserProfile(listingId);
+      await this.updateUserReviewLikes({
+        userId: reviewerId,
+        listing_review_id: id,
+        isReply,
+        reply_review_id: listingAdd[0]
+      });
     }
     return listingAdd;
+  }
+
+  public async getLikesDisLikesCount(input: { review_id: number }) {
+    const likescount = camelizeKeys(
+      await knex
+        .count('ld.like_dislike')
+        .from('user_reviews_likes as ld')
+        .where('ld.listing_review_id', '=', input.review_id)
+        .where('ld.like_dislike', '=', 'liked')
+        .first()
+    );
+
+    const dislikescount = camelizeKeys(
+      await knex
+        .count('ld.like_dislike')
+        .from('user_reviews_likes as ld')
+        .where('ld.listing_review_id', '=', input.review_id)
+        .where('ld.like_dislike', '=', 'disliked')
+        .first()
+    );
+    return {
+      likes: likescount['count(`ld`.`likeDislike`)'],
+      disLikes: dislikescount['count(`ld`.`likeDislike`)']
+    };
+  }
+
+  public async getIsLikeOrDisLike(input: { ld: string; review_id: number; reviewer_id: number }) {
+    return knex
+      .select('ld.like_dislike')
+      .from('user_reviews_likes as ld')
+      .where('ld.listing_review_id', '=', input.review_id)
+      .where('ld.user_id', '=', input.reviewer_id)
+      .whereNull('ld.reply_review_id');
+  }
+
+  public async updateLiskesDisLikes(input: { ld: string; review_id: number; reviewer_id: number }) {
+    const lkDk = await this.getIsLikeOrDisLike(input);
+    if (lkDk && lkDk.length > 0) {
+      const up = {};
+      up.like_dislike = input.ld;
+      await UserReviewLikesDAO.query()
+        .update(up)
+        .where('listing_review_id', '=', input.review_id)
+        .where('user_id', '=', input.reviewer_id);
+    } else {
+      await returnId(knex('user_reviews_likes')).insert({
+        user_id: input.reviewer_id,
+        listing_review_id: input.review_id,
+        like_dislike: input.ld
+      });
+    }
+    return true;
   }
 
   public async getListingReviewDAO(id: number) {
@@ -244,6 +321,34 @@ export default class ListingDAO extends Model {
       listing = null;
     }
     return listing;
+  }
+
+  public async asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+  }
+
+  public async getReplies(repos: ObjectArray) {
+    return Promise.all(
+      repos.flatMap(async element => {
+        if (element.reply_review_id) {
+          return ListingReviewDAO.query()
+            .eager('[reviewer, likedislikes]')
+            .where('id', element.reply_review_id);
+        } else {
+          return [];
+        }
+      })
+    );
+  }
+
+  public async childReviews(input: { id: number }) {
+    const repo = await UserReviewLikesDAO.query()
+      .select('reply_review_id')
+      .where('listing_review_id', '=', input.id);
+    const res = await this.getReplies(repo);
+    return camelizeKeys(res.flat());
   }
 
   public async patchListing(id, params) {
@@ -308,19 +413,27 @@ export default class ListingDAO extends Model {
     );
     return res;
   }
+  public async reviews(input: {
+    reviewer_id: number;
+    reviewee_id: number;
+    listing_id: number;
+    id: number;
+    isReply: boolean;
+  }) {
+    const whereCond = { is_reply: input.isReply || false };
 
-  public async reviews(input: { reviewer_id: number; reviewee_id: number; listing_id: number }) {
-    const whereCond = {};
     if (input.listing_id) {
       whereCond.listing_id = input.listing_id;
     }
     if (input.reviewer_id) {
       whereCond.reviewer_id = input.reviewer_id;
     }
-
+    if (input.id) {
+      whereCond.id = input.id;
+    }
     const res = camelizeKeys(
       await ListingReviewDAO.query()
-        .eager('reviewer')
+        .eager('[reviewer, likedislikes]')
         .where(whereCond)
         .orderBy('id', 'desc')
     );
@@ -473,10 +586,65 @@ class ListingContent extends Model {
   }
 }
 
+// UserReviewLikesDAO model.
+class UserReviewLikesDAO extends Model {
+  static get tableName() {
+    return 'user_reviews_likes';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+  static get relationMappings() {
+    return {
+      likedislikes: {
+        relation: Model.HasManyRelation,
+        modelClass: ListingReviewDAO,
+        join: {
+          from: 'listing_review.id',
+          to: 'user_reviews_likes.reply_review_id'
+        }
+      },
+      reviewer: {
+        relation: Model.HasManyRelation,
+        modelClass: UserProfile,
+        join: {
+          from: 'user_reviews_likes.user_id',
+          to: 'user_profile.user_id'
+        }
+      }
+    };
+  }
+}
+
 // ListingReviewDAO model.
 class ListingReviewDAO extends Model {
   static get tableName() {
     return 'listing_review';
+  }
+
+  static get idColumn() {
+    return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      listing: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ListingDAO,
+        join: {
+          from: 'listing_review.listing_id',
+          to: 'listing.id'
+        }
+      }
+    };
+  }
+}
+
+// ListingWatchListDAO model.
+class ListingWatchListDAO extends Model {
+  static get tableName() {
+    return 'watchlist';
   }
 
   static get idColumn() {
@@ -499,6 +667,14 @@ class ListingReviewDAO extends Model {
         join: {
           from: 'listing_review.reviewer_id',
           to: 'user_profile.user_id'
+        }
+      },
+      likedislikes: {
+        relation: Model.HasManyRelation,
+        modelClass: UserReviewLikesDAO,
+        join: {
+          from: 'listing_review.id',
+          to: 'user_reviews_likes.listing_review_id'
         }
       }
     };

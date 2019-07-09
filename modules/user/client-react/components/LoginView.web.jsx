@@ -23,8 +23,7 @@ const LoginView = ({ onSubmit, t }) => {
   return (
     <PageLayout>
       {renderMetaData()}
-      <LayoutCenter>
-        <h1 className="text-center">{t('login.form.title')}</h1>
+      <div align="center">
         <LoginForm onSubmit={onSubmit} />
         {/* <hr />
         <Card>
@@ -34,7 +33,7 @@ const LoginView = ({ onSubmit, t }) => {
             <CardText>user@example.com:user1234</CardText>
           </CardGroup>
         </Card> */}
-      </LayoutCenter>
+      </div>
     </PageLayout>
   );
 };

@@ -1,0 +1,6 @@
+mutation countLikesDisLikes($review_id: Int!) {
+  countLikesDisLikes(review_id: $review_id) {
+    likes
+    disLikes
+  }
+}

@@ -17,5 +17,13 @@ query listing($id: Int!) {
     listingId
     comment
     rating
+    createdAt
+    likesReplies {
+      id
+      userId
+      listingReviewId
+      likeDisLike
+      isReply
+    }
   }
 }

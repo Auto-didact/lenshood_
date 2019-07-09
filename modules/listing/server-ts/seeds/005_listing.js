@@ -8,7 +8,8 @@ export async function seed(knex, Promise) {
     'listing_damage',
     'listing_rental',
     'listing_content',
-    'listing_review'
+    'listing_review',
+    'user_reviews_likes'
   ]);
 
   await Promise.all(

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
 import Helmet from 'react-helmet';
-import { Row, Col, Breadcrumb } from 'antd';
-import { PageLayout } from '@gqlapp/look-client-react';
+import { Row, Col, Breadcrumb, Card } from 'antd';
+import AddToCartCard from '@gqlapp/order-client-react/containers/AddToCartCard';
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
+
 import UserCard from './components/userCard';
 import ProductCard from './components/ProductCard';
 import ReviewsCard from './components/ReviewsCard';
-import AddToCartCard from './components/AddToCartCard';
+import SuggestedCardList from './components/SuggestedCardList';
 
 import settings from '../../../../settings';
 
@@ -38,7 +40,8 @@ class ListingDetailView extends Component {
 
     const t = this.props.t;
     const seller = this.props.listing && this.props.listing.user;
-    const leftGap = '5%';
+
+    const leftGap = '0%';
     const cancellationPolicy = t('listingDetail.content.cancellationPolicy');
     const damagePolicy = t('listingDetail.content.damagePolicy');
 
@@ -46,7 +49,7 @@ class ListingDetailView extends Component {
       return (
         <PageLayout>
           {this.renderMetaData()}
-          <div className="text-center">{t('listing.loadMsg')}</div>
+          <Loader text={t('listing.loadMsg')} />
         </PageLayout>
       );
     } else {
@@ -55,6 +58,7 @@ class ListingDetailView extends Component {
           <Breadcrumb
             separator=">"
             style={{
+              padding: '0px 5px',
               marginLeft: leftGap,
               marginTop: '5px',
               marginBottom: '5px'
@@ -63,23 +67,16 @@ class ListingDetailView extends Component {
             <Breadcrumb.Item>{listing.gearCategory}</Breadcrumb.Item>
             <Breadcrumb.Item href="">{listing.gearSubcategory}</Breadcrumb.Item>
             {listing.listingContent.length !== 0 ? (
-              <Breadcrumb.Item href=""> {listing.listingContent[0].gear}</Breadcrumb.Item>
+              <Breadcrumb.Item href=""> {listing.listingContent[0].brand}</Breadcrumb.Item>
             ) : (
               ''
             )}
           </Breadcrumb>
 
           {
-            <h1
-              style={{
-                paddingLeft: leftGap,
-                paddingTop: '10px',
-                paddingBottom: '10px'
-              }}
-              className="gearCat"
-            >
+            <h1 className="gearCat">
               {listing && listing.listingContent.length !== 0
-                ? listing.listingContent.map(item => <span>{`${item.gear}  `}</span>)
+                ? listing.listingContent.map(item => <span>{`${item.brand} ${item.model}  `}</span>)
                 : listing.gearCategory}
             </h1>
           }

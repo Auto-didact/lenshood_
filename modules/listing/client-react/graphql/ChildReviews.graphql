@@ -1,0 +1,24 @@
+query childReviews($id: Int!) {
+  childReviews(id: $id) {
+    id
+    reviewer {
+      id
+      firstName
+      lastName
+      avatar
+      rating
+      mobile
+    }
+    listingId
+    comment
+    rating
+    createdAt
+    likesReplies {
+      id
+      userId
+      listingReviewId
+      likeDisLike
+      isReply
+    }
+  }
+}
