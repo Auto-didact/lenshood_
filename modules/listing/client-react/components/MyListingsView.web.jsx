@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 
 import { AccountLayout, Loader } from '@gqlapp/look-client-react';
-import MyList from './components/MyList';
+import MyListComponent from './components/MyListComponent';
 import settings from '../../../../settings';
 
 class MyListingsView extends Component {
@@ -24,7 +24,7 @@ class MyListingsView extends Component {
 
         {this.props.loading && (!this.props.userListings && <Loader text="Loading..." />)}
 
-        {this.props.userListings && <MyList {...this.props} />}
+        {this.props.userListings && <MyListComponent {...this.props} />}
       </AccountLayout>
     );
   }

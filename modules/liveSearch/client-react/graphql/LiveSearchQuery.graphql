@@ -1,0 +1,7 @@
+#import "./LiveSearch.graphql"
+
+query liveSearches($orderBy: OrderBySearchInput, $filter: FilterSearchInput) {
+  liveSearches(orderBy: $orderBy, filter: $filter) {
+    ...LiveSearchInfo
+  }
+}

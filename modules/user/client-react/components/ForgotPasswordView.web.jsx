@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { LayoutCenter, PageLayout } from '@gqlapp/look-client-react';
 
-import ForgotPasswordForm from '../components/ForgotPasswordForm';
+import ForgotPasswordFormComponent from '../components/ForgotPasswordFormComponent';
 import settings from '../../../../settings';
 
 const ForgotPasswordView = ({ onSubmit, t, sent }) => {
@@ -24,7 +24,7 @@ const ForgotPasswordView = ({ onSubmit, t, sent }) => {
       {renderMetaData()}
       <LayoutCenter>
         <h1 className="text-center">{t('forgotPass.form.title')}</h1>
-        <ForgotPasswordForm onSubmit={onSubmit} sent={sent} />
+        <ForgotPasswordFormComponent onSubmit={onSubmit} sent={sent} />
       </LayoutCenter>
     </PageLayout>
   );

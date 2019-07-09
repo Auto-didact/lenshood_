@@ -161,11 +161,6 @@
   overflow: hidden;
 }
 
-.cartitem {
-  border-radius: 9px;
-  box-shadow: 0 0 10px 4px rgba(49, 196, 167, 0.09);
-}
-
 .AddMoreproducts,
 .AddMoreproducts:hover {
   font-size: 14px;
@@ -200,13 +195,6 @@
 .cardFormitem {
   border: solid 0.5px #23b195 !important;
   padding: 20px;
-}
-
-.checkoutSteps {
-  text-align: center;
-  text-shadow: 1px 0 0;
-  font-size: 30px;
-  margin-bottom: 19px;
 }
 
 .lightText {

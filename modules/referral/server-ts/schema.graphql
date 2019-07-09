@@ -1,0 +1,45 @@
+# Entity
+type Referral {
+  id: Int
+  referredUser: User
+  isVerified: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+extend type Query {
+  referrals(userId: Int): [Referral]
+  referralUser(userId: Int): User
+}
+
+extend type Mutation {
+  addReferred(input: AddReferralInput!): Referral
+  verifyReferral(input: verifyReferralInput!): Boolean
+  sendRefEmail(input: sendRefEmailInput!): Boolean
+}
+
+input sendRefEmailInput {
+  email: String!
+  username: String!
+}
+
+input verifyReferralInput {
+  referredId: Int!
+  userId: Int
+}
+
+input AddReferralInput {
+  userId: Int
+  referral: String
+  referredId: Int
+}
+
+extend type Subscription {
+  referredUserUpdated(id: Int!): UpdateReferredUserPayload
+}
+
+type UpdateReferredUserPayload {
+  mutation: String!
+  id: Int!
+  node: User!
+}

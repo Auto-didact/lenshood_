@@ -1,0 +1,7 @@
+#import "./AutoSearchListing.graphql"
+
+query listingsList {
+  listingsList {
+    ...AutoSearchListingInfo
+  }
+}

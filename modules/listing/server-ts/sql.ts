@@ -1,4 +1,4 @@
-import { camelizeKeys, decamelizeKeys } from 'humps';
+import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
@@ -134,16 +134,57 @@ export default class ListingDAO extends Model {
     };
   }
 
-  public async listingsPagination(limit: number, after: number) {
-    const res = camelizeKeys(
+  public async listingsPagination(limit: number, after: number, orderBy: any, filter: any) {
+    const queryBuilder = ListingDAO.query().eager(eager);
+
+    if (orderBy && orderBy.column) {
+      const column = orderBy.column;
+      let order = 'asc';
+      if (orderBy.order) {
+        order = orderBy.order;
+      }
+
+      queryBuilder.orderBy(decamelize(column), order);
+    } else {
+      queryBuilder.orderBy('id', 'desc');
+    }
+
+    if (filter) {
+      if (has(filter, 'gearCategory') && filter.gearCategory !== '') {
+        queryBuilder.where(function() {
+          this.where('gear_category', filter.gearCategory);
+        });
+      }
+
+      if (has(filter, 'gearSubcategory') && filter.gearSubcategory !== '') {
+        queryBuilder.where(function() {
+          this.where('gear_subcategory', filter.gearSubcategory);
+        });
+      }
+
+      if (has(filter, 'searchText') && filter.searchText !== '') {
+        queryBuilder
+          .from('listing')
+          .leftJoin('listing_content AS ld', 'ld.listing_id', 'listing.id')
+          .where(function() {
+            this.where(raw('LOWER(??) LIKE LOWER(?)', ['description', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.model', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.gear', `%${filter.searchText}%`]))
+              .orWhere(raw('LOWER(??) LIKE LOWER(?)', ['ld.brand', `%${filter.searchText}%`]));
+          });
+      }
+    }
+
+    const res = camelizeKeys(await queryBuilder.limit(limit).offset(after));
+    return res;
+  }
+
+  public async listingsList() {
+    return camelizeKeys(
       await ListingDAO.query()
         .eager(eager)
         .orderBy('id', 'desc')
-        .limit(limit)
-        .offset(after)
     );
-    // console.log(res);
-    return res;
   }
 
   public async getReviewsForListingIds(listingIds: number[]) {
@@ -198,7 +239,7 @@ export default class ListingDAO extends Model {
     const res = await ListingDAO.query().upsertGraph(decamelizeKeys(params));
     return res.id;
   }
-  
+
   public async updateUserReviewLikes(input: {
     userId: number;
     listing_review_id: number;
@@ -351,7 +392,7 @@ export default class ListingDAO extends Model {
     return camelizeKeys(res.flat());
   }
 
-  public async patchListing(id, params) {
+  public async patchListing(id: any, params: any) {
     const listing = await ListingDAO.query()
       .patch(params)
       .findById(id);

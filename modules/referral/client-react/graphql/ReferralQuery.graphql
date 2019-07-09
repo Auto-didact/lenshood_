@@ -1,0 +1,7 @@
+#import "./Referral.graphql"
+
+query myReferrals {
+  referrals {
+    ...ReferralInfo
+  }
+}

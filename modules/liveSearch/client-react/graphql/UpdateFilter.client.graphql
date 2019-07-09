@@ -1,0 +1,5 @@
+#import "./LiveSearchState.client.graphql"
+
+mutation updateFilter($filter: FilterSearchInput!) {
+  updateFilter(filter: $filter) @client
+}

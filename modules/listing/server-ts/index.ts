@@ -5,7 +5,7 @@ import createResolvers from './resolvers';
 import scopes from './scopes';
 import Listing from './sql';
 
-const createContextFunc = ({ graphqlContext: { identity } }) => ({
+const createContextFunc = ({ graphqlContext: { identity } }: any) => ({
   Listing: new Listing(),
   auth: {
     isAuthenticated: !!identity,

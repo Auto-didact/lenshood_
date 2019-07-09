@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 
 import { getItem } from '@gqlapp/core-common/clientStorage';
 
-import Loading from '../components/Loading';
+import LoadingComponent from '../components/LoadingComponent';
 
 import settings from '../../../../settings';
 
@@ -51,7 +51,7 @@ class DataRootComponent extends React.Component {
   }
 
   render() {
-    return this.state.ready ? this.props.children : <Loading />;
+    return this.state.ready ? this.props.children : <LoadingComponent />;
   }
 }
 

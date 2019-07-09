@@ -6,7 +6,8 @@ import { knex, returnId } from '@gqlapp/database-server-ts';
 
 import { Model, raw } from 'objection';
 
-import Listing from '@gqlapp/listing-server-ts/sql';
+import Listing from "@gqlapp/listing-server-ts/sql";
+import Referral from "@gqlapp/referral-server-ts/sql";
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -15,6 +16,7 @@ Model.knex(knex);
 const user_eager = `[
   listings.[listing_images,  listing_detail.damages, listing_rental, listing_content],
   profile.[referred_by.profile],
+  referrals.[referred_user.profile],
   addresses,
   identification,
   verification,
@@ -54,6 +56,14 @@ export class User extends Model {
         join: {
           from: 'user.id',
           to: 'user_profile.user_id'
+        }
+      },
+      referrals: {
+        relation: Model.HasManyRelation,
+        modelClass: Referral,
+        join: {
+          from: "user.id",
+          to: "referral.user_id"
         }
       },
       addresses: {
