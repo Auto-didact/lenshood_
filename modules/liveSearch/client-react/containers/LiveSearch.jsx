@@ -13,8 +13,8 @@ import {
   withFilterUpdating,
   withOrderByUpdating,
   withLiveSearch,
-  // withIncreSearchItem,
-  // withdecreSearchItem,
+  withIncreSearchItem,
+  withdecreSearchItem,
   withLiveSearchState,
   updateLiveSearchState
 } from "./LiveSearchOperations";
@@ -69,8 +69,8 @@ LiveSearch.propTypes = {
 export default compose(
   withLiveSearchState,
   withLiveSearch,
-  // withIncreSearchItem,
-  // withdecreSearchItem,
+  withIncreSearchItem,
+  withdecreSearchItem,
   withOrderByUpdating,
   withFilterUpdating
 )(translate("liveSearch")(LiveSearch));

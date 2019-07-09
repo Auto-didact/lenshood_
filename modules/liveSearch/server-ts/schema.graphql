@@ -36,7 +36,7 @@ input FilterSearchInput {
 extend type Mutation {
   addSearchItem(input: AddSearchQueryInput!): LiveSearch
   increSearchItem(input: IncreDecreInput!): LiveSearch
-  decreSearchItem(input: IncreDecreInput!): Boolean
+  decreSearchItem(input: IncreDecreInput!): LiveSearch
 }
 
 input AddSearchQueryInput {

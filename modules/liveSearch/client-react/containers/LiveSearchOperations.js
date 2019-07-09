@@ -4,7 +4,8 @@ import { removeTypename, log } from "@gqlapp/core-common";
 import LIVESEARCH_STATE_QUERY from "../graphql/LiveSearchStateQuery.client.graphql";
 import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
 import LIVESEARCH_QUERY from "../graphql/LiveSearchQuery.graphql";
-// import DELETE_USER from "../graphql/DeleteUser.graphql";
+import INCRE_SEARCH from "../graphql/IncrementSearch.graphql";
+import DECRE_SEARCH from "../graphql/DecrementSearch.graphql";
 import UPDATE_FILTER from "../graphql/UpdateFilter.client.graphql";
 
 const withLiveSearchState = Component =>
@@ -44,7 +45,7 @@ const withLiveSearch = Component =>
   })(Component);
 
 const withIncreSearchItem = Component =>
-  graphql(DELETE_USER, {
+  graphql(INCRE_SEARCH, {
     props: ({ mutate }) => ({
       increSearchItem: async input => {
         try {
@@ -65,7 +66,7 @@ const withIncreSearchItem = Component =>
   })(Component);
 
 const withdecreSearchItem = Component =>
-  graphql(DELETE_USER, {
+  graphql(DECRE_SEARCH, {
     props: ({ mutate }) => ({
       decreSearchItem: async input => {
         try {
@@ -75,7 +76,7 @@ const withdecreSearchItem = Component =>
             variables: { input }
           });
 
-          if (decreSearchItem.errors) {
+          if (decreSearchItem && decreSearchItem.errors) {
             return { errors: decreSearchItem.errors };
           }
         } catch (e) {
@@ -151,8 +152,8 @@ function deleteLiveSearch(prev, id) {
 export {
   withLiveSearchState,
   withLiveSearch,
-  //   withIncreSearchItem,
-  //   withdecreSearchItem,
+  withIncreSearchItem,
+  withdecreSearchItem,
   withOrderByUpdating,
   withFilterUpdating
 };

@@ -41,6 +41,7 @@ export default (pubsub: PubSub) => ({
     },
     async decreSearchItem(obj: any, { input }: any, context: any) {
       if (!input.userId) input.userId = context.identity.id;
+      const searchitem = await context.LiveSearch.liveSearchItem(input.id);
       const isDeleted = await context.LiveSearch.decreSearchItem(
         input.userId,
         input.id
@@ -54,15 +55,16 @@ export default (pubsub: PubSub) => ({
               node: item
             }
           });
+          return item;
         } else {
           pubsub.publish(SEARCH_SUBSCRIPTION, {
             liveSearchUpdated: {
               mutation: "DELETED",
-              node: item
+              node: searchitem
             }
           });
+          return { searchitem };
         }
-        return true;
       } else throw new Error("Couldn't perform the task");
     }
   },
