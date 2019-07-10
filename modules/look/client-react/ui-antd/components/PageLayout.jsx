@@ -8,6 +8,10 @@ import Footer from "./Footer";
 const { Header, Content } = Layout;
 
 class PageLayout extends React.Component {
+componentWillMount=()=>{
+  
+    global.window.scrollTo(0, 0);}
+  
   render() {
     const { children, navBar } = this.props;
 
