@@ -47,18 +47,22 @@ const ReferralVerifyView = props => {
             </Button>
           )
         ) : (
-          <div className="width100 centerAlign">
+          <div className="width100 centerAlign marginT30">
             <Empty
               description={
-                <span className="themeColor">
-                  <h3>The User wasn't referred by You.</h3>
+                <span>
+                  <h3>The user wasn't referred by You.</h3>
                   <h4>Please go back!</h4>
                 </span>
               }
             />
           </div>
         )
-      ) : null}
+      ) : (
+        <div className="width100 centerAlign marginT30">
+          <Empty description={<h3>User not found!</h3>} />
+        </div>
+      )}
     </PageLayout>
   );
 };

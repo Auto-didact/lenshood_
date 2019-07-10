@@ -34,7 +34,7 @@ class ReviewsCardComponent extends Component {
           ))}
         </Row>
         <List
-          className="marginT30"
+          className="marginB30"
           itemLayout="horizontal"
           dataSource={reviews.reviewers}
           renderItem={item => (
