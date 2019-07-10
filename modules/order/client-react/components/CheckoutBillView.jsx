@@ -1,8 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import RenderAddress, { PageLayout } from '@gqlapp/look-client-react';
-import { FieldArray } from 'formik';
-import { Row, Col, Icon, Button } from 'antd';
+import PropTypes from 'prop-types';
+import { RenderAddress, PageLayout } from '@gqlapp/look-client-react';
+import { FieldArray, withFormik } from 'formik';
+// import RenderAddress from './RenderAddress';
+import { Row, Col } from 'antd';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
 import OrderCard from './OrderCard';
@@ -15,7 +17,7 @@ const renderMetaData = () => (
   />
 );
 
-export default class CheckoutBillView extends React.Component {
+class CheckoutBillView extends React.Component {
   state = {
     product: {
       name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
@@ -28,12 +30,20 @@ export default class CheckoutBillView extends React.Component {
       refund: 5000,
       totalRent: 1300
     },
-    address: [
+    addresses: [
       {
-        name: 'Ankit Jain',
-        streetaddress1: 'Room A308, Manas Hostel, IITG',
-        streetaddress2: 'Guwahati, North Guwahati',
+        streetAddress1: 'Room A308, Manas Hostel, IITG',
+        streetAddress2: 'North Guwahati',
         state: 'Assam',
+        city: 'Guwahati',
+        pinCode: '7810390',
+        mobile: '+91-9085626859'
+      },
+      {
+        streetAddress1: 'Room A308, Manas Hostel, IITG',
+        streetAddress2: 'Guwahati, North Guwahati',
+        state: 'Assam',
+        city: 'Guwahati',
         pinCode: '7810390',
         mobile: '+91-9085626859'
       }
@@ -54,66 +64,21 @@ export default class CheckoutBillView extends React.Component {
               <h3 className="billingAddress">Billing Address</h3>
               <br />
             </Col>
-            <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              <Row gutter={16}>
-                <Col
-                  xs={{ span: 24, offset: 0 }}
-                  sm={{ span: 12, offset: 0 }}
-                  md={{ span: 8, offset: 0 }}
-                  className="PadB30"
-                >
-                  <div className="HomeAddress">
-                    <div className="HomeAddressBlock">
-                      Home Address <Icon type="home" className="homeicon" />
-                    </div>
-                    <br />
-                    <div className="addressLines">
-                      <h4>{this.state.address.name},</h4>
-                      <h4>{this.state.address.address1},</h4>
-                      <h4>{this.state.address.address2},</h4>
-                      <h4>{this.state.address.state}.</h4>
-                      <h4>{this.state.address.PIN}</h4>
-                      <h4>Mobile: {this.state.address.mobile}</h4>
-                    </div>
-                    <Button className="addressIcons" ghost>
-                      <Icon type="delete" />
-                    </Button>
-                    <Button className="addressIcons" ghost>
-                      <Icon type="edit" />
-                    </Button>
-                  </div>
-                </Col>
-                <Col
-                  xs={{ span: 14, offset: 5 }}
-                  sm={{ span: 10, offset: 0 }}
-                  md={{ span: 6, offset: 0 }}
-                  className="PadB30"
-                >
-                  <div
-                    className="AddNewAddressBlock"
-                    //   onClick={}
-                  >
-                    <div className="AddNewAddress">
-                      <Icon type="plus" />
-                    </div>
-                    <h5>Add a new address</h5>
-                  </div>
-                </Col>
-              </Row>
-              {/* <FieldArray
+            <Col>
+              <FieldArray
                 name="addresses"
                 render={arrayHelpers => (
                   <RenderAddress
                     name="addresses"
-                    addresses={this.state.address}
+                    addresses={this.state.addresses}
                     // addresses={addresses}
                     arrayHelpers={arrayHelpers}
-                    label={t('addresses')}
+                    label="addresses"
                     t={t}
                     isSelectable={true}
                   />
                 )}
-              /> */}
+              />
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />
@@ -124,3 +89,28 @@ export default class CheckoutBillView extends React.Component {
     );
   }
 }
+
+CheckoutBillView.propTypes = {
+  touched: PropTypes.object,
+  t: PropTypes.func
+};
+const CheckoutBillWithFormik = withFormik({
+  mapPropsToValues: values => {
+    const { addresses } = values.initialValues || '';
+
+    return {
+      addresses: addresses && addresses.length !== 0 ? addresses.map(this.state.addresses) : []
+    };
+  },
+  async handleSubmit(
+    values,
+    {
+      props: { onSubmit }
+    }
+  ) {
+    console.log('values', values);
+    //onSubmit();
+  },
+  displayName: 'CheckoutBill ' // helps with React DevTools
+});
+export default CheckoutBillWithFormik(CheckoutBillView);

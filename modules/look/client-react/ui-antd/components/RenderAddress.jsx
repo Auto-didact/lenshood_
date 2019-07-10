@@ -66,8 +66,8 @@ export default class RenderAddress extends React.Component {
   };
 
   render() {
-    const { arrayHelpers, name, addresses, t } = this.props;
-    const label = 'profile.card.group.addresses';
+    const { arrayHelpers, name, addresses, t, label } = this.props;
+    // const label = 'profile.card.group.addresses';
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
@@ -193,7 +193,7 @@ export default class RenderAddress extends React.Component {
       <>
         <Row gutter={32} align="top">
           <Col span={24}>
-            <h3 className="Addresses">Address</h3>
+            <h3 className="Addresses">Addresses</h3>
             <br />
           </Col>
           <Col lg={14} sm={24} align="top">
@@ -221,7 +221,7 @@ export default class RenderAddress extends React.Component {
                         // }
                         // onClick={() => this.handleSelect(indexas)}
                       >
-                        <b>Make {t(`${label}.${keys[5].label}`)}</b>
+                        <b>Make Prime Address</b>
                         {addressCard[indexas]}
                       </Radio>
                     ))}
