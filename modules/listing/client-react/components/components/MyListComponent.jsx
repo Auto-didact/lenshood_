@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import '../resources/listingCatalogue.css';
 import { Layout, Button, Row, Col, Empty } from "antd";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import DetailsCardComponent from "./DetailsCardComponent";
 import { ALL, ONSHELF, IDLE } from "../../constants/ListingStates";
 
@@ -62,12 +62,8 @@ class MyListComponent extends Component {
         }
       >
         {this.state.noListingsStatus ? (
-          <Button
-            type="primary"
-            href={`/listing/new`}
-            style={{ width: "200px" }}
-          >
-            Create One Now
+          <Button type="primary" style={{ width: "200px" }}>
+            <Link to="/listing/new">Create One Now</Link>
           </Button>
         ) : (
           <Button
@@ -96,19 +92,33 @@ class MyListComponent extends Component {
                 onClick={() => this.FilterItems(ALL)}
                 className={this.classNamesgroup(ALL)}
               >
-                All
+                {`${ALL} (${
+                  this.props.userListings ? this.props.userListings.length : 0
+                })`}
               </Button>
               <Button
                 onClick={() => this.FilterItems(ONSHELF)}
                 className={this.classNamesgroup(ONSHELF)}
               >
-                On Shelf
+                {`${ONSHELF} (${
+                  this.props.userListings
+                    ? this.props.userListings.filter(
+                        item => item.status === ONSHELF
+                      ).length
+                    : 0
+                })`}
               </Button>
               <Button
                 onClick={() => this.FilterItems(IDLE)}
                 className={this.classNamesgroup(IDLE)}
               >
-                Idle
+                {`${IDLE} (${
+                  this.props.userListings
+                    ? this.props.userListings.filter(
+                        item => item.status === IDLE
+                      ).length
+                    : 0
+                })`}
               </Button>
             </ButtonGroup>
           </Col>
