@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import '../resources/listingCatalogue.css';
-import { Layout, Button, Row, Col, Empty } from 'antd';
-import PropTypes from 'prop-types';
+import { Layout, Button, Row, Col, Empty } from "antd";
+import PropTypes from "prop-types";
 
-import DetailsCardComponent from './DetailsCardComponent';
-import { ALL, ONSHELF, IDLE } from '../../constants/ListingStates';
+import DetailsCardComponent from "./DetailsCardComponent";
+import { ALL, ONSHELF, IDLE } from "../../constants/ListingStates";
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
@@ -19,9 +19,9 @@ class MyListComponent extends Component {
   }
   classNamesgroup(e) {
     if (this.state.status === e) {
-      return 'btnActive';
+      return "btnActive";
     } else {
-      return 'btn';
+      return "btn";
     }
   }
   FilterItems(e) {
@@ -54,14 +54,30 @@ class MyListComponent extends Component {
     return (
       <Empty
         description={
-          <span>{this.state.noListingsStatus ? 'No Listings To Show' : `No listings on ${this.state.status}`}</span>
+          <span>
+            {this.state.noListingsStatus
+              ? "No Listings To Show"
+              : `No listings on ${this.state.status}`}
+          </span>
         }
       >
-        <Button type="primary" href={!this.state.noListingsStatus ? `` : `/listing/new`} style={{ width: '200px' }}>
-          {this.state.noListingsStatus
-            ? 'Create One Now'
-            : `Move Some to ${this.state.status === ONSHELF ? 'Shelf' : 'Idle'}`}
-        </Button>
+        {this.state.noListingsStatus ? (
+          <Button
+            type="primary"
+            href={`/listing/new`}
+            style={{ width: "200px" }}
+          >
+            Create One Now
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            onClick={() => this.FilterItems(ALL)}
+            style={{ width: "200px" }}
+          >
+            {`Move Some to ${this.state.status === ONSHELF ? "Shelf" : "Idle"}`}
+          </Button>
+        )}
       </Empty>
     );
   }
@@ -76,13 +92,22 @@ class MyListComponent extends Component {
           </Col>
           <Col md={{ span: 10 }} sm={{ span: 15 }} xs={{ span: 24 }}>
             <ButtonGroup className="width100">
-              <Button onClick={() => this.FilterItems(ALL)} className={this.classNamesgroup(ALL)}>
+              <Button
+                onClick={() => this.FilterItems(ALL)}
+                className={this.classNamesgroup(ALL)}
+              >
                 All
               </Button>
-              <Button onClick={() => this.FilterItems(ONSHELF)} className={this.classNamesgroup(ONSHELF)}>
+              <Button
+                onClick={() => this.FilterItems(ONSHELF)}
+                className={this.classNamesgroup(ONSHELF)}
+              >
                 On Shelf
               </Button>
-              <Button onClick={() => this.FilterItems(IDLE)} className={this.classNamesgroup(IDLE)}>
+              <Button
+                onClick={() => this.FilterItems(IDLE)}
+                className={this.classNamesgroup(IDLE)}
+              >
                 Idle
               </Button>
             </ButtonGroup>
@@ -90,7 +115,9 @@ class MyListComponent extends Component {
         </Row>
         {this.props.userListings && this.props.userListings.length !== 0
           ? this.listingParser().length !== 0
-            ? this.listingParser().map((item, key) => this.returnItem(item, key))
+            ? this.listingParser().map((item, key) =>
+                this.returnItem(item, key)
+              )
             : this.renderNoListings()
           : this.renderNoListings()}
       </Content>
