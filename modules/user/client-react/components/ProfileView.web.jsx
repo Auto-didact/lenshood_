@@ -43,7 +43,7 @@ class ProfileView extends React.Component {
     }
 
     function getFollowing(follow) {
-      return follow.following.profile;
+      return follow.followee.profile;
     }
     return {
       endorsements: {
