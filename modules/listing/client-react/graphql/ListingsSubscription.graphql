@@ -1,6 +1,6 @@
 #import "./Listing.graphql"
 
-subscription onListingsUpdated($endCursor: Int!, $filter: FilterListInput) {
+subscription onListingsUpdated($endCursor: Int, $filter: FilterListInput) {
   listingsUpdated(endCursor: $endCursor, filter: $filter) {
     mutation
     node {

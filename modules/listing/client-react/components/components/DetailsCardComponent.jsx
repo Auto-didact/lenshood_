@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Icon, Button, Row, Col, Card, Popconfirm, message } from "antd";
 import { Link } from "react-router-dom";
 import { ImgCamera } from "../../constants/DefaultImages";
+import { IDLE, ONSHELF } from "../../constants/ListingStates";
 
 class DetailsCardComponent extends Component {
   render() {
@@ -48,10 +49,10 @@ class DetailsCardComponent extends Component {
             className="DetailsCardCol"
           >
             <div style={{ padding: "10px", align: "center" }}>
-              {item.status === "On Rent" ? (
-                <h6 className="OnRentTag">On Rent</h6>
+              {item.status === ONSHELF ? (
+                <h6 className="OnShelfTag font12 borderRadius9">{ONSHELF}</h6>
               ) : (
-                <h6 className="OnShelfTag">On Shelf</h6>
+                <h6 className="OnRentTag font12 borderRadius9">{IDLE}</h6>
               )}
               <h3 className="DetailsCardHeading">
                 {item.listingContent
@@ -100,9 +101,7 @@ class DetailsCardComponent extends Component {
                     block
                     onClick={e => this.props.toggle(item.id, e)}
                   >
-                    {item.status === "On Shelf"
-                      ? "Move to Idle"
-                      : "Move to Shelf"}
+                    {item.status === ONSHELF ? "Move to Idle" : "Move to Shelf"}
                   </Button>
                 </Col>
                 <Col span={12}>
