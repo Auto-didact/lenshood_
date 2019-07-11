@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Row, Col, Rate, Button, Card, Avatar } from "antd";
-import { NavLink } from "react-router-dom";
 
 import { CardText } from "@gqlapp/look-client-react";
 import { ImgUser } from "../../constants/DefaultImages";

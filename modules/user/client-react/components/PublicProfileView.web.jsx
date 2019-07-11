@@ -130,36 +130,31 @@ class PublicProfileView extends React.Component {
   render() {
     const { t } = this.props;
     const { user, loading } = this.props;
-
-    if (loading && !user) {
-      return (
-        <PageLayout select="/profile">
-          <Loader text={t("profile.loadMsg")} />
-        </PageLayout>
-      );
-    } else {
-      return (
-        <PageLayout select="/profile">
-          <Row style={{ margin: "40px 0px " }}>
-            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-              <div style={{ margin: "5px" }}>
-                <PublicProfileHeadComponent
-                  profile={user.profile && user.profile}
-                  description={this.userCardData().profileHead}
-                  role={user.role}
-                  username={user.username}
-                  portfolios={user.portfolios}
-                />
-              </div>
-            </Col>
-            <Col xs={{ span: 24 }} lg={{ span: 9 }}>
-              <Row
-                gutter={10}
-                type="flex"
-                justify="space-around"
-                align="middle"
-              >
-                {/*Verification
+    return (
+      <PageLayout select="/profile">
+        {loading && !user && <Loader text={t("profile.loadMsg")} />}
+        {user && (
+          <div>
+            <Row style={{ margin: "40px 0px " }}>
+              <Col xs={{ span: 24 }} lg={{ span: 12 }}>
+                <div style={{ margin: "5px" }}>
+                  <PublicProfileHeadComponent
+                    profile={user.profile && user.profile}
+                    description={this.userCardData().profileHead}
+                    role={user.role}
+                    username={user.username}
+                    portfolios={user.portfolios}
+                  />
+                </div>
+              </Col>
+              <Col xs={{ span: 24 }} lg={{ span: 9 }}>
+                <Row
+                  gutter={10}
+                  type="flex"
+                  justify="space-around"
+                  align="middle"
+                >
+                  {/*Verification
                 <Col
                   xs={{ span: 24 }}
                   md={{ span: 8 }}
@@ -172,53 +167,54 @@ class PublicProfileView extends React.Component {
                   />
                 </Col>*/}
 
-                <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
-                  <div className="public-profile-connections">
-                    <Tabs tabPosition="left" defaultActiveKey="1">
-                      <TabPane tab="Endorsements" key="1">
-                        <PublicUsersCardComponent
-                          data={this.userCardData().endorsements}
-                        />
-                      </TabPane>
-                      <TabPane tab="Endorsed" key="2">
-                        <PublicUsersCardComponent
-                          data={this.userCardData().endorsed}
-                        />
-                      </TabPane>
-                      <TabPane tab="followers" key="3">
-                        <PublicUsersCardComponent
-                          data={this.userCardData().followers}
-                        />
-                      </TabPane>
-                      <TabPane tab="following" key="4">
-                        <PublicUsersCardComponent
-                          data={this.userCardData().following}
-                        />
-                      </TabPane>
-                    </Tabs>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Divider />
-          <h2 style={{ marginLeft: "10px" }}>Listings</h2>
-          <Divider />
-          <Row>
-            {user && user.listings.length !== 0
-              ? user.listings.map((listing, key) => (
-                  <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 6 }}>
-                    <PublicProfileListingCardComponent
-                      listing={listing}
-                      key={key}
-                    />
+                  <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
+                    <div className="public-profile-connections">
+                      <Tabs tabPosition="left" defaultActiveKey="1">
+                        <TabPane tab="Endorsements" key="1">
+                          <PublicUsersCardComponent
+                            data={this.userCardData().endorsements}
+                          />
+                        </TabPane>
+                        <TabPane tab="Endorsed" key="2">
+                          <PublicUsersCardComponent
+                            data={this.userCardData().endorsed}
+                          />
+                        </TabPane>
+                        <TabPane tab="followers" key="3">
+                          <PublicUsersCardComponent
+                            data={this.userCardData().followers}
+                          />
+                        </TabPane>
+                        <TabPane tab="following" key="4">
+                          <PublicUsersCardComponent
+                            data={this.userCardData().following}
+                          />
+                        </TabPane>
+                      </Tabs>
+                    </div>
                   </Col>
-                ))
-              : "No Listings to show"}
-          </Row>
-        </PageLayout>
-      );
-    }
+                </Row>
+              </Col>
+            </Row>
+            <Divider />
+            <h2 style={{ marginLeft: "10px" }}>Listings</h2>
+            <Divider />
+            <Row>
+              {user && user.listings.length !== 0
+                ? user.listings.map((listing, key) => (
+                    <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 6 }}>
+                      <PublicProfileListingCardComponent
+                        listing={listing}
+                        key={key}
+                      />
+                    </Col>
+                  ))
+                : "No Listings to show"}
+            </Row>
+          </div>
+        )}
+      </PageLayout>
+    );
   }
 }
 
