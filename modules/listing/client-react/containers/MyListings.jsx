@@ -9,27 +9,31 @@ import TOGGLE_LISTING_STATUS from "../graphql/ToggleListingStatus.graphql";
 // import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
 import DELETE_LISTING from "../graphql/DeleteListing.graphql";
 import LISTINGS_SUBSCRIPTION from "../graphql/ListingsSubscription.graphql";
+import { message } from "antd";
 
 const MyListings = props => {
-  // updateComponent() {
-  //   this.forceUpdate();
-  // }
   useEffect(() => {
     const subscribe = subscribeToListingList(props.subscribeToMore);
     return () => subscribe();
   });
-
-  // render() {
   const DeleteListing = async id => {
-    return await props.deleteListing(id);
-    // console.log(id);
-    // this.updateComponent();
+    try {
+      await await props.toggleListingStatus(id);
+    } catch (e) {
+      message.error("Couldn't perform the action");
+      throw e;
+    }
+    message.warning("Listing deleted.");
   };
 
   const ToggleListingStatus = async id => {
-    return await props.toggleListingStatus(id);
-    // console.log(id);
-    // this.updateComponent();
+    try {
+      await await props.toggleListingStatus(id);
+    } catch (e) {
+      message.error("Couldn't perform the action");
+      throw e;
+    }
+    message.info("Success!");
   };
 
   return (

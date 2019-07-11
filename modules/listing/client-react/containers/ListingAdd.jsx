@@ -2,6 +2,8 @@ import React from "react";
 import { graphql, compose } from "react-apollo";
 import CURRENT_USER_QUERY from "@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql";
 
+import { message } from "antd";
+
 import ListingAddView from "../components/ListingAddView";
 
 import ADD_LISTING from "../graphql/AddListing.graphql";
@@ -38,6 +40,7 @@ export default compose(
         });
 
         if (history) {
+          message.info("Changes Saved.");
           return history.push(
             "/listing-detail/" + listingData.data.addListing.id,
             {
@@ -45,6 +48,7 @@ export default compose(
             }
           );
         } else if (navigation) {
+          message.info("Listing added.");
           return navigation.navigate("ListingEdit", {
             id: listingData.data.addListing.id
           });
