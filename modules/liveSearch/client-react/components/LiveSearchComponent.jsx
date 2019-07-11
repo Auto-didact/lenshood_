@@ -174,7 +174,6 @@ const LiveSearchComponent = ({
           <Table
             dataSource={liveSearches}
             columns={columns}
-            bordered
             title={() => (
               <Button type="primary" onClick={() => setModalVisible()}>
                 Request an Item

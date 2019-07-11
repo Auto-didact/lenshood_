@@ -1,6 +1,7 @@
 import { graphql } from "react-apollo";
 import update from "immutability-helper";
 import { removeTypename, log } from "@gqlapp/core-common";
+import { message } from "antd";
 import ADD_ITEM from "../graphql/AddQueryItem.graphql";
 import LIVESEARCH_STATE_QUERY from "../graphql/LiveSearchStateQuery.client.graphql";
 import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
@@ -23,6 +24,7 @@ const withSearchItemAdd = Component =>
         const { data: addSearchItem } = await mutate({
           variables: { input }
         });
+        message.info("Query item added!");
         return addSearchItem;
       }
     })
