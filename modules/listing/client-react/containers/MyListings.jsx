@@ -18,7 +18,7 @@ const MyListings = props => {
   });
   const DeleteListing = async id => {
     try {
-      await await props.toggleListingStatus(id);
+      await await props.deleteListing(id);
     } catch (e) {
       message.error("Couldn't perform the action");
       throw e;
