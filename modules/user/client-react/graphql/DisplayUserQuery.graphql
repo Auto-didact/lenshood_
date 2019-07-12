@@ -1,0 +1,7 @@
+#import "./User.graphql"
+
+query displayUser($id: Int!) {
+  displayUser(id: $id) {
+    ...UserInfo
+  }
+}

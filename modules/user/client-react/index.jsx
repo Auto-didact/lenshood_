@@ -5,8 +5,7 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { MenuItem } from '@gqlapp/look-client-react';
 import ClientModule from '@gqlapp/module-client-react';
 
-// To Do
-import { Icon, Tabs } from 'antd';
+import { Icon, Tabs, message } from "antd";
 
 import resolvers from './resolvers';
 import resources from './locales';
@@ -40,8 +39,14 @@ const LogoutLink = withRouter(
       onClick={e => {
         e.preventDefault();
         (async () => {
-          await logout();
-          history.push('/');
+          try {
+            await logout();
+          } catch (e) {
+            message.error("Couldn't LogOut!");
+            throw e;
+          }
+          message.info("Logged Out!");
+          history.push("/");
         })();
       }}
       className="nav-link"
@@ -76,13 +81,42 @@ const NavLinkLoginWithI18n = translate('user')(({ t }) => (
 
 export default new ClientModule({
   route: [
-    // <Route exact path="/public-profile/:id" component={PublicProfile} />,
-    <AuthRoute exact path="/public-profile/:id" role={['user', 'admin']} redirect="/login" component={PublicProfile} />,
-    <AuthRoute exact path="/profile" role={['user', 'admin']} redirect="/login" component={ProfileView} />,
-    <AuthRoute exact path="/users" redirect="/profile" role="admin" component={Users} />,
-    <AuthRoute exact path="/users/new" role={['admin']} component={UserAdd} />,
-    <AuthRoute path="/users/:id" redirect="/profile" role={['user', 'admin']} component={UserEdit} />,
-    <AuthRoute exact path="/register" redirectOnLoggedIn redirect="/profile" component={Register} />,
+    <Route exact path="/public-profile/:id" component={PublicProfile} />,
+    // <AuthRoute
+    //   exact
+    //   path="/user-profile/:id"
+    //   role={["user", "admin"]}
+    //   redirect="/login"
+    //   component={PublicProfile}
+    // />,
+    <AuthRoute
+      exact
+      path="/profile"
+      role={["user", "admin"]}
+      redirect="/login"
+      component={ProfileView}
+    />,
+    <AuthRoute
+      exact
+      path="/users"
+      redirect="/profile"
+      role="admin"
+      component={Users}
+    />,
+    <AuthRoute exact path="/users/new" role={["admin"]} component={UserAdd} />,
+    <AuthRoute
+      path="/users/:id"
+      redirect="/profile"
+      role={["user", "admin"]}
+      component={UserEdit}
+    />,
+    <AuthRoute
+      exact
+      path="/register"
+      redirectOnLoggedIn
+      redirect="/profile"
+      component={Register}
+    />,
     <AuthRoute
       exact
       path="/login"

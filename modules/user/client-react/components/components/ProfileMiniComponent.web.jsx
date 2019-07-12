@@ -6,11 +6,15 @@ const ProfileMiniComponent = ({ item }) => {
   return (
     <Row>
       <Col span={4}>
-        <Avatar size={30} src={item.avatar} />
+        {item ? (
+          <Avatar size={30} src={item.avatar} />
+        ) : (
+          <Avatar size={30} icon="user" />
+        )}
       </Col>
       <Col span={18}>
-        <CardText style={{ margin: '2px 0px' }}>
-          {item.firstName} {item.lastName}
+        <CardText style={{ margin: "2px 0px" }}>
+          {item ? `${item.firstName} ${item.lastName}` : "Name not available"}
         </CardText>
       </Col>
     </Row>

@@ -1,6 +1,6 @@
 import { returnId, truncateTables } from '@gqlapp/database-server-ts';
 
-let gearCategory = ['Cameras', 'Lenses'],
+let gearCategory = ["Cameras", "Lenses", "Drones", "Lighting"],
   gearSubcategory = {
     Cameras: [
       'DSLR',
@@ -30,8 +30,12 @@ export async function seed(knex, Promise) {
   await Promise.all(
     [...Array(20).keys()].map(async ii => {
       let gc = gearCategory[Math.floor(Math.random() * gearCategory.length)];
-      let gsc = gearSubcategory[gc][Math.floor(Math.random() * gearSubcategory[gc].length)];
-      const listing = await returnId(knex('listing')).insert({
+      let gsc = gearSubcategory[gc]
+        ? gearSubcategory[gc][
+            Math.floor(Math.random() * gearSubcategory[gc].length)
+          ]
+        : "none";
+      const listing = await returnId(knex("listing")).insert({
         user_id: 1,
         gear_category: gc,
         gear_subcategory: gsc,

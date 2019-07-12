@@ -4,7 +4,10 @@ import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 import { PLATFORM, removeTypename } from '@gqlapp/core-common';
 
-import ListingListView from '../components/ListingListView';
+import { message } from "antd";
+
+import { removeTypename } from "@gqlapp/core-common";
+import ListingListView from "../components/ListingListView";
 
 import LISTS_STATE_QUERY from '../graphql/ListsStateQuery.client.graphql';
 import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
@@ -209,6 +212,7 @@ export default compose(
             });
           }
         });
+        message.warning("Listing deleted.");
       }
     })
   }),
