@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Form, Input, Button, Checkbox, Upload, Icon, Modal } from 'antd';
 import { PageLayout } from '@gqlapp/look-client-react';
 // import "./resources/listingCatalogue.css";
-import ListYGSteps from './components/ListYGSteps';
+import ListYGStepsComponent from './components/ListYGStepsComponent';
 
 const { TextArea } = Input;
 
@@ -88,7 +88,7 @@ class ListTourGearProduct extends Component {
         <div className="Listyourgearcards">
           <Row>
             <Col md={{ span: 14, offset: 5 }} sm={{ span: 20, offset: 2 }} className="LYGcol1">
-              <ListYGSteps step={1} />
+              <ListYGStepsComponent step={1} />
               <Form layout="vertical">
                 <Form.Item label={<strong>Listing title</strong>}>
                   <Input type="text" />

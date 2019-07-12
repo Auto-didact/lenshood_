@@ -38,6 +38,7 @@ const UserEdit = props => {
     try {
       await editUser({ id: user.id, ...userValues });
     } catch (e) {
+      message.error(t("userEdit.errorMsg"));
       throw new FormError(t("userEdit.errorMsg"), e);
     }
 

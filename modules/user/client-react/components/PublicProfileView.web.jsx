@@ -9,9 +9,9 @@ import { Card, CardGroup, CardText, CardTitle, PageLayout, Loader } from '@gqlap
 // To Do Abstract Out
 import { Row, Col, Divider, Icon, Button, Tabs } from 'antd';
 
-import PublicProfileHead from './components/PublicProfileHead';
-import PublicUsersCard from './components/PublicUsersCard';
-import PublicProfileListingCard from './components/PublicProfileListingCard';
+import PublicProfileHeadComponent from './components/PublicProfileHeadComponent';
+import PublicUsersCardComponent from './components/PublicUsersCardComponent';
+import PublicProfileListingCardComponent from './components/PublicProfileListingCardComponent';
 
 import settings from '../../../../settings';
 
@@ -136,7 +136,7 @@ class PublicProfileView extends React.Component {
           <Row style={{ margin: '40px 0px ' }}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <div style={{ margin: '5px' }}>
-                <PublicProfileHead
+                <PublicProfileHeadComponent
                   profile={user.profile && user.profile}
                   description={this.userCardData().profileHead}
                   role={user.role}
@@ -154,7 +154,7 @@ class PublicProfileView extends React.Component {
                   lg={{ span: 24 }}
                   style={{ height: "100%" }}
                 >
-                  <UserVerifications
+                  <UserVerificationsComponent
                     data={user.verification}
                     verification={this.userCardData().verification}
                   />
@@ -164,16 +164,16 @@ class PublicProfileView extends React.Component {
                   <div className="public-profile-connections">
                     <Tabs tabPosition="left" defaultActiveKey="1">
                       <TabPane tab="Endorsements" key="1">
-                        <PublicUsersCard data={this.userCardData().endorsements} />
+                        <PublicUsersCardComponent data={this.userCardData().endorsements} />
                       </TabPane>
                       <TabPane tab="Endorsed" key="2">
-                        <PublicUsersCard data={this.userCardData().endorsed} />
+                        <PublicUsersCardComponent data={this.userCardData().endorsed} />
                       </TabPane>
                       <TabPane tab="followers" key="3">
-                        <PublicUsersCard data={this.userCardData().followers} />
+                        <PublicUsersCardComponent data={this.userCardData().followers} />
                       </TabPane>
                       <TabPane tab="following" key="4">
-                        <PublicUsersCard data={this.userCardData().following} />
+                        <PublicUsersCardComponent data={this.userCardData().following} />
                       </TabPane>
                     </Tabs>
                   </div>
@@ -188,7 +188,7 @@ class PublicProfileView extends React.Component {
             {user && user.listings.length !== 0
               ? user.listings.map((listing, key) => (
                   <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 6 }}>
-                    <PublicProfileListingCard listing={listing} key={key} />
+                    <PublicProfileListingCardComponent listing={listing} key={key} />
                   </Col>
                 ))
               : 'No Listings to show'}

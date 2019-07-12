@@ -3,6 +3,7 @@ type User {
   username: String!
   role: String
   isActive: Boolean
+  isFeatured: Boolean
   email: String!
   profile: UserProfile
   addresses: [UserAddress]
@@ -19,6 +20,9 @@ type User {
 
   # Listing Module
   listings: [Listing]
+
+  # Referral Module
+  referrals: [Referral!]!
 
   authCertificate: CertificateAuth
   authFacebook: FacebookAuth
@@ -204,10 +208,22 @@ extend type Query {
   currentUser: User
   # Get user's driving license info
   userDrivingLicense(id: Int!): UserDrivingLicense
+
+  featuredUsers: [User]
 }
 
 type UserPayload {
   user: User
+}
+
+type endorseUnEndorse {
+  endorsecount: Int
+  isEndorsed: Boolean
+}
+
+type follwUnFollw {
+  follwerCount: Int
+  isFollwed: Boolean
 }
 
 extend type Mutation {
@@ -221,6 +237,12 @@ extend type Mutation {
   addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
   # Add Mobile for a user
   addUserMobile(input: AddMobileInput!): UserMobile!
+  #Endorse/UnEndorse user
+  toggleEndorse(endorseeId: Int, endorserId: Int): endorseUnEndorse!
+  #Follow/UnFollow user
+  toggleFollow(userId: Int, followerId: Int): follwUnFollw!
+  #toggle isFeatured
+  toggleIsFeatured(userId: Int, isFeatured: Boolean): Boolean
 }
 
 # Input for ordering users
@@ -281,6 +303,7 @@ input AddUserInput {
   password: String!
   role: String
   isActive: Boolean
+  isFeatured: Boolean
   profile: ProfileInput
   addresses: [AddressInput]
   portfolios: [PortfolioInput]
@@ -293,6 +316,7 @@ input EditUserInput {
   username: String!
   role: String!
   isActive: Boolean
+  isFeatured: Boolean
   email: String!
   password: String
   profile: ProfileInput

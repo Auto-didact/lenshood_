@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { PageLayout } from '@gqlapp/look-client-react';
 import ListingCatalogue from '../containers/ListingCatalogue';
+
 
 const ListingCatalogueView = () => {
   return (
@@ -10,6 +12,7 @@ const ListingCatalogueView = () => {
     </PageLayout>
   );
 };
+
 
 ListingCatalogueView.propTypes = {
   listings: PropTypes.arrayOf(

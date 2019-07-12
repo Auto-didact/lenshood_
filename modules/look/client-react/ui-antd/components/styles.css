@@ -19,9 +19,9 @@
   padding-top: 5px;
 }
 .HeaderRight {
-    float: right;
-    margin: 0;
-    padding-top: 5px;
+  float: right;
+  margin: 0;
+  padding-top: 5px;
 }
 /* ========= FOOTER =========== */
 
@@ -31,12 +31,10 @@
   padding-right: 3px;
 }
 
-
 .footer a:hover {
   color: white;
   text-decoration: underline;
 }
-
 
 .footer {
   text-align: center;
@@ -55,133 +53,131 @@
   border-top: 0.5px #aaa solid;
   background: #222;
   text-align: center;
-  width:100%;
+  width: 100%;
   height: 100px;
 }
 /*====== For Navbar and Side Drawer ====*/
-@media only screen and (max-width: 700px) {
-
-.screen_width_more_than_800{
- display:none;
+@media only screen and (max-width: 800px) {
+  .screen_width_more_than_800 {
+    display: none;
+  }
 }
-
-
+@media only screen and (min-width: 801px) {
+  .screen_width_less_than_800 {
+    display: none;
+  }
 }
-@media only screen and (min-width: 701px) {
-.screen_width_less_than_800{
-  display:none;
+.ant-drawer-body .ant-avatar {
+  height: 90px;
+  width: 90px;
+  border: 1px solid #ececed;
 }
+.forUser {
+  height: 100% !important;
+  text-align: center;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  margin: 0px !important;
 }
-.ant-drawer-body  .ant-avatar{
-  height:90px;
-  width:90px;
-  border:1px solid #ececed;
-}
-.forUser{
-  height:100% !important;
-  text-align:center;
-  padding-right:0px !important;
-  padding-left:0px !important;
-  margin:0px !important;
-}
-.userItems{
+.userItems {
   display: flex;
-  height:100%;
-  width:100%;
-  padding-left:5px;
+  height: 100%;
+  width: 100%;
+  padding-left: 5px;
 }
-.userItems>li{
-  padding:0px !important;
-  height:100% !important;
-  margin-top:15px !important;
-  border-bottom:1px solid #ececed;
+.userItems > li {
+  padding: 0px !important;
+  height: 100% !important;
+  margin-top: 15px !important;
+  border-bottom: 1px solid #ececed;
 }
-.userItems div { 
+.userItems div {
   display: flex;
   flex-direction: column;
 }
-.userItems>li:nth-child(3)>a{
-  display:flex;
-  flex-direction:column;
+.userItems > li:nth-child(3) > a {
+  display: flex;
+  flex-direction: column;
 }
 
-.nav-link-drop{
-color: #23b195 !important; 
-height: 30px;
+.nav-link-drop {
+  color: #23b195 !important;
+  height: 30px;
 }
-.light_font{
+.light_font {
   font-weight: lighter;
 }
-.bold_font{
-  font-weight:bolder;
+.bold_font {
+  font-weight: bolder;
 }
-.left{
-  float:left;
+.left {
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  float: left;
 }
-.right{
-  float:right;
+.right {
+  float: right;
 }
-.line_height60{
-line-height: 60px;
-}
-
-.hamburg{
-color:#fff;
-font-size:25px;
-float:right;
-margin-top:20px;
-font-weight:bold;
-width:0px;
+.line_height60 {
+  line-height: 60px;
 }
 
-.ant-drawer-wrapper-body{
-overflow-x:hidden;
-}
-.ant-drawer-header{
-background:#fff;
-}
-.ant-drawer-content{
-background:#fff;
-}
-.ant-drawer-title{
-color:#23b195;;
-}
-.ant-drawer-close{
-color:#23b195;;
-}
-.ant-drawer-body{
-padding:5px 0 0 0;
-font-weight: bold;
-} 
-.ant-drawer-body ul{
-background:#fff;
+.hamburg {
+  color: #fff;
+  font-size: 25px;
+  float: right;
+  margin-top: 20px;
+  font-weight: bold;
+  width: 0px;
 }
 
-.ant-drawer-body>ul>li:nth-child(3){
-height:100%;
+.ant-drawer-wrapper-body {
+  overflow-x: hidden;
 }
-.ant-drawer-body>ul>li:nth-child(3)>a{
-margin-top:10px;
-margin-bottom:10px;
+.ant-drawer-header {
+  background: #fff;
 }
-.ant-drawer-body>ul>li:nth-child(4){
-margin-top:10px;
+.ant-drawer-content {
+  background: #fff;
 }
-.ant-drawer-body>ul>li>a{
-color:#23b195;
+.ant-drawer-title {
+  color: #23b195;
 }
-.ant-drawer-body a{
-color:#23b195;
+.ant-drawer-close {
+  color: #23b195;
 }
-.ant-menu-item-selected{
-border-left:2px solid #23b195 ;
+.ant-drawer-body {
+  padding: 5px 0 0 0;
+  font-weight: bold;
+}
+.ant-drawer-body ul {
+  background: #fff;
+}
+
+.ant-drawer-body > ul > li:nth-child(3) {
+  height: 100%;
+}
+.ant-drawer-body > ul > li:nth-child(3) > a {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.ant-drawer-body > ul > li:nth-child(4) {
+  margin-top: 10px;
+}
+.ant-drawer-body > ul > li > a {
+  color: #23b195;
+}
+.ant-drawer-body a {
+  color: #23b195;
+}
+.ant-menu-item-selected {
+  border-left: 2px solid #23b195;
 }
 
 /*======For Loader=====*/
-.loader{
-position:absolute;
-top:50%;
-left:46%;
-text-align: center;
-
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 46%;
+  text-align: center;
 }

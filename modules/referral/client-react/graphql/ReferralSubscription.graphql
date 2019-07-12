@@ -1,0 +1,11 @@
+#import "./Referral.graphql"
+
+subscription onListingUpdated($id: Int!) {
+  referredUUserpdated(id: $id) {
+    mutation
+    id
+    node {
+      ...ReferralInfo
+    }
+  }
+}
