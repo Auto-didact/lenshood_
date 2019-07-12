@@ -130,13 +130,15 @@
     "title": "Register",
     "meta": "A Registration page example",
     "errorMsg": "Registration failed!",
+    "confirmMsg": "A Confirmation Email has been sent. Please check your mail inbox.",
     "form": {
       "title": "Sign Up",
       "field": {
         "name": "Username",
         "email": "Email",
         "pass": "Password",
-        "passConf": "Password Confirmation"
+        "passConf": "Password Confirmation",
+        "referral": "Referral ID"
       },
       "btnSubmit": "Register"
     }

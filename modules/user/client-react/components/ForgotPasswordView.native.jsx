@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 
-import ForgotPasswordForm from './ForgotPasswordForm';
+import ForgotPasswordFormComponent from './ForgotPasswordFormComponent';
 
 class ForgotPasswordView extends React.PureComponent {
   static propTypes = {
@@ -15,7 +15,7 @@ class ForgotPasswordView extends React.PureComponent {
     const { onSubmit, sent, forgotPassword } = this.props;
     return (
       <View style={styles.forgotPassContainer}>
-        <ForgotPasswordForm onSubmit={onSubmit({ forgotPassword })} sent={sent} />
+        <ForgotPasswordFormComponent onSubmit={onSubmit({ forgotPassword })} sent={sent} />
       </View>
     );
   }

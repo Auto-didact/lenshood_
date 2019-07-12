@@ -2,22 +2,16 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Pagination } from '@gqlapp/look-client-react';
-import { Row, Col, Button, Switch, Spin } from 'antd';
+import { PageLayout, Pagination, Loader } from '@gqlapp/look-client-react';
+import { Row, Col, Button, Switch } from 'antd';
 import settings from '../../../../settings';
 
-import SuggestedCardList from './components/SuggestedCardList';
+import SuggestedCardListComponent from './components/SuggestedCardListComponent';
 
 const { itemsNumber, type } = settings.pagination.web;
 const margin = '5%';
 
-const Loading = ({ t }) => (
-  <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-    <Spin size="large" />
-    <br />
-    {t('listing.loadMsg')}
-  </div>
-);
+const Loading = ({ t }) => <Loader text={t('listing.loadMsg')} />;
 Loading.propTypes = { t: PropTypes.func };
 
 const NoListingsMessage = ({ t }) => <div className="text-center">{t('listing.noListingsMsg')}</div>;
@@ -142,7 +136,7 @@ class ListingCatalogueView extends Component {
                 <h2 className="headingTop">
                   <strong>All listings</strong>
                 </h2>
-                <SuggestedCardList relatedList={this.props.listings} />
+                <SuggestedCardListComponent relatedList={this.props.listings} />
               </Col>
             </div>
           </Row>

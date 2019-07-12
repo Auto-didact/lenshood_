@@ -1,21 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Spin } from 'antd';
-import UserForm from './UserForm';
+import { Loader } from '@gqlapp/look-client-react';
+import UserFormComponent from './UserFormComponent';
 
 const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
   return (
     <div>
-      {loading && !user ? (
-        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-          <Spin size="large" />
-          <br />
-          {t('userEdit.loadMsg')}
-        </div>
-      ) : (
-        <UserForm
+      {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
+      {!loading && !user && <h1 className="text-center"> Please refresh the page!!!! </h1>}
+      {user && (
+        <UserFormComponent
           valueCheck={valueCheck}
           LYGflag={true}
           onSubmit={onSubmit}

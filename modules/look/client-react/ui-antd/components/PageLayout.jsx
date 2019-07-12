@@ -1,23 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Layout } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Layout, BackTop, Icon, Button, Tooltip } from 'antd';
 
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 const { Header, Content } = Layout;
 
 class PageLayout extends React.Component {
+  componentWillMount = () => {
+    global && global.window && global.window.scrollTo(0, 0);
+  };
+
   render() {
     const { children, navBar } = this.props;
 
     return (
       <Layout>
         {navBar !== false && (
-          <Header
-            className="header"
-            style={{ position: "fixed", zIndex: 1, width: "100%" }}
-          >
+          <Header className="header" style={{ position: 'fixed', zIndex: 1000, width: '100%' }}>
             <NavBar />
           </Header>
         )}
@@ -25,7 +26,11 @@ class PageLayout extends React.Component {
         <Content id="content" className="page-content">
           {children}
         </Content>
-
+        <BackTop>
+          <Tooltip placement="left" title="Back to Top" autoAdjustOverflow={true}>
+            <Button icon="arrow-up" type="primary" shape="circle-outline" size="large" />
+          </Tooltip>
+        </BackTop>
         <Footer />
       </Layout>
     );

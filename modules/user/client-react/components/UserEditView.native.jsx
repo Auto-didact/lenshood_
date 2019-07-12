@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { translate } from "@gqlapp/i18n-client-react";
 import { Loading } from "@gqlapp/look-client-react-native";
 
-import UserForm from "./UserForm";
+import UserFormComponent from "./UserFormComponent";
 import { withLoadedUser } from "../containers/Auth";
 
 class UserEditView extends React.PureComponent {
@@ -25,7 +25,7 @@ class UserEditView extends React.PureComponent {
       const isNotSelf = !user || (user && user.id !== currentUser.id);
       return (
         <View style={styles.container}>
-          <UserForm
+          <UserFormComponent
             onSubmit={this.props.onSubmit}
             shouldDisplayRole={isNotSelf}
             shouldDisplayActive={isNotSelf}

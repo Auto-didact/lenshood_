@@ -307,7 +307,7 @@
               "l2": "If the Borrower cancels within 48 hours of the rental pick-up date, they will receive a 50% refund.",
               "l3": "If the Borrower cancels within 24 hours of the rental pick-up date, the rental is non-refundable."
             },
-            "p12": "If LensHood believes that you intend to cause harm to any items you rent through the platform, or believe you are renting with intent to steal; we reserve the right to cancel your rental immediately and without warning, and charge you an appropriate sum. This sum will be up to but not more than the total value of the items in question. It is at LensHood's discretion to determine what is an appropriate sum in each instance.",
+            "p12": "If LensHood believes that you intend to cause harm to any items you rent through the platform, or believe you are borrowing with intent to steal; we reserve the right to cancel your rental immediately and without warning, and charge you an appropriate sum. This sum will be up to but not more than the total value of the items in question. It is at LensHood's discretion to determine what is an appropriate sum in each instance.",
             "p13": {
               "head": "For Lenders:",
               "p131": "We highly discourage owners from cancelling—you should never accept a rental unless you are certain you can fulfill it. However, if you are an owner and need to cancel because of an unforeseen event, email us at reachus@lenshood.in. Whenever you cancel a rental, you'll get an automated review on your profile saying that you cancelled. Any applicable cancellation fees are automatically deducted from your next rental payout."
@@ -377,7 +377,7 @@
         "content": {
           "p1": {
             "head": "How should I set the price for my camera?",
-            "p11": "Feel free to use our suggested daily/weekly rental price as a benchmark. You could also have a look to see what similar items are currently renting for. In addition, if you're looking to rent for a longer period of time, we suggest lowering the daily price further.",
+            "p11": "Feel free to use our suggested daily/weekly rental price as a benchmark. You could also have a look to see what similar items are currently borrowing for. In addition, if you're looking to rent for a longer period of time, we suggest lowering the daily price further.",
             "p12": "Discount the daily price when people take it for longer durations. Research and data shows that this type of pricing strategies have the highest conversion rate."
           }
         }
@@ -398,7 +398,7 @@
             "p12": {
               "head": "Further, for borrowers, the following checks will be done by our hustlers during every rental:",
               "l1": "A photograph of the user with the equipment and a LensHood sticker.",
-              "l2": "Submission of an original Government ID of the person who is renting.",
+              "l2": "Submission of an original Government ID of the person who is borrowing.",
               "l3": "Photo of equipment (body & lenses) with Unique Serial Number"
             }
           }
@@ -455,9 +455,9 @@
     }
   },
 
-  "lending": {
+  "borrowing": {
     "navlink": {
-      "lending": "/lending"
+      "borrowing": "/renting"
     },
     "title": "How LensHood Works",
     "meta": {
@@ -466,82 +466,97 @@
         "text": "Lenshood",
         "active": "false",
         "content": {
-          "p1": "LensHood provides a safe and secure way to earn money from the equipments you own and save money by renting equipments at the comfort of your home"
+          "p1": "lenshood makes it easy for you to borrow photography equipment from the comfort of your home. No security deposite required."
         }
       },
-      "search1": {
+      "p1": {
         "key": 2,
         "text": "1. Search",
         "active": "false",
         "content": {
-          "p1": "Search for the Photography gear you are looking for."
+          "l1": "Search for the gear you are looking for."
         }
       },
-      "book": {
+      "p2": {
         "key": 2,
         "text": "2. Book",
         "active": "false",
         "content": {
-          "p1": "Book the desired gear, for the dates you want to rent out and pay upfront."
+          "l1": "Book the desired gear, for the dates you want and pay upfront."
         }
       },
-      "id_proof": {
+      "p3": {
         "key": 3,
         "text": "3. ID Proof",
         "active": "false",
         "content": {
-          "p1": "Get ready with your ID Proofs for LensHood KYC."
+          "l1": "Our hustler will deliver the gear to your doorstep. keep any original gov id card ready as we will hold on to it for you, during rental period."
         }
       },
-      "search2": {
+      "p4": {
         "key": 4,
-        "text": "4. Search",
+        "text": "4. Use And Return",
         "active": "false",
         "content": {
-          "p1": "Sit back & Relax ll our hustler comes to your doorstep."
+          "l1": "Happy clicking! Our hustler will meet you once the rental period is over to collect the gear."
         }
-      },
-      "list": {
+      }
+      }
+    
+  },
+  "lending":{
+    "navlink": {
+      "lending": "/renting"
+    },
+    "title": "How LensHood Works",
+    "meta": {
+      "lenshood": {
+        "key": 1,
+        "text": "Lenshood",
+        "active": "false",
+        "content": {
+          "p1": "LensHood provides a safe and secure way to earn money from the equipments you own. All our users are thoroughly verified and our insurence policy will take care of the rest."
+       } },
+      "p1": {
         "key": 5,
         "text": "1. List",
         "active": "false",
         "content": {
-          "p1": "List your equipment for rental and we will call you to schedule your verificaon."
+          "l1": "List your equipment for rental and we will call you to schedule your verification."
         }
       },
-      "verification": {
+      "p2": {
         "key": 6,
         "text": "2. Verification",
         "active": "false",
         "content": {
-          "p1": "Get your lisng verified by our hustler."
+          "l1": "Get your listing verified by our hustler."
         }
       },
-      "notification": {
+      "p3": {
         "key": 7,
         "text": "3. Notification",
         "active": "false",
         "content": {
-          "p1": "Get nofied in case of an order and wait for our hustler to pick it up."
+          "l1": "Get nofied in case of an order and wait for our hustler to pick it up."
         }
       },
-      "earn": {
+      "p4": {
         "key": 8,
         "text": "4. Earn",
         "active": "false",
         "content": {
-          "p1": "Earn extra money while we have got your equipments covered."
+          "l1": "Sit back and relax as we earn your money for you."
         }
       },
-      "return": {
+      "p5": {
         "key": 9,
-        "text": "9. Return",
+        "text": "5. Return",
         "active": "false",
         "content": {
-          "p1": "Finally, Get your gear back as the rental gets over."
+          "l1": "As soon as the order is done,  our hustlers will return your gear back to you."
         }
-      }
-    }
+      }}
   },
   "privacy_rules": {
     "navlink": {

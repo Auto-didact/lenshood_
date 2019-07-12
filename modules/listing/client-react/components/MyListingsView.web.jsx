@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import Helmet from 'react-helmet';
+import React, { Component } from "react";
+import Helmet from "react-helmet";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { Spin } from 'antd';
-
-import { AccountLayout } from '@gqlapp/look-client-react';
-import MyList from './components/MyList';
-import settings from '../../../../settings';
+import { AccountLayout, Loader } from "@gqlapp/look-client-react";
+import MyListComponent from "./components/MyListComponent";
+import settings from "../../../../settings";
 
 class MyListingsView extends Component {
   render() {
@@ -18,32 +16,24 @@ class MyListingsView extends Component {
           title={`${settings.app.name} - My Listings`}
           meta={[
             {
-              name: 'description',
+              name: "description",
               content: `${settings.app.name} - My Listings)}`
             }
           ]}
         />
 
-
         {this.props.loading &&
-          (!this.props.userListings && (
-            <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-              <Spin size="large" />
-              <br />
-              Loading...
-            </div>
-          ))}
+          (!this.props.userListings && <Loader text="Loading..." />)}
 
-
-        {this.props.userListings && <MyList {...this.props} />}
+        {this.props.userListings && <MyListComponent {...this.props} />}
       </AccountLayout>
     );
   }
 }
 
 MyListingsView.propTypes = {
-  userListings: PropTypes.object,
-  loading: PropTypes.object
+  userListings: PropTypes.array,
+  loading: PropTypes.bool
 };
 
 export default MyListingsView;

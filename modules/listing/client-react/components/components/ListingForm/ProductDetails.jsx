@@ -55,6 +55,12 @@ export default class ProductDetails extends Component {
             "Other Lenses"
           ],
           components: ["Lens"]
+        },
+        {
+          gearCategory: "Drones"
+        },
+        {
+          gearCategory: "Lighting"
         }
       ],
       status: ["idle", "on_rent", "on_shelf", "disabled"],
@@ -67,31 +73,28 @@ export default class ProductDetails extends Component {
 
       listingContent: props.values.listingContent,
 
-      isAdmin: false
-
+      isAdmin: false,
 
       // FOR RENDERAUTOCOMPLETE
-      // dataSource: []
+      dataSource: []
     };
     this.handleGearCategoryChange = this.handleGearCategoryChange.bind(this);
     this.handleGearSubCategoryChange = this.handleGearSubCategoryChange.bind(
       this
     );
 
-
-
     // FOR RENDERAUTOCOMPLETE
-    // this.handleSearch = this.handleSearch.bind(this);
-    // // this.renderOption = this.renderOption.bind(this);
-    // this.searchResult = this.searchResult.bind(this);
-    // this.onSelect = this.onSelect.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.searchResult = this.searchResult.bind(this);
   }
 
   handleGearCategoryChange = value => {
     const activeGearCategory = this.state.listingCategories.filter(category => {
       return category.gearCategory == value;
     });
-    const gearSubcategories = activeGearCategory[0].gearSubcategories;
+    const gearSubcategories = activeGearCategory[0].gearSubcategories
+      ? activeGearCategory[0].gearSubcategories
+      : null;
 
     this.setState({
       activeGearCategory: activeGearCategory,
@@ -134,38 +137,29 @@ export default class ProductDetails extends Component {
   //   return <>{options}</>;
   // };
 
-
-
-
   // FOR RENDERAUTOCOMPLETE
-  // handleSearch = value => {
-  //   this.setState({
-  //     dataSource: value ? this.searchResult(value) : []
-  //   });
-  // };
-  // 
-  // searchResult(query) {
-  //   var items = this.props.users.filter(
-  //     item =>
-  //       item.username.toUpperCase().includes(query.toUpperCase()) ||
-  //       item.profile.firstName.toUpperCase().includes(query.toUpperCase()) ||
-  //       item.profile.lastName.toUpperCase().includes(query.toUpperCase())
-  //   );
-  //   console.log("Filtered Users", items);
-  //   return items;
-  // }
-  // 
-  // onSelect(value) {
-  //   console.log("Selected Value", value);
-  //   var i;
-  //   for (i = 0; i < this.props.users.length; i++) {
-  //     if (this.props.users[i].username === value) {
-  //       this.props.values.userId = this.props.users[i].id;
-  //       console.log(this.props.users[i]);
-  //       break;
-  //     }
-  //   }
-  // }
+  handleSearch = value => {
+    this.setState({
+      dataSource: value ? this.searchResult(value) : []
+    });
+  };
+
+  searchResult(query) {
+    var items = this.props.users.filter(
+      item =>
+        item.username.toUpperCase().includes(query.toUpperCase()) ||
+        (item.profile &&
+          ((item.profile.firstName &&
+            item.profile.firstName
+              .toUpperCase()
+              .includes(query.toUpperCase())) ||
+            (item.profile.lastName &&
+              item.profile.lastName
+                .toUpperCase()
+                .includes(query.toUpperCase()))))
+    );
+    return items;
+  }
 
   render() {
     const values = this.props.values;
@@ -173,28 +167,21 @@ export default class ProductDetails extends Component {
     const isAdmin = this.props.isAdmin;
     return (
       <>
-
-
-
-        {/* 
-        // FOR RENDERAUTOCOMPLETE
+        {/* // FOR RENDERAUTOCOMPLETE */}
         {isAdmin && (
           <>
             <Field
-              name="userId"
+              name="username"
               dataSource={this.state.dataSource.map(item => item.username)}
               component={RenderAutoComplete}
               label={t("listing.field.username")}
-              value={values.userId}
-              onSelect={this.onSelect}
+              value={values.username}
+              // onSelect={this.onSelect}
               onSearch={this.handleSearch}
             />
           </>
-        )} */}
+        )}
 
-
-
-        
         {/* Gear Category */}
         <Field
           name="gearCategory"

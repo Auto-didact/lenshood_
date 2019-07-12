@@ -113,6 +113,8 @@
 }
 
 .cartitem img {
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
   width: 100%;
   height: 160px;
 }
@@ -158,7 +160,7 @@
   padding-bottom: 20px;
 }
 
-.checkoutSteps {
+.CheckoutStepsComponent {
   text-align: center;
   text-shadow: 1px 0 0;
   font-size: 30px;
@@ -226,7 +228,6 @@
 
 .CancelRequest {
   margin-top: 10px !important;
-  border-radius: 4px !important;
 }
 
 .itemDetails {
@@ -247,8 +248,7 @@
 .btnOrder {
   color: #23b195;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }
 
 .btnOrderActive,
@@ -256,6 +256,5 @@
   background-color: #23b195 !important;
   color: white !important;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }

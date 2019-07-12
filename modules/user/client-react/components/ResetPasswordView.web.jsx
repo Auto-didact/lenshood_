@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { PageLayout } from '@gqlapp/look-client-react';
 
-import ResetPasswordForm from '../components/ResetPasswordForm';
+import ResetPasswordFormComponent from '../components/ResetPasswordFormComponent';
 
 import settings from '../../../../settings';
 
@@ -24,7 +24,7 @@ const ResetPasswordView = ({ t, onSubmit }) => {
     <PageLayout>
       {renderMetaData()}
       <h1>{t('resetPass.form.title')}</h1>
-      <ResetPasswordForm onSubmit={onSubmit} />
+      <ResetPasswordFormComponent onSubmit={onSubmit} />
     </PageLayout>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
-import ListingForm from "./ListingForm";
+import ListingFormComponent from "./ListingFormComponent";
 
 import settings from "../../../../settings";
 import { translate } from "@gqlapp/i18n-client-react";
@@ -30,7 +30,11 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
       {/* <Link id="back-button" to="/listings">
         {t('listing.btn.back')}
       </Link> */}
-      <ListingForm onSubmit={onSubmit(addListing)} currentUser={currentUser} users={users}/>
+      <ListingFormComponent
+        onSubmit={onSubmit(addListing)}
+        currentUser={currentUser}
+        users={users}
+      />
       <br />
     </PageLayout>
   );
@@ -39,7 +43,8 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
 ListingAddView.propTypes = {
   addListing: PropTypes.func.isRequired,
   t: PropTypes.func,
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  users: PropTypes.array
 };
 
 export default translate("listing")(ListingAddView);

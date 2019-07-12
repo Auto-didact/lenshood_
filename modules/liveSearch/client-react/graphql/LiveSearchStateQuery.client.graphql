@@ -1,0 +1,7 @@
+#import "./LiveSearchState.client.graphql"
+
+query LiveSearchState {
+  liveSearchState @client {
+    ...LiveSearchStateInfo
+  }
+}

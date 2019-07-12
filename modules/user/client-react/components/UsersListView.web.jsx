@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { Table, Button } from '@gqlapp/look-client-react';
-import UserDrawer from './UserDrawer';
-import { Popconfirm, Icon, Spin } from 'antd';
+import { Table, Button, Loader } from '@gqlapp/look-client-react';
+import UserDrawerComponent from './UserDrawerComponent';
+import { Popconfirm, Icon } from 'antd';
 
 const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   const [errors, setErrors] = useState([]);
@@ -100,7 +100,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
       key: 'actions',
       render: (text, record) => (
         <div>
-          <UserDrawer user={record} />
+          <UserDrawerComponent user={record} />
           <Popconfirm
             title="Are you sure delete this User?"
             onConfirm={() => handleDeleteUser(record.id)}
@@ -120,11 +120,7 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
   return (
     <>
       {loading && !users ? (
-        <div className="text-center" style={{ marginTop: '50%', textAlign: 'center' }}>
-          <Spin size="large" />
-          <br />
-          {t('users.loadMsg')}
-        </div>
+        <Loader text={t('users.loadMsg')} />
       ) : (
         <>
           {errors &&

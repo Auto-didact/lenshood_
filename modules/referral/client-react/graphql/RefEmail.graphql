@@ -1,0 +1,3 @@
+mutation sendRefEmail($input: sendRefEmailInput!) {
+  sendRefEmail(input: $input)
+}

@@ -1,7 +1,12 @@
 #import "./Listing.graphql"
 
-query listings($limit: Int!, $after: Int) {
-  listings(limit: $limit, after: $after) {
+query listings(
+  $limit: Int!
+  $after: Int
+  $orderBy: OrderByListInput
+  $filter: FilterListInput
+) {
+  listings(limit: $limit, after: $after, orderBy: $orderBy, filter: $filter) {
     totalCount
     edges {
       cursor

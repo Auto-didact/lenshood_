@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -5,21 +6,24 @@ import { RenderAddress, PageLayout } from '@gqlapp/look-client-react';
 import { FieldArray, withFormik } from 'formik';
 import { Row, Col } from 'antd';
 import settings from '../../../../settings';
-import CheckoutSteps from './CheckoutSteps';
-import OrderCard from './OrderCard';
+import CheckoutStepsComponent from "./CheckoutStepsComponent";
+import OrderCardComponent from "./OrderCardComponent";
 import naruto2 from '../resources/naruto2.jpg';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Bill`}
-    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
+    meta={[
+      { name: "description", content: `${settings.app.name} - ${"meta"}` }
+    ]}
   />
 );
 
 class CheckoutBillView extends React.Component {
   state = {
     product: {
-      name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
+      name:
+        "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
       image: naruto2,
       days: 4,
       date: {
@@ -57,7 +61,7 @@ class CheckoutBillView extends React.Component {
         <div className="checkoutDiv">
           <Row>
             <Col lg={{ span: 22, offset: 2 }} xs={{ span: 24, offset: 0 }}>
-              <CheckoutSteps step={1} />
+              <CheckoutStepsComponent step={1} />
             </Col>
             <Col span={24}>
               <h3 className="billingAddress">Billing Address</h3>
@@ -78,7 +82,11 @@ class CheckoutBillView extends React.Component {
               )}
             />
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />
+              <OrderCardComponent
+                product={this.state.product}
+                paid={false}
+                buttonText={"Continue"}
+              />
             </Col>
           </Row>
         </div>

@@ -1,0 +1,13 @@
+fragment ReferralVerifyUserInfo on User {
+  id
+  username
+  email
+  profile {
+    firstName
+    lastName
+    isVerified
+    referredBy {
+      id
+    }
+  }
+}

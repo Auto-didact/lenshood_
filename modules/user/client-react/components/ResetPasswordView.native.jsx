@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-import ResetPasswordForm from '../components/ResetPasswordForm';
+import ResetPasswordFormComponent from '../components/ResetPasswordFormComponent';
 
 const ResetPasswordView = ({ onSubmit }) => (
   <View style={styles.container}>
-    <ResetPasswordForm onSubmit={onSubmit} />
+    <ResetPasswordFormComponent onSubmit={onSubmit} />
   </View>
 );
 

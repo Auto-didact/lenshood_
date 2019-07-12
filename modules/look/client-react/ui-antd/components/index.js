@@ -19,6 +19,7 @@ export { default as RenderAddress } from './RenderAddress';
 export { default as RenderDatePicker } from './RenderDatePicker';
 export { default as RenderDateRangePicker } from './RenderDateRangePicker';
 export { default as RenderAutoComplete } from './RenderAutoComplete';
+export { default as Loader } from './Loader';
 
 export { default as Alert } from './Alert';
 export { default as Container } from './Container';
