@@ -234,7 +234,7 @@ extend type Subscription {
   listingUpdated(id: Int!): UpdateListingPayload
   # Subscription for listing list
   listingsUpdated(
-    endCursor: Int!
+    endCursor: Int
     filter: FilterListInput
   ): UpdateListingPayload
   # Subscription for listingReviews
@@ -244,7 +244,7 @@ extend type Subscription {
 # Payload for listingsUpdated Subscription
 type UpdateListingPayload {
   mutation: String!
-  id: Int!
+  id: Int
   node: Listing
 }
 

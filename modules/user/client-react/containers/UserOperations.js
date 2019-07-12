@@ -1,11 +1,12 @@
-import { graphql } from 'react-apollo';
-import update from 'immutability-helper';
-import { removeTypename, log } from '@gqlapp/core-common';
-import USERS_STATE_QUERY from '../graphql/UsersStateQuery.client.graphql';
-import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
-import USERS_QUERY from '../graphql/UsersQuery.graphql';
-import DELETE_USER from '../graphql/DeleteUser.graphql';
-import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
+import { graphql } from "react-apollo";
+import update from "immutability-helper";
+import { removeTypename, log } from "@gqlapp/core-common";
+import { message } from "antd";
+import USERS_STATE_QUERY from "../graphql/UsersStateQuery.client.graphql";
+import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
+import USERS_QUERY from "../graphql/UsersQuery.graphql";
+import DELETE_USER from "../graphql/DeleteUser.graphql";
+import UPDATE_FILTER from "../graphql/UpdateFilter.client.graphql";
 
 const withUsersState = Component =>
   graphql(USERS_STATE_QUERY, {
@@ -18,12 +19,21 @@ const withUsers = Component =>
   graphql(USERS_QUERY, {
     options: ({ orderBy, filter }) => {
       return {
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         variables: { orderBy, filter }
       };
     },
-    props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
-      return { loading, users, refetch, subscribeToMore, updateQuery, errors: error ? error.graphQLErrors : null };
+    props({
+      data: { loading, users, refetch, error, updateQuery, subscribeToMore }
+    }) {
+      return {
+        loading,
+        users,
+        refetch,
+        subscribeToMore,
+        updateQuery,
+        errors: error ? error.graphQLErrors : null
+      };
     }
   })(Component);
 
@@ -42,8 +52,10 @@ const withUsersDeleting = Component =>
             return { errors: deleteUser.errors };
           }
         } catch (e) {
+          message.error("Couldn't perform the action");
           log.error(e);
         }
+        message.error("User deleted!");
       }
     })
   })(Component);
@@ -76,11 +88,11 @@ const updateUsersState = (usersUpdated, updateQuery) => {
   const { mutation, node } = usersUpdated;
   updateQuery(prev => {
     switch (mutation) {
-      case 'CREATED':
+      case "CREATED":
         return addUser(prev, node);
-      case 'DELETED':
+      case "DELETED":
         return deleteUser(prev, node.id);
-      case 'UPDATED':
+      case "UPDATED":
         return deleteUser(prev, node.id);
       default:
         return prev;
@@ -114,5 +126,11 @@ function deleteUser(prev, id) {
   });
 }
 
-export { withUsersState, withUsers, withUsersDeleting, withOrderByUpdating, withFilterUpdating };
+export {
+  withUsersState,
+  withUsers,
+  withUsersDeleting,
+  withOrderByUpdating,
+  withFilterUpdating
+};
 export { updateUsersState };

@@ -55,6 +55,12 @@ export default class ProductDetails extends Component {
             "Other Lenses"
           ],
           components: ["Lens"]
+        },
+        {
+          gearCategory: "Drones"
+        },
+        {
+          gearCategory: "Lighting"
         }
       ],
       status: ["idle", "on_rent", "on_shelf", "disabled"],
@@ -86,7 +92,9 @@ export default class ProductDetails extends Component {
     const activeGearCategory = this.state.listingCategories.filter(category => {
       return category.gearCategory == value;
     });
-    const gearSubcategories = activeGearCategory[0].gearSubcategories;
+    const gearSubcategories = activeGearCategory[0].gearSubcategories
+      ? activeGearCategory[0].gearSubcategories
+      : null;
 
     this.setState({
       activeGearCategory: activeGearCategory,
@@ -157,7 +165,6 @@ export default class ProductDetails extends Component {
     const values = this.props.values;
     const t = this.props.t;
     const isAdmin = this.props.isAdmin;
-    console.log(this.props);
     return (
       <>
         {/* // FOR RENDERAUTOCOMPLETE */}

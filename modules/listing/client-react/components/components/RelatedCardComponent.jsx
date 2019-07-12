@@ -113,7 +113,11 @@ class RelatedCardComponent extends Component {
                 {seller}
                 <br />
                 {rating ? (
-                  <Rate disabled defaultValue={rating} className="CardRate" />
+                  <Rate
+                    disabled
+                    defaultValue={Number(rating)}
+                    className="CardRate"
+                  />
                 ) : (
                   <a>Not Reviewed</a>
                 )}
@@ -131,7 +135,7 @@ class RelatedCardComponent extends Component {
 }
 
 RelatedCardComponent.propTypes = {
-  relatedList: PropTypes.object.isRequired
+  relatedListing: PropTypes.object.isRequired
 };
 
 export default RelatedCardComponent;

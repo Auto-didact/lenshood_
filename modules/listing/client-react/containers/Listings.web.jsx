@@ -4,6 +4,8 @@ import { graphql, compose } from "react-apollo";
 import update from "immutability-helper";
 import { PLATFORM } from "@gqlapp/core-common";
 
+import { message } from "antd";
+
 import { removeTypename } from "@gqlapp/core-common";
 import ListingListView from "../components/ListingListView";
 
@@ -222,6 +224,7 @@ export default compose(
             });
           }
         });
+        message.warning("Listing deleted.");
       }
     })
   }),

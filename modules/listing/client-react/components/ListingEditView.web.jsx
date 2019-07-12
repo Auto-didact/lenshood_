@@ -75,7 +75,7 @@ ListingEditView.propTypes = {
   listing: PropTypes.object,
   editListing: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  users: PropTypes.object,
+  users: PropTypes.array,
   t: PropTypes.func
 };
 
