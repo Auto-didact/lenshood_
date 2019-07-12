@@ -243,7 +243,7 @@ const UserForm = ({
             name="addresses"
             addresses={addresses}
             arrayHelpers={arrayHelpers}
-            label={t('profile.card.group.addresses')}
+            label="profile.card.group.addresses"
             t={t}
             isSelectable={true}
           />
@@ -394,3 +394,4 @@ const UserFormWithFormik = withFormik({
     validate(values, isEmpty(props.initialValues) ? createUserFormSchema : updateUserFormSchema)
 });
 export default translate('user')(UserFormWithFormik(UserForm));
+

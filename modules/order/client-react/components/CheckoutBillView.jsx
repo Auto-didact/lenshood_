@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { RenderAddress, PageLayout } from '@gqlapp/look-client-react';
 import { FieldArray, withFormik } from 'formik';
-// import RenderAddress from './RenderAddress';
 import { Row, Col } from 'antd';
 import settings from '../../../../settings';
 import CheckoutSteps from './CheckoutSteps';
@@ -64,22 +63,20 @@ class CheckoutBillView extends React.Component {
               <h3 className="billingAddress">Billing Address</h3>
               <br />
             </Col>
-            <Col>
-              <FieldArray
-                name="addresses"
-                render={arrayHelpers => (
-                  <RenderAddress
-                    name="addresses"
-                    addresses={this.state.addresses}
-                    // addresses={addresses}
-                    arrayHelpers={arrayHelpers}
-                    label="addresses"
-                    t={t}
-                    isSelectable={true}
-                  />
-                )}
-              />
-            </Col>
+            <FieldArray
+              name="addresses"
+              render={arrayHelpers => (
+                <RenderAddress
+                  name="addresses"
+                  addresses={this.state.addresses}
+                  // addresses={addresses}
+                  arrayHelpers={arrayHelpers}
+                  label="addresses"
+                  t={t}
+                  isSelectable={true}
+                />
+              )}
+            />
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCard product={this.state.product} paid={false} buttonText={'Continue'} />
             </Col>
@@ -96,6 +93,7 @@ CheckoutBillView.propTypes = {
 };
 const CheckoutBillWithFormik = withFormik({
   mapPropsToValues: values => {
+    // values.initialValues is always undefined here this part does not work
     const { addresses } = values.initialValues || '';
 
     return {

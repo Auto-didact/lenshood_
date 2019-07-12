@@ -2,6 +2,10 @@
 
 /* Checkout pages */
 
+.ant-radio-inner {
+  margin-left: 10px;
+}
+
 .billingAddress {
   font-size: 15px;
   text-shadow: 0.6px 0 0;
