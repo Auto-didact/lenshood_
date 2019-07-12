@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import { Card, Rate, Icon, Carousel, Avatar, Divider } from "antd";
-import { ImgCamera } from "../../constants/DefaultImages";
+import { Card, Rate, Icon, Carousel, Avatar, Divider } from 'antd';
+import { ImgCamera } from '../../constants/DefaultImages';
 
 // import '../resources/listingCatalogue.css';
 
@@ -24,9 +24,7 @@ class PublicProfileListingCardComponent extends Component {
     const rent_per_day = listing.listingRental.perDay || null;
 
     const title_set =
-      listing && listing.listingContent && listing.listingContent.length !== 0
-        ? listing.listingContent
-        : null;
+      listing && listing.listingContent && listing.listingContent.length !== 0 ? listing.listingContent : null;
 
     // const status = {
     //   dots: true,
@@ -40,25 +38,25 @@ class PublicProfileListingCardComponent extends Component {
     return (
       <Link className="listing-link" to={`/listing-detail/${listing_id}`}>
         <Card
-          style={{ height: "361px", margin: "5px" }}
-          bodyStyle={{ margin: "0px" }}
+          style={{ height: '361px', margin: '5px' }}
+          bodyStyle={{ margin: '0px' }}
           hoverable
           cover={
             <div
               style={{
-                overflow: "hidden",
+                overflow: 'hidden',
 
-                height: "230px",
+                height: '230px',
 
-                borderRadius: "8px 8px 0px 0px",
-                background: "#c3c3c3"
+                borderRadius: '8px 8px 0px 0px',
+                background: '#c3c3c3'
               }}
               align="center"
             >
               <img
                 src={listing_img}
                 style={{
-                  height: "100%"
+                  height: '100%'
                 }}
               />
             </div>

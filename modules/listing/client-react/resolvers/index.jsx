@@ -1,13 +1,13 @@
-import update from "immutability-helper";
+import update from 'immutability-helper';
 
 // import COMMENT_QUERY_CLIENT from '../graphql/CommentQuery.client.graphql';
-import LISTS_STATE_QUERY from "../graphql/ListsStateQuery.client.graphql";
+import LISTS_STATE_QUERY from '../graphql/ListsStateQuery.client.graphql';
 
 // const TYPE_NAME = 'CommentState';
 // const TYPE_NAME_COMMENT = 'Comment';
-const TYPE_LISTS_STATE = "ListsState";
-const TYPE_LISTS_STATE_FILTER = "FilterListInput";
-const TYPE_LISTS_STATE_ORDER_BY = "OrderByListInput";
+const TYPE_LISTS_STATE = 'ListsState';
+const TYPE_LISTS_STATE_FILTER = 'FilterListInput';
+const TYPE_LISTS_STATE_ORDER_BY = 'OrderByListInput';
 
 const defaults = {
   //   comment: {
@@ -19,14 +19,14 @@ const defaults = {
   // };
   listsState: {
     orderBy: {
-      column: "",
-      order: "",
+      column: '',
+      order: '',
       __typename: TYPE_LISTS_STATE_ORDER_BY
     },
     filter: {
-      searchText: "",
-      gearCategory: "",
-      gearSubcategory: "",
+      searchText: '',
+      gearCategory: '',
+      gearSubcategory: '',
       __typename: TYPE_LISTS_STATE_FILTER
     },
     __typename: TYPE_LISTS_STATE

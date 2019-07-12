@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import moment from "moment";
-import PropTypes from "prop-types";
-import {
-  RenderDateRangePicker,
-  Button as FormButton,
-  Form
-} from "@gqlapp/look-client-react";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { withFormik } from "formik";
-import { required, validate } from "@gqlapp/validation-common-react";
+import React, { useState } from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import { RenderDateRangePicker, Button as FormButton, Form } from '@gqlapp/look-client-react';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { withFormik } from 'formik';
+import { required, validate } from '@gqlapp/validation-common-react';
 
 const DateChangeSchema = {
   dateRange: [required]
@@ -18,8 +14,8 @@ const DateRangeCardComponent = props => {
   const { handleSubmit, submitting, errors } = props;
   let product = props.products;
   const [dates, setDateRange] = useState([
-    moment(product.date.start, "DD-MM-YY"),
-    moment(product.date.end, "DD-MM-YY")
+    moment(product.date.start, 'DD-MM-YY'),
+    moment(product.date.end, 'DD-MM-YY')
   ]);
   return (
     <Form name="CartItem" onSubmit={handleSubmit}>
@@ -31,12 +27,8 @@ const DateRangeCardComponent = props => {
         value={dates}
         onChange={v => setDateRange(v)}
       />
-      <div className="text-center">
-        {errors && errors.errorMsg && (
-          <Alert color="error">{errors.errorMsg}</Alert>
-        )}
-      </div>
-      <h4>No of days : {dates[1].diff(dates[0], "days") + 1}</h4>
+      <div className="text-center">{errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}</div>
+      <h4>No of days : {dates[1].diff(dates[0], 'days') + 1}</h4>
       <FormButton color="primary" type="submit" disabled={submitting}>
         Submit
       </FormButton>
@@ -52,10 +44,7 @@ DateRangeCardComponent.propTypes = {
 
 const CartItemWithFormik = withFormik({
   mapPropsToValues: props => ({
-    dateRange: [
-      moment(props.products.date.start, "DD-MM-YY"),
-      moment(props.products.date.end, "DD-MM-YY")
-    ]
+    dateRange: [moment(props.products.date.start, 'DD-MM-YY'), moment(props.products.date.end, 'DD-MM-YY')]
   }),
   validate: values => validate(values, DateChangeSchema),
   handleSubmit({ dateRange }, { props }) {
@@ -63,10 +52,10 @@ const CartItemWithFormik = withFormik({
       valid = true;
     for (
       i = dateRange[0];
-      moment(i, "DD-MM-YY") <= moment(dateRange[1], "DD-MM-YY");
-      i = moment(i, "DD-MM-YY")
-        .add(1, "d")
-        .format("DD-MM-YY")
+      moment(i, 'DD-MM-YY') <= moment(dateRange[1], 'DD-MM-YY');
+      i = moment(i, 'DD-MM-YY')
+        .add(1, 'd')
+        .format('DD-MM-YY')
     ) {
       if (props.books.some(item => item === i)) {
         valid = false;
@@ -74,15 +63,11 @@ const CartItemWithFormik = withFormik({
       }
     }
     if (valid === true) {
-      props.editProduct(
-        props.products.id,
-        moment(dateRange[0], "DD-MM-YY"),
-        moment(dateRange[1], "DD-MM-YY")
-      );
-    } else alert("The dates should not include the disabled ones!");
+      props.editProduct(props.products.id, moment(dateRange[0], 'DD-MM-YY'), moment(dateRange[1], 'DD-MM-YY'));
+    } else alert('The dates should not include the disabled ones!');
   },
   enableReinitialize: true,
-  displayName: "DatesChangeForm" // helps with React DevTools
+  displayName: 'DatesChangeForm' // helps with React DevTools
 });
 
 export default CartItemWithFormik(DateRangeCardComponent);

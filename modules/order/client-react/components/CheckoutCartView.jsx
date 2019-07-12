@@ -1,23 +1,21 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from "../../../../settings";
-import { Link } from "react-router-dom";
-import { Row, Col, Button, Card, Icon, Modal, Checkbox } from "antd";
-import CheckoutStepsComponent from "./CheckoutStepsComponent";
-import CartItemComponent from "./CartItemComponent";
-import DateRangeCardComponent from "./DateRangeCardComponent";
-import { TotalAmount, TotalRent, Refund } from "../helper/index";
-import { AGREEMENT1, AGREEMENT2, AGREEMENT3 } from "../constants/Undertaking";
-import moment from "moment";
+import settings from '../../../../settings';
+import { Link } from 'react-router-dom';
+import { Row, Col, Button, Card, Icon, Modal, Checkbox } from 'antd';
+import CheckoutStepsComponent from './CheckoutStepsComponent';
+import CartItemComponent from './CartItemComponent';
+import DateRangeCardComponent from './DateRangeCardComponent';
+import { TotalAmount, TotalRent, Refund } from '../helper/index';
+import { AGREEMENT1, AGREEMENT2, AGREEMENT3 } from '../constants/Undertaking';
+import moment from 'moment';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Cart`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
@@ -50,10 +48,10 @@ export default class CheckoutCartView extends React.Component {
       this.state.cartItem.bookings.map(book => {
         for (
           i = book.start;
-          moment(i, "DD-MM-YY") <= moment(book.end, "DD-MM-YY");
-          i = moment(i, "DD-MM-YY")
-            .add(1, "d")
-            .format("DD-MM-YY")
+          moment(i, 'DD-MM-YY') <= moment(book.end, 'DD-MM-YY');
+          i = moment(i, 'DD-MM-YY')
+            .add(1, 'd')
+            .format('DD-MM-YY')
         ) {
           this.state.books.push(i);
         }
@@ -63,9 +61,7 @@ export default class CheckoutCartView extends React.Component {
   disabledDate(current) {
     if (
       (current && current.valueOf() < Date.now()) ||
-      this.state.books.some(
-        row => row === moment(current._d).format("DD-MM-YY")
-      )
+      this.state.books.some(row => row === moment(current._d).format('DD-MM-YY'))
     ) {
       return true;
     } else {
@@ -100,18 +96,13 @@ export default class CheckoutCartView extends React.Component {
                   {state.products.length} items
                 </div>
                 <div>
-                  Total rent:{" "}
-                  <strong>&#8377; {TotalRent(state.products)} </strong>
+                  Total rent: <strong>&#8377; {TotalRent(state.products)} </strong>
                 </div>
               </Col>
               <br />
               <br />
               <Row>
-                <Col
-                  lg={{ span: 14, offset: 0 }}
-                  xs={{ span: 24, offset: 0 }}
-                  className="margin20"
-                >
+                <Col lg={{ span: 14, offset: 0 }} xs={{ span: 24, offset: 0 }} className="margin20">
                   {state.products.map(cartItem => (
                     <CartItemComponent
                       key={cartItem.id}
@@ -139,56 +130,33 @@ export default class CheckoutCartView extends React.Component {
                     />
                   ) : null}
                 </Modal>
-                <Col
-                  lg={{ span: 7, offset: 1 }}
-                  sm={{ span: 24, offset: 0 }}
-                  xs={{ span: 24, offset: 0 }}
-                >
+                <Col lg={{ span: 7, offset: 1 }} sm={{ span: 24, offset: 0 }} xs={{ span: 24, offset: 0 }}>
                   <Card className="margin20 boxShadowTheme">
-                    <Button
-                      type="primary"
-                      ghost
-                      onClick={() => this.props.Addproducts()}
-                      block
-                      className="marginB20"
-                    >
+                    <Button type="primary" ghost onClick={() => this.props.Addproducts()} block className="marginB20">
                       Add more products
                     </Button>
 
                     <Col className="marginV15" span={24}>
                       <Checkbox onChange={e => this.onChange1(e)}>
-                        <span className="font11h">
-                          {AGREEMENT1}
-                        </span>
+                        <span className="font11h">{AGREEMENT1}</span>
                       </Checkbox>
                     </Col>
                     <Col span={24}>
                       <Checkbox onChange={e => this.onChange2(e)}>
-                        <span className="font11h">
-                          {AGREEMENT2(this.state.randomVal)}
-                        </span>
+                        <span className="font11h">{AGREEMENT2(this.state.randomVal)}</span>
                       </Checkbox>
                     </Col>
                     <Col className="marginV15" span={24}>
                       <Checkbox onChange={e => this.onChange3(e)}>
-                        <span className="font11h">
-                          {AGREEMENT3}
-                        </span>
+                        <span className="font11h">{AGREEMENT3}</span>
                       </Checkbox>
                     </Col>
-                    {this.state.option1 &&
-                    this.state.option2 &&
-                    this.state.option3 ? (
+                    {this.state.option1 && this.state.option2 && this.state.option3 ? (
                       <Button type="primary" className="margin20" block>
                         Checkout
                       </Button>
                     ) : (
-                      <Button
-                        type="primary"
-                        className="margin20"
-                        disabled
-                        block
-                      >
+                      <Button type="primary" className="margin20" disabled block>
                         Checkout
                       </Button>
                     )}
@@ -198,16 +166,10 @@ export default class CheckoutCartView extends React.Component {
                         <div key={key}>
                           <strong>Item {key + 1}:</strong>
                           <p>
-                            Rent per day{" "}
-                            <div className="rightfloat">
-                              &#8377; {item.rent}
-                            </div>
+                            Rent per day <div className="rightfloat">&#8377; {item.rent}</div>
                             <br />
-                            &#8377; {item.rent}/- <Icon type="close" />{" "}
-                            {item.days} days
-                            <div className="rightfloat">
-                              &#8377; {item.rent * item.days}
-                            </div>
+                            &#8377; {item.rent}/- <Icon type="close" /> {item.days} days
+                            <div className="rightfloat">&#8377; {item.rent * item.days}</div>
                           </p>
                         </div>
                       ))}
@@ -221,29 +183,20 @@ export default class CheckoutCartView extends React.Component {
                     </p> */}
 
                       <p>
-                        Delivery fee (Drop and Pick Up){" "}
-                        <div className="rightfloat">
-                          &#8377; {state.deliveryfee}
-                        </div>
+                        Delivery fee (Drop and Pick Up) <div className="rightfloat">&#8377; {state.deliveryfee}</div>
                       </p>
                       <hr />
                       <p>
                         GST ({state.gst}%)
                         <div className="rightfloat">
-                          &#8377;{" "}
-                          {(state.gst * TotalAmount(state.products, 0, 0)) /
-                            100}
+                          &#8377; {(state.gst * TotalAmount(state.products, 0, 0)) / 100}
                         </div>
                       </p>
                       <h3>
-                        Total rent amount{" "}
+                        Total rent amount{' '}
                         <strong className="colorFloat">
                           &#8377;
-                          {TotalAmount(
-                            state.products,
-                            state.gst,
-                            state.deliveryfee
-                          )}
+                          {TotalAmount(state.products, state.gst, state.deliveryfee)}
                         </strong>
                       </h3>
                       {/* <p>

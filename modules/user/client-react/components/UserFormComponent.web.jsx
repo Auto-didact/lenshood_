@@ -11,13 +11,12 @@ import {
   RenderSelect,
   RenderUpload,
   RenderCheckBox,
+  RenderAddress,
   RenderDynamicField,
   Option,
   Button,
   Alert
 } from '@gqlapp/look-client-react';
-
-import RenderAddress from './RenderAddress';
 
 import settings from '../../../../settings';
 import './styling.css';
@@ -258,7 +257,7 @@ const UserForm = ({
         <h1 className="heading vgap">Contact</h1>
 
         <div className="g3 about">
-          <FieldArray
+          {/* <FieldArray
             name="addresses"
             render={arrayHelpers => (
               <RenderDynamicField
@@ -275,6 +274,20 @@ const UserForm = ({
                 values={addresses}
                 name="addresses"
                 label={t('userEdit.form.field.addresses')}
+              />
+            )}
+          /> */}
+
+          <FieldArray
+            name="addresses"
+            render={arrayHelpers => (
+              <RenderAddress
+                name="addresses"
+                addresses={addresses}
+                arrayHelpers={arrayHelpers}
+                label="profile.card.group.addresses"
+                t={t}
+                isSelectable={true}
               />
             )}
           />

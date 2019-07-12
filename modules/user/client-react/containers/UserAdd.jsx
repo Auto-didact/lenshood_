@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { compose, graphql } from "react-apollo";
-import { pick } from "lodash";
-import { translate } from "@gqlapp/i18n-client-react";
-import { FormError } from "@gqlapp/forms-client-react";
-import UserAddView from "../components/UserAddView";
-import ADD_USER from "../graphql/AddUser.graphql";
-import settings from "../../../../settings";
-import UserFormatter from "../helpers/UserFormatter";
-import { message } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { compose, graphql } from 'react-apollo';
+import { pick } from 'lodash';
+import { translate } from '@gqlapp/i18n-client-react';
+import { FormError } from '@gqlapp/forms-client-react';
+import UserAddView from '../components/UserAddView';
+import ADD_USER from '../graphql/AddUser.graphql';
+import settings from '../../../../settings';
+import UserFormatter from '../helpers/UserFormatter';
+import { message } from 'antd';
 
 const UserAdd = props => {
   const { addUser, t, history, navigation } = props;
@@ -16,34 +16,34 @@ const UserAdd = props => {
   const onSubmit = async values => {
     console.log(values);
     let userValues = pick(values, [
-      "username",
-      "email",
-      "role",
-      "isActive",
-      "profile",
-      "addresses",
-      "portfolios",
-      "password"
+      'username',
+      'email',
+      'role',
+      'isActive',
+      'profile',
+      'addresses',
+      'portfolios',
+      'password'
     ]);
 
     userValues = UserFormatter.trimExtraSpaces(userValues);
 
     if (settings.auth.certificate.enabled) {
-      userValues["auth"] = {
-        certificate: pick(values.auth.certificate, "serial")
+      userValues['auth'] = {
+        certificate: pick(values.auth.certificate, 'serial')
       };
     }
 
     try {
       await addUser(userValues);
     } catch (e) {
-      message.error(t("userAdd.errorMsg"));
-      throw new FormError(t("userAdd.errorMsg"), e);
+      message.error(t('userAdd.errorMsg'));
+      throw new FormError(t('userAdd.errorMsg'), e);
     }
 
-    message.info("New User Added!");
+    message.info('New User Added!');
     if (history) {
-      return history.push("/users/");
+      return history.push('/users/');
     }
     if (navigation) {
       return navigation.goBack();
@@ -61,7 +61,7 @@ UserAdd.propTypes = {
 };
 
 export default compose(
-  translate("user"),
+  translate('user'),
   graphql(ADD_USER, {
     props: ({ mutate }) => ({
       addUser: async input => {

@@ -1,6 +1,6 @@
-import React from "react";
-import { Row, Col, Button, Card } from "antd";
-import ReferModalComponent from "./ReferModalComponent";
+import React from 'react';
+import { Row, Col, Button, Card } from 'antd';
+import ReferModalComponent from './ReferModalComponent';
 
 export default class ReferDetailsCardComponent extends React.Component {
   state = {
@@ -19,18 +19,13 @@ export default class ReferDetailsCardComponent extends React.Component {
             <strong>Your Referrals</strong>
           </h1>
           <h3 className="marginB20">
-            Cash earned{" "}
+            Cash earned{' '}
             <strong className="colorFloat">
               &#8377;
               {this.state.cashEarned}
             </strong>
           </h3>
-          <Button
-            onClick={() => this.setModal1Visible(true)}
-            type="primary"
-            ghost
-            block
-          >
+          <Button onClick={() => this.setModal1Visible(true)} type="primary" ghost block>
             View referral details
           </Button>
           <ReferModalComponent
@@ -41,9 +36,9 @@ export default class ReferDetailsCardComponent extends React.Component {
           />
         </Card>
         <Card className="boxShadowTheme borderRadius9">
-          {" "}
+          {' '}
           <h3>
-            Credit Available{" "}
+            Credit Available{' '}
             <strong className="colorFloat">
               &#8377;
               {this.state.totalCredit}

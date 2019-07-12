@@ -1,21 +1,21 @@
-import { camelizeKeys, decamelize } from "humps";
-import { has } from "lodash";
-import { knex, returnId } from "@gqlapp/database-server-ts";
-import { User } from "@gqlapp/user-server-ts/sql";
+import { camelizeKeys, decamelize } from 'humps';
+import { has } from 'lodash';
+import { knex, returnId } from '@gqlapp/database-server-ts';
+import { User } from '@gqlapp/user-server-ts/sql';
 
-import { Model, raw } from "objection";
+import { Model, raw } from 'objection';
 
 Model.knex(knex);
 
-const eager = "[users.user.[profile]]";
+const eager = '[users.user.[profile]]';
 
 export default class LiveSearch extends Model {
   static get tableName() {
-    return "live_search";
+    return 'live_search';
   }
 
   static get idColumn() {
-    return "id";
+    return 'id';
   }
 
   static get relationMappings() {
@@ -24,43 +24,40 @@ export default class LiveSearch extends Model {
         relation: Model.HasManyRelation,
         modelClass: LiveSearchUser,
         join: {
-          from: "live_search.id",
-          to: "live_search_user.search_id"
+          from: 'live_search.id',
+          to: 'live_search_user.search_id'
         }
       }
     };
   }
 
-  async liveSearches(orderBy: any, filter: any) {
+  public async liveSearches(orderBy: any, filter: any) {
     const queryBuilder = LiveSearch.query().eager(eager);
 
     // add order by
     if (orderBy && orderBy.column) {
-      let column = orderBy.column;
-      let order = "asc";
+      const column = orderBy.column;
+      let order = 'asc';
       if (orderBy.order) {
         order = orderBy.order;
       }
 
       queryBuilder.orderBy(decamelize(column), order);
-    } else queryBuilder.orderBy("id", "desc");
+    } else {
+      queryBuilder.orderBy('id', 'desc');
+    }
 
     // // add filter conditions
     if (filter) {
-      if (has(filter, "gearCategory") && filter.gearCategory !== "") {
+      if (has(filter, 'gearCategory') && filter.gearCategory !== '') {
         queryBuilder.where(function() {
-          this.where("gear_category", filter.gearCategory);
+          this.where('gear_category', filter.gearCategory);
         });
       }
 
-      if (has(filter, "searchText") && filter.searchText !== "") {
+      if (has(filter, 'searchText') && filter.searchText !== '') {
         queryBuilder.where(function() {
-          this.where(
-            raw("LOWER(??) LIKE LOWER(?)", [
-              "query_item",
-              `%${filter.searchText}%`
-            ])
-          );
+          this.where(raw('LOWER(??) LIKE LOWER(?)', ['query_item', `%${filter.searchText}%`]));
         });
       }
     }
@@ -68,26 +65,26 @@ export default class LiveSearch extends Model {
     return res;
   }
 
-  async addSearchItem(userId: any, gearCategory: any, queryItem: any) {
+  public async addSearchItem(userId: any, gearCategory: any, queryItem: any) {
     const res = await returnId(
-      knex("live_search").insert({
+      knex('live_search').insert({
         gear_category: gearCategory,
         query_item: queryItem
       })
     );
     const ref = await returnId(
-      knex("live_search_user").insert({
+      knex('live_search_user').insert({
         user_id: userId,
         search_id: res[0]
       })
     );
-    console.log("ref", ref);
+    console.log('ref', ref);
     return res;
   }
 
-  async increSearchItem(userId: any, searchId: any) {
+  public async increSearchItem(userId: any, searchId: any) {
     const res = await returnId(
-      knex("live_search_user").insert({
+      knex('live_search_user').insert({
         user_id: userId,
         search_id: searchId
       })
@@ -95,21 +92,20 @@ export default class LiveSearch extends Model {
     return res;
   }
 
-  async decreSearchItem(userId: any, searchId: any) {
-    const res = await knex("live_search_user")
-      .where("user_id", "=", userId)
-      .andWhere("search_id", "=", searchId)
+  public async decreSearchItem(userId: any, searchId: any) {
+    const res = await knex('live_search_user')
+      .where('user_id', '=', userId)
+      .andWhere('search_id', '=', searchId)
       .del();
 
-    const ref = await returnId(
-      knex("live_search_user").where("search_id", "=", searchId)
-    );
+    const ref = await returnId(knex('live_search_user').where('search_id', '=', searchId));
 
-    console.log("ref", ref);
-    if (ref.length == 0)
-      await knex("live_search")
-        .where("id", "=", searchId)
+    console.log('ref', ref);
+    if (ref.length == 0) {
+      await knex('live_search')
+        .where('id', '=', searchId)
         .del();
+    }
 
     return res;
   }
@@ -119,7 +115,7 @@ export default class LiveSearch extends Model {
       await LiveSearch.query()
         .findById(id)
         .eager(eager)
-        .orderBy("id", "desc")
+        .orderBy('id', 'desc')
     );
     return res;
   }
@@ -127,11 +123,11 @@ export default class LiveSearch extends Model {
 
 class LiveSearchUser extends Model {
   static get tableName() {
-    return "live_search_user";
+    return 'live_search_user';
   }
 
   static get idColumn() {
-    return "id";
+    return 'id';
   }
 
   static get relationMappings() {
@@ -140,16 +136,16 @@ class LiveSearchUser extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "live_search_user.user_id",
-          to: "user.id"
+          from: 'live_search_user.user_id',
+          to: 'user.id'
         }
       },
       search_item: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "live_search_user.search_id",
-          to: "live_search.id"
+          from: 'live_search_user.search_id',
+          to: 'live_search.id'
         }
       }
     };

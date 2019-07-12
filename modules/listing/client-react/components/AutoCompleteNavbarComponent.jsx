@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { translate } from "@gqlapp/i18n-client-react";
-import { Input, Icon, AutoComplete } from "antd";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Input, Icon, AutoComplete } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Option } = AutoComplete;
 
@@ -34,9 +34,7 @@ class AutoCompleteNavbarComponent extends Component {
       <Option key={item.id} text={item.description}>
         <div>
           <span>
-            Found in{" "}
-            <Link to={`/listing-detail/${item.id}`}>{item.description}</Link> in{" "}
-            {item.gearSubcategory}
+            Found in <Link to={`/listing-detail/${item.id}`}>{item.description}</Link> in {item.gearSubcategory}
           </span>
           <span className="rightfloat">{item.gearCategory}</span>
         </div>
@@ -53,12 +51,9 @@ class AutoCompleteNavbarComponent extends Component {
         (item.listingContent &&
           item.listingContent.some(
             listitem =>
-              (listitem.gear &&
-                listitem.gear.toUpperCase().includes(query.toUpperCase())) ||
-              (listitem.brand &&
-                listitem.brand.toUpperCase().includes(query.toUpperCase())) ||
-              (listitem.model &&
-                listitem.model.toUpperCase().includes(query.toUpperCase()))
+              (listitem.gear && listitem.gear.toUpperCase().includes(query.toUpperCase())) ||
+              (listitem.brand && listitem.brand.toUpperCase().includes(query.toUpperCase())) ||
+              (listitem.model && listitem.model.toUpperCase().includes(query.toUpperCase()))
           ))
     );
     return items;
@@ -81,4 +76,4 @@ class AutoCompleteNavbarComponent extends Component {
   }
 }
 
-export default translate("listing")(AutoCompleteNavbarComponent);
+export default translate('listing')(AutoCompleteNavbarComponent);

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Icon, Card } from "antd";
+import React, { useState } from 'react';
+import { Row, Col, Button, Icon, Card } from 'antd';
 
 const CartItemComponent = props => {
   let product = props.products;
@@ -7,20 +7,14 @@ const CartItemComponent = props => {
     <Card
       className="cartitem borderRadius9 marginB20"
       bodyStyle={{
-        padding: "0px"
+        padding: '0px'
       }}
     >
       <div className="listcloseicons">
-        <Button
-          onClick={() => props.cartItemSelect(product.id)}
-          className="borderzero listclose"
-        >
+        <Button onClick={() => props.cartItemSelect(product.id)} className="borderzero listclose">
           <Icon type="edit" />
         </Button>
-        <Button
-          className="borderzero listclose"
-          onClick={() => props.deleteProduct(product.id)}
-        >
+        <Button className="borderzero listclose" onClick={() => props.deleteProduct(product.id)}>
           <Icon type="close" />
         </Button>
       </div>

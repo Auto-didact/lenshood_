@@ -1,12 +1,12 @@
 // React
-import React from "react";
+import React from 'react';
 
 // Apollo
-import { graphql, compose } from "react-apollo";
+import { graphql, compose } from 'react-apollo';
 
 // Components
-import PublicProfileView from "../components/PublicProfileView";
-import USER_QUERY from "../graphql/DisplayUserQuery.graphql";
+import PublicProfileView from '../components/PublicProfileView';
+import USER_QUERY from '../graphql/DisplayUserQuery.graphql';
 
 const PublicProfile = props => {
   let id = 0;

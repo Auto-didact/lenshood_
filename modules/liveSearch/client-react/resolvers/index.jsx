@@ -1,21 +1,21 @@
-import update from "immutability-helper";
+import update from 'immutability-helper';
 
-import LIVESEARCH_STATE_QUERY from "../graphql/LiveSearchStateQuery.client.graphql";
+import LIVESEARCH_STATE_QUERY from '../graphql/LiveSearchStateQuery.client.graphql';
 
-const TYPE_SEARCH_STATE = "LiveSearchState";
-const TYPE_SEARCH_STATE_FILTER = "FilterSearchInput";
-const TYPE_SEARCH_STATE_ORDER_BY = "OrderBySearchInput";
+const TYPE_SEARCH_STATE = 'LiveSearchState';
+const TYPE_SEARCH_STATE_FILTER = 'FilterSearchInput';
+const TYPE_SEARCH_STATE_ORDER_BY = 'OrderBySearchInput';
 
 const defaults = {
   liveSearchState: {
     orderBy: {
-      column: "",
-      order: "",
+      column: '',
+      order: '',
       __typename: TYPE_SEARCH_STATE_ORDER_BY
     },
     filter: {
-      searchText: "",
-      gearCategory: "",
+      searchText: '',
+      gearCategory: '',
       __typename: TYPE_SEARCH_STATE_FILTER
     },
     __typename: TYPE_SEARCH_STATE
