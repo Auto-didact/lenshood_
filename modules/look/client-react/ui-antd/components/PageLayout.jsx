@@ -9,7 +9,7 @@ const { Header, Content } = Layout;
 
 class PageLayout extends React.Component {
   componentWillMount = () => {
-    global&&global.window&&global.window.scrollTo(0, 0);
+    global && global.window && global.window.scrollTo(0, 0);
   };
 
   render() {
