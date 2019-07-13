@@ -76,12 +76,12 @@ export default class RenderAddress extends React.Component {
 
     //Form field Section-->>
     const keys = [
+      { key: 'primeAddress', label: 'primeAddress' },
       { key: 'streetAddress1', label: 'streetAddress' },
       { key: 'streetAddress2', label: 'streetAddress' },
       { key: 'city', label: 'city' },
       { key: 'state', label: 'state' },
-      { key: 'pinCode', label: 'pinCode' },
-      { key: 'primeAddress', label: 'primeAddress' }
+      { key: 'pinCode', label: 'pinCode' }
     ];
 
     let formItems = [];
@@ -110,7 +110,7 @@ export default class RenderAddress extends React.Component {
                   }
                   // onClick={() => this.handleSelect(indexk)}
                 >
-                  {t(`${label}.${keys[5].label}`)}
+                  {t(`${label}.${keys[0].label}`)}
                 </Radio>
               )}
             </FormItem>
