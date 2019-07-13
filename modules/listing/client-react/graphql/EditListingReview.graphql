@@ -1,0 +1,5 @@
+mutation editListingReview($input: EditListingReviewInput!) {
+  editListingReview(input: $input) {
+    id
+  }
+}

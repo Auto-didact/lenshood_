@@ -58,6 +58,9 @@ export default pubsub => ({
     },
     featuredUsers(obj, args, { User, identity }) {
       return User.featuredUsers();
+    },
+    userProfile(obj, { userId }, { User, identity }) {
+      return User.userProfile(userId);
     }
   },
   // User: {

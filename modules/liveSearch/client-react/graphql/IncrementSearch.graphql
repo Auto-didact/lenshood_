@@ -1,7 +1,7 @@
 #import "./LiveSearch.graphql"
 
 mutation increSearchItem($input: IncreDecreInput!) {
-  increSearchItem(input: $input){
-      ...LiveSearchInfo
+  increSearchItem(input: $input) {
+    ...LiveSearchInfo
   }
 }

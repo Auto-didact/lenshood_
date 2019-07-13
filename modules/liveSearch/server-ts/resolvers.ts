@@ -1,6 +1,6 @@
-import { PubSub, withFilter } from "graphql-subscriptions";
+import { PubSub, withFilter } from 'graphql-subscriptions';
 
-const SEARCH_SUBSCRIPTION = "search_subscription";
+const SEARCH_SUBSCRIPTION = 'search_subscription';
 
 export default (pubsub: PubSub) => ({
   Query: {
@@ -10,48 +10,47 @@ export default (pubsub: PubSub) => ({
   },
   Mutation: {
     async addSearchItem(obj: any, { input }: any, context: any) {
-      if (!input.userId) input.userId = context.identity.id;
-      const id = await context.LiveSearch.addSearchItem(
-        input.userId,
-        input.gearCategory,
-        input.queryItem
-      );
+      if (!input.userId) {
+        input.userId = context.identity.id;
+      }
+      const id = await context.LiveSearch.addSearchItem(input.userId, input.gearCategory, input.queryItem);
       const item = await context.LiveSearch.liveSearchItem(id);
       pubsub.publish(SEARCH_SUBSCRIPTION, {
         liveSearchUpdated: {
-          mutation: "CREATED",
+          mutation: 'CREATED',
           node: item
         }
       });
       return item;
     },
     async increSearchItem(obj: any, { input }: any, context: any) {
-      if (!input.userId) input.userId = context.identity.id;
+      if (!input.userId) {
+        input.userId = context.identity.id;
+      }
 
       await context.LiveSearch.increSearchItem(input.userId, input.id);
 
       const item = await context.LiveSearch.liveSearchItem(input.id);
       pubsub.publish(SEARCH_SUBSCRIPTION, {
         liveSearchUpdated: {
-          mutation: "UPDATED",
+          mutation: 'UPDATED',
           node: item
         }
       });
       return item;
     },
     async decreSearchItem(obj: any, { input }: any, context: any) {
-      if (!input.userId) input.userId = context.identity.id;
+      if (!input.userId) {
+        input.userId = context.identity.id;
+      }
       const searchitem = await context.LiveSearch.liveSearchItem(input.id);
-      const isDeleted = await context.LiveSearch.decreSearchItem(
-        input.userId,
-        input.id
-      );
+      const isDeleted = await context.LiveSearch.decreSearchItem(input.userId, input.id);
       if (isDeleted) {
         const item = await context.LiveSearch.liveSearchItem(input.id);
         if (item) {
           pubsub.publish(SEARCH_SUBSCRIPTION, {
             liveSearchUpdated: {
-              mutation: "UPDATED",
+              mutation: 'UPDATED',
               node: item
             }
           });
@@ -59,13 +58,15 @@ export default (pubsub: PubSub) => ({
         } else {
           pubsub.publish(SEARCH_SUBSCRIPTION, {
             liveSearchUpdated: {
-              mutation: "DELETED",
+              mutation: 'DELETED',
               node: searchitem
             }
           });
           return { searchitem };
         }
-      } else throw new Error("Couldn't perform the task");
+      } else {
+        throw new Error("Couldn't perform the task");
+      }
     }
   },
   Subscription: {
@@ -80,16 +81,17 @@ export default (pubsub: PubSub) => ({
 
           const checkByFilter =
             (!gearCategory || gearCategory === node.gearCategory) &&
-            (!searchText ||
-              node.queryItem.toUpperCase().includes(searchText.toUpperCase()));
+            (!searchText || node.queryItem.toUpperCase().includes(searchText.toUpperCase()));
 
           switch (mutation) {
-            case "DELETED":
+            case 'DELETED':
               return true;
-            case "CREATED":
+            case 'CREATED':
               return checkByFilter;
-            case "UPDATED":
+            case 'UPDATED':
               return !checkByFilter;
+            default:
+              return false;
           }
         }
       )

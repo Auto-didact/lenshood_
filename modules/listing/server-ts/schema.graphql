@@ -77,9 +77,12 @@ type Listings {
 }
 type ListingReview {
   id: Int!
+  reviewer: [UserProfile]!
   listingId: String!
   comment: String!
   rating: String!
+  createdAt: String!
+  likesReplies: [UserReviewsLikes]
 }
 
 type WatchList {
@@ -87,6 +90,14 @@ type WatchList {
   listingId: Int!
   userId: Int!
   shouldNotify: String!
+}
+
+type UserReviewsLikes {
+  id: Int!
+  userId: Int!
+  listingReviewId: Int!
+  likeDisLike: String
+  isReply: Boolean!
 }
 
 extend type Query {
@@ -102,6 +113,13 @@ extend type Query {
   watchlist(userId: Int!): [WatchList]
   watchStatus(listingId: Int!, userId: Int): Boolean
   featuredListings: [Listing]
+  reviews(reviewer_id: Int, reviewee_id: Int, listing_id: Int): [ListingReview]
+  childReviews(id: Int!): [ListingReview]
+}
+
+type CountOFLikesDisLikes {
+  likes: Int!
+  disLikes: Int!
 }
 
 input FilterListInput {
@@ -138,11 +156,20 @@ extend type Mutation {
   toggleListingIsFeatured(id: Int!, isFeatured: Boolean!): Boolean
 
   # to Add/Remove from watchlist
-  addOrRemoveWatchList(
+  toggleWatchList(
     user_id: Int!
     listing_id: Int!
     should_notify: Boolean
   ): String
+  addReview(
+    listing_id: Int!
+    reviewer_id: Int!
+    rating: Int!
+    comment: String!
+  ): Boolean
+
+  addLikesDisLikes(ld: String!, review_id: Int!, reviewer_id: Int!): Boolean
+  countLikesDisLikes(review_id: Int!): CountOFLikesDisLikes!
 }
 
 # Input for addListing Mutation
@@ -209,15 +236,16 @@ input EditListingInput {
 input AddListingReviewInput {
   rating: String!
   comment: String!
+  reviewerId: Int!
   # Needed for listingReviewUpdated Subscription filter
   listingId: Int!
+  isReply: Boolean
+  id: Int
 }
 
 # Input for editListingReview Mutation
 input DeleteListingReviewInput {
   id: Int!
-  # Needed for listingReviewUpdated Subscription filter
-  listingId: Int!
 }
 
 # Input for deleteListingReview Mutation

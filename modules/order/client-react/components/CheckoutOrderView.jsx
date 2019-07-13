@@ -1,28 +1,25 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from "../../../../settings";
-import { Row, Col } from "antd";
-import CheckoutStepsComponent from "./CheckoutStepsComponent";
-import OrderCardComponent from "./OrderCardComponent";
-import OrderTrackCardComponent from "./OrderTrackCardComponent";
-import naruto2 from "../resources/naruto2.jpg";
+import settings from '../../../../settings';
+import { Row, Col } from 'antd';
+import CheckoutStepsComponent from './CheckoutStepsComponent';
+import OrderCardComponent from './OrderCardComponent';
+import OrderTrackCardComponent from './OrderTrackCardComponent';
+import naruto2 from '../resources/naruto2.jpg';
 
 const renderMetaData = t => (
   <Helmet
     title={`${settings.app.name} - Order`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
 export default class CheckoutOrderView extends React.Component {
   state = {
     product: {
-      name:
-        "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
+      name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
       image: naruto2,
       days: 4,
       date: {
@@ -33,11 +30,11 @@ export default class CheckoutOrderView extends React.Component {
       totalRent: 1300,
       youPaid: {
         amount: 6300,
-        method: "Debit Card"
+        method: 'Debit Card'
       }
     },
     status: {
-      owner: "Rajeev Khanna",
+      owner: 'Rajeev Khanna',
       date: {
         confirm: "29 Nov'18",
         pickup: "02 Dec'18",
@@ -61,26 +58,11 @@ export default class CheckoutOrderView extends React.Component {
               <CheckoutStepsComponent step={3} />
             </Col>
             <Col lg={{ span: 22, offset: 1 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }}>
-              <Col
-                lg={{ span: 14, offset: 0 }}
-                xs={{ span: 24, offset: 0 }}
-                className="margin20"
-              >
-                <OrderTrackCardComponent
-                  status={this.state.status}
-                  completed={this.state.completed}
-                />
+              <Col lg={{ span: 14, offset: 0 }} xs={{ span: 24, offset: 0 }} className="margin20">
+                <OrderTrackCardComponent status={this.state.status} completed={this.state.completed} />
               </Col>
-              <Col
-                lg={{ span: 8, offset: 2 }}
-                xs={{ span: 24, offset: 0 }}
-                className="marginT20"
-              >
-                <OrderCardComponent
-                  product={this.state.product}
-                  paid={true}
-                  buttonText={"Cancel order"}
-                />
+              <Col lg={{ span: 8, offset: 2 }} xs={{ span: 24, offset: 0 }} className="marginT20">
+                <OrderCardComponent product={this.state.product} paid={true} buttonText={'Cancel order'} />
               </Col>
             </Col>
           </Row>

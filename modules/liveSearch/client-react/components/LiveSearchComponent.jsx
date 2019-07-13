@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -26,12 +27,12 @@ const LiveSearchComponent = ({
   };
 
   const cancel = () => {
-    message.error("Task cancelled");
+    message.error('Task cancelled');
   };
 
   const renderOrderByArrow = name => {
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === "desc") {
+      if (orderBy.order === 'desc') {
         return <span className="badge badge-primary">&#8595;</span>;
       } else {
         return <span className="badge badge-primary">&#8593;</span>;
@@ -44,14 +45,14 @@ const LiveSearchComponent = ({
   const handleOrderBy = (e, name) => {
     e.preventDefault();
 
-    let order = "asc";
+    let order = 'asc';
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === "asc") {
-        order = "desc";
-      } else if (orderBy.order === "desc") {
+      if (orderBy.order === 'asc') {
+        order = 'desc';
+      } else if (orderBy.order === 'desc') {
         return onOrderBy({
-          column: "",
-          order: ""
+          column: '',
+          order: ''
         });
       }
     }
@@ -81,31 +82,31 @@ const LiveSearchComponent = ({
     {
       title: (
         <a /*onClick={e => handleOrderBy(e, 'queryItem')}*/ href="#">
-          {"Requested Item"} {/*renderOrderByArrow('queryItem')*/}
+          {'Requested Item'} {/*renderOrderByArrow('queryItem')*/}
         </a>
       ),
-      dataIndex: "queryItem",
-      key: "queryItem",
+      dataIndex: 'queryItem',
+      key: 'queryItem',
       sorter: (a, b) => a.queryItem.length - b.queryItem.length,
-      sortDirections: ["descend", "ascend"]
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: (
         <a /*onClick={e => handleOrderBy(e, ' gearCategory')}*/ href="#">
-          {"Gear Category"} {/*renderOrderByArrow(' gearCategory')*/}
+          {'Gear Category'} {/*renderOrderByArrow(' gearCategory')*/}
         </a>
       ),
-      dataIndex: "gearCategory",
-      key: "gearCategory",
+      dataIndex: 'gearCategory',
+      key: 'gearCategory',
       sorter: (a, b) => a.gearCategory.length - b.gearCategory.length,
-      sortDirections: ["descend", "ascend"]
+      sortDirections: ['descend', 'ascend']
     },
     {
-      title: <a href="#">{"Requested by"}</a>,
-      dataIndex: "users",
-      key: "users",
+      title: <a href="#">{'Requested by'}</a>,
+      dataIndex: 'users',
+      key: 'users',
       sorter: (a, b) => a.users.length - b.users.length,
-      sortDirections: ["descend", "ascend"],
+      sortDirections: ['descend', 'ascend'],
       render: text => (
         <div>
           <strong>
@@ -120,9 +121,9 @@ const LiveSearchComponent = ({
       )
     },
     {
-      title: "Add / Cancel Request",
-      dataIndex: "users",
-      key: "actions",
+      title: 'Add / Cancel Request',
+      dataIndex: 'users',
+      key: 'actions',
       render: (text, record) => (
         <div>
           {text.some(item => item.user.id === currentUser.id) ? (
@@ -133,7 +134,7 @@ const LiveSearchComponent = ({
               okText="Yes"
               cancelText="No"
             >
-              <Button type="danger" size="small" style={{ width: "70px" }}>
+              <Button type="danger" size="small" style={{ width: '70px' }}>
                 Cancel
               </Button>
             </Popconfirm>
@@ -145,7 +146,7 @@ const LiveSearchComponent = ({
               okText="Yes"
               cancelText="No"
             >
-              <Button type="primary" size="small" style={{ width: "70px" }}>
+              <Button type="primary" size="small" style={{ width: '70px' }}>
                 Request
               </Button>
             </Popconfirm>
@@ -163,11 +164,7 @@ const LiveSearchComponent = ({
         <>
           {errors &&
             errors.map(error => (
-              <div
-                className="alert alert-danger"
-                role="alert"
-                key={error.field}
-              >
+              <div className="alert alert-danger" role="alert" key={error.field}>
                 {error.message}
               </div>
             ))}

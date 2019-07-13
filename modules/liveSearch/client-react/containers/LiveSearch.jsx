@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { compose } from "react-apollo";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout } from "@gqlapp/look-client-react";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { compose } from 'react-apollo';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout } from '@gqlapp/look-client-react';
 
-import settings from "../../../../settings";
-import LiveSearchComponent from "../components/LiveSearchComponent";
-import LiveSearchFilterComponent from "../components/LiveSearchFilterComponent";
-import { useLiveSearchWithSubscription } from "./withSubscription";
+import settings from '../../../../settings';
+import LiveSearchComponent from '../components/LiveSearchComponent';
+import LiveSearchFilterComponent from '../components/LiveSearchFilterComponent';
+import { useLiveSearchWithSubscription } from './withSubscription';
 import {
   withFilterUpdating,
   withOrderByUpdating,
@@ -18,14 +18,11 @@ import {
   withLiveSearchState,
   withSearchItemAdd,
   updateLiveSearchState
-} from "./LiveSearchOperations";
+} from './LiveSearchOperations';
 
 const LiveSearch = props => {
   const { t, updateQuery, subscribeToMore, filter } = props;
-  const liveSearchUpdated = useLiveSearchWithSubscription(
-    subscribeToMore,
-    filter
-  );
+  const liveSearchUpdated = useLiveSearchWithSubscription(subscribeToMore, filter);
 
   useEffect(() => {
     if (liveSearchUpdated) {
@@ -35,11 +32,11 @@ const LiveSearch = props => {
 
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("title")}`}
+      title={`${settings.app.name} - ${t('title')}`}
       meta={[
         {
-          name: "description",
-          content: `${settings.app.name} - ${t("meta")}`
+          name: 'description',
+          content: `${settings.app.name} - ${t('meta')}`
         }
       ]}
     />

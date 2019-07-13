@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Icon, Button, Row, Col, Card, Rate, Avatar } from "antd";
-import { BORROWED } from "../constants/OrderStates";
+import React, { Component } from 'react';
+import { Icon, Button, Row, Col, Card, Rate, Avatar } from 'antd';
+import { BORROWED } from '../constants/OrderStates';
 
 class OrderDetailsComponent extends Component {
   render() {
@@ -14,14 +14,8 @@ class OrderDetailsComponent extends Component {
               <span className="itemName">{item.id}</span>
             </Col>
             <Col sm={5} xs={12}>
-              <Button
-                type="primary"
-                ghost
-                size="small"
-                block
-                onClick={e => this.props.setTrackList(item.id)}
-              >
-                {" "}
+              <Button type="primary" ghost size="small" block onClick={e => this.props.setTrackList(item.id)}>
+                {' '}
                 <Icon type="environment" theme="filled" /> Track
               </Button>
             </Col>
@@ -34,7 +28,7 @@ class OrderDetailsComponent extends Component {
             <h4 className="itemName">{item.name}</h4>
             <Col sm={14} xs={24}>
               <h4 className="itemDetails">
-                {item.details}{" "}
+                {item.details}{' '}
                 <span className="colorcursor">
                   <Icon type="car" theme="filled" />
                 </span>
@@ -50,31 +44,17 @@ class OrderDetailsComponent extends Component {
                   {item.seller}
                   <br />
                   <p className="font10 mainColor">
-                    {" "}
-                    <Rate
-                      disabled
-                      defaultValue={item.stars}
-                      className="font10 mainColor"
-                    />
+                    {' '}
+                    <Rate disabled defaultValue={item.stars} className="font10 mainColor" />
                   </p>
                 </h4>
               </Col>
             </Col>
             <Col sm={10} xs={24}>
-              <Button
-                type="primary"
-                size="small"
-                className="CancelRequest font12"
-                block
-              >
+              <Button type="primary" size="small" className="CancelRequest font12" block>
                 Cancel booking
               </Button>
-              <Button
-                type="primary"
-                className="CancelRequest font12"
-                size="small"
-                block
-              >
+              <Button type="primary" className="CancelRequest font12" size="small" block>
                 Request Extension
               </Button>
             </Col>
@@ -82,17 +62,11 @@ class OrderDetailsComponent extends Component {
           <Col span={24} className="orderTotalDate">
             <h4>
               <Col sm={17} xs={24}>
-                <span className="orderGrey">
-                  {item.status === BORROWED ? "Ordered" : "Lended"} on
-                </span>{" "}
-                {item.orderDate}{" "}
+                <span className="orderGrey">{item.status === BORROWED ? 'Ordered' : 'Lended'} on</span> {item.orderDate}{' '}
               </Col>
               <Col sm={7} xs={24}>
                 <span className="orderGrey">
-                  <span>
-                    {item.status === BORROWED ? "Order" : "Lend"} Total
-                  </span>{" "}
-                  &#8377; {item.orderTotal}
+                  <span>{item.status === BORROWED ? 'Order' : 'Lend'} Total</span> &#8377; {item.orderTotal}
                 </span>
               </Col>
             </h4>

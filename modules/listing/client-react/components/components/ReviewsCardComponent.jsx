@@ -1,65 +1,99 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Rate, List, Row, Col, Avatar } from 'antd';
-import { Card } from '@gqlapp/look-client-react';
-// import '../resources/listingCatalogue.css';
+import { withApollo } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { message } from 'antd';
+import CommentCard from './CommentCard';
+import ADD_LISTING_REVIEW from '../../graphql/AddReviews.graphql';
 
-class ReviewsCardComponent extends Component {
-  averageReviews(array) {
-    var total = 0,
-      len = 0;
-    for (var key in array) {
-      total = total + array[key];
-      len = len + 1;
-    }
-    return total / 5;
+import ModelPopup from './ModelPopup';
+
+class ReviewsCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      error: false,
+      result: null,
+      visible: false,
+      reviews: props.reviews,
+      is_reply: false,
+      reply_id: null
+    };
   }
+
+  showModal = e => {
+    this.setState({
+      visible: true,
+      is_reply: Boolean(e.target.getAttribute('isReply')) || false,
+      reply_id: e.target.getAttribute('reply_id') || null
+    });
+  };
+
+  handleAddReviews = async r => {
+    if (this.state.is_reply) {
+      return null;
+    } else {
+      return await this.setState(prevState => ({
+        result: 'triggered',
+        loading: false,
+        visible: false,
+        reply_id: null,
+        reviews: [r, ...prevState.reviews]
+      }));
+    }
+  };
+
+  addReviews = async (rating, comment) => {
+    let input = {};
+    input['listingId'] = parseInt(this.props.listing.id);
+    input['rating'] = rating + '';
+    input['comment'] = comment;
+    input['reviewerId'] = this.props.listing.user.id;
+    input['isReply'] = this.state.is_reply;
+    if (this.state.reply_id) input['id'] = parseInt(this.state.reply_id);
+    await this.setState({ loading: true });
+    try {
+      let results = await this.props.client.mutate({
+        mutation: ADD_LISTING_REVIEW,
+        variables: { input }
+      });
+      results.data.addListingReview['reviewer'] = [this.props.listing.user.profile];
+      await this.handleAddReviews(Object.assign(results.data.addListingReview, {}));
+    } catch (error) {
+      console.warn(error.message);
+      await this.setState({ error: true, loading: false, visible: false, reply_id: null });
+    }
+  };
+
+  cancel() {
+    message.error('Click on No');
+  }
+
   render() {
-    let reviews = this.props.reviews;
     return (
-      <Card>
-        <h4>
-          {reviews.reviewers.length} reviews on this item{' '}
-          <Rate disabled defaultValue={this.averageReviews(reviews.properties)} className="RevStar" />{' '}
-          <h5 className="InlineDisplay">{this.averageReviews(reviews.properties)}</h5>
-        </h4>
-        <Row>
-          {Object.entries(reviews.properties).map(([key, value]) => (
-            <Col lg={12} sm={24}>
-              {key}
-              <div className="rightfloat">
-                <h5 className="reviewVal">{value}</h5> <Rate disabled defaultValue={value} className="RevStar" />{' '}
-              </div>
-            </Col>
-          ))}
-        </Row>
-        <List
-          className="marginB30"
-          itemLayout="horizontal"
-          dataSource={reviews.reviewers}
-          renderItem={item => (
-            <List.Item className="marginB20">
-              <List.Item.Meta
-                avatar={<Avatar />}
-                title={
-                  <div className="DateandDes">
-                    <Link to="" className="itemLink" href="#">
-                      {item.name}
-                    </Link>
-                    <h5>{item.Date}</h5>
-                  </div>
-                }
-                description={<h5 className="lineHeight18">{item.word}</h5>}
-              />
-            </List.Item>
-          )}
-        />
-        <Link to="">
-          <h3 className="mainColor">Show all reviews</h3>
-        </Link>
-      </Card>
+      <div id="listing_user_reviews">
+        <span className="font16 blockDisplay fontBold" style={{ margin: 0, display: 'inline-block' }}>
+          User Reviews
+        </span>
+        <span
+          style={{ margin: 0, display: 'inline-block', float: 'right', cursor: 'pointer', textDecoration: 'underline' }}
+          onClick={this.showModal}
+        >
+          add
+        </span>
+        <ModelPopup title="ADD REVIEW" visible={this.state.visible} action={this.addReviews.bind(this)} rcard={this} />
+        {this.state.reviews.map(reviewe => {
+          return <CommentCard listing={this.props.listing} reviews={reviewe} rcard={this} />;
+        })}
+      </div>
     );
   }
 }
 
-export default ReviewsCardComponent;
+ReviewsCard.propTypes = {
+  listing: PropTypes.object,
+  reviews: PropTypes.object,
+  client: PropTypes.object
+};
+
+export default withApollo(ReviewsCard);

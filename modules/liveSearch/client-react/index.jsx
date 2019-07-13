@@ -1,38 +1,27 @@
-import React from "react";
+import React from 'react';
 
-import ClientModule from "@gqlapp/module-client-react";
-import { translate } from "@gqlapp/i18n-client-react";
-import {
-  IfLoggedIn,
-  AuthRoute
-} from "@gqlapp/user-client-react/containers/Auth.web";
+import ClientModule from '@gqlapp/module-client-react';
+import { translate } from '@gqlapp/i18n-client-react';
+import { IfLoggedIn, AuthRoute } from '@gqlapp/user-client-react/containers/Auth.web';
 
-import { NavLink } from "react-router-dom";
-import { MenuItem } from "@gqlapp/look-client-react";
-import { Icon } from "antd";
-import LiveSearch from "./containers/LiveSearch";
-import resources from "./locales";
-import resolvers from "./resolvers/index";
+import { NavLink } from 'react-router-dom';
+import { MenuItem } from '@gqlapp/look-client-react';
+import { Icon } from 'antd';
+import LiveSearch from './containers/LiveSearch';
+import resources from './locales';
+import resolvers from './resolvers/index';
 
-const NavLinkLiveSearchWithI18n = translate("liveSearch")(({ t }) => (
+const NavLinkLiveSearchWithI18n = translate('liveSearch')(({ t }) => (
   <NavLink to="/live-search" className="nav-link" activeClassName="active">
     <div>
       <Icon type="search" />
-      {t("liveSearch:navLink")}
+      {t('liveSearch:navLink')}
     </div>
   </NavLink>
 ));
 
 export default new ClientModule({
-  route: [
-    <AuthRoute
-      exact
-      path="/live-search"
-      redirect="/profile"
-      role={["user", "admin"]}
-      component={LiveSearch}
-    />
-  ],
+  route: [<AuthRoute exact path="/live-search" redirect="/profile" role={['user', 'admin']} component={LiveSearch} />],
   navItemUser: [
     <IfLoggedIn key="/live-search">
       <MenuItem>
@@ -41,5 +30,5 @@ export default new ClientModule({
     </IfLoggedIn>
   ],
   resolver: [resolvers],
-  localization: [{ ns: "liveSearch", resources }]
+  localization: [{ ns: 'liveSearch', resources }]
 });

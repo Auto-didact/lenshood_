@@ -1,3 +1,4 @@
+
 import { graphql } from "react-apollo";
 import update from "immutability-helper";
 import { removeTypename, log } from "@gqlapp/core-common";
@@ -34,20 +35,11 @@ const withLiveSearch = Component =>
   graphql(LIVESEARCH_QUERY, {
     options: ({ orderBy, filter }) => {
       return {
-        fetchPolicy: "network-only",
+        fetchPolicy: 'network-only',
         variables: { orderBy, filter }
       };
     },
-    props({
-      data: {
-        loading,
-        liveSearches,
-        refetch,
-        error,
-        updateQuery,
-        subscribeToMore
-      }
-    }) {
+    props({ data: { loading, liveSearches, refetch, error, updateQuery, subscribeToMore } }) {
       return {
         loading,
         liveSearches,
@@ -126,11 +118,11 @@ const updateLiveSearchState = (liveSearchUpdated, updateQuery) => {
   const { mutation, node } = liveSearchUpdated;
   updateQuery(prev => {
     switch (mutation) {
-      case "CREATED":
+      case 'CREATED':
         return addLiveSearch(prev, node);
-      case "DELETED":
+      case 'DELETED':
         return deleteLiveSearch(prev, node.id);
-      case "UPDATED":
+      case 'UPDATED':
         return deleteLiveSearch(prev, node.id);
       default:
         return prev;

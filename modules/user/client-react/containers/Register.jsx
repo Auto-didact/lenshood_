@@ -1,17 +1,17 @@
 // React
-import React from "react";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
 // Apollo
-import { graphql, compose } from "react-apollo";
+import { graphql, compose } from 'react-apollo';
 
 // Components
-import { FormError } from "@gqlapp/forms-client-react";
-import RegisterView from "../components/RegisterView";
+import { FormError } from '@gqlapp/forms-client-react';
+import RegisterView from '../components/RegisterView';
 
-import REGISTER from "../graphql/Register.graphql";
+import REGISTER from '../graphql/Register.graphql';
 
-import { message } from "antd";
+import { message } from 'antd';
 
 const Register = props => {
   const { t, register, history, navigation } = props;
@@ -19,12 +19,12 @@ const Register = props => {
     try {
       await register(values);
     } catch (e) {
-      throw new FormError(t("reg.errorMsg"), e);
+      throw new FormError(t('reg.errorMsg'), e);
     }
 
-    message.info(t("reg.confirmMsg"));
+    message.info(t('reg.confirmMsg'));
     if (history) {
-      history.push("/profile");
+      history.push('/profile');
     } else if (navigation) {
       navigation.goBack();
     }
@@ -41,7 +41,7 @@ Register.propTypes = {
 };
 
 const RegisterWithApollo = compose(
-  translate("user"),
+  translate('user'),
 
   graphql(REGISTER, {
     props: ({ mutate }) => ({

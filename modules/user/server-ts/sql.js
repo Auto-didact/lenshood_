@@ -6,8 +6,8 @@ import { knex, returnId } from "@gqlapp/database-server-ts";
 
 import { Model, raw } from "objection";
 
-import Listing from "@gqlapp/listing-server-ts/sql";
-import Referral from "@gqlapp/referral-server-ts/sql";
+import Listing from '@gqlapp/listing-server-ts/sql';
+import Referral from '@gqlapp/referral-server-ts/sql';
 
 // Give the knex object to objection.
 Model.knex(knex);
@@ -62,8 +62,8 @@ export class User extends Model {
         relation: Model.HasManyRelation,
         modelClass: Referral,
         join: {
-          from: "user.id",
-          to: "referral.user_id"
+          from: 'user.id',
+          to: 'referral.user_id'
         }
       },
       addresses: {
@@ -705,13 +705,21 @@ export class User extends Model {
     );
     return res;
   }
+  async userProfile(userId) {
+    const res = camelizeKeys(
+      await UserProfile.query()
+        .where('user_id', userId)
+        .first()
+    );
+    return res;
+  }
 }
 
 const UserDAO = new User();
 export default UserDAO;
 
 // UserProfile model.
-class UserProfile extends Model {
+export class UserProfile extends Model {
   static get tableName() {
     return "user_profile";
   }

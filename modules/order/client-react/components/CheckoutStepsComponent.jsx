@@ -14,8 +14,8 @@ class CheckoutStepsComponent extends Component {
           <Step title={<span className="font13">Payment options</span>} />
           <Step title={<span className="font13">Order Status</span>} />
         </Steps>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </Col>
     );
   }

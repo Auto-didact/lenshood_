@@ -1,6 +1,6 @@
-import React from "react";
-import { CardText } from "@gqlapp/look-client-react";
-import { Avatar, Row, Col } from "antd";
+import React from 'react';
+import { CardText } from '@gqlapp/look-client-react';
+import { Avatar, Row, Col } from 'antd';
 
 const ProfileMiniComponent = ({ item }) => {
   return (
