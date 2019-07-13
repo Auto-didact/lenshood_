@@ -2,6 +2,7 @@ import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import { Model } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
+import { has } from "lodash";
 
 // Give the knex object to objection.
 Model.knex(knex);
