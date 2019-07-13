@@ -4,14 +4,11 @@ fragment ReferralUserInfo on User {
   profile {
     firstName
     lastName
-    # referredBy {
-    #   id
-    #   username
-    #   profile {
-    #     firstName
-    #     lastName
-    #   }
-    # }
+    isVerified
+    referredBy {
+      id
+      username
+    }
   }
   referrals {
     id

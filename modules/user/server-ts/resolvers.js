@@ -26,9 +26,10 @@ const createPasswordHash = password => {
 
 export default pubsub => ({
   Query: {
-    users: withAuth(["user:view:all"], (obj, { orderBy, filter }, { User }) => {
-      return User.getUsers(orderBy, filter);
-    }),
+    users(obj, { orderBy, filter }, { User, identity }) {
+      if (identity) return User.getUsers(orderBy, filter);
+      else return null;
+    },
     user: withAuth(
       ["user:view:self"],
       async (obj, { id }, { identity, User, req: { t } }) => {

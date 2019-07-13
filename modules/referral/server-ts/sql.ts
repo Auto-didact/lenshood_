@@ -80,7 +80,7 @@ export default class ReferralDao extends Model {
         referred_id: referredId
       })
     );
-    const ref = await returnId(
+    await returnId(
       knex('user_profile').insert({
         user_id: referredId,
         referrer_id: userId
