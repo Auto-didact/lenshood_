@@ -42,11 +42,17 @@ const HomeHead = ({ t, image }: HomeHeadProps) => {
             <Divider />
           </div>
           <div className="home-image-content-question">Already Have An Account?</div>
-          <Button type="default" className="home-image-content-button home-image-content-button-login" size="default">
+          <Button
+            type="default"
+            className="home-image-content-button home-image-content-button-login"
+            size="default"
+            style={{ display: 'block' }}
+          >
             Login
           </Button>
         </div>
       </div>
+      <img className="wave" src={require('../../images/home/waves.png')} />
     </div>
   );
 };
