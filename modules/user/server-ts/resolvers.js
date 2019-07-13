@@ -32,6 +32,9 @@ export default pubsub => ({
     user: withAuth(
       ["user:view:self"],
       async (obj, { id }, { identity, User, req: { t } }) => {
+        if (identity.id === id) {
+          return null;
+        }
         if (identity.id === id || identity.role === "admin") {
           try {
             const user = await User.getUser(id);
@@ -187,6 +190,7 @@ export default pubsub => ({
           : ["user:update:self"];
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
+        console.log("input", input);
         const isAdmin = () => identity.role === "admin";
         const isSelf = () => identity.id === input.id;
 
