@@ -91,14 +91,14 @@ const NavLinkLoginWithI18n = translate("user")(({ t }) => (
 
 export default new ClientModule({
   route: [
-    <Route exact path="/public-profile/:id" component={PublicProfile} />,
-    // <AuthRoute
-    //   exact
-    //   path="/user-profile/:id"
-    //   role={["user", "admin"]}
-    //   redirect="/login"
-    //   component={PublicProfile}
-    // />,
+    // <Route exact path="/public-profile/:id" component={PublicProfile} />,
+    <AuthRoute
+      exact
+      path="/public-profile/:id"
+      role={["user", "admin"]}
+      redirect="/login"
+      component={PublicProfile}
+    />,
     <AuthRoute
       exact
       path="/profile"

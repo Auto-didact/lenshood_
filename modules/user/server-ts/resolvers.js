@@ -47,7 +47,10 @@ export default pubsub => ({
         throw new Error(t("user:accessDenied"));
       }
     ),
-    async displayUser(obj, { id }, { User }) {
+    async displayUser(obj, { id }, { User, identity }) {
+      if (identity.id === id) {
+        return null;
+      }
       const user = await User.getUser(id);
       return user;
     },
