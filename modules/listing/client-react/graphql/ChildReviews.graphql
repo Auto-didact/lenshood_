@@ -1,10 +1,5 @@
-#import "./Listing.graphql"
-
-query listing($id: Int!) {
-  listing(id: $id) {
-    ...ListingInfo
-  }
-  reviews(listing_id: $id) {
+query childReviews($id: Int!) {
+  childReviews(id: $id) {
     id
     reviewer {
       id

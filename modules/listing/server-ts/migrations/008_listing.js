@@ -88,8 +88,15 @@ exports.up = function(knex, Promise) {
           .references('id')
           .inTable('listing')
           .onDelete('CASCADE');
+        table
+          .integer('reviewer_id')
+          .unsigned()
+          .references('id')
+          .inTable('user')
+          .onDelete('CASCADE');
         table.string('comment');
         table.string('rating');
+        table.boolean('is_reply').defaultTo(false);
         table.timestamps(false, true);
       })
       .createTable('watchlist', table => {
@@ -109,6 +116,30 @@ exports.up = function(knex, Promise) {
         table.string('should_notify').defaultTo(true);
         table.timestamps(false, true);
       })
+      .createTable('user_reviews_likes', table => {
+        table.increments('id');
+        table
+          .integer('user_id')
+          .unsigned()
+          .references('id')
+          .inTable('user')
+          .onDelete('CASCADE');
+        table
+          .integer('listing_review_id')
+          .unsigned()
+          .references('id')
+          .inTable('listing_review')
+          .onDelete('CASCADE');
+        table
+          .integer('reply_review_id')
+          .unsigned()
+          .references('id')
+          .inTable('listing_review')
+          .onDelete('CASCADE');
+        table.string('like_dislike');
+        table.boolean('is_reply').defaultTo(false);
+        table.timestamps(false, true);
+      })
   ]);
 };
 
@@ -120,6 +151,7 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('listing_damage'),
     knex.schema.dropTable('listing_rental'),
     knex.schema.dropTable('listing_content'),
-    knex.schema.dropTable('review')
+    knex.schema.dropTable('listing_review'),
+    knex.schema.dropTable('user_reviews_likes')
   ]);
 };

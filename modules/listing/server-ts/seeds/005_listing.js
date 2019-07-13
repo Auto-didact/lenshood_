@@ -23,7 +23,8 @@ export async function seed(knex, Promise) {
     'listing_damage',
     'listing_rental',
     'listing_content',
-    'listing_review'
+    'listing_review',
+    'user_reviews_likes'
   ]);
 
   await Promise.all(
@@ -79,7 +80,8 @@ export async function seed(knex, Promise) {
           return returnId(knex('listing_review')).insert({
             listing_id: listing[0],
             comment: `Review title ${jj + 1} for Listing ${listing[0]}`,
-            rating: jj + 2
+            rating: jj + 2,
+            reviewer_id: Math.floor(Math.random() * 5) + 1
           });
         })
       );

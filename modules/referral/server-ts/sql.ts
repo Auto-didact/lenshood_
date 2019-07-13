@@ -86,7 +86,6 @@ export default class ReferralDao extends Model {
         referrer_id: userId
       })
     );
-    console.log('ref', ref);
     return res;
   }
 

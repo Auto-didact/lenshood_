@@ -90,6 +90,8 @@ export default (pubsub: PubSub) => ({
               return checkByFilter;
             case 'UPDATED':
               return !checkByFilter;
+            default:
+              return false;
           }
         }
       )

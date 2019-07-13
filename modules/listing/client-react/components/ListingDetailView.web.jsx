@@ -10,7 +10,7 @@ import { PageLayout, Loader } from '@gqlapp/look-client-react';
 
 import UserCardComponent from './components/UserCardComponent';
 import ProductCardComponent from './components/ProductCardComponent';
-// import ReviewsCard from './components/ReviewsCard';
+import ReviewsCard from './components/ReviewsCardComponent';
 // import SuggestedCardList from './components/SuggestedCardList';
 
 import settings from '../../../../settings';
@@ -38,6 +38,7 @@ class ListingDetailView extends Component {
   render() {
     const loading = this.props.loading;
     const listing = this.props.listing;
+    const reviews = this.props.reviews;
 
     const t = this.props.t;
     const seller = this.props.listing && this.props.listing.user;
@@ -51,7 +52,6 @@ class ListingDetailView extends Component {
       return (
         <PageLayout>
           {this.renderMetaData()}
-
           <Loader text={t('listing.loadMsg')} />
         </PageLayout>
       );
@@ -90,7 +90,7 @@ class ListingDetailView extends Component {
                 cancellationPolicy={cancellationPolicy}
                 damagePolicy={damagePolicy}
               />
-              {/*<ReviewsCardComponent reviews={this.state.product.reviews} />*/}
+              <ReviewsCard listing={listing} reviews={reviews} />
             </Col>
             <Col xl={8} lg={9} md={11} sm={24}>
               <Row>
@@ -129,6 +129,7 @@ class ListingDetailView extends Component {
 ListingDetailView.propTypes = {
   loading: PropTypes.bool.isRequired,
   listing: PropTypes.object,
+  reviews: PropTypes.object,
   location: PropTypes.object.isRequired,
   t: PropTypes.func
 };

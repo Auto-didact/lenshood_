@@ -5,8 +5,7 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { MenuItem } from '@gqlapp/look-client-react';
 import ClientModule from '@gqlapp/module-client-react';
 
-// To Do
-import { Icon, Tabs, message } from 'antd';
+import { Icon, Tabs, message } from "antd";
 
 import resolvers from './resolvers';
 import resources from './locales';

@@ -81,6 +81,12 @@ export default (pubsub: PubSub) => ({
     },
     featuredListings(obj: any, input: any, context: any) {
       return context.Listing.featuredListings();
+    },
+    reviews(obj: any, input: any, context: any) {
+      return context.Listing.reviews(input);
+    },
+    childReviews(obj: any, input: number, context: any) {
+      return context.Listing.childReviews(input);
     }
   },
   // Listing: {
@@ -165,7 +171,6 @@ export default (pubsub: PubSub) => ({
       }
     },
     async editListing(obj: any, { input }: ListingInputWithId, context: any) {
-      console.log(input);
       await context.Listing.editListing(input);
       const listing = await context.Listing.listing(input.id);
       // publish for listing list
@@ -187,9 +192,12 @@ export default (pubsub: PubSub) => ({
       return listing;
     },
     async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
-      const [id] = await context.Listing.addListingReview(input);
-      const listingReview = await context.Listing.getListingReview(id);
+      const [id] = await context.Listing.addListingReviewDAO(input);
+      const listingReview = await context.Listing.getListingReviewDAO(id);
       // publish for edit listing page
+      listingReview.listingId = listingReview.listing_id;
+      listingReview.reviewerId = listingReview.reviewer_id;
+      listingReview.createdAt = listingReview.reviewer_id;
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
           mutation: 'CREATED',
@@ -200,9 +208,15 @@ export default (pubsub: PubSub) => ({
       });
       return listingReview;
     },
-    async deleteListingReview(obj: any, { input: { id, listingId } }: ListingReviewInputWithId, context: any) {
-      await context.Listing.deleteListingReview(id);
+    async deleteListingReview(obj: any, { input: { id } }: ListingReviewInputWithId, context: any) {
+      const listingReview = await context.Listing.deleteListingReviewDAO(id);
       // publish for edit listing page
+      let listingId = null;
+      if (listingReview) {
+        listingReview.listingId = listingReview.listing_id;
+        listingReview.reviewerId = listingReview.reviewer_id;
+        listingId = listingReview.listingId;
+      }
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
           mutation: 'DELETED',
@@ -211,12 +225,15 @@ export default (pubsub: PubSub) => ({
           node: null
         }
       });
-      return { id };
+      return listingReview;
     },
     async editListingReview(obj: any, { input }: ListingReviewInputWithId, context: any) {
-      await context.Listing.editListingReview(input);
-      const listingReview = await context.Listing.getListingReview(input.id);
+      const listingReview = await context.Listing.editListingReviewDAO(input);
       // publish for edit listing page
+      if (listingReview) {
+        listingReview.listingId = listingReview.listing_id;
+        listingReview.reviewerId = listingReview.reviewer_id;
+      }
       pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
         listingReviewUpdated: {
           mutation: 'UPDATED',
@@ -230,12 +247,18 @@ export default (pubsub: PubSub) => ({
     async toggleListingIsFeatured(obj: any, input: { id: number; isFeatured: boolean }, context: any) {
       return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
     },
-    async addOrRemoveWatchList(
+    async toggleWatchList(
       obj: any,
       input: { user_id: number; listing_id: number; should_notify: boolean },
       context: any
     ) {
       return context.Listing.addOrRemoveWatchList(input);
+    },
+    async addLikesDisLikes(obj: any, input: { ld: string; review_id: number; reviewer_id: number }, context: any) {
+      return context.Listing.updateLiskesDisLikes(input);
+    },
+    async countLikesDisLikes(obj: any, input: { review_id: number }, context: any) {
+      return context.Listing.getLikesDisLikesCount(input);
     }
   },
   Subscription: {

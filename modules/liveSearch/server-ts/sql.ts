@@ -78,7 +78,6 @@ export default class LiveSearch extends Model {
         search_id: res[0]
       })
     );
-    console.log('ref', ref);
     return res;
   }
 
@@ -99,9 +98,7 @@ export default class LiveSearch extends Model {
       .del();
 
     const ref = await returnId(knex('live_search_user').where('search_id', '=', searchId));
-
-    console.log('ref', ref);
-    if (ref.length == 0) {
+    if (ref.length === 0) {
       await knex('live_search')
         .where('id', '=', searchId)
         .del();

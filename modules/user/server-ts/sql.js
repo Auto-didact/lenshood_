@@ -671,13 +671,21 @@ export class User extends Model {
     );
     return res;
   }
+  async userProfile(userId) {
+    const res = camelizeKeys(
+      await UserProfile.query()
+        .where('user_id', userId)
+        .first()
+    );
+    return res;
+  }
 }
 
 const UserDAO = new User();
 export default UserDAO;
 
 // UserProfile model.
-class UserProfile extends Model {
+export class UserProfile extends Model {
   static get tableName() {
     return 'user_profile';
   }
