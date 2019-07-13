@@ -117,12 +117,18 @@ export default class RenderAddress extends React.Component {
           ))),
           //Geting all the addressCard.
           (addressCard[indexa] = (
-            <div className="HomeAddress" key={indexa}>
+            <div
+              className="HomeAddress"
+              key={indexa}
+              style={{
+                marginTop: '15px'
+              }}
+            >
               <div
                 className="HomeAddressBlock"
                 style={{
                   position: 'relative',
-                  bottom: '13px'
+                  bottom: '16px'
                 }}
               >
                 Home Address
@@ -191,63 +197,61 @@ export default class RenderAddress extends React.Component {
 
     return (
       <>
-        <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-          <Row>
-            <Col span={24}>
-              <h3 className="Addresses">Addresses</h3>
-              <br />
-            </Col>
-            <Col>
-              <Row gutter={80}>
-                <Col
-                  xs={{ span: 24, offset: 0 }}
-                  sm={{ span: 12, offset: 0 }}
-                  md={{ span: 8, offset: 0 }}
-                  className="PadB30"
-                >
-                  {isSelectable ? (
-                    <Radio.Group name="addresses" defaultValue={addresses[0]} style={{ marginLeft: '10px' }}>
-                      {addresses.map((address, indexas) => (
-                        <Radio
-                          key={indexas}
-                          value={address}
-                          style={{
-                            backgroundColor: '#d5f0eb',
-                            height: '31px',
-                            paddingTop: '10px'
-                          }}
-                          // checked={
-                          //   // this.state.primeAddress[indexas]
-                          //   address.primeAddress
-                          // }
-                          // onClick={() => this.handleSelect(indexas)}
-                        >
-                          <b>Make Prime Address</b>
-                          {addressCard[indexas]}
-                        </Radio>
-                      ))}
-                    </Radio.Group>
-                  ) : (
-                    addresses.map((address, indexas) => addressCard[indexas])
-                  )}
-                </Col>
-                <Col
-                  xs={{ span: 28, offset: 0 }}
-                  sm={{ span: 18, offset: 0 }}
-                  md={{ span: 10, offset: 0 }}
-                  className="PadB30"
-                >
-                  <div className="AddNewAddressBlock" onClick={this.handleAddAddress}>
-                    <div className="AddNewAddress">
-                      <Icon type="plus" />
-                    </div>
-                    <h5>Add a new address</h5>
+        <Row>
+          <Col span={24}>
+            <h3 className="Addresses">Addresses</h3>
+            <br />
+          </Col>
+          <Col>
+            <Row gutter={80}>
+              <Col
+                xs={{ span: 24, offset: 0 }}
+                sm={{ span: 12, offset: 0 }}
+                md={{ span: 8, offset: 0 }}
+                className="PadB30"
+              >
+                {isSelectable ? (
+                  <Radio.Group name="addresses" defaultValue={addresses[0]} style={{ marginLeft: '10px' }}>
+                    {addresses.map((address, indexas) => (
+                      <Radio
+                        key={indexas}
+                        value={address}
+                        style={{
+                          backgroundColor: '#d5f0eb',
+                          height: '56px',
+                          paddingTop: '20px'
+                        }}
+                        // checked={
+                        //   // this.state.primeAddress[indexas]
+                        //   address.primeAddress
+                        // }
+                        // onClick={() => this.handleSelect(indexas)}
+                      >
+                        <b>Make Prime Address</b>
+                        {addressCard[indexas]}
+                      </Radio>
+                    ))}
+                  </Radio.Group>
+                ) : (
+                  addresses.map((address, indexas) => addressCard[indexas])
+                )}
+              </Col>
+              <Col
+                xs={{ span: 24, offset: 0 }}
+                sm={{ span: 12, offset: 0 }}
+                md={{ span: 8, offset: 0 }}
+                className="PadB30"
+              >
+                <div className="AddNewAddressBlock" onClick={this.handleAddAddress} style={{ marginTop: '15px' }}>
+                  <div className="AddNewAddress">
+                    <Icon type="plus" />
                   </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Col>
+                  <h5>Add a new address</h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </>
     );
   }

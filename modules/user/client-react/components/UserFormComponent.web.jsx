@@ -287,7 +287,6 @@ const UserForm = ({
                 arrayHelpers={arrayHelpers}
                 label="profile.card.group.addresses"
                 t={t}
-                isSelectable={true}
               />
             )}
           />

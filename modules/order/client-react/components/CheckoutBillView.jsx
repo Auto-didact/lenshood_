@@ -63,20 +63,22 @@ class CheckoutBillView extends React.Component {
               <h3 className="billingAddress">Billing Address</h3>
               <br />
             </Col>
-            <FieldArray
-              name="addresses"
-              render={arrayHelpers => (
-                <RenderAddress
-                  name="addresses"
-                  addresses={this.state.addresses}
-                  // addresses={addresses}
-                  arrayHelpers={arrayHelpers}
-                  label="addresses"
-                  t={t}
-                  isSelectable={true}
-                />
-              )}
-            />
+            <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
+              <FieldArray
+                name="addresses"
+                render={arrayHelpers => (
+                  <RenderAddress
+                    name="addresses"
+                    addresses={this.state.addresses}
+                    // addresses={addresses}
+                    arrayHelpers={arrayHelpers}
+                    label="addresses"
+                    t={t}
+                    isSelectable={true}
+                  />
+                )}
+              />
+            </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
               <OrderCardComponent product={this.state.product} paid={false} buttonText={'Continue'} />
             </Col>
@@ -92,12 +94,22 @@ CheckoutBillView.propTypes = {
   t: PropTypes.func
 };
 const CheckoutBillWithFormik = withFormik({
-  mapPropsToValues: values => {
-    // values.initialValues is always undefined here this part does not work
-    const { addresses } = values.initialValues || '';
+  mapPropsToValues: state => {
+    // is always undefined here this part does not work
+    const { addresses } = state || '';
+
+    function getAddresses(address) {
+      return {
+        streetAddress1: address.streetAddress1,
+        streetAddress2: address.streetAddress2,
+        city: address.city,
+        state: address.state,
+        pinCode: address.pinCode
+      };
+    }
 
     return {
-      addresses: addresses && addresses.length !== 0 ? addresses.map(this.state.addresses) : []
+      addresses: addresses && addresses.length !== 0 ? addresses.map(getAddresses) : []
     };
   },
   async handleSubmit(
