@@ -12,6 +12,7 @@ import TrustAndSafety from '../containers/TrustAndSafety';
 // import { Layout, Menu, Breadcrumb, Icon, Row } from 'antd';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
+import FeautredUsers from '../containers/FeautredUsers';
 
 // import SiderC from './Sider';
 
@@ -32,6 +33,8 @@ class StaticView extends React.Component<StaticViewProps> {
     return (
       <PageLayout>
         <Switch>
+          {/* <Route exact path="/featured-listing" component={FeaturedListing} />, */}
+          <Route exact path="/featured-users" component={FeautredUsers} />,
           <Route exact path="/mission" component={Mission} />,
           <Route exact path="/about-us" component={AboutUs} />,
           <Route exact path="/terms-of-service" component={TermsOfService} />,

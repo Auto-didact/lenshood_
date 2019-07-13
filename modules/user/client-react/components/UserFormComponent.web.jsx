@@ -86,7 +86,7 @@ const UserForm = ({
             />
           </>
         ) : null}
-
+        {console.log('avatar', profile.avatar)}
         {/*----------Personal Information-----------*/}
         <h1 className="heading vgap">Personal</h1>
 
