@@ -101,13 +101,10 @@ export default () => ({
           });
         });
       }
-      console.log('referral', referral);
-      console.log('user', user);
       let idx;
       if (referral) {
         idx = await Referral.addReferred(referral.id, user.id);
       }
-      console.log(idx);
       return { user };
     },
     async forgotPassword(obj, { input }, { User, mailer }) {
