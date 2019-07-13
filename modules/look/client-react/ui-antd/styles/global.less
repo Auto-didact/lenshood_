@@ -132,6 +132,7 @@
   height: 100vh;
   width: 100vw;
   position: relative;
+  overflow: hidden;
 }
 .home-head {
   position: absolute;
@@ -188,7 +189,23 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 200%;
+  height: 100px;
+  background-position: 0 bottom;
+  background-repeat: repeat-x;
+  transform-origin: center bottom;
+  animation: wave 4s linear infinite;
+}
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.5);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
 }
 //--}Home-Page
 
