@@ -242,7 +242,11 @@ export default class RenderAddress extends React.Component {
                 md={{ span: 8, offset: 0 }}
                 className="PadB30"
               >
-                <div className="AddNewAddressBlock" onClick={this.handleAddAddress} style={{ marginTop: '15px' }}>
+                <div
+                  className="AddNewAddressBlock"
+                  onClick={this.handleAddAddress}
+                  style={{ marginTop: !isSelectable ? '15px' : null }}
+                >
                   <div className="AddNewAddress">
                     <Icon type="plus" />
                   </div>
