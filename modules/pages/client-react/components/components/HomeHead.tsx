@@ -52,7 +52,9 @@ const HomeHead = ({ t, image }: HomeHeadProps) => {
           </Button>
         </div>
       </div>
-      <img className="wave" src={require('../../images/home/waves.png')} />
+      <img className="waves wave1" src={require('../../images/home/waves.png')} />
+      <img className="waves wave2" src={require('../../images/home/waves.png')} />
+      <img className="waves wave3" src={require('../../images/home/waves.png')} />
     </div>
   );
 };
