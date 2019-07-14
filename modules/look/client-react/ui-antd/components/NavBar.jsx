@@ -19,7 +19,7 @@ export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
     current: '/',
-    width: 810,
+    width: 710,
     height: 0,
     show1:
       this.props.location.pathname == '/about-us' ||
@@ -118,7 +118,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="navbar">
-        <Row gutter={0} className="screen_width_more_than_800">
+        <Row gutter={0} className="screen_width_more_than_700">
           <Form layout="inline">
             <Col span={14}>
               <Col span={8}>
@@ -186,10 +186,10 @@ class NavBar extends React.Component {
           </Form>
         </Row>
 
-        {/*Render This if screen width less than 800*/}
+        {/*Render This if screen width less than 700*/}
 
         {!__DEV__ && (
-          <Row id="outer-container" className="screen_width_less_than_800">
+          <Row id="outer-container" className="screen_width_less_than_700">
             {/* <Form layout="inline"> */}
             <div className="left">
               <NavLink to="/" className="nav-link">
@@ -285,8 +285,8 @@ class NavBar extends React.Component {
           </Row>
         )}
         {/*---------For Dev Version--------------*/}
-        {__DEV__ && this.state.width < 800 && (
-          <Row id="outer-container" className="screen_width_less_than_800">
+        {__DEV__ && this.state.width < 700 && (
+          <Row id="outer-container" className="screen_width_less_than_700">
             {/* <Form layout="inline"> */}
             <div className="left">
               <NavLink to="/" className="nav-link">
