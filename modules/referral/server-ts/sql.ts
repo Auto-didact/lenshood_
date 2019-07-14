@@ -107,6 +107,12 @@ export default class ReferralDao extends Model {
         referrer_id: userId
       })
     );
+    await returnId(
+      knex("referral").insert({
+        user_id: userId,
+        referred_id: referredId
+      })
+    );
     return res;
   }
 
