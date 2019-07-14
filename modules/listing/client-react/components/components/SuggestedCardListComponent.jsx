@@ -29,7 +29,7 @@ class SuggestedCardListComponent extends Component {
 }
 
 SuggestedCardListComponent.propTypes = {
-  relatedList: PropTypes.object.isRequired
+  relatedList: PropTypes.array.isRequired
 };
 
 export default SuggestedCardListComponent;

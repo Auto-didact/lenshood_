@@ -1,18 +1,34 @@
-import { graphql } from 'react-apollo';
-import update from 'immutability-helper';
-import { removeTypename, log } from '@gqlapp/core-common';
-import LIVESEARCH_STATE_QUERY from '../graphql/LiveSearchStateQuery.client.graphql';
-import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
-import LIVESEARCH_QUERY from '../graphql/LiveSearchQuery.graphql';
-import INCRE_SEARCH from '../graphql/IncrementSearch.graphql';
-import DECRE_SEARCH from '../graphql/DecrementSearch.graphql';
-import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
+
+import { graphql } from "react-apollo";
+import update from "immutability-helper";
+import { removeTypename, log } from "@gqlapp/core-common";
+import { message } from "antd";
+import ADD_ITEM from "../graphql/AddQueryItem.graphql";
+import LIVESEARCH_STATE_QUERY from "../graphql/LiveSearchStateQuery.client.graphql";
+import UPDATE_ORDER_BY from "../graphql/UpdateOrderBy.client.graphql";
+import LIVESEARCH_QUERY from "../graphql/LiveSearchQuery.graphql";
+import INCRE_SEARCH from "../graphql/IncrementSearch.graphql";
+import DECRE_SEARCH from "../graphql/DecrementSearch.graphql";
+import UPDATE_FILTER from "../graphql/UpdateFilter.client.graphql";
 
 const withLiveSearchState = Component =>
   graphql(LIVESEARCH_STATE_QUERY, {
     props({ data: { liveSearchState } }) {
       return removeTypename(liveSearchState);
     }
+  })(Component);
+
+const withSearchItemAdd = Component =>
+  graphql(ADD_ITEM, {
+    props: ({ mutate }) => ({
+      addSearchItem: async input => {
+        const { data: addSearchItem } = await mutate({
+          variables: { input }
+        });
+        message.info("Query item added!");
+        return addSearchItem;
+      }
+    })
   })(Component);
 
 const withLiveSearch = Component =>
@@ -122,7 +138,7 @@ function addLiveSearch(prev, node) {
 
   return update(prev, {
     liveSearches: {
-      $set: [...prev.liveSearches, node]
+      $set: [node, ...prev.liveSearches]
     }
   });
 }
@@ -142,6 +158,7 @@ function deleteLiveSearch(prev, id) {
 
 export {
   withLiveSearchState,
+  withSearchItemAdd,
   withLiveSearch,
   withIncreSearchItem,
   withdecreSearchItem,

@@ -16,6 +16,7 @@ import {
   withIncreSearchItem,
   withdecreSearchItem,
   withLiveSearchState,
+  withSearchItemAdd,
   updateLiveSearchState
 } from './LiveSearchOperations';
 
@@ -40,8 +41,7 @@ const LiveSearch = props => {
       ]}
     />
   );
-
-  console.log(props);
+  
   return (
     <PageLayout>
       {renderMetaData()}
@@ -69,5 +69,6 @@ export default compose(
   withIncreSearchItem,
   withdecreSearchItem,
   withOrderByUpdating,
-  withFilterUpdating
-)(translate('liveSearch')(LiveSearch));
+  withFilterUpdating,
+  withSearchItemAdd
+)(translate("liveSearch")(LiveSearch));

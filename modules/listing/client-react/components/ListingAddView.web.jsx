@@ -30,7 +30,11 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
       {/* <Link id="back-button" to="/listings">
         {t('listing.btn.back')}
       </Link> */}
-      <ListingFormComponent onSubmit={onSubmit(addListing)} currentUser={currentUser} users={users} />
+      <ListingFormComponent
+        onSubmit={onSubmit(addListing)}
+        currentUser={currentUser}
+        users={users}
+      />
       <br />
     </PageLayout>
   );
@@ -40,7 +44,7 @@ ListingAddView.propTypes = {
   addListing: PropTypes.func.isRequired,
   t: PropTypes.func,
   currentUser: PropTypes.object,
-  users: PropTypes.object
+  users: PropTypes.array
 };
 
 export default translate('listing')(ListingAddView);

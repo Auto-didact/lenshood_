@@ -2,14 +2,15 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { PageLayout } from '@gqlapp/look-client-react';
 // import { TranslateFunction } from "@gqlapp/i18n-client-react";
-import settings from '../../../../settings';
-import { Link } from 'react-router-dom';
-import { Row, Col, Button, Card, Icon, Modal } from 'antd';
-import CheckoutStepsComponent from './CheckoutStepsComponent';
-import CartItemComponent from './CartItemComponent';
-import DateRangeCardComponent from './DateRangeCardComponent';
-import { TotalAmount, TotalRent, Refund } from '../helper/index';
-import moment from 'moment';
+import settings from "../../../../settings";
+import { Link } from "react-router-dom";
+import { Row, Col, Button, Card, Icon, Modal, Checkbox } from "antd";
+import CheckoutStepsComponent from "./CheckoutStepsComponent";
+import CartItemComponent from "./CartItemComponent";
+import DateRangeCardComponent from "./DateRangeCardComponent";
+import { TotalAmount, TotalRent, Refund } from "../helper/index";
+import { AGREEMENT1, AGREEMENT2, AGREEMENT3 } from "../constants/Undertaking";
+import moment from "moment";
 
 const renderMetaData = () => (
   <Helmet
@@ -21,7 +22,11 @@ const renderMetaData = () => (
 export default class CheckoutCartView extends React.Component {
   state = {
     cartItem: null,
-    books: []
+    books: [],
+    randomVal: 2000,
+    option1: false,
+    option2: false,
+    option3: false
   };
   cartItemSelect(id) {
     var i;
@@ -62,6 +67,16 @@ export default class CheckoutCartView extends React.Component {
     } else {
       return false;
     }
+  }
+
+  onChange3(e) {
+    this.setState({ option3: e.target.checked });
+  }
+  onChange2(e) {
+    this.setState({ option2: e.target.checked });
+  }
+  onChange1(e) {
+    this.setState({ option1: e.target.checked });
   }
 
   render() {
@@ -115,14 +130,59 @@ export default class CheckoutCartView extends React.Component {
                     />
                   ) : null}
                 </Modal>
-                <Col lg={{ span: 7, offset: 1 }} sm={{ span: 24, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-                  <Card className="margin20 boxShadowTheme borderRadius9">
-                    <Button type="primary" ghost onClick={() => this.props.Addproducts()} block>
+                <Col
+                  lg={{ span: 7, offset: 1 }}
+                  sm={{ span: 24, offset: 0 }}
+                  xs={{ span: 24, offset: 0 }}
+                >
+                  <Card className="margin20 boxShadowTheme">
+                    <Button
+                      type="primary"
+                      ghost
+                      onClick={() => this.props.Addproducts()}
+                      block
+                      className="marginB20"
+                    >
                       Add more products
                     </Button>
-                    <Button type="primary" className="margin20" block>
-                      Checkout
-                    </Button>
+
+                    <Col className="marginV15" span={24}>
+                      <Checkbox onChange={e => this.onChange1(e)}>
+                        <span className="font11h">
+                          {AGREEMENT1}
+                        </span>
+                      </Checkbox>
+                    </Col>
+                    <Col span={24}>
+                      <Checkbox onChange={e => this.onChange2(e)}>
+                        <span className="font11h">
+                          {AGREEMENT2(this.state.randomVal)}
+                        </span>
+                      </Checkbox>
+                    </Col>
+                    <Col className="marginV15" span={24}>
+                      <Checkbox onChange={e => this.onChange3(e)}>
+                        <span className="font11h">
+                          {AGREEMENT3}
+                        </span>
+                      </Checkbox>
+                    </Col>
+                    {this.state.option1 &&
+                    this.state.option2 &&
+                    this.state.option3 ? (
+                      <Button type="primary" className="margin20" block>
+                        Checkout
+                      </Button>
+                    ) : (
+                      <Button
+                        type="primary"
+                        className="margin20"
+                        disabled
+                        block
+                      >
+                        Checkout
+                      </Button>
+                    )}
                     <h2 className="cartSum">Cart Summary</h2>
                     <div className="font12">
                       {state.products.map((item, key) => (

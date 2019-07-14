@@ -101,7 +101,15 @@ class RelatedCardComponent extends Component {
               <h3 className="CatalogUserName">
                 {seller}
                 <br />
-                {rating ? <Rate disabled defaultValue={rating} className="CardRate" /> : <a>Not Reviewed</a>}
+                {rating ? (
+                  <Rate
+                    disabled
+                    defaultValue={Number(rating)}
+                    className="CardRate"
+                  />
+                ) : (
+                  <a>Not Reviewed</a>
+                )}
                 {/* <div className="RelIconGroup">
                   <Icon type="car" theme="filled" className="marginR10" />
                   <Icon type="safety-certificate" theme="filled" />
@@ -116,7 +124,7 @@ class RelatedCardComponent extends Component {
 }
 
 RelatedCardComponent.propTypes = {
-  relatedList: PropTypes.object.isRequired
+  relatedListing: PropTypes.object.isRequired
 };
 
 export default RelatedCardComponent;

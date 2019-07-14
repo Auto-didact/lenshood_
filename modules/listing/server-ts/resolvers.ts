@@ -146,29 +146,26 @@ export default (pubsub: PubSub) => ({
       } else if (listing.status === 'idle' || listing.status === IDLE) {
         stat = ONSHELF;
       }
-      const isToggled = await context.Listing.patchListing(id, {
-        status: stat
-      });
+      const isToggled = await context.Listing.toggleStatus(id, stat);
 
       if (isToggled) {
-        // s;
-        // publish for listing list
-        // pubsub.publish(LISTINGS_SUBSCRIPTION, {
-        //   listingsUpdated: {
-        //     mutation: "DELETED",
-        //     id,
-        //     node: listing
-        //   }
-        // });
-        // // publish for edit listing page
-        // pubsub.publish(LISTING_SUBSCRIPTION, {
-        //   listingUpdated: {
-        //     mutation: "DELETED",
-        //     id,
-        //     node: listing
-        //   }
-        // });
-        return { id: listing.id };
+        const list = await context.Listing.listing(id);
+        pubsub.publish(LISTINGS_SUBSCRIPTION, {
+          listingsUpdated: {
+            mutation: "UPDATED",
+            id: list.id,
+            node: list
+          }
+        });
+        // publish for edit listing page
+        pubsub.publish(LISTING_SUBSCRIPTION, {
+          listingUpdated: {
+            mutation: "UPDATED",
+            id: list.id,
+            node: list
+          }
+        });
+        return { id: list.id };
       } else {
         return { id: null };
       }
@@ -195,8 +192,8 @@ export default (pubsub: PubSub) => ({
       return listing;
     },
     async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
-      const [id] = await context.Listing.addListingReview(input);
-      const listingReview = await context.Listing.getListingReview(id);
+      const [id] = await context.Listing.addListingReviewDAO(input);
+      const listingReview = await context.Listing.getListingReviewDAO(id);
       // publish for edit listing page
       listingReview.listingId = listingReview.listing_id;
       listingReview.reviewerId = listingReview.reviewer_id;
@@ -211,8 +208,8 @@ export default (pubsub: PubSub) => ({
       });
       return listingReview;
     },
-    async deleteListingReview(obj: any, { input: { id, listingId } }: ListingReviewInputWithId, context: any) {
-      await context.Listing.deleteListingReview(id);
+    async deleteListingReview(obj: any, { input: { id } }: ListingReviewInputWithId, context: any) {
+      const listingReview = await context.Listing.deleteListingReviewDAO(id);
       // publish for edit listing page
       let listingId = null;
       if (listingReview) {
@@ -231,8 +228,7 @@ export default (pubsub: PubSub) => ({
       return listingReview;
     },
     async editListingReview(obj: any, { input }: ListingReviewInputWithId, context: any) {
-      await context.Listing.editListingReview(input);
-      const listingReview = await context.Listing.getListingReview(input.id);
+      const listingReview = await context.Listing.editListingReviewDAO(input);
       // publish for edit listing page
       if (listingReview) {
         listingReview.listingId = listingReview.listing_id;
@@ -278,7 +274,9 @@ export default (pubsub: PubSub) => ({
       subscribe: withFilter(
         () => pubsub.asyncIterator(LISTINGS_SUBSCRIPTION),
         (payload, variables) => {
-          return variables.endCursor <= payload.listingsUpdated.id;
+          if (variables.endCursor)
+            return variables.endCursor <= payload.listingsUpdated.id;
+          else return true;
         }
       )
     },

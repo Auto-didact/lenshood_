@@ -14,7 +14,7 @@ const ListingFilterComponent = props => {
   } = props;
   console.log(props);
   let state = {
-    gearCategory: ['', 'Cameras', 'Lenses'],
+    gearCategory: ["", "Cameras", "Lenses", "Drones", "Lighting"],
     gearSubcategory: {
       Cameras: [
         '',
@@ -39,7 +39,13 @@ const ListingFilterComponent = props => {
     ongearCategoryChange(value);
     ongearSubcategoryChange('');
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
-    setActiveGearSubCategory(value ? state.gearSubcategory[value][0] : null);
+    setActiveGearSubCategory(
+      value
+        ? state.gearSubcategory[value]
+          ? state.gearSubcategory[value][0]
+          : null
+        : null
+    );
   };
 
   const handlegearSubCategoryChange = value => {
