@@ -11,6 +11,7 @@ interface ReferralInput {
   input: Referral;
 }
 
+const USERS_SUBSCRIPTION = "users_subscription";
 // const REFERRED_SUBSCRIPTION = "referred_subscription";
 export default (pubsub: PubSub) => ({
   Query: {
@@ -50,6 +51,12 @@ export default (pubsub: PubSub) => ({
       }
       await context.Referral.addReferred(input.userId, input.referredId);
       const referral = await context.User.getUser(input.referredId);
+      pubsub.publish(USERS_SUBSCRIPTION, {
+        usersUpdated: {
+          mutation: "UPDATED",
+          node: referral
+        }
+      });
       return referral;
     },
 
@@ -81,6 +88,12 @@ export default (pubsub: PubSub) => ({
       }
       await context.Referral.updateReferred(input.userId, input.referredId);
       const referral = await context.User.getUser(input.referredId);
+      pubsub.publish(USERS_SUBSCRIPTION, {
+        usersUpdated: {
+          mutation: "UPDATED",
+          node: referral
+        }
+      });
       return referral;
     },
     async verifyReferral(obj: any, { input }: any, context: any) {
@@ -92,8 +105,8 @@ export default (pubsub: PubSub) => ({
         input.referredId
       );
       if (res) {
-        // let id = input.userId;
-        // const user = await context.User.getUser(id);
+        let id = input.referredId;
+        const user = await context.User.getUser(id);
         // pubsub.publish(REFERRED_SUBSCRIPTION, {
         //   referredUpdated: {
         //     mutation: "CREATED",
@@ -101,6 +114,12 @@ export default (pubsub: PubSub) => ({
         //     node: user
         //   }
         // });
+        pubsub.publish(USERS_SUBSCRIPTION, {
+          usersUpdated: {
+            mutation: "UPDATED",
+            node: user
+          }
+        });
         return true;
       } else {
         throw new Error("Couldn't verify the user");

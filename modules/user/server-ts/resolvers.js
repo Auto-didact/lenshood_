@@ -194,7 +194,6 @@ export default pubsub => ({
           : ["user:update:self"];
       },
       async (obj, { input }, { User, identity, req: { t } }) => {
-        console.log("input", input);
         const isAdmin = () => identity.role === "admin";
         const isSelf = () => identity.id === input.id;
 

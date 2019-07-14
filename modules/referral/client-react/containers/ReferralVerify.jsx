@@ -17,7 +17,6 @@ const ReferralVerify = props => {
   }
 
   let userBool = false;
-  console.log(props);
 
   if (Number(code) === currentUser.id) {
     userBool = true;

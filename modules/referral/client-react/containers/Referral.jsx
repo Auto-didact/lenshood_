@@ -28,7 +28,6 @@ const Referral = props => {
   const refSubmit = async values => {
     const flag = values.flag;
     delete values["flag"];
-    console.log("After flag", values);
     try {
       if (flag) await addReferred(values);
       else await updateReferred(values);

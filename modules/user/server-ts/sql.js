@@ -356,7 +356,6 @@ export class User extends Model {
     // return knex('user')
     //   .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
     //   .where({ id });
-    console.log("params", params);
     const userId = params.profile ? params.profile.referredId : null;
     const res = await User.query().upsertGraph(decamelizeKeys(params));
     if (userId)
