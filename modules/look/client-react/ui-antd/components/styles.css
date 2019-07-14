@@ -57,17 +57,15 @@
   height: 100px;
 }
 /*====== For Navbar and Side Drawer ====*/
-.navbar{
-  overflow: hidden;
-}
+
 @media only screen and (max-width: 800px) {
   .screen_width_more_than_800 {
-    display: none !important;
+    display: none;
   }
 }
 @media only screen and (min-width: 801px) {
   .screen_width_less_than_800 {
-    display: none !important;
+    display: none ;
   }
 }
 .ant-drawer-body .ant-avatar {

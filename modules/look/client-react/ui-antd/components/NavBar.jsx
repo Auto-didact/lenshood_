@@ -284,7 +284,8 @@ class NavBar extends React.Component {
             {/* </Form> */}
           </Row>
         )}
-        {__DEV__ && this.state.width <= 800 && (
+        {/*---------For Dev Version--------------*/}
+        {__DEV__ && this.state.width < 800 && (
           <Row id="outer-container" className="screen_width_less_than_800">
             {/* <Form layout="inline"> */}
             <div className="left">
