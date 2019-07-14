@@ -447,7 +447,8 @@ const UserFormWithFormik = withFormik({
         isAvailable: profile && profile.isAvailable,
         isVerified: profile && profile.isVerified,
         rating: profile && profile.rating,
-        website: profile && profile.website
+        website: profile && profile.website,
+        referrerId: profile && profile.referredBy && profile.referredBy.id
       },
       addresses:
         addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],

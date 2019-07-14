@@ -103,7 +103,7 @@ export default () => ({
       }
       let idx;
       if (referral) {
-        idx = await Referral.addReferred(referral.id, user.id);
+        idx = await Referral.registerWithRef(referral.id, user.id);
       }
       return { user };
     },

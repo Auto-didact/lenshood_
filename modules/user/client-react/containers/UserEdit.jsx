@@ -25,7 +25,7 @@ const UserEdit = props => {
   if (Number(id) === currentUser.id) {
     userBool = true;
     id = currentUser.id;
-  } else id = user.id;
+  } else id = user ? user.id : null;
 
   const onSubmit = async values => {
     let userValues = pick(values, [
@@ -66,6 +66,7 @@ const UserEdit = props => {
     //   return navigation.goBack();
     // }
   };
+
   return <UserEditView userBool={userBool} onSubmit={onSubmit} {...props} />;
 };
 

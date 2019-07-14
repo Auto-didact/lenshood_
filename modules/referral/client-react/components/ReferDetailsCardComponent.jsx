@@ -20,7 +20,6 @@ export default class ReferDetailsCardComponent extends React.Component {
 
   render() {
     const { referralUser } = this.props;
-    console.log(this.props);
     return (
       <div>
         <Card className="boxShadowTheme borderRadius9 marginB20">
@@ -104,6 +103,7 @@ export default class ReferDetailsCardComponent extends React.Component {
                 refUsername={referralUser.username}
                 referredId={referralUser.id}
                 setModal2Visible={this.setModal2Visible.bind(this)}
+                refSubmit={this.props.refSubmit}
               />
             </div>
           )}

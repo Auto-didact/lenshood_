@@ -61,6 +61,7 @@ class ReferralInputComponent extends Component {
       users
     } = this.props;
 
+    console.log(this.props);
     return (
       <Modal
         title={
@@ -123,7 +124,7 @@ const ReferralInputComponentWithFormik = withFormik({
   async handleSubmit(
     values,
     {
-      props: { referredId, refUsername, onSubmit, prevReferral, users }
+      props: { referredId, refUsername, refSubmit, prevReferral, users }
     }
   ) {
     if (refUsername === values.referral) {
@@ -132,15 +133,12 @@ const ReferralInputComponentWithFormik = withFormik({
       message.error("The referral is similar to the previous one.");
     } else if (users.some(item => item.username === values.referral)) {
       values.referredId = referredId;
+      values.flag = prevReferral ? false : true;
+      console.log(values);
+      refSubmit(values);
     } else {
       message.error("There's no user with such username.");
     }
-
-    // if (values.referral) {
-    //   // delete values["inviteVal"];
-    //   onSubmit({ referral: referral, email: values.referral });
-    // }
-    console.log(values);
   },
   enableReinitialize: true,
   displayName: "inviteForm" // helps with React DevTools
