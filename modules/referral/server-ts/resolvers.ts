@@ -57,6 +57,13 @@ export default (pubsub: PubSub) => ({
           node: referral
         }
       });
+      const user2 = await context.User.getUser(input.userId);
+      pubsub.publish(USERS_SUBSCRIPTION, {
+        usersUpdated: {
+          mutation: "UPDATED",
+          node: user2
+        }
+      });
       return referral;
     },
 
@@ -94,6 +101,13 @@ export default (pubsub: PubSub) => ({
           node: referral
         }
       });
+      const user2 = await context.User.getUser(input.userId);
+      pubsub.publish(USERS_SUBSCRIPTION, {
+        usersUpdated: {
+          mutation: "UPDATED",
+          node: user2
+        }
+      });
       return referral;
     },
     async verifyReferral(obj: any, { input }: any, context: any) {
@@ -118,6 +132,13 @@ export default (pubsub: PubSub) => ({
           usersUpdated: {
             mutation: "UPDATED",
             node: user
+          }
+        });
+        const user2 = await context.User.getUser(input.userId);
+        pubsub.publish(USERS_SUBSCRIPTION, {
+          usersUpdated: {
+            mutation: "UPDATED",
+            node: user2
           }
         });
         return true;
