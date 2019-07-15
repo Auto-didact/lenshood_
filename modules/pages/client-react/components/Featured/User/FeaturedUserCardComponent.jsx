@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Card } from 'antd';
-import Featured_Img from '../images/download.png';
+import Featured_Img from '../../../images/download.png';
 
 // import '../resources/listingCatalogue.css';
 
