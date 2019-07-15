@@ -102,3 +102,5 @@ export default new ClientModule({
   resolver: [resolvers],
   localization: [{ ns: 'listing', resources }]
 });
+
+export { default as SuggestedCardListComponent } from './components/components/SuggestedCardListComponent';
