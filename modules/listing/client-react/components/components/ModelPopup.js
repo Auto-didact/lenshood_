@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 const { TextArea } = Input;
 
 class ModelPopup extends Component {
-  state = { visible: false, comment: '', rating: 0 };
+  constructor(props) {
+    super(props);
+    let comment = '';
+    if (props.comment) comment = props.comment;
+    let rating = 0;
+    if (props.rating) rating = parseInt(props.rating);
+    this.state = { visible: false, comment: comment, rating: rating };
+  }
 
   handleComment = e => {
     e.preventDefault();
@@ -58,7 +65,9 @@ ModelPopup.propTypes = {
   title: PropTypes.string,
   visible: PropTypes.bool,
   action: PropTypes.func.bind,
-  rcard: PropTypes.object
+  rcard: PropTypes.object,
+  rating: PropTypes.number,
+  comment: PropTypes.string
 };
 
 export default ModelPopup;

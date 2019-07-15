@@ -1,12 +1,37 @@
-import React, { Component } from "react";
-import { Row, Col, Rate, Button, Card, Avatar } from "antd";
-
-import { CardText } from "@gqlapp/look-client-react";
-import { ImgUser } from "../../constants/DefaultImages";
+import React, { Component } from 'react';
+import { Row, Col, Rate, Button, Card, Avatar, message } from 'antd';
+import { withApollo } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { CardText } from '@gqlapp/look-client-react';
+import { ImgUser } from '../../constants/DefaultImages';
 // import '../resources/listingCatalogue.css';
+import TOGGLE_ENDORSE from '../../graphql/ToggleEndorse.graphql';
+import TOGGLE_FOLLOW from '../../graphql/ToggleFollow.graphql';
+
 const { Meta } = Card;
 
 class UserCardComponent extends Component {
+  state = {
+    currentUserId: parseInt(this.props.userId),
+    sellerId: parseInt(this.props.seller.id)
+  };
+
+  toggleEndorse = async () => {
+    let result = await this.props.client.mutate({
+      mutation: TOGGLE_ENDORSE,
+      variables: { endorsee: this.state.sellerId, endorser: this.state.currentUserId }
+    });
+    message.info('Endorse Count is ' + result.data.toggleEndorse.endorsecount);
+  };
+
+  toggleFollow = async () => {
+    let result = await this.props.client.mutate({
+      mutation: TOGGLE_FOLLOW,
+      variables: { u_Id: this.state.sellerId, f_Id: this.state.currentUserId }
+    });
+    message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
+  };
+
   render() {
     let seller = this.props.seller;
     const portfolios = this.props.seller && this.props.seller.portfolios;
@@ -16,46 +41,29 @@ class UserCardComponent extends Component {
     const sellerName =
       firstName && lastName
         ? `${firstName} ${lastName}`
-        : firstName || lastname
+        : firstName || lastName
         ? firstName
           ? firstName
           : lastName
-        : "Name Not Provided";
+        : 'Name Not Provided';
 
     return (
-      <Card
-        style={{ backgroundColor: "#FAFAFA", width: "100%", marginTop: "10px" }}
-      >
+      <Card style={{ backgroundColor: '#FAFAFA', width: '100%', marginTop: '10px' }}>
         <Row type="flex" justify="space-around" align="middle">
-          <Col
-            lg={{ span: 18 }}
-            md={{ span: 24 }}
-            xs={{ span: 24 }}
-            sm={{ span: 16 }}
-            style={{ marginTop: "5px" }}
-          >
+          <Col lg={{ span: 18 }} md={{ span: 24 }} xs={{ span: 24 }} sm={{ span: 16 }} style={{ marginTop: '5px' }}>
             <Meta
-              avatar={
-                <Avatar
-                  size={70}
-                  src={seller.profile.avatar ? seller.profile.avatar : ImgUser}
-                />
-              }
+              avatar={<Avatar size={70} src={seller.profile.avatar ? seller.profile.avatar : ImgUser} />}
               title={
                 <div>
                   <h4 className="UserCardUserName">{sellerName}</h4>
                   <div>
                     {seller.profile.rating ? (
-                      <Rate
-                        disabled
-                        defaultValue={Number(seller.profile.rating)}
-                        className="font10 mainColor"
-                      />
+                      <Rate disabled defaultValue={Number(seller.profile.rating)} className="font10 mainColor" />
                     ) : (
                       <p>Not Rated</p>
                     )}
                   </div>
-                  <h6>Read Reviews ({seller.reviewsCount || "0"})</h6>
+                  <h6>Read Reviews ({seller.reviewsCount || '0'})</h6>
                 </div>
               }
             />
@@ -65,11 +73,16 @@ class UserCardComponent extends Component {
             md={{ span: 24 }}
             xs={{ span: 24 }}
             sm={{ span: 8 }}
-            style={{ marginTop: "5px", maxWidth: "150px" }}
+            style={{ marginTop: '5px', maxWidth: '150px' }}
           >
             <div align="center">
-              <Button type="primary" block>
+              <Button type="primary" onClick={this.toggleFollow} block>
                 Follow
+              </Button>
+              <br />
+              <br />
+              <Button type="primary" onClick={this.toggleEndorse} block>
+                Endorse
               </Button>
               <br />
             </div>
@@ -102,4 +115,10 @@ class UserCardComponent extends Component {
   }
 }
 
-export default UserCardComponent;
+UserCardComponent.propTypes = {
+  client: PropTypes.object,
+  seller: PropTypes.object,
+  userId: PropTypes.number
+};
+
+export default withApollo(UserCardComponent);

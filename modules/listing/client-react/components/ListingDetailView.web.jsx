@@ -79,9 +79,7 @@ class ListingDetailView extends Component {
           {
             <h1 className="gearCat">
               {listing && listing.listingContent.length !== 0
-                ? listing.listingContent.map((item, id) => (
-                    <span key={id}>{`${item.brand} ${item.model}  `}</span>
-                  ))
+                ? listing.listingContent.map((item, id) => <span key={id}>{`${item.brand} ${item.model}  `}</span>)
                 : listing.gearCategory}
             </h1>
           }
@@ -105,7 +103,7 @@ class ListingDetailView extends Component {
                   />
                 </Col>
                 <Col span={24}>
-                  <UserCardComponent seller={seller} />
+                  <UserCardComponent seller={seller} userId={listing.user.id} />
                 </Col>
               </Row>
             </Col>
