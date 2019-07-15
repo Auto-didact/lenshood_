@@ -13,7 +13,7 @@ import TrustAndSafety from '../containers/TrustAndSafety';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
 import { PageLayout } from '@gqlapp/look-client-react';
 import FeaturedUsers from '../containers/Featured/FeaturedUser';
-import FeaturedListing from '../containers/Featured/FeaturedUser';
+import FeaturedListing from '../containers/Featured/FeaturedListing';
 
 // import SiderC from './Sider';
 

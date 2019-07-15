@@ -34,7 +34,7 @@ export default class FeaturedUserCardComponent extends Component {
           hoverable
           style={{
             height: '335px',
-            width: '250px',
+            // width: '250px',
             textAlign: 'center'
           }}
           cover={

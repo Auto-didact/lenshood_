@@ -4,8 +4,7 @@ import {
   translate
   // , TranslateFunction
 } from '@gqlapp/i18n-client-react';
-// import FeaturedUsersView from '../../components/Featured/FeaturedUsersView';
-import FeaturedUsersView from '../../components/Featured/Listing/FeaturedListingView';
+import FeaturedUsersView from '../../components/Featured/User/FeaturedUsersView';
 
 // interface PagesProps {
 //   t: TranslateFunction;

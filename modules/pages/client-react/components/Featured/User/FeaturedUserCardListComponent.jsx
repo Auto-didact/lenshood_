@@ -7,29 +7,23 @@ import FeaturedUserCardComponent from './FeaturedUserCardComponent';
 export default class FeaturedUserCardListComponent extends React.Component {
   render() {
     return (
-      <div
-        style={{
-          backgroundColor: '#fff'
+      <List
+        grid={{
+          gutter: 24,
+          xs: 1,
+          sm: 2,
+          md: 3,
+          lg: 4,
+          xl: 4,
+          xxl: 4
         }}
-      >
-        <List
-          grid={{
-            gutter: 24,
-            xs: 1,
-            sm: 2,
-            md: 3,
-            lg: 4,
-            xl: 4,
-            xxl: 4
-          }}
-          dataSource={this.props.relatedUser}
-          renderItem={item => (
-            <List.Item key={item.id}>
-              <FeaturedUserCardComponent key={item.id} relatedUsers={item} />
-            </List.Item>
-          )}
-        />
-      </div>
+        dataSource={this.props.relatedUser}
+        renderItem={item => (
+          <List.Item key={item.id}>
+            <FeaturedUserCardComponent key={item.id} relatedUsers={item} />
+          </List.Item>
+        )}
+      />
     );
   }
 }
