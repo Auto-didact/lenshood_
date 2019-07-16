@@ -7,9 +7,11 @@ import { PageLayout } from "@gqlapp/look-client-react";
 import { translate } from "@gqlapp/i18n-client-react";
 import settings from "../../../../settings";
 import HomeHead from "./components/HomeHead";
-import HomeSteps from "./components/HomeSteps";
+import HomeFeaturedUsers from "./components/HomeFeaturedUsers";
+import HomeFeaturedListings from "./components/HomeFeaturedListings";
 
-import ListingCatalogue from "@gqlapp/listing-client-react/containers/ListingCatalogue";
+import HomeSteps from "./components/HomeSteps";
+import HomeHowItWorks from "./components/HomeHowItWorks";
 
 class HomeView extends Component {
   render() {
@@ -28,8 +30,10 @@ class HomeView extends Component {
           ]}
         />
         <HomeHead t={t} image={img1} />
+        <HomeFeaturedListings t={t} />
+        <HomeFeaturedUsers t={t} />
         <HomeSteps t={t} />
-        <ListingCatalogue />
+        <HomeHowItWorks t={t} />
       </PageLayout>
     );
   }

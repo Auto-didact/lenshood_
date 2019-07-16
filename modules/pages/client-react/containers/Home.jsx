@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import HomeView from "../components/HomeView";
+import HomeView from '../components/HomeView';
 
 const Home = () => {
   return <HomeView />;

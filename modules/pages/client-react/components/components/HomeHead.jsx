@@ -29,34 +29,11 @@ const HomeHead = ({ t, image }) => {
           >
             SignUp
           </Button>
-          <div className="home-image-divider-3 home-content-divider-margin">
-            <Divider />
-          </div>
-          <div className="home-image-content-question">
-            Already Have An Account?
-          </div>
-          <Button
-            type="default"
-            className="home-image-content-button home-image-content-button-login"
-            size="default"
-            style={{ display: "block" }}
-          >
-            Login
-          </Button>
         </div>
       </div>
-      <img
-        className="waves wave1"
-        src={require("../../images/home/waves.png")}
-      />
-      <img
-        className="waves wave2"
-        src={require("../../images/home/waves.png")}
-      />
-      <img
-        className="waves wave3"
-        src={require("../../images/home/waves.png")}
-      />
+      {/*  <img className="waves wave1" src={require('../../images/home/waves.png')} />
+      <img className="waves wave2" src={require('../../images/home/waves.png')} />
+      <img className="waves wave3" src={require('../../images/home/waves.png')} />*/}
     </div>
   );
 };
