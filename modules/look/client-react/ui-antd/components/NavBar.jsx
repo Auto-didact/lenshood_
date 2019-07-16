@@ -116,6 +116,15 @@ class NavBar extends React.Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
   render() {
+    let userItems = [];
+    let userItems2 = [];
+    ref.modules.navItemsUser.forEach((item, index) => {
+      index >= ref.modules.navItemsUser.length - 3 ? userItems.push(item) : null;
+    });
+    ref.modules.navItemsUser.forEach((item, index) => {
+      index < ref.modules.navItemsUser.length - 3 ? userItems2.push(item) : null;
+    });
+
     return (
       <div className="navbar">
         <Row gutter={0} className="screen_width_more_than_700">
@@ -315,12 +324,14 @@ class NavBar extends React.Component {
                   <MenuItem className="forUser">
                     <UserAvatar className="avatar" />
 
-                    <Menu mode="inline" className="userItems">
-                      {ref.modules.navItemsUser}
+                    <Menu mode="inline" className="userItems" selectedKeys={[this.props.location.pathname]}>
+                      {userItems}
                     </Menu>
                   </MenuItem>
                 </IfLoggedIn>
+                {userItems2}
                 {ref.modules.navItemsRight}
+
                 <Menu.Item className="about" key="about">
                   <a className="nav-link-drop" onClick={() => this.toggle(1)}>
                     <div>
