@@ -228,11 +228,13 @@ class NavBar extends React.Component {
                     <UserAvatar className="avatar" />
 
                     <Menu mode="inline" className="userItems">
-                      {ref.modules.navItemsUser}
+                      {userItems}
                     </Menu>
                   </MenuItem>
                 </IfLoggedIn>
+
                 {ref.modules.navItemsRight}
+                {userItems2}
                 <Menu.Item className="about" key="about">
                   <a className="nav-link-drop" onClick={() => this.toggle(1)}>
                     <div>
