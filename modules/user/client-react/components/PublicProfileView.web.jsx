@@ -6,6 +6,8 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
 import TOGGLE_ENDORSE from '@gqlapp/listing-client-react/graphql/ToggleEndorse.graphql';
 import TOGGLE_FOLLOW from '@gqlapp/listing-client-react/graphql/ToggleFollow.graphql';
+import IS_FOLLOW from '@gqlapp/listing-client-react/graphql/IsFollowed.graphql';
+import Is_Endorse from '@gqlapp/listing-client-react/graphql/IsEndorsed.graphql';
 // To Do Abstract Out
 import { Row, Col, Divider, Tabs, Button, message } from 'antd';
 import { withApollo } from 'react-apollo';
@@ -20,7 +22,30 @@ const { TabPane } = Tabs;
 
 class PublicProfileView extends React.Component {
   state = {
-    currentUserId: parseInt(this.props.currentUser.id)
+    currentUserId: parseInt(this.props.currentUser.id),
+    isFollow: false,
+    isEndorse: false
+  };
+
+  componentWillMount = async () => {
+    await this.isEndorsedF();
+    await this.isFollowF();
+  };
+
+  isEndorsedF = async () => {
+    let result = await this.props.client.mutate({
+      mutation: Is_Endorse,
+      variables: { endorsee: parseInt(this.getUserId()), endorser: this.state.currentUserId }
+    });
+    this.setState({ isEndorse: result.data.isEndorsed });
+  };
+
+  isFollowF = async () => {
+    let result = await this.props.client.mutate({
+      mutation: IS_FOLLOW,
+      variables: { u_Id: parseInt(this.getUserId()), f_Id: this.state.currentUserId }
+    });
+    this.setState({ isFollow: result.data.isFollwed });
   };
 
   toggleEndorse = async () => {
@@ -28,6 +53,7 @@ class PublicProfileView extends React.Component {
       mutation: TOGGLE_ENDORSE,
       variables: { endorsee: parseInt(this.getUserId()), endorser: this.state.currentUserId }
     });
+    this.setState({ isEndorse: result.data.toggleEndorse.isEndorsed });
     message.info('Endorse Count is ' + result.data.toggleEndorse.endorsecount);
   };
 
@@ -36,6 +62,7 @@ class PublicProfileView extends React.Component {
       mutation: TOGGLE_FOLLOW,
       variables: { u_Id: parseInt(this.getUserId()), f_Id: this.state.currentUserId }
     });
+    this.setState({ isFollow: result.data.toggleFollow.isFollwed });
     message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
   };
   getUserId = () => {
@@ -179,13 +206,13 @@ class PublicProfileView extends React.Component {
                 style={{ marginTop: '67px', maxWidth: '80px' }}
               >
                 <div align="center">
-                  <Button type="primary" onClick={this.toggleFollow} block>
-                    Follow
+                  <Button type="primary" onClick={this.toggleFollow} value="Follow" block>
+                    {this.state.isFollow ? 'UnFollow' : 'Follow'}
                   </Button>
                   <br />
                   <br />
                   <Button type="primary" onClick={this.toggleEndorse} block>
-                    Endorse
+                    {this.state.isEndorse ? 'UnEndorse' : 'Endorse'}
                   </Button>
                   <br />
                 </div>

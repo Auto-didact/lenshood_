@@ -1,0 +1,3 @@
+mutation isEndorsed($endorsee: Int, $endorser: Int) {
+  isEndorsed(endorseeId: $endorsee, endorserId: $endorser)
+}

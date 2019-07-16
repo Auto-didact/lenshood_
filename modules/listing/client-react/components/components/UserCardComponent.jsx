@@ -7,13 +7,38 @@ import { ImgUser } from '../../constants/DefaultImages';
 // import '../resources/listingCatalogue.css';
 import TOGGLE_ENDORSE from '../../graphql/ToggleEndorse.graphql';
 import TOGGLE_FOLLOW from '../../graphql/ToggleFollow.graphql';
+import IS_FOLLOW from '../../graphql/IsFollowed.graphql';
+import Is_Endorse from '../../graphql/IsEndorsed.graphql';
 
 const { Meta } = Card;
 
 class UserCardComponent extends Component {
   state = {
     currentUserId: parseInt(this.props.userId),
-    sellerId: parseInt(this.props.seller.id)
+    sellerId: parseInt(this.props.seller.id),
+    isFollow: false,
+    isEndorse: false
+  };
+
+  componentWillMount = async () => {
+    await this.isEndorsedF();
+    await this.isFollowF();
+  };
+
+  isEndorsedF = async () => {
+    let result = await this.props.client.mutate({
+      mutation: Is_Endorse,
+      variables: { endorsee: parseInt(this.props.seller.id), endorser: this.state.currentUserId }
+    });
+    this.setState({ isEndorse: result.data.isEndorsed });
+  };
+
+  isFollowF = async () => {
+    let result = await this.props.client.mutate({
+      mutation: IS_FOLLOW,
+      variables: { u_Id: parseInt(this.props.seller.id), f_Id: this.state.currentUserId }
+    });
+    this.setState({ isFollow: result.data.isFollwed });
   };
 
   toggleEndorse = async () => {
@@ -21,6 +46,7 @@ class UserCardComponent extends Component {
       mutation: TOGGLE_ENDORSE,
       variables: { endorsee: this.state.sellerId, endorser: this.state.currentUserId }
     });
+    this.setState({ isEndorse: result.data.toggleEndorse.isEndorsed });
     message.info('Endorse Count is ' + result.data.toggleEndorse.endorsecount);
   };
 
@@ -29,11 +55,13 @@ class UserCardComponent extends Component {
       mutation: TOGGLE_FOLLOW,
       variables: { u_Id: this.state.sellerId, f_Id: this.state.currentUserId }
     });
+    this.setState({ isFollow: result.data.toggleFollow.isFollwed });
     message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
   };
 
   render() {
     let seller = this.props.seller;
+    console.log(seller);
     const portfolios = this.props.seller && this.props.seller.portfolios;
     const firstName = seller && seller.profile && seller.profile.firstName;
     const lastName = seller && seller.profile && seller.profile.lastName;
@@ -76,13 +104,13 @@ class UserCardComponent extends Component {
             style={{ marginTop: '5px', maxWidth: '150px' }}
           >
             <div align="center">
-              <Button type="primary" onClick={this.toggleFollow} block>
-                Follow
+              <Button type="primary" onClick={this.toggleFollow} value="Follow" block>
+                {this.state.isFollow ? 'UnFollow' : 'Follow'}
               </Button>
               <br />
               <br />
               <Button type="primary" onClick={this.toggleEndorse} block>
-                Endorse
+                {this.state.isEndorse ? 'UnEndorse' : 'Endorse'}
               </Button>
               <br />
             </div>
