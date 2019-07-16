@@ -227,7 +227,7 @@ class NavBar extends React.Component {
                   <MenuItem className="forUser">
                     <UserAvatar className="avatar" />
 
-                    <Menu mode="inline" className="userItems">
+                    <Menu mode="inline" className="userItems" selectedKeys={[this.props.location.pathname]}>
                       {userItems}
                     </Menu>
                   </MenuItem>
