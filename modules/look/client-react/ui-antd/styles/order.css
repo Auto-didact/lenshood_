@@ -187,10 +187,29 @@
   text-align: justify;
 }
 
+.trackTag {
+  color: white;
+  float: right;
+}
+
+.orderCardCol {
+  overflow: hidden !important;
+  border-radius: 8px 0px 0px 0px !important;
+
+  object-fit: cover;
+  height: 250px;
+}
+
+.orderCard {
+  margin: 0px 0px 15px 0px !important;
+  border-radius: 8px 0px !important;
+  min-width: 100%;
+}
+
 .orderImage {
   width: 100%;
-  padding-right: 15px;
-  height: 60px;
+  vertical-align: center;
+  /* padding-right: 15px; */
 }
 
 .cartSum {
@@ -224,6 +243,8 @@
 
 .orderGrey {
   color: #676767;
+  position: relative;
+  bottom: 10px;
 }
 
 .CancelRequest {
