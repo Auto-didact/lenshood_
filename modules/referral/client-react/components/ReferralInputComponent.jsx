@@ -1,17 +1,12 @@
-import React, { Component } from "react";
-import { graphql, compose } from "react-apollo";
-import { Modal, Card, message } from "antd";
-import {
-  Button,
-  Form,
-  RenderAutoComplete,
-  Alert
-} from "@gqlapp/look-client-react";
-import PropTypes from "prop-types";
-import { withFormik } from "formik";
-import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
-import { required, validate } from "@gqlapp/validation-common-react";
-import USERS_QUERY from "@gqlapp/user-client-react/graphql/ListingUserQuery.graphql";
+import React, { Component } from 'react';
+import { graphql, compose } from 'react-apollo';
+import { Modal, Card, message } from 'antd';
+import { Button, Form, RenderAutoComplete, Alert } from '@gqlapp/look-client-react';
+import PropTypes from 'prop-types';
+import { withFormik } from 'formik';
+import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
+import { required, validate } from '@gqlapp/validation-common-react';
+import USERS_QUERY from '@gqlapp/user-client-react/graphql/ListingUserQuery.graphql';
 
 const ReferralInputComponentSchema = {
   referral: [required]
@@ -38,14 +33,8 @@ class ReferralInputComponent extends Component {
       item =>
         item.username.toUpperCase().includes(query.toUpperCase()) ||
         (item.profile &&
-          ((item.profile.firstName &&
-            item.profile.firstName
-              .toUpperCase()
-              .includes(query.toUpperCase())) ||
-            (item.profile.lastName &&
-              item.profile.lastName
-                .toUpperCase()
-                .includes(query.toUpperCase()))))
+          ((item.profile.firstName && item.profile.firstName.toUpperCase().includes(query.toUpperCase())) ||
+            (item.profile.lastName && item.profile.lastName.toUpperCase().includes(query.toUpperCase()))))
     );
     return items;
   }
@@ -62,9 +51,7 @@ class ReferralInputComponent extends Component {
     } = this.props;
     return (
       <Modal
-        title={
-          <strong>{prevReferral ? "Change Referral" : "Add Referral"}</strong>
-        }
+        title={<strong>{prevReferral ? 'Change Referral' : 'Add Referral'}</strong>}
         centered
         footer={null}
         bodyStyle={{ padding: 0 }}
@@ -91,9 +78,7 @@ class ReferralInputComponent extends Component {
               Submit
             </Button>
             <div className="text-center">
-              {errors && errors.errorMsg && (
-                <Alert color="error">{errors.errorMsg}</Alert>
-              )}
+              {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
             </div>
           </Form>
         </Card>
@@ -116,26 +101,19 @@ ReferralInputComponent.propTypes = {
 
 const ReferralInputComponentWithFormik = withFormik({
   mapPropsToValues: () => ({
-    referral: ""
+    referral: ''
   }),
   validate: values => validate(values, ReferralInputComponentSchema),
   async handleSubmit(
     values,
     {
-      props: {
-        referredId,
-        refUsername,
-        refSubmit,
-        prevReferral,
-        users,
-        setModal2Visible
-      }
+      props: { referredId, refUsername, refSubmit, prevReferral, users, setModal2Visible }
     }
   ) {
     if (refUsername === values.referral) {
-      message.error("You cannot use your username as referral.");
+      message.error('You cannot use your username as referral.');
     } else if (prevReferral === values.referral) {
-      message.error("The referral is similar to the previous one.");
+      message.error('The referral is similar to the previous one.');
     } else if (users.some(item => item.username === values.referral)) {
       values.referredId = referredId;
       values.flag = prevReferral ? false : true;
@@ -147,20 +125,18 @@ const ReferralInputComponentWithFormik = withFormik({
     setModal2Visible(false);
   },
   enableReinitialize: true,
-  displayName: "inviteForm" // helps with React DevTools
+  displayName: 'inviteForm' // helps with React DevTools
 });
 
 export default compose(
   graphql(USERS_QUERY, {
     options: ({ orderBy, filter }) => {
       return {
-        fetchPolicy: "network-only",
+        fetchPolicy: 'network-only',
         variables: { orderBy, filter }
       };
     },
-    props({
-      data: { loading, users, refetch, error, updateQuery, subscribeToMore }
-    }) {
+    props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
       return {
         loading,
         users,

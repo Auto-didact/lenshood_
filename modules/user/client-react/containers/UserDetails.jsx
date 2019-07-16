@@ -1,46 +1,38 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { compose, graphql } from "react-apollo";
-import { pick } from "lodash";
-import { translate } from "@gqlapp/i18n-client-react";
-import { FormError } from "@gqlapp/forms-client-react";
-import UserDetailsView from "../components/UserDetailsView";
-import { message } from "antd";
-import EDIT_USER from "../graphql/EditUser.graphql";
-import settings from "../../../../settings";
-import UserFormatter from "../helpers/UserFormatter";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { compose, graphql } from 'react-apollo';
+import { pick } from 'lodash';
+import { translate } from '@gqlapp/i18n-client-react';
+import { FormError } from '@gqlapp/forms-client-react';
+import UserDetailsView from '../components/UserDetailsView';
+import { message } from 'antd';
+import EDIT_USER from '../graphql/EditUser.graphql';
+import settings from '../../../../settings';
+import UserFormatter from '../helpers/UserFormatter';
 
 const UserEdit = props => {
   const { currentUser, editUser, t, history, navigation } = props;
 
   console.log(props);
   const onSubmit = async values => {
-    let userValues = pick(values, [
-      "username",
-      "email",
-      "role",
-      "isActive",
-      "profile",
-      "addresses",
-      "portfolios"
-    ]);
+    let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'profile', 'addresses', 'portfolios']);
 
     userValues = UserFormatter.trimExtraSpaces(userValues);
 
     if (settings.auth.certificate.enabled) {
-      userValues["auth"] = {
-        certificate: pick(values.auth.certificate, "serial")
+      userValues['auth'] = {
+        certificate: pick(values.auth.certificate, 'serial')
       };
     }
 
     try {
       await editUser({ id: currentUser.id, ...userValues });
     } catch (e) {
-      message.error(t("userEdit.errorMsg"));
-      throw new FormError(t("userEdit.errorMsg"), e);
+      message.error(t('userEdit.errorMsg'));
+      throw new FormError(t('userEdit.errorMsg'), e);
     }
 
-    message.info("Changes saved! Click on Next to continue!");
+    message.info('Changes saved! Click on Next to continue!');
     // if (history) {
     //   return history.goBack();
     // }
@@ -58,9 +50,7 @@ const UserEdit = props => {
     about: currentUser && currentUser.profile.about ? true : false
   };
 
-  return (
-    <UserDetailsView onSubmit={onSubmit} {...props} valueCheck={valueCheck} />
-  );
+  return <UserDetailsView onSubmit={onSubmit} {...props} valueCheck={valueCheck} />;
 };
 
 UserEdit.propTypes = {
@@ -73,7 +63,7 @@ UserEdit.propTypes = {
 };
 
 export default compose(
-  translate("user"),
+  translate('user'),
   graphql(EDIT_USER, {
     props: ({ mutate }) => ({
       editUser: async input => {

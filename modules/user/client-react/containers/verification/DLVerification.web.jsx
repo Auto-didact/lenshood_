@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { graphql } from "react-apollo";
-import { Loader } from "@gqlapp/look-client-react";
-import VerificationModalComponent from "../../components/verification/VerificationModalComponent";
-import DLVerificationFormComponent from "../../components/verification/DLVerificationFormComponent";
-import DrivingLicenseComponent from "../../components/verification/DrivingLicenseComponent";
-import ADD_DL from "../../graphql/AddDrivingLicense.graphql";
-import { message } from "antd";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'react-apollo';
+import { Loader } from '@gqlapp/look-client-react';
+import VerificationModalComponent from '../../components/verification/VerificationModalComponent';
+import DLVerificationFormComponent from '../../components/verification/DLVerificationFormComponent';
+import DrivingLicenseComponent from '../../components/verification/DrivingLicenseComponent';
+import ADD_DL from '../../graphql/AddDrivingLicense.graphql';
+import { message } from 'antd';
 
 class DLAdd extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class DLAdd extends Component {
 
   onSubmit(addDL) {
     return async values => {
-      message.info("Driving license verification is under process...");
+      message.info('Driving license verification is under process...');
       const dl = await addDL(values.dlId, values.dob);
       this.setDrivingLicense(dl);
     };
@@ -39,7 +39,7 @@ class DLAdd extends Component {
   async onChange(values) {
     this.setState({ loading: true, form: false });
     await this.onSubmit(this.props.addDL)(values);
-    message.info("Driving license verified.");
+    message.info('Driving license verified.');
     this.setState({ loading: false, verified: true });
   }
 
@@ -55,17 +55,9 @@ class DLAdd extends Component {
         title="Driving License Verification"
         vStatus={this.state.vStatus}
       >
-        {this.state.loading ? <Loader text="Loading..." /> : ""}
-        {this.state.form ? (
-          <DLVerificationFormComponent onSubmit={this.onChange} />
-        ) : (
-          ""
-        )}
-        {this.state.verified ? (
-          <DrivingLicenseComponent dl={this.state.dl} />
-        ) : (
-          ""
-        )}
+        {this.state.loading ? <Loader text="Loading..." /> : ''}
+        {this.state.form ? <DLVerificationFormComponent onSubmit={this.onChange} /> : ''}
+        {this.state.verified ? <DrivingLicenseComponent dl={this.state.dl} /> : ''}
       </VerificationModalComponent>
     );
   }
