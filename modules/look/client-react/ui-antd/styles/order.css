@@ -2,6 +2,10 @@
 
 /* Checkout pages */
 
+.ant-radio-inner {
+  margin-left: 10px;
+}
+
 .billingAddress {
   font-size: 15px;
   text-shadow: 0.6px 0 0;
@@ -11,7 +15,7 @@
 .HomeAddress {
   font-size: 12px;
   padding: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 1px;
   background-color: rgba(35, 177, 149, 0.2);
   width: 100%;
 }

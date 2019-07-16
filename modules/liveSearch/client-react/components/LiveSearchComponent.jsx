@@ -1,13 +1,12 @@
 /* eslint-disable react/display-name */
 
-
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Table, Loader } from "@gqlapp/look-client-react";
-import { Popconfirm, Button, message, Modal } from "antd";
-import { FormError } from "@gqlapp/forms-client-react";
-import LiveSearchFormComponent from "./LiveSearchFormComponent";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Table, Loader } from '@gqlapp/look-client-react';
+import { Popconfirm, Button, message, Modal } from 'antd';
+import { FormError } from '@gqlapp/forms-client-react';
+import LiveSearchFormComponent from './LiveSearchFormComponent';
 
 const LiveSearchComponent = ({
   orderBy,
@@ -109,14 +108,8 @@ const LiveSearchComponent = ({
       sortDirections: ['descend', 'ascend'],
       render: text => (
         <div>
-          <strong>
-            {text.some(item => item.user.id === currentUser.id)
-              ? "You"
-              : text[0].user.username}
-          </strong>
-          {text.length > 1 ? (
-            <span>{` and ${text.length - 1} others`}</span>
-          ) : null}
+          <strong>{text.some(item => item.user.id === currentUser.id) ? 'You' : text[0].user.username}</strong>
+          {text.length > 1 ? <span>{` and ${text.length - 1} others`}</span> : null}
         </div>
       )
     },

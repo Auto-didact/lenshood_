@@ -66,7 +66,7 @@ export default class DynamicFieldSet extends React.Component {
           ))}
           {keys.length > 1 ? (
             <Icon
-              style={{paddingTop:'40px'}}
+              style={{ paddingTop: '40px' }}
               title="Remove "
               className="dynamic-delete-button"
               type="minus-circle-o"

@@ -152,7 +152,7 @@ export default (pubsub: PubSub) => ({
         const list = await context.Listing.listing(id);
         pubsub.publish(LISTINGS_SUBSCRIPTION, {
           listingsUpdated: {
-            mutation: "UPDATED",
+            mutation: 'UPDATED',
             id: list.id,
             node: list
           }
@@ -160,7 +160,7 @@ export default (pubsub: PubSub) => ({
         // publish for edit listing page
         pubsub.publish(LISTING_SUBSCRIPTION, {
           listingUpdated: {
-            mutation: "UPDATED",
+            mutation: 'UPDATED',
             id: list.id,
             node: list
           }
@@ -274,9 +274,11 @@ export default (pubsub: PubSub) => ({
       subscribe: withFilter(
         () => pubsub.asyncIterator(LISTINGS_SUBSCRIPTION),
         (payload, variables) => {
-          if (variables.endCursor)
+          if (variables.endCursor) {
             return variables.endCursor <= payload.listingsUpdated.id;
-          else return true;
+          } else {
+            return true;
+          }
         }
       )
     },

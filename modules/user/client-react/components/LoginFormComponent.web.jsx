@@ -88,7 +88,7 @@ const LoginFormComponent = ({ handleSubmit, submitting, errors, values, t }) => 
     <div className="signInoOuter">
       <Card className="modalcard" bodyStyle={{ borderRadius: '0px', padding: '0px', margin: '0px' }}>
         <Row className="SignInComp">
-          <Col sm={8} xs={0} align="left" style={{ overflow: "hidden" }}>
+          <Col sm={8} xs={0} align="left" style={{ overflow: 'hidden' }}>
             <img src={camera1} alt="" className="signInimg" />
           </Col>
           <Col sm={0} xs={24}>

@@ -5,11 +5,11 @@ import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
-// const RadioButton = Radio.Button;
 
 export default class RenderAddress extends React.Component {
   state = {
     visible: []
+    // ,primeAddress: [false, true]
   };
 
   componentDidMount() {
@@ -22,7 +22,6 @@ export default class RenderAddress extends React.Component {
   }
 
   modalControl = (index, visiblity) => {
-    console.log('index, visiblity', index, visiblity);
     let visible = this.state.visible;
     visible[index] = visiblity;
     this.setState({ visible });
@@ -48,48 +47,100 @@ export default class RenderAddress extends React.Component {
     this.setState({ visible });
   };
 
+  handleSelect = index => {
+    console.log('handleSelect called');
+    // const primeAddress = this.state.primeAddress;
+    // console.log('primeAddress before', primeAddress);
+
+    // primeAddress.map();
+    // primeAddress[index] == true ? (primeAddress[index] = false) : (primeAddress[index] = true);
+    // this.setState({ primeAddress });
+
+    // console.log('primeAddress after', this.state.primeAddress);
+
+    this.props.addresses.map(address => {
+      address.primeAddress = false;
+    });
+
+    this.props.addresses[index].primeAddress = true;
+  };
+
   render() {
-    const { arrayHelpers, name, addresses, t } = this.props;
-    const label = 'profile.card.group.addresses';
+    const { arrayHelpers, name, addresses, t, label } = this.props;
+    // const label = 'profile.card.group.addresses';
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
     }
-
     const isSelectable = this.props.isSelectable || false;
 
     //Form field Section-->>
     const keys = [
+      { key: 'primeAddress', label: 'primeAddress' },
       { key: 'streetAddress1', label: 'streetAddress' },
       { key: 'streetAddress2', label: 'streetAddress' },
       { key: 'city', label: 'city' },
       { key: 'state', label: 'state' },
       { key: 'pinCode', label: 'pinCode' }
     ];
+
     let formItems = [];
     let addressCard = [];
+
     {
       //Geting all the fields for the form.
       this.props.addresses.map(
         (address, indexa) => (
           (formItems[indexa] = keys.map((k, indexk) => (
             <FormItem style={{ display: 'inline-block', margin: '0px 5px', width: '75%' }} key={indexk}>
-              <Field
-                name={`${name}[${indexa}].${k.key}`}
-                component={RenderField}
-                placeholder={k.label}
-                type="text"
-                label={t(`${label}.${k.label}`)}
-                value={address[k.key]}
-              />
+              {k.key != 'primeAddress' ? (
+                <Field
+                  name={`${name}[${indexa}].${k.key}`}
+                  component={RenderField}
+                  placeholder={k.label}
+                  type="text"
+                  label={t(`${label}.${k.label}`)}
+                  value={address[k.key]}
+                />
+              ) : (
+                <Radio
+                  value={
+                    // this.state.primeAddress[indexa]
+                    address
+                  }
+                  // onClick={() => this.handleSelect(indexk)}
+                >
+                  {t(`${label}.${keys[0].label}`)}
+                </Radio>
+              )}
             </FormItem>
           ))),
           //Geting all the addressCard.
           (addressCard[indexa] = (
-            <div style={{ marginTop: 16 }} className="HomeAddress" key={indexa}>
-              <div className="HomeAddressBlock">Home Address {/* <Icon type="home" className="homeicon" /> */}</div>
+            <div
+              className="HomeAddress"
+              key={indexa}
+              style={{
+                marginTop: '15px'
+              }}
+            >
+              <div
+                className="HomeAddressBlock"
+                style={{
+                  position: 'relative',
+                  bottom: '16px'
+                }}
+              >
+                Home Address
+              </div>
               <br />
-              <div className="addressLines">
+              <div
+                className="addressLines"
+                style={{
+                  position: 'relative',
+                  bottom: '20px'
+                }}
+              >
                 <h4>{address.streetAddress1 && address.streetAddress1 + ','}</h4>
                 <h4>{address.streetAddress2 && address.streetAddress2 + ','}</h4>
                 <h4>{address.city && address.city + ','}</h4>
@@ -98,12 +149,13 @@ export default class RenderAddress extends React.Component {
               </div>
 
               <Row style={{ marginBottom: '8px' }}>
-                <Col
-                  span={12}
-                  align="left"
-                  // style={{ paddingRight: '20px' }}
-                >
-                  <Button shape="circle" size="large" onClick={() => this.modalControl(indexa, true)}>
+                <Col span={12} align="left">
+                  <Button
+                    style={{ position: 'relative', bottom: '10px', right: '6px' }}
+                    shape="circle"
+                    size="large"
+                    onClick={() => this.modalControl(indexa, true)}
+                  >
                     <Icon type="edit" />
                   </Button>
                   <Modal
@@ -118,11 +170,7 @@ export default class RenderAddress extends React.Component {
                     </div>
                   </Modal>
                 </Col>
-                <Col
-                  span={12}
-                  align="right"
-                  //  style={{ paddingRight: '20px' }}
-                >
+                <Col span={12} align="right">
                   <Popconfirm
                     title="Are you sure to delete this address?"
                     onConfirm={() => arrayHelpers.remove(indexa)}
@@ -130,7 +178,12 @@ export default class RenderAddress extends React.Component {
                     okText="Yes"
                     cancelText="No"
                   >
-                    <Button type="danger" shape="circle" size="large">
+                    <Button
+                      style={{ position: 'relative', bottom: '10px', left: '6px' }}
+                      type="danger"
+                      shape="circle"
+                      size="large"
+                    >
                       <Icon type="delete" />
                     </Button>
                   </Popconfirm>
@@ -144,42 +197,56 @@ export default class RenderAddress extends React.Component {
 
     return (
       <>
-        <Row gutter={32} align="top">
+        <Row>
           <Col span={24}>
-            <h3 className="Addresses">Address</h3>
+            <h3 className="Addresses">Addresses</h3>
             <br />
           </Col>
-          <Col lg={14} sm={24} align="top">
-            <Row gutter={32} align="top">
+          <Col>
+            <Row gutter={80}>
               <Col
-                xs={{ span: 18, offset: 3 }}
+                xs={{ span: 24, offset: 0 }}
                 sm={{ span: 12, offset: 0 }}
-                md={{ span: 10, offset: 0 }}
-                className="PadB30"
-              >
-                <Radio.Group>
-                  {addresses.map((address, indexas) =>
-                    isSelectable ? (
-                      <Radio
-                        key={indexas}
-                        value={address}
-                        // onClick={() => onSelect(address)}
-                      >
-                        {addressCard[indexas]}
-                      </Radio>
-                    ) : (
-                      addressCard[indexas]
-                    )
-                  )}
-                </Radio.Group>
-              </Col>
-              <Col
-                xs={{ span: 14, offset: 5 }}
-                sm={{ span: 10, offset: 0 }}
                 md={{ span: 8, offset: 0 }}
                 className="PadB30"
               >
-                <div style={{ marginTop: 16 }} className="AddNewAddressBlock" onClick={this.handleAddAddress}>
+                {isSelectable ? (
+                  <Radio.Group name="addresses" defaultValue={addresses[0]} style={{ marginLeft: '10px' }}>
+                    {addresses.map((address, indexas) => (
+                      <Radio
+                        key={indexas}
+                        value={address}
+                        style={{
+                          backgroundColor: '#d5f0eb',
+                          height: '56px',
+                          paddingTop: '20px'
+                        }}
+                        // checked={
+                        //   // this.state.primeAddress[indexas]
+                        //   address.primeAddress
+                        // }
+                        // onClick={() => this.handleSelect(indexas)}
+                      >
+                        <b>Make Prime Address</b>
+                        {addressCard[indexas]}
+                      </Radio>
+                    ))}
+                  </Radio.Group>
+                ) : (
+                  addresses.map((address, indexas) => addressCard[indexas])
+                )}
+              </Col>
+              <Col
+                xs={{ span: 24, offset: 0 }}
+                sm={{ span: 12, offset: 0 }}
+                md={{ span: 8, offset: 0 }}
+                className="PadB30"
+              >
+                <div
+                  className="AddNewAddressBlock"
+                  onClick={this.handleAddAddress}
+                  style={{ marginTop: !isSelectable ? '15px' : null }}
+                >
                   <div className="AddNewAddress">
                     <Icon type="plus" />
                   </div>
@@ -192,10 +259,6 @@ export default class RenderAddress extends React.Component {
       </>
     );
   }
-
-  // render() {
-  //   return <Button style={{ width: '30%' }} onClick={this.add} />;
-  // }
 }
 
 RenderAddress.propTypes = {
