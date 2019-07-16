@@ -7,7 +7,13 @@ class OrderDetailsComponent extends Component {
     const item = this.props.item;
 
     return (
-      <Card className="boxShadowTheme borderRadius9 marginT20">
+      <Card
+        className="boxShadowTheme borderRadius9 marginT20"
+        hoverable
+        bodyStyle={{
+          padding: '0px'
+        }}
+      >
         <Row>
           <Col span={24} className="marginB10 PadA10">
             <Col sm={19} xs={24}>

@@ -57,14 +57,17 @@
   height: 100px;
 }
 /*====== For Navbar and Side Drawer ====*/
-@media only screen and (max-width: 800px) {
-  .screen_width_more_than_800 {
-    display: none;
+.navbar{
+  width:100%;
+}
+@media only screen and (max-width: 700px) {
+  .screen_width_more_than_700 {
+    display: none !important;
   }
 }
-@media only screen and (min-width: 801px) {
-  .screen_width_less_than_800 {
-    display: none;
+@media only screen and (min-width: 701px) {
+  .screen_width_less_than_700 {
+    display: none !important;
   }
 }
 .ant-drawer-body .ant-avatar {
@@ -176,8 +179,11 @@
 
 /*======For Loader=====*/
 .loader {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 46%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
   text-align: center;
 }
