@@ -11,13 +11,12 @@ import {
   RenderSelect,
   RenderUpload,
   RenderCheckBox,
+  RenderAddress,
   RenderDynamicField,
   Option,
   Button,
   Alert
 } from '@gqlapp/look-client-react';
-
-import RenderAddress from './RenderAddress';
 
 import settings from '../../../../settings';
 import './styling.css';
@@ -87,9 +86,11 @@ const UserForm = ({
             />
           </>
         ) : null}
-
+        {console.log('avatar', profile.avatar)}
         {/*----------Personal Information-----------*/}
-        <h1 className="heading vgap">Personal</h1>
+        {LYGflag == false || (!valueCheck.firstName || !valueCheck.lastName || !valueCheck.about) ? (
+          <h1 className="heading vgap">Personal</h1>
+        ) : null}
 
         <div className="row">
           {LYGflag == false || !valueCheck.firstName ? (
@@ -197,25 +198,26 @@ const UserForm = ({
 
         {/*---------------Account Information Begin Here---------------*/}
 
-        <h1 className="heading vgap">Account</h1>
-
         {LYGflag == false ? (
-          <div className="about">
-            <Field
-              name="username"
-              component={RenderField}
-              type="text"
-              label={t('userEdit.form.field.name')}
-              value={username}
-            />
-            <Field
-              name="email"
-              component={RenderField}
-              type="email"
-              label={t('userEdit.form.field.email')}
-              value={email}
-            />
-          </div>
+          <>
+            <h1 className="heading vgap">Account</h1>
+            <div className="about">
+              <Field
+                name="username"
+                component={RenderField}
+                type="text"
+                label={t('userEdit.form.field.name')}
+                value={username}
+              />
+              <Field
+                name="email"
+                component={RenderField}
+                type="email"
+                label={t('userEdit.form.field.email')}
+                value={email}
+              />
+            </div>
+          </>
         ) : null}
 
         {/*------------Account Info End here-------------------------*/}
@@ -258,23 +260,36 @@ const UserForm = ({
         <h1 className="heading vgap">Contact</h1>
 
         <div className="g3 about">
-          <FieldArray
+          {/* <FieldArray
             name="addresses"
             render={arrayHelpers => (
               <RenderDynamicField
                 keys={[
-                  { key: 'streetAddress1', type: 'text' },
-                  { key: 'streetAddress2', type: 'text' },
-                  { key: 'city', type: 'text' },
-                  { key: 'state', type: 'text' },
-                  { key: 'pinCode', type: 'text' }
+                  { key: "streetAddress1", type: "text" },
+                  { key: "streetAddress2", type: "text" },
+                  { key: "city", type: "text" },
+                  { key: "state", type: "text" },
+                  { key: "pinCode", type: "text" }
                 ]}
                 buttonText="Add Address"
-                style={{ width: '40%' }}
+                style={{ width: "40%" }}
                 arrayHelpers={arrayHelpers}
                 values={addresses}
                 name="addresses"
-                label={t('userEdit.form.field.addresses')}
+                label={t("userEdit.form.field.addresses")}
+              />
+            )}
+          /> */}
+
+          <FieldArray
+            name="addresses"
+            render={arrayHelpers => (
+              <RenderAddress
+                name="addresses"
+                addresses={addresses}
+                arrayHelpers={arrayHelpers}
+                label="profile.card.group.addresses"
+                t={t}
               />
             )}
           />
@@ -408,7 +423,8 @@ const UserFormWithFormik = withFormik({
         isAvailable: profile && profile.isAvailable,
         isVerified: profile && profile.isVerified,
         rating: profile && profile.rating,
-        website: profile && profile.website
+        website: profile && profile.website,
+        referrerId: profile && profile.referredBy && profile.referredBy.id
       },
       addresses: addresses && addresses.length !== 0 ? addresses.map(getAddresses) : [],
       portfolios: portfolios && portfolios.length !== 0 ? portfolios.map(getPortfolios) : [],

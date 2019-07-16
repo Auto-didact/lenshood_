@@ -15,7 +15,7 @@ import {
 } from '@gqlapp/authentication-client-react';
 import { camera1, camera2 } from '../constants/DefaultImages';
 
-import { Divider, Row, Col, Card, Modal, message } from "antd";
+import { Divider, Row, Col, Card, Modal, message } from 'antd';
 
 import settings from '../../../../settings';
 
@@ -159,9 +159,7 @@ const RegisterFormComponent = ({ values, handleSubmit, submitting, errors, t }) 
                 />
               </Col>
               {/* <div className="text-center"> */}
-              {errors &&
-                errors.errorMsg &&
-                message.error(errors.referral || errors.errorMsg)}
+              {errors && errors.errorMsg && message.error(errors.referral || errors.errorMsg)}
               {/* </div> */}
               <Button color="primary" block type="submit" disabled={submitting}>
                 {t('reg.form.btnSubmit')}

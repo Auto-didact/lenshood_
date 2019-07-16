@@ -20,7 +20,6 @@ export default class OrderTrackCardComponent extends React.Component {
     else return <Icon type="clock-circle" style={{ color: '#FFCC99' }} />;
   }
   render() {
-    console.log('Hey from Order Card', this.props.status.owner);
     return (
       <Card className="boxShadowTheme borderRadius9">
         <h4>
@@ -30,7 +29,7 @@ export default class OrderTrackCardComponent extends React.Component {
         <Steps direction="vertical" size="small" current={this.props.completed} className="TrackSteps">
           <Step
             title={
-              <p className="font12">Order to be Confermed {this.dateCheck(0, this.props.status.date.confirm, 0)}</p>
+              <p className="font12">Order to be Confirmed {this.dateCheck(0, this.props.status.date.confirm, 0)}</p>
             }
             icon={this.IconCheck(0)}
           />

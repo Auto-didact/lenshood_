@@ -6,11 +6,28 @@ import { graphql, compose } from 'react-apollo';
 import CURRENT_USER_ID from '@gqlapp/user-client-react/graphql/CurrentUserId.graphql';
 
 // Components
+import ProfileView from '../components/ProfileView';
 import PublicProfileView from '../components/PublicProfileView';
 import USER_QUERY from '../graphql/DisplayUserQuery.graphql';
 
 const PublicProfile = props => {
-  return <PublicProfileView {...props} />;
+  let userBool = false;
+  let id = 0;
+  if (props.match) {
+    id = props.match.params.id;
+  } else if (props.navigation) {
+    id = props.navigation.state.params.id;
+  }
+
+  if (Number(id) === props.currentUser.id) {
+    userBool = true;
+  }
+
+  if (userBool) {
+    return <ProfileView {...props} />;
+  } else {
+    return <PublicProfileView {...props} />;
+  }
 };
 
 export default compose(

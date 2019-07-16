@@ -26,10 +26,14 @@ const createPasswordHash = password => {
 
 export default pubsub => ({
   Query: {
-    users: withAuth(['user:view:all'], (obj, { orderBy, filter }, { User }) => {
-      return User.getUsers(orderBy, filter);
-    }),
+    users(obj, { orderBy, filter }, { User, identity }) {
+      if (identity) return User.getUsers(orderBy, filter);
+      else return null;
+    },
     user: withAuth(['user:view:self'], async (obj, { id }, { identity, User, req: { t } }) => {
+      if (identity.id === id) {
+        return null;
+      }
       if (identity.id === id || identity.role === 'admin') {
         try {
           const user = await User.getUser(id);
@@ -38,10 +42,11 @@ export default pubsub => ({
           return { errors: e };
         }
       }
-
-      throw new Error(t('user:accessDenied'));
     }),
-    async displayUser(obj, { id }, { User }) {
+    async displayUser(obj, { id }, { User, identity }) {
+      if (identity.id === id) {
+        return null;
+      }
       const user = await User.getUser(id);
       return user;
     },

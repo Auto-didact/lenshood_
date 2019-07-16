@@ -332,7 +332,14 @@ export class User extends Model {
     // return knex('user')
     //   .update(decamelizeKeys({ username, role, isActive, ...localAuthInput }))
     //   .where({ id });
+    const userId = params.profile ? params.profile.referredId : null;
     const res = await User.query().upsertGraph(decamelizeKeys(params));
+    if (userId)
+      await returnId(
+        knex('user_profile')
+          .where('user_id', '=', res.id)
+          .update('referrer_id', userId)
+      );
     return res.id;
   }
 
@@ -738,7 +745,7 @@ export class UserProfile extends Model {
         }
       },
       referred_by: {
-        relation: Model.HasOneRelation, //Confirm this! To Do
+        relation: Model.HasOneRelation,
         modelClass: User,
         join: {
           from: 'user_profile.referrer_id',

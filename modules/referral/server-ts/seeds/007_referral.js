@@ -6,11 +6,11 @@ export async function seed(knex, Promise) {
     knex('referral').insert({
       user_id: 1,
       referred_id: 1,
-      is_verified: false
+      is_verified: true
     })
   );
   await returnId(
-    knex("referral").insert({
+    knex('referral').insert({
       user_id: 1,
       referred_id: 2,
       is_verified: false

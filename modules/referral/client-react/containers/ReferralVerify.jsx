@@ -16,6 +16,12 @@ const ReferralVerify = props => {
     code = props.navigation.state.params.id;
   }
 
+  let userBool = false;
+
+  if (Number(code) === currentUser.id) {
+    userBool = true;
+  }
+
   const onSubmit = async () => {
     let values = {
       referredId: Number(code)
@@ -29,7 +35,14 @@ const ReferralVerify = props => {
     message.info('User Verified. You may go back now.');
     window.location.reload();
   };
-  return <ReferralVerifyView onSubmit={onSubmit} currentUser={currentUser} user={user} loading={loading} />;
+  return (
+    <ReferralVerifyView
+      onSubmit={onSubmit}
+      currentUser={currentUser}
+      user={userBool ? currentUser : user}
+      loading={loading}
+    />
+  );
 };
 
 export default compose(
@@ -45,8 +58,8 @@ export default compose(
         variables: { id: Number(id) }
       };
     },
-    props({ data: { loading, user } }) {
-      const userPayload = user ? { user: user } : {};
+    props({ data: { loading, displayUser } }) {
+      const userPayload = displayUser ? { user: displayUser } : {};
       return {
         loading,
         ...userPayload

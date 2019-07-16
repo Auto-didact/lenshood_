@@ -35,7 +35,6 @@ export default class Footer extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         {/*------#For Large Screen Devices---#Render this for screen width more than 800px--*/}
@@ -181,9 +180,7 @@ export default class Footer extends React.Component {
                     </li>
                   </ul>
                 </div>
-
               </div>
-
 
               <div>
                 <h3 onClick={() => this.toggle(2)}>
@@ -210,7 +207,6 @@ export default class Footer extends React.Component {
                     </li>
                   </ul>
                 </div>
-
               </div>
               <div>
                 <h3 onClick={() => this.toggle(3)}>

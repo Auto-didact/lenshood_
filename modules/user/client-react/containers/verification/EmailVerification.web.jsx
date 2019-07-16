@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import { Alert } from 'antd';
+import { message } from 'antd';
 import { Loader } from '@gqlapp/look-client-react';
 import VerificationModalComponent from '../../components/verification/VerificationModalComponent';
 import EmailVerificationFormComponent from '../../components/verification/EmailVerificationFormComponent';
@@ -35,6 +35,7 @@ class EmailAdd extends Component {
       // To Do change email values in set email, uncomment below line
       // const emailData = await addEmail(values.email, values.otp);
       this.setEmail(values.email);
+      message.info('Verification email has been sent. Please check your inbox.');
     };
   }
 
@@ -43,11 +44,6 @@ class EmailAdd extends Component {
     this.onSubmit(this.props.addEmail)(values);
     this.setState({ loading: false });
   }
-
-  // async onSubmit(values, addEmail) {
-  //   console.log(addEmail);
-  //   // addEmail(values.emailId, values.dob);
-  // }
 
   render() {
     return (

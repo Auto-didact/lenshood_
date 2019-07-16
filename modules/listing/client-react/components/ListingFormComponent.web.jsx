@@ -29,8 +29,7 @@ class ListingFormComponent extends Component {
   }
 
   nextStep = async () => {
-    if (!this.props.values.gearSubcategory)
-      this.props.values.gearSubcategory = "none";
+    if (!this.props.values.gearSubcategory) this.props.values.gearSubcategory = 'none';
     let errors = await this.props.validateForm(this.props.values);
     var isErrorsEmpty = !Object.keys(errors).length;
     // console.log(errors);
@@ -62,7 +61,7 @@ class ListingFormComponent extends Component {
     // console.log("currentUser Listings", this.props.listing);
     // const userRole = currentUser.role;
     this.steps = [
-      <UserDetails />,
+      <UserDetails currentUser={currentUser} />,
       <ProductDetails values={values} t={t} User={currentUser} users={this.props.users} isAdmin={isAdmin} />,
       <RentalDetails values={values} t={t} isAdmin={isAdmin} />
     ];

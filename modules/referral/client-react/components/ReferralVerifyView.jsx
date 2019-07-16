@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const ReferralVerifyView = props => {
   const { t, onSubmit, currentUser, user, loading } = props;
-  // console.log(props);
+  console.log(props);
   const renderMetaData = () => (
     <Helmet
       title={`${settings.app.name} - ${t('title')}`}
@@ -22,7 +22,7 @@ const ReferralVerifyView = props => {
       {renderMetaData()}
       <Link
         id="back-button"
-        to="/invites"
+        to="/referrals"
         style={{
           fontSize: '20px',
           margin: '10px',

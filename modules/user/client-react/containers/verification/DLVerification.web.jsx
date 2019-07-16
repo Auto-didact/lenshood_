@@ -6,6 +6,7 @@ import VerificationModalComponent from '../../components/verification/Verificati
 import DLVerificationFormComponent from '../../components/verification/DLVerificationFormComponent';
 import DrivingLicenseComponent from '../../components/verification/DrivingLicenseComponent';
 import ADD_DL from '../../graphql/AddDrivingLicense.graphql';
+import { message } from 'antd';
 
 class DLAdd extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class DLAdd extends Component {
 
   onSubmit(addDL) {
     return async values => {
+      message.info('Driving license verification is under process...');
       const dl = await addDL(values.dlId, values.dob);
       this.setDrivingLicense(dl);
     };
@@ -37,6 +39,7 @@ class DLAdd extends Component {
   async onChange(values) {
     this.setState({ loading: true, form: false });
     await this.onSubmit(this.props.addDL)(values);
+    message.info('Driving license verified.');
     this.setState({ loading: false, verified: true });
   }
 

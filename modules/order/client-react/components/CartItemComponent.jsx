@@ -1,6 +1,5 @@
-
-import React, { useState } from "react";
-import { Row, Col, Button, Icon, Card } from "antd";
+import React, { useState } from 'react';
+import { Row, Col, Button, Icon, Card } from 'antd';
 
 const CartItemComponent = props => {
   let product = props.products;
@@ -8,7 +7,7 @@ const CartItemComponent = props => {
     <Card
       className="cartitem borderRadius9 marginB20"
       bodyStyle={{
-        padding: "0px"
+        padding: '0px'
       }}
     >
       <div className="listcloseicons">

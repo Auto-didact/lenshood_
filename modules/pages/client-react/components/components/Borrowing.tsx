@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import settings from '../../../../../settings';
+// import settings from '../../../../../settings';
 
 interface BorrowingProps {
   t: TranslateFunction;

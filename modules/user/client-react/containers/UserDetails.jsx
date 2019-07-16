@@ -6,18 +6,16 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { FormError } from '@gqlapp/forms-client-react';
 import UserDetailsView from '../components/UserDetailsView';
 import { message } from 'antd';
-import USER_QUERY from '../graphql/UserQuery.graphql';
-import CURRENT_USER_QUERY from '../graphql/CurrentUserQuery.graphql';
 import EDIT_USER from '../graphql/EditUser.graphql';
 import settings from '../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
 
 const UserEdit = props => {
-  const { user, editUser, t, history, navigation } = props;
+  const { currentUser, editUser, t, history, navigation } = props;
 
+  console.log(props);
   const onSubmit = async values => {
     let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'profile', 'addresses', 'portfolios']);
-    //
 
     userValues = UserFormatter.trimExtraSpaces(userValues);
 
@@ -28,7 +26,7 @@ const UserEdit = props => {
     }
 
     try {
-      await editUser({ id: user.id, ...userValues });
+      await editUser({ id: currentUser.id, ...userValues });
     } catch (e) {
       message.error(t('userEdit.errorMsg'));
       throw new FormError(t('userEdit.errorMsg'), e);
@@ -45,18 +43,18 @@ const UserEdit = props => {
   };
 
   let valueCheck = {
-    avatar: props.user && props.user.profile.avatar ? true : false,
-    firstName: props.user && props.user.profile.firstName ? true : false,
-    lastName: props.user && props.user.profile.lastName ? true : false,
-    designation: props.user && props.user.profile.designation ? true : false,
-    about: props.user && props.user.profile.about ? true : false
+    avatar: currentUser && currentUser.profile.avatar ? true : false,
+    firstName: currentUser && currentUser.profile.firstName ? true : false,
+    lastName: currentUser && currentUser.profile.lastName ? true : false,
+    designation: currentUser && currentUser.profile.designation ? true : false,
+    about: currentUser && currentUser.profile.about ? true : false
   };
 
   return <UserDetailsView onSubmit={onSubmit} {...props} valueCheck={valueCheck} />;
 };
 
 UserEdit.propTypes = {
-  user: PropTypes.object,
+  currentUser: PropTypes.object,
   editUser: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   navigation: PropTypes.object,
@@ -66,33 +64,6 @@ UserEdit.propTypes = {
 
 export default compose(
   translate('user'),
-  graphql(CURRENT_USER_QUERY, {
-    props({ data: { loading, error, currentUser } }) {
-      if (error) throw new Error(error);
-      return { loading, currentUser };
-    }
-  }),
-  graphql(USER_QUERY, {
-    options: props => {
-      let id = props.currentUser.id;
-      //   let id = 0;
-      //   if (props.match) {
-      //     id = props.match.params.id;
-      //   } else if (props.navigation) {
-      //     id = props.navigation.state.params.id;
-      //   }
-      return {
-        variables: { id: Number(id) }
-      };
-    },
-    props({ data: { loading, user } }) {
-      const userPayload = user ? { user: user } : {};
-      return {
-        loading,
-        ...userPayload
-      };
-    }
-  }),
   graphql(EDIT_USER, {
     props: ({ mutate }) => ({
       editUser: async input => {

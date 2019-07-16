@@ -341,6 +341,7 @@ input ProfileInput {
   designation: String
   mobile: String
   website: String
+  referrerId: Int
 }
 
 input PortfolioInput {
