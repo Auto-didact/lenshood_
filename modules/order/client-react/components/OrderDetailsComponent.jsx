@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Button, Row, Col, Card, Rate, Avatar } from 'antd';
+import { ImgCamera } from '@gqlapp/listing-client-react';
 import { BORROWED } from '../constants/OrderStates';
 
 class OrderDetailsComponent extends Component {
@@ -14,6 +15,56 @@ class OrderDetailsComponent extends Component {
           padding: '0px'
         }}
       >
+        {/* <Row type="flex" justify="space-around" align="middle">
+          <Col xs={{ span: 24 }} md={{ span: 9 }} xxl={{ span: 6 }} className="DetailsCardCol" align="center">
+            <img className="orderImage" alt="" src={item.image.length !== 0 ? item.image : ImgCamera[0].imageUrl} />
+          </Col>
+          <Col xs={{ span: 24 }} md={{ span: 15 }} xxl={{ span: 18 }} className="DetailsCardCol">
+            <div style={{ padding: '10px', align: 'center' }}>
+              <Button type="primary" ghost size="small" block onClick={e => this.props.setTrackList(item.id)}>
+                <Icon type="environment" theme="filled" /> Track
+              </Button>
+              <h3 className="itemName">{item.name ? <span>{item.name}</span> : 'Info Not Provided'}</h3>
+
+
+              <Row style={{ marginBottom: '8px' }}>
+                <Col span={12} align="left" style={{ paddingLeft: '20px' }}>
+                  <Link to={`/listing/${item.id}`}>
+                    <Button shape="circle" size="large">
+                      <Icon type="edit" />
+                    </Button>
+                  </Link>
+                </Col>
+                <Col span={12} align="right" style={{ paddingRight: '20px' }}>
+                  <Popconfirm
+                    title="Are you sure to delete this listing?"
+                    onConfirm={e => this.props.DeleteListing(item.id, e)}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="danger" shape="circle" size="large">
+                      <Icon type="delete" />
+                    </Button>
+                  </Popconfirm>
+                </Col>
+              </Row>
+              <Row gutter={13} align="middle">
+                <Col span={12}>
+                  <Button type="primary" block onClick={e => this.props.toggle(item.id, e)}>
+                    {item.status === ONSHELF ? 'Move to Idle' : 'Move to Shelf'}
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button type="primary" block>
+                    View Listing
+                  </Button>
+                </Col>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+ */}
         <Row>
           <Col span={24} className="marginB10 PadA10">
             <Col sm={19} xs={24}>
@@ -21,17 +72,18 @@ class OrderDetailsComponent extends Component {
             </Col>
             <Col sm={5} xs={12}>
               <Button type="primary" ghost size="small" block onClick={e => this.props.setTrackList(item.id)}>
-                {' '}
                 <Icon type="environment" theme="filled" /> Track
               </Button>
             </Col>
           </Col>
           <br />
-          <Col md={7} sm={9} xs={24}>
+          <Col md={7} sm={9} xs={24} style={{ paddingLeft: '52px' }}>
             <img height={140} src={item.image} alt="" className="width100" />
           </Col>
+
           <Col md={17} sm={15} xs={24} className="PadA10">
             <h4 className="itemName">{item.name}</h4>
+
             <Col sm={14} xs={24}>
               <h4 className="itemDetails">
                 {item.details}{' '}

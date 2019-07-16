@@ -104,3 +104,4 @@ export default new ClientModule({
 });
 
 export { default as SuggestedCardListComponent } from './components/components/SuggestedCardListComponent';
+export { ImgCamera } from './constants/DefaultImages';
