@@ -48,13 +48,13 @@ export default class ProductDetails extends Component {
             'Lens Accessories',
             'Other Lenses'
           ],
-          components: ["Lens"]
+          components: ['Lens']
         },
         {
-          gearCategory: "Drones"
+          gearCategory: 'Drones'
         },
         {
-          gearCategory: "Lighting"
+          gearCategory: 'Lighting'
         }
       ],
       status: ['idle', 'on_rent', 'on_shelf', 'disabled'],
@@ -84,9 +84,7 @@ export default class ProductDetails extends Component {
     const activeGearCategory = this.state.listingCategories.filter(category => {
       return category.gearCategory == value;
     });
-    const gearSubcategories = activeGearCategory[0].gearSubcategories
-      ? activeGearCategory[0].gearSubcategories
-      : null;
+    const gearSubcategories = activeGearCategory[0].gearSubcategories ? activeGearCategory[0].gearSubcategories : null;
 
     this.setState({
       activeGearCategory: activeGearCategory,

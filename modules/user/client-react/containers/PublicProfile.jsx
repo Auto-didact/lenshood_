@@ -1,26 +1,32 @@
 // React
-import React from "react";
+import React from 'react';
 
 // Apollo
-import { graphql, compose } from "react-apollo";
+import { graphql, compose } from 'react-apollo';
 
 // Components
-import PublicProfileView from "../components/PublicProfileView";
-import USER_QUERY from "../graphql/DisplayUserQuery.graphql";
+import ProfileView from '../components/ProfileView';
+import PublicProfileView from '../components/PublicProfileView';
+import USER_QUERY from '../graphql/DisplayUserQuery.graphql';
 
 const PublicProfile = props => {
+  let userBool = false;
   let id = 0;
   if (props.match) {
-    id = Number(props.match.params.id);
+    id = props.match.params.id;
   } else if (props.navigation) {
-    id = Number(props.navigation.state.params.id);
+    id = props.navigation.state.params.id;
   }
-  // console.log(id == props.currentUser.id);
 
-  // if (id === props.currentUser.id) {
-  //   props.history.push(`/profile`);
-  // } else
-  return <PublicProfileView {...props} />;
+  if (Number(id) === props.currentUser.id) {
+    userBool = true;
+  }
+
+  if (userBool) {
+    return <ProfileView {...props} />;
+  } else {
+    return <PublicProfileView {...props} />;
+  }
 };
 
 export default compose(

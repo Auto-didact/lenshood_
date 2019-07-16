@@ -12,7 +12,20 @@ import settings from '../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
 
 const UserEdit = props => {
-  const { user, editUser, t, history, navigation } = props;
+  const { user, editUser, currentUser, t, history, navigation } = props;
+
+  let userBool = false;
+  let id = 0;
+  if (props.match) {
+    id = props.match.params.id;
+  } else if (props.navigation) {
+    id = props.navigation.state.params.id;
+  }
+
+  if (Number(id) === currentUser.id) {
+    userBool = true;
+    id = currentUser.id;
+  } else id = user ? user.id : null;
 
   const onSubmit = async values => {
     let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'profile', 'addresses', 'portfolios']);
@@ -27,7 +40,10 @@ const UserEdit = props => {
     }
 
     try {
-      await editUser({ id: user.id, ...userValues });
+      await editUser({
+        id,
+        ...userValues
+      });
     } catch (e) {
       message.error(t('userEdit.errorMsg'));
       throw new FormError(t('userEdit.errorMsg'), e);
@@ -42,8 +58,8 @@ const UserEdit = props => {
     //   return navigation.goBack();
     // }
   };
-  console.log(props);
-  return <UserEditView onSubmit={onSubmit} {...props} />;
+
+  return <UserEditView userBool={userBool} onSubmit={onSubmit} {...props} />;
 };
 
 UserEdit.propTypes = {

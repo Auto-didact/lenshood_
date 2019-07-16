@@ -51,6 +51,7 @@ export async function seed(knex, Promise) {
       mobile: '9876543211',
       flag: 'admin',
       user_id: admin_id[0],
+      is_verified: true,
       referrer_id: admin_id[0]
     })
   );

@@ -13,7 +13,7 @@ import ReferralVerify from './containers/ReferralVerify';
 import resources from './locales';
 
 const NavLinkMyInvitesWithI18n = translate('referral')(({ t }) => (
-  <NavLink to="/invites">
+  <NavLink to="/referrals">
     <div>
       <Icon type="money-collect" />
       {t('referral:navLink')}
@@ -23,18 +23,18 @@ const NavLinkMyInvitesWithI18n = translate('referral')(({ t }) => (
 
 export default new ClientModule({
   route: [
-    <AuthRoute exact path="/invites/:id" redirectOnLoggedIn redirect="/profile" component={ReferredRedirect} />,
-    <AuthRoute exact path="/invites" redirect="/profile" role={['user', 'admin']} component={Referral} />,
+    <AuthRoute exact path="/referrals/:id" redirectOnLoggedIn redirect="/profile" component={ReferredRedirect} />,
+    <AuthRoute exact path="/referrals" redirect="/profile" role={['user', 'admin']} component={Referral} />,
     <AuthRoute
       exact
-      path="/invites/verify/:id"
+      path="/referrals/verify/:id"
       redirect="/profile"
       role={['user', 'admin']}
       component={ReferralVerify}
     />
   ],
   navItemUser: [
-    <IfLoggedIn key="/invites">
+    <IfLoggedIn key="/referrals">
       <MenuItem>
         <NavLinkMyInvitesWithI18n />
       </MenuItem>

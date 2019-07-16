@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { graphql, compose } from "react-apollo";
-import update from "immutability-helper";
+import { graphql, compose } from 'react-apollo';
+import update from 'immutability-helper';
 
-import MyListingsView from "../components/MyListingsView";
-import MY_LISTINGS_QUERY from "../graphql/MyListingsQuery.graphql";
-import TOGGLE_LISTING_STATUS from "../graphql/ToggleListingStatus.graphql";
+import MyListingsView from '../components/MyListingsView';
+import MY_LISTINGS_QUERY from '../graphql/MyListingsQuery.graphql';
+import TOGGLE_LISTING_STATUS from '../graphql/ToggleListingStatus.graphql';
 // import { ALL, ONSHELF, ONRENT } from "../constants/ListingStates";
-import DELETE_LISTING from "../graphql/DeleteListing.graphql";
-import LISTINGS_SUBSCRIPTION from "../graphql/ListingsSubscription.graphql";
-import { message } from "antd";
+import DELETE_LISTING from '../graphql/DeleteListing.graphql';
+import LISTINGS_SUBSCRIPTION from '../graphql/ListingsSubscription.graphql';
+import { message } from 'antd';
 
 const MyListings = props => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const MyListings = props => {
       message.error("Couldn't perform the action");
       throw e;
     }
-    message.warning("Listing deleted.");
+    message.warning('Listing deleted.');
   };
 
   const ToggleListingStatus = async id => {
@@ -33,16 +33,10 @@ const MyListings = props => {
       message.error("Couldn't perform the action");
       throw e;
     }
-    message.info("Success!");
+    message.info('Success!');
   };
 
-  return (
-    <MyListingsView
-      DeleteListing={DeleteListing}
-      toggle={ToggleListingStatus}
-      {...props}
-    />
-  );
+  return <MyListingsView DeleteListing={DeleteListing} toggle={ToggleListingStatus} {...props} />;
   // }
 };
 
@@ -59,8 +53,6 @@ const onAddListing = (prev, node) => {
 };
 
 const onDeleteListing = (prev, id) => {
-  console.log("prev", prev);
-  console.log("id", id);
   const index = prev.userListings.findIndex(list => list.id === id);
 
   // ignore if not found
@@ -90,11 +82,11 @@ const subscribeToListingList = subscribeToMore =>
     ) => {
       let newResult = prev;
 
-      if (mutation === "CREATED") {
+      if (mutation === 'CREATED') {
         newResult = onAddListing(prev, node);
-      } else if (mutation === "UPDATED") {
+      } else if (mutation === 'UPDATED') {
         newResult = onDeleteListing(prev, node.id);
-      } else if (mutation === "DELETED") {
+      } else if (mutation === 'DELETED') {
         newResult = onDeleteListing(prev, node.id);
       }
 
@@ -104,16 +96,7 @@ const subscribeToListingList = subscribeToMore =>
 
 export default compose(
   graphql(MY_LISTINGS_QUERY, {
-    props({
-      data: {
-        loading,
-        error,
-        userListings,
-        subscribeToMore,
-        updateQuery,
-        refetch
-      }
-    }) {
+    props({ data: { loading, error, userListings, subscribeToMore, updateQuery, refetch } }) {
       if (error) throw new Error(error);
       return { loading, userListings, subscribeToMore, updateQuery, refetch };
     }

@@ -80,15 +80,59 @@ export default class ReferralDao extends Model {
         referred_id: referredId
       })
     );
-    const ref = await returnId(
+    const flag = await returnId(knex('user_profile').where('user_id', '=', referredId));
+    if (!flag) {
+      await returnId(
+        knex('user_profile').insert({
+          user_id: referredId,
+          referrer_id: userId
+        })
+      );
+    } else {
+      await returnId(
+        knex('user_profile')
+          .where('user_id', '=', referredId)
+          .update('referrer_id', userId)
+      );
+    }
+    return res;
+  }
+
+  public async registerWithRef(userId: number, referredId: number) {
+    const res = await returnId(
       knex('user_profile').insert({
         user_id: referredId,
         referrer_id: userId
       })
     );
+    await returnId(
+      knex('referral').insert({
+        user_id: userId,
+        referred_id: referredId
+      })
+    );
     return res;
   }
 
+  public async updateReferred(userId: number, referredId: number) {
+    await returnId(
+      knex('referral')
+        .andWhere('referred_id', '=', referredId)
+        .del()
+    );
+    const res = await returnId(
+      knex('referral').insert({
+        user_id: userId,
+        referred_id: referredId
+      })
+    );
+    await returnId(
+      knex('user_profile')
+        .where('user_id', '=', referredId)
+        .update('referrer_id', userId)
+    );
+    return res;
+  }
   public async verifyReferral(userId: number, referredId: number) {
     const res = await returnId(
       knex('referral')

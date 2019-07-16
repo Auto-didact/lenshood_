@@ -6,8 +6,8 @@ const AddressCardComponent = ({ address, subTitle, index }) => {
     <div
       style={{
         backgroundColor: '#c1f7ed',
-        padding: '10% 10% 5% 10%',
-        marginBottom: '2%',
+        // padding: '10% 10% 5% 10%',
+        // marginBottom: '2%',
         height: '150px'
       }}
     >

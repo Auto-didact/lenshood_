@@ -30,11 +30,7 @@ const ListingAddView = ({ addListing, t, currentUser, users }) => {
       {/* <Link id="back-button" to="/listings">
         {t('listing.btn.back')}
       </Link> */}
-      <ListingFormComponent
-        onSubmit={onSubmit(addListing)}
-        currentUser={currentUser}
-        users={users}
-      />
+      <ListingFormComponent onSubmit={onSubmit(addListing)} currentUser={currentUser} users={users} />
       <br />
     </PageLayout>
   );

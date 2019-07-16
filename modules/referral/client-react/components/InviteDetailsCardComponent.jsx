@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Row, Col, Card, Icon, Input, message, Radio } from 'antd';
 import { Button, Form, RenderField, Alert } from '@gqlapp/look-client-react';
 import PropTypes from 'prop-types';
@@ -21,7 +21,17 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
     message.info('Copied to Clipboard!');
   }
 
-  const inviteUrl = `${window.location}/${username}`;
+  const [inviteUrl, setinviteUrl] = useState(`/${username}`);
+
+  const [flag, setflag] = useState(false);
+
+  const [inputForm, setInputForm] = useState('email');
+
+  useEffect(() => {
+    setflag(true);
+    setinviteUrl(`${global.window.location}/${username}`);
+  }, []);
+
   const whatsappMessage = `Earn cash when you sign-up using the following link: ${inviteUrl} Use the referral code - ${username} while signing up to earn cash.`;
   const twitterMessage = {
     text: `Use the referral code - ${username} while signing up to earn cash.`,
@@ -29,7 +39,6 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
     link: inviteUrl
   };
 
-  const [inputForm, setInputForm] = useState('email');
   function handleChangeInput(e) {
     setInputForm(e.target.value);
   }
@@ -54,7 +63,7 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
         </Col>
         <Col sm={4} xs={7}>
           <div>
-            {document.queryCommandSupported('copy') && (
+            {flag && document.queryCommandSupported('copy') && (
               <div>
                 <Button onClick={copyToClipboard} color="primary" block size="lg">
                   Copy

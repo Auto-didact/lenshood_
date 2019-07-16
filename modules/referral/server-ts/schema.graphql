@@ -13,7 +13,8 @@ extend type Query {
 }
 
 extend type Mutation {
-  addReferred(input: AddReferralInput!): Referral
+  addReferred(input: AddReferralInput!): User
+  updateReferred(input: AddReferralInput!): User
   verifyReferral(input: verifyReferralInput!): Boolean
   sendRefEmail(input: sendRefEmailInput!): Boolean
 }

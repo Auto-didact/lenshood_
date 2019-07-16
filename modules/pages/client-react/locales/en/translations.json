@@ -501,10 +501,9 @@
           "l1": "Happy clicking! Our hustler will meet you once the rental period is over to collect the gear."
         }
       }
-      }
-    
+    }
   },
-  "lending":{
+  "lending": {
     "navlink": {
       "lending": "/renting"
     },
@@ -516,7 +515,8 @@
         "active": "false",
         "content": {
           "p1": "LensHood provides a safe and secure way to earn money from the equipments you own. All our users are thoroughly verified and our insurence policy will take care of the rest."
-       } },
+        }
+      },
       "p1": {
         "key": 5,
         "text": "1. List",
@@ -556,7 +556,8 @@
         "content": {
           "l1": "As soon as the order is done,  our hustlers will return your gear back to you."
         }
-      }}
+      }
+    }
   },
   "privacy_rules": {
     "navlink": {
@@ -600,6 +601,46 @@
           "head": "Information on how you use your phone",
           "l1": "This might include your mobile network, IP address or operating system and your phone settings."
         }
+      }
+    }
+  },
+  "featuredListing": {
+    "title": "Edit Listing",
+    "meta": "An Edit Listing page example",
+    "loadMsg": "Loading...",
+    "noListingsMsg": "There are no featured listings yet.",
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete",
+      "back": "Back",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "label": {
+      "edit": "Edit",
+      "create": "Create",
+      "listing": "Listing"
+    },
+    "field": {
+      "username": "UserName",
+      "gearCategory": "Gear Category",
+      "gearSubcategory": "Gear Sub-Category",
+      "listingDamages": "Damages",
+      "description": "Description",
+      "status": "Status",
+      "isActive": "Active",
+      "gearComponents": "Gear Components",
+      "listingDetail": {
+        "condition": "Condition",
+        "repairHistory": "Repair History",
+        "age": "Age"
+      },
+      "listingRental": {
+        "perDay": "Rent per Day",
+        "perWeek": "Rent per Week",
+        "perMonth": "Rent per Month",
+        "replacementValue": "Replacement Value"
       }
     }
   }
