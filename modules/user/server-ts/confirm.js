@@ -1,18 +1,20 @@
-import jwt from 'jsonwebtoken';
-import User from './sql';
-import settings from '../../../settings';
+import jwt from "jsonwebtoken";
+import User from "./sql";
+import settings from "../../../settings";
+import { message } from "antd";
 
 export default async (req, res, next) => {
   try {
-    const token = Buffer.from(req.params.token, 'base64').toString();
+    const token = Buffer.from(req.params.token, "base64").toString();
     const result = jwt.verify(token, settings.auth.secret);
     await User.updateActive(result.identity.id, true);
     await User.updateUserVerification(result.identity.id, {
       is_email_verified: true
     });
-    res.redirect('/login');
+    message.info("Your Email has been confirmed, Please login to Continue...");
+    res.redirect("/login");
   } catch (e) {
-    res.send('error');
+    res.send("error");
     next(e);
   }
 };
