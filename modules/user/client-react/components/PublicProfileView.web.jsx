@@ -4,8 +4,11 @@ import Helmet from 'react-helmet';
 
 import { translate } from '@gqlapp/i18n-client-react';
 import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import TOGGLE_ENDORSE from '@gqlapp/listing-client-react/graphql/ToggleEndorse.graphql';
+import TOGGLE_FOLLOW from '@gqlapp/listing-client-react/graphql/ToggleFollow.graphql';
 // To Do Abstract Out
-import { Row, Col, Divider, Tabs } from 'antd';
+import { Row, Col, Divider, Tabs, Button, message } from 'antd';
+import { withApollo } from 'react-apollo';
 
 import PublicProfileHeadComponent from './components/PublicProfileHeadComponent';
 import PublicUsersCardComponent from './components/PublicUsersCardComponent';
@@ -16,15 +19,35 @@ import settings from '../../../../settings';
 const { TabPane } = Tabs;
 
 class PublicProfileView extends React.Component {
-  isCurrentUser = () => {
+  state = {
+    currentUserId: parseInt(this.props.currentUser.id)
+  };
+
+  toggleEndorse = async () => {
+    let result = await this.props.client.mutate({
+      mutation: TOGGLE_ENDORSE,
+      variables: { endorsee: parseInt(this.getUserId()), endorser: this.state.currentUserId }
+    });
+    message.info('Endorse Count is ' + result.data.toggleEndorse.endorsecount);
+  };
+
+  toggleFollow = async () => {
+    let result = await this.props.client.mutate({
+      mutation: TOGGLE_FOLLOW,
+      variables: { u_Id: parseInt(this.getUserId()), f_Id: this.state.currentUserId }
+    });
+    message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
+  };
+  getUserId = () => {
     let id = 0;
     if (this.props.match) {
       id = Number(this.props.match.params.id);
     } else if (this.props.navigation) {
       id = Number(this.props.navigation.state.params.id);
     }
-    return this.props.currentUser && id === this.props.currentUser.id;
+    return id;
   };
+  isCurrentUser = () => this.props.currentUser && this.getUserId() === this.props.currentUser.id;
   userCardData = () => {
     const { user } = this.props;
     const { t } = this.props;
@@ -148,6 +171,25 @@ class PublicProfileView extends React.Component {
                   />
                 </div>
               </Col>
+              <Col
+                lg={{ span: 6 }}
+                md={{ span: 24 }}
+                xs={{ span: 24 }}
+                sm={{ span: 8 }}
+                style={{ marginTop: '67px', maxWidth: '80px' }}
+              >
+                <div align="center">
+                  <Button type="primary" onClick={this.toggleFollow} block>
+                    Follow
+                  </Button>
+                  <br />
+                  <br />
+                  <Button type="primary" onClick={this.toggleEndorse} block>
+                    Endorse
+                  </Button>
+                  <br />
+                </div>
+              </Col>
               <Col xs={{ span: 24 }} lg={{ span: 9 }}>
                 <Row gutter={10} type="flex" justify="space-around" align="middle">
                   {/*Verification
@@ -209,6 +251,7 @@ PublicProfileView.propTypes = {
   currentUser: PropTypes.object,
   match: PropTypes.object,
   navigation: PropTypes.object,
+  client: PropTypes.object,
   t: PropTypes.func
 };
-export default translate('user')(PublicProfileView);
+export default translate('user')(withApollo(PublicProfileView));
