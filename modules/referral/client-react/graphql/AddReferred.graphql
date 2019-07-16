@@ -1,7 +1,7 @@
-#import "./Referral.graphql"
+#import "./ReferralUserInfo.graphql"
 
 mutation addReferred($input: AddReferralInput!) {
   addReferred(input: $input) {
-    ...ReferralInfo
+    ...ReferralUserInfo
   }
 }

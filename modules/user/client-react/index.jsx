@@ -5,7 +5,7 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { MenuItem } from '@gqlapp/look-client-react';
 import ClientModule from '@gqlapp/module-client-react';
 
-import { Icon, Tabs, message } from "antd";
+import { Icon, Tabs, message } from 'antd';
 
 import resolvers from './resolvers';
 import resources from './locales';
@@ -45,7 +45,7 @@ const LogoutLink = withRouter(
             message.error("Couldn't LogOut!");
             throw e;
           }
-          message.info('Logged Out!');
+          message.info('Successfully logged out!');
           history.push('/');
         })();
       }}
@@ -81,14 +81,8 @@ const NavLinkLoginWithI18n = translate('user')(({ t }) => (
 
 export default new ClientModule({
   route: [
-    <Route exact path="/public-profile/:id" component={PublicProfile} />,
-    // <AuthRoute
-    //   exact
-    //   path="/user-profile/:id"
-    //   role={["user", "admin"]}
-    //   redirect="/login"
-    //   component={PublicProfile}
-    // />,
+    // <Route exact path="/public-profile/:id" component={PublicProfile} />,
+    <AuthRoute exact path="/public-profile/:id" role={['user', 'admin']} redirect="/login" component={PublicProfile} />,
     <AuthRoute exact path="/profile" role={['user', 'admin']} redirect="/login" component={ProfileView} />,
     <AuthRoute exact path="/users" redirect="/profile" role="admin" component={Users} />,
     <AuthRoute exact path="/users/new" role={['admin']} component={UserAdd} />,

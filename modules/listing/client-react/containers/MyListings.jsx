@@ -53,8 +53,6 @@ const onAddListing = (prev, node) => {
 };
 
 const onDeleteListing = (prev, id) => {
-  console.log('prev', prev);
-  console.log('id', id);
   const index = prev.userListings.findIndex(list => list.id === id);
 
   // ignore if not found

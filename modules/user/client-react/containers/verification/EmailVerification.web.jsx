@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
-import { Alert } from 'antd';
-import { Loader } from '@gqlapp/look-client-react';
-import VerificationModalComponent from '../../components/verification/VerificationModalComponent';
-import EmailVerificationFormComponent from '../../components/verification/EmailVerificationFormComponent';
-import Email from '../../components/verification/Email';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { graphql } from "react-apollo";
+import { message } from "antd";
+import { Loader } from "@gqlapp/look-client-react";
+import VerificationModalComponent from "../../components/verification/VerificationModalComponent";
+import EmailVerificationFormComponent from "../../components/verification/EmailVerificationFormComponent";
+import Email from "../../components/verification/Email";
 
-import ADD_Email from '../../graphql/AddEmail.graphql';
+import ADD_Email from "../../graphql/AddEmail.graphql";
 
 class EmailAdd extends Component {
   constructor(props) {
@@ -35,6 +35,9 @@ class EmailAdd extends Component {
       // To Do change email values in set email, uncomment below line
       // const emailData = await addEmail(values.email, values.otp);
       this.setEmail(values.email);
+      message.info(
+        "Verification email has been sent. Please check your inbox."
+      );
     };
   }
 
@@ -44,21 +47,27 @@ class EmailAdd extends Component {
     this.setState({ loading: false });
   }
 
-  // async onSubmit(values, addEmail) {
-  //   console.log(addEmail);
-  //   // addEmail(values.emailId, values.dob);
-  // }
-
   render() {
     return (
-      <VerificationModalComponent button="Email" title="Email Verification" vStatus={this.state.vStatus}>
-        {this.state.loading ? <Loader text="Loading..." /> : ''}
+      <VerificationModalComponent
+        button="Email"
+        title="Email Verification"
+        vStatus={this.state.vStatus}
+      >
+        {this.state.loading ? <Loader text="Loading..." /> : ""}
         {this.state.form && !this.state.sent ? (
-          <EmailVerificationFormComponent otp={this.state.otp} onSubmit={this.onChange} />
+          <EmailVerificationFormComponent
+            otp={this.state.otp}
+            onSubmit={this.onChange}
+          />
         ) : (
-          ''
+          ""
         )}
-        {this.state.vStatus ? <Email email={this.state.email} sentStatus={this.state.sent} /> : ''}
+        {this.state.vStatus ? (
+          <Email email={this.state.email} sentStatus={this.state.sent} />
+        ) : (
+          ""
+        )}
       </VerificationModalComponent>
     );
   }

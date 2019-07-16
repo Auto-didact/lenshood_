@@ -63,7 +63,7 @@ export default new ClientModule({
 
     // Components
     <Route exact path="/listing-detail/:id" component={ListingDetail} />,
-    <Route exact path="/my-listings" component={MyListings} />,
+    <AuthRoute redirect="/profile" role={['user', 'admin']} exact path="/my-listings" component={MyListings} />,
     <Route exact path="/list-your-gear" component={ListYourGearOwner} />,
     <Route exact path="/list-your-gear2" component={ListYourGearProduct} />,
     <Route exact path="/list-your-gear3" component={ListYourGearRental} />,

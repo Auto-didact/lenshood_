@@ -1,6 +1,6 @@
-import React from 'react';
-import { Modal, Badge, Card } from 'antd';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Modal, Badge, Card } from "antd";
+import { Link } from "react-router-dom";
 
 export default class ReferModalComponent extends React.Component {
   render() {
@@ -17,27 +17,34 @@ export default class ReferModalComponent extends React.Component {
             <strong>Referral Details</strong>
           </h1>
           <p className="justifyAlign">
-            When your friends register with LensHood they will appear here so you can track your earnings
+            When your friends register with LensHood they will appear here so
+            you can track your earnings
           </p>
           <p className="marginB20">
             {this.props.referrals
               ? this.props.referrals.map(item => (
                   <div key={item.id}>
                     <Badge
-                      status={item.isVerified ? 'success' : 'error'}
+                      status={item.isVerified ? "success" : "error"}
                       text={
                         <span>
-                          <strong>{`${item.referredUser.username}`}</strong>{' '}
+                          <strong>{`${item.referredUser.username}`}</strong>{" "}
                           {item.referredUser.profile &&
                           item.referredUser.profile.firstName &&
                           item.referredUser.profile.lastName
-                            ? `(${item.referredUser.profile.firstName} ${item.referredUser.profile.lastName})`
-                            : '(Name not provided yet)'}
+                            ? `(${item.referredUser.profile.firstName} ${
+                                item.referredUser.profile.lastName
+                              })`
+                            : "(Name not provided yet)"}
                           <span className="rightfloat">
                             {item.isVerified ? (
-                              'verified'
+                              "verified"
                             ) : (
-                              <Link to={`/invites/verify/${item.referredUser.id}`}>verify</Link>
+                              <Link
+                                to={`/referrals/verify/${item.referredUser.id}`}
+                              >
+                                verify
+                              </Link>
                             )}
                           </span>
                         </span>
@@ -50,7 +57,7 @@ export default class ReferModalComponent extends React.Component {
           </p>
           <hr className="marginB20" />
           <h3 className="rightfloat marginB20">
-            Cash earned:{' '}
+            Cash earned:{" "}
             <strong>
               &#8377;
               {this.props.cashEarned}
