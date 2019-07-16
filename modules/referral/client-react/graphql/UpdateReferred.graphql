@@ -1,0 +1,7 @@
+#import "./ReferralUserInfo.graphql"
+
+mutation updateReferred($input: AddReferralInput!) {
+  updateReferred(input: $input) {
+    ...ReferralUserInfo
+  }
+}

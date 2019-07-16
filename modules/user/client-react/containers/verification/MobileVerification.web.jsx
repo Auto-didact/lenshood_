@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
-import { Alert, Button } from 'antd';
-import { Loader } from '@gqlapp/look-client-react';
-import VerificationModalComponent from '../../components/verification/VerificationModalComponent';
-import MobileVerificationFormComponent from '../../components/verification/MobileVerificationFormComponent';
-import Mobile from '../../components/verification/Mobile';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { graphql } from "react-apollo";
+import { Alert, Button, message } from "antd";
+import { Loader } from "@gqlapp/look-client-react";
+import VerificationModalComponent from "../../components/verification/VerificationModalComponent";
+import MobileVerificationFormComponent from "../../components/verification/MobileVerificationFormComponent";
+import Mobile from "../../components/verification/Mobile";
 
-import ADD_Mobile from '../../graphql/AddMobile.graphql';
+import ADD_Mobile from "../../graphql/AddMobile.graphql";
 
 class MobileAdd extends Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class MobileAdd extends Component {
 
   setMobile(mobile) {
     this.setState({ mobile: mobile });
+    message.info("Mobile number has been verified.");
   }
 
   toggleLoading() {
@@ -39,10 +40,11 @@ class MobileAdd extends Component {
     return async values => {
       // To Do call mobile Data check if verified or not
       const mobileData = await addMobile(values.mobile, values.otp);
-      if (mobileData.otpSent && typeof values.otp === 'undefined') {
+      if (mobileData.otpSent && typeof values.otp === "undefined") {
         this.setState({ otp: true, mobileNo: values.mobile });
       } else if (!mobileData.otpSent) {
-        console.log('unable to send otp!');
+        message.info("Unable to send OTP.");
+        console.log("unable to send otp!");
       } else {
         // set error or verified
         if (mobileData.error && !mobileData.isVerified) {
@@ -61,7 +63,7 @@ class MobileAdd extends Component {
   }
 
   async onChange(values) {
-    console.log('submit clicked!');
+    console.log("submit clicked!");
     // fix this
     this.setState({ loading: true });
     await this.onSubmit(this.props.addMobile)(values);
@@ -75,13 +77,36 @@ class MobileAdd extends Component {
 
   render() {
     return (
-      <VerificationModalComponent button="Mobile" title="Mobile Verification" vStatus={this.state.vStatus}>
-        {this.state.loading ? <Loader text="Loading..." /> : ''}
-        {this.state.otp ? <Alert message={`An OTP has been sent to ${this.state.mobileNo}`} /> : ''}
-        {this.state.error ? <Alert type="error" message={`Error Occurred: `} description={this.state.error} /> : ''}
-        {this.state.form ? <MobileVerificationFormComponent otp={this.state.otp} onSubmit={this.onChange} /> : ''}
+      <VerificationModalComponent
+        button="Mobile"
+        title="Mobile Verification"
+        vStatus={this.state.vStatus}
+      >
+        {this.state.loading ? <Loader text="Loading..." /> : ""}
+        {this.state.otp ? (
+          <Alert message={`An OTP has been sent to ${this.state.mobileNo}`} />
+        ) : (
+          ""
+        )}
+        {this.state.error ? (
+          <Alert
+            type="error"
+            message={`Error Occurred: `}
+            description={this.state.error}
+          />
+        ) : (
+          ""
+        )}
+        {this.state.form ? (
+          <MobileVerificationFormComponent
+            otp={this.state.otp}
+            onSubmit={this.onChange}
+          />
+        ) : (
+          ""
+        )}
 
-        {this.state.vStatus ? <Mobile mobile={this.state.mobile} /> : ''}
+        {this.state.vStatus ? <Mobile mobile={this.state.mobile} /> : ""}
       </VerificationModalComponent>
     );
   }
