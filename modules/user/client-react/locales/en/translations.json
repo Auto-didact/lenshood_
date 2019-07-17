@@ -86,7 +86,8 @@
           "city": "City",
           "pinCode": "Pin Code",
           "state": "State",
-          "streetAddress": "Street Address"
+          "streetAddress": "Street Address",
+          "primeAddress": "Prime Address"
         },
         "portfolios": {
           "title": "Portfolios",

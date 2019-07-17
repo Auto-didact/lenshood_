@@ -1,7 +1,7 @@
-import React from "react";
-import { Row, Col, Button, Card } from "antd";
-import ReferModalComponent from "./ReferModalComponent";
-import ReferralInputComponent from "./ReferralInputComponent";
+import React from 'react';
+import { Row, Col, Button, Card } from 'antd';
+import ReferModalComponent from './ReferModalComponent';
+import ReferralInputComponent from './ReferralInputComponent';
 
 export default class ReferDetailsCardComponent extends React.Component {
   state = {
@@ -27,18 +27,13 @@ export default class ReferDetailsCardComponent extends React.Component {
             <strong>Your Referrals</strong>
           </h1>
           <h3 className="marginB20">
-            Cash earned{" "}
+            Cash earned{' '}
             <strong className="colorFloat">
               &#8377;
               {this.state.cashEarned}
             </strong>
           </h3>
-          <Button
-            onClick={() => this.setModal1Visible(true)}
-            type="primary"
-            ghost
-            block
-          >
+          <Button onClick={() => this.setModal1Visible(true)} type="primary" ghost block>
             View referral details
           </Button>
           <ReferModalComponent
@@ -49,9 +44,9 @@ export default class ReferDetailsCardComponent extends React.Component {
           />
         </Card>
         <Card className="boxShadowTheme borderRadius9 marginB20">
-          {" "}
+          {' '}
           <h3>
-            Credit Available{" "}
+            Credit Available{' '}
             <strong className="colorFloat">
               &#8377;
               {this.state.totalCredit}
@@ -65,10 +60,8 @@ export default class ReferDetailsCardComponent extends React.Component {
           {referralUser.profile.isVerified ? (
             <div>
               <h3>
-                Your account has been verified by{" "}
-                <span className="mainColor">
-                  {referralUser.profile.referredBy.username}
-                </span>
+                Your account has been verified by{' '}
+                <span className="mainColor">{referralUser.profile.referredBy.username}</span>
               </h3>
             </div>
           ) : (
@@ -76,30 +69,20 @@ export default class ReferDetailsCardComponent extends React.Component {
               {referralUser.profile.referredBy ? (
                 <div>
                   <h3>
-                    <span className="mainColor">
-                      {referralUser.profile.referredBy.username}
-                    </span>{" "}
-                    has not yet verified your account.
+                    <span className="mainColor">{referralUser.profile.referredBy.username}</span> has not yet verified
+                    your account.
                   </h3>
-                  <Button onClick={() => this.setModal2Visible(true)}>
-                    Change referral
-                  </Button>
+                  <Button onClick={() => this.setModal2Visible(true)}>Change referral</Button>
                 </div>
               ) : (
                 <div>
                   <h3>Your Acoount has not been verified.</h3>
-                  <Button onClick={() => this.setModal2Visible(true)}>
-                    Add referral
-                  </Button>
+                  <Button onClick={() => this.setModal2Visible(true)}>Add referral</Button>
                 </div>
               )}
               <ReferralInputComponent
                 modal2Visible={this.state.modal2Visible}
-                prevReferral={
-                  referralUser.profile.referredBy
-                    ? referralUser.profile.referredBy.username
-                    : null
-                }
+                prevReferral={referralUser.profile.referredBy ? referralUser.profile.referredBy.username : null}
                 refUsername={referralUser.username}
                 referredId={referralUser.id}
                 setModal2Visible={this.setModal2Visible.bind(this)}

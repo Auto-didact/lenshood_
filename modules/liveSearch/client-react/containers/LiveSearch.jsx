@@ -41,7 +41,7 @@ const LiveSearch = props => {
       ]}
     />
   );
-  
+
   return (
     <PageLayout>
       {renderMetaData()}
@@ -71,4 +71,4 @@ export default compose(
   withOrderByUpdating,
   withFilterUpdating,
   withSearchItemAdd
-)(translate("liveSearch")(LiveSearch));
+)(translate('liveSearch')(LiveSearch));

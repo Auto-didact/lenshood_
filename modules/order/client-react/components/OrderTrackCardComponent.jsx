@@ -29,7 +29,7 @@ export default class OrderTrackCardComponent extends React.Component {
         <Steps direction="vertical" size="small" current={this.props.completed} className="TrackSteps">
           <Step
             title={
-              <p className="font12">Order to be Confermed {this.dateCheck(0, this.props.status.date.confirm, 0)}</p>
+              <p className="font12">Order to be Confirmed {this.dateCheck(0, this.props.status.date.confirm, 0)}</p>
             }
             icon={this.IconCheck(0)}
           />

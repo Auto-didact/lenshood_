@@ -19,7 +19,7 @@ export const onAppCreate = modules => (ref.modules = modules);
 class NavBar extends React.Component {
   state = {
     current: '/',
-    width: 0,
+    width: 710,
     height: 0,
     show1:
       this.props.location.pathname == '/about-us' ||
@@ -103,10 +103,31 @@ class NavBar extends React.Component {
     </Menu>
   );
 
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
   render() {
+    let userItems = [];
+    let userItems2 = [];
+    ref.modules.navItemsUser.forEach((item, index) => {
+      index >= ref.modules.navItemsUser.length - 3 ? userItems.push(item) : null;
+    });
+    ref.modules.navItemsUser.forEach((item, index) => {
+      index < ref.modules.navItemsUser.length - 3 ? userItems2.push(item) : null;
+    });
+
     return (
-      <div>
-        <Row gutter={0} className="screen_width_more_than_800">
+      <div className="navbar">
+        <Row gutter={0} className="screen_width_more_than_700">
           <Form layout="inline">
             <Col span={14}>
               <Col span={8}>
@@ -174,102 +195,205 @@ class NavBar extends React.Component {
           </Form>
         </Row>
 
-        {/*Render This if screen width less than 800*/}
+        {/*Render This if screen width less than 700*/}
 
-        <Row id="outer-container" className="screen_width_less_than_800">
-          {/* <Form layout="inline"> */}
-          <div className="left">
-            <NavLink to="/" className="nav-link">
-              <img src={require('../../logo/Logo2.png')} height="40" width="40" />
-            </NavLink>
-          </div>
-          {/* <SearchNavbar history={this.props.history} /> */}
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.props.location.pathname]}
-            mode="horizontal"
-            className="right line_height60"
-          >
-            <Icon type="menu" onClick={this.showDrawer} className="hamburg" />
-            {/*ref.modules.navItemsRight*/}
-          </Menu>
-          <Drawer
-            title="Lenshood"
-            placement="right"
-            closable={true}
-            onClose={this.onClose}
-            visible={this.state.visible}
-          >
-            <Menu mode="inline" selectedKeys={[this.props.location.pathname]}>
-              <IfLoggedIn>
-                <MenuItem className="forUser">
-                  <UserAvatar className="avatar" />
-
-                  <Menu mode="inline" className="userItems">
-                    {ref.modules.navItemsUser}
-                  </Menu>
-                </MenuItem>
-              </IfLoggedIn>
-              {ref.modules.navItemsRight}
-              <Menu.Item className="about" key="about">
-                <a className="nav-link-drop" onClick={() => this.toggle(1)}>
-                  <div>
-                    About{' '}
-                    {this.state.show1 ? (
-                      <Icon type="caret-up" theme="filled" />
-                    ) : (
-                      <Icon type="caret-down" theme="filled" />
-                    )}
-                  </div>
-                </a>
-              </Menu.Item>
-              {this.state.show1 ? this.menuList : null}
-
-              {__DEV__ ? (
-                <Menu className="light_font" mode="inline">
-                  <Menu.Item className="about bold_font" key="dev">
-                    <a className="nav-link-drop" onClick={() => this.toggle(2)}>
-                      <div>
-                        Dev{' '}
-                        {this.state.show2 ? (
-                          <Icon type="caret-up" theme="filled" />
-                        ) : (
-                          <Icon type="caret-down" theme="filled" />
-                        )}
-                      </div>
-                    </a>
-                  </Menu.Item>
-
-                  {this.state.show2 ? ref.modules.navItemsTest : null}
-                  {this.state.show2 ? (
-                    <MenuItem key="garphql">
-                      <a href="/graphiql">GraphiQL</a>
-                    </MenuItem>
-                  ) : null}
-                </Menu>
-              ) : null}
-
-              <IfLoggedIn role="admin">
-                <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
-                  <Menu.Item className="about bold_font" key="admin">
-                    <a className="nav-link-drop" onClick={() => this.toggle(3)}>
-                      <div>
-                        Admin{' '}
-                        {this.state.show3 ? (
-                          <Icon type="caret-up" theme="filled" />
-                        ) : (
-                          <Icon type="caret-down" theme="filled" />
-                        )}
-                      </div>
-                    </a>
-                  </Menu.Item>
-                  {this.state.show3 ? ref.modules.navItemsAdmin : null}
-                </Menu>
-              </IfLoggedIn>
+        {!__DEV__ && (
+          <Row id="outer-container" className="screen_width_less_than_700">
+            {/* <Form layout="inline"> */}
+            <div className="left">
+              <NavLink to="/" className="nav-link">
+                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+              </NavLink>
+            </div>
+            {/* <SearchNavbar history={this.props.history} /> */}
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.props.location.pathname]}
+              mode="horizontal"
+              className="right line_height60"
+            >
+              <Icon type="menu" onClick={this.showDrawer} className="hamburg" />
+              {/*ref.modules.navItemsRight*/}
             </Menu>
-          </Drawer>
-          {/* </Form> */}
-        </Row>
+            <Drawer
+              title="Lenshood"
+              placement="right"
+              closable={true}
+              onClose={this.onClose}
+              visible={this.state.visible}
+            >
+              <Menu mode="inline" selectedKeys={[this.props.location.pathname]}>
+                <IfLoggedIn>
+                  <MenuItem className="forUser">
+                    <UserAvatar className="avatar" />
+
+                    <Menu mode="inline" className="userItems" selectedKeys={[this.props.location.pathname]}>
+                      {userItems}
+                    </Menu>
+                  </MenuItem>
+                </IfLoggedIn>
+
+                {ref.modules.navItemsRight}
+                {userItems2}
+                <Menu.Item className="about" key="about">
+                  <a className="nav-link-drop" onClick={() => this.toggle(1)}>
+                    <div>
+                      About{' '}
+                      {this.state.show1 ? (
+                        <Icon type="caret-up" theme="filled" />
+                      ) : (
+                        <Icon type="caret-down" theme="filled" />
+                      )}
+                    </div>
+                  </a>
+                </Menu.Item>
+                {this.state.show1 ? this.menuList : null}
+
+                {__DEV__ ? (
+                  <Menu className="light_font" mode="inline">
+                    <Menu.Item className="about bold_font" key="dev">
+                      <a className="nav-link-drop" onClick={() => this.toggle(2)}>
+                        <div>
+                          Dev{' '}
+                          {this.state.show2 ? (
+                            <Icon type="caret-up" theme="filled" />
+                          ) : (
+                            <Icon type="caret-down" theme="filled" />
+                          )}
+                        </div>
+                      </a>
+                    </Menu.Item>
+
+                    {this.state.show2 ? ref.modules.navItemsTest : null}
+                    {this.state.show2 ? (
+                      <MenuItem key="garphql">
+                        <a href="/graphiql">GraphiQL</a>
+                      </MenuItem>
+                    ) : null}
+                  </Menu>
+                ) : null}
+
+                <IfLoggedIn role="admin">
+                  <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
+                    <Menu.Item className="about bold_font" key="admin">
+                      <a className="nav-link-drop" onClick={() => this.toggle(3)}>
+                        <div>
+                          Admin{' '}
+                          {this.state.show3 ? (
+                            <Icon type="caret-up" theme="filled" />
+                          ) : (
+                            <Icon type="caret-down" theme="filled" />
+                          )}
+                        </div>
+                      </a>
+                    </Menu.Item>
+                    {this.state.show3 ? ref.modules.navItemsAdmin : null}
+                  </Menu>
+                </IfLoggedIn>
+              </Menu>
+            </Drawer>
+            {/* </Form> */}
+          </Row>
+        )}
+        {/*---------For Dev Version--------------*/}
+        {__DEV__ && this.state.width < 700 && (
+          <Row id="outer-container" className="screen_width_less_than_700">
+            {/* <Form layout="inline"> */}
+            <div className="left">
+              <NavLink to="/" className="nav-link">
+                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+              </NavLink>
+            </div>
+            {/* <SearchNavbar history={this.props.history} /> */}
+            <Menu
+              onClick={this.handleClick}
+              selectedKeys={[this.props.location.pathname]}
+              mode="horizontal"
+              className="right line_height60"
+            >
+              <Icon type="menu" onClick={this.showDrawer} className="hamburg" />
+              {/*ref.modules.navItemsRight*/}
+            </Menu>
+            <Drawer
+              title="Lenshood"
+              placement="right"
+              closable={true}
+              onClose={this.onClose}
+              visible={this.state.visible}
+            >
+              <Menu mode="inline" selectedKeys={[this.props.location.pathname]}>
+                <IfLoggedIn>
+                  <MenuItem className="forUser">
+                    <UserAvatar className="avatar" />
+
+                    <Menu mode="inline" className="userItems" selectedKeys={[this.props.location.pathname]}>
+                      {userItems}
+                    </Menu>
+                  </MenuItem>
+                </IfLoggedIn>
+                {userItems2}
+                {ref.modules.navItemsRight}
+
+                <Menu.Item className="about" key="about">
+                  <a className="nav-link-drop" onClick={() => this.toggle(1)}>
+                    <div>
+                      About{' '}
+                      {this.state.show1 ? (
+                        <Icon type="caret-up" theme="filled" />
+                      ) : (
+                        <Icon type="caret-down" theme="filled" />
+                      )}
+                    </div>
+                  </a>
+                </Menu.Item>
+                {this.state.show1 ? this.menuList : null}
+
+                {__DEV__ ? (
+                  <Menu className="light_font" mode="inline">
+                    <Menu.Item className="about bold_font" key="dev">
+                      <a className="nav-link-drop" onClick={() => this.toggle(2)}>
+                        <div>
+                          Dev{' '}
+                          {this.state.show2 ? (
+                            <Icon type="caret-up" theme="filled" />
+                          ) : (
+                            <Icon type="caret-down" theme="filled" />
+                          )}
+                        </div>
+                      </a>
+                    </Menu.Item>
+
+                    {this.state.show2 ? ref.modules.navItemsTest : null}
+                    {this.state.show2 ? (
+                      <MenuItem key="garphql">
+                        <a href="/graphiql">GraphiQL</a>
+                      </MenuItem>
+                    ) : null}
+                  </Menu>
+                ) : null}
+
+                <IfLoggedIn role="admin">
+                  <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
+                    <Menu.Item className="about bold_font" key="admin">
+                      <a className="nav-link-drop" onClick={() => this.toggle(3)}>
+                        <div>
+                          Admin{' '}
+                          {this.state.show3 ? (
+                            <Icon type="caret-up" theme="filled" />
+                          ) : (
+                            <Icon type="caret-down" theme="filled" />
+                          )}
+                        </div>
+                      </a>
+                    </Menu.Item>
+                    {this.state.show3 ? ref.modules.navItemsAdmin : null}
+                  </Menu>
+                </IfLoggedIn>
+              </Menu>
+            </Drawer>
+            {/* </Form> */}
+          </Row>
+        )}
       </div>
     );
   }

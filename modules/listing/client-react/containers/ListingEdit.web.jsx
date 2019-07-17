@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 
-import { message } from "antd";
+import { message } from 'antd';
 
-import ListingEditView from "../components/ListingEditView";
+import ListingEditView from '../components/ListingEditView';
 
 import LISTING_QUERY from '../graphql/ListingQuery.graphql';
 import EDIT_LISTING from '../graphql/EditListing.graphql';
@@ -123,7 +123,7 @@ export default compose(
             input: removeTypename(values)
           }
         });
-        message.info("Changes Saved.");
+        message.info('Changes Saved.');
         if (history) {
           return history.push('/listings');
         }

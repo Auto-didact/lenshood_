@@ -10,6 +10,8 @@ import resources from './locales';
 
 export default new ClientModule({
   route: [
+    <Route exact path="/featured-listing" component={Static} />,
+    <Route exact path="/featured-users" component={Static} />,
     <Route exact path="/mission" component={Static} />,
     <Route exact path="/about-us" component={Static} />,
     <Route exact path="/terms-of-service" component={Static} />,
