@@ -3,6 +3,7 @@ import { Row, Col, Rate, Button, Card, Avatar, message } from 'antd';
 import { withApollo } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { CardText } from '@gqlapp/look-client-react';
+import CURRENT_USER_QUERY from '@gqlapp/user-client-react/graphql/CurrentUserId.graphql';
 import { ImgUser } from '../../constants/DefaultImages';
 // import '../resources/listingCatalogue.css';
 import TOGGLE_ENDORSE from '../../graphql/ToggleEndorse.graphql';
@@ -21,6 +22,7 @@ class UserCardComponent extends Component {
   };
 
   componentWillMount = async () => {
+    await this.current_user();
     await this.isEndorsedF();
     await this.isFollowF();
   };
@@ -59,9 +61,15 @@ class UserCardComponent extends Component {
     message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
   };
 
+  current_user = async () => {
+    let result = await this.props.client.query({
+      query: CURRENT_USER_QUERY
+    });
+    this.setState({ currentUserId: parseInt(result.data.currentUser.id) });
+  };
+
   render() {
     let seller = this.props.seller;
-    console.log(seller);
     const portfolios = this.props.seller && this.props.seller.portfolios;
     const firstName = seller && seller.profile && seller.profile.firstName;
     const lastName = seller && seller.profile && seller.profile.lastName;

@@ -3,7 +3,7 @@ import React from 'react';
 
 // Apollo
 import { graphql, compose } from 'react-apollo';
-import CURRENT_USER_ID from '@gqlapp/user-client-react/graphql/CurrentUserId.graphql';
+import CURRENT_USER_ID from '@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql';
 
 // Components
 import ProfileView from '../components/ProfileView';

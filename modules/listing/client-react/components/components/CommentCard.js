@@ -254,8 +254,8 @@ class CommentCard extends Component {
         datetime={
           <div>
             <Rate disabled defaultValue={reviews.rating} className="font10 mainColor" />
-            <Tooltip title={moment(parseInt(reviews.createdAt)).format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{moment(parseInt(reviews.createdAt)).fromNow()}</span>
+            <Tooltip title={moment(reviews.createdAt).format('YYYY-MM-DD HH:mm:ss')}>
+              <span>{moment(reviews.createdAt).fromNow()}</span>
             </Tooltip>
           </div>
         }
