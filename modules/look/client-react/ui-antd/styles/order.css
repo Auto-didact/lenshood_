@@ -207,9 +207,7 @@
 }
 
 .orderImage {
-  width: 100%;
-  vertical-align: center;
-  /* padding-right: 15px; */
+  height: 100%;
 }
 
 .cartSum {
