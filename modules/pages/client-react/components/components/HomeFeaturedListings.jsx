@@ -6,7 +6,7 @@ const { TabPane } = Tabs;
 
 const HomeFeaturedListings = ({ t }) => {
   return (
-    <div className="home-featured-listings-container">
+    <div className="home-featured-listings-container layout-counter-margin layout-padding">
       <Row gutter={10}>
         <Col span={8}>Featured</Col>
         <Col span={8}>Featured</Col>

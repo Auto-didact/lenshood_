@@ -7,7 +7,7 @@ import { Button, Divider, Card } from "antd";
 
 const HomeHead = ({ t, image }) => {
   return (
-    <div className="home-head-container">
+    <div className="home-head-container layout-counter-margin">
       <div className="home-head">
         <img className="home-head-image" src={image} alt="" />
         <div className="home-image-content">

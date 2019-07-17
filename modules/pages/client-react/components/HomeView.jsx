@@ -30,6 +30,8 @@ class HomeView extends Component {
           ]}
         />
         <HomeHead t={t} image={img1} />
+        <br />
+        <br />
         <HomeFeaturedListings t={t} />
         <HomeFeaturedUsers t={t} />
         <HomeSteps t={t} />
