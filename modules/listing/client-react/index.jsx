@@ -10,7 +10,8 @@ import { MenuItem } from '@gqlapp/look-client-react';
 import { Icon } from 'antd';
 
 import Listings from './containers/Listings';
-import ListingCatalogue from './containers/ListingCatalogue';
+
+import ListingCatalogueView from './components/ListingCatalogueView';
 import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
@@ -22,8 +23,11 @@ import ListYourGearProduct from './components/ListYourGearProduct';
 import ListYourGearRental from './components/ListYourGearRental';
 import ListingDynamicFieldFormTest from './components/ListingDynamicFieldFormTest';
 
+
+
 import resources from './locales';
 import resolvers from './resolvers';
+
 
 const MyListingsNavItemAccount = () => {
   return (
@@ -53,12 +57,16 @@ const NavLinkListYourGearWithI18n = translate('listing')(({ t }) => (
 
 export default new ClientModule({
   route: [
-    // Home
-    <Route exact path="/" component={ListingCatalogue} />,
-    <AuthRoute exact path="/listings" redirect="/profile" role="admin" component={Listings} />,
+
+
+
+
+    <Route exact path="/listings" component={Listings} />,
     <AuthRoute exact path="/listing/new" redirect="/profile" role={['user', 'admin']} component={ListingAdd} />,
     <AuthRoute redirect="/profile" role={['user', 'admin']} path="/listing/:id" component={ListingEdit} />,
-    <Route exact path="/listing_catalogue" component={ListingCatalogue} />,
+    <Route exact path="/listing_catalogue" component={ListingCatalogueView} />,
+
+
     <Route exact path="/my-listings/:id" component={MyListingDetail} />,
 
     // Components
@@ -99,8 +107,11 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
+
   resolver: [resolvers],
+
   localization: [{ ns: 'listing', resources }]
+
 });
 
 export { default as SuggestedCardListComponent } from './components/components/SuggestedCardListComponent';

@@ -20,7 +20,9 @@ const BorrowingAndLendingView = (props: any) => {
     global.window.scrollTo(0, 0);
   });
   const keyParser = () => {
+
     if (props.match.path === '/renting') {
+
       return 1;
     } else {
       return 2;
@@ -31,12 +33,15 @@ const BorrowingAndLendingView = (props: any) => {
   return (
     <div
       style={{
+
+
         width: '100%',
         alignItems: 'center',
-        fontFamily: 'Avenir Next',
+
         display: 'flex',
         flexDirection: 'column',
         border: 'none'
+
       }}
     >
       {renderMetaData(t)}

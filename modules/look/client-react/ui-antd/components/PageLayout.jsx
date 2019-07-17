@@ -16,14 +16,14 @@ class PageLayout extends React.Component {
     const { children, navBar } = this.props;
 
     return (
-      <Layout>
+      <Layout className="main-layout">
         {navBar !== false && (
           <Header className="header" style={{ position: 'fixed', zIndex: 1000, width: '100%' }}>
             <NavBar />
           </Header>
         )}
 
-        <Content id="content" className="page-content">
+        <Content id="content" className="page-content layout-padding">
           {children}
         </Content>
         <BackTop>
