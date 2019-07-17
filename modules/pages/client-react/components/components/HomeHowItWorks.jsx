@@ -24,11 +24,11 @@ const HomeHowItWorks = ({ t }) => {
             }}
           >
             <TabPane tab="For Borrowers" key="1">
-              <Borrowing t={t} />
+              For Borrowers
             </TabPane>
 
             <TabPane tab="For Lenders" key="2">
-              <Lending t={t} />
+              For Lenders
             </TabPane>
           </Tabs>
         </Col>

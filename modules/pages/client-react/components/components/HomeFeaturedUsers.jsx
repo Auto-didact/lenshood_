@@ -1,17 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col, Tabs } from "antd";
+import FeaturedUser from "../../containers/Featured/FeaturedUser";
 
 const { TabPane } = Tabs;
 
 const HomeFeaturedUsers = ({ t }) => {
   return (
     <div className="home-featured-users-container layout-counter-margin layout-padding">
-      <Row gutter={10}>
-        <Col span={8}>Featured</Col>
-        <Col span={8}>Featured</Col>
-        <Col span={8}>Featured</Col>
-      </Row>
+      <FeaturedUser />
     </div>
   );
 };
