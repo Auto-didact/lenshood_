@@ -259,7 +259,7 @@ const UserForm = ({
         {/*---------------Contact Starts------------------------*/}
         <h1 className="heading vgap">Contact</h1>
 
-        <div className="g3 about">
+        <div className="address">
           {/* <FieldArray
             name="addresses"
             render={arrayHelpers => (
