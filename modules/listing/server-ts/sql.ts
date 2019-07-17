@@ -746,35 +746,3 @@ class ListingWatchListDAO extends Model {
     };
   }
 }
-
-// ListingWatchListDAO model.
-class ListingWatchListDAO extends Model {
-  static get tableName() {
-    return 'watchlist';
-  }
-
-  static get idColumn() {
-    return 'id';
-  }
-
-  static get relationMappings() {
-    return {
-      listing: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: ListingDAO,
-        join: {
-          from: 'watchlist.listing_id',
-          to: 'listing.id'
-        }
-      },
-      user: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: User,
-        join: {
-          from: 'watchlist.user_id',
-          to: 'user.id'
-        }
-      }
-    };
-  }
-}
