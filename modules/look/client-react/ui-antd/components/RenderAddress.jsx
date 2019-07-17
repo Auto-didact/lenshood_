@@ -8,8 +8,8 @@ const FormItem = Form.Item;
 
 export default class RenderAddress extends React.Component {
   state = {
-    visible: []
-    // ,primeAddress: [false, true]
+    visible: [],
+    newAddressState: false
   };
 
   componentDidMount() {
@@ -44,7 +44,7 @@ export default class RenderAddress extends React.Component {
     //Setting the visiblity
     const visible = this.state.visible;
     visible[addresses.length] = true;
-    this.setState({ visible });
+    this.setState({ visible, newAddressState: true });
   };
 
   handleSelect = index => {
@@ -65,9 +65,15 @@ export default class RenderAddress extends React.Component {
     this.props.addresses[index].primeAddress = true;
   };
 
+  checkAdd = index => {
+    let newAddressState = this.state.newAddressState;
+    this.state.newAddressState ? this.props.arrayHelpers.remove(index) : null;
+    newAddressState = false;
+    this.setState({ newAddressState });
+  };
+
   render() {
     const { arrayHelpers, name, addresses, t, label } = this.props;
-    // const label = 'profile.card.group.addresses';
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
@@ -162,8 +168,8 @@ export default class RenderAddress extends React.Component {
                     visible={this.state.visible[indexa]}
                     title="Address"
                     okText="Ok"
-                    onCancel={() => this.modalControl(indexa, false)}
-                    onOk={() => this.modalControl(indexa, false)}
+                    onCancel={() => this.modalControl(indexa, false) || this.checkAdd(indexa)}
+                    onOk={() => this.modalControl(indexa, false) || this.checkAdd(indexa)}
                   >
                     <div>
                       <FormItem>{formItems[indexa]}</FormItem>

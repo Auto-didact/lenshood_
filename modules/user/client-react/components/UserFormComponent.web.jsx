@@ -86,7 +86,6 @@ const UserForm = ({
             />
           </>
         ) : null}
-        {console.log('avatar', profile.avatar)}
         {/*----------Personal Information-----------*/}
         {LYGflag == false || (!valueCheck.firstName || !valueCheck.lastName || !valueCheck.about) ? (
           <h1 className="heading vgap">Personal</h1>
