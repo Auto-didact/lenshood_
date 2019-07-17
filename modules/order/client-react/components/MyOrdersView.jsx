@@ -3,7 +3,7 @@ import { AccountLayout } from '@gqlapp/look-client-react';
 // import './resources/listingCatalogue.css';
 import MyOrderComponent from './MyOrderComponent';
 
-class MyListingsView extends Component {
+export default class MyOrdersView extends Component {
   state = {
     listings: this.props.listings
   };
@@ -15,5 +15,3 @@ class MyListingsView extends Component {
     );
   }
 }
-
-export default MyListingsView;

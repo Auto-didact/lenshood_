@@ -25,6 +25,7 @@ class OrderDetailsComponent extends Component {
                 className="trackTag font12 borderRadius9"
                 style={{
                   width: '15%',
+                  minWidth: '65px',
                   position: 'relative',
                   left: '5px',
                   bottom: '5px'
