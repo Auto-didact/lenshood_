@@ -185,7 +185,7 @@ class NavBar extends React.Component {
                 {ref.modules.navItemsRight}
                 <IfLoggedIn>
                   <MenuItem>
-                    <DropDown content={<UserAvatar />} noicon>
+                    <DropDown content={<UserAvatar />} noicon selectedKeys={[this.props.location.pathname]}>
                       {ref.modules.navItemsUser}
                     </DropDown>
                   </MenuItem>
