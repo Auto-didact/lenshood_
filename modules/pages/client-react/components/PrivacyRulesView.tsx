@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import Helmet from 'react-helmet';
+// import Helmet from 'react-helmet';
 import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import settings from '../../../../settings';
+// import settings from '../../../../settings';
 import './pageStyle.css';
 
 interface PrivacyRulesViewProps {
   t: TranslateFunction;
 }
 
-const renderMetaData = (t: TranslateFunction) => (
+/*const renderMetaData = (t: TranslateFunction) => (
   <Helmet
     title={`${settings.app.name} - ${t('title')}`}
     meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
   />
-);
+);*/
 
 /* eslint-disable no-unused-expressions */
 

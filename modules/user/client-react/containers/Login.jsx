@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql, compose, withApollo } from 'react-apollo';
 import { translate } from '@gqlapp/i18n-client-react';
 import { FormError } from '@gqlapp/forms-client-react';
+import { message } from 'antd';
 
 import authentication from '@gqlapp/authentication-client-react';
 
@@ -18,13 +19,18 @@ const Login = props => {
     try {
       await login(values);
     } catch (e) {
+      message.error(t('login.errorMsg'));
       throw new FormError(t('login.errorMsg'), e);
     }
     await authentication.doLogin(client);
-    await client.writeQuery({ query: CURRENT_USER_QUERY, data: { currentUser: login.user } });
+    await client.writeQuery({
+      query: CURRENT_USER_QUERY,
+      data: { currentUser: login.user }
+    });
     if (onLogin) {
       onLogin();
     }
+    message.info(`Logged you in.`);
   };
 
   return <LoginView {...props} onSubmit={onSubmit} />;

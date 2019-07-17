@@ -1,16 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { DebounceInput } from "react-debounce-input";
-import {
-  Form,
-  FormItem,
-  Select,
-  Option,
-  Label,
-  Input
-} from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { DebounceInput } from 'react-debounce-input';
+import { Form, FormItem, Select, Option, Label, Input } from '@gqlapp/look-client-react';
 
-const activeGearCategory = ["", "Cameras", "Lenses"];
+const activeGearCategory = ['', 'Cameras', 'Lenses', 'Drones', 'Lighting'];
 
 const LiveSearchFilterComponent = ({
   filter: { searchText, gearCategory },
@@ -18,7 +11,6 @@ const LiveSearchFilterComponent = ({
   onGearCategoryChange
 }) => (
   <Form layout="inline">
-    {console.log("Entries", gearCategory, searchText)}
     <FormItem label="Search">
       <DebounceInput
         minLength={1}
@@ -40,7 +32,7 @@ const LiveSearchFilterComponent = ({
       >
         {activeGearCategory.map((item, key) => (
           <Option key={key} value={item}>
-            {item ? item : "All"}
+            {item ? item : 'All'}
           </Option>
         ))}
       </Select>
@@ -51,8 +43,7 @@ const LiveSearchFilterComponent = ({
 LiveSearchFilterComponent.propTypes = {
   filter: PropTypes.object.isRequired,
   onSearchTextChange: PropTypes.func.isRequired,
-  onGearCategoryChange: PropTypes.func.isRequired,
-  onIsActiveChange: PropTypes.func.isRequired
+  onGearCategoryChange: PropTypes.func.isRequired
 };
 
 export default LiveSearchFilterComponent;

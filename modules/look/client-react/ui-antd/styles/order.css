@@ -2,6 +2,10 @@
 
 /* Checkout pages */
 
+.ant-radio-inner {
+  margin-left: 10px;
+}
+
 .billingAddress {
   font-size: 15px;
   text-shadow: 0.6px 0 0;
@@ -11,7 +15,7 @@
 .HomeAddress {
   font-size: 12px;
   padding: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 1px;
   background-color: rgba(35, 177, 149, 0.2);
   width: 100%;
 }
@@ -109,6 +113,8 @@
 }
 
 .cartitem img {
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
   width: 100%;
   height: 160px;
 }
@@ -181,10 +187,27 @@
   text-align: justify;
 }
 
+.trackTag {
+  color: white;
+  float: right;
+}
+
+.orderCardCol {
+  overflow: hidden !important;
+  border-radius: 8px 0px 0px 0px !important;
+
+  object-fit: cover;
+  height: 250px;
+}
+
+.orderCard {
+  margin: 0px 0px 15px 0px !important;
+  border-radius: 8px 0px !important;
+  min-width: 100%;
+}
+
 .orderImage {
-  width: 100%;
-  padding-right: 15px;
-  height: 60px;
+  height: 100%;
 }
 
 .cartSum {
@@ -218,6 +241,8 @@
 
 .orderGrey {
   color: #676767;
+  position: relative;
+  bottom: 10px;
 }
 
 .CancelRequest {
@@ -250,6 +275,5 @@
   background-color: #23b195 !important;
   color: white !important;
   border: #23b195 0.5px solid !important;
-  width: 100% !important;
-  border-radius: 0 !important;
+  width: 50% !important;
 }

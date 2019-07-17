@@ -52,11 +52,8 @@ export default class OrderCardComponent extends React.Component {
             </strong>
           </h4>
         )}
-        <h5
-          className="RefundOrder"
-        >
-          Refundable deposit{' '}
-          <strong className="ProductRef">&#8377; {this.props.product.refund}</strong>
+        <h5 className="RefundOrder">
+          Refundable deposit <strong className="ProductRef">&#8377; {this.props.product.refund}</strong>
         </h5>
         {this.props.paid === true ? (
           <h5 className="lightText">

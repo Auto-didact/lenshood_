@@ -1,6 +1,7 @@
 import { graphql } from 'react-apollo';
 import update from 'immutability-helper';
 import { removeTypename, log } from '@gqlapp/core-common';
+import { message } from 'antd';
 import USERS_STATE_QUERY from '../graphql/UsersStateQuery.client.graphql';
 import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
 import USERS_QUERY from '../graphql/UsersQuery.graphql';
@@ -23,7 +24,14 @@ const withUsers = Component =>
       };
     },
     props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
-      return { loading, users, refetch, subscribeToMore, updateQuery, errors: error ? error.graphQLErrors : null };
+      return {
+        loading,
+        users,
+        refetch,
+        subscribeToMore,
+        updateQuery,
+        errors: error ? error.graphQLErrors : null
+      };
     }
   })(Component);
 
@@ -42,8 +50,10 @@ const withUsersDeleting = Component =>
             return { errors: deleteUser.errors };
           }
         } catch (e) {
+          message.error("Couldn't perform the action");
           log.error(e);
         }
+        message.error('User deleted!');
       }
     })
   })(Component);

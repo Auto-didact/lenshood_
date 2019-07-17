@@ -204,11 +204,12 @@ extend type Query {
   users(orderBy: OrderByUserInput, filter: FilterUserInput): [User]
   # Get user by id
   user(id: Int!): User
+  displayUser(id: Int!): User
   # Get current user
   currentUser: User
   # Get user's driving license info
   userDrivingLicense(id: Int!): UserDrivingLicense
-
+  userProfile(userId: Int!): UserProfile
   featuredUsers: [User]
 }
 
@@ -338,6 +339,7 @@ input ProfileInput {
   designation: String
   mobile: String
   website: String
+  referrerId: Int
 }
 
 input PortfolioInput {

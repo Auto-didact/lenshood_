@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Icon, Button, Row, Col, Card, Popconfirm, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { ImgCamera } from '../../constants/DefaultImages';
+import { IDLE, ONSHELF } from '../../constants/ListingStates';
 
 class DetailsCardComponent extends Component {
   render() {
     const item = this.props.item;
 
     const buttonText = this.props.buttonText;
-
 
     function cancel(e) {
       console.log(e);
@@ -34,15 +34,15 @@ class DetailsCardComponent extends Component {
           </Col>
           <Col xs={{ span: 24 }} md={{ span: 15 }} xxl={{ span: 18 }} className="DetailsCardCol">
             <div style={{ padding: '10px', align: 'center' }}>
-              {item.status === 'On Rent' ? (
-                <h6 className="OnRentTag">On Rent</h6>
+              {item.status === ONSHELF ? (
+                <h6 className="OnShelfTag font12 borderRadius9">{ONSHELF}</h6>
               ) : (
-                <h6 className="OnShelfTag">On Shelf</h6>
+                <h6 className="OnRentTag font12 borderRadius9">{IDLE}</h6>
               )}
               <h3 className="DetailsCardHeading">
                 {item.listingContent
                   ? item.listingContent.length !== 0
-                    ? item.listingContent.map(gear => <span>{`${gear.brand} ${gear.gear} / `}</span>)
+                    ? item.listingContent.map((gear, id) => <span key={id}>{`${gear.brand} ${gear.gear} / `}</span>)
                     : 'Info Not Provided'
                   : 'Info Not Provided'}
               </h3>
@@ -77,19 +77,11 @@ class DetailsCardComponent extends Component {
                   </Popconfirm>
                 </Col>
               </Row>
-              <Row gutter={13} align="center">
+              <Row gutter={13} align="middle">
                 <Col span={12}>
-
-                  <Button
-                    type="primary"
-                    block
-                    onClick={e => this.props.toggle(item.id, e)}
-                  >
-                    {item.status === "On Shelf"
-                      ? "Move to Idle"
-                      : "Move to Shelf"}
+                  <Button type="primary" block onClick={e => this.props.toggle(item.id, e)}>
+                    {item.status === ONSHELF ? 'Move to Idle' : 'Move to Shelf'}
                   </Button>
-
                 </Col>
                 <Col span={12}>
                   <Button type="primary" block>

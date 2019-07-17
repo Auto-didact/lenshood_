@@ -1,32 +1,25 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { PageLayout } from "@gqlapp/look-client-react";
-// import RenderAddress from '@gqlapp/user-client-react';
-// import { TranslateFunction } from '@gqlapp/i18n-client-react';
-import settings from "../../../../settings";
-import { Row, Col, Icon, Button } from "antd";
-import CheckoutStepsComponent from "./CheckoutStepsComponent";
-import OrderCardComponent from "./OrderCardComponent";
-import naruto2 from "../resources/naruto2.jpg";
-// import {
-//   // withFormik,
-//   FieldArray
-// } from 'formik';
+import React from 'react';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import { RenderAddress, PageLayout } from '@gqlapp/look-client-react';
+import { FieldArray, withFormik } from 'formik';
+import { Row, Col } from 'antd';
+import settings from '../../../../settings';
+import CheckoutStepsComponent from './CheckoutStepsComponent';
+import OrderCardComponent from './OrderCardComponent';
+import naruto2 from '../resources/naruto2.jpg';
 
 const renderMetaData = () => (
   <Helmet
     title={`${settings.app.name} - Bill`}
-    meta={[
-      { name: "description", content: `${settings.app.name} - ${"meta"}` }
-    ]}
+    meta={[{ name: 'description', content: `${settings.app.name} - ${'meta'}` }]}
   />
 );
 
-export default class CheckoutBillView extends React.Component {
+class CheckoutBillView extends React.Component {
   state = {
     product: {
-      name:
-        "Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ",
+      name: 'Canon EOS 70D DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5- 5.6 IS ',
       image: naruto2,
       days: 4,
       date: {
@@ -36,17 +29,28 @@ export default class CheckoutBillView extends React.Component {
       refund: 5000,
       totalRent: 1300
     },
-    address: {
-      name: "Ankit Jain",
-      address1: "Room A308, Manas Hostel, IITG",
-      address2: "Guwahati, North Guwahati",
-      state: "Assam",
-      PIN: "7810390",
-      mobile: "+91-9085626859"
-    }
+    addresses: [
+      {
+        streetAddress1: 'Room A308, Manas Hostel, IITG',
+        streetAddress2: 'North Guwahati',
+        state: 'Assam',
+        city: 'Guwahati',
+        pinCode: '7810390',
+        mobile: '+91-9085626859'
+      },
+      {
+        streetAddress1: 'Room A308, Manas Hostel, IITG',
+        streetAddress2: 'Guwahati, North Guwahati',
+        state: 'Assam',
+        city: 'Guwahati',
+        pinCode: '7810390',
+        mobile: '+91-9085626859'
+      }
+    ]
   };
 
   render() {
+    const { t } = this.props;
     return (
       <PageLayout>
         {renderMetaData()}
@@ -60,72 +64,23 @@ export default class CheckoutBillView extends React.Component {
               <br />
             </Col>
             <Col lg={{ span: 16, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              <Row gutter={16}>
-                <Col
-                  xs={{ span: 24, offset: 0 }}
-                  sm={{ span: 12, offset: 0 }}
-                  md={{ span: 8, offset: 0 }}
-                  className="PadB30"
-                >
-                  <div className="HomeAddress">
-                    <div className="HomeAddressBlock">
-                      Home Address <Icon type="home" className="homeicon" />
-                    </div>
-                    <br />
-                    <div className="addressLines">
-                      <h4>{this.state.address.name},</h4>
-                      <h4>{this.state.address.address1},</h4>
-                      <h4>{this.state.address.address2},</h4>
-                      <h4>{this.state.address.state}.</h4>
-                      <h4>{this.state.address.PIN}</h4>
-                      <h4>Mobile: {this.state.address.mobile}</h4>
-                    </div>
-                    <Button className="addressIcons" ghost>
-                      <Icon type="delete" />
-                    </Button>
-                    <Button className="addressIcons" ghost>
-                      <Icon type="edit" />
-                    </Button>
-                  </div>
-                </Col>
-                <Col
-                  xs={{ span: 14, offset: 5 }}
-                  sm={{ span: 10, offset: 0 }}
-                  md={{ span: 6, offset: 0 }}
-                  className="PadB30"
-                >
-                  <div
-                    className="AddNewAddressBlock"
-                    //   onClick={}
-                  >
-                    <div className="AddNewAddress">
-                      <Icon type="plus" />
-                    </div>
-                    <h5>Add a new address</h5>
-                  </div>
-                </Col>
-              </Row>
-              {/* <FieldArray
+              <FieldArray
                 name="addresses"
                 render={arrayHelpers => (
                   <RenderAddress
                     name="addresses"
-                    addresses={
-                      // addresses ||
-                      this.state.address
-                    }
+                    addresses={this.state.addresses}
+                    // addresses={addresses}
                     arrayHelpers={arrayHelpers}
-                    // isSelectable={true}
+                    label="addresses"
+                    t={t}
+                    isSelectable={true}
                   />
                 )}
-              /> */}
+              />
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              <OrderCardComponent
-                product={this.state.product}
-                paid={false}
-                buttonText={"Continue"}
-              />
+              <OrderCardComponent product={this.state.product} paid={false} buttonText={'Continue'} />
             </Col>
           </Row>
         </div>
@@ -133,3 +88,39 @@ export default class CheckoutBillView extends React.Component {
     );
   }
 }
+
+CheckoutBillView.propTypes = {
+  touched: PropTypes.object,
+  t: PropTypes.func
+};
+const CheckoutBillWithFormik = withFormik({
+  mapPropsToValues: state => {
+    // is always undefined here this part does not work
+    const { addresses } = state || '';
+
+    function getAddresses(address) {
+      return {
+        streetAddress1: address.streetAddress1,
+        streetAddress2: address.streetAddress2,
+        city: address.city,
+        state: address.state,
+        pinCode: address.pinCode
+      };
+    }
+
+    return {
+      addresses: addresses && addresses.length !== 0 ? addresses.map(getAddresses) : []
+    };
+  },
+  async handleSubmit(
+    values,
+    {
+      props: { onSubmit }
+    }
+  ) {
+    console.log('values', values);
+    //onSubmit();
+  },
+  displayName: 'CheckoutBill ' // helps with React DevTools
+});
+export default CheckoutBillWithFormik(CheckoutBillView);

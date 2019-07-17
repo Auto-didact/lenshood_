@@ -31,8 +31,8 @@ class MyListingsView extends Component {
 }
 
 MyListingsView.propTypes = {
-  userListings: PropTypes.object,
-  loading: PropTypes.object
+  userListings: PropTypes.array,
+  loading: PropTypes.bool
 };
 
 export default MyListingsView;

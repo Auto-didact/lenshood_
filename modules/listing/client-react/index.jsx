@@ -10,6 +10,7 @@ import { MenuItem } from '@gqlapp/look-client-react';
 import { Icon } from 'antd';
 
 import Listings from './containers/Listings';
+
 import ListingCatalogueView from './components/ListingCatalogueView';
 import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
@@ -23,8 +24,9 @@ import ListYourGearRental from './components/ListYourGearRental';
 import ListingDynamicFieldFormTest from './components/ListingDynamicFieldFormTest';
 
 
-import resources from "./locales";
-import resolvers from "./resolvers";
+
+import resources from './locales';
+import resolvers from './resolvers';
 
 
 const MyListingsNavItemAccount = () => {
@@ -58,16 +60,18 @@ export default new ClientModule({
 
 
 
+
     <Route exact path="/listings" component={Listings} />,
     <AuthRoute exact path="/listing/new" redirect="/profile" role={['user', 'admin']} component={ListingAdd} />,
     <AuthRoute redirect="/profile" role={['user', 'admin']} path="/listing/:id" component={ListingEdit} />,
     <Route exact path="/listing_catalogue" component={ListingCatalogueView} />,
 
+
     <Route exact path="/my-listings/:id" component={MyListingDetail} />,
 
     // Components
     <Route exact path="/listing-detail/:id" component={ListingDetail} />,
-    <Route exact path="/my-listings" component={MyListings} />,
+    <AuthRoute redirect="/profile" role={['user', 'admin']} exact path="/my-listings" component={MyListings} />,
     <Route exact path="/list-your-gear" component={ListYourGearOwner} />,
     <Route exact path="/list-your-gear2" component={ListYourGearProduct} />,
     <Route exact path="/list-your-gear3" component={ListYourGearRental} />,
@@ -105,6 +109,10 @@ export default new ClientModule({
   ],
 
   resolver: [resolvers],
-  localization: [{ ns: "listing", resources }]
+
+  localization: [{ ns: 'listing', resources }]
 
 });
+
+export { default as SuggestedCardListComponent } from './components/components/SuggestedCardListComponent';
+export { ImgCamera } from './constants/DefaultImages';

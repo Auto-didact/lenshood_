@@ -4,20 +4,19 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { Loader } from '@gqlapp/look-client-react';
 import UserFormComponent from './UserFormComponent';
 
-const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) => {
-  const isNotSelf = !user || (user && user.id !== currentUser.id);
+const UserEditView = ({ loading, t, currentUser, onSubmit, valueCheck }) => {
   return (
     <div>
-      {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
-      {!loading && !user && <h1 className="text-center"> Please refresh the page!!!! </h1>}
-      {user && (
+      {loading && !currentUser && <Loader text={t('userEdit.loadMsg')} />}
+      {!loading && !currentUser && <h1 className="text-center"> Please refresh the page!!!! </h1>}
+      {currentUser && (
         <UserFormComponent
           valueCheck={valueCheck}
           LYGflag={true}
           onSubmit={onSubmit}
-          shouldDisplayRole={isNotSelf}
-          shouldDisplayActive={isNotSelf}
-          initialValues={user}
+          shouldDisplayRole={false}
+          shouldDisplayActive={false}
+          initialValues={currentUser}
           userRole={currentUser && currentUser.role ? currentUser.role : null}
         />
       )}
@@ -27,7 +26,6 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit, valueCheck }) =
 
 UserEditView.propTypes = {
   loading: PropTypes.bool.isRequired,
-  user: PropTypes.object,
   currentUser: PropTypes.object,
   t: PropTypes.func,
   onSubmit: PropTypes.func

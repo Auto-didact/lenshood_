@@ -9,7 +9,7 @@ import './styling.css';
 import UserFormComponent from './UserFormComponent';
 import settings from '../../../../settings';
 
-const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
+const UserEditView = ({ loading, user, t, currentUser, onSubmit, userBool }) => {
   const isNotSelf = !user || (user && user.id !== currentUser.id);
 
   const renderMetaData = () => (
@@ -28,8 +28,8 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
     <PageLayout>
       {renderMetaData()}
       {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
-      {!loading && !user && <h1 className="text-center"> Please refresh the page!!!! </h1>}
-      {user && (
+      {!loading && !user && !userBool && <h1 className="text-center"> Please refresh the page!!!! </h1>}
+      {(userBool || user) && (
         <div style={{}}>
           <Link
             id="back-button"
@@ -45,16 +45,15 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
           <h2 style={{ textAlign: 'center' }}>
             {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
           </h2>
-          <div className="con">
-            <UserFormComponent
-              LYGflag={false}
-              onSubmit={onSubmit}
-              shouldDisplayRole={isNotSelf}
-              shouldDisplayActive={isNotSelf}
-              initialValues={user}
-              userRole={currentUser && currentUser.role ? currentUser.role : null}
-            />
-          </div>
+
+          <UserFormComponent
+            LYGflag={false}
+            onSubmit={onSubmit}
+            shouldDisplayRole={isNotSelf}
+            shouldDisplayActive={isNotSelf}
+            initialValues={userBool ? currentUser : user}
+            userRole={currentUser && currentUser.role ? currentUser.role : null}
+          />
         </div>
       )}
     </PageLayout>
@@ -65,6 +64,7 @@ UserEditView.propTypes = {
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object,
   currentUser: PropTypes.object,
+  userBool: PropTypes.bool,
   t: PropTypes.func,
   onSubmit: PropTypes.func
 };

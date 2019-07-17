@@ -1,21 +1,19 @@
-import React from "react";
-import Helmet from "react-helmet";
-import PropTypes from "prop-types";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout, Loader } from "@gqlapp/look-client-react";
-import settings from "../../../../settings";
-import { Button, Icon, Empty } from "antd";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import settings from '../../../../settings';
+import { Button, Icon, Empty } from 'antd';
+import { Link } from 'react-router-dom';
 
 const ReferralVerifyView = props => {
   const { t, onSubmit, currentUser, user, loading } = props;
-  // console.log(props);
+  console.log(props);
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("title")}`}
-      meta={[
-        { name: "description", content: `${settings.app.name} - ${t("meta")}` }
-      ]}
+      title={`${settings.app.name} - ${t('title')}`}
+      meta={[{ name: 'description', content: `${settings.app.name} - ${t('meta')}` }]}
     />
   );
 
@@ -24,19 +22,18 @@ const ReferralVerifyView = props => {
       {renderMetaData()}
       <Link
         id="back-button"
-        to="/invites"
+        to="/referrals"
         style={{
-          fontSize: "20px",
-          margin: "10px",
-          textDecoration: "underline"
+          fontSize: '20px',
+          margin: '10px',
+          textDecoration: 'underline'
         }}
       >
         <Icon type="arrow-left" /> Back
       </Link>
-      {loading && !user && <Loader text={"Loading..."} />}
+      {loading && !user && <Loader text={'Loading...'} />}
       {user && user.profile && currentUser ? (
-        user.profile.referredBy &&
-        currentUser.id === user.profile.referredBy.id ? (
+        user.profile.referredBy && currentUser.id === user.profile.referredBy.id ? (
           !user.profile.isVerified ? (
             <Button type="primary" onClick={() => onSubmit()}>
               Verify User
@@ -47,18 +44,22 @@ const ReferralVerifyView = props => {
             </Button>
           )
         ) : (
-          <div className="width100 centerAlign">
+          <div className="width100 centerAlign marginT30">
             <Empty
               description={
-                <span className="themeColor">
-                  <h3>The User wasn't referred by You.</h3>
+                <span>
+                  <h3>The user wasn't referred by You.</h3>
                   <h4>Please go back!</h4>
                 </span>
               }
             />
           </div>
         )
-      ) : null}
+      ) : (
+        <div className="width100 centerAlign marginT30">
+          <Empty description={<h3>User not found!</h3>} />
+        </div>
+      )}
     </PageLayout>
   );
 };
@@ -71,4 +72,4 @@ ReferralVerifyView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("referral")(ReferralVerifyView);
+export default translate('referral')(ReferralVerifyView);

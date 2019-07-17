@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { DebounceInput } from "react-debounce-input";
-import { translate } from "@gqlapp/i18n-client-react";
-import {
-  Form,
-  FormItem,
-  Select,
-  Option,
-  Input
-} from "@gqlapp/look-client-react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { DebounceInput } from 'react-debounce-input';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Form, FormItem, Select, Option, Input } from '@gqlapp/look-client-react';
 
 const ListingFilterComponent = props => {
   const {
@@ -20,42 +14,32 @@ const ListingFilterComponent = props => {
   } = props;
   console.log(props);
   let state = {
-    gearCategory: ["", "Cameras", "Lenses"],
+    gearCategory: ['', 'Cameras', 'Lenses', 'Drones', 'Lighting'],
     gearSubcategory: {
       Cameras: [
-        "",
-        "DSLR",
-        "SLR",
-        "Mirrorless Camera",
-        "Point & Shoot Camera",
-        "Video Camera",
-        "Cinema Camera",
-        "Go Pro & Headcam",
-        "Other"
+        '',
+        'DSLR',
+        'SLR',
+        'Mirrorless Camera',
+        'Point & Shoot Camera',
+        'Video Camera',
+        'Cinema Camera',
+        'Go Pro & Headcam',
+        'Other'
       ],
-      Lenses: [
-        "",
-        "DSLR Lens",
-        "Prime Lens",
-        "Mirrorless Lense",
-        "Cinema Lens",
-        "Lens Accessories",
-        "Other Lenses"
-      ]
+      Lenses: ['', 'DSLR Lens', 'Prime Lens', 'Mirrorless Lense', 'Cinema Lens', 'Lens Accessories', 'Other Lenses']
     }
   };
 
   const [activeGearCategory, setActiveGearCategory] = useState(gearCategory);
 
-  const [activeGearSubCategory, setActiveGearSubCategory] = useState(
-    gearSubcategory
-  );
+  const [activeGearSubCategory, setActiveGearSubCategory] = useState(gearSubcategory);
 
   const handlegearCategoryChange = value => {
     ongearCategoryChange(value);
-    ongearSubcategoryChange("");
+    ongearSubcategoryChange('');
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
-    setActiveGearSubCategory(value ? state.gearSubcategory[value][0] : null);
+    setActiveGearSubCategory(value ? (state.gearSubcategory[value] ? state.gearSubcategory[value][0] : null) : null);
   };
 
   const handlegearSubCategoryChange = value => {
@@ -87,7 +71,7 @@ const ListingFilterComponent = props => {
         >
           {state.gearCategory.map((item, key) => (
             <Option key={key} value={item}>
-              {item ? item : "All"}
+              {item ? item : 'All'}
             </Option>
           ))}
         </Select>
@@ -105,7 +89,7 @@ const ListingFilterComponent = props => {
           >
             {activeGearCategory.map((item, key) => (
               <Option key={key} value={item}>
-                {item ? item : "All"}
+                {item ? item : 'All'}
               </Option>
             ))}
           </Select>
@@ -123,4 +107,4 @@ ListingFilterComponent.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("listing")(ListingFilterComponent);
+export default translate('listing')(ListingFilterComponent);

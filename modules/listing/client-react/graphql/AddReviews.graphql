@@ -1,0 +1,24 @@
+mutation addListingReview($input: AddListingReviewInput!) {
+  addListingReview(input: $input) {
+    id
+    reviewer {
+      id
+      firstName
+      lastName
+      avatar
+      rating
+      mobile
+    }
+    listingId
+    comment
+    rating
+    createdAt
+    likesReplies {
+      id
+      userId
+      listingReviewId
+      likeDisLike
+      isReply
+    }
+  }
+}

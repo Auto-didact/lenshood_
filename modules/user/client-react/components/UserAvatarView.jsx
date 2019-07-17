@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Avatar } from "antd";
+import React, { Component } from 'react';
+import { Avatar } from 'antd';
 
 export default class UserAvatarView extends Component {
   render() {

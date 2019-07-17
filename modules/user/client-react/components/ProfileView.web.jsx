@@ -25,39 +25,18 @@ class ProfileView extends React.Component {
     const following = currentUser.following;
 
     function getEndorsements(endorsement) {
-      if (endorsement) {
-        var data = endorsement.endorser.profile;
-
-        return data;
-      } else {
-        return null;
-      }
+      return endorsement.endorser.profile;
     }
     function getEndorsed(endorse) {
-      if (endorse) {
-        var data = endorse.endorsee.profile;
-
-        return data;
-      } else {
-        return null;
-      }
+      return endorse.endorsee.profile;
     }
 
     function getFollowers(follower) {
-      if (follower) {
-        var data = follower.follower.profile;
-        return data;
-      } else {
-        return null;
-      }
+      return follower.follower.profile;
     }
 
     function getFollowing(follow) {
-      if (follow) {
-        return follow.following.profile;
-      } else {
-        return null;
-      }
+      return follow.followee.profile;
     }
     return {
       endorsements: {
@@ -232,7 +211,10 @@ class ProfileView extends React.Component {
               <Row gutter={10} type="flex" justify="space-around" align="middle">
                 {/*Verification*/}
                 <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 24 }} style={{ height: '100%' }}>
-                  <UserVerificationsComponent data={currentUser.verification} verification={this.userCardData().verification} />
+                  <UserVerificationsComponent
+                    data={currentUser.verification}
+                    verification={this.userCardData().verification}
+                  />
                 </Col>
 
                 <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 24 }}>

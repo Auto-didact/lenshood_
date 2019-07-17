@@ -194,6 +194,8 @@
   float: right;
   margin-right: 12px;
   background: #e3c41c;
+  width: 50px;
+  text-align: center;
 }
 
 .OnShelfTag {
@@ -330,6 +332,7 @@
   padding: 10px 5px;
 }
 
+
 /*Home */
 
 
@@ -340,8 +343,7 @@
     margin: 5px -4vw 5px -4vw;
     padding: 10px 4vw 10px 4vw !important;
   }
-  
- 
+
 }
 @media only screen and (min-width: 1025px) {
   .gearCat {

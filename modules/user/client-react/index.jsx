@@ -1,40 +1,33 @@
-import React from "react";
-import { CookiesProvider } from "react-cookie";
-import { NavLink, withRouter, Route } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
-import { MenuItem } from "@gqlapp/look-client-react";
-import ClientModule from "@gqlapp/module-client-react";
+import React from 'react';
+import { CookiesProvider } from 'react-cookie';
+import { NavLink, withRouter, Route } from 'react-router-dom';
+import { translate } from '@gqlapp/i18n-client-react';
+import { MenuItem } from '@gqlapp/look-client-react';
+import ClientModule from '@gqlapp/module-client-react';
 
-// To Do
-import { Icon, Tabs } from "antd";
+import { Icon, Tabs, message } from 'antd';
 
-import resolvers from "./resolvers";
-import resources from "./locales";
-import DataRootComponent from "./containers/DataRootComponent";
-import Users from "./containers/Users";
-import UserEdit from "./containers/UserEdit";
-import UserAdd from "./containers/UserAdd";
-import Register from "./containers/Register";
-import Login from "./containers/Login";
-import ForgotPassword from "./containers/ForgotPassword";
-import ResetPassword from "./containers/ResetPassword";
-import ProfileView from "./components/ProfileView";
-import PublicProfile from "./containers/PublicProfile";
-import DemoRoute from "./containers/DemoRoute";
-import {
-  AuthRoute,
-  IfLoggedIn,
-  IfNotLoggedIn,
-  withLoadedUser,
-  withLogout
-} from "./containers/Auth";
-import { isAdminFunction } from "./helpers/isAdmin";
+import resolvers from './resolvers';
+import resources from './locales';
+import DataRootComponent from './containers/DataRootComponent';
+import Users from './containers/Users';
+import UserEdit from './containers/UserEdit';
+import UserAdd from './containers/UserAdd';
+import Register from './containers/Register';
+import Login from './containers/Login';
+import ForgotPassword from './containers/ForgotPassword';
+import ResetPassword from './containers/ResetPassword';
+import ProfileView from './components/ProfileView';
+import PublicProfile from './containers/PublicProfile';
+import DemoRoute from './containers/DemoRoute';
+import { AuthRoute, IfLoggedIn, IfNotLoggedIn, withLoadedUser, withLogout } from './containers/Auth';
+import { isAdminFunction } from './helpers/isAdmin';
 
 const MyProfile = () => {
   return (
     <div>
       <Icon type="user" />
-      {"My Profile"}
+      {'My Profile'}
     </div>
   );
 };
@@ -46,8 +39,14 @@ const LogoutLink = withRouter(
       onClick={e => {
         e.preventDefault();
         (async () => {
-          await logout();
-          history.push("/");
+          try {
+            await logout();
+          } catch (e) {
+            message.error("Couldn't LogOut!");
+            throw e;
+          }
+          message.info('Successfully logged out!');
+          history.push('/');
         })();
       }}
       className="nav-link"
@@ -58,93 +57,48 @@ const LogoutLink = withRouter(
   ))
 );
 
-export * from "./containers/Auth";
-export { default as UserDetails } from "./containers/UserDetails";
-export { default as LOGIN } from "./graphql/Login.graphql";
+export * from './containers/Auth';
+export { default as UserDetails } from './containers/UserDetails';
+export { default as LOGIN } from './graphql/Login.graphql';
 
-const NavLinkUsersWithI18n = translate("user")(({ t }) => (
+const NavLinkUsersWithI18n = translate('user')(({ t }) => (
   <NavLink to="/users" className="nav-link" activeClassName="active">
-    {t("navLink.users")}
+    {t('navLink.users')}
   </NavLink>
 ));
-const NavLinkProfileWithI18n = translate("user")(({ t }) => (
-  <NavLink
-    to="/profile"
-    className="AccDetItem"
-    activeClassName="AccDetItemSelected"
-  >
+const NavLinkProfileWithI18n = translate('user')(({ t }) => (
+  <NavLink to="/profile" className="AccDetItem" activeClassName="AccDetItemSelected">
     <Icon type="user" />
-    {t("navLink.profile")}
+    {t('navLink.profile')}
   </NavLink>
 ));
 
-const NavLinkLoginWithI18n = translate("user")(({ t }) => (
+const NavLinkLoginWithI18n = translate('user')(({ t }) => (
   <NavLink to="/login" className="nav-link" activeClassName="active">
-    {t("navLink.signIn")}
+    {t('navLink.signIn')}
   </NavLink>
 ));
 
 export default new ClientModule({
   route: [
     // <Route exact path="/public-profile/:id" component={PublicProfile} />,
-    <AuthRoute
-      exact
-      path="/public-profile/:id"
-      role={["user", "admin"]}
-      redirect="/login"
-      component={PublicProfile}
-    />,
-    <AuthRoute
-      exact
-      path="/profile"
-      role={["user", "admin"]}
-      redirect="/login"
-      component={ProfileView}
-    />,
-    <AuthRoute
-      exact
-      path="/users"
-      redirect="/profile"
-      role="admin"
-      component={Users}
-    />,
-    <AuthRoute exact path="/users/new" role={["admin"]} component={UserAdd} />,
-    <AuthRoute
-      path="/users/:id"
-      redirect="/profile"
-      role={["user", "admin"]}
-      component={UserEdit}
-    />,
-    <AuthRoute
-      exact
-      path="/register"
-      redirectOnLoggedIn
-      redirect="/profile"
-      component={Register}
-    />,
+    <AuthRoute exact path="/public-profile/:id" role={['user', 'admin']} redirect="/login" component={PublicProfile} />,
+    <AuthRoute exact path="/profile" role={['user', 'admin']} redirect="/login" component={ProfileView} />,
+    <AuthRoute exact path="/users" redirect="/profile" role="admin" component={Users} />,
+    <AuthRoute exact path="/users/new" role={['admin']} component={UserAdd} />,
+    <AuthRoute path="/users/:id" redirect="/profile" role={['user', 'admin']} component={UserEdit} />,
+    <AuthRoute exact path="/register" redirectOnLoggedIn redirect="/profile" component={Register} />,
     <AuthRoute
       exact
       path="/login"
       redirectOnLoggedIn
       redirect="/"
       component={withRouter(({ history }) => (
-        <Login onLogin={() => history.push("/profile")} />
+        <Login onLogin={() => history.push('/profile')} />
       ))}
     />,
-    <AuthRoute
-      exact
-      path="/forgot-password"
-      redirectOnLoggedIn
-      redirect="/profile"
-      component={ForgotPassword}
-    />,
-    <AuthRoute
-      exact
-      path="/reset-password/:token"
-      redirectOnLoggedIn
-      redirect="/profile"
-      component={ResetPassword}
-    />,
+    <AuthRoute exact path="/forgot-password" redirectOnLoggedIn redirect="/profile" component={ForgotPassword} />,
+    <AuthRoute exact path="/reset-password/:token" redirectOnLoggedIn redirect="/profile" component={ResetPassword} />,
     // FOR RENDERAUTOCOMPLETE
     <Route path="/demo-path" component={DemoRoute} />
   ],
@@ -186,15 +140,8 @@ export default new ClientModule({
   ],
 
   resolver: [resolvers],
-  localization: [{ ns: "user", resources }],
+  localization: [{ ns: 'user', resources }],
   dataRootComponent: [DataRootComponent],
   // eslint-disable-next-line react/display-name
-  rootComponentFactory: [
-    req =>
-      req ? (
-        <CookiesProvider cookies={req.universalCookies} />
-      ) : (
-        <CookiesProvider />
-      )
-  ]
+  rootComponentFactory: [req => (req ? <CookiesProvider cookies={req.universalCookies} /> : <CookiesProvider />)]
 });

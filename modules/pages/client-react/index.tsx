@@ -11,7 +11,9 @@ import resources from './locales';
 
 export default new ClientModule({
   route: [
+
     <Route exact path="/" component={Home} />,
+
     <Route exact path="/mission" component={Static} />,
     <Route exact path="/about-us" component={Static} />,
     <Route exact path="/terms-of-service" component={Static} />,

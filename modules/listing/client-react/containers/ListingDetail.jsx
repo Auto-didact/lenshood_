@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
-import ListingEditView from '../components/ListingEditView';
 import ListingDetailView from '../components/ListingDetailView';
 
 import LISTING_QUERY from '../graphql/ListingQuery.graphql';
@@ -14,6 +13,7 @@ const ListingDetail = props => {
 ListingDetail.propTypes = {
   loading: PropTypes.bool.isRequired,
   listing: PropTypes.object,
+  reviews: PropTypes.object,
   history: PropTypes.object,
   navigation: PropTypes.object
 };
@@ -31,8 +31,8 @@ export default graphql(LISTING_QUERY, {
       variables: { id: Number(id) }
     };
   },
-  props({ data: { loading, error, listing } }) {
+  props({ data: { loading, error, listing, reviews } }) {
     if (error) throw new Error(error);
-    return { loading, listing };
+    return { loading, listing, reviews };
   }
 })(ListingDetail);

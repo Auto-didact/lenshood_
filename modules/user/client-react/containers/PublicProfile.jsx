@@ -1,14 +1,33 @@
 // React
-import React from "react";
+import React from 'react';
 
 // Apollo
-import { graphql, compose } from "react-apollo";
+import { graphql, compose } from 'react-apollo';
 
 // Components
-import PublicProfileView from "../components/PublicProfileView";
-import USER_QUERY from "../graphql/UserQuery.graphql";
+import ProfileView from '../components/ProfileView';
+import PublicProfileView from '../components/PublicProfileView';
+import USER_QUERY from '../graphql/DisplayUserQuery.graphql';
 
-const PublicProfile = props => <PublicProfileView {...props} />;
+const PublicProfile = props => {
+  let userBool = false;
+  let id = 0;
+  if (props.match) {
+    id = props.match.params.id;
+  } else if (props.navigation) {
+    id = props.navigation.state.params.id;
+  }
+
+  if (Number(id) === props.currentUser.id) {
+    userBool = true;
+  }
+
+  if (userBool) {
+    return <ProfileView {...props} />;
+  } else {
+    return <PublicProfileView {...props} />;
+  }
+};
 
 export default compose(
   graphql(USER_QUERY, {
@@ -23,12 +42,9 @@ export default compose(
         variables: { id: Number(id) }
       };
     },
-    props({ data: { loading, user } }) {
-      const userPayload = user ? { user: user } : {};
-      return {
-        loading,
-        ...userPayload
-      };
+    props({ data: { loading, error, displayUser } }) {
+      if (error) throw new Error(error);
+      return { loading, user: displayUser };
     }
   })
 )(PublicProfile);

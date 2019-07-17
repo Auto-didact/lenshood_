@@ -1,10 +1,12 @@
 /* eslint-disable react/display-name */
 
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Table, Loader } from "@gqlapp/look-client-react";
-import { Popconfirm, Button, message } from "antd";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Table, Loader } from '@gqlapp/look-client-react';
+import { Popconfirm, Button, message, Modal } from 'antd';
+import { FormError } from '@gqlapp/forms-client-react';
+import LiveSearchFormComponent from './LiveSearchFormComponent';
 
 const LiveSearchComponent = ({
   orderBy,
@@ -13,24 +15,23 @@ const LiveSearchComponent = ({
   liveSearches,
   currentUser,
   increSearchItem,
-  decreSearchItem
+  decreSearchItem,
+  addSearchItem
 }) => {
   const [errors, setErrors] = useState([]);
-  // const handleDeleteUser = async id => {
-  //   const result = await deleteUser(id);
-  //   if (result && result.errors) {
-  //     setErrors(result.errors);
-  //   } else {
-  //     setErrors([]);
-  //   }
-  // };
+  const [visible, setVisible] = useState(false);
+
+  const setModalVisible = () => {
+    setVisible(!visible);
+  };
+
   const cancel = () => {
-    message.error("Task cancelled");
+    message.error('Task cancelled');
   };
 
   const renderOrderByArrow = name => {
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === "desc") {
+      if (orderBy.order === 'desc') {
         return <span className="badge badge-primary">&#8595;</span>;
       } else {
         return <span className="badge badge-primary">&#8593;</span>;
@@ -43,14 +44,14 @@ const LiveSearchComponent = ({
   const handleOrderBy = (e, name) => {
     e.preventDefault();
 
-    let order = "asc";
+    let order = 'asc';
     if (orderBy && orderBy.column === name) {
-      if (orderBy.order === "asc") {
-        order = "desc";
-      } else if (orderBy.order === "desc") {
+      if (orderBy.order === 'asc') {
+        order = 'desc';
+      } else if (orderBy.order === 'desc') {
         return onOrderBy({
-          column: "",
-          order: ""
+          column: '',
+          order: ''
         });
       }
     }
@@ -66,50 +67,56 @@ const LiveSearchComponent = ({
     return decreSearchItem({ id: id });
   };
 
-  // console.log(liveSearches)
+  const onSubmit = async values => {
+    try {
+      await addSearchItem(values);
+    } catch (e) {
+      message.error("Couldn't add the Item. Please try again.");
+      throw new FormError("Couldn't add the Item. Please try again.", e);
+    }
+    setModalVisible();
+  };
 
   const columns = [
     {
       title: (
         <a /*onClick={e => handleOrderBy(e, 'queryItem')}*/ href="#">
-          {"Requested Item"} {/*renderOrderByArrow('queryItem')*/}
+          {'Requested Item'} {/*renderOrderByArrow('queryItem')*/}
         </a>
       ),
-      dataIndex: "queryItem",
-      key: "queryItem",
+      dataIndex: 'queryItem',
+      key: 'queryItem',
       sorter: (a, b) => a.queryItem.length - b.queryItem.length,
-      sortDirections: ["descend", "ascend"]
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: (
         <a /*onClick={e => handleOrderBy(e, ' gearCategory')}*/ href="#">
-          {"Gear Category"} {/*renderOrderByArrow(' gearCategory')*/}
+          {'Gear Category'} {/*renderOrderByArrow(' gearCategory')*/}
         </a>
       ),
-      dataIndex: "gearCategory",
-      key: "gearCategory",
+      dataIndex: 'gearCategory',
+      key: 'gearCategory',
       sorter: (a, b) => a.gearCategory.length - b.gearCategory.length,
-      sortDirections: ["descend", "ascend"]
+      sortDirections: ['descend', 'ascend']
     },
     {
-      title: <a href="#">{"Requested by"}</a>,
-      dataIndex: "users",
-      key: "users",
+      title: <a href="#">{'Requested by'}</a>,
+      dataIndex: 'users',
+      key: 'users',
       sorter: (a, b) => a.users.length - b.users.length,
-      sortDirections: ["descend", "ascend"],
+      sortDirections: ['descend', 'ascend'],
       render: text => (
         <div>
-          <strong>{text[0].user.username}</strong>
-          {text.length > 1 ? (
-            <span>{` and ${text.length - 1} others`}</span>
-          ) : null}
+          <strong>{text.some(item => item.user.id === currentUser.id) ? 'You' : text[0].user.username}</strong>
+          {text.length > 1 ? <span>{` and ${text.length - 1} others`}</span> : null}
         </div>
       )
     },
     {
-      title: "Add / Cancel Request",
-      dataIndex: "users",
-      key: "actions",
+      title: 'Add / Cancel Request',
+      dataIndex: 'users',
+      key: 'actions',
       render: (text, record) => (
         <div>
           {text.some(item => item.user.id === currentUser.id) ? (
@@ -120,7 +127,7 @@ const LiveSearchComponent = ({
               okText="Yes"
               cancelText="No"
             >
-              <Button type="danger" size="small" style={{ width: "70px" }}>
+              <Button type="danger" size="small" style={{ width: '70px' }}>
                 Cancel
               </Button>
             </Popconfirm>
@@ -132,7 +139,7 @@ const LiveSearchComponent = ({
               okText="Yes"
               cancelText="No"
             >
-              <Button type="primary" size="small" style={{ width: "70px" }}>
+              <Button type="primary" size="small" style={{ width: '70px' }}>
                 Request
               </Button>
             </Popconfirm>
@@ -150,20 +157,27 @@ const LiveSearchComponent = ({
         <>
           {errors &&
             errors.map(error => (
-              <div
-                className="alert alert-danger"
-                role="alert"
-                key={error.field}
-              >
+              <div className="alert alert-danger" role="alert" key={error.field}>
                 {error.message}
               </div>
             ))}
           <Table
             dataSource={liveSearches}
             columns={columns}
-            bordered
-            title={() => <Button type="primary">Add a Query</Button>}
+            title={() => (
+              <Button type="primary" onClick={() => setModalVisible()}>
+                Request an Item
+              </Button>
+            )}
           />
+          <Modal
+            title={<strong>Add an Item Request</strong>}
+            visible={visible}
+            onCancel={() => setModalVisible()}
+            footer={null}
+          >
+            <LiveSearchFormComponent onSubmit={onSubmit} />
+          </Modal>
         </>
       )}
     </>

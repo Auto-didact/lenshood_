@@ -38,7 +38,9 @@
     "modules/liveSearch/client-react/containers/LiveSearch.jsx",
     "modules/liveSearch/client-react/components/LiveSearchView.jsx",
     "modules/listing/client-react/components/ListingFilterComponent.jsx",
-    "modules/liveSearch/client-react/index.jsx"
+    "modules/liveSearch/client-react/index.jsx",
+    "modules/pages/client-react/containers/Featured/FeaturedUser.jsx",
+    "modules/order/client-react/components/MyOrdersView.jsx"
   ],
   "exclude": ["node_modules"]
 }

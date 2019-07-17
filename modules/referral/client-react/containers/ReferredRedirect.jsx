@@ -1,5 +1,5 @@
-import React from "react";
-import Register from "@gqlapp/user-client-react/containers/Register";
+import React from 'react';
+import Register from '@gqlapp/user-client-react/containers/Register';
 
 const ReferredRedirect = props => {
   let code = false;
