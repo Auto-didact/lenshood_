@@ -31,7 +31,11 @@ class ReviewsCard extends Component {
 
   handleAddReviews = async r => {
     if (this.state.is_reply) {
-      return null;
+      return await this.setState({
+        result: 'triggered',
+        loading: false,
+        visible: false
+      });
     } else {
       return await this.setState(prevState => ({
         result: 'triggered',

@@ -1,5 +1,5 @@
 import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
-import { Model } from 'objection';
+import { Model, raw } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
 import { has } from 'lodash';

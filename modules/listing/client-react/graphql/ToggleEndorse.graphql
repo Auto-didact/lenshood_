@@ -1,0 +1,6 @@
+mutation toggleEndorse($endorsee: Int, $endorser: Int) {
+  toggleEndorse(endorseeId: $endorsee, endorserId: $endorser) {
+    endorsecount
+    isEndorsed
+  }
+}

@@ -103,7 +103,7 @@ class ListingDetailView extends Component {
                   />
                 </Col>
                 <Col span={24}>
-                  <UserCardComponent seller={seller} />
+                  <UserCardComponent seller={seller} userId={listing.user.id} />
                 </Col>
               </Row>
             </Col>

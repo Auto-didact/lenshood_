@@ -1,0 +1,6 @@
+mutation toggleFollow($u_Id: Int, $f_Id: Int) {
+  toggleFollow(userId: $u_Id, followerId: $f_Id) {
+    follwerCount
+    isFollwed
+  }
+}
