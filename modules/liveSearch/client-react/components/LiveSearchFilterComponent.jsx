@@ -11,6 +11,7 @@ const LiveSearchFilterComponent = ({
   onGearCategoryChange
 }) => (
   <Form layout="inline">
+    {console.log("searchText", searchText, gearCategory)}
     <FormItem label="Search">
       <DebounceInput
         minLength={1}

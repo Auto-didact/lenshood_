@@ -134,6 +134,7 @@ const ListingFormComponentWithFormik = withFormik({
     username: props.listing && props.listing.user.username,
     gearCategory: props.listing && props.listing.gearCategory,
     gearSubcategory: props.listing && props.listing.gearSubcategory,
+    gearSubSubcategory: props.listing && props.listing.gearSubSubcategory,
     description: props.listing && props.listing.description,
     status: (props.listing && props.listing.status) || 'Idle',
     isActive: (props.listing && props.listing.isActive) || true,
