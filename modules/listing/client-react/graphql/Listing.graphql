@@ -2,6 +2,7 @@ fragment ListingInfo on Listing {
   id
   gearCategory
   gearSubcategory
+  gearSubSubcategory
   description
   status
   isActive

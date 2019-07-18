@@ -4,6 +4,7 @@ fragment MyListings on Listing {
   description
   gearCategory
   gearSubcategory
+  gearSubSubcategory
   listingContent {
     id
     gear

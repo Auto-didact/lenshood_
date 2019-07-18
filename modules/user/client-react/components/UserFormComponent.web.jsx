@@ -72,8 +72,8 @@ const UserForm = ({
   } = values;
   const isAdmin = isAdminFunction(userRole);
   return (
-    <div className="con">
-      <Form name="user" onSubmit={handleSubmit}>
+    <div>
+      <Form name="user" onSubmit={handleSubmit} className="userForm">
         {/*-----------Avatar-------------------*/}
         {LYGflag == false || !valueCheck.avatar ? (
           <>
@@ -221,7 +221,7 @@ const UserForm = ({
 
         {/*------------Account Info End here-------------------------*/}
         {/*-----------------For Admin---------------------*/}
-        {isAdmin && <h1 className="heading vgap">**For Admin</h1>}
+        {isAdmin && !LYGflag && <h1 className="heading vgap">**For Admin</h1>}
 
         {LYGflag == false ? (
           <div className="about">

@@ -36,6 +36,7 @@ export interface Listing {
   userId: number;
   gearCategory: string;
   gearSubcategory: string;
+  gearSubSubcategory: string;
   description: string;
   status: string;
   isActive: boolean;
@@ -311,8 +312,8 @@ export default class ListingDAO extends Model {
   public async updateLiskesDisLikes(input: { ld: string; review_id: number; reviewer_id: number }) {
     const lkDk = await this.getIsLikeOrDisLike(input);
     if (lkDk && lkDk.length > 0) {
-      const up = {};
-      up.like_dislike = input.ld;
+      let up = {};
+      up = { like_dislike: input.ld };
       await UserReviewLikesDAO.query()
         .update(up)
         .where('listing_review_id', '=', input.review_id)
@@ -365,7 +366,7 @@ export default class ListingDAO extends Model {
     return listing;
   }
 
-  public async asyncForEach(array, callback) {
+  public async asyncForEach(array: any, callback: any) {
     for (let index = 0; index < array.length; index++) {
       await callback(array[index], index, array);
     }
