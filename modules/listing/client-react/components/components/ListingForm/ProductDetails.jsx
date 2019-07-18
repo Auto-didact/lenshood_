@@ -94,6 +94,8 @@ export default class ProductDetails extends Component {
   }
 
   handleGearCategoryChange = value => {
+    this.props.values.gearSubcategory = null;
+    this.props.values.gearSubSubcategory = null;
     this.setState({
       activeGearCategory: value,
       activeGearSubcategories: null,
@@ -102,6 +104,7 @@ export default class ProductDetails extends Component {
   };
 
   handleGearSubCategoryChange = value => {
+    this.props.values.gearSubSubcategory = null;
     this.setState({
       activeGearSubcategories: value,
       activeGearSubSubcategory: null
@@ -211,22 +214,42 @@ export default class ProductDetails extends Component {
         {this.state.listingCategories.gearSubSubcategory[
           this.state.activeGearSubcategories
         ] ? (
-          <Field
-            name="gearSubSubcategory"
-            component={RenderSelect}
-            type="text"
-            label={t("listing.field.gearSubcategory")}
-            value={this.state.activeGearSubSubcategory}
-            onChange={this.handleGearSubSubcategoryChange}
-          >
+          <>
             {this.state.listingCategories.gearSubSubcategory[
               this.state.activeGearSubcategories
-            ].map((category, idx) => (
-              <Select.Option key={idx} value={category}>
-                {category}
-              </Select.Option>
-            ))}
-          </Field>
+            ].some(
+              item =>
+                item == "Standard/Zoom Lens" ||
+                item == "Wide angle/Fish eye Lens"
+            ) ? (
+              <p>
+              <strong>Note: </strong>
+              <ul>
+                <li>
+                  <strong>Wide angle/fisheye</strong> - below 18mm
+                </li>
+                <li>
+                  <strong>zoom/standard</strong> - above 18mm
+                </li>
+              </ul></p>
+            ) : null}
+            <Field
+              name="gearSubSubcategory"
+              component={RenderSelect}
+              type="text"
+              label={t("listing.field.gearSubSubcategory")}
+              value={this.state.activeGearSubSubcategory}
+              onChange={this.handleGearSubSubcategoryChange}
+            >
+              {this.state.listingCategories.gearSubSubcategory[
+                this.state.activeGearSubcategories
+              ].map((category, idx) => (
+                <Select.Option key={idx} value={category}>
+                  {category}
+                </Select.Option>
+              ))}
+            </Field>
+          </>
         ) : null}
         {/* Listing Status */}
         {this.state.isAdmin ? (
