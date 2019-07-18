@@ -1,9 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { DebounceInput } from 'react-debounce-input';
-import { Form, FormItem, Select, Option, Label, Input } from '@gqlapp/look-client-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { DebounceInput } from "react-debounce-input";
+import {
+  Form,
+  FormItem,
+  Select,
+  Option,
+  Label,
+  Input
+} from "@gqlapp/look-client-react";
 
-const activeGearCategory = ['', 'Cameras', 'Lenses', 'Drones', 'Lighting'];
+const activeGearCategory = [
+  "",
+  "Cameras",
+  "Lenses",
+  "Tripods and Support",
+  "Lighting",
+  "Studio Space"
+];
 
 const LiveSearchFilterComponent = ({
   filter: { searchText, gearCategory },
@@ -33,7 +47,7 @@ const LiveSearchFilterComponent = ({
       >
         {activeGearCategory.map((item, key) => (
           <Option key={key} value={item}>
-            {item ? item : 'All'}
+            {item ? item : "All"}
           </Option>
         ))}
       </Select>
