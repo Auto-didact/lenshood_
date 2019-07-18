@@ -4,6 +4,9 @@ import React from "react"; // , { useEffect }
 // import settings from '../../../../settings';
 import FeaturedUserCardListComponent from "./FeaturedUserCardListComponent";
 
+//Animation
+import { Parallax } from "rc-scroll-anim";
+
 // interface FeaturedUsersViewProps {
 //   t: TranslateFunction;
 // }
@@ -69,18 +72,28 @@ export default class FeaturedUsersView extends React.Component
 
   render() {
     return (
-      <React.Fragment style={{ backgroundColor: "#c3c3c3" }}>
-        <h1 style={{ textAlign: "center", fontSize: "30px" }}>
-          Featured Users
-        </h1>
+      <React.Fragment>
+        <Parallax
+          animation={{ x: 0, opacity: 1, playScale: [0.5, 0.8] }}
+          style={{ transform: "translateX(-100px)", opacity: 0 }}
+        >
+          <h1 style={{ textAlign: "center", fontSize: "30px" }}>
+            Featured Users
+          </h1>
 
-        <div align="center">
-          <div
-            style={{ height: "2px", width: "342px", background: "#23b195" }}
-          />
-        </div>
+          <div align="center">
+            <div
+              style={{ height: "2px", width: "342px", background: "#23b195" }}
+            />
+          </div>
+        </Parallax>
         <br />
-        <FeaturedUserCardListComponent relatedUser={this.state.users} />
+        <Parallax
+          animation={{ x: 0, opacity: 1, playScale: [0.5, 0.8] }}
+          style={{ transform: "translateX(300px)", opacity: 0 }}
+        >
+          <FeaturedUserCardListComponent relatedUser={this.state.users} />
+        </Parallax>
       </React.Fragment>
     );
   }

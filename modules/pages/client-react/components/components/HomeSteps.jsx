@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Row, Col } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'antd';
 
 const HomeSteps = ({ t }) => {
   return (
     <div className="home-steps-container" align="center">
       <h1 className="home-steps-head">Three Simple Steps To Get Started</h1>
       <div align="center">
-        <div style={{ height: "2px", width: "342px", background: "#23b195" }} />
+        <div style={{ height: '2px', width: '342px', background: '#23b195' }} />
       </div>
       <br />
       <Row gutter={10} align="middle" type="flex" justify="space-around">

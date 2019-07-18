@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Row, Col, Tabs } from 'antd';
-import FeaturedListing from '../../containers/Featured/FeaturedListing';
+import React from "react";
+import PropTypes from "prop-types";
+import { Row, Col, Tabs } from "antd";
+import FeaturedListing from "../../containers/Featured/FeaturedListing";
 
 const { TabPane } = Tabs;
 
