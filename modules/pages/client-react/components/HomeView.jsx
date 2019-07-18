@@ -11,6 +11,8 @@ import HomeFeaturedUsers from "./components/HomeFeaturedUsers";
 import HomeFeaturedListings from "./components/HomeFeaturedListings";
 
 import HomeSteps from "./components/HomeSteps";
+import HomeWhyLenshood from "./components/HomeWhyLenshood";
+
 import HomeHowItWorks from "./components/HomeHowItWorks";
 
 class HomeView extends Component {
@@ -36,6 +38,7 @@ class HomeView extends Component {
         <HomeFeaturedUsers t={t} />
         <HomeSteps t={t} />
         <HomeHowItWorks t={t} />
+        <HomeWhyLenshood t={t} />
       </PageLayout>
     );
   }

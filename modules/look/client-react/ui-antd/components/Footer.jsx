@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Icon } from "antd";
-import { Link } from "react-router-dom";
-import Container from "./Container";
-import Row from "./Row";
-import Col from "./Col";
-import "./styles.css";
+import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
+import Container from './Container';
+import Row from './Row';
+import Col from './Col';
+import './styles.css';
 
 export default class Footer extends React.Component {
   state = {
@@ -38,10 +38,7 @@ export default class Footer extends React.Component {
     return (
       <div>
         {/*------#For Large Screen Devices---#Render this for screen width more than 800px--*/}
-        <Container
-          className="no-print screen_width_more_than_700"
-          align="center"
-        >
+        <Container className="no-print screen_width_more_than_700" align="center">
           <Row className="footer" gutter={16}>
             <Col lg={12} sm={24}>
               <Row>
@@ -109,12 +106,8 @@ export default class Footer extends React.Component {
                       <Link to="/blog">Blog</Link>
                     </li>
                     <li>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://facebook.com/lenshoodcommunity"
-                      >
-                        {" "}
+                      <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/lenshoodcommunity">
+                        {' '}
                         <Icon theme="filled" type="facebook" />
                       </a>
                       <a
@@ -124,11 +117,7 @@ export default class Footer extends React.Component {
                       >
                         <Icon theme="filled" type="linkedin" />
                       </a>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://www.instagram.com/we_are_lenshood/"
-                      >
+                      <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/we_are_lenshood/">
                         <Icon theme="filled" type="instagram" />
                       </a>
                       <a target="_blank" rel="noopener noreferrer" href="/">
@@ -139,22 +128,18 @@ export default class Footer extends React.Component {
                 </Col>
               </Row>
             </Col>
-            <Col
-              className="FooterLogo"
-              span={24}
-              style={{ borderTopStyle: "solid", padding: "10px 0px 0px 0px" }}
-            >
+            <Col className="FooterLogo" span={24} style={{ borderTopStyle: 'solid', padding: '10px 0px 0px 0px' }}>
               <Row>
                 <Link to="/">
                   <img
-                    src={require("../../logo/OrgLogo.png")}
+                    src={require('../../logo/OrgLogo.png')}
                     height="50"
                     width="50"
                     align="centre"
                     style={{
-                      display: "block",
-                      marginLeft: "auto",
-                      marginRight: "auto"
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto'
                     }}
                   />
                 </Link>
@@ -165,33 +150,26 @@ export default class Footer extends React.Component {
 
         {/*------#For Small screen Device----#Render this For Screen width less than 800px */}
 
-        <Container
-          className="no-print screen_width_less_than_700"
-          align="center"
-        >
+        <Container className="no-print screen_width_less_than_700" align="center">
           <Row className="footer" gutter={16}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div>
                 <h3 onClick={() => this.toggle(1)}>
-                  About Lenshood{" "}
-                  {this.state.show1 ? (
-                    <Icon type="caret-up" />
-                  ) : (
-                    <Icon type="caret-down" theme="filled" />
-                  )}
+                  About Lenshood{' '}
+                  {this.state.show1 ? <Icon type="caret-up" /> : <Icon type="caret-down" theme="filled" />}
                 </h3>
                 <div
                   style={
                     this.state.show1
-                      ? { display: "block" }
+                      ? { display: 'block' }
                       : {
-                          display: "none",
-                          position: "absolute",
-                          marginLeft: "20px"
+                          display: 'none',
+                          position: 'absolute',
+                          marginLeft: '20px'
                         }
                   }
                 >
-                  <ul style={{ listStyle: "none", padding: "0 0 0 0" }}>
+                  <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                     <li>
                       <Link to="/about-us">About us</Link>
                     </li>
@@ -210,21 +188,15 @@ export default class Footer extends React.Component {
 
               <div>
                 <h3 onClick={() => this.toggle(2)}>
-                  How It Works{" "}
+                  How It Works{' '}
                   {this.state.show2 ? (
                     <Icon type="caret-up" theme="filled" />
                   ) : (
                     <Icon type="caret-down" theme="filled" />
                   )}
                 </h3>
-                <div
-                  style={
-                    this.state.show2
-                      ? { display: "block" }
-                      : { display: "none" }
-                  }
-                >
-                  <ul style={{ listStyle: "none", padding: "0 0 0 0" }}>
+                <div style={this.state.show2 ? { display: 'block' } : { display: 'none' }}>
+                  <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                     <li>
                       <Link to="/renting">Renting</Link>
                     </li>
@@ -242,21 +214,15 @@ export default class Footer extends React.Component {
               </div>
               <div>
                 <h3 onClick={() => this.toggle(3)}>
-                  Keep In Touch{" "}
+                  Keep In Touch{' '}
                   {this.state.show3 ? (
                     <Icon type="caret-up" theme="filled" />
                   ) : (
                     <Icon type="caret-down" theme="filled" />
                   )}
                 </h3>
-                <div
-                  style={
-                    this.state.show3
-                      ? { display: "block" }
-                      : { display: "none" }
-                  }
-                >
-                  <ul style={{ listStyle: "none", padding: "0 0 0 0" }}>
+                <div style={this.state.show3 ? { display: 'block' } : { display: 'none' }}>
+                  <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                     <li>
                       <a href="mailto:reachus@lenshood.in">
                         Write to us:
@@ -277,31 +243,21 @@ export default class Footer extends React.Component {
 
               <div>
                 <h3 onClick={() => this.toggle(4)}>
-                  Follow Us{" "}
+                  Follow Us{' '}
                   {this.state.show4 ? (
                     <Icon type="caret-up" theme="filled" />
                   ) : (
                     <Icon type="caret-down" theme="filled" />
                   )}
                 </h3>
-                <div
-                  style={
-                    this.state.show4
-                      ? { display: "block" }
-                      : { display: "none" }
-                  }
-                >
-                  <ul style={{ listStyle: "none", padding: "0 0 0 0" }}>
+                <div style={this.state.show4 ? { display: 'block' } : { display: 'none' }}>
+                  <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
                     <li>
                       <Link to="/blog">Blog</Link>
                     </li>
                     <li>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://facebook.com/lenshoodcommunity"
-                      >
-                        {" "}
+                      <a target="_blank" rel="noopener noreferrer" href="https://facebook.com/lenshoodcommunity">
+                        {' '}
                         <Icon theme="filled" type="facebook" />
                       </a>
                       <a
@@ -311,11 +267,7 @@ export default class Footer extends React.Component {
                       >
                         <Icon theme="filled" type="linkedin" />
                       </a>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://www.instagram.com/we_are_lenshood/"
-                      >
+                      <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/we_are_lenshood/">
                         <Icon theme="filled" type="instagram" />
                       </a>
                       <a target="_blank" rel="noopener noreferrer" href="/">
@@ -327,22 +279,18 @@ export default class Footer extends React.Component {
               </div>
             </div>
 
-            <Col
-              className="FooterLogo"
-              span={24}
-              style={{ borderTopStyle: "solid", padding: "10px 0px 0px 0px" }}
-            >
+            <Col className="FooterLogo" span={24} style={{ borderTopStyle: 'solid', padding: '10px 0px 0px 0px' }}>
               <Row>
                 <Link to="/">
                   <img
-                    src={require("../../logo/OrgLogo.png")}
+                    src={require('../../logo/OrgLogo.png')}
                     height="50"
                     width="50"
                     align="centre"
                     style={{
-                      display: "block",
-                      marginLeft: "auto",
-                      marginRight: "auto"
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto'
                     }}
                   />
                 </Link>

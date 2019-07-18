@@ -10,12 +10,20 @@ class FeaturedListingView extends Component {
       <div>
         <Row>
           <Col span={24}>
-            <h1
-              className="headingTop"
-              style={{ textAlign: "center", fontSize: " 50px" }}
-            >
+            <h1 style={{ textAlign: "center", fontSize: " 30px" }}>
               Featured listings
             </h1>
+
+            <div align="center">
+              <div
+                style={{
+                  height: "2px ",
+                  width: "342px",
+                  background: "#23b195"
+                }}
+              />
+            </div>
+            <br />
             <SuggestedCardListComponent relatedList={this.props.listings} />
           </Col>
         </Row>

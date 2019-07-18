@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Row, Col, Tabs } from "antd";
-import Borrowing from "./Borrowing";
-import Lending from "./Lending";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col, Tabs } from 'antd';
+import Borrowing from './Borrowing';
+import Lending from './Lending';
 
 const { TabPane } = Tabs;
 
@@ -17,10 +17,10 @@ const HomeHowItWorks = ({ t }) => {
             defaultActiveKey={1}
             size="large"
             tabBarStyle={{
-              maxWidth: "1000px",
-              display: "flex",
-              justifyContent: "center",
-              color: "#111"
+              maxWidth: '1000px',
+              display: 'flex',
+              justifyContent: 'center',
+              color: '#111'
             }}
           >
             <TabPane tab="For Borrowers" key="1">

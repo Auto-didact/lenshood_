@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Row, Col, Tabs } from "antd";
-import FeaturedUser from "../../containers/Featured/FeaturedUser";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col, Tabs } from 'antd';
+import FeaturedUser from '../../containers/Featured/FeaturedUser';
 
 const { TabPane } = Tabs;
 

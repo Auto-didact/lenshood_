@@ -70,9 +70,16 @@ export default class FeaturedUsersView extends React.Component
   render() {
     return (
       <React.Fragment style={{ backgroundColor: "#c3c3c3" }}>
-        <h1 style={{ textAlign: "center", fontSize: "50px" }}>
+        <h1 style={{ textAlign: "center", fontSize: "30px" }}>
           Featured Users
         </h1>
+
+        <div align="center">
+          <div
+            style={{ height: "2px", width: "342px", background: "#23b195" }}
+          />
+        </div>
+        <br />
         <FeaturedUserCardListComponent relatedUser={this.state.users} />
       </React.Fragment>
     );
