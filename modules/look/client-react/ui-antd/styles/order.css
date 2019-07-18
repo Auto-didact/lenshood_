@@ -206,8 +206,14 @@
   min-width: 100%;
 }
 
-.orderImage {
+.orderHorizontalImage {
   height: 100%;
+}
+
+.orderVerticalImage {
+  width: 100%;
+  padding-right: 15px;
+  height: 60px;
 }
 
 .cartSum {

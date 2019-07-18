@@ -169,7 +169,7 @@ export default class RenderAddress extends React.Component {
                     title="Address"
                     okText="Ok"
                     onCancel={() => this.modalControl(indexa, false) || this.checkAdd(indexa)}
-                    onOk={() => this.modalControl(indexa, false) || this.checkAdd(indexa)}
+                    onOk={() => this.modalControl(indexa, false) || this.setState({ newAddressState: false })}
                   >
                     <div>
                       <FormItem>{formItems[indexa]}</FormItem>
