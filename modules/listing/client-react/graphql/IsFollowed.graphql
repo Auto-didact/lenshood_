@@ -1,0 +1,3 @@
+mutation isFollwed($u_Id: Int, $f_Id: Int) {
+  isFollwed(userId: $u_Id, followerId: $f_Id)
+}

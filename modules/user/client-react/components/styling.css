@@ -171,4 +171,10 @@ padding-left:5px;
 .save{
     width:100% !important;
 }
+.address>div>div:nth-child(2)>div>div{
+    width: 100%;
+}
+.address{
+    width:100%;
+}
 /*===============User Edit Form Ends Here==================*/

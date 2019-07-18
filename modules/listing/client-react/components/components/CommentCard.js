@@ -107,7 +107,15 @@ class CommentCard extends Component {
           mutation: DELETE_LISTING_REVIEW,
           variables: { input }
         });
-        await this.setState({ visible: false, result: 'triggered', loading: false });
+        await this.props.rcard.setState({
+          reviews: this.props.rcard.state.reviews.filter(v => v.id !== input.id)
+        });
+        await this.setState({
+          visible: false,
+          result: 'triggered',
+          loading: false,
+          childreviews: this.state.childreviews.filter(v => v.id !== input.id)
+        });
       } catch (error) {
         console.warn(error.message);
         await this.setState({ error: true, loading: false, visible: false });
@@ -236,6 +244,8 @@ class CommentCard extends Component {
                 visible={this.state.visible}
                 action={this.editReviews.bind(this)}
                 rcard={this}
+                rating={parseInt(reviews.rating)}
+                comment={reviews.comment}
               />
             </div>
             <p>{reviews.comment}</p>
@@ -244,8 +254,8 @@ class CommentCard extends Component {
         datetime={
           <div>
             <Rate disabled defaultValue={reviews.rating} className="font10 mainColor" />
-            <Tooltip title={moment(parseInt(reviews.createdAt)).format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{moment(parseInt(reviews.createdAt)).fromNow()}</span>
+            <Tooltip title={moment(reviews.createdAt).format('YYYY-MM-DD HH:mm:ss')}>
+              <span>{moment(reviews.createdAt).fromNow()}</span>
             </Tooltip>
           </div>
         }
