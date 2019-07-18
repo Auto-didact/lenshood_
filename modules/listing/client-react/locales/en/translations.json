@@ -23,7 +23,7 @@
 
   "listing": {
     "title": "Edit Listing",
-    "meta": "An Edit Listing page example",
+    "meta": "Edit Listing page",
     "loadMsg": "Loading...",
     "noListingsMsg": "There are no listings yet.",
     "btn": {
@@ -43,6 +43,7 @@
       "username": "UserName",
       "gearCategory": "Gear Category",
       "gearSubcategory": "Gear Sub-Category",
+      "gearSubSubcategory": "Gear Sub-Subcategory",
       "listingDamages": "Damages",
       "description": "Description",
       "status": "Status",

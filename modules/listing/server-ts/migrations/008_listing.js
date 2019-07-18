@@ -11,6 +11,7 @@ exports.up = function(knex, Promise) {
           .onDelete('CASCADE');
         table.string('gear_category');
         table.string('gear_subcategory');
+        table.string('gear_sub_subcategory');
         table.string('description');
         table.string('status').defaultTo('Idle');
         table.boolean('is_active').defaultTo(true);
