@@ -758,53 +758,13 @@ class ListingReviewDAO extends Model {
 }
 
 // ListingWatchListDAO model.
-// class ListingWatchListDAO extends Model {
-//   static get tableName() {
-//     return 'watchlist';
-//   }
-
-//   static get idColumn() {
-//     return 'id';
-//   }
-
-//   static get relationMappings() {
-//     return {
-//       listing: {
-//         relation: Model.HasManyRelation,
-//         modelClass: ListingDAO,
-//         join: {
-//           from: 'listing_review.listing_id',
-//           to: 'listing.id'
-//         }
-//       },
-//       reviewer: {
-//         relation: Model.HasManyRelation,
-//         modelClass: UserProfile,
-//         join: {
-//           from: 'listing_review.reviewer_id',
-//           to: 'user_profile.user_id'
-//         }
-//       },
-//       likedislikes: {
-//         relation: Model.HasManyRelation,
-//         modelClass: UserReviewLikesDAO,
-//         join: {
-//           from: 'listing_review.id',
-//           to: 'user_reviews_likes.listing_review_id'
-//         }
-//       }
-//     };
-//   }
-// }
-
-// ListingWatchListDAO model.
 class ListingWatchListDAO extends Model {
   static get tableName() {
-    return "watchlist";
+    return 'watchlist';
   }
 
   static get idColumn() {
-    return "id";
+    return 'id';
   }
 
   static get relationMappings() {
