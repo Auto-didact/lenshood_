@@ -1,41 +1,59 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Row, Col, Card, Icon, Input, message, Radio } from 'antd';
-import { Button, Form, RenderField, Alert } from '@gqlapp/look-client-react';
-import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
-import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
-import { match, email, minLength, required, validate, number } from '@gqlapp/validation-common-react';
-import settings from '../../../../settings';
+import React, { useRef, useState, useEffect } from "react";
+import { Row, Col, Card, Icon, Input, message, Radio } from "antd";
+import {
+  Button,
+  Form,
+  RenderField,
+  Alert,
+  SocialSharingButtons
+} from "@gqlapp/look-client-react";
+import PropTypes from "prop-types";
+import { withFormik } from "formik";
+import { isFormError, FieldAdapter as Field } from "@gqlapp/forms-client-react";
+import {
+  match,
+  email,
+  minLength,
+  required,
+  validate,
+  number
+} from "@gqlapp/validation-common-react";
+import settings from "../../../../settings";
 
 const InviteDetailsCardComponentSchema = {
   inviteVal: [required]
 };
 
-const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, username }) => {
+const InviteDetailsCardComponent = ({
+  values,
+  handleSubmit,
+  submitting,
+  errors,
+  username
+}) => {
   const textAreaRef = useRef(null);
 
   function copyToClipboard(e) {
     textAreaRef.current.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     e.target.focus();
-    message.info('Copied to Clipboard!');
+    message.info("Copied to Clipboard!");
   }
 
-  const [inviteUrl, setinviteUrl] = useState(`/${username}`);
+  const inviteUrl = `https://www.lenshood.in/referrals/${username}`;
 
   const [flag, setflag] = useState(false);
 
-  const [inputForm, setInputForm] = useState('email');
+  const [inputForm, setInputForm] = useState("email");
 
   useEffect(() => {
     setflag(true);
-    setinviteUrl(`${global.window.location}/${username}`);
   }, []);
 
   const whatsappMessage = `Earn cash when you sign-up using the following link: ${inviteUrl} Use the referral code - ${username} while signing up to earn cash.`;
   const twitterMessage = {
     text: `Use the referral code - ${username} while signing up to earn cash.`,
-    hashtag: '#lenshood #earncash #renting #lending',
+    hashtag: "#lenshood #earncash #renting #lending",
     link: inviteUrl
   };
 
@@ -50,8 +68,9 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
           <strong>Get up to 40 cash for every friend you invite</strong>
         </h1>
         <p className="justifyAlign marginB20">
-          Help us grow the herd and we’ll help you get dinner somewhere nice. Share your link to give friends 20 and
-          you’ll get 10 cash when they buy, sell, borrow or lend for the first time.
+          Help us grow the herd and we’ll help you get dinner somewhere nice.
+          Share your link to give friends 20 and you’ll get 10 cash when they
+          buy, sell, borrow or lend for the first time.
         </p>
         <h2>
           <strong>Share your link:</strong>
@@ -63,9 +82,14 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
         </Col>
         <Col sm={4} xs={7}>
           <div>
-            {flag && document.queryCommandSupported('copy') && (
+            {flag && document.queryCommandSupported("copy") && (
               <div>
-                <Button onClick={copyToClipboard} color="primary" block size="lg">
+                <Button
+                  onClick={copyToClipboard}
+                  color="primary"
+                  block
+                  size="lg"
+                >
                   Copy
                 </Button>
               </div>
@@ -85,7 +109,7 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
             <Radio.Button value="num">Number</Radio.Button>
           </Radio.Group>
           <Col sm={20} xs={17}>
-            {inputForm === 'email' ? (
+            {inputForm === "email" ? (
               <Field
                 name="inviteVal.email"
                 component={RenderField}
@@ -105,20 +129,39 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
           </Col>
 
           <Col sm={4} xs={7}>
-            <Button type="submit" disabled={submitting} color="primary" block ghost>
+            <Button
+              type="submit"
+              disabled={submitting}
+              color="primary"
+              block
+              ghost
+            >
               Invite
             </Button>
             <div className="text-center">
-              {errors && errors.errorMsg && <Alert color="error">{errors.errorMsg}</Alert>}
+              {errors && errors.errorMsg && (
+                <Alert color="error">{errors.errorMsg}</Alert>
+              )}
             </div>
           </Col>
         </Form>
         <br />
 
-        <Col span={24}>
-          <a href={`http://www.facebook.com/share.php?u=${inviteUrl}`} target="_blank">
+        <div style={{ height: "50px" }}>
+          <SocialSharingButtons
+            link={inviteUrl}
+            whatsappMessage={whatsappMessage}
+            twitterMessage={twitterMessage}
+          />
+        </div>
+
+        {/* <Col span={24}>
+          <a
+            href={`http://www.facebook.com/share.php?u=${inviteUrl}`}
+            target="_blank"
+          >
             <img
-              src={require('../resources/facebook.png')}
+              src={require("../resources/facebook.png")}
               height="35"
               width="35"
               align="centre"
@@ -126,31 +169,39 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
             />
           </a>
           <a
-            href={`https://twitter.com/share?url=${twitterMessage.link}&amp;text=${twitterMessage.text}&amp;hashtags=${
+            href={`https://twitter.com/share?url=${
+              twitterMessage.link
+            }&amp;text=${twitterMessage.text}&amp;hashtags=${
               twitterMessage.hashtag
             }`}
             target="_blank"
           >
             <img
-              src={require('../resources/twitter.png')}
+              src={require("../resources/twitter.png")}
               height="35"
               width="35"
               align="centre"
               className="marginR10 borderRadius9"
             />
           </a>
-          <a href={`https://web.whatsapp.com/send?text=${whatsappMessage}`} target="_blank">
+          <a
+            href={`https://web.whatsapp.com/send?text=${whatsappMessage}`}
+            target="_blank"
+          >
             <img
-              src={require('../resources/whatsapp.png')}
+              src={require("../resources/whatsapp.png")}
               height="35"
               width="35"
               align="centre"
               className="marginR10 borderRadius9"
             />
           </a>
-          <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${inviteUrl}`} target="_blank">
+          <a
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${inviteUrl}`}
+            target="_blank"
+          >
             <img
-              src={require('../resources/linkedin.png')}
+              src={require("../resources/linkedin.png")}
               height="35"
               width="35"
               align="centre"
@@ -158,6 +209,7 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
             />
           </a>
         </Col>
+       */}
       </Card>
     </div>
   );
@@ -184,12 +236,14 @@ const InviteDetailsCardComponentWithFormik = withFormik({
     }
   ) {
     if (!values.inviteVal.number && !values.inviteVal.email) {
-      message.warn('No One to invite!');
+      message.warn("No One to invite!");
     }
 
     if (values.inviteVal.number) {
       let x = values.inviteVal.number.toString();
-      x.length >= 10 ? message.warn('Function not defined yet!') : message.warn('Enter a valid Phone Number');
+      x.length >= 10
+        ? message.warn("Function not defined yet!")
+        : message.warn("Enter a valid Phone Number");
     }
 
     if (values.inviteVal.email) {
@@ -199,7 +253,7 @@ const InviteDetailsCardComponentWithFormik = withFormik({
     console.log(values);
   },
   enableReinitialize: true,
-  displayName: 'inviteForm' // helps with React DevTools
+  displayName: "inviteForm" // helps with React DevTools
 });
 
 export default InviteDetailsCardComponentWithFormik(InviteDetailsCardComponent);
