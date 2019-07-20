@@ -36,6 +36,7 @@ type User {
 
 type UserProfile {
   id: Int
+  userId: Int
   firstName: String
   lastName: String
   isVerified: Boolean
