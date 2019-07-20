@@ -171,6 +171,13 @@ extend type Mutation {
 
   addLikesDisLikes(ld: String!, review_id: Int!, reviewer_id: Int!): Boolean
   countLikesDisLikes(review_id: Int!): CountOFLikesDisLikes!
+
+  sendListEmail(input: sendListEmailInput!): Boolean
+}
+
+input sendListEmailInput {
+  email: String!
+  message: String!
 }
 
 # Input for addListing Mutation

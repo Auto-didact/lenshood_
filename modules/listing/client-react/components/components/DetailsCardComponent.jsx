@@ -82,7 +82,10 @@ class DetailsCardComponent extends Component {
               </h5>
 
               <div style={{ height: "50px" }}>
-                <SocialSharingButtons {...message} />
+                <SocialSharingButtons
+                  {...message}
+                  onSubmit={this.props.onSubmit}
+                />
               </div>
               <Row style={{ marginBottom: "8px" }}>
                 <Col span={12} align="left" style={{ paddingLeft: "20px" }}>

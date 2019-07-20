@@ -1,17 +1,29 @@
 import React from "react";
 
 import PropTypes from "prop-types";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import MyListingDetailView from "../components/MyListingDetailView";
 
 import LIST_QUERY from "../graphql/ListQuery.graphql";
+import SEND_REF_EMAIL from "../graphql/sendListEmail.graphql";
+import { FormError } from "@gqlapp/forms-client-react";
 
 const MyListingDetail = props => {
   // constructor(props) {
   //   super(props);
   //   this.subscription = null;
   // }
-  return <MyListingDetailView {...props} />;
+
+  const onSubmit = async values => {
+    try {
+      await props.sendListEmail(values);
+    } catch (e) {
+      message.error("Message sending failed");
+      throw new FormError("Message sending failed", e);
+    }
+    message.info("Email sent!");
+  };
+  return <MyListingDetailView onSubmit={onSubmit} {...props} />;
 };
 
 MyListingDetail.propTypes = {
@@ -21,21 +33,33 @@ MyListingDetail.propTypes = {
   navigation: PropTypes.object
 };
 
-export default graphql(LIST_QUERY, {
-  options: props => {
-    let id = 0;
-    if (props.match) {
-      id = props.match.params.id;
-    } else if (props.navigation) {
-      id = props.navigation.state.params.id;
-    }
+export default compose(
+  graphql(LIST_QUERY, {
+    options: props => {
+      let id = 0;
+      if (props.match) {
+        id = props.match.params.id;
+      } else if (props.navigation) {
+        id = props.navigation.state.params.id;
+      }
 
-    return {
-      variables: { id: Number(id) }
-    };
-  },
-  props({ data: { loading, error, listing } }) {
-    if (error) throw new Error(error);
-    return { loading, listing };
-  }
-})(MyListingDetail);
+      return {
+        variables: { id: Number(id) }
+      };
+    },
+    props({ data: { loading, error, listing } }) {
+      if (error) throw new Error(error);
+      return { loading, listing };
+    }
+  }),
+  graphql(SEND_REF_EMAIL, {
+    props: ({ mutate }) => ({
+      sendListEmail: async input => {
+        const { data: sendListEmail } = await mutate({
+          variables: { input }
+        });
+        return sendListEmail;
+      }
+    })
+  })
+)(MyListingDetail);

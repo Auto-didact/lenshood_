@@ -173,7 +173,7 @@ class ProductCardComponent extends Component {
         <br />
         <div className="marginB20">
           <h3 className="font16 blockDisplay fontBold"> Sharing Options</h3>
-          <SocialSharingButtons {...message} />
+          <SocialSharingButtons {...message} onSubmit={this.props.onSubmit} />
         </div>
       </div>
     );
