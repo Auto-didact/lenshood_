@@ -25,7 +25,8 @@ const SocialSharingButtons = props => {
     errors,
     twitterMessage,
     whatsappMessage,
-    link
+    link,
+    hideEmailButton
   } = props;
 
   const [inputForm, setInputForm] = useState("email");
@@ -84,13 +85,15 @@ const SocialSharingButtons = props => {
           className="marginR10 borderRadius9"
         />
       </a>
-      <Button
-        shape="circle"
-        onClick={() => setflag(true)}
-        color="primary"
-        ghost
-        icon="mail"
-      />
+      {!hideEmailButton && (
+        <Button
+          shape="circle"
+          onClick={() => setflag(true)}
+          color="primary"
+          ghost
+          icon="mail"
+        />
+      )}
       <Modal
         title="Share Listing"
         centered
@@ -152,6 +155,7 @@ SocialSharingButtons.propTypes = {
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   errors: PropTypes.object,
+  hideEmailButton: PropTypes.bool,
   values: PropTypes.object
 };
 
