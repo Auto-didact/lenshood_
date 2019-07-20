@@ -239,7 +239,7 @@ class NavBar extends React.Component {
                   <Menu.Item key="/">
                     <NavLink to="/">
                       <Icon type="database" />
-                      Browse
+                      Listing
                     </NavLink>
                   </Menu.Item>
                 </Menu>
@@ -347,7 +347,7 @@ class NavBar extends React.Component {
                   <Menu.Item key="/">
                     <NavLink to="/">
                       <Icon type="database" />
-                      Browse
+                      Listing
                     </NavLink>
                   </Menu.Item>
                 </Menu>
