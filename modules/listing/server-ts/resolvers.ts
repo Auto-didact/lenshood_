@@ -2,7 +2,7 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
 import { Listing, ListingReview, Identifier } from './sql';
-// import withAuth from "graphql-auth";
+import withAuth from 'graphql-auth';
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = 'On Shelf';
 const IDLE = 'Idle';
@@ -66,13 +66,12 @@ export default (pubsub: PubSub) => ({
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
     },
-
     listingsList(obj: any, args: any, context: any) {
       return context.Listing.listingsList();
     },
-    userListings(obj: any, { userId }: any, context: any) {
+    userListings: withAuth(['user:view:self'], async (obj: any, { userId }: any, context: any) => {
       return context.Listing.userListings(userId || context.identity.id);
-    },
+    }),
     watchlist(obj: any, { userId }: any, context: any) {
       return context.Listing.watchlist(userId || context.identity.id);
     },
@@ -95,7 +94,7 @@ export default (pubsub: PubSub) => ({
   //   })
   // },
   Mutation: {
-    async addListing(obj: any, { input }: ListingInput, context: any) {
+    addListing: withAuth(['stripe:*'], async (obj: any, { input }: ListingInput, context: any) => {
       if (!input.userId) {
         input.userId = context.identity.id;
       }
@@ -110,8 +109,8 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listing;
-    },
-    async deleteListing(obj: any, { id }: Identifier, context: any) {
+    }),
+    deleteListing: withAuth(async (obj: any, { id }: Identifier, context: any) => {
       const listing = await context.Listing.listing(id);
       const isDeleted = await context.Listing.deleteListing(id);
       if (isDeleted) {
@@ -135,9 +134,9 @@ export default (pubsub: PubSub) => ({
       } else {
         return { id: null };
       }
-    },
+    }),
 
-    async toggleListingStatus(obj: any, { id }: Identifier, context: any) {
+    toggleListingStatus: withAuth(async (obj: any, { id }: Identifier, context: any) => {
       const listing = await context.Listing.listing(id);
       let stat = null;
 
@@ -169,8 +168,8 @@ export default (pubsub: PubSub) => ({
       } else {
         return { id: null };
       }
-    },
-    async editListing(obj: any, { input }: ListingInputWithId, context: any) {
+    }),
+    editListing: withAuth(async (obj: any, { input }: ListingInputWithId, context: any) => {
       await context.Listing.editListing(input);
       const listing = await context.Listing.listing(input.id);
       // publish for listing list
@@ -190,8 +189,8 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listing;
-    },
-    async addListingReview(obj: any, { input }: ListingReviewInput, context: any) {
+    }),
+    addListingReview: withAuth(async (obj: any, { input }: ListingReviewInput, context: any) => {
       const [id] = await context.Listing.addListingReviewDAO(input);
       const listingReview = await context.Listing.getListingReviewDAO(id);
       // publish for edit listing page
@@ -207,8 +206,8 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listingReview;
-    },
-    async deleteListingReview(obj: any, { input: { id } }: ListingReviewInputWithId, context: any) {
+    }),
+    deleteListingReview: withAuth(async (obj: any, { input: { id } }: ListingReviewInputWithId, context: any) => {
       const listingReview = await context.Listing.deleteListingReviewDAO(id);
       // publish for edit listing page
       let listingId = null;
@@ -226,8 +225,8 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listingReview;
-    },
-    async editListingReview(obj: any, { input }: ListingReviewInputWithId, context: any) {
+    }),
+    editListingReview: withAuth(async (obj: any, { input }: ListingReviewInputWithId, context: any) => {
       const listingReview = await context.Listing.editListingReviewDAO(input);
       // publish for edit listing page
       if (listingReview) {
@@ -243,23 +242,23 @@ export default (pubsub: PubSub) => ({
         }
       });
       return listingReview;
-    },
-    async toggleListingIsFeatured(obj: any, input: { id: number; isFeatured: boolean }, context: any) {
+    }),
+    toggleListingIsFeatured: withAuth(async (obj: any, input: { id: number; isFeatured: boolean }, context: any) => {
       return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
-    },
-    async toggleWatchList(
-      obj: any,
-      input: { user_id: number; listing_id: number; should_notify: boolean },
-      context: any
-    ) {
-      return context.Listing.addOrRemoveWatchList(input);
-    },
-    async addLikesDisLikes(obj: any, input: { ld: string; review_id: number; reviewer_id: number }, context: any) {
-      return context.Listing.updateLiskesDisLikes(input);
-    },
-    async countLikesDisLikes(obj: any, input: { review_id: number }, context: any) {
+    }),
+    toggleWatchList: withAuth(
+      async (obj: any, input: { user_id: number; listing_id: number; should_notify: boolean }, context: any) => {
+        return context.Listing.addOrRemoveWatchList(input);
+      }
+    ),
+    addLikesDisLikes: withAuth(
+      async (obj: any, input: { ld: string; review_id: number; reviewer_id: number }, context: any) => {
+        return context.Listing.updateLiskesDisLikes(input);
+      }
+    ),
+    countLikesDisLikes: withAuth(async (obj: any, input: { review_id: number }, context: any) => {
       return context.Listing.getLikesDisLikesCount(input);
-    }
+    })
   },
   Subscription: {
     listingUpdated: {

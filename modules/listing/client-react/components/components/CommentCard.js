@@ -38,8 +38,6 @@ class CommentCard extends Component {
 
   like = async () => {
     await this.setState({
-      likes: 1,
-      dislikes: 0,
       action: 'liked'
     });
     await this.updateLikes();
@@ -47,8 +45,6 @@ class CommentCard extends Component {
 
   dislike = async () => {
     await this.setState({
-      likes: 0,
-      dislikes: 1,
       action: 'disliked'
     });
     await this.updateLikes();
@@ -101,7 +97,7 @@ class CommentCard extends Component {
 
   deleteReviews = async input => {
     await this.setState({ loading: true });
-    if (this.props.listing.user.id == parseInt(this.props.reviews.reviewer[0].id)) {
+    if (this.props.listing.user.id == parseInt(this.props.reviews.reviewer[0].userId)) {
       try {
         await this.props.client.mutate({
           mutation: DELETE_LISTING_REVIEW,
@@ -120,6 +116,8 @@ class CommentCard extends Component {
         console.warn(error.message);
         await this.setState({ error: true, loading: false, visible: false });
       }
+    } else {
+      await this.setState({ error: true, loading: false, visible: false });
     }
   };
 
@@ -130,7 +128,7 @@ class CommentCard extends Component {
     input['rating'] = rating + '';
     input['comment'] = comment;
     await this.setState({ loading: true });
-    if (this.props.listing.user.id == parseInt(this.props.reviews.reviewer[0].id)) {
+    if (this.props.listing.user.id == parseInt(this.props.reviews.reviewer[0].userId)) {
       try {
         await this.props.client.mutate({
           mutation: EDITI_LISTING_REVIEW,
@@ -148,6 +146,8 @@ class CommentCard extends Component {
         console.warn(error.message);
         await this.setState({ error: true, loading: false, visible: false });
       }
+    } else {
+      await this.setState({ error: true, loading: false, visible: false });
     }
   };
 

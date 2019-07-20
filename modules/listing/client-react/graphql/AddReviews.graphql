@@ -3,6 +3,7 @@ mutation addListingReview($input: AddListingReviewInput!) {
     id
     reviewer {
       id
+      userId
       firstName
       lastName
       avatar
