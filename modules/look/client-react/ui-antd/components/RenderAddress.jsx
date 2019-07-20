@@ -219,23 +219,29 @@ export default class RenderAddress extends React.Component {
                 {isSelectable ? (
                   <Radio.Group name="addresses" defaultValue={addresses[0]} style={{ marginLeft: '10px' }}>
                     {addresses.map((address, indexas) => (
-                      <Radio
-                        key={indexas}
-                        value={address}
-                        style={{
-                          backgroundColor: '#d5f0eb',
-                          height: '56px',
-                          paddingTop: '20px'
-                        }}
-                        // checked={
-                        //   // this.state.primeAddress[indexas]
-                        //   address.primeAddress
-                        // }
-                        // onClick={() => this.handleSelect(indexas)}
-                      >
-                        <b>Make Prime Address</b>
-                        {addressCard[indexas]}
-                      </Radio>
+                      <>
+                        <Radio
+                          id={indexas}
+                          key={indexas}
+                          value={address}
+                          style={{
+                            backgroundColor: '#d5f0eb',
+                            paddingTop: '20px',
+                            height: '56px'
+                            // opacity: '0',
+                            // position: 'absolute'
+                          }}
+                          // onClick={() => this.handleSelect(indexas)}
+                          onChange={console.log('radio handlechange called')}
+                        />
+                        <label
+                          htmlFor={indexas}
+                          name="address"
+                          // onClick={() => this.css(('outline', 'rgba(77, 97, 171, 0.5) auto 3px'))}
+                        >
+                          {addressCard[indexas]}
+                        </label>
+                      </>
                     ))}
                   </Radio.Group>
                 ) : (
