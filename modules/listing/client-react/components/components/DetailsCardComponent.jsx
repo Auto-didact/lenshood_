@@ -49,6 +49,45 @@ class DetailsCardComponent extends Component {
                   : ImgCamera[0].imageUrl
               }
             />
+
+            <Col
+              sm={0}
+              xs={4}
+              style={{
+                top: "4px",
+                left: 0,
+                position: "absolute",
+                zIndex: 1000
+              }}
+            >
+              <Link to={`/listing/${item.id}`}>
+                <Button shape="circle" size="default">
+                  <Icon type="edit" />
+                </Button>
+              </Link>
+            </Col>
+            <Col
+              sm={0}
+              xs={4}
+              style={{
+                top: "4px",
+                right: 0,
+                position: "absolute",
+                zIndex: 1000
+              }}
+            >
+              <Popconfirm
+                title="Are you sure to delete this listing?"
+                onConfirm={e => this.props.DeleteListing(item.id, e)}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" shape="circle" size="default">
+                  <Icon type="delete" />
+                </Button>
+              </Popconfirm>
+            </Col>
           </Col>
           <Col
             xs={{ span: 24 }}
@@ -80,22 +119,28 @@ class DetailsCardComponent extends Component {
               <h5 className="marginB20">
                 <strong>&#8377; {item.listingRental.perDay} per day</strong>
               </h5>
-
-              <div style={{ height: "50px" }}>
-                <SocialSharingButtons
-                  {...message}
-                  onSubmit={this.props.onSubmit}
-                />
-              </div>
               <Row style={{ marginBottom: "8px" }}>
-                <Col span={12} align="left" style={{ paddingLeft: "20px" }}>
+                <Col sm={4} xs={0} align="left" style={{ paddingLeft: "20px" }}>
                   <Link to={`/listing/${item.id}`}>
                     <Button shape="circle" size="large">
                       <Icon type="edit" />
                     </Button>
                   </Link>
                 </Col>
-                <Col span={12} align="right" style={{ paddingRight: "20px" }}>
+                <Col sm={16} xs={24} align="center">
+                  <div style={{ height: "50px" }}>
+                    <SocialSharingButtons
+                      {...message}
+                      onSubmit={this.props.onSubmit}
+                    />
+                  </div>
+                </Col>
+                <Col
+                  sm={4}
+                  xs={0}
+                  align="right"
+                  style={{ paddingRight: "20px" }}
+                >
                   <Popconfirm
                     title="Are you sure to delete this listing?"
                     onConfirm={e => this.props.DeleteListing(item.id, e)}
