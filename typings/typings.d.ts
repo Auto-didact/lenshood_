@@ -28,6 +28,12 @@ declare module '@gqlapp/user-server-ts' {
   export = { scopes, User };
 }
 
+declare module '@gqlapp/listing-server-ts' {
+  const scopes: any;
+  const Listing: any;
+  export = { scopes, Listing };
+}
+
 declare module '@gqlapp/authentication-client-react' {
   const authentication: any;
   export = authentication;
