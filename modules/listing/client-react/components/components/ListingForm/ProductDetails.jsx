@@ -14,7 +14,7 @@ import {
 } from "@gqlapp/look-client-react";
 
 // Abstract Radio Button out To Do
-import { Radio, Select } from "antd";
+import { Radio, Select, message } from "antd";
 
 const RadioButton = Radio.Button;
 
@@ -109,6 +109,18 @@ export default class ProductDetails extends Component {
       activeGearSubcategories: value,
       activeGearSubSubcategory: null
     });
+    if (value === "DSLR's" && this.state.listingContent.length === 0) {
+      let content = [
+        { gear: "Body", brand: null, model: null, serial: null },
+        { gear: "Lens", brand: null, model: null, serial: null },
+        { gear: "Battery", brand: null, model: null, serial: null },
+        { gear: "Battery Charger", brand: null, model: null, serial: null },
+        { gear: "Memory Card", brand: null, model: null, serial: null },
+        { gear: "Bag", brand: null, model: null, serial: null }
+      ];
+      message.info("Please fill in the component details");
+      this.props.values.listingContent = content;
+    }
   };
 
   handleGearSubSubcategoryChange = value => {
@@ -223,15 +235,16 @@ export default class ProductDetails extends Component {
                 item == "Wide angle/Fish eye Lens"
             ) ? (
               <p>
-              <strong>Note: </strong>
-              <ul>
-                <li>
-                  <strong>Wide angle/fisheye</strong> - below 18mm
-                </li>
-                <li>
-                  <strong>zoom/standard</strong> - above 18mm
-                </li>
-              </ul></p>
+                <strong>Note: </strong>
+                <ul>
+                  <li>
+                    <strong>Wide angle/fisheye</strong> - below 18mm
+                  </li>
+                  <li>
+                    <strong>zoom/standard</strong> - above 18mm
+                  </li>
+                </ul>
+              </p>
             ) : null}
             <Field
               name="gearSubSubcategory"
