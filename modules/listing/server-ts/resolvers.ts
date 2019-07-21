@@ -1,8 +1,9 @@
 import { PubSub, withFilter } from "graphql-subscriptions";
 // import { createBatchResolver } from 'graphql-resolve-batch';
 // interfaces
+
 import { Listing, ListingReview, Identifier } from "./sql";
-// import withAuth from "graphql-auth";
+import withAuth from "graphql-auth";
 // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
 const ONSHELF = "On Shelf";
 const IDLE = "Idle";
@@ -77,13 +78,15 @@ export default (pubsub: PubSub) => ({
     listing(obj: any, { id }: Identifier, context: any) {
       return context.Listing.listing(id);
     },
-
     listingsList(obj: any, args: any, context: any) {
       return context.Listing.listingsList();
     },
-    userListings(obj: any, { userId }: any, context: any) {
-      return context.Listing.userListings(userId || context.identity.id);
-    },
+    userListings: withAuth(
+      ["user:view:self"],
+      async (obj: any, { userId }: any, context: any) => {
+        return context.Listing.userListings(userId || context.identity.id);
+      }
+    ),
     watchlist(obj: any, { userId }: any, context: any) {
       return context.Listing.watchlist(userId || context.identity.id);
     },
@@ -125,195 +128,206 @@ export default (pubsub: PubSub) => ({
       }
       throw new Error("Email couldn't be sent");
     },
-    async addListing(obj: any, { input }: ListingInput, context: any) {
-      if (!input.userId) {
-        input.userId = context.identity.id;
-      }
-      const id = await context.Listing.addListing(input);
-      const listing = await context.Listing.listing(id);
-      // publish for liswting list
-      pubsub.publish(LISTINGS_SUBSCRIPTION, {
-        listingsUpdated: {
-          mutation: "CREATED",
-          id,
-          node: listing
+    addListing: withAuth(
+      ["stripe:*"],
+      async (obj: any, { input }: ListingInput, context: any) => {
+        if (!input.userId) {
+          input.userId = context.identity.id;
         }
-      });
-      return listing;
-    },
-    async deleteListing(obj: any, { id }: Identifier, context: any) {
-      const listing = await context.Listing.listing(id);
-      const isDeleted = await context.Listing.deleteListing(id);
-      if (isDeleted) {
-        // publish for listing list
+        const id = await context.Listing.addListing(input);
+        const listing = await context.Listing.listing(id);
+        // publish for liswting list
         pubsub.publish(LISTINGS_SUBSCRIPTION, {
           listingsUpdated: {
-            mutation: "DELETED",
+            mutation: "CREATED",
             id,
             node: listing
           }
         });
-        // publish for edit listing page
-        pubsub.publish(LISTING_SUBSCRIPTION, {
-          listingUpdated: {
-            mutation: "DELETED",
-            id, // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
-            node: listing
-          }
-        });
-        return { id: listing.id };
-      } else {
-        return { id: null };
+        return listing;
       }
-    },
-
-    async toggleListingStatus(obj: any, { id }: Identifier, context: any) {
-      const listing = await context.Listing.listing(id);
-      let stat = null;
-
-      if (listing.status === ONSHELF) {
-        stat = IDLE;
-      } else if (listing.status === "idle" || listing.status === IDLE) {
-        stat = ONSHELF;
+    ),
+    deleteListing: withAuth(
+      async (obj: any, { id }: Identifier, context: any) => {
+        const listing = await context.Listing.listing(id);
+        const isDeleted = await context.Listing.deleteListing(id);
+        if (isDeleted) {
+          // publish for listing list
+          pubsub.publish(LISTINGS_SUBSCRIPTION, {
+            listingsUpdated: {
+              mutation: "DELETED",
+              id,
+              node: listing
+            }
+          });
+          // publish for edit listing page
+          pubsub.publish(LISTING_SUBSCRIPTION, {
+            listingUpdated: {
+              mutation: "DELETED",
+              id, // import { ONSHELF, ONRENT } from "../common/constants/ListingStates";
+              node: listing
+            }
+          });
+          return { id: listing.id };
+        } else {
+          return { id: null };
+        }
       }
-      const isToggled = await context.Listing.toggleStatus(id, stat);
+    ),
 
-      if (isToggled) {
-        const list = await context.Listing.listing(id);
+    toggleListingStatus: withAuth(
+      async (obj: any, { id }: Identifier, context: any) => {
+        const listing = await context.Listing.listing(id);
+        let stat = null;
+
+        if (listing.status === ONSHELF) {
+          stat = IDLE;
+        } else if (listing.status === "idle" || listing.status === IDLE) {
+          stat = ONSHELF;
+        }
+        const isToggled = await context.Listing.toggleStatus(id, stat);
+
+        if (isToggled) {
+          const list = await context.Listing.listing(id);
+          pubsub.publish(LISTINGS_SUBSCRIPTION, {
+            listingsUpdated: {
+              mutation: "UPDATED",
+              id: list.id,
+              node: list
+            }
+          });
+          // publish for edit listing page
+          pubsub.publish(LISTING_SUBSCRIPTION, {
+            listingUpdated: {
+              mutation: "UPDATED",
+              id: list.id,
+              node: list
+            }
+          });
+          return { id: list.id };
+        } else {
+          return { id: null };
+        }
+      }
+    ),
+    editListing: withAuth(
+      async (obj: any, { input }: ListingInputWithId, context: any) => {
+        await context.Listing.editListing(input);
+        const listing = await context.Listing.listing(input.id);
+        // publish for listing list
         pubsub.publish(LISTINGS_SUBSCRIPTION, {
           listingsUpdated: {
             mutation: "UPDATED",
-            id: list.id,
-            node: list
+            id: listing.id,
+            node: listing
           }
         });
         // publish for edit listing page
         pubsub.publish(LISTING_SUBSCRIPTION, {
           listingUpdated: {
             mutation: "UPDATED",
-            id: list.id,
-            node: list
+            id: listing.id,
+            node: listing
           }
         });
-        return { id: list.id };
-      } else {
-        return { id: null };
+        return listing;
       }
-    },
-    async editListing(obj: any, { input }: ListingInputWithId, context: any) {
-      await context.Listing.editListing(input);
-      const listing = await context.Listing.listing(input.id);
-      // publish for listing list
-      pubsub.publish(LISTINGS_SUBSCRIPTION, {
-        listingsUpdated: {
-          mutation: "UPDATED",
-          id: listing.id,
-          node: listing
-        }
-      });
-      // publish for edit listing page
-      pubsub.publish(LISTING_SUBSCRIPTION, {
-        listingUpdated: {
-          mutation: "UPDATED",
-          id: listing.id,
-          node: listing
-        }
-      });
-      return listing;
-    },
-    async addListingReview(
-      obj: any,
-      { input }: ListingReviewInput,
-      context: any
-    ) {
-      const [id] = await context.Listing.addListingReviewDAO(input);
-      const listingReview = await context.Listing.getListingReviewDAO(id);
-      // publish for edit listing page
-      listingReview.listingId = listingReview.listing_id;
-      listingReview.reviewerId = listingReview.reviewer_id;
-      listingReview.createdAt = listingReview.reviewer_id;
-      pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
-        listingReviewUpdated: {
-          mutation: "CREATED",
-          id: listingReview.id,
-          listingId: input.listingId,
-          node: listingReview
-        }
-      });
-      return listingReview;
-    },
-    async deleteListingReview(
-      obj: any,
-      { input: { id } }: ListingReviewInputWithId,
-      context: any
-    ) {
-      const listingReview = await context.Listing.deleteListingReviewDAO(id);
-      // publish for edit listing page
-      let listingId = null;
-      if (listingReview) {
+    ),
+    addListingReview: withAuth(
+      async (obj: any, { input }: ListingReviewInput, context: any) => {
+        const [id] = await context.Listing.addListingReviewDAO(input);
+        const listingReview = await context.Listing.getListingReviewDAO(id);
+        // publish for edit listing page
         listingReview.listingId = listingReview.listing_id;
         listingReview.reviewerId = listingReview.reviewer_id;
-        listingId = listingReview.listingId;
+        listingReview.createdAt = listingReview.reviewer_id;
+        pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
+          listingReviewUpdated: {
+            mutation: "CREATED",
+            id: listingReview.id,
+            listingId: input.listingId,
+            node: listingReview
+          }
+        });
+        return listingReview;
       }
-      pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
-        listingReviewUpdated: {
-          mutation: "DELETED",
-          id,
-          listingId,
-          node: null
+    ),
+    deleteListingReview: withAuth(
+      async (
+        obj: any,
+        { input: { id } }: ListingReviewInputWithId,
+        context: any
+      ) => {
+        const listingReview = await context.Listing.deleteListingReviewDAO(id);
+        // publish for edit listing page
+        let listingId = null;
+        if (listingReview) {
+          listingReview.listingId = listingReview.listing_id;
+          listingReview.reviewerId = listingReview.reviewer_id;
+          listingId = listingReview.listingId;
         }
-      });
-      return listingReview;
-    },
-    async editListingReview(
-      obj: any,
-      { input }: ListingReviewInputWithId,
-      context: any
-    ) {
-      const listingReview = await context.Listing.editListingReviewDAO(input);
-      // publish for edit listing page
-      if (listingReview) {
-        listingReview.listingId = listingReview.listing_id;
-        listingReview.reviewerId = listingReview.reviewer_id;
+        pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
+          listingReviewUpdated: {
+            mutation: "DELETED",
+            id,
+            listingId,
+            node: null
+          }
+        });
+        return listingReview;
       }
-      pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
-        listingReviewUpdated: {
-          mutation: "UPDATED",
-          id: input.id,
-          listingId: input.listingId,
-          node: listingReview
+    ),
+    editListingReview: withAuth(
+      async (obj: any, { input }: ListingReviewInputWithId, context: any) => {
+        const listingReview = await context.Listing.editListingReviewDAO(input);
+        // publish for edit listing page
+        if (listingReview) {
+          listingReview.listingId = listingReview.listing_id;
+          listingReview.reviewerId = listingReview.reviewer_id;
         }
-      });
-      return listingReview;
-    },
-    async toggleListingIsFeatured(
-      obj: any,
-      input: { id: number; isFeatured: boolean },
-      context: any
-    ) {
-      return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
-    },
-    async toggleWatchList(
-      obj: any,
-      input: { user_id: number; listing_id: number; should_notify: boolean },
-      context: any
-    ) {
-      return context.Listing.addOrRemoveWatchList(input);
-    },
-    async addLikesDisLikes(
-      obj: any,
-      input: { ld: string; review_id: number; reviewer_id: number },
-      context: any
-    ) {
-      return context.Listing.updateLiskesDisLikes(input);
-    },
-    async countLikesDisLikes(
-      obj: any,
-      input: { review_id: number },
-      context: any
-    ) {
-      return context.Listing.getLikesDisLikesCount(input);
-    }
+        pubsub.publish(LISTINGREVIEW_SUBSCRIPTION, {
+          listingReviewUpdated: {
+            mutation: "UPDATED",
+            id: input.id,
+            listingId: input.listingId,
+            node: listingReview
+          }
+        });
+        return listingReview;
+      }
+    ),
+    toggleListingIsFeatured: withAuth(
+      async (
+        obj: any,
+        input: { id: number; isFeatured: boolean },
+        context: any
+      ) => {
+        return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
+      }
+    ),
+    toggleWatchList: withAuth(
+      async (
+        obj: any,
+        input: { user_id: number; listing_id: number; should_notify: boolean },
+        context: any
+      ) => {
+        return context.Listing.addOrRemoveWatchList(input);
+      }
+    ),
+    addLikesDisLikes: withAuth(
+      async (
+        obj: any,
+        input: { ld: string; review_id: number; reviewer_id: number },
+        context: any
+      ) => {
+        return context.Listing.updateLiskesDisLikes(input);
+      }
+    ),
+    countLikesDisLikes: withAuth(
+      async (obj: any, input: { review_id: number }, context: any) => {
+        return context.Listing.getLikesDisLikesCount(input);
+      }
+    )
   },
   Subscription: {
     listingUpdated: {
