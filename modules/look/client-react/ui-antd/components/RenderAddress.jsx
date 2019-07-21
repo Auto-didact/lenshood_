@@ -8,8 +8,8 @@ const FormItem = Form.Item;
 
 export default class RenderAddress extends React.Component {
   state = {
-    visible: []
-    // ,primeAddress: [false, true]
+    visible: [],
+    newAddressState: false
   };
 
   componentDidMount() {
@@ -44,7 +44,7 @@ export default class RenderAddress extends React.Component {
     //Setting the visiblity
     const visible = this.state.visible;
     visible[addresses.length] = true;
-    this.setState({ visible });
+    this.setState({ visible, newAddressState: true });
   };
 
   handleSelect = index => {
@@ -65,9 +65,15 @@ export default class RenderAddress extends React.Component {
     this.props.addresses[index].primeAddress = true;
   };
 
+  checkAdd = index => {
+    let newAddressState = this.state.newAddressState;
+    this.state.newAddressState ? this.props.arrayHelpers.remove(index) : null;
+    newAddressState = false;
+    this.setState({ newAddressState });
+  };
+
   render() {
     const { arrayHelpers, name, addresses, t, label } = this.props;
-    // const label = 'profile.card.group.addresses';
     function cancel(e) {
       console.log(e);
       message.error('Click on No');
@@ -162,8 +168,8 @@ export default class RenderAddress extends React.Component {
                     visible={this.state.visible[indexa]}
                     title="Address"
                     okText="Ok"
-                    onCancel={() => this.modalControl(indexa, false)}
-                    onOk={() => this.modalControl(indexa, false)}
+                    onCancel={() => this.modalControl(indexa, false) || this.checkAdd(indexa)}
+                    onOk={() => this.modalControl(indexa, false) || this.setState({ newAddressState: false })}
                   >
                     <div>
                       <FormItem>{formItems[indexa]}</FormItem>
@@ -214,18 +220,16 @@ export default class RenderAddress extends React.Component {
                   <Radio.Group name="addresses" defaultValue={addresses[0]} style={{ marginLeft: '10px' }}>
                     {addresses.map((address, indexas) => (
                       <Radio
+                        // id={indexas}
                         key={indexas}
                         value={address}
                         style={{
                           backgroundColor: '#d5f0eb',
                           height: '56px',
                           paddingTop: '20px'
+                          // opacity: '0',
+                          // position: 'absolute'
                         }}
-                        // checked={
-                        //   // this.state.primeAddress[indexas]
-                        //   address.primeAddress
-                        // }
-                        // onClick={() => this.handleSelect(indexas)}
                       >
                         <b>Make Prime Address</b>
                         {addressCard[indexas]}
@@ -260,6 +264,7 @@ export default class RenderAddress extends React.Component {
     );
   }
 }
+
 RenderAddress.propTypes = {
   t: PropTypes.func,
   addresses: PropTypes.any,
