@@ -196,8 +196,9 @@ class NavBar extends React.Component {
           </Form>
         </Row>
 
-        {/*Render This if screen width less than 700*/}
+        {/*-----------------Render This if screen width less than 700--------------------------*/}
 
+        {/*-------------------For Production Build -----------------*/}
         {!__DEV__ && (
           <Row id="outer-container" className="screen_width_less_than_700">
             {/* <Form layout="inline"> */}
@@ -305,6 +306,8 @@ class NavBar extends React.Component {
             {/* </Form> */}
           </Row>
         )}
+        {/*----------Production Version Ends Here---------------*/}
+
         {/*---------For Dev Version--------------*/}
         {__DEV__ && this.state.width < 700 && (
           <Row id="outer-container" className="screen_width_less_than_700">
