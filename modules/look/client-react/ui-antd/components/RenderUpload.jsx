@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Form, Upload, Modal, Icon } from 'antd';
+import { Form, Upload, Modal, Icon } from "antd";
 
 const FormItem = Form.Item;
 
@@ -12,13 +12,13 @@ export default class RenderUpload extends React.Component {
     // To Do Fix this thing
     this.state = {
       previewVisible: false,
-      previewImage: '',
+      previewImage: "",
       fileList: props.value
         ? [
             {
-              uid: '-1',
-              name: 'Damage.png',
-              status: 'done',
+              uid: "-1",
+              name: "Damage.png",
+              status: "done",
               url: props.value
             }
           ]
@@ -32,7 +32,12 @@ export default class RenderUpload extends React.Component {
     // console.log(file.response.secure_url);
     // const arrayHelpers = this.props.arrayHelpers;
 
-    if (file.status == 'done') {
+    if (file.status === "uploading") {
+      this.props.setload(true);
+    }
+
+    if (file.status == "done") {
+      this.props.setload(false);
       if (file.response) {
         let url = file.response.secure_url;
         if (url) {
@@ -41,10 +46,11 @@ export default class RenderUpload extends React.Component {
           this.props.input.onChange(url);
         }
       }
-    } else if (file.status == 'removed') {
+    } else if (file.status == "removed") {
+      this.props.setload(false);
       // console.log(file);
       //remove value in form
-      this.props.input.onChange('');
+      this.props.input.onChange("");
     }
     this.setState({ fileList });
   };
@@ -69,12 +75,13 @@ export default class RenderUpload extends React.Component {
     // console.log(input);
     // const defaultFileList = this.props.defaultFileList;
 
-    const cloudinary_url = 'https://api.cloudinary.com/v1_1/www-lenshood-in/image/upload';
+    const cloudinary_url =
+      "https://api.cloudinary.com/v1_1/www-lenshood-in/image/upload";
     // { upload_preset: 'nxzf2ip6' }
     // const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-    const cloudinary_data = { upload_preset: 'nxzf2ip6' };
+    const cloudinary_data = { upload_preset: "nxzf2ip6" };
 
-    let validateStatus = '';
+    let validateStatus = "";
     // if (touched && error) {
     //   validateStatus = 'error';
     // }
@@ -110,10 +117,14 @@ export default class RenderUpload extends React.Component {
           >
             {fileList.length >= 1 ? null : uploadButton}
           </Upload>
-          <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          <Modal
+            visible={previewVisible}
+            footer={null}
+            onCancel={this.handleCancel}
+          >
+            <img alt="example" style={{ width: "100%" }} src={previewImage} />
           </Modal>
-        </div>{' '}
+        </div>{" "}
       </FormItem>
     );
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withFormik, FieldArray } from "formik";
 import { isEmpty } from "lodash";
@@ -84,9 +84,12 @@ const UserForm = ({
     portfolios
   } = values;
   const isAdmin = isAdminFunction(userRole);
+
+  const [load, setload] = useState(false);
+
   return (
     <div>
-      <Form name="user" onSubmit={handleSubmit} className="userForm" >
+      <Form name="user" onSubmit={handleSubmit} className="userForm">
         {/*-----------Avatar-------------------*/}
         {LYGflag == false || !valueCheck.avatar ? (
           <>
@@ -94,6 +97,7 @@ const UserForm = ({
               name="profile.avatar"
               component={RenderUpload}
               type="text"
+              setload={setload}
               label={t("userEdit.form.field.avatar")}
               value={profile.avatar}
             />
@@ -159,6 +163,7 @@ const UserForm = ({
                   values={portfolios}
                   name="portfolios"
                   label={t("userEdit.form.field.portfolios")}
+                  setload={setload}
                 />
               )}
             />
@@ -387,9 +392,15 @@ const UserForm = ({
           {errors && errors.errorMsg && (
             <Alert color="error">{errors.errorMsg}</Alert>
           )}
-          <Button color="primary" type="submit">
-            {t("userEdit.form.btnSubmit")}
-          </Button>
+          {load ? (
+            <Button color="primary" type="submit" disabled>
+              {t("userEdit.form.btnSubmit")}
+            </Button>
+          ) : (
+            <Button color="primary" type="submit">
+              {t("userEdit.form.btnSubmit")}
+            </Button>
+          )}
         </div>
       </Form>
     </div>

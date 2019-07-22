@@ -318,6 +318,7 @@ export default class ProductDetails extends Component {
                 },
                 { key: "serial", type: "text", label: "Serial Number" }
               ]}
+              setload={this.props.setload}
               arrayHelpers={arrayHelpers}
               values={values.listingContent}
               initialValues={this.state.listingContent}
@@ -336,6 +337,7 @@ export default class ProductDetails extends Component {
             <RenderUploadMultiple
               arrayHelpers={arrayHelpers}
               values={values.listingImages}
+              setload={this.props.setload}
               dictKey="imageUrl"
             />
           )}
@@ -389,6 +391,7 @@ export default class ProductDetails extends Component {
                 { key: "imageUrl", type: "image", label: "Image" },
                 { key: "damageDetail", type: "text", label: "Details" }
               ]}
+              setload={this.props.setload}
               arrayHelpers={arrayHelpers}
               values={values.listingDetail.damages}
               name="listingDetail.damages"
