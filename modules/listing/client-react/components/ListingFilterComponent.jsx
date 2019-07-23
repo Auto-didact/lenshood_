@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { DebounceInput } from "react-debounce-input";
-import { translate } from "@gqlapp/i18n-client-react";
-import {
-  Form,
-  FormItem,
-  Select,
-  Option,
-  Input
-} from "@gqlapp/look-client-react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { DebounceInput } from 'react-debounce-input';
+import { translate } from '@gqlapp/i18n-client-react';
+import { Form, FormItem, Select, Option, Input } from '@gqlapp/look-client-react';
 
 const ListingFilterComponent = props => {
   const {
@@ -20,64 +14,28 @@ const ListingFilterComponent = props => {
   } = props;
   console.log(props);
   let state = {
-    gearCategory: [
-      "Cameras",
-      "Lenses",
-      "Tripods and Support",
-      "Lighting",
-      "Studio Space"
-    ],
+    gearCategory: ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'],
     gearSubcategory: {
-      Cameras: [
-        "DSLR's",
-        "Point and Shoot cameras",
-        "Mirrorless cameras",
-        "Action cams",
-        "Cinema Cameras"
-      ],
-      Lenses: ["DSLR Lenses", "Mirrorless Lenses", "Cinema Lenses"],
-      Lighting: [
-        "Photography Lighting",
-        "Video Lighting",
-        "Lighting Accesories"
-      ],
-      "Tripods and Support": [
-        "Tripods/Monopods",
-        "Gimbals/Stabilizers",
-        "Rigs/Sliders"
-      ]
+      Cameras: ["DSLR's", 'Point and Shoot cameras', 'Mirrorless cameras', 'Action cams', 'Cinema Cameras'],
+      Lenses: ['DSLR Lenses', 'Mirrorless Lenses', 'Cinema Lenses'],
+      Lighting: ['Photography Lighting', 'Video Lighting', 'Lighting Accesories'],
+      'Tripods and Support': ['Tripods/Monopods', 'Gimbals/Stabilizers', 'Rigs/Sliders']
     },
     gearSubSubcategory: {
-      "DSLR Lenses": [
-        "Standard/Zoom Lens",
-        "Wide angle/Fish eye Lens",
-        "Fixed/Prime Lens"
-      ],
-      "Mirrorless Lenses": [
-        "Standard/Zoom Lens",
-        "Wide angle/Fish eye Lens",
-        "Fixed/Prime Lens"
-      ]
+      'DSLR Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens'],
+      'Mirrorless Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens']
     }
   };
 
   const [activeGearCategory, setActiveGearCategory] = useState(gearCategory);
 
-  const [activeGearSubCategory, setActiveGearSubCategory] = useState(
-    gearSubcategory
-  );
+  const [activeGearSubCategory, setActiveGearSubCategory] = useState(gearSubcategory);
 
   const handlegearCategoryChange = value => {
     ongearCategoryChange(value);
-    ongearSubcategoryChange("");
+    ongearSubcategoryChange('');
     setActiveGearCategory(value ? state.gearSubcategory[value] : null);
-    setActiveGearSubCategory(
-      value
-        ? state.gearSubcategory[value]
-          ? state.gearSubcategory[value][0]
-          : null
-        : null
-    );
+    setActiveGearSubCategory(value ? (state.gearSubcategory[value] ? state.gearSubcategory[value][0] : null) : null);
   };
 
   const handlegearSubCategoryChange = value => {
@@ -109,7 +67,7 @@ const ListingFilterComponent = props => {
         >
           {state.gearCategory.map((item, key) => (
             <Option key={key} value={item}>
-              {item ? item : "All"}
+              {item ? item : 'All'}
             </Option>
           ))}
         </Select>
@@ -127,7 +85,7 @@ const ListingFilterComponent = props => {
           >
             {activeGearCategory.map((item, key) => (
               <Option key={key} value={item}>
-                {item ? item : "All"}
+                {item ? item : 'All'}
               </Option>
             ))}
           </Select>
@@ -145,4 +103,4 @@ ListingFilterComponent.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("listing")(ListingFilterComponent);
+export default translate('listing')(ListingFilterComponent);

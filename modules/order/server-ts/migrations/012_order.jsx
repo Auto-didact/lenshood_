@@ -1,4 +1,3 @@
-
 import { STALE } from '../constants/order_states';
 
 exports.up = function(knex, Promise) {

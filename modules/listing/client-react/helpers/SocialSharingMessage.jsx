@@ -9,7 +9,7 @@ export function MyListingsMessage(id, gearCategory, gearSubcategory) {
     text: `Hey, I have put my photography equipment - ${
       gearSubcategory ? gearSubcategory : gearCategory
     }  on lenshood.`,
-    hashtag: "#lenshood #earncash #renting #lending",
+    hashtag: '#lenshood #earncash #renting #lending',
     link: listLink
   };
   const emailMessage = `Hey, I have put my photography equipment - ${
@@ -29,7 +29,7 @@ export function ListingsMessage(id, username, gearCategory, gearSubcategory) {
     text: `Hey, check out this cool photography equipment - ${
       gearSubcategory ? gearSubcategory : gearCategory
     } by ${username} on lenshood,`,
-    hashtag: "#lenshood #earncash #renting #lending",
+    hashtag: '#lenshood #earncash #renting #lending',
     link: listLink
   };
   const emailMessage = `Hey, I have put my photography equipment - ${

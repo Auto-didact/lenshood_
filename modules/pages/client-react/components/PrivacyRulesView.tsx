@@ -26,7 +26,7 @@ const PrivacyRulesView = ({ t }: PrivacyRulesViewProps) => {
       style={{
         width: '100%',
         alignItems: 'center',
-        fontFamily: 'Avenir Next',
+
         display: 'flex',
         flexDirection: 'column',
         border: 'none'

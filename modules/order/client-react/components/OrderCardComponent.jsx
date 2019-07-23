@@ -8,7 +8,7 @@ export default class OrderCardComponent extends React.Component {
         <h3 className="OrderHead">Order Status</h3>
         <Row>
           <Col lg={9} sm={7} xs={9}>
-            <img src={this.props.product.image} alt="" className="orderImage" />
+            <img src={this.props.product.image} alt="" className="orderVerticalImage" />
           </Col>
           <Col lg={15} sm={17} xs={15}>
             <h4 className="itemName">{this.props.product.name}</h4>

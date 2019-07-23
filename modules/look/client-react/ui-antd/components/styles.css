@@ -23,6 +23,11 @@
   margin: 0;
   padding-top: 5px;
 }
+.header{
+  position: fixed;
+  z-index: 1000;
+  width:100%;
+}
 /* ========= FOOTER =========== */
 
 .footer a {

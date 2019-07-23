@@ -182,6 +182,7 @@ class NavBar extends React.Component {
                     </a>
                   </Dropdown>
                 </Menu.Item>
+
                 {ref.modules.navItemsRight}
                 <IfLoggedIn>
                   <MenuItem>
@@ -195,8 +196,9 @@ class NavBar extends React.Component {
           </Form>
         </Row>
 
-        {/*Render This if screen width less than 700*/}
+        {/*-----------------Render This if screen width less than 700--------------------------*/}
 
+        {/*-------------------For Production Build -----------------*/}
         {!__DEV__ && (
           <Row id="outer-container" className="screen_width_less_than_700">
             {/* <Form layout="inline"> */}
@@ -233,8 +235,17 @@ class NavBar extends React.Component {
                   </MenuItem>
                 </IfLoggedIn>
 
-                {ref.modules.navItemsRight}
                 {userItems2}
+                <Menu selectedKeys={[this.props.location.pathname]} mode="inline">
+                  <Menu.Item key="/">
+                    <NavLink to="/">
+                      <Icon type="database" />
+                      Listing
+                    </NavLink>
+                  </Menu.Item>
+                </Menu>
+                {ref.modules.navItemsRight}
+
                 <Menu.Item className="about" key="about">
                   <a className="nav-link-drop" onClick={() => this.toggle(1)}>
                     <div>
@@ -295,6 +306,8 @@ class NavBar extends React.Component {
             {/* </Form> */}
           </Row>
         )}
+        {/*----------Production Version Ends Here---------------*/}
+
         {/*---------For Dev Version--------------*/}
         {__DEV__ && this.state.width < 700 && (
           <Row id="outer-container" className="screen_width_less_than_700">
@@ -332,6 +345,16 @@ class NavBar extends React.Component {
                   </MenuItem>
                 </IfLoggedIn>
                 {userItems2}
+
+                <Menu selectedKeys={[this.props.location.pathname]} mode="inline">
+                  <Menu.Item key="/">
+                    <NavLink to="/">
+                      <Icon type="database" />
+                      Listing
+                    </NavLink>
+                  </Menu.Item>
+                </Menu>
+
                 {ref.modules.navItemsRight}
 
                 <Menu.Item className="about" key="about">

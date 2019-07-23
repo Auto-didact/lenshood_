@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { PLATFORM } from '@gqlapp/core-common';
 
-import ListingCatalogueView from '../components/ListingCatalogueView';
+import ListingCatalogueComponent from '../components/ListingCatalogueComponent';
 
 import LISTINGSCARD_QUERY from '../graphql/ListingsCardQuery.graphql';
 import settings from '../../../../settings';
@@ -14,7 +14,7 @@ const limit =
     : settings.pagination.mobile.itemsNumber;
 
 const ListingCatalogue = props => {
-  return <ListingCatalogueView {...props} />;
+  return <ListingCatalogueComponent {...props} />;
 };
 
 ListingCatalogue.propTypes = {
