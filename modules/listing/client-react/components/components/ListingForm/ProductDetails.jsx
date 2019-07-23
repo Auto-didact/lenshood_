@@ -333,9 +333,9 @@ export default class ProductDetails extends Component {
         <FieldArray
           name="listingImages"
           label={t("listing.field.listingImages")}
-          setload={this.props.setload}
           render={arrayHelpers => (
             <RenderUploadMultiple
+            setload={this.props.setload}
               arrayHelpers={arrayHelpers}
               values={values.listingImages}
               dictKey="imageUrl"
