@@ -332,23 +332,33 @@
   padding: 10px 5px;
 }
 
+
+/*Home */
+
+
+
+
 @media only screen and (min-width: 769px) {
   .gearCat {
     margin: 5px -4vw 5px -4vw;
     padding: 10px 4vw 10px 4vw !important;
   }
+
 }
 @media only screen and (min-width: 1025px) {
   .gearCat {
     margin: 5px -5vw 5px -5vw;
     padding: 10px 5vw 10px 5vw !important;
   }
+  
+
 }
 @media only screen and (min-width: 1441px) {
   .gearCat {
     margin: 5px -8vw 5px -8vw;
     padding: 10px 8vw 10px 8vw !important;
   }
+  
 }
 
 .detViewPad {

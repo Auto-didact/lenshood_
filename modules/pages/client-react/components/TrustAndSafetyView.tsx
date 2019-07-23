@@ -25,7 +25,6 @@ const TrustAndSafetyView = ({ t }: TrustAndSafetyViewProps) => {
       style={{
         width: '100%',
         alignItems: 'center',
-        fontFamily: 'Avenir Next',
         display: 'flex',
         flexDirection: 'column',
         border: 'none',
@@ -194,10 +193,7 @@ const TrustAndSafetyView = ({ t }: TrustAndSafetyViewProps) => {
                 lineHeight: '29px'
               }}
             >
-
-              We keep an Original Government ID Card of the Borrower during the
-              rental period.
-
+              We keep an Original Government ID Card of the Borrower during the rental period.
             </h2>
           </div>
         </div>
@@ -253,8 +249,6 @@ const TrustAndSafetyView = ({ t }: TrustAndSafetyViewProps) => {
             marginTop: '150px'
           }}
         />
-
-
 
         <div
           style={{
