@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, InputNumber, Input } from 'antd';
+import { Modal, InputNumber, Input, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 
 const { TextArea } = Input;
@@ -46,16 +46,24 @@ class ModelPopup extends Component {
         destroyOnClose={true}
         forceRender={true}
       >
-        Rating :{' '}
-        <InputNumber min={0} max={5} defaultValue={3} value={this.state.rating} onChange={this.handleRatings} />
+        <Row type="flex" gutter={20} style={this.props.isReply ? { display: 'none' } : { display: 'block' }}>
+          <Col order={1}>{' Rating : '}</Col>
+          <Col order={2}>
+            <InputNumber min={0} max={5} defaultValue={3} value={this.state.rating} onChange={this.handleRatings} />
+          </Col>
+        </Row>
         <br />
-        Comment:{' '}
-        <TextArea
-          placeholder="comment"
-          value={this.state.comment}
-          onChange={this.handleComment}
-          autosize={{ minRows: 2, maxRows: 6 }}
-        />
+        <Row type="flex" gutter={20}>
+          <Col order={1}>{'Comment : '}</Col>
+          <Col order={2}>
+            <TextArea
+              placeholder="comment"
+              value={this.state.comment}
+              onChange={this.handleComment}
+              autosize={{ minRows: 2, maxRows: 6 }}
+            />
+          </Col>
+        </Row>
       </Modal>
     );
   }
@@ -67,7 +75,8 @@ ModelPopup.propTypes = {
   action: PropTypes.func.bind,
   rcard: PropTypes.object,
   rating: PropTypes.number,
-  comment: PropTypes.string
+  comment: PropTypes.string,
+  isReply: PropTypes.bool
 };
 
 export default ModelPopup;

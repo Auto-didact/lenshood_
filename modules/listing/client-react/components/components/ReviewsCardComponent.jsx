@@ -85,9 +85,22 @@ class ReviewsCard extends Component {
         >
           add
         </span>
-        <ModelPopup title="ADD REVIEW" visible={this.state.visible} action={this.addReviews.bind(this)} rcard={this} />
+        <ModelPopup
+          title="ADD REVIEW"
+          visible={this.state.visible}
+          action={this.addReviews.bind(this)}
+          rcard={this}
+          isReply={this.state.reply_id ? true : false}
+        />
         {this.state.reviews.map(reviewe => {
-          return <CommentCard listing={this.props.listing} reviews={reviewe} rcard={this} />;
+          return (
+            <CommentCard
+              listing={this.props.listing}
+              reviews={reviewe}
+              rcard={this}
+              isReply={this.state.reply_id ? true : false}
+            />
+          );
         })}
       </div>
     );
