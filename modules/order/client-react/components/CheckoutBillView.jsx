@@ -84,6 +84,48 @@ class CheckoutBillView extends React.Component {
             </Col>
           </Row>
         </div>
+        <div>
+          {/* <input id="nric" type="radio" name="id-type" value="nric" checked />
+          <label htmlFor="nric" className="config-select">
+            <span className="emoji" role="img" aria-label="Singapore">
+              🇸🇬
+            </span>
+            <span>NRIC</span>
+          </label>
+          <input id="ektp" type="radio" name="id-type" value="ektp" />
+          <label htmlFor="ektp" className="config-select id-config-wrapper">
+            <span className="emoji" role="img" aria-label="Indonesia">
+              🇮🇩
+            </span>
+            <span>eKTP</span>
+          </label> */}
+          {/* <div className="nric-wrapper">
+            <input id="nric" type="radio" name="id-type" value="nric" checked />
+            <label htmlFor="nric" className="config-select">
+              <span className="emoji" role="img" aria-label="Singapore">
+                🇸🇬
+              </span>
+              <span>NRIC</span>
+            </label>
+            <div className="inline-radios nric-options">
+              <input id="single" type="radio" name="front-only" value="true" checked />>
+              <label htmlFor="single" className="inline-radio">
+                Front-only
+              </label>
+              <input id="double" type="radio" name="front-only" value="false" />>
+              <label htmlFor="double" className="inline-radio">
+                Front & back
+              </label>
+            </div>
+          </div>
+          <input id="ektp" type="radio" name="id-type" value="ektp" />
+          <label htmlFor="ektp" className="config-select id-config-wrapper">
+            <span className="emoji" role="img" aria-label="Indonesia">
+              🇮🇩
+            </span>
+            <span>eKTP</span>
+          </label> */}
+        </div>
       </PageLayout>
     );
   }
