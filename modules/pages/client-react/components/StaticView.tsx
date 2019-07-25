@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AboutUs from '../containers/AboutUs';
 import Blog from '../containers/Blog';
 import FAQ from '../containers/FAQ';
 import BorrowingAndLending from '../containers/BorrowingAndLending';
@@ -37,7 +36,6 @@ class StaticView extends React.Component<StaticViewProps> {
           <Route exact path="/featured-listing" component={FeaturedListing} />,
           <Route exact path="/featured-users" component={FeaturedUsers} />,
           <Route exact path="/mission" component={Mission} />,
-          <Route exact path="/about-us" component={AboutUs} />,
           <Route exact path="/terms-of-service" component={TermsOfService} />,
           <Route exact path="/privacy-rules" component={PrivacyRules} />,
           <Route exact path="/renting" component={BorrowingAndLending} />,
