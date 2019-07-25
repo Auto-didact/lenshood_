@@ -1,3 +1,4 @@
+import home from '@gqlapp/home-client-react';
 import liveSearch from '@gqlapp/live_search-client-react';
 import referral from '@gqlapp/referral-client-react';
 import listing from '@gqlapp/listing-client-react';
@@ -24,6 +25,7 @@ const pagination = require('@gqlapp/pagination-client-react').default;
 const user = require('@gqlapp/user-client-react').default;
 
 const modules = new ClientModule(
+  home,
   liveSearch,
   referral,
   listing,

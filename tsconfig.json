@@ -18,6 +18,12 @@
     "removeComments": true,
     "skipLibCheck": true
   },
-  "include": ["**/typings.d.ts", "**/*.ts", "**/*.tsx", "**/*.vue"],
+  "include": [
+    "**/typings.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.vue",
+    "modules/home/client-react/containers/Home.jsx"
+  ],
   "exclude": ["node_modules"]
 }
