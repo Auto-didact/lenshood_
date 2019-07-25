@@ -9,6 +9,7 @@ import {
   // Option,
   RenderUploadMultiple,
   RenderDynamicField,
+  RenderComponentsField,
   RenderCheckBox,
   RenderRadioGroup
 } from "@gqlapp/look-client-react";
@@ -295,8 +296,7 @@ export default class ProductDetails extends Component {
         <FieldArray
           name="listingContent"
           render={arrayHelpers => (
-            <RenderDynamicField
-              buttonText="Add Component"
+            <RenderComponentsField
               keys={[
                 {
                   key: "gear",
