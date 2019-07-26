@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Tabs } from 'antd';
-import FeaturedUser from '../containers/Featured/FeaturedUser';
+import FeaturedUsers from '@gqlapp/user-client-react/containers/FeaturedUsers';
 
 const { TabPane } = Tabs;
 
 const HomeFeaturedUsers = ({ t }) => {
   return (
     <div className="home-featured-users-container layout-counter-margin layout-padding">
-      <FeaturedUser />
+      <FeaturedUsers />
     </div>
   );
 };

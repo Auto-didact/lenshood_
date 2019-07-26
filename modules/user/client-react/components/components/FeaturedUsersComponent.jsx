@@ -8,8 +8,9 @@ import FeaturedUserCardListComponent from './FeaturedUserCardListComponent';
 import { OverPack } from 'rc-scroll-anim';
 import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
+import {Loader} from '@gqlapp/look-client-react';
 
-// interface FeaturedUsersViewProps {
+// interface FeaturedUsersComponentProps {
 //   t: TranslateFunction;
 // }
 
@@ -20,8 +21,8 @@ import QueueAnim from 'rc-queue-anim';
 //   />
 // );
 
-export default class FeaturedUsersView extends React.Component
-// <FeaturedUsersViewProps>
+export default class FeaturedUsersComponent extends React.Component
+// <FeaturedUsersComponentProps>
 {
   state = {
     users: [
@@ -92,7 +93,7 @@ export default class FeaturedUsersView extends React.Component
         <br />
         <OverPack>
           <QueueAnim key="queue" leaveReverse>
-            <FeaturedUserCardListComponent key="b" relatedUser={this.state.users} />
+            {this.props.loading ?  <Loader/> :   (<FeaturedUserCardListComponent key="b" relatedUser={this.props.featuredUsers} />)}
           </QueueAnim>
         </OverPack>
       </React.Fragment>

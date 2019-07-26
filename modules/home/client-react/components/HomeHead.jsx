@@ -136,7 +136,7 @@ const HomeHead = ({ t, image }) => {
           }}
           align="right"
         >
-          <img src={require('../images/home/banner.svg')} width="80%" />
+          <img src={require('../images/home/banner.svg')} width="90%" />
         </Col>
       </Row>
     </div>

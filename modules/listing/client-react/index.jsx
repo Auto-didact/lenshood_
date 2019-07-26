@@ -15,6 +15,7 @@ import ListingCatalogueView from './components/ListingCatalogueView';
 import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
+import FeaturedListings from './containers/FeaturedListings';
 
 import ListingDetail from './containers/ListingDetail';
 import MyListings from './containers/MyListings';
@@ -60,7 +61,7 @@ export default new ClientModule({
 
 
 
-
+    <Route exact path="/featured_listings" component={FeaturedListings} />,
     <Route exact path="/listings" component={Listings} />,
     <AuthRoute exact path="/listing/new" redirect="/profile" role={['user', 'admin']} component={ListingAdd} />,
     <AuthRoute redirect="/profile" role={['user', 'admin']} path="/listing/:id" component={ListingEdit} />,

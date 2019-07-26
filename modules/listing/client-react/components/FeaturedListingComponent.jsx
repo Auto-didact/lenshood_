@@ -9,7 +9,7 @@ import { OverPack } from 'rc-scroll-anim';
 import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
 
-class FeaturedListingView extends Component {
+class FeaturedListingComponent extends Component {
   render() {
     return (
       <div>
@@ -36,7 +36,7 @@ class FeaturedListingView extends Component {
             <br />
             <OverPack>
               <QueueAnim key="queue" leaveReverse>
-                <SuggestedCardListComponent key="b" relatedList={this.props.listings} />
+                <SuggestedCardListComponent key="b" relatedList={this.props.featuredListings} />
               </QueueAnim>
             </OverPack>
           </Col>
@@ -46,7 +46,7 @@ class FeaturedListingView extends Component {
   }
 }
 
-FeaturedListingView.propTypes = {
+FeaturedListingComponent.propTypes = {
   listings: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -56,4 +56,4 @@ FeaturedListingView.propTypes = {
   ).isRequired
 };
 
-export default translate('listing')(FeaturedListingView);
+export default translate('listing')(FeaturedListingComponent);

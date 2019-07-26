@@ -22,6 +22,8 @@ import PublicProfile from './containers/PublicProfile';
 import DemoRoute from './containers/DemoRoute';
 import { AuthRoute, IfLoggedIn, IfNotLoggedIn, withLoadedUser, withLogout } from './containers/Auth';
 import { isAdminFunction } from './helpers/isAdmin';
+import FeaturedUsers from './containers/FeaturedUsers';
+
 
 const MyProfile = () => {
   return (
@@ -82,6 +84,7 @@ const NavLinkLoginWithI18n = translate('user')(({ t }) => (
 export default new ClientModule({
   route: [
     // <Route exact path="/public-profile/:id" component={PublicProfile} />,
+    <AuthRoute exact path="/featured" role={['user', 'admin']}  component={FeaturedUsers} />,
     <AuthRoute exact path="/public-profile/:id" role={['user', 'admin']} redirect="/login" component={PublicProfile} />,
     <AuthRoute exact path="/profile" role={['user', 'admin']} redirect="/login" component={ProfileView} />,
     <AuthRoute exact path="/users" redirect="/profile" role="admin" component={Users} />,
