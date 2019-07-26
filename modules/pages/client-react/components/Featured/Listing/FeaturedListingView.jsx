@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { translate } from '@gqlapp/i18n-client-react';
-import { SuggestedCardListComponent } from '@gqlapp/listing-client-react';
-import { Row, Col } from 'antd';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { translate } from "@gqlapp/i18n-client-react";
+import { SuggestedCardListComponent } from "@gqlapp/listing-client-react";
+import { Row, Col } from "antd";
 
 //Animation
-import { Parallax } from 'rc-scroll-anim';
+import { OverPack } from "rc-scroll-anim";
+import TweenOne from "rc-tween-one";
+import QueueAnim from "rc-queue-anim";
 
 class FeaturedListingView extends Component {
   render() {
@@ -13,29 +15,31 @@ class FeaturedListingView extends Component {
       <div>
         <Row>
           <Col span={24}>
-            <Parallax
-              animation={{ x: 0, opacity: 1, playScale: [0.5, 0.8] }}
-              style={{ transform: 'translateX(100px)', opacity: 0 }}
-            >
-              <h1 style={{ textAlign: 'center', fontSize: ' 30px' }}>Featured listings</h1>
+            <OverPack>
+              <QueueAnim key="queue" leaveReverse>
+                <div key="a"> 
+                  <h1 align="center" className="home-heading">Featured listings</h1>
 
-              <div align="center">
-                <div
-                  style={{
-                    height: '2px ',
-                    width: '342px',
-                    background: '#23b195'
-                  }}
-                />
-              </div>
-            </Parallax>
+                  <div align="center">
+                    <div
+                      className="home-heading-underline"
+                      style={{
+                        width: "142px"
+                      }}
+                    />
+                  </div>
+                </div>
+              </QueueAnim>
+            </OverPack>
             <br />
-            <Parallax
-              animation={{ x: 0, opacity: 1, playScale: [0.5, 0.8] }}
-              style={{ transform: 'translateX(-300px)', opacity: 0 }}
-            >
-              <SuggestedCardListComponent relatedList={this.props.listings} />
-            </Parallax>
+            <OverPack>
+              <QueueAnim key="queue" leaveReverse>
+                <SuggestedCardListComponent
+                  key="b"
+                  relatedList={this.props.listings}
+                />
+              </QueueAnim>
+            </OverPack>
           </Col>
         </Row>
       </div>
@@ -53,4 +57,4 @@ FeaturedListingView.propTypes = {
   ).isRequired
 };
 
-export default translate('listing')(FeaturedListingView);
+export default translate("listing")(FeaturedListingView);

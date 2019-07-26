@@ -45,15 +45,12 @@
 @menu-dark-item-active-bg: @primary-color;
 
 //font
-@font-family: Avenir Next;
+@font-family: Lora;
 
 //List
 @list-item-padding: 0px;
 
 //Tabs
-.main-layout {
-  font-family: @font-family;
-}
 
 .ant-tabs-nav .ant-tabs-tab {
   margin: 0px !important;
@@ -120,7 +117,7 @@
 }
 
 .page-content {
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
 
   padding-top: 69px;
@@ -168,48 +165,34 @@
   }
 }
 //Home-Page{--
+.home-heading {
+  font-size: 45px;
+}
+
+.home-heading-underline{
+  height:3px;
+  background: @primary-color;
+  margin-top:-20px;
+  
+}
 
 .home-head-container {
-  margin-top: -69px;
   height: 100vh;
-  max-width: 100vw;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0px 0px 10px 10px;
-}
-.home-head {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  margin-top: -69px;
 }
-.home-head-image {
-  margin-left: -45vh;
-
-  height: 100vh;
+.home-head-static-text {
+  display: table-cell;
+  float: right;
 }
-.home-image-content {
-  position: absolute;
-  top: 100px;
-  left: 7vw;
-  right: 7vw;
-
-  width: 86vw;
+.home-head-content {
 }
 .home-image-contentText {
-  color: rgba(0, 0, 0, 0.9) !important;
+  color: @primary-color;
 
-  font-size: 50px;
+  font-size: 70px;
 }
 
-.home-image-contentText2 {
-  color: rgba(0, 0, 0, 0.9) !important;
-
-  font-size: 15px;
-  width: 70%;
-}
 .home-image-content-button-login {
   margin-top: 30px;
 }
@@ -267,44 +250,101 @@
 }
 
 .home-steps-container {
-  margin: 10px 0px;
-
-  width: 100%;
+  padding-top: 20px;
+  background: #e5e5e5;
+  max-width: 100vw;
 }
 
-.home-steps-head {
-  font-size: 45px;
-}
 .home-steps-sub-head {
   font-size: 35px;
 }
 .home-steps-picture {
-  background: #c4c4c4;
   border-radius: 10px;
   width: 100%;
   height: 300px;
 }
+.home-why-lenshood-id{
+  
+}
+.home-overlay-text {
+  position: absolute;
+  margin-top: -80px;
+  top: 0;
+  left: 30px;
+  color: rgba(0, 0, 0, 0.15);
+  font-size: 150px !important;
+}
 .home-how-it-works-container {
-  height: 100vh;
+  padding-top: 30px;
   max-width: 100vw;
-  background: #ececec;
+
   border-radius: 10px 10px 10px 10px;
 }
+.home-how-it-works-list{
+  font-size: 25px;
+  height:500px;
+}
+.home-how-it-works-list-item{
+
+  font-size: 18px;
+  
+}
+
 
 .home-featured-listings-container {
+  height: 750px;
   max-width: 100vw;
-  background: rgba(30, 176, 148, 0.66);
   border-radius: 10px 10px 0px 0px;
+
 }
 .home-featured-users-container {
+  height: 750px;
+  overflow:hidden;
   max-width: 100vw;
-  background: #ececec;
-  border-radius: 0px 0px 10px 10px;
-}
-.home-why-lenshood-container {
-  margin: 10px 0px;
 
+}
+
+
+.home-why-lenshood-container {
+  max-width: 100vw;
+  background: #e5e5e5;
+  margin-bottom: -20px;
+  padding-top: 20px;
+}
+.home-why-content-text {
+  padding-top: 30px;
+  position: relative;
+  display: inline;
+}
+
+.linked-animate-demo-wrapper {
+  overflow: hidden;
+  height: 500px;
+  background: white;
+  position: relative;
+}
+
+.linked-animate-demo-box {
+  position: absolute;
+  width: 1280px;
+  height: 600px;
+  display: block;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  right: -100%;
+  margin: auto;
+}
+
+.linked-animate-demo-block {
+  position: absolute;
+  transition: transform 0.45s ease;
+}
+
+.linked-animate-demo-block-child {
+  border-radius: 100%;
   width: 100%;
+  height: 100%;
 }
 
 //--}Home-Page

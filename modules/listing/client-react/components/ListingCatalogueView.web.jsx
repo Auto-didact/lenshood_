@@ -7,7 +7,7 @@ import ListingCatalogue from '../containers/ListingCatalogue';
 
 const ListingCatalogueView = () => {
   return (
-    <PageLayout style={{ padding: '5px' }}>
+    <PageLayout className="layout-counter-margin layout-padding" style={{background:"grey"}}>
       <ListingCatalogue />
     </PageLayout>
   );

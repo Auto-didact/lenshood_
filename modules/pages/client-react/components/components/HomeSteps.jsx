@@ -1,48 +1,68 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
+import { OverPack } from "rc-scroll-anim";
+import TweenOne from "rc-tween-one";
+import QueueAnim from "rc-queue-anim";
+
+const stepsData = [
+  {
+    id:1,
+    text: "SignUp",
+    subText: "Some Text About SignUp"
+  },
+  {
+    id:2,
+    text: "Lenshood KYC",
+    subText: "Some Text About Lenshood KYC"
+  },
+  {
+    id:3,
+    text: "Add Listing",
+    subText: "Some Text About Add Listing"
+  }
+];
 
 const HomeSteps = ({ t }) => {
   return (
-    <div className="home-steps-container" align="center">
-      <h1 className="home-steps-head">Three Simple Steps To Get Started</h1>
+    <div
+      className="home-steps-container layout-counter-margin layout-padding"
+      align="center"
+    >
+      <h1 className="home-heading">Three Simple Steps To Get Started</h1>
       <div align="center">
-        <div style={{ height: "2px", width: "342px", background: "#23b195" }} />
+        <div className="home-heading-underline" style={{width: "392px" }} />
       </div>
       <br />
-      <Row gutter={10} align="middle" type="flex" justify="space-around">
-        <Col xs={24} span={12}>
-          <h1 className="home-steps-sub-head">
-            <b>SignUp</b>
-          </h1>
-          <h1>Some Text About SignUp</h1>
+      {stepsData.map((item, key)=>(<Row align="middle" type="flex" gutter={10} style={{ height: "50vh" }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} span={12} order = {(key+1)%2 === 0 ? 2: 1}>
+          <OverPack style={{ width: "100%", height: "30vh" }}>
+            <QueueAnim key="queue" leaveReverse>
+              {" "}
+              <div key="a">
+                <h1 className="home-steps-sub-head">
+                  <b>{item.text}</b>
+                </h1>
+                <h1>{item.subText}</h1>
+              </div>{" "}
+            </QueueAnim>
+          </OverPack>
         </Col>
-        <Col xs={24} span={12}>
-          <div className="home-steps-picture" />
+        <Col xs={{ span: 24 }} md={{ span: 12 }} span={12} order = {(key+1)%2 === 0 ? 1: 2}>
+          <OverPack style={{ width: "100%", height: "50vh" }}>
+            <QueueAnim key="queue" leaveReverse>
+              {" "}
+              <div key="a">
+                <img
+                  src={require(`../../images/home/steps-${item.id}.svg`)}
+                  height="400px"
+                />
+              </div>{" "}
+            </QueueAnim>
+          </OverPack>
         </Col>
-      </Row>
-      <Row gutter={10} align="middle" type="flex" justify="space-around">
-        <Col xs={{ span: 24, order: 2 }} span={12}>
-          <div className="home-steps-picture" />
-        </Col>
-        <Col xs={{ span: 24, order: 1 }} span={12}>
-          <h1 className="home-steps-sub-head">
-            <b>Lenshood KYC</b>
-          </h1>
-          <h1>Some Text About KYC</h1>
-        </Col>
-      </Row>
-      <Row gutter={10} align="middle" type="flex" justify="space-around">
-        <Col xs={24} span={12}>
-          <h1 className="home-steps-sub-head">
-            <b>Add Listing</b>
-          </h1>
-          <h1>Some Text About Add Listing</h1>
-        </Col>
-        <Col xs={24} span={12}>
-          <div className="home-steps-picture" />
-        </Col>
-      </Row>
+      </Row>))}
+      
     </div>
   );
 };

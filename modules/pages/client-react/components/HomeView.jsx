@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { PageLayout } from '@gqlapp/look-client-react';
 
 import { translate } from '@gqlapp/i18n-client-react';
+import { Anchor } from 'antd';
+
 import settings from '../../../../settings';
 import HomeHead from './components/HomeHead';
 import HomeFeaturedUsers from './components/HomeFeaturedUsers';
@@ -14,6 +16,9 @@ import HomeSteps from './components/HomeSteps';
 import HomeWhyLenshood from './components/HomeWhyLenshood';
 
 import HomeHowItWorks from './components/HomeHowItWorks';
+
+const { Link } = Anchor;
+
 
 class HomeView extends Component {
   render() {
@@ -32,6 +37,7 @@ class HomeView extends Component {
           ]}
         />
         <HomeHead t={t} image={img1} />
+      
         <br />
         <br />
         <HomeFeaturedListings t={t} />
