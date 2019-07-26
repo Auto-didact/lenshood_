@@ -15,6 +15,7 @@ export { default as RenderCheckBox } from './RenderCheckBox';
 export { default as RenderUploadMultiple } from './RenderUploadMultiple';
 export { default as RenderUpload } from './RenderUpload';
 export { default as RenderDynamicField } from './RenderDynamicField';
+export { default as RenderComponentsField } from './RenderComponentsField';
 export { default as RenderAddress } from './RenderAddress';
 export { default as RenderDatePicker } from './RenderDatePicker';
 export { default as RenderDateRangePicker } from './RenderDateRangePicker';

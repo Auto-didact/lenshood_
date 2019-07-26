@@ -46,9 +46,6 @@ export default class Footer extends React.Component {
                   <ul>
                     <h3>About Lenshood</h3>
                     <li>
-                      <Link to="/about-us">About us</Link>
-                    </li>
-                    <li>
                       <Link to="/terms-of-service">Terms of Service</Link>
                     </li>
                     <li>
@@ -166,9 +163,6 @@ export default class Footer extends React.Component {
                   }
                 >
                   <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
-                    <li>
-                      <Link to="/about-us">About us</Link>
-                    </li>
                     <li>
                       <Link to="/terms-of-service">Terms of Service</Link>
                     </li>

@@ -1,0 +1,26 @@
+fragment FeaturedListingInfo on Listing {
+  id
+  gearCategory
+  gearSubcategory
+  gearSubSubcategory
+  createdAt
+
+  listingImages {
+    id
+    imageUrl
+  }
+  listingRental {
+    id
+    perDay
+  }
+  user {
+    id
+    username
+    profile {
+      avatar
+      firstName
+      lastName
+      rating
+    }
+  }
+}

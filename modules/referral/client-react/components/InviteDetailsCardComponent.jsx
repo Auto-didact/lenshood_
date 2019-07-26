@@ -113,66 +113,14 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
           </Col>
         </Form>
         <br />
-
-        <div style={{ height: '50px' }}>
-          <SocialSharingButtons link={inviteUrl} whatsappMessage={whatsappMessage} twitterMessage={twitterMessage} />
+        <div style={{ height: "50px" }}>
+          <SocialSharingButtons
+            link={inviteUrl}
+            whatsappMessage={whatsappMessage}
+            twitterMessage={twitterMessage}
+            hideEmailButton={true}
+          />
         </div>
-
-        {/* <Col span={24}>
-          <a
-            href={`http://www.facebook.com/share.php?u=${inviteUrl}`}
-            target="_blank"
-          >
-            <img
-              src={require("../resources/facebook.png")}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a
-            href={`https://twitter.com/share?url=${
-              twitterMessage.link
-            }&amp;text=${twitterMessage.text}&amp;hashtags=${
-              twitterMessage.hashtag
-            }`}
-            target="_blank"
-          >
-            <img
-              src={require("../resources/twitter.png")}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a
-            href={`https://web.whatsapp.com/send?text=${whatsappMessage}`}
-            target="_blank"
-          >
-            <img
-              src={require("../resources/whatsapp.png")}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${inviteUrl}`}
-            target="_blank"
-          >
-            <img
-              src={require("../resources/linkedin.png")}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-        </Col>
-       */}
       </Card>
     </div>
   );

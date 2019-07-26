@@ -1,0 +1,7 @@
+#import "./FeaturedUser.graphql"
+
+query featuredUsers {
+  featuredUsers {
+    ...FeaturedUserInfo
+  }
+}
