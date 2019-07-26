@@ -57,7 +57,7 @@ const HomeWhyLenshood = ({ t }) => {
               <QueueAnim key="queue" leaveReverse>
                 {' '}
                 <div key="a">
-                  <img src={require(`../../images/home/why-lenshood-${item.id}.svg`)} height="400px" />
+                  <img src={require(`../images/home/why-lenshood-${item.id}.svg`)} height="400px" />
                 </div>{' '}
               </QueueAnim>
             </OverPack>

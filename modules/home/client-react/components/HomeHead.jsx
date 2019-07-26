@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import settings from '../../../../../settings';
+import settings from '../../../../settings';
 import { Button, Divider, Card, Row, Col } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
@@ -136,7 +136,7 @@ const HomeHead = ({ t, image }) => {
           }}
           align="right"
         >
-          <img src={require('../../images/home/banner.svg')} width="80%" />
+          <img src={require('../images/home/banner.svg')} width="80%" />
         </Col>
       </Row>
     </div>

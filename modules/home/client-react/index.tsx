@@ -15,6 +15,9 @@ import resources from "./locales";
 // ));
 
 export default new ClientModule({
-  route: [<Route exact path="/home" component={Home} />],
+  route: [
+    <Route exact path="/" component={Home} />,
+    <Route exact path="/home" component={Home} />
+  ],
   localization: [{ ns: "home", resources }]
 });

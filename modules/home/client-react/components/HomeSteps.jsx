@@ -51,7 +51,7 @@ const HomeSteps = ({ t }) => {
               <QueueAnim key="queue" leaveReverse>
                 {' '}
                 <div key="a">
-                  <img src={require(`../../images/home/steps-${item.id}.svg`)} height="400px" />
+                  <img src={require(`../images/home/steps-${item.id}.svg`)} height="400px" />
                 </div>{' '}
               </QueueAnim>
             </OverPack>

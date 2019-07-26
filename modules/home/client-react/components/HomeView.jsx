@@ -8,14 +8,14 @@ import { translate } from '@gqlapp/i18n-client-react';
 import { Anchor } from 'antd';
 
 import settings from '../../../../settings';
-import HomeHead from './components/HomeHead';
-import HomeFeaturedUsers from './components/HomeFeaturedUsers';
-import HomeFeaturedListings from './components/HomeFeaturedListings';
+import HomeHead from './HomeHead';
+import HomeFeaturedUsers from './HomeFeaturedUsers';
+import HomeFeaturedListings from './HomeFeaturedListings';
 
-import HomeSteps from './components/HomeSteps';
-import HomeWhyLenshood from './components/HomeWhyLenshood';
+import HomeSteps from './HomeSteps';
+import HomeWhyLenshood from './HomeWhyLenshood';
 
-import HomeHowItWorks from './components/HomeHowItWorks';
+import HomeHowItWorks from './HomeHowItWorks';
 
 const { Link } = Anchor;
 
