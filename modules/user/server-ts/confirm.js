@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from './sql';
 import settings from '../../../settings';
+import { message } from 'antd';
 
 export default async (req, res, next) => {
   try {
@@ -10,6 +11,7 @@ export default async (req, res, next) => {
     await User.updateUserVerification(result.identity.id, {
       is_email_verified: true
     });
+    message.info('Your Email has been confirmed, Please login to Continue...');
     res.redirect('/login');
   } catch (e) {
     res.send('error');

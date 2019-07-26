@@ -19,7 +19,6 @@ import HomeHowItWorks from './components/HomeHowItWorks';
 
 const { Link } = Anchor;
 
-
 class HomeView extends Component {
   render() {
     const t = this.props.t;
@@ -37,7 +36,7 @@ class HomeView extends Component {
           ]}
         />
         <HomeHead t={t} image={img1} />
-      
+
         <br />
         <br />
         <HomeFeaturedListings t={t} />

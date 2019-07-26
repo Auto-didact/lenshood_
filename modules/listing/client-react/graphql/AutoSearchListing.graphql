@@ -2,6 +2,7 @@ fragment AutoSearchListingInfo on Listing {
   id
   gearCategory
   gearSubcategory
+  gearSubSubcategory
   description
   listingContent {
     gear

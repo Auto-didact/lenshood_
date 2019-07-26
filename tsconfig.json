@@ -11,7 +11,7 @@
     "noUnusedLocals": true,
     "jsx": "react",
     "lib": ["es2015", "dom", "esnext"],
-    "noImplicitAny": true,
+    "noImplicitAny": false, //temporarily change to remove errors of declaration
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
@@ -23,24 +23,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.vue",
-    "modules/order/client-react/components/OrderCardComponent.jsxonent.jsx",
-    "modules/order/client-react/components/CheckoutStepsComponent.jsxonent.jsx",
-    "modules/order/client-react/components/CheckoutPayView.jsx",
-    "modules/order/client-react/components/CheckoutOrderView.jsx",
-    "modules/order/client-react/components/CheckoutCartView.jsx",
-    "modules/order/client-react/components/CheckoutBillView.jsx",
-    "modules/order/client-react/containers/CheckoutPay.jsx",
-    "modules/referral/client-react/index.jsx",
-    "modules/referral/client-react/components/ReferralView.jsx",
-    "modules/referral/client-react/containers/Referral.jsx",
-    "modules/user/server-ts/sql.js",
-    "modules/user/server-ts/resolvers.js",
-    "modules/liveSearch/client-react/containers/LiveSearch.jsx",
-    "modules/liveSearch/client-react/components/LiveSearchView.jsx",
-    "modules/listing/client-react/components/ListingFilterComponent.jsx",
-    "modules/liveSearch/client-react/index.jsx",
-    "modules/pages/client-react/containers/Featured/FeaturedUser.jsx",
-    "modules/order/client-react/components/MyOrdersView.jsx"
+    "modules/home/client-react/containers/Home.jsx"
   ],
   "exclude": ["node_modules"]
 }

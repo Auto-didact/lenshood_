@@ -3,6 +3,7 @@ import React from 'react';
 
 // Apollo
 import { graphql, compose } from 'react-apollo';
+import CURRENT_USER_ID from '@gqlapp/user-client-react/graphql/CurrentUserQuery.graphql';
 
 // Components
 import ProfileView from '../components/ProfileView';
@@ -45,6 +46,12 @@ export default compose(
     props({ data: { loading, error, displayUser } }) {
       if (error) throw new Error(error);
       return { loading, user: displayUser };
+    }
+  }),
+  graphql(CURRENT_USER_ID, {
+    props({ data: { loading, error, currentUser } }) {
+      if (error) throw new Error(error);
+      return { loading, currentUser };
     }
   })
 )(PublicProfile);

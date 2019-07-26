@@ -43,13 +43,13 @@ export default pubsub => ({
         }
       }
     }),
-    async displayUser(obj, { id }, { User, identity }) {
+    displayUser: withAuth(async (obj, { id }, { User, identity }) => {
       if (identity.id === id) {
         return null;
       }
       const user = await User.getUser(id);
       return user;
-    },
+    }),
     currentUser(obj, args, { User, identity }) {
       if (identity) {
         const user = User.getUser(identity.id);
@@ -58,12 +58,12 @@ export default pubsub => ({
         return null;
       }
     },
-    featuredUsers(obj, args, { User, identity }) {
+    featuredUsers: withAuth(async (obj, args, { User, identity }) => {
       return User.featuredUsers();
-    },
-    userProfile(obj, { userId }, { User, identity }) {
+    }),
+    userProfile: withAuth(async (obj, { userId }, { User, identity }) => {
       return User.userProfile(userId);
-    }
+    })
   },
   // User: {
   //   profile(obj) {
@@ -414,11 +414,21 @@ export default pubsub => ({
         }
       }
     ),
-    toggleEndorse: (obj, input, { User, identity, req: { t } }) =>
-      User.toggleEndorse(input.endorseeId, input.endorserId),
-    toggleFollow: (obj, input, { User, identity, req: { t } }) => User.toggleFollow(input.userId, input.followerId),
-    toggleIsFeatured: (obj, input, { User, identity, req: { t } }) =>
+    toggleEndorse: withAuth(['user:update:self'], async (obj, input, { User, identity, req: { t } }) =>
+      User.toggleEndorse(input.endorseeId, input.endorserId)
+    ),
+    isEndorsed: withAuth(['user:update:self'], async (obj, input, { User, identity, req: { t } }) =>
+      User.isEndorsedF(input.endorseeId, input.endorserId)
+    ),
+    toggleFollow: withAuth(['user:update:self'], async (obj, input, { User, identity, req: { t } }) =>
+      User.toggleFollow(input.userId, input.followerId)
+    ),
+    isFollwed: withAuth(['user:update:self'], async (obj, input, { User, identity, req: { t } }) =>
+      User.isFollowedF(input.userId, input.followerId)
+    ),
+    toggleIsFeatured: withAuth(['user:update:self'], async (obj, input, { User, identity, req: { t } }) =>
       User.toggleIsFeatured(input.userId, input.isFeatured)
+    )
   },
   Subscription: {
     usersUpdated: {

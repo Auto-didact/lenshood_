@@ -11,7 +11,7 @@ const LiveSearchFormComponentSchema = {
   queryItem: [required]
 };
 
-const activeGearCategory = ['Cameras', 'Lenses', 'Drones', 'Lighting'];
+const activeGearCategory = ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'];
 
 const LiveSearchFormComponent = ({ values, handleSubmit, errors, t }) => {
   return (

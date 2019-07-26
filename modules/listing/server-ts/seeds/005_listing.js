@@ -1,18 +1,15 @@
 import { returnId, truncateTables } from '@gqlapp/database-server-ts';
 
-let gearCategory = ['Cameras', 'Lenses', 'Drones', 'Lighting'],
+let gearCategory = ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'],
   gearSubcategory = {
-    Cameras: [
-      'DSLR',
-      'SLR',
-      'Mirrorless Camera',
-      'Point & Shoot Camera',
-      'Video Camera',
-      'Cinema Camera',
-      'Go Pro & Headcam',
-      'Other'
-    ],
-    Lenses: ['DSLR Lens', 'Prime Lens', 'Mirrorless Lense', 'Cinema Lens', 'Lens Accessories', 'Other Lenses']
+    Cameras: ["DSLR's", 'Point and Shoot cameras', 'Mirrorless cameras', 'Action cams', 'Cinema Cameras'],
+    Lenses: ['DSLR Lenses', 'Mirrorless Lenses', 'Cinema Lenses'],
+    Lighting: ['Photography Lighting', 'Video Lighting', 'Lighting Accesories'],
+    'Tripods and Support': ['Tripods/Monopods', 'Gimbals/Stabilizers', 'Rigs/Sliders']
+  },
+  gearSubSubcategory = {
+    'DSLR Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens'],
+    'Mirrorless Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens']
   };
 
 export async function seed(knex, Promise) {
@@ -33,10 +30,15 @@ export async function seed(knex, Promise) {
       let gsc = gearSubcategory[gc]
         ? gearSubcategory[gc][Math.floor(Math.random() * gearSubcategory[gc].length)]
         : 'none';
+      let gssc = gearSubSubcategory[gsc]
+        ? gearSubSubcategory[gsc][Math.floor(Math.random() * gearSubSubcategory[gsc].length)]
+        : null;
+
       const listing = await returnId(knex('listing')).insert({
         user_id: 1,
         gear_category: gc,
         gear_subcategory: gsc,
+        gear_sub_subcategory: gssc,
         description: `Listing description ${ii + 1}`
       });
       await Promise.all(

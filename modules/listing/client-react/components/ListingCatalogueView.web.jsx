@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import { PageLayout } from '@gqlapp/look-client-react';
 import ListingCatalogue from '../containers/ListingCatalogue';
 
-
 const ListingCatalogueView = () => {
   return (
-    <PageLayout className="layout-counter-margin layout-padding" style={{background:"grey"}}>
+    <PageLayout className="layout-counter-margin layout-padding" style={{ background: 'grey' }}>
       <ListingCatalogue />
     </PageLayout>
   );
 };
-
 
 ListingCatalogueView.propTypes = {
   listings: PropTypes.arrayOf(

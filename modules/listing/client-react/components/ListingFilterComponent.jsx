@@ -14,20 +14,16 @@ const ListingFilterComponent = props => {
   } = props;
   console.log(props);
   let state = {
-    gearCategory: ['', 'Cameras', 'Lenses', 'Drones', 'Lighting'],
+    gearCategory: ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'],
     gearSubcategory: {
-      Cameras: [
-        '',
-        'DSLR',
-        'SLR',
-        'Mirrorless Camera',
-        'Point & Shoot Camera',
-        'Video Camera',
-        'Cinema Camera',
-        'Go Pro & Headcam',
-        'Other'
-      ],
-      Lenses: ['', 'DSLR Lens', 'Prime Lens', 'Mirrorless Lense', 'Cinema Lens', 'Lens Accessories', 'Other Lenses']
+      Cameras: ["DSLR's", 'Point and Shoot cameras', 'Mirrorless cameras', 'Action cams', 'Cinema Cameras'],
+      Lenses: ['DSLR Lenses', 'Mirrorless Lenses', 'Cinema Lenses'],
+      Lighting: ['Photography Lighting', 'Video Lighting', 'Lighting Accesories'],
+      'Tripods and Support': ['Tripods/Monopods', 'Gimbals/Stabilizers', 'Rigs/Sliders']
+    },
+    gearSubSubcategory: {
+      'DSLR Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens'],
+      'Mirrorless Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens']
     }
   };
 

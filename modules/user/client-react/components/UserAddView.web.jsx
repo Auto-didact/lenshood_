@@ -30,14 +30,16 @@ const UserAddView = ({ t, onSubmit, currentUser }) => {
       <h2>
         {t('userEdit.form.titleCreate')} {t('userEdit.form.title')}
       </h2>
-      <UserFormComponent
-        LYGflag={false}
-        onSubmit={onSubmit}
-        initialValues={{}}
-        shouldDisplayRole={true}
-        shouldDisplayActive={true}
-        userRole={currentUser.role}
-      />
+      <div className="con">
+        <UserFormComponent
+          LYGflag={false}
+          onSubmit={onSubmit}
+          initialValues={{}}
+          shouldDisplayRole={true}
+          shouldDisplayActive={true}
+          userRole={currentUser.role}
+        />
+      </div>
     </PageLayout>
   );
 };

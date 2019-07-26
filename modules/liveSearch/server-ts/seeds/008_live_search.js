@@ -1,6 +1,6 @@
 import { returnId, truncateTables } from '@gqlapp/database-server-ts';
 
-let gearCategory = ['Cameras', 'Lenses', 'Drones', 'Lighting'];
+let gearCategory = ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'];
 
 export async function seed(knex, Promise) {
   await truncateTables(knex, Promise, ['live_search', 'live_search_user']);

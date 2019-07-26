@@ -1,5 +1,5 @@
 import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
-import { Model } from 'objection';
+import { Model, raw } from 'objection';
 import { knex, returnId, orderedFor } from '@gqlapp/database-server-ts';
 import { User, UserProfile } from '@gqlapp/user-server-ts/sql';
 import { has } from 'lodash';
@@ -36,6 +36,7 @@ export interface Listing {
   userId: number;
   gearCategory: string;
   gearSubcategory: string;
+  gearSubSubcategory: string;
   description: string;
   status: string;
   isActive: boolean;
@@ -311,8 +312,8 @@ export default class ListingDAO extends Model {
   public async updateLiskesDisLikes(input: { ld: string; review_id: number; reviewer_id: number }) {
     const lkDk = await this.getIsLikeOrDisLike(input);
     if (lkDk && lkDk.length > 0) {
-      const up = {};
-      up.like_dislike = input.ld;
+      let up = {};
+      up = { like_dislike: input.ld };
       await UserReviewLikesDAO.query()
         .update(up)
         .where('listing_review_id', '=', input.review_id)
@@ -365,7 +366,7 @@ export default class ListingDAO extends Model {
     return listing;
   }
 
-  public async asyncForEach(array, callback) {
+  public async asyncForEach(array: any, callback: any) {
     for (let index = 0; index < array.length; index++) {
       await callback(array[index], index, array);
     }
@@ -681,46 +682,6 @@ class ListingReviewDAO extends Model {
     return {
       listing: {
         relation: Model.BelongsToOneRelation,
-        modelClass: ListingDAO,
-        join: {
-          from: 'listing_review.listing_id',
-          to: 'listing.id'
-        }
-      },
-      reviewer: {
-        relation: Model.HasManyRelation,
-        modelClass: UserProfile,
-        join: {
-          from: 'listing_review.reviewer_id',
-          to: 'user_profile.user_id'
-        }
-      },
-      likedislikes: {
-        relation: Model.HasManyRelation,
-        modelClass: UserReviewLikesDAO,
-        join: {
-          from: 'listing_review.id',
-          to: 'user_reviews_likes.listing_review_id'
-        }
-      }
-    };
-  }
-}
-
-// ListingWatchListDAO model.
-class ListingWatchListDAO extends Model {
-  static get tableName() {
-    return 'watchlist';
-  }
-
-  static get idColumn() {
-    return 'id';
-  }
-
-  static get relationMappings() {
-    return {
-      listing: {
-        relation: Model.HasManyRelation,
         modelClass: ListingDAO,
         join: {
           from: 'listing_review.listing_id',

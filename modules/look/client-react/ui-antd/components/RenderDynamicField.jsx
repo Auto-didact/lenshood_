@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FieldAdapter as Field } from '@gqlapp/forms-client-react';
-import { Form, Icon } from 'antd';
-import { RenderField, RenderUpload, Button } from '@gqlapp/look-client-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
+import { Form, Icon } from "antd";
+import { RenderField, RenderUpload, Button } from "@gqlapp/look-client-react";
 
 const FormItem = Form.Item;
 
@@ -12,7 +12,7 @@ export default class DynamicFieldSet extends React.Component {
     let obj = {};
     const keys = this.props.keys;
 
-    keys.map(k => (obj[k.key] = ''));
+    keys.map(k => (obj[k.key] = ""));
 
     arrayHelpers.push(obj);
   };
@@ -34,10 +34,13 @@ export default class DynamicFieldSet extends React.Component {
 
     if (values) {
       formItems = values.map((v, indexv) => (
-        <FormItem required={false} key={indexv} style={{ margin: '0px' }}>
+        <FormItem required={false} key={indexv} style={{ margin: "0px" }}>
           {keys.map((k, indexk) => (
-            <FormItem style={{ display: 'inline-block', margin: '0px 5px' }} key={indexk}>
-              {k.type == 'text' ? (
+            <FormItem
+              style={{ display: "inline-block", margin: "0px 5px" }}
+              key={indexk}
+            >
+              {k.type == "text" ? (
                 <Field
                   name={`${name}[${indexv}].${k.key}`}
                   component={RenderField}
@@ -51,11 +54,12 @@ export default class DynamicFieldSet extends React.Component {
                 />
               ) : null}
 
-              {k.type == 'image' ? (
+              {k.type == "image" ? (
                 <Field
                   name={`${name}[${indexv}].${k.key}`}
                   component={RenderUpload}
                   type="text"
+                  setload={this.props.setload}
                   label={k.label || k.key}
                   value={v[k.key]}
                   key={indexv}
@@ -66,7 +70,7 @@ export default class DynamicFieldSet extends React.Component {
           ))}
           {keys.length > 1 ? (
             <Icon
-              style={{ paddingTop: '40px' }}
+              style={{ paddingTop: "40px" }}
               title="Remove "
               className="dynamic-delete-button"
               type="minus-circle-o"
@@ -81,8 +85,8 @@ export default class DynamicFieldSet extends React.Component {
         <FormItem label={this.props.label}>
           {formItems}
           <FormItem>
-            <Button style={{ width: '200px' }} onClick={this.add}>
-              <Icon type="plus" /> {this.props.buttonText || 'Add Field'}
+            <Button style={{ width: "200px" }} onClick={this.add}>
+              <Icon type="plus" /> {this.props.buttonText || "Add Field"}
             </Button>
           </FormItem>
         </FormItem>

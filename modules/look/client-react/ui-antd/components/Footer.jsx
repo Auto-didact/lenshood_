@@ -37,7 +37,8 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div>
-        {/*------#For Large Screen Devices---#Render this for screen width more than 800px--*/}
+
+        {/*------#For Large Screen Devices---#Render this for screen width more than 700px--*/}
         <Container className="no-print screen_width_more_than_700" align="center">
           <Row className="footer" gutter={16}>
             <Col lg={12} sm={24}>
@@ -45,9 +46,6 @@ export default class Footer extends React.Component {
                 <Col sm={{ span: 12 }}>
                   <ul>
                     <h3>About Lenshood</h3>
-                    <li>
-                      <Link to="/about-us">About us</Link>
-                    </li>
                     <li>
                       <Link to="/terms-of-service">Terms of Service</Link>
                     </li>
@@ -148,7 +146,7 @@ export default class Footer extends React.Component {
           </Row>
         </Container>
 
-        {/*------#For Small screen Device----#Render this For Screen width less than 800px */}
+        {/*------#For Small screen Device----#Render this For Screen width less than 700px */}
 
         <Container className="no-print screen_width_less_than_700" align="center">
           <Row className="footer" gutter={16}>
@@ -170,9 +168,6 @@ export default class Footer extends React.Component {
                   }
                 >
                   <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
-                    <li>
-                      <Link to="/about-us">About us</Link>
-                    </li>
                     <li>
                       <Link to="/terms-of-service">Terms of Service</Link>
                     </li>

@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import '../resources/listingCatalogue.css';
-import { Icon, Button, Row, Col, Card, Popconfirm, message } from 'antd';
-import { Link } from 'react-router-dom';
-import { ImgCamera } from '../../constants/DefaultImages';
-import { IDLE, ONSHELF } from '../../constants/ListingStates';
+import { Icon, Button, Row, Col, Card, Popconfirm, message } from "antd";
+import { Link } from "react-router-dom";
+import { ImgCamera } from "../../constants/DefaultImages";
+import { IDLE, ONSHELF } from "../../constants/ListingStates";
+import { MyListingsMessage } from "../../helpers/SocialSharingMessage";
+import { SocialSharingButtons } from "@gqlapp/look-client-react";
 
 class DetailsCardComponent extends Component {
   render() {
@@ -13,27 +15,87 @@ class DetailsCardComponent extends Component {
 
     function cancel(e) {
       console.log(e);
-      message.error('Click on No');
+      message.error("Click on No");
     }
+
+    const message = MyListingsMessage(
+      item.id,
+      item.gearCategory,
+      item.gearSubcategory
+    );
 
     return (
       <Card
         className="DetailsCard"
         hoverable
         bodyStyle={{
-          padding: '0px'
+          padding: "0px"
         }}
       >
         <Row type="flex" justify="space-around" align="middle">
-          <Col xs={{ span: 24 }} md={{ span: 9 }} xxl={{ span: 6 }} className="DetailsCardCol" align="center">
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 9 }}
+            xxl={{ span: 6 }}
+            className="DetailsCardCol"
+            align="center"
+          >
             <img
               className="DetailsCardImg"
               alt=""
-              src={item.listingImages.length !== 0 ? item.listingImages[0].imageUrl : ImgCamera[0].imageUrl}
+              src={
+                item.listingImages.length !== 0
+                  ? item.listingImages[0].imageUrl
+                  : ImgCamera[0].imageUrl
+              }
             />
+
+            <Col
+              sm={0}
+              xs={4}
+              style={{
+                top: "4px",
+                left: 0,
+                position: "absolute",
+                zIndex: 1000
+              }}
+            >
+              <Link to={`/listing/${item.id}`}>
+                <Button shape="circle" size="default">
+                  <Icon type="edit" />
+                </Button>
+              </Link>
+            </Col>
+            <Col
+              sm={0}
+              xs={4}
+              style={{
+                top: "4px",
+                right: 0,
+                position: "absolute",
+                zIndex: 1000
+              }}
+            >
+              <Popconfirm
+                title="Are you sure to delete this listing?"
+                onConfirm={e => this.props.DeleteListing(item.id, e)}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" shape="circle" size="default">
+                  <Icon type="delete" />
+                </Button>
+              </Popconfirm>
+            </Col>
           </Col>
-          <Col xs={{ span: 24 }} md={{ span: 15 }} xxl={{ span: 18 }} className="DetailsCardCol">
-            <div style={{ padding: '10px', align: 'center' }}>
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 15 }}
+            xxl={{ span: 18 }}
+            className="DetailsCardCol"
+          >
+            <div style={{ padding: "10px", align: "center" }}>
               {item.status === ONSHELF ? (
                 <h6 className="OnShelfTag font12 borderRadius9">{ONSHELF}</h6>
               ) : (
@@ -42,9 +104,11 @@ class DetailsCardComponent extends Component {
               <h3 className="DetailsCardHeading">
                 {item.listingContent
                   ? item.listingContent.length !== 0
-                    ? item.listingContent.map((gear, id) => <span key={id}>{`${gear.brand} ${gear.gear} / `}</span>)
-                    : 'Info Not Provided'
-                  : 'Info Not Provided'}
+                    ? item.listingContent.map((gear, id) => (
+                        <span key={id}>{`${gear.brand} ${gear.gear} / `}</span>
+                      ))
+                    : "Info Not Provided"
+                  : "Info Not Provided"}
               </h3>
               {/*<h5>
                 <span className="StarRate">
@@ -52,18 +116,31 @@ class DetailsCardComponent extends Component {
                 </span>
                 <span className="mainColor"> ({item.reviews})</span>
               </h5>*/}
-              <h5 className="marginB25">
+              <h5 className="marginB20">
                 <strong>&#8377; {item.listingRental.perDay} per day</strong>
               </h5>
-              <Row style={{ marginBottom: '8px' }}>
-                <Col span={12} align="left" style={{ paddingLeft: '20px' }}>
+              <Row style={{ marginBottom: "8px" }}>
+                <Col sm={4} xs={0} align="left" style={{ paddingLeft: "20px" }}>
                   <Link to={`/listing/${item.id}`}>
                     <Button shape="circle" size="large">
                       <Icon type="edit" />
                     </Button>
                   </Link>
                 </Col>
-                <Col span={12} align="right" style={{ paddingRight: '20px' }}>
+                <Col sm={16} xs={24} align="center">
+                  <div style={{ height: "50px" }}>
+                    <SocialSharingButtons
+                      {...message}
+                      onSubmit={this.props.onSubmit}
+                    />
+                  </div>
+                </Col>
+                <Col
+                  sm={4}
+                  xs={0}
+                  align="right"
+                  style={{ paddingRight: "20px" }}
+                >
                   <Popconfirm
                     title="Are you sure to delete this listing?"
                     onConfirm={e => this.props.DeleteListing(item.id, e)}
@@ -79,8 +156,12 @@ class DetailsCardComponent extends Component {
               </Row>
               <Row gutter={13} align="middle">
                 <Col span={12}>
-                  <Button type="primary" block onClick={e => this.props.toggle(item.id, e)}>
-                    {item.status === ONSHELF ? 'Move to Idle' : 'Move to Shelf'}
+                  <Button
+                    type="primary"
+                    block
+                    onClick={e => this.props.toggle(item.id, e)}
+                  >
+                    {item.status === ONSHELF ? "Move to Idle" : "Move to Shelf"}
                   </Button>
                 </Col>
                 <Col span={12}>

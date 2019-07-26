@@ -17,7 +17,11 @@ class OrderDetailsComponent extends Component {
       >
         <Row type="flex" justify="space-around" align="middle">
           <Col xs={{ span: 24 }} md={{ span: 9 }} xxl={{ span: 6 }} className="orderCardCol" align="center">
-            <img className="orderImage" alt="" src={item.image.length !== 0 ? item.image : ImgCamera[0].imageUrl} />
+            <img
+              className="orderHorizontalImage"
+              alt=""
+              src={item.image.length !== 0 ? item.image : ImgCamera[0].imageUrl}
+            />
           </Col>
           <Col xs={{ span: 24 }} md={{ span: 15 }} xxl={{ span: 18 }} className="orderCardCol">
             <div style={{ padding: '10px', align: 'center' }}>

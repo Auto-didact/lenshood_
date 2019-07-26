@@ -1,0 +1,95 @@
+#import "./Profile.graphql"
+
+fragment FeaturedUserInfo on User {
+  id
+  username
+  role
+  isActive
+  email
+  listings {
+    id
+    gearCategory
+    gearSubcategory
+    listingImages {
+      id
+      imageUrl
+    }
+    listingContent {
+      gear
+      brand
+      model
+    }
+    listingRental {
+      perDay
+    }
+  }
+  profile {
+    ...UserProfileInfo
+  }
+  endorsements {
+    endorser {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  endorsed {
+    endorsee {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  followers {
+    follower {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  following {
+    followee {
+      profile {
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+  addresses {
+    streetAddress1
+    streetAddress2
+    city
+    state
+    pinCode
+  }
+  portfolios {
+    platform
+    portfolioUrl
+  }
+  authCertificate {
+    serial
+  }
+  authFacebook {
+    fbId
+    displayName
+  }
+  authGoogle {
+    googleId
+    displayName
+  }
+  authGithub {
+    ghId
+    displayName
+  }
+  authLinkedin {
+    lnId
+    displayName
+  }
+}

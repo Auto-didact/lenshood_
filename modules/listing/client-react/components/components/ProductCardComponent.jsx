@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Carousel, Icon, Divider, CardText, Card, Button } from 'antd';
 import { ImgCamera } from '../../constants/DefaultImages';
+import { ListingsMessage } from '../../helpers/SocialSharingMessage';
+import { SocialSharingButtons } from '@gqlapp/look-client-react';
+
 // import '../resources/listingCatalogue.css';
 // To Do Carousel Arrows;
 // function SampleNextArrow(props) {
@@ -61,6 +64,9 @@ class ProductCardComponent extends Component {
       // nextArrow: <SampleNextArrow />,
       // prevArrow: <SamplePrevArrow />
     };
+
+    const message = ListingsMessage(listing.id, listing.user.username, listing.gearCategory, listing.gearSubcategory);
+
     return (
       <div style={{ paddingRight: '4px', paddingTop: '5px' }}>
         <div style={{ marginLeft: '10px', marginRight: '10px' }}>
@@ -138,6 +144,11 @@ class ProductCardComponent extends Component {
         <br />
         <h3 className="font16 blockDisplay fontBold">Damage Policy</h3>
         <p className="font14">{damagePolicy}</p>
+        <br />
+        <div className="marginB20">
+          <h3 className="font16 blockDisplay fontBold"> Sharing Options</h3>
+          <SocialSharingButtons {...message} onSubmit={this.props.onSubmit} />
+        </div>
       </div>
     );
   }

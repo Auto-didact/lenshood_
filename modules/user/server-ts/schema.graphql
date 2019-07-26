@@ -36,6 +36,7 @@ type User {
 
 type UserProfile {
   id: Int
+  userId: Int
   firstName: String
   lastName: String
   isVerified: Boolean
@@ -240,8 +241,10 @@ extend type Mutation {
   addUserMobile(input: AddMobileInput!): UserMobile!
   #Endorse/UnEndorse user
   toggleEndorse(endorseeId: Int, endorserId: Int): endorseUnEndorse!
+  isEndorsed(endorseeId: Int, endorserId: Int): Boolean!
   #Follow/UnFollow user
   toggleFollow(userId: Int, followerId: Int): follwUnFollw!
+  isFollwed(userId: Int, followerId: Int): Boolean!
   #toggle isFeatured
   toggleIsFeatured(userId: Int, isFeatured: Boolean): Boolean
 }

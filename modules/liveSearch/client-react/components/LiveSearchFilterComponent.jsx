@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DebounceInput } from 'react-debounce-input';
 import { Form, FormItem, Select, Option, Label, Input } from '@gqlapp/look-client-react';
 
-const activeGearCategory = ['', 'Cameras', 'Lenses', 'Drones', 'Lighting'];
+const activeGearCategory = ['', 'Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'];
 
 const LiveSearchFilterComponent = ({
   filter: { searchText, gearCategory },
@@ -11,6 +11,7 @@ const LiveSearchFilterComponent = ({
   onGearCategoryChange
 }) => (
   <Form layout="inline">
+    {console.log('searchText', searchText, gearCategory)}
     <FormItem label="Search">
       <DebounceInput
         minLength={1}

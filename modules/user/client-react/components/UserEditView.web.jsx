@@ -46,14 +46,17 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit, userBool }) => 
             {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
           </h2>
 
-          <UserFormComponent
-            LYGflag={false}
-            onSubmit={onSubmit}
-            shouldDisplayRole={isNotSelf}
-            shouldDisplayActive={isNotSelf}
-            initialValues={userBool ? currentUser : user}
-            userRole={currentUser && currentUser.role ? currentUser.role : null}
-          />
+          <div className="con">
+            {' '}
+            <UserFormComponent
+              LYGflag={false}
+              onSubmit={onSubmit}
+              shouldDisplayRole={isNotSelf}
+              shouldDisplayActive={isNotSelf}
+              initialValues={userBool ? currentUser : user}
+              userRole={currentUser && currentUser.role ? currentUser.role : null}
+            />
+          </div>
         </div>
       )}
     </PageLayout>

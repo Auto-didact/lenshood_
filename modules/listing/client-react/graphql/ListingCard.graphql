@@ -2,6 +2,7 @@ fragment ListingCard on Listing {
   id
   gearCategory
   gearSubcategory
+  gearSubSubcategory
   createdAt
 
   listingImages {

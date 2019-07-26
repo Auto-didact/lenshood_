@@ -10,15 +10,17 @@ const UserEditView = ({ loading, t, currentUser, onSubmit, valueCheck }) => {
       {loading && !currentUser && <Loader text={t('userEdit.loadMsg')} />}
       {!loading && !currentUser && <h1 className="text-center"> Please refresh the page!!!! </h1>}
       {currentUser && (
-        <UserFormComponent
-          valueCheck={valueCheck}
-          LYGflag={true}
-          onSubmit={onSubmit}
-          shouldDisplayRole={false}
-          shouldDisplayActive={false}
-          initialValues={currentUser}
-          userRole={currentUser && currentUser.role ? currentUser.role : null}
-        />
+        <div className="userDetails">
+          <UserFormComponent
+            valueCheck={valueCheck}
+            LYGflag={true}
+            onSubmit={onSubmit}
+            shouldDisplayRole={false}
+            shouldDisplayActive={false}
+            initialValues={currentUser}
+            userRole={currentUser && currentUser.role ? currentUser.role : null}
+          />
+        </div>
       )}
     </div>
   );

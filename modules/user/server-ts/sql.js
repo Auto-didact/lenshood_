@@ -340,6 +340,12 @@ export class User extends Model {
           .where('user_id', '=', res.id)
           .update('referrer_id', userId)
       );
+    await returnId(
+      knex('referral')
+        .where('user_id', '=', userId)
+        .andWhere('referred_id', '=', res.id)
+        .update('is_verified', params.profile.isVerified)
+    );
     return res.id;
   }
 
@@ -592,6 +598,22 @@ export class User extends Model {
     )['count(`u`.`id`)'];
   }
 
+  async isEndorsedF(endorsee_id, endorser_id) {
+    const count = camelizeKeys(
+      await knex
+        .count('u.id')
+        .from('user_endorsement as u')
+        .where('u.endorser_id', '=', endorser_id)
+        .andWhere('u.endorsee_id', '=', endorsee_id)
+        .first()
+    )['count(`u`.`id`)'];
+    let isEndorsed = false;
+    if (count != 0) {
+      isEndorsed = true;
+    }
+    return isEndorsed;
+  }
+
   async toggleEndorse(endorsee_id, endorser_id) {
     const count = camelizeKeys(
       await knex
@@ -631,6 +653,23 @@ export class User extends Model {
         .where('u.followee_id', '=', userId)
         .first()
     )['count(`u`.`id`)'];
+  }
+
+  async isFollowedF(userId, followerId) {
+    const count = camelizeKeys(
+      await knex
+        .count('u.id')
+        .from('user_follower as u')
+        .where('u.followee_id', '=', userId)
+        .andWhere('u.follower_id', '=', followerId)
+        .first()
+    )['count(`u`.`id`)'];
+
+    let isFollowed = false;
+    if (count != 0) {
+      isFollowed = true;
+    }
+    return isFollowed;
   }
 
   async toggleFollow(userId, followerId) {

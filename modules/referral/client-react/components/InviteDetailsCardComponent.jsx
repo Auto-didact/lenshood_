@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Row, Col, Card, Icon, Input, message, Radio } from 'antd';
-import { Button, Form, RenderField, Alert } from '@gqlapp/look-client-react';
+import { Button, Form, RenderField, Alert, SocialSharingButtons } from '@gqlapp/look-client-react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
@@ -21,7 +21,7 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
     message.info('Copied to Clipboard!');
   }
 
-  const [inviteUrl, setinviteUrl] = useState(`/${username}`);
+  const inviteUrl = `https://www.lenshood.in/referrals/${username}`;
 
   const [flag, setflag] = useState(false);
 
@@ -29,7 +29,6 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
 
   useEffect(() => {
     setflag(true);
-    setinviteUrl(`${global.window.location}/${username}`);
   }, []);
 
   const whatsappMessage = `Earn cash when you sign-up using the following link: ${inviteUrl} Use the referral code - ${username} while signing up to earn cash.`;
@@ -114,50 +113,14 @@ const InviteDetailsCardComponent = ({ values, handleSubmit, submitting, errors, 
           </Col>
         </Form>
         <br />
-
-        <Col span={24}>
-          <a href={`http://www.facebook.com/share.php?u=${inviteUrl}`} target="_blank">
-            <img
-              src={require('../resources/facebook.png')}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a
-            href={`https://twitter.com/share?url=${twitterMessage.link}&amp;text=${twitterMessage.text}&amp;hashtags=${
-              twitterMessage.hashtag
-            }`}
-            target="_blank"
-          >
-            <img
-              src={require('../resources/twitter.png')}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a href={`https://web.whatsapp.com/send?text=${whatsappMessage}`} target="_blank">
-            <img
-              src={require('../resources/whatsapp.png')}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-          <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${inviteUrl}`} target="_blank">
-            <img
-              src={require('../resources/linkedin.png')}
-              height="35"
-              width="35"
-              align="centre"
-              className="marginR10 borderRadius9"
-            />
-          </a>
-        </Col>
+        <div style={{ height: "50px" }}>
+          <SocialSharingButtons
+            link={inviteUrl}
+            whatsappMessage={whatsappMessage}
+            twitterMessage={twitterMessage}
+            hideEmailButton={true}
+          />
+        </div>
       </Card>
     </div>
   );

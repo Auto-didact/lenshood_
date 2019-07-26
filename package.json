@@ -164,12 +164,14 @@
   },
   "dependencies": {
     "lodash": "^4.17.11",
+
     "opencollective": "^1.0.3",
     "rc-queue-anim": "^1.6.12",
     "rc-scroll-anim": "^2.5.9",
     "rc-tween-one": "^2.4.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-burger-menu": "^2.6.10"
+
   },
   "resolutions": {
     "immutability-helper": "2.8.1",

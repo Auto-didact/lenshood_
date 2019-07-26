@@ -175,7 +175,7 @@
 }
 
 .DetailsCardHeading {
-  height: 100px;
+  height: 90px;
 }
 
 .DetailsWidth {
@@ -332,33 +332,25 @@
   padding: 10px 5px;
 }
 
-
 /*Home */
-
-
-
 
 @media only screen and (min-width: 769px) {
   .gearCat {
     margin: 5px -4vw 5px -4vw;
     padding: 10px 4vw 10px 4vw !important;
   }
-
 }
 @media only screen and (min-width: 1025px) {
   .gearCat {
     margin: 5px -5vw 5px -5vw;
     padding: 10px 5vw 10px 5vw !important;
   }
-  
-
 }
 @media only screen and (min-width: 1441px) {
   .gearCat {
     margin: 5px -8vw 5px -8vw;
     padding: 10px 8vw 10px 8vw !important;
   }
-  
 }
 
 .detViewPad {
@@ -404,6 +396,11 @@
   background: #23b195;
   padding: 0 7px;
   margin: 3px 5px 3px 0px;
+}
+
+.ComponentCardColor {
+  margin-bottom: 20px !important;
+  background-color: rgba(153, 245, 227, 0.123) !important;
 }
 
 /* .variable-width .slick-slide p {
