@@ -399,8 +399,43 @@
 
 .home-featured-listing-banner {
   position: absolute;
-  top: -30%;
-  left: 0;
+  top: 0%;
+  left: -30vw;
+  width:160vw;
+  transform: rotate(30deg);
+  
+}
+@media only screen and (min-width: 768px) {
+  .home-featured-listing-banner {
+    top: -10%;
+    left: -30vw;
+  width:160vw;
+    
+  }
+
+}
+@media only screen and (min-width: 1024px) {
+  .home-featured-listing-banner {
+    transform: rotate(10deg);
+    
+    
+  }
+  .home-featured-listings-container {
+    
+    height: 1000px;
+    
+  }
+
+}
+@media only screen and (min-width: 1440px) {
+  .home-featured-listing-banner {
+    transform: rotate(0deg);
+    top: -15%;
+    left: -0vw;
+  width:100vw;
+    
+  }
+
 }
 .home-featured-users-container {
   height: 800px;

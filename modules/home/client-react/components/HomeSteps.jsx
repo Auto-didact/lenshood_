@@ -33,7 +33,12 @@ const HomeSteps = ({ t }) => {
       <br />
       {stepsData.map((item, key) => (
         <Row align="middle" type="flex" gutter={10} style={{ height: '50vh' }}>
-          <Col xs={{ span: 24 }} md={{ span: 12 }} span={12} order={{xs:((key+1)%2===0?1:0), md:((key + 1) % 2 === 0 ? 2 : 1)}}>
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 12 }}
+            span={12}
+            order={{ xs: (key + 1) % 2 === 0 ? 1 : 0, md: (key + 1) % 2 === 0 ? 2 : 1 }}
+          >
             <OverPack style={{ width: '100%', height: '30vh' }}>
               <QueueAnim key="queue" leaveReverse>
                 {' '}

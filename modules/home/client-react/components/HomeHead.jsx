@@ -61,20 +61,14 @@ const animationBack = [
 
 const HomeHead = ({ t, image }) => {
   return (
-    <div >
+    <div>
       <Row align="middle" type="flex" className="home-head-container  layout-counter-margin layout-padding">
-        <Col xs ={{span:24, order:1}}  md={{span:9, order:0}} >
+        <Col xs={{ span: 24, order: 1 }} md={{ span: 9, order: 0 }}>
           <div style={{ height: '100%' }}>
-            <div
-              className="home-head-text-component"
-            >
+            <div className="home-head-text-component">
               <QueueAnim delay={300} className="queue-simple">
                 <Row gutter={0} key="a" className="home-image-contentText">
-                  <Col
-                    span={12}
-                    className="home-head-upper-left-anim"
-                    
-                  >
+                  <Col span={12} className="home-head-upper-left-anim">
                     <TweenOne
                       repeat={-1}
                       animation={animationFront}
@@ -127,7 +121,8 @@ const HomeHead = ({ t, image }) => {
           </div>
         </Col>
         <Col
-          xs ={{span:24, order:0}} md={{span:15, order:1}}
+          xs={{ span: 24, order: 0 }}
+          md={{ span: 15, order: 1 }}
           style={{
             overflow: 'hidden',
             padding: '20px 0px 0px 0px'

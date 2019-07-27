@@ -8,9 +8,9 @@ const { TabPane } = Tabs;
 const HomeFeaturedListings = ({ t }) => {
   return (
     <div className="home-featured-listings-container layout-counter-margin">
-      <div className="home-featured-listing-banner">
-        <img src={require("../images/home/wave.svg")} style={{width:"100vw"}} />
-      </div>
+     
+        <img src={require("../images/home/wave.svg")}  className="home-featured-listing-banner"/>
+     
 
       <div className="layout-padding">
         <FeaturedListings />
