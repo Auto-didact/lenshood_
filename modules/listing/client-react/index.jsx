@@ -77,7 +77,13 @@ export default new ClientModule({
     />,
     <Route exact path="/listing_catalogue" component={ListingCatalogueView} />,
 
-    <Route exact path="/my-listings/:id" component={MyListingDetail} />,
+    <AuthRoute
+      redirect="/profile"
+      role={["user", "admin"]}
+      exact
+      path="/my-listings/:id"
+      component={MyListingDetail}
+    />,
 
     // Components
     <Route exact path="/listing-detail/:id" component={ListingDetail} />,
