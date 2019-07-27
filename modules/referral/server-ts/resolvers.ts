@@ -137,7 +137,7 @@ export default (pubsub: PubSub) => ({
         const sent = await mailer.sendMail({
           from: `${settings.app.name} <${process.env.EMAIL_USER}>`,
           to: input.email,
-          subject: 'LeensHood Invitation',
+          subject: 'LensHood Invitation',
           html: `Earn cash when you sign-up using the following link: <a href="${url}">${url}</a> Use the referral code - <strong>"${
             input.username
           }"</strong> while signing up to earn cash.`

@@ -1,0 +1,7 @@
+#import "./FeaturedListing.graphql"
+
+query featuredListings {
+  featuredListings {
+    ...FeaturedListingInfo
+  }
+}

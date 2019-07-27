@@ -15,7 +15,6 @@ export default new ClientModule({
     <Route exact path="/" component={Home} />,
 
     <Route exact path="/mission" component={Static} />,
-    <Route exact path="/about-us" component={Static} />,
     <Route exact path="/terms-of-service" component={Static} />,
     <Route exact path="/privacy-rules" component={Static} />,
     <Route exact path="/renting" component={Static} />,

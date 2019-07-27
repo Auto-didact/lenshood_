@@ -12,7 +12,10 @@ export function MyListingsMessage(id, gearCategory, gearSubcategory) {
     hashtag: '#lenshood #earncash #renting #lending',
     link: listLink
   };
-  return { whatsappMessage, twitterMessage, link: listLink };
+  const emailMessage = `Hey, I have put my photography equipment - ${
+    gearSubcategory ? gearSubcategory : gearCategory
+  } on lenshood, you can check it here <a href="${listLink}">${listLink}</a>. Checkout other listings at <a href="${link}">${link}</a>.`;
+  return { whatsappMessage, twitterMessage, link: listLink, emailMessage };
 }
 
 export function ListingsMessage(id, username, gearCategory, gearSubcategory) {
@@ -29,5 +32,8 @@ export function ListingsMessage(id, username, gearCategory, gearSubcategory) {
     hashtag: '#lenshood #earncash #renting #lending',
     link: listLink
   };
-  return { whatsappMessage, twitterMessage, link: listLink };
+  const emailMessage = `Hey, I have put my photography equipment - ${
+    gearSubcategory ? gearSubcategory : gearCategory
+  } on lenshood, you can check it here <a href="${listLink}">${listLink}</a>. Checkout other listings at <a href="${link}">${link}</a>.`;
+  return { whatsappMessage, twitterMessage, link: listLink, emailMessage };
 }

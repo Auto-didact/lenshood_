@@ -22,7 +22,6 @@ class NavBar extends React.Component {
     width: 710,
     height: 0,
     show1:
-      this.props.location.pathname == '/about-us' ||
       this.props.location.pathname == '/terms-of-service' ||
       this.props.location.pathname == '/privacy-rules' ||
       this.props.location.pathname == '/mission' ||
@@ -76,9 +75,6 @@ class NavBar extends React.Component {
 
   menuList = (
     <Menu className="light_font" selectedKeys={[this.props.location.pathname]} mode="inline">
-      <Menu.Item key="/about-us">
-        <NavLink to="/about-us">About us</NavLink>
-      </Menu.Item>
       <Menu.Item key="/terms-of-service">
         <NavLink to="/terms-of-service">Terms of Service</NavLink>
       </Menu.Item>
