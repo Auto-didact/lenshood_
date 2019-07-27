@@ -446,8 +446,9 @@
 }
 
 .home-semi-circle {
+  overflow:hidden;
   width: 100%;
-  height: 800px;
+  height: 700px;
   background-color: white;
   border-bottom-right-radius: 100%;
   border-bottom-left-radius: 100%;
@@ -456,6 +457,12 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+@media only screen and (min-width: 768px) {
+  height: 800px;
+  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: 100%;
 }
 
 .home-why-lenshood-container {
