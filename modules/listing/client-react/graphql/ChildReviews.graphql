@@ -3,6 +3,7 @@ query childReviews($id: Int!) {
     id
     reviewer {
       id
+      userId
       firstName
       lastName
       avatar
