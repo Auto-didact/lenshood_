@@ -22,6 +22,7 @@ export { default as RenderDateRangePicker } from './RenderDateRangePicker';
 export { default as RenderAutoComplete } from './RenderAutoComplete';
 export { default as Loader } from './Loader';
 export { default as SocialSharingButtons } from './SocialSharingButtons';
+export { default as DataNotFound } from './DataNotFound';
 
 export { default as Alert } from './Alert';
 export { default as Container } from './Container';
