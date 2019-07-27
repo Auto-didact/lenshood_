@@ -73,31 +73,34 @@ const HomeHead = ({ t, image }) => {
               }}
             >
               <QueueAnim delay={300} className="queue-simple">
-                <div key="a" className="home-image-contentText">
-                  <div
+                <Row gutter={0} key="a" className="home-image-contentText">
+                  <Col
+                  span={12}
+                  
                     style={{
-                      display: 'table-cell',
-                      float: 'left',
+                      width:"153px",
+                      height:"90px",
                       color: '#3D675A',
                       position: 'relative'
+
                     }}
                   >
-                    <TweenOne repeat={-1} animation={animationFront}>
+                    <TweenOne repeat={-1} animation={animationFront} style={{ position: 'absolute', top: '0', left: 0 }}>
                       Earn
                     </TweenOne>
                     <TweenOne repeat={-1} animation={animationBack} style={{ position: 'absolute', top: '0', left: 0 }}>
                       Save
                     </TweenOne>
-                  </div>
+                  </Col>
 
-                  <div className="home-head-static-text">{`Money`}</div>
-                </div>
-                <div key="b" className="home-image-contentText" style={{ marginTop: '-55px' }}>
-                  <div style={{ display: 'inline' }}>By</div>
-                  <div
+                  <Col span={12} style={{}} align="left">{"Money"}</Col>
+                </Row>
+                <Row key="b" className="home-image-contentText">
+                  <Col span={12} style={{ float:'left', width:"90px" }}>{`By`}</Col>
+                  <Col span={12}
                     style={{
-                      display: 'table-cell',
-                      float: 'right',
+                      
+                      
                       color: '#3D675A',
                       position: 'relative'
                     }}
@@ -108,8 +111,8 @@ const HomeHead = ({ t, image }) => {
                     <TweenOne repeat={-1} animation={animationBack} style={{ position: 'absolute', top: '0', left: 0 }}>
                       Borrowing
                     </TweenOne>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
 
                 <div key="c" style={{ fontSize: '15px', color: '#3D675A' }}>
                   The safest way to lend and rent your cameras within a trusted community of like minded people.

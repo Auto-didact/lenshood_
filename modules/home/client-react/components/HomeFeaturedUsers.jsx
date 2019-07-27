@@ -7,8 +7,10 @@ const { TabPane } = Tabs;
 
 const HomeFeaturedUsers = ({ t }) => {
   return (
-    <div className="home-featured-users-container layout-counter-margin layout-padding">
+    <div className="home-featured-users-container layout-counter-margin ">
+      <div class="home-semi-circle layout-padding">
       <FeaturedUsers />
+      </div>
     </div>
   );
 };
