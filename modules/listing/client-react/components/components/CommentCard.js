@@ -11,10 +11,11 @@ import UPDATE_LIKES_REVIEW from '../../graphql/UpdateLikes.graphql';
 import COUNT_LIKES_DISLIKES from '../../graphql/LikesDisLikesCount.graphql';
 import ModelPopup from './ModelPopup';
 
-const { Panel } = Collapse;
 class CommentCard extends Component {
   constructor(props) {
     super(props);
+    this.childComments = React.createRef();
+    this.focuschildComments = this.focuschildComments.bind(this);
   }
   state = {
     likes: 0,
@@ -23,11 +24,16 @@ class CommentCard extends Component {
     visible: false,
     parentReview: {},
     childreviews: [],
-    showResults: false
+    showResults: false,
+    isReply: false
   };
 
   componentDidMount() {
     this.getTotalLikesDisLikes();
+  }
+
+  focuschildComments() {
+    this.childComments.current.focus();
   }
 
   showModal = () => {
@@ -68,7 +74,7 @@ class CommentCard extends Component {
         result: 'triggered',
         loading: false,
         likes: res.data.countLikesDisLikes.likes,
-        dislikes: res.data.countLikesDisLikes.dislikes
+        dislikes: res.data.countLikesDisLikes.disLikes
       });
     } catch (error) {
       console.warn(error.message);
@@ -103,21 +109,21 @@ class CommentCard extends Component {
           mutation: DELETE_LISTING_REVIEW,
           variables: { input }
         });
+
+        if (this.props.rChildCard) {
+          await this.props.rChildCard.setState({
+            childreviews: this.props.rChildCard.state.childreviews.filter(v => v.id !== input.id)
+          });
+        }
         await this.props.rcard.setState({
           reviews: this.props.rcard.state.reviews.filter(v => v.id !== input.id)
         });
-        await this.setState({
-          visible: false,
-          result: 'triggered',
-          loading: false,
-          childreviews: this.state.childreviews.filter(v => v.id !== input.id)
-        });
       } catch (error) {
         console.warn(error.message);
-        await this.setState({ error: true, loading: false, visible: false });
+        await this.setState({ error: true, loading: false, visible: false, showResults: false });
       }
     } else {
-      await this.setState({ error: true, loading: false, visible: false });
+      await this.setState({ error: true, loading: false, visible: false, showResults: false });
     }
   };
 
@@ -140,35 +146,46 @@ class CommentCard extends Component {
           result: 'triggered',
           loading: false,
           visible: false,
+          showResults: false,
           parentReview: this.props.reviews
         });
       } catch (error) {
         console.warn(error.message);
-        await this.setState({ error: true, loading: false, visible: false });
+        await this.setState({ error: true, loading: false, visible: false, showResults: false });
       }
     } else {
-      await this.setState({ error: true, loading: false, visible: false });
+      await this.setState({ error: true, loading: false, visible: false, showResults: false });
     }
   };
 
   getChildReviews = async () => {
-    await this.setState({ loading: true });
-    let id = this.props.reviews.id;
-    try {
-      let res = await this.props.client.query({
-        query: CHILD_LISTING_REVIEW,
-        variables: { id }
-      });
+    if (this.state.showResults) {
       await this.setState({
         result: 'triggered',
         loading: false,
         editvisible: false,
-        childreviews: res.data.childReviews || this.state.childreviews,
-        showResults: true
+        childreviews: [],
+        showResults: false
       });
-    } catch (error) {
-      console.warn(error.message);
-      await this.setState({ error: true, loading: false, editvisible: false, showResults: false });
+    } else {
+      await this.setState({ loading: true });
+      let id = this.props.reviews.id;
+      try {
+        let res = await this.props.client.query({
+          query: CHILD_LISTING_REVIEW,
+          variables: { id }
+        });
+        await this.setState({
+          result: 'triggered',
+          loading: false,
+          editvisible: false,
+          childreviews: [...res.data.childReviews],
+          showResults: true
+        });
+      } catch (error) {
+        console.warn(error.message);
+        await this.setState({ error: true, loading: false, editvisible: false, showResults: false });
+      }
     }
   };
 
@@ -176,42 +193,33 @@ class CommentCard extends Component {
     message.error('Click on No');
   }
 
-  ChildComments = () => {
-    return (
-      <Collapse accordion>
-        {this.state.childreviews.map(child => (
-          <Panel header="Replies" key="1">
-            <CommentCard
-              reviews={child}
-              listing={this.props.listing}
-              rcard={this.props.rcard}
-              client={this.props.client}
-            />
-          </Panel>
-        ))}
-      </Collapse>
-    );
+  doReply = e => {
+    this.setState({ showResults: false });
+    this.props.rcard.showModal(e);
   };
 
   render() {
     let reviews = this.props.reviews;
     const name = reviews.reviewer[0].firstName + '  ' + reviews.reviewer[0].lastName;
     let avatar = reviews.reviewer[0].avatar ? reviews.reviewer[0].avatar : ImgUser;
-    const { likes, dislikes, action } = this.state;
     const actions = [
       <span>
         <Tooltip title="Like">
-          <Icon type="like" theme={action === 'liked' ? 'filled' : 'outlined'} onClick={this.like} />
+          <Icon type="like" theme={this.state.action === 'liked' ? 'filled' : 'outlined'} onClick={this.like} />
         </Tooltip>
-        <span style={{ paddingLeft: 8, cursor: 'auto' }}>{likes}</span>
+        <span style={{ paddingLeft: 8, cursor: 'auto' }}>{this.state.likes}</span>
       </span>,
       <span>
         <Tooltip title="Dislike">
-          <Icon type="dislike" theme={action === 'disliked' ? 'filled' : 'outlined'} onClick={this.dislike} />
+          <Icon
+            type="dislike"
+            theme={this.state.action === 'disliked' ? 'filled' : 'outlined'}
+            onClick={this.dislike}
+          />
         </Tooltip>
-        <span style={{ paddingLeft: 8, cursor: 'auto' }}>{dislikes}</span>
+        <span style={{ paddingLeft: 8, cursor: 'auto' }}>{this.state.dislikes}</span>
       </span>,
-      <span isReply={1} reply_id={this.props.reviews.id} onClick={this.props.rcard.showModal}>
+      <span isReply={1} reply_id={this.props.reviews.id} onClick={this.doReply}>
         Reply
       </span>
     ];
@@ -246,18 +254,21 @@ class CommentCard extends Component {
                 rcard={this}
                 rating={parseInt(reviews.rating)}
                 comment={reviews.comment}
+                isReply={this.props.isReply}
               />
             </div>
             <p>{reviews.comment}</p>
           </div>
         }
         datetime={
-          <div>
-            <Rate disabled defaultValue={reviews.rating} className="font10 mainColor" />
-            <Tooltip title={moment(reviews.createdAt).format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{moment(reviews.createdAt).fromNow()}</span>
-            </Tooltip>
-          </div>
+          this.props.isReply ? null : (
+            <div>
+              <Rate disabled defaultValue={reviews.rating} className="font10 mainColor" />
+              <Tooltip title={moment(reviews.createdAt).format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment(reviews.createdAt).fromNow()}</span>
+              </Tooltip>
+            </div>
+          )
         }
       >
         <div>
@@ -265,7 +276,16 @@ class CommentCard extends Component {
             {' '}
             &gt;&gt;
           </Button>
-          {this.state.showResults ? this.ChildComments() : null}
+          {this.state.showResults ? (
+            <ChildComments
+              ref={this.childComments}
+              listing={this.props.listing}
+              rcard={this.props.rcard}
+              rChildCard={this}
+              childreviews={this.state.childreviews}
+              client={this.props.client}
+            />
+          ) : null}
         </div>
       </Comment>
     );
@@ -276,7 +296,37 @@ CommentCard.propTypes = {
   reviews: PropTypes.object,
   listing: PropTypes.object,
   rcard: PropTypes.object,
-  client: PropTypes.object
+  client: PropTypes.object,
+  isReply: PropTypes.bool,
+  rChildCard: PropTypes.object
 };
 
 export default withApollo(CommentCard);
+
+export class ChildComments extends Component {
+  render() {
+    return (
+      <Collapse bordered={false}>
+        {this.props.childreviews.map(child => (
+          <CommentCard
+            key={child.id}
+            reviews={child}
+            listing={this.props.listing}
+            rcard={this.props.rcard}
+            rChildCard={this.props.rChildCard}
+            client={this.props.client}
+            isReply={true}
+          />
+        ))}
+      </Collapse>
+    );
+  }
+}
+
+ChildComments.propTypes = {
+  listing: PropTypes.object,
+  rcard: PropTypes.object,
+  client: PropTypes.object,
+  childreviews: PropTypes.array,
+  rChildCard: PropTypes.object
+};

@@ -3,7 +3,12 @@ import { Layout, Row, Col, Breadcrumb, Card } from "antd";
 import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout, AccountLayout, Loader } from "@gqlapp/look-client-react";
+import {
+  PageLayout,
+  AccountLayout,
+  Loader,
+  DataNotFound
+} from "@gqlapp/look-client-react";
 import DetailsCardComponent from "./components/DetailsCardComponent";
 import ProductCalenderComponent from "./components/ProductCalenderComponent";
 import ReviewsCardComponent from "./components/ReviewsCardComponent";
@@ -74,30 +79,45 @@ class MyListDetailsView extends Component {
     ]
   };
 
+  renderMetaData = () => (
+    <Helmet
+      title={`${settings.app.name} - ${this.props.t("listing.title")}`}
+      meta={[
+        {
+          name: "description",
+          content: this.props.t("listing.meta")
+        }
+      ]}
+    />
+  );
+
   render() {
     const loading = this.props.loading;
     const listing = this.props.listing;
     const t = this.props.t;
-
+    console.log("listing", listing);
+    console.log("listingProps", this.props);
     if (loading && !listing) {
       return (
         <PageLayout>
-          <Helmet
-            title={`${settings.app.name} - ${this.props.t("listing.title")}`}
-            meta={[
-              {
-                name: "description",
-                content: this.props.t("listing.meta")
-              }
-            ]}
-          />
-
+          {this.renderMetaData()}
           <Loader text={t("listing.loadMsg")} />
         </PageLayout>
       );
-    } else {
+    } else if (
+      (!loading && !listing) ||
+      this.props.currentUser.id != listing.user.id
+    ) {
+      return (
+        <PageLayout>
+          {this.renderMetaData()}
+          <DataNotFound description={<h3>Listing not found!</h3>} />
+        </PageLayout>
+      );
+    } else if (listing) {
       return (
         <AccountLayout select="/my-listings">
+          {this.renderMetaData()}
           {/* <Breadcrumb separator=">">
           <Breadcrumb.Item>Account</Breadcrumb.Item>
           <Breadcrumb.Item href=""> My listing</Breadcrumb.Item>
@@ -113,7 +133,7 @@ class MyListDetailsView extends Component {
               name={this.state.name}
             />
           </Card>
-          <ReviewsCardComponent reviews={this.state.reviews} />
+          {/* <ReviewsCardComponent reviews={this.state.reviews} /> */}
         </AccountLayout>
       );
     }

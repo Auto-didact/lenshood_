@@ -12,8 +12,6 @@ import UserFormatter from '../helpers/UserFormatter';
 
 const UserEdit = props => {
   const { currentUser, editUser, t, history, navigation } = props;
-
-  console.log(props);
   const onSubmit = async values => {
     let userValues = pick(values, ['username', 'email', 'role', 'isActive', 'profile', 'addresses', 'portfolios']);
 
