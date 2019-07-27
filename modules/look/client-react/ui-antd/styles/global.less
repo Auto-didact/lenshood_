@@ -1,7 +1,6 @@
 @import "~antd/dist/antd.css";
-@import url('https://fonts.googleapis.com/css?family=Lora&display=swap.css');
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap.css');
-
+@import url("https://fonts.googleapis.com/css?family=Lora&display=swap.css");
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap.css");
 
 /* tile uploaded pictures */
 .upload-list-inline .ant-upload-list-item {
@@ -49,8 +48,8 @@
 @menu-dark-item-active-bg: @primary-color;
 
 //font
-@font-family: 'Poppins', sans-serif;
-@secondary-font:Lora;
+@font-family: "Poppins", sans-serif;
+@secondary-font: Lora;
 
 //List
 @list-item-padding: 0px;
@@ -183,17 +182,92 @@
 .home-head-container {
   height: 100vh;
   width: 100vw;
-  margin-top: -69px;
+  
+  margin-top: -60px;
 }
+
+.home-head-text-component {
+  border-left: 4px solid #12ae90;
+  padding: 0px 0 30px 30px;
+  margin-top:20px;
+  width: 100%;
+}
+
+.home-head-upper-left-anim {
+  width: 133px;
+  height: 60px;
+  color: #3d675a;
+  position: relative;
+}
+.home-head-bottom-left-text {
+  float: left;
+  width: 80px;
+}
+
+.home-image-contentText {
+  color: @primary-color;
+  font-size: 50px;
+}
+
+@media only screen and (min-width: 546px) {
+  .home-head-container {
+    margin-top: -69px;
+  }
+  .home-image-contentText {
+    font-size: 35px !important;
+  }
+  .home-head-upper-left-anim {
+    width: 98px !important;
+    height: 55px !important;
+    
+  }
+  .home-head-bottom-left-text {
+    
+    width: 60px !important; 
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .home-head-container {
+    margin-top: -69px;
+  }
+  .home-image-contentText {
+    font-size: 55px !important;
+  }
+  .home-head-upper-left-anim {
+    width: 143px !important;
+    height: 65px !important;
+    
+  }
+  .home-head-bottom-left-text {
+    
+    width: 80px !important; 
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .home-head-container {
+    margin-top: -69px;
+  }
+  .home-image-contentText {
+    font-size: 75px !important;
+  }
+  .home-head-upper-left-anim {
+    width: 193px !important;
+    height: 85px !important;
+    
+  }
+  .home-head-bottom-left-text {
+    
+    width: 100px !important; 
+  }
+}
+
 
 .home-head-content {
 }
-.home-image-contentText {
-  color: @primary-color;
-  font-size: 70px;
-}
 
-.queue-simple{
+
+.queue-simple {
   display: block;
 }
 
@@ -215,7 +289,6 @@
 .home-image-divider-3 {
   width: 55%;
 }
-
 
 .ant-anchor {
   display: inline;
@@ -340,7 +413,7 @@
 .home-semi-circle {
   width: 100%;
   height: 800px;
-  background-color:white;
+  background-color: white;
   border-bottom-right-radius: 100%;
   border-bottom-left-radius: 100%;
   margin-left: 0;

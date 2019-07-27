@@ -38,7 +38,7 @@ class HomeView extends Component {
           ]}
         />
         <HomeHead t={t} image={img1} />
-        <Anchor className="home-anchor" offsetTop="00">
+        {/*<Anchor className="home-anchor" offsetTop="00">
           <Link
             className="home-anchor-link"
             href="#featured-listing"
@@ -60,7 +60,7 @@ class HomeView extends Component {
             href="#why-lenshood"
             title="Why Lenshood"
           />
-        </Anchor>
+        </Anchor>*/}
         <br />
         <br />
         <br />

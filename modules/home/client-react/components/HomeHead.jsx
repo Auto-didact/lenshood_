@@ -61,31 +61,25 @@ const animationBack = [
 
 const HomeHead = ({ t, image }) => {
   return (
-    <div className="home-head-container  layout-counter-margin layout-padding">
-      <Row align="middle" type="flex" style={{ height: '100%' }}>
-        <Col span={9}>
+    <div >
+      <Row align="middle" type="flex" className="home-head-container  layout-counter-margin layout-padding">
+        <Col xs ={{span:24, order:1}}  md={{span:9, order:0}} >
           <div style={{ height: '100%' }}>
             <div
-              style={{
-                borderLeft: ' 4px solid #12AE90',
-                padding: '0 0 30px 30px',
-                width: '340px'
-              }}
+              className="home-head-text-component"
             >
               <QueueAnim delay={300} className="queue-simple">
                 <Row gutter={0} key="a" className="home-image-contentText">
                   <Col
-                  span={12}
-                  
-                    style={{
-                      width:"153px",
-                      height:"90px",
-                      color: '#3D675A',
-                      position: 'relative'
-
-                    }}
+                    span={12}
+                    className="home-head-upper-left-anim"
+                    
                   >
-                    <TweenOne repeat={-1} animation={animationFront} style={{ position: 'absolute', top: '0', left: 0 }}>
+                    <TweenOne
+                      repeat={-1}
+                      animation={animationFront}
+                      style={{ position: 'absolute', top: '0', left: 0 }}
+                    >
                       Earn
                     </TweenOne>
                     <TweenOne repeat={-1} animation={animationBack} style={{ position: 'absolute', top: '0', left: 0 }}>
@@ -93,14 +87,15 @@ const HomeHead = ({ t, image }) => {
                     </TweenOne>
                   </Col>
 
-                  <Col span={12} style={{}} align="left">{"Money"}</Col>
+                  <Col span={12} style={{}} align="left">
+                    {'Money'}
+                  </Col>
                 </Row>
                 <Row key="b" className="home-image-contentText">
-                  <Col span={12} style={{ float:'left', width:"90px" }}>{`By`}</Col>
-                  <Col span={12}
+                  <Col span={12} className="home-head-bottom-left-text">{`By`}</Col>
+                  <Col
+                    span={12}
                     style={{
-                      
-                      
                       color: '#3D675A',
                       position: 'relative'
                     }}
@@ -121,7 +116,7 @@ const HomeHead = ({ t, image }) => {
             </div>
 
             <Button
-              style={{ margin: '10px 0  0px 34px', borderRadius: '20px' }}
+              style={{ margin: '10px 0  0px 0px', borderRadius: '20px' }}
               type="primary"
               className="home-image-content-button "
               size="large"
@@ -132,7 +127,7 @@ const HomeHead = ({ t, image }) => {
           </div>
         </Col>
         <Col
-          span={15}
+          xs ={{span:24, order:0}} md={{span:15, order:1}}
           style={{
             overflow: 'hidden',
             padding: '20px 0px 0px 0px'
