@@ -62,7 +62,7 @@ export default class OrderCardComponent extends React.Component {
           </h5>
         ) : null}
         <br />
-        <Button type="primary" block>
+        <Button type="primary" block onClick={this.props.onSubmit}>
           {this.props.buttonText}
         </Button>
       </Card>

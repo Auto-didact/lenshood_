@@ -80,7 +80,15 @@ class CheckoutBillView extends React.Component {
               />
             </Col>
             <Col lg={{ span: 8, offset: 0 }} xs={{ span: 24, offset: 0 }}>
-              <OrderCardComponent product={this.state.product} paid={false} buttonText={'Continue'} />
+              <OrderCardComponent
+                onSubmit={() => {
+                  console.log('Working!');
+                  this.props.onSubmit();
+                }}
+                product={this.state.product}
+                paid={false}
+                buttonText={'Continue'}
+              />
             </Col>
           </Row>
         </div>
@@ -161,7 +169,7 @@ const CheckoutBillWithFormik = withFormik({
     }
   ) {
     console.log('values', values);
-    //onSubmit();
+    // onSubmit();
   },
   displayName: 'CheckoutBill ' // helps with React DevTools
 });

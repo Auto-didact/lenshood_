@@ -92,7 +92,7 @@ export default class CheckoutPay extends React.Component {
               </Card>
             </Col>
             <Col lg={{ span: 8, offset: 0 }} sm={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-              <OrderCardComponent product={this.state.product} paid={false} buttonText={'Place order'} />
+              <OrderCardComponent onSubmit={this.props.onSubmit} product={this.state.product} paid={false} buttonText={'Place order'} />
             </Col>
           </Row>
         </div>

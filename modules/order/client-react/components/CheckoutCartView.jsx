@@ -9,7 +9,7 @@ import CheckoutStepsComponent from './CheckoutStepsComponent';
 import CartItemComponent from './CartItemComponent';
 import DateRangeCardComponent from './DateRangeCardComponent';
 import { TotalAmount, TotalRent, Refund } from '../helper/index';
-import { AGREEMENT1, AGREEMENT2, AGREEMENT3 } from '../constants/Undertaking';
+import { AGREEMENT, AGREEMENT1, AGREEMENT2, AGREEMENT3 } from '../constants/Undertaking';
 import moment from 'moment';
 
 const renderMetaData = () => (
@@ -24,6 +24,7 @@ export default class CheckoutCartView extends React.Component {
     cartItem: null,
     books: [],
     randomVal: 2000,
+    checkout: false,
     option1: false,
     option2: false,
     option3: false
@@ -67,6 +68,15 @@ export default class CheckoutCartView extends React.Component {
     } else {
       return false;
     }
+  }
+
+  onChange(e) {
+    this.setState({
+      checkout: e.target.checked,
+      option1: e.target.checked,
+      option2: e.target.checked,
+      option3: e.target.checked
+    });
   }
 
   onChange3(e) {
@@ -137,22 +147,40 @@ export default class CheckoutCartView extends React.Component {
                     </Button>
 
                     <Col className="marginV15" span={24}>
-                      <Checkbox onChange={e => this.onChange1(e)}>
+                      <Checkbox onChange={e => this.onChange(e)}>
+                        <span className="font11h">
+                          <b>{AGREEMENT}</b>
+                        </span>
+                      </Checkbox>
+                    </Col>
+
+                    <Col className="marginV15" span={24}>
+                      <Checkbox onChange={e => this.onChange1(e)} checked={this.state.option1}>
                         <span className="font11h">{AGREEMENT1}</span>
                       </Checkbox>
                     </Col>
                     <Col span={24}>
-                      <Checkbox onChange={e => this.onChange2(e)}>
+                      <Checkbox onChange={e => this.onChange2(e)} checked={this.state.option1}>
                         <span className="font11h">{AGREEMENT2(this.state.randomVal)}</span>
                       </Checkbox>
                     </Col>
                     <Col className="marginV15" span={24}>
-                      <Checkbox onChange={e => this.onChange3(e)}>
+                      <Checkbox onChange={e => this.onChange3(e)} checked={this.state.option1}>
                         <span className="font11h">{AGREEMENT3}</span>
                       </Checkbox>
                     </Col>
-                    {this.state.option1 && this.state.option2 && this.state.option3 ? (
-                      <Button type="primary" className="margin20" block>
+
+                    {/* {this.state.option1 && this.state.option2 && this.state.option3 ? ( */}
+                    {this.state.checkout ? (
+                      <Button
+                        type="primary"
+                        className="margin20"
+                        block
+                        onClick={() => {
+                          console.log('Working!');
+                          this.props.onSubmit();
+                        }}
+                      >
                         Checkout
                       </Button>
                     ) : (

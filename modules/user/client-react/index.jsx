@@ -134,13 +134,6 @@ export default new ClientModule({
       </MenuItem>
     </IfNotLoggedIn>
   ],
-  navItemAccount: [
-    <IfLoggedIn key="/profile">
-      <MenuItem>
-        <NavLinkProfileWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
-  ],
 
   resolver: [resolvers],
   localization: [{ ns: 'user', resources }],
