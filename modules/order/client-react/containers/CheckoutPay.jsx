@@ -9,7 +9,6 @@ import { message } from 'antd';
 // }
 
 class CheckoutPay extends React.Component {
-  
   constructor(props) {
     super(props);
 
@@ -63,7 +62,7 @@ class CheckoutPay extends React.Component {
   }
 
   render() {
-    return <CheckoutPayView {...this.props} onSubmit={this.onSubmit}/>;
+    return <CheckoutPayView {...this.props} onSubmit={this.onSubmit} />;
   }
 }
 
