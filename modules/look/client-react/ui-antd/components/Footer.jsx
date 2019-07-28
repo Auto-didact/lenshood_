@@ -37,6 +37,7 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div>
+
         {/*------#For Large Screen Devices---#Render this for screen width more than 700px--*/}
         <Container className="no-print screen_width_more_than_700" align="center">
           <Row className="footer" gutter={16}>
@@ -159,7 +160,11 @@ export default class Footer extends React.Component {
                   style={
                     this.state.show1
                       ? { display: 'block' }
-                      : { display: 'none', position: 'absolute', marginLeft: '20px' }
+                      : {
+                          display: 'none',
+                          position: 'absolute',
+                          marginLeft: '20px'
+                        }
                   }
                 >
                   <ul style={{ listStyle: 'none', padding: '0 0 0 0' }}>
