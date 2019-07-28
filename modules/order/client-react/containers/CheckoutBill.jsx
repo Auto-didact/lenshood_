@@ -9,7 +9,6 @@ import CheckoutBillView from '../components/CheckoutBillView';
 // }
 
 class CheckoutBill extends React.Component {
-
   constructor(props) {
     super(props);
 

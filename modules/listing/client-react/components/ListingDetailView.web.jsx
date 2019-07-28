@@ -85,7 +85,7 @@ class ListingDetailView extends Component {
                   listing={listing}
                   cancellationPolicy={cancellationPolicy}
                   damagePolicy={damagePolicy}
-                  onSubmit={this.props.onSubmit}
+                  onSubmit={this.props.onShare}
                 />
                 <ReviewsCard listing={listing} reviews={reviews} />
               </Col>
@@ -97,6 +97,7 @@ class ListingDetailView extends Component {
                       noOfDays={this.state.noOfDays}
                       product={this.state.product}
                       listing={listing}
+                      {...this.props}
                     />
                   </Col>
                   <Col span={24}>
