@@ -16,13 +16,13 @@ import {
   withUsers,
   withUsersDeleting,
   withUsersState,
-  updateUsersState
+  updateUsersState,
+  withToggleFeatured
 } from './UserOperations';
 
 const Users = props => {
   const { t, updateQuery, subscribeToMore, filter } = props;
   const usersUpdated = useUsersWithSubscription(subscribeToMore, filter);
-
   useEffect(() => {
     if (usersUpdated) {
       updateUsersState(usersUpdated, updateQuery);
@@ -69,5 +69,6 @@ export default compose(
   withUsers,
   withUsersDeleting,
   withOrderByUpdating,
-  withFilterUpdating
+  withFilterUpdating,
+  withToggleFeatured
 )(translate('user')(Users));

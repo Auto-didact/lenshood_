@@ -1,0 +1,3 @@
+mutation toggleListingIsFeatured($id: Int!, $isFeatured: Boolean!) {
+  toggleListingIsFeatured(id: $id, isFeatured: $isFeatured)
+}

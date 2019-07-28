@@ -704,9 +704,15 @@ export class User extends Model {
   }
 
   async toggleIsFeatured(userId, isFeatured) {
-    return knex('user')
+    let isUpdate = await knex('user')
       .where({ id: userId })
       .update({ is_featured: isFeatured });
+    if (isUpdate) {
+      if (isFeatured) return false;
+      else return true;
+    } else {
+      return false;
+    }
   }
 
   async featuredUsers() {

@@ -7,6 +7,7 @@ import UPDATE_ORDER_BY from '../graphql/UpdateOrderBy.client.graphql';
 import USERS_QUERY from '../graphql/UsersQuery.graphql';
 import DELETE_USER from '../graphql/DeleteUser.graphql';
 import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
+import TOGGLE_FEATURED_USER from '../graphql/ToggleFeaturedForUsers.graphql';
 
 const withUsersState = Component =>
   graphql(USERS_STATE_QUERY, {
@@ -98,6 +99,28 @@ const updateUsersState = (usersUpdated, updateQuery) => {
   });
 };
 
+const withToggleFeatured = Component =>
+  graphql(TOGGLE_FEATURED_USER, {
+    props: ({ mutate }) => ({
+      toggleFeatured: async (userId, isFeatured) => {
+        try {
+          const {
+            data: { toggleIsFeatured }
+          } = await mutate({
+            variables: { userId, isFeatured }
+          });
+          if (toggleIsFeatured.errors) {
+            return { errors: toggleIsFeatured.errors };
+          }
+        } catch (e) {
+          message.error("Couldn't perform the action");
+          log.error(e);
+        }
+        message.success('toggleFeatured done!');
+      }
+    })
+  })(Component);
+
 function addUser(prev, node) {
   // check if it is duplicate
   if (prev.users.some(user => user.id === node.id)) {
@@ -124,5 +147,5 @@ function deleteUser(prev, id) {
   });
 }
 
-export { withUsersState, withUsers, withUsersDeleting, withOrderByUpdating, withFilterUpdating };
+export { withUsersState, withUsers, withUsersDeleting, withOrderByUpdating, withFilterUpdating, withToggleFeatured };
 export { updateUsersState };
