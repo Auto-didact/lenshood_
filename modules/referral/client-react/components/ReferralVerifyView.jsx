@@ -2,9 +2,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import { PageLayout, Loader, DataNotFound } from '@gqlapp/look-client-react';
 import settings from '../../../../settings';
-import { Button, Icon, Empty } from 'antd';
+import { Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 const ReferralVerifyView = props => {
@@ -44,21 +44,17 @@ const ReferralVerifyView = props => {
             </Button>
           )
         ) : (
-          <div className="width100 centerAlign marginT30">
-            <Empty
-              description={
-                <span>
-                  <h3>The user wasn't referred by You.</h3>
-                  <h4>Please go back!</h4>
-                </span>
-              }
-            />
-          </div>
+          <DataNotFound
+            description={
+              <span>
+                <h3>The user wasn't referred by You.</h3>
+                <h4>Please go back!</h4>
+              </span>
+            }
+          />
         )
       ) : (
-        <div className="width100 centerAlign marginT30">
-          <Empty description={<h3>User not found!</h3>} />
-        </div>
+        !loading && <DataNotFound description={<h3>User not found!</h3>} />
       )}
     </PageLayout>
   );

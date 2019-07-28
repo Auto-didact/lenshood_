@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import { PageLayout, Loader, DataNotFound } from '@gqlapp/look-client-react';
 import './styling.css';
 import UserFormComponent from './UserFormComponent';
 import settings from '../../../../settings';
@@ -28,7 +28,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit, userBool }) => 
     <PageLayout>
       {renderMetaData()}
       {loading && !user && <Loader text={t('userEdit.loadMsg')} />}
-      {!loading && !user && !userBool && <h1 className="text-center"> Please refresh the page!!!! </h1>}
+      {!loading && !user && !userBool && <DataNotFound description={<h3>User not found!</h3>} />}
       {(userBool || user) && (
         <div style={{}}>
           <Link

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import { translate } from '@gqlapp/i18n-client-react';
-import { PageLayout, Loader } from '@gqlapp/look-client-react';
+import { PageLayout, Loader, DataNotFound } from '@gqlapp/look-client-react';
 import TOGGLE_ENDORSE from '@gqlapp/listing-client-react/graphql/ToggleEndorse.graphql';
 import TOGGLE_FOLLOW from '@gqlapp/listing-client-react/graphql/ToggleFollow.graphql';
 import IS_FOLLOW from '@gqlapp/listing-client-react/graphql/IsFollowed.graphql';
@@ -35,7 +35,10 @@ class PublicProfileView extends React.Component {
   isEndorsedF = async () => {
     let result = await this.props.client.mutate({
       mutation: Is_Endorse,
-      variables: { endorsee: parseInt(this.getUserId()), endorser: this.state.currentUserId }
+      variables: {
+        endorsee: parseInt(this.getUserId()),
+        endorser: this.state.currentUserId
+      }
     });
     this.setState({ isEndorse: result.data.isEndorsed });
   };
@@ -43,7 +46,10 @@ class PublicProfileView extends React.Component {
   isFollowF = async () => {
     let result = await this.props.client.mutate({
       mutation: IS_FOLLOW,
-      variables: { u_Id: parseInt(this.getUserId()), f_Id: this.state.currentUserId }
+      variables: {
+        u_Id: parseInt(this.getUserId()),
+        f_Id: this.state.currentUserId
+      }
     });
     this.setState({ isFollow: result.data.isFollwed });
   };
@@ -51,7 +57,10 @@ class PublicProfileView extends React.Component {
   toggleEndorse = async () => {
     let result = await this.props.client.mutate({
       mutation: TOGGLE_ENDORSE,
-      variables: { endorsee: parseInt(this.getUserId()), endorser: this.state.currentUserId }
+      variables: {
+        endorsee: parseInt(this.getUserId()),
+        endorser: this.state.currentUserId
+      }
     });
     this.setState({ isEndorse: result.data.toggleEndorse.isEndorsed });
     message.info('Endorse Count is ' + result.data.toggleEndorse.endorsecount);
@@ -60,7 +69,10 @@ class PublicProfileView extends React.Component {
   toggleFollow = async () => {
     let result = await this.props.client.mutate({
       mutation: TOGGLE_FOLLOW,
-      variables: { u_Id: parseInt(this.getUserId()), f_Id: this.state.currentUserId }
+      variables: {
+        u_Id: parseInt(this.getUserId()),
+        f_Id: this.state.currentUserId
+      }
     });
     this.setState({ isFollow: result.data.toggleFollow.isFollwed });
     message.info('Follower Count is ' + result.data.toggleFollow.follwerCount);
@@ -184,6 +196,7 @@ class PublicProfileView extends React.Component {
     return (
       <PageLayout select="/profile">
         {loading && !user && <Loader text={t('profile.loadMsg')} />}
+        {!loading && !user && <DataNotFound description={<h3>User not found!</h3>} />}
         {user && (
           <div>
             <Row style={{ margin: '40px 0px ' }}>

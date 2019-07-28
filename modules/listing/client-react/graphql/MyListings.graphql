@@ -21,4 +21,7 @@ fragment MyListings on Listing {
     replacementValue
     perDay
   }
+  user {
+    id
+  }
 }

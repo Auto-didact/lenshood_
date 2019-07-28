@@ -116,7 +116,14 @@ export default compose(
     }
   }),
   graphql(EDIT_LISTING, {
-    props: ({ ownProps: { history, navigation }, mutate }) => ({
+    props: ({
+      ownProps: {
+        history,
+        navigation,
+        currentUser: { role }
+      },
+      mutate
+    }) => ({
       editListing: async values => {
         await mutate({
           variables: {
@@ -125,10 +132,12 @@ export default compose(
         });
         message.info('Changes Saved.');
         if (history) {
-          return history.push('/listings');
+          if (role === 'admin') return history.push('/listings');
+          else return history.push('/my-listings');
         }
         if (navigation) {
-          return navigation.navigate('ListingListComponent');
+          if (role === 'admin') return navigation.navigate('ListingListComponent');
+          else return navigation.navigate('MyListings');
         }
       }
     })

@@ -15,6 +15,7 @@ import ListingCatalogueView from './components/ListingCatalogueView';
 import MyListingDetail from './containers/MyListingDetail';
 import ListingEdit from './containers/ListingEdit';
 import ListingAdd from './containers/ListingAdd';
+import FeaturedListings from './containers/FeaturedListings';
 
 import ListingDetail from './containers/ListingDetail';
 import MyListings from './containers/MyListings';
@@ -23,11 +24,8 @@ import ListYourGearProduct from './components/ListYourGearProduct';
 import ListYourGearRental from './components/ListYourGearRental';
 import ListingDynamicFieldFormTest from './components/ListingDynamicFieldFormTest';
 
-
-
 import resources from './locales';
 import resolvers from './resolvers';
-
 
 const MyListingsNavItemAccount = () => {
   return (
@@ -57,17 +55,21 @@ const NavLinkListYourGearWithI18n = translate('listing')(({ t }) => (
 
 export default new ClientModule({
   route: [
+    <Route exact path="/featured_listings" component={FeaturedListings} />,
 
-
-
-
-    <Route exact path="/listings" component={Listings} />,
+    <AuthRoute exact role={['admin']} path="/listings" component={Listings} />,
     <AuthRoute exact path="/listing/new" redirect="/profile" role={['user', 'admin']} component={ListingAdd} />,
     <AuthRoute redirect="/profile" role={['user', 'admin']} path="/listing/:id" component={ListingEdit} />,
+
     <Route exact path="/listing_catalogue" component={ListingCatalogueView} />,
 
-
-    <Route exact path="/my-listings/:id" component={MyListingDetail} />,
+    <AuthRoute
+      redirect="/profile"
+      role={['user', 'admin']}
+      exact
+      path="/my-listings/:id"
+      component={MyListingDetail}
+    />,
 
     // Components
     <Route exact path="/listing-detail/:id" component={ListingDetail} />,
@@ -111,7 +113,6 @@ export default new ClientModule({
   resolver: [resolvers],
 
   localization: [{ ns: 'listing', resources }]
-
 });
 
 export { default as SuggestedCardListComponent } from './components/components/SuggestedCardListComponent';

@@ -8,6 +8,7 @@ import USERS_QUERY from '../graphql/UsersQuery.graphql';
 import DELETE_USER from '../graphql/DeleteUser.graphql';
 import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
 import TOGGLE_FEATURED_USER from '../graphql/ToggleFeaturedForUsers.graphql';
+import USER_QUERY from '../graphql/FeaturedUsers.graphql';
 
 const withUsersState = Component =>
   graphql(USERS_STATE_QUERY, {
@@ -20,11 +21,13 @@ const withUsers = Component =>
   graphql(USERS_QUERY, {
     options: ({ orderBy, filter }) => {
       return {
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         variables: { orderBy, filter }
       };
     },
-    props({ data: { loading, users, refetch, error, updateQuery, subscribeToMore } }) {
+    props({
+      data: { loading, users, refetch, error, updateQuery, subscribeToMore }
+    }) {
       return {
         loading,
         users,
@@ -33,6 +36,14 @@ const withUsers = Component =>
         updateQuery,
         errors: error ? error.graphQLErrors : null
       };
+    }
+  })(Component);
+
+const withFeaturedUsers = Component =>
+  graphql(USER_QUERY, {
+    props({ data: { loading, error, featuredUsers } }) {
+      if (error) throw new Error(error);
+      return { loading, featuredUsers };
     }
   })(Component);
 
@@ -54,7 +65,7 @@ const withUsersDeleting = Component =>
           message.error("Couldn't perform the action");
           log.error(e);
         }
-        message.error('User deleted!');
+        message.error("User deleted!");
       }
     })
   })(Component);
@@ -87,11 +98,11 @@ const updateUsersState = (usersUpdated, updateQuery) => {
   const { mutation, node } = usersUpdated;
   updateQuery(prev => {
     switch (mutation) {
-      case 'CREATED':
+      case "CREATED":
         return addUser(prev, node);
-      case 'DELETED':
+      case "DELETED":
         return deleteUser(prev, node.id);
-      case 'UPDATED':
+      case "UPDATED":
         return deleteUser(prev, node.id);
       default:
         return prev;
@@ -147,5 +158,13 @@ function deleteUser(prev, id) {
   });
 }
 
-export { withUsersState, withUsers, withUsersDeleting, withOrderByUpdating, withFilterUpdating, withToggleFeatured };
+export {
+  withUsersState,
+  withUsers,
+  withUsersDeleting,
+  withOrderByUpdating,
+  withFilterUpdating,
+  withFeaturedUsers,
+  withToggleFeatured
+};
 export { updateUsersState };
