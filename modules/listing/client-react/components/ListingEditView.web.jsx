@@ -1,28 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
-import { translate } from "@gqlapp/i18n-client-react";
-import { PageLayout, Loader, DataNotFound } from "@gqlapp/look-client-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { translate } from '@gqlapp/i18n-client-react';
+import { PageLayout, Loader, DataNotFound } from '@gqlapp/look-client-react';
 
-import ListingFormComponent from "./ListingFormComponent";
-import settings from "../../../../settings";
+import ListingFormComponent from './ListingFormComponent';
+import settings from '../../../../settings';
 
 const onSubmit = (listing, editListing) => values => {
-  values["id"] = listing.id;
+  values['id'] = listing.id;
 
   editListing(values);
 };
 
-const ListingEditView = ({
-  loading,
-  listing,
-  location,
-  editListing,
-  t,
-  currentUser,
-  users
-}) => {
+const ListingEditView = ({ loading, listing, location, editListing, t, currentUser, users }) => {
   let listingObj = listing;
   // if new listing was just added read it from router
   if (!listingObj && location.state) {
@@ -31,11 +23,11 @@ const ListingEditView = ({
 
   const renderMetaData = () => (
     <Helmet
-      title={`${settings.app.name} - ${t("listing.title")}`}
+      title={`${settings.app.name} - ${t('listing.title')}`}
       meta={[
         {
-          name: "description",
-          content: t("listing.meta")
+          name: 'description',
+          content: t('listing.meta')
         }
       ]}
     />
@@ -44,13 +36,10 @@ const ListingEditView = ({
     return (
       <PageLayout>
         {renderMetaData()}
-        <Loader text={t("listing.loadMsg")} />
+        <Loader text={t('listing.loadMsg')} />
       </PageLayout>
     );
-  } else if (
-    (!loading && !listingObj) ||
-    (currentUser.id != listingObj.user.id && currentUser.role === "user")
-  ) {
+  } else if ((!loading && !listingObj) || (currentUser.id != listingObj.user.id && currentUser.role === 'user')) {
     return (
       <PageLayout>
         {renderMetaData()}
@@ -87,4 +76,4 @@ ListingEditView.propTypes = {
   t: PropTypes.func
 };
 
-export default translate("listing")(ListingEditView);
+export default translate('listing')(ListingEditView);
