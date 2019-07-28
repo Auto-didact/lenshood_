@@ -21,6 +21,15 @@ const NavLinkMyInvitesWithI18n = translate('referral')(({ t }) => (
   </NavLink>
 ));
 
+const AccountLinkMyInvitesWithI18n = translate('referral')(({ t }) => (
+  <NavLink to="/referrals" className="AccDetItem" activeClassName="AccDetItemSelected">
+    <div>
+      <Icon type="money-collect" />
+      {t('referral:accountLink')}
+    </div>
+  </NavLink>
+));
+
 export default new ClientModule({
   route: [
     <AuthRoute exact path="/referrals/:id" redirectOnLoggedIn redirect="/profile" component={ReferredRedirect} />,
@@ -37,6 +46,13 @@ export default new ClientModule({
     <IfLoggedIn key="/referrals">
       <MenuItem>
         <NavLinkMyInvitesWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+  navItemAccount: [
+    <IfLoggedIn key="/referrals">
+      <MenuItem>
+        <AccountLinkMyInvitesWithI18n />
       </MenuItem>
     </IfLoggedIn>
   ],

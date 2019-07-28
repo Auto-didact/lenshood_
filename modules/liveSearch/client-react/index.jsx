@@ -20,6 +20,13 @@ const NavLinkLiveSearchWithI18n = translate('liveSearch')(({ t }) => (
   </NavLink>
 ));
 
+const AccountLinkLiveSearchWithI18n = translate('liveSearch')(({ t }) => (
+  <NavLink to="/live-search" className="AccDetItem" activeClassName="AccDetItemSelected">
+    <Icon type="search" />
+    {t('liveSearch:navLink')}
+</NavLink>
+));
+
 export default new ClientModule({
   route: [<AuthRoute exact path="/live-search" redirect="/profile" role={['user', 'admin']} component={LiveSearch} />],
   navItemUser: [
@@ -29,6 +36,14 @@ export default new ClientModule({
       </MenuItem>
     </IfLoggedIn>
   ],
+  navItemAccount: [
+    <IfLoggedIn key="/live-search">
+      <MenuItem>
+        <AccountLinkLiveSearchWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+
   resolver: [resolvers],
   localization: [{ ns: 'liveSearch', resources }]
 });
