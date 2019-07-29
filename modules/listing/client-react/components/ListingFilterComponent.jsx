@@ -13,16 +13,16 @@ const ListingFilterComponent = props => {
     t
   } = props;
   let state = {
-    gearCategory: ['Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'],
+    gearCategory: ['','Cameras', 'Lenses', 'Tripods and Support', 'Lighting', 'Studio Space'],
     gearSubcategory: {
-      Cameras: ["DSLR's", 'Point and Shoot cameras', 'Mirrorless cameras', 'Action cams', 'Cinema Cameras'],
-      Lenses: ['DSLR Lenses', 'Mirrorless Lenses', 'Cinema Lenses'],
-      Lighting: ['Photography Lighting', 'Video Lighting', 'Lighting Accesories'],
-      'Tripods and Support': ['Tripods/Monopods', 'Gimbals/Stabilizers', 'Rigs/Sliders']
+      Cameras: ['',"DSLR's", 'Point and Shoot cameras', 'Mirrorless cameras', 'Action cams', 'Cinema Cameras'],
+      Lenses: ['','DSLR Lenses', 'Mirrorless Lenses', 'Cinema Lenses'],
+      Lighting: ['','Photography Lighting', 'Video Lighting', 'Lighting Accesories'],
+      'Tripods and Support': ['','Tripods/Monopods', 'Gimbals/Stabilizers', 'Rigs/Sliders']
     },
     gearSubSubcategory: {
-      'DSLR Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens'],
-      'Mirrorless Lenses': ['Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens']
+      'DSLR Lenses': ['','Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens'],
+      'Mirrorless Lenses': ['','Standard/Zoom Lens', 'Wide angle/Fish eye Lens', 'Fixed/Prime Lens']
     }
   };
 
@@ -62,7 +62,7 @@ const ListingFilterComponent = props => {
           onChange={value => {
             handlegearCategoryChange(value);
           }}
-          style={{ width: 110 }}
+          // style={{ width: 110 }}
         >
           {state.gearCategory.map((item, key) => (
             <Option key={key} value={item}>
@@ -80,7 +80,7 @@ const ListingFilterComponent = props => {
             onChange={value => {
               handlegearSubCategoryChange(value);
             }}
-            style={{ width: 190 }}
+            style={{ width: 230 }}
           >
             {activeGearCategory.map((item, key) => (
               <Option key={key} value={item}>
