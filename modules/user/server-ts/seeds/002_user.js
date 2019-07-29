@@ -25,7 +25,8 @@ export async function seed(knex, Promise) {
     email: 'admin@example.com',
     password_hash: await bcrypt.hash('admin123', 12),
     role: 'admin',
-    is_active: true
+    is_active: true,
+    is_featured: true
   });
 
   // admin certificate
@@ -111,28 +112,32 @@ export async function seed(knex, Promise) {
     email: 'user1@example.com',
     password_hash: await bcrypt.hash('user1234', 12),
     role: 'user',
-    is_active: true
+    is_active: true,
+    is_featured: true
   });
   const user_id2 = await returnId(knex('user')).insert({
     username: 'user2',
     email: 'user2@example.com',
     password_hash: await bcrypt.hash('user1234', 12),
     role: 'user',
-    is_active: true
+    is_active: true,
+    is_featured: true
   });
   const user_id3 = await returnId(knex('user')).insert({
     username: 'user3',
     email: 'user3@example.com',
     password_hash: await bcrypt.hash('user1234', 12),
     role: 'user',
-    is_active: true
+    is_active: true,
+    is_featured: true
   });
   const user_id4 = await returnId(knex('user')).insert({
     username: 'user4',
     email: 'user4@example.com',
     password_hash: await bcrypt.hash('user1234', 12),
     role: 'user',
-    is_active: true
+    is_active: true,
+    is_featured: true
   });
 
   // users profiles

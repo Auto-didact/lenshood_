@@ -39,7 +39,8 @@ export async function seed(knex, Promise) {
         gear_category: gc,
         gear_subcategory: gsc,
         gear_sub_subcategory: gssc,
-        description: `Listing description ${ii + 1}`
+        description: `Listing description ${ii + 1}`,
+        is_featured: true
       });
       await Promise.all(
         [...Array(3).keys()].map(async () => {
