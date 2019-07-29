@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Tabs } from 'antd';
 import FeaturedUsers from '@gqlapp/user-client-react/containers/FeaturedUsers';
-
-const { TabPane } = Tabs;
 
 const HomeFeaturedUsers = ({ t }) => {
   return (

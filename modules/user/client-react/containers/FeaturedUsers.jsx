@@ -1,12 +1,8 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
-import {withFeaturedUsers} from './UserOperations';
-import FeaturedUsersComponent from "../components/components/FeaturedUsersComponent";
-
-import {
-  translate
-  // , TranslateFunction
-} from '@gqlapp/i18n-client-react';
+import {translate} from '@gqlapp/i18n-client-react';
+import { withFeaturedUsers } from './UserOperations';
+import FeaturedUsersComponent from '../components/components/FeaturedUsersComponent';
 
 // interface PagesProps {
 //   t: TranslateFunction;
@@ -18,10 +14,12 @@ class FeaturedUsers extends React.Component
   // public
   render() {
     const props = this.props;
-    return <><FeaturedUsersComponent {...props}/></>;
+    return (
+      <>
+        <FeaturedUsersComponent {...props} />
+      </>
+    );
   }
 }
 
-export default compose(
-  withFeaturedUsers
-)(FeaturedUsers);
+export default compose(withFeaturedUsers)(FeaturedUsers);
