@@ -10,18 +10,20 @@ exports.up = function(knex, Promise) {
         .references('id')
         .inTable('user')
         .onDelete('CASCADE');
+      table.string('state').defaultTo(STALE);
+      table.boolean('is_active').defaultTo(true);
+      table.timestamps(false, true);
+    }),
+
+    // Order Details
+    knex.schema.createTable('order_detail', table => {
+      table.increments('id');
       table
         .integer('listing_id')
         .unsigned()
         .references('id')
         .inTable('listing')
         .onDelete('CASCADE');
-      table.string('state').defaultTo(STALE);
-      table.boolean('is_active').defaultTo(true);
-      table.timestamps(false, true);
-    }),
-    knex.schema.createTable('order_detail', table => {
-      table.increments('id');
       table.integer('days');
       table.string('start_date');
       table.string('end_date');
@@ -40,6 +42,8 @@ exports.up = function(knex, Promise) {
       table.boolean('is_active').defaultTo(true);
       table.timestamps(false, true);
     }),
+
+    // payment table
     knex.schema.createTable('order_payment', table => {
       table.increments('id');
       table
@@ -49,9 +53,12 @@ exports.up = function(knex, Promise) {
         .inTable('order')
         .onDelete('CASCADE');
       table.string('rp_transaction_id');
-      table.boolean('is_active').defaultTo(true);
+      table.string('rp_transaction_amount');
+
       table.timestamps(false, true);
     }),
+
+    // pickup/drop delivery table
     knex.schema.createTable('order_delivery', table => {
       table.increments('id');
       table
@@ -75,9 +82,6 @@ exports.up = function(knex, Promise) {
       table.timestamps(false, true);
     })
   ]);
-
-  // payment table
-  // pickup/drop delivery table
 };
 
 exports.down = function(knex, Promise) {
