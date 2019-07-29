@@ -20,11 +20,13 @@ interface OrderDetail {
 }
 
 interface OrderPayment {
+  orderId: number;
   rpTransactionId: string;
   rpTransactionAmount: string;
 }
 
 interface OrderDelivery {
+  orderId: number;
   hustlerId: number;
   source: string;
   destination: string;

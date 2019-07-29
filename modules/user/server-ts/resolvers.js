@@ -58,9 +58,9 @@ export default pubsub => ({
         return null;
       }
     },
-    featuredUsers: withAuth(async (obj, args, { User, identity }) => {
+    featuredUsers: async (obj, args, { User, identity }) => {
       return User.featuredUsers();
-    }),
+    },
     userProfile: withAuth(async (obj, { userId }, { User, identity }) => {
       return User.userProfile(userId);
     })
