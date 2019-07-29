@@ -1,0 +1,3 @@
+mutation toggleIsFeatured($userId: Int, $isFeatured: Boolean) {
+  toggleIsFeatured(userId: $userId, isFeatured: $isFeatured)
+}

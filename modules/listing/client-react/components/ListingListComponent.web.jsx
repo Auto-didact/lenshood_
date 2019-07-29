@@ -2,7 +2,7 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Popconfirm, Icon } from 'antd';
+import { Popconfirm, Icon, message } from 'antd';
 
 import { translate } from '@gqlapp/i18n-client-react';
 import { Table, Button, Pagination, Loader } from '@gqlapp/look-client-react';
@@ -22,7 +22,7 @@ const cancel = () => {
 };
 
 const ListingListComponent = props => {
-  const { orderBy, onOrderBy, loading, listings, t, loadData, deleteListing } = props;
+  const { orderBy, onOrderBy, loading, listings, t, loadData, deleteListing, toggleFeatured } = props;
   const renderOrderByArrow = name => {
     if (orderBy && orderBy.column === name) {
       if (orderBy.order === 'desc') {
@@ -48,6 +48,14 @@ const ListingListComponent = props => {
       }
     }
     return onOrderBy({ column: name, order });
+  };
+  const handleToggleUserFeature = async (event, record, isFeatured) => {
+    event.persist();
+    const result = await toggleFeatured(record.id, isFeatured);
+    if (!result) {
+      record.isFeatured = isFeatured;
+      event.target.innerHTML = isFeatured ? 'Featured' : 'UnFeatured';
+    }
   };
   const columns = [
     {
@@ -89,6 +97,18 @@ const ListingListComponent = props => {
       dataIndex: 'status',
       key: 'status',
       render: text => <div>{text}</div>
+    },
+    {
+      title: (
+        <a onClick={e => handleOrderBy(e, 'isFeatured')} href="#">
+          {t('Is Featured')} {renderOrderByArrow('isFeatured')}
+        </a>
+      ),
+      dataIndex: 'isFeatured',
+      key: 'isFeatured',
+      render: (text, record) => (
+        <a onClick={e => handleToggleUserFeature(e, record, text ? false : true)}>{text ? 'Featured' : 'UnFeatured'}</a>
+      )
     },
     {
       title: t('list.column.actions'),
@@ -157,6 +177,7 @@ ListingListComponent.propTypes = {
   onOrderBy: PropTypes.func.isRequired,
   deleteListing: PropTypes.func.isRequired,
   loadData: PropTypes.func,
+  toggleFeatured: PropTypes.func,
   t: PropTypes.func
 };
 
