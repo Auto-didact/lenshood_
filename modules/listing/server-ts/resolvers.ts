@@ -302,7 +302,25 @@ export default (pubsub: PubSub) => ({
         input: { id: number; isFeatured: boolean },
         context: any
       ) => {
-        return context.Listing.toggleIsFeatured(input.id, input.isFeatured);
+        let listingId = await context.Listing.toggleIsFeatured(input.id, input.isFeatured);
+        const listing = await context.Listing.listing(input.id);
+        // publish for listing list
+        pubsub.publish(LISTINGS_SUBSCRIPTION, {
+          listingsUpdated: {
+            mutation: "UPDATED",
+            id: listing.id,
+            node: listing
+          }
+        });
+        // publish for edit listing page
+        pubsub.publish(LISTING_SUBSCRIPTION, {
+          listingUpdated: {
+            mutation: "UPDATED",
+            id: listing.id,
+            node: listing
+          }
+        });
+        return listingId
       }
     ),
     toggleWatchList: withAuth(

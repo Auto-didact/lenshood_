@@ -73,23 +73,4 @@ fragment FeaturedUserInfo on User {
     platform
     portfolioUrl
   }
-  authCertificate {
-    serial
-  }
-  authFacebook {
-    fbId
-    displayName
-  }
-  authGoogle {
-    googleId
-    displayName
-  }
-  authGithub {
-    ghId
-    displayName
-  }
-  authLinkedin {
-    lnId
-    displayName
-  }
 }
