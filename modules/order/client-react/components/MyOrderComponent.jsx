@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import { Layout, Button, Row, Col, Modal } from 'antd';
-import OrderDetailsComponent from './OrderDetailsComponent';
-import { LENDED, BORROWED } from '../constants/OrderStates';
-import OrderTrackCardComponent from './OrderTrackCardComponent';
+import React, { Component } from "react";
+import { Layout, Button, Row, Col, Modal } from "antd";
+import OrderDetailsComponent from "./OrderDetailsComponent";
+import { LENDED, BORROWED } from "../constants/OrderStates";
+import OrderTrackCardComponent from "./OrderTrackCardComponent";
 
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
+
+//Animation
+import { OverPack } from "rc-scroll-anim";
+import TweenOne from "rc-tween-one";
 
 class MyOrderComponent extends Component {
   state = {
@@ -27,16 +31,31 @@ class MyOrderComponent extends Component {
   }
   classNamesgroup(e) {
     if (this.state.status === e) {
-      return 'btnOrderActive';
+      return "btnOrderActive";
     } else {
-      return 'btnOrder';
+      return "btnOrder";
     }
   }
   FilterItems(e) {
     this.setState({ status: e });
   }
   returnItem(item) {
-    return <OrderDetailsComponent buttonText="View" item={item} setTrackList={this.setTrackList.bind(this)} />;
+    return (
+      <OverPack playScale={0.1}>
+        <TweenOne
+          key="0"
+          animation={{ opacity: 1 }}
+          className="code-box-shape"
+          style={{ opacity: 0, marginBottom: 10 }}
+        >
+          <OrderDetailsComponent
+            buttonText="View"
+            item={item}
+            setTrackList={this.setTrackList.bind(this)}
+          />
+        </TweenOne>
+      </OverPack>
+    );
   }
   renderItem(item) {
     if (item.status === this.state.status) {
@@ -56,21 +75,29 @@ class MyOrderComponent extends Component {
           </Col>
           <Col md={{ span: 8 }} sm={{ span: 14 }} xs={{ span: 24 }}>
             <ButtonGroup className="width100">
-              <Button onClick={() => this.FilterItems(LENDED)} className={this.classNamesgroup(LENDED)}>
+              <Button
+                onClick={() => this.FilterItems(LENDED)}
+                className={this.classNamesgroup(LENDED)}
+              >
                 Lended
               </Button>
-              <Button onClick={() => this.FilterItems(BORROWED)} className={this.classNamesgroup(BORROWED)}>
+              <Button
+                onClick={() => this.FilterItems(BORROWED)}
+                className={this.classNamesgroup(BORROWED)}
+              >
                 Borrowed
               </Button>
             </ButtonGroup>
           </Col>
         </Row>
-        {this.state.listings ? this.state.listings.map(item => this.renderItem(item)) : null}
+        {this.state.listings
+          ? this.state.listings.map(item => this.renderItem(item))
+          : null}
         <Modal
           centered
           visible={this.state.modalVisible}
           footer={null}
-          bodyStyle={{ padding: '0' }}
+          bodyStyle={{ padding: "0" }}
           onCancel={() => this.setModal1Visible(false)}
         >
           {console.log(this.state.trackList)}
