@@ -17,26 +17,32 @@ const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
     <>
       <div>
         {photoId.image ? (
-          photoId.isVerified ? (
-            <Alert
-              message="Document verified."
-              type="success"
-              className="marginB15"
-            />
-          ) : (
-            <Alert
-              message="Verification of your document is under process..."
-              type="success"
-              className="marginB15"
-            />
-          )
+          <div>
+            {photoId.isVerified ? (
+              <Alert
+                message="Document verified."
+                type="success"
+                className="marginB15"
+              />
+            ) : (
+              <Alert
+                message="Verification of your document is under process..."
+                type="success"
+                className="marginB15"
+              />
+            )}
+            <br />
+          </div>
         ) : null}
       </div>
       <div className="userForm">
         {!photoId.image || !values.photoId ? (
-          <strong>Upload Your Selfie:</strong>
+          <strong>
+            Upload a recent Selfie or Photo of yours with a Govt. ID for
+            verification:
+            <br />
+          </strong>
         ) : null}
-        <br />
         <Form name="photoId" onSubmit={handleSubmit}>
           <Field
             name="photoId"
@@ -48,12 +54,7 @@ const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
           />
           {!photoId.image || !values.photoId ? (
             load ? (
-              <Button
-                color="primary"
-                block
-                type="submit"
-                disabled
-              >
+              <Button color="primary" block type="submit" disabled>
                 {photoId.isVerified ? "Change" : "Submit"}
               </Button>
             ) : (

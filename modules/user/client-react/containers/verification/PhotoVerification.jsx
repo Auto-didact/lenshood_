@@ -16,7 +16,7 @@ class EmailAdd extends Component {
       loading: false,
       vStatus: props.email && props.email.isVerified,
       photoId: {
-        image: "gfhjg",
+        image: "fgb",
         isVerified: false
       },
       status: false
