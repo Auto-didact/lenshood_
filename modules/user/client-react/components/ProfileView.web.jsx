@@ -98,6 +98,7 @@ class ProfileView extends React.Component {
   render() {
     const { t } = this.props;
     const { currentUser, currentUserLoading } = this.props;
+    console.log(currentUser)
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">

@@ -11,6 +11,7 @@ type User {
   verification: UserVerification
   drivingLicense: UserDrivingLicense
   mobile: UserMobile
+  photoId: UserPhotoId
   endorsements: [UserEndorsement]
   endorsed: [UserEndorsed]
   followers: [UserFollower]
@@ -100,6 +101,15 @@ type UserDrivingLicense {
   validityTransport: String
   validityNonTransport: String
 
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPhotoId {
+  id: Int
+  image: String
+  isVerified: Boolean
+  error: String
   createdAt: String
   updatedAt: String
 }
@@ -239,6 +249,7 @@ extend type Mutation {
   addUserDrivingLicense(input: AddDrivingLicenseInput!): UserDrivingLicense!
   # Add Mobile for a user
   addUserMobile(input: AddMobileInput!): UserMobile!
+  addUserPhotoId(input: PhotoIdInput!): UserPhotoId!
   #Endorse/UnEndorse user
   toggleEndorse(endorseeId: Int, endorserId: Int): endorseUnEndorse!
   isEndorsed(endorseeId: Int, endorserId: Int): Boolean!
@@ -363,6 +374,12 @@ input AddDrivingLicenseInput {
   id: Int
   dlId: String!
   dob: String!
+}
+
+# Input for PhotoID Verificaton Mutation
+input PhotoIdInput {
+  id: Int
+  image: String!
 }
 
 # Input for Mobile Verificaton Mutation

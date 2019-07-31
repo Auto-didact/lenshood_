@@ -52,7 +52,10 @@ const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
             label={null}
             value={values.photoId}
           />
-          {!photoId.image || !values.photoId ? (
+          {console.log("Images values", photoId.image, values.photoId)}
+          {!photoId.image ||
+          !values.photoId ||
+          photoId.image != values.photoId ? (
             load ? (
               <Button color="primary" block type="submit" disabled>
                 {photoId.isVerified ? "Change" : "Submit"}

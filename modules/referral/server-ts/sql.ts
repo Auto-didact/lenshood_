@@ -67,7 +67,6 @@ export default class ReferralDao extends Model {
       await ReferralDao.query()
         .findById(id)
         .eager(eager)
-        .orderBy('id', 'desc')
     );
     // console.log(query[0]);
     return res;

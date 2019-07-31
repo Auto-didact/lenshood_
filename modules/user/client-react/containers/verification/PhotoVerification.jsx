@@ -54,7 +54,7 @@ class EmailAdd extends Component {
   render() {
     return (
       <VerificationModalComponent
-        button="PhotoID verification"
+        button="Photo with ID"
         title="PhotoID Verification"
         vStatus={false}
       >
