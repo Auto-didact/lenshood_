@@ -9,6 +9,10 @@ import { ALL, ONSHELF, IDLE } from "../../constants/ListingStates";
 const ButtonGroup = Button.Group;
 const { Content } = Layout;
 
+//Animation
+import { OverPack } from "rc-scroll-anim";
+import TweenOne from "rc-tween-one";
+
 class MyListComponent extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +34,23 @@ class MyListComponent extends Component {
 
   returnItem(item, key) {
     return (
-      <DetailsCardComponent
-        buttonText="View"
-        item={item}
-        key={key}
-        onSubmit={this.props.onSubmit}
-        toggle={this.props.toggle}
-        DeleteListing={this.props.DeleteListing}
-      />
+      <OverPack playScale={0.1}>
+        <TweenOne
+          key="0"
+          animation={{ opacity: 1 }}
+          className="code-box-shape"
+          style={{ opacity: 0, marginBottom: 10 }}
+        >
+          <DetailsCardComponent
+            buttonText="View"
+            item={item}
+            key={key}
+            onSubmit={this.props.onSubmit}
+            toggle={this.props.toggle}
+            DeleteListing={this.props.DeleteListing}
+          />
+        </TweenOne>
+      </OverPack>
     );
   }
 
@@ -124,6 +137,10 @@ class MyListComponent extends Component {
             </ButtonGroup>
           </Col>
         </Row>
+        {/* <Parallax
+          animation={{ x: 0 }}
+          style={{ transform: "translateX(-100px)", margin: "10px auto" }}
+        > */}
         {this.props.userListings && this.props.userListings.length !== 0
           ? this.listingParser().length !== 0
             ? this.listingParser().map((item, key) =>
