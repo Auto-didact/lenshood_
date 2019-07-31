@@ -17,7 +17,7 @@ export default class RenderUpload extends React.Component {
         ? [
             {
               uid: "-1",
-              name: "Damage.png",
+              name: "image.png",
               status: "done",
               url: props.value
             }
@@ -122,7 +122,7 @@ export default class RenderUpload extends React.Component {
             footer={null}
             onCancel={this.handleCancel}
           >
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            <img alt="image" style={{ width: "100%" }} src={previewImage} />
           </Modal>
         </div>{" "}
       </FormItem>
