@@ -4,19 +4,38 @@ import { withFormik } from "formik";
 import { translate } from "@gqlapp/i18n-client-react";
 import { FieldAdapter as Field } from "@gqlapp/forms-client-react";
 import { required, validate } from "@gqlapp/validation-common-react";
-import { Form, Button, RenderUpload, Alert } from "@gqlapp/look-client-react";
+import {
+  Form,
+  Button,
+  RenderUpload,
+  Alert,
+  Loader
+} from "@gqlapp/look-client-react";
 
 const PhotoIdFormSchema = {
   photoId: [required]
 };
 
-const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
+const PhotoIdForm = ({
+  values,
+  handleSubmit,
+  submitting,
+  t,
+  photoId,
+  loading
+}) => {
   const [load, setload] = useState(false);
-  console.log("values", values);
+  // console.log("values", values);
+  // console.log("photoId", photoId);
   return (
     <>
       <div>
-        {photoId.image ? (
+        {photoId && photoId.error ? (
+          <div>
+            <Alert message={photoId.error} type="error" className="marginB15" />
+            <br />
+          </div>
+        ) : photoId && photoId.image ? (
           <div>
             {photoId.isVerified ? (
               <Alert
@@ -36,13 +55,17 @@ const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
         ) : null}
       </div>
       <div className="userForm">
-        {!photoId.image || !values.photoId ? (
+        {(!photoId && values.photoId) ||
+        !values.photoId ||
+        (photoId && photoId.image != values.photoId) ? (
           <strong>
             Upload a recent Selfie or Photo of yours with a Govt. ID for
             verification:
             <br />
           </strong>
         ) : null}
+
+        {loading ? <Loader text="Loading..." /> : ""}
         <Form name="photoId" onSubmit={handleSubmit}>
           <Field
             name="photoId"
@@ -52,24 +75,17 @@ const PhotoIdForm = ({ values, handleSubmit, submitting, t, photoId }) => {
             label={null}
             value={values.photoId}
           />
-          {console.log("Images values", photoId.image, values.photoId)}
-          {!photoId.image ||
+          {(!photoId && values.photoId) ||
           !values.photoId ||
-          photoId.image != values.photoId ? (
-            load ? (
-              <Button color="primary" block type="submit" disabled>
-                {photoId.isVerified ? "Change" : "Submit"}
-              </Button>
-            ) : (
-              <Button
-                color="primary"
-                block
-                type="submit"
-                disabled={submitting || !values.photoId}
-              >
-                {photoId.isVerified ? "Change" : "Submit"}
-              </Button>
-            )
+          (photoId && photoId.image != values.photoId) ? (
+            <Button
+              color="primary"
+              block
+              type="submit"
+              disabled={submitting || !values.photoId || load || loading}
+            >
+              {photoId && photoId.isVerified ? "Change" : "Submit"}
+            </Button>
           ) : null}
         </Form>
       </div>
@@ -87,8 +103,8 @@ PhotoIdForm.propTypes = {
 };
 
 const PhotoIdFormWithFormik = withFormik({
-  mapPropsToValues: props => ({
-    photoId: props.photoId.image
+  mapPropsToValues: ({ photoId }) => ({
+    photoId: photoId && photoId.image
   }),
   validate: values => validate(values, PhotoIdFormSchema),
   handleSubmit(

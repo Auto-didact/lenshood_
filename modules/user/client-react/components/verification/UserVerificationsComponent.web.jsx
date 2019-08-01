@@ -37,6 +37,7 @@ const renderVarificationIcon = varStatus => {
 const VerificationView = ({ data, verification, t }) => {
   const mobile = verification.mobileVerification;
   const email = verification.emailVerification;
+  const photoId = verification.photoIdVerification.photoId;
   return (
     <Card>
       {renderMetaData(t)}
@@ -51,7 +52,7 @@ const VerificationView = ({ data, verification, t }) => {
       <EmailVerification email={email} />
       <DLVerification vStatus={data && data.isIdVerified} />
       <MobileVerification mobile={mobile} />
-      <PhotoVerification email={email} />
+      <PhotoVerification photoId={photoId} />
 
       {/*
         <CardText>

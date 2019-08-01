@@ -80,6 +80,7 @@ type UserVerification {
   id: Int
   isEmailVerified: Boolean
   isMobileVerified: Boolean
+  isPhotoIdVerified: Boolean
   isAddressVerified: Boolean
   isIdVerified: Boolean
   isReferred: Boolean

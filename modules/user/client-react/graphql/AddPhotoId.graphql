@@ -1,0 +1,7 @@
+mutation addUserPhotoId($input: PhotoIdInput!) {
+  addUserPhotoId(input: $input) {
+    image
+    isVerified
+    error
+  }
+}

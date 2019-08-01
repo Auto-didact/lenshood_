@@ -423,7 +423,8 @@ export class User extends Model {
           .where("user_id", "=", params.id)
           .update({
             image: params.image,
-            is_verified: false
+            is_verified: false,
+            error: null
           })
       );
     }
