@@ -41,7 +41,7 @@ const UserAdd = props => {
       throw new FormError(t('userAdd.errorMsg'), e);
     }
 
-    message.info('New User Added!');
+    message.success('New User Added!');
     if (history) {
       return history.push('/users/');
     }

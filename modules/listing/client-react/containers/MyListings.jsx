@@ -19,6 +19,7 @@ const MyListings = props => {
     return () => subscribe();
   });
   const DeleteListing = async id => {
+    message.info('Please wait...');
     try {
       await await props.deleteListing(id);
     } catch (e) {

@@ -10,6 +10,11 @@ fragment UserCompleteInfo on User {
   profile {
     ...UserProfileInfo
   }
+  photoId {
+    image
+    isVerified
+    error
+  }
   addresses {
     streetAddress1
     streetAddress2
@@ -25,6 +30,7 @@ fragment UserCompleteInfo on User {
   verification {
     isEmailVerified
     isMobileVerified
+    isPhotoIdVerified
     isAddressVerified
     isIdVerified
     isReferred

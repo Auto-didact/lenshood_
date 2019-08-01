@@ -446,6 +446,38 @@ export default pubsub => ({
         }
       }
     ),
+
+    addUserPhotoId: withAuth(
+      (obj, args, { identity }) => {
+        if (typeof args.id !== "undefined") {
+          return identity.id !== args.input.id
+            ? ["user:update"]
+            : ["user:update:self"];
+        } else {
+          return ["user:update:self"];
+        }
+      },
+      async (obj, { input }, { User, identity }) => {
+        input["id"] = input.id ? input.id : identity.id;
+        let pId = await User.addUserPhotoId(input);
+        await User.updateUserVerification(input.id, {
+          is_photo_id_verified: false
+        });
+        const userPhotoId = await User.getPhotoId(pId);
+        try {
+          const user = await User.getUser(input.id);
+          pubsub.publish(USERS_SUBSCRIPTION, {
+            usersUpdated: {
+              mutation: "UPDATED",
+              node: user
+            }
+          });
+          return userPhotoId;
+        } catch (e) {
+          throw e;
+        }
+      }
+    ),
     toggleEndorse: withAuth(
       ["user:update:self"],
       async (obj, input, { User, identity, req: { t } }) =>

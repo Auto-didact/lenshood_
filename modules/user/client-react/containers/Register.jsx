@@ -14,6 +14,7 @@ import REGISTER from '../graphql/Register.graphql';
 import { message } from 'antd';
 
 const Register = props => {
+  message.info('Please wait...');
   const { t, register, history, navigation } = props;
   const onSubmit = async values => {
     try {
@@ -22,7 +23,7 @@ const Register = props => {
       throw new FormError(t('reg.errorMsg'), e);
     }
 
-    message.info(t('reg.confirmMsg'));
+    message.success(t('reg.confirmMsg'));
     if (history) {
       history.push('/profile');
     } else if (navigation) {

@@ -8,6 +8,7 @@ import { Icon } from 'antd';
 import DLVerification from '../../containers/verification/DLVerification';
 import MobileVerification from '../../containers/verification/MobileVerification';
 import EmailVerification from '../../containers/verification/EmailVerification';
+import PhotoVerification from '../../containers/verification/PhotoVerification';
 
 import settings from '../../../../../settings';
 
@@ -36,6 +37,7 @@ const renderVarificationIcon = varStatus => {
 const VerificationView = ({ data, verification, t }) => {
   const mobile = verification.mobileVerification;
   const email = verification.emailVerification;
+  const photoId = verification.photoIdVerification.photoId;
   return (
     <Card>
       {renderMetaData(t)}
@@ -50,6 +52,7 @@ const VerificationView = ({ data, verification, t }) => {
       <EmailVerification email={email} />
       <DLVerification vStatus={data && data.isIdVerified} />
       <MobileVerification mobile={mobile} />
+      <PhotoVerification photoId={photoId} />
 
       {/*
         <CardText>

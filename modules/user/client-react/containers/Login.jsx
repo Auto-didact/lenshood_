@@ -16,6 +16,7 @@ const Login = props => {
   const { t, login, client, onLogin } = props;
 
   const onSubmit = async values => {
+    message.info('Please wait...');
     try {
       await login(values);
     } catch (e) {
@@ -30,7 +31,7 @@ const Login = props => {
     if (onLogin) {
       onLogin();
     }
-    message.info(`Logged you in.`);
+    message.success(`Logged you in.`);
   };
 
   return <LoginView {...props} onSubmit={onSubmit} />;

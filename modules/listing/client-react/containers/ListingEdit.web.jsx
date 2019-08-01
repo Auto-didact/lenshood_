@@ -130,7 +130,7 @@ export default compose(
             input: removeTypename(values)
           }
         });
-        message.info('Changes Saved.');
+        message.success('Changes Saved.');
         if (history) {
           if (role === 'admin') return history.push('/listings');
           else return history.push('/my-listings');

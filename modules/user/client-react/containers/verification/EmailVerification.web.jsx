@@ -34,6 +34,7 @@ class EmailAdd extends Component {
     return async values => {
       // To Do change email values in set email, uncomment below line
       // const emailData = await addEmail(values.email, values.otp);
+      message.info('Please wait...');
       this.setEmail(values.email);
       message.info('Verification email has been sent. Please check your inbox.');
     };

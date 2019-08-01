@@ -4,6 +4,7 @@ import { withFormik } from 'formik';
 import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { required, validate } from '@gqlapp/validation-common-react';
+import { message } from "antd";
 import { Form, RenderField, RenderSelect, Option, Button, Alert } from '@gqlapp/look-client-react';
 
 const LiveSearchFormComponentSchema = {
@@ -50,6 +51,7 @@ const LiveSearchFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
+    message.info('Please wait...');
     onSubmit(values).catch(e => {
       if (isFormError(e)) {
         setErrors(e.errors);

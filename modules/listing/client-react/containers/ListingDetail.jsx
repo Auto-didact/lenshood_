@@ -11,13 +11,14 @@ import { message } from "antd";
 
 const ListingDetail = props => {
   const onShare = async values => {
+    message.info('Please wait...');
     try {
       await props.sendListEmail(values);
     } catch (e) {
       message.error("Message sending failed");
       throw new FormError("Message sending failed", e);
     }
-    message.info("Email sent!");
+    message.success("Email sent!");
   };
 
   return <ListingDetailView onShare={onShare} {...props} />;

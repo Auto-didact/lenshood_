@@ -23,6 +23,7 @@ import {
   Button,
   Alert
 } from "@gqlapp/look-client-react";
+import { message } from "antd";
 
 import settings from "../../../../settings";
 import "./styling.css";
@@ -490,6 +491,7 @@ const UserFormWithFormik = withFormik({
       props: { onSubmit }
     }
   ) {
+    message.info("Please wait...");
     await onSubmit(values).catch(e => {
       if (isFormError(e)) {
         setErrors(e.errors);

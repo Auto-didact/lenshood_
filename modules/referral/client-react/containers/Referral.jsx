@@ -16,16 +16,18 @@ const Referral = props => {
   };
 
   const onSubmit = async values => {
+    message.info('Please wait...');
     try {
       await sendRefEmail(values);
     } catch (e) {
       message.error('Invition sending failed');
       throw new FormError('Invition sending failed', e);
     }
-    message.info('Invitation sent!');
+    message.success('Invitation sent!');
   };
 
   const refSubmit = async values => {
+    message.info('Please wait...');
     const flag = values.flag;
     delete values['flag'];
     try {
@@ -35,7 +37,7 @@ const Referral = props => {
       message.error('Referral Update failed');
       throw new FormError('Referral Update failed', e);
     }
-    message.info('Changes saved!');
+    message.success('Changes saved!');
   };
 
   return (

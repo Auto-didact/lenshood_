@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { translate } from '@gqlapp/i18n-client-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { translate } from "@gqlapp/i18n-client-react";
 // To Do Abstract Out
-import { Modal, Button } from 'antd';
-import VerificationIconComponent from './VerificationIconComponent';
+import { Modal, Button } from "antd";
+import VerificationIconComponent from "./VerificationIconComponent";
 
 class VerificationModalComponent extends React.Component {
   constructor(props) {
@@ -28,11 +28,21 @@ class VerificationModalComponent extends React.Component {
     const { visible, loading } = this.state;
     return (
       <div>
-        <Button block type="dashed" onClick={this.showModal} disabled={this.props.vStatus}>
+        <Button
+          block
+          type="dashed"
+          onClick={this.showModal}
+          disabled={this.props.vStatus}
+        >
           {this.props.button}
           <VerificationIconComponent vStatus={this.props.vStatus} />
         </Button>
-        <Modal title={this.props.title} visible={visible} onCancel={this.handleCancel} footer={null}>
+        <Modal
+          title={this.props.title}
+          visible={visible}
+          onCancel={this.handleCancel}
+          footer={null}
+        >
           {this.props.children}
         </Modal>
       </div>
@@ -53,4 +63,4 @@ VerificationModalComponent.propTypes = {
   t: PropTypes.func
 };
 
-export default translate('user')(VerificationModalComponent);
+export default translate("user")(VerificationModalComponent);

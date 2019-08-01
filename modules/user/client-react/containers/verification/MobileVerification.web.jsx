@@ -65,6 +65,7 @@ class MobileAdd extends Component {
   async onChange(values) {
     console.log('submit clicked!');
     // fix this
+    message.info('Please wait...');
     this.setState({ loading: true });
     await this.onSubmit(this.props.addMobile)(values);
     this.setState({ loading: false });
