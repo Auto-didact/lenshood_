@@ -6,6 +6,7 @@ fragment UserCompleteInfo on User {
   role
   isActive
   email
+  isFeatured
   profile {
     ...UserProfileInfo
   }
@@ -29,10 +30,10 @@ fragment UserCompleteInfo on User {
     isReferred
   }
   endorsements {
-    endorser{
+    endorser {
       id
       username
-      profile{
+      profile {
         firstName
         lastName
         avatar
@@ -40,10 +41,10 @@ fragment UserCompleteInfo on User {
     }
   }
   endorsed {
-    endorsee{
+    endorsee {
       id
       username
-      profile{
+      profile {
         firstName
         lastName
         avatar
@@ -51,10 +52,10 @@ fragment UserCompleteInfo on User {
     }
   }
   followers {
-    follower{
+    follower {
       id
       username
-      profile{
+      profile {
         firstName
         lastName
         avatar
@@ -62,10 +63,10 @@ fragment UserCompleteInfo on User {
     }
   }
   following {
-    followee{
+    followee {
       id
       username
-      profile{
+      profile {
         firstName
         lastName
         avatar

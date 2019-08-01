@@ -8,6 +8,7 @@ fragment ListingInfo on Listing {
   isActive
   createdAt
   updatedAt
+  isFeatured
   listingImages {
     id
     imageUrl

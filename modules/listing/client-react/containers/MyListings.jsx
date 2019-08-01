@@ -11,7 +11,7 @@ import DELETE_LISTING from "../graphql/DeleteListing.graphql";
 import SEND_REF_EMAIL from "../graphql/sendListEmail.graphql";
 import LISTINGS_SUBSCRIPTION from "../graphql/ListingsSubscription.graphql";
 import { message } from "antd";
-import { FormError } from '@gqlapp/forms-client-react';
+import { FormError } from "@gqlapp/forms-client-react";
 
 const MyListings = props => {
   useEffect(() => {
@@ -30,22 +30,24 @@ const MyListings = props => {
 
   const ToggleListingStatus = async id => {
     try {
+      message.info("Please wait...");
       await await props.toggleListingStatus(id);
     } catch (e) {
       message.error("Couldn't perform the action");
       throw e;
     }
-    message.info("Success!");
+    message.success("Success!");
   };
 
   const onSubmit = async values => {
     try {
+      message.info("Please wait...");
       await props.sendListEmail(values);
     } catch (e) {
       message.error("Message sending failed");
       throw new FormError("Message sending failed", e);
     }
-    message.info("Email sent!");
+    message.success("Email sent!");
   };
 
   return (

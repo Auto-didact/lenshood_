@@ -5,16 +5,27 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Table, Button, Loader } from '@gqlapp/look-client-react';
+import { Popconfirm, Icon, message } from 'antd';
 import UserDrawerComponent from './UserDrawerComponent';
-import { Popconfirm, Icon } from 'antd';
 
-const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
+const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, toggleFeatured, t }) => {
   const [errors, setErrors] = useState([]);
   const handleDeleteUser = async id => {
     const result = await deleteUser(id);
     if (result && result.errors) {
       setErrors(result.errors);
     } else {
+      setErrors([]);
+    }
+  };
+  const handleToggleUserFeature = async (event, record, isFeatured) => {
+    event.persist();
+    const result = await toggleFeatured(record.id, isFeatured);
+    if (result) {
+      if (result.error) setErrors(result.errors);
+    } else {
+      record.isFeatured = isFeatured;
+      event.target.innerHTML = isFeatured ? 'Featured' : 'UnFeatured';
       setErrors([]);
     }
   };
@@ -96,6 +107,18 @@ const UsersView = ({ deleteUser, orderBy, onOrderBy, loading, users, t }) => {
       render: text => text.toString()
     },
     {
+      title: (
+        <a onClick={e => handleOrderBy(e, 'isFeatured')} href="#">
+          {t('Is Featured')} {renderOrderByArrow('isFeatured')}
+        </a>
+      ),
+      dataIndex: 'isFeatured',
+      key: 'isFeatured',
+      render: (text, record) => (
+        <a onClick={e => handleToggleUserFeature(e, record, text ? false : true)}>{text ? 'Featured' : 'UnFeatured'}</a>
+      )
+    },
+    {
       title: t('users.column.actions'),
       key: 'actions',
       render: (text, record) => (
@@ -142,6 +165,8 @@ UsersView.propTypes = {
   orderBy: PropTypes.object,
   onOrderBy: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  toggleFeatured: PropTypes.func.isRequired,
+  onClickIsFeatured: PropTypes.func,
   t: PropTypes.func
 };
 

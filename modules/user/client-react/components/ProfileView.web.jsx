@@ -42,22 +42,22 @@ class ProfileView extends React.Component {
       endorsements: {
         title: t('profile.card.group.endorsements.title'),
         notFound: t('profile.card.group.endorsements.notFound'),
-        list: endorsements.map(getEndorsements)
+        list: endorsements? endorsements.map(getEndorsements) : []
       },
       endorsed: {
         title: t('profile.card.group.endorsed.title'),
         notFound: t('profile.card.group.endorsed.notFound'),
-        list: endorsed.map(getEndorsed)
+        list:endorsed? endorsed.map(getEndorsed) : []
       },
       followers: {
         title: t('profile.card.group.followers.title'),
         notFound: t('profile.card.group.followers.notFound'),
-        list: followers.map(getFollowers)
+        list:followers?  followers.map(getFollowers) : []
       },
       following: {
         title: t('profile.card.group.following.title'),
         notFound: t('profile.card.group.following.notFound'),
-        list: following.map(getFollowing)
+        list:following? following.map(getFollowing): []
       },
       profileHead: {
         rating: t('profile.card.group.rating'),
@@ -98,7 +98,6 @@ class ProfileView extends React.Component {
   render() {
     const { t } = this.props;
     const { currentUser, currentUserLoading } = this.props;
-
     if (currentUserLoading && !currentUser) {
       return (
         <AccountLayout select="/profile">

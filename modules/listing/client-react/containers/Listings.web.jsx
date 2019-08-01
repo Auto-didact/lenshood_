@@ -15,6 +15,7 @@ import UPDATE_FILTER from '../graphql/UpdateFilter.client.graphql';
 import LISTINGS_QUERY from '../graphql/ListingsQuery.graphql';
 import LISTINGS_SUBSCRIPTION from '../graphql/ListingsSubscription.graphql';
 import DELETE_LISTING from '../graphql/DeleteListing.graphql';
+import TOGGLE_LISTING_IS_FEATURED from '../graphql/ToggleListingIsFeature.graphql';
 import settings from '../../../../settings';
 
 const limit =
@@ -232,6 +233,26 @@ export default compose(
       },
       ongearCategoryChange(gearCategory) {
         mutate({ variables: { filter: { gearCategory } } });
+      }
+    })
+  }),
+  graphql(TOGGLE_LISTING_IS_FEATURED, {
+    props: ({ mutate }) => ({
+      toggleFeatured: async (id, isFeatured) => {
+        try {
+          const {
+            data: { toggleListingIsFeatured }
+          } = await mutate({
+            variables: { id, isFeatured }
+          });
+          if (toggleListingIsFeatured.errors) {
+            return { errors: toggleListingIsFeatured.errors };
+          }
+          message.success('toggleFeatured done!');
+        } catch (e) {
+          console.log(e);
+          message.error("Couldn't perform the action");
+        }
       }
     })
   })
