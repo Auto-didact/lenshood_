@@ -30,7 +30,7 @@ const UserEdit = props => {
       throw new FormError(t('userEdit.errorMsg'), e);
     }
 
-    message.info('Changes saved! Click on Next to continue!');
+    message.success('Changes saved! Click on Next to continue!');
     // if (history) {
     //   return history.goBack();
     // }

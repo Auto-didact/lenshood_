@@ -202,6 +202,7 @@ const ListingFormComponentWithFormik = withFormik({
     }
   ) {
     console.log("values", values);
+    message.info('Please wait...');
     let listingUser;
     if (values.username) {
       listingUser = users.find(user => user.username === values.username);
@@ -209,7 +210,7 @@ const ListingFormComponentWithFormik = withFormik({
         values.userId = listingUser.id;
         delete values["username"];
         onSubmit(values);
-      } else message.info("Please provide a valid username!!");
+      } else message.warn("Please provide a valid username!!");
     } else {
       delete values["username"];
       onSubmit(values);

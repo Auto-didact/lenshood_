@@ -39,12 +39,12 @@ export default compose(
         });
 
         if (history) {
-          message.info('Changes Saved.');
+          message.success('Listing added.');
           return history.push('/listing-detail/' + listingData.data.addListing.id, {
             listing: listingData.data.addListing
           });
         } else if (navigation) {
-          message.info('Listing added.');
+          message.success('Listing added.');
           return navigation.navigate('ListingEdit', {
             id: listingData.data.addListing.id
           });

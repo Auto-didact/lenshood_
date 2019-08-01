@@ -23,6 +23,7 @@ const ReferralVerify = props => {
   }
 
   const onSubmit = async () => {
+    message.info('Please wait...');
     let values = {
       referredId: Number(code)
     };
@@ -32,7 +33,7 @@ const ReferralVerify = props => {
       message.error("Couldn't verify the user");
       throw new FormError("Couldn't verify the user", e);
     }
-    message.info('User Verified. You may go back now.');
+    message.success('User Verified. You may go back now.');
     window.location.reload();
   };
   return (

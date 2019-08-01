@@ -39,7 +39,7 @@ class DLAdd extends Component {
   async onChange(values) {
     this.setState({ loading: true, form: false });
     await this.onSubmit(this.props.addDL)(values);
-    message.info('Driving license verified.');
+    message.success('Driving license verified.');
     this.setState({ loading: false, verified: true });
   }
 

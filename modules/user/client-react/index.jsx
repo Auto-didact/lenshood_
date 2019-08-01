@@ -39,6 +39,7 @@ const LogoutLink = withRouter(
     <a
       href="javascript:void(0)"
       onClick={e => {
+        message.info('Please wait...');
         e.preventDefault();
         (async () => {
           try {
@@ -47,7 +48,7 @@ const LogoutLink = withRouter(
             message.error("Couldn't LogOut!");
             throw e;
           }
-          message.info('Successfully logged out!');
+          message.success('Successfully logged out!');
           history.push('/');
         })();
       }}
