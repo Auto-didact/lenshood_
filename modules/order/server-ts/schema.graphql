@@ -1,16 +1,152 @@
-# Entity
-type TypeName {
-  typeName: String!
+type Order {
+  id: Int!
+
+  # User module
+  user: User
+
+  state: String
+  isActive: Boolean
+  orderDetails: [OrderDetail]
+  orderDelivery: [OrderDelivery]
+  createdAt: String
+  updatedAt: String
+}
+
+type OrderDetail {
+  id: Int!
+
+  orderId: Int
+  days: Int
+  startDate: String
+  endDate: String
+  totalR: Int
+  refundableDeposit: Int
+  serviceFee: Int
+  rentPerDay: Int
+  rentPerWeek: Int
+}
+
+type OrderPayment {
+  id: Int!
+  orderId: Int
+  rpTransactionId: String
+  rpTransactionAmount: String
+}
+type OrderDelivery {
+  id: Int!
+  orderId: Int
+  hustlerId: Int
+  source: String
+  destination: String
+  type: String
+  deliveryDateTime: String
+}
+
+type OrderEdges {
+  node: Order
+  cursor: Int
+}
+
+type OrderPageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+
+type Orders {
+  totalCount: Int
+  edges: [OrderEdges]
+  pageInfo: OrderPageInfo
 }
 
 extend type Query {
-  queryName: TypeName
+  orders(
+    limit: Int
+    after: Int
+    orderBy: OrderByListInput
+    filter: FilterListInput
+  ): Orders
+  ordersList: [Order]
+  order(id: Int!): Order
+  userOrders(userId: Int): [Order]
 }
 
+# input FilterListInput {
+#   searchText: String
+#   gearCategory: String
+#   gearSubcategory: String
+# }
+
+# Input for ordering orders
+# input OrderByListInput {
+#   column: String
+#   # asc | desc
+#   order: String
+# }
+
 extend type Mutation {
-  mutationName(varName: Int!): TypeName
+  # Create new order
+  addOrder(input: AddOrderInput!): Order
+  # Delete a order
+  deleteOrder(id: Int!): Order
+  # Edit a order
+  editOrder(input: EditOrderInput!): Order
+}
+
+input OrderDetailInput {
+  id: Int
+  orderId: Int
+  days: Int
+  startDate: String
+  endDate: String
+  totalR: Int
+  refundableDeposit: Int
+  serviceFee: Int
+  rentPerDay: Int
+  rentPerWeek: Int
+}
+input OrderPaymentInput {
+  id: Int
+  orderId: Int
+  rpTransactionId: String
+  rpTransactionAmount: String
+}
+input OrderDeliveryInput {
+  id: Int
+  orderId: Int
+  hustlerId: Int
+  source: String
+  destination: String
+  type: String
+  deliveryDateTime: String
+}
+
+input AddOrderInput {
+  userId: Int
+  state: String
+  isActive: Boolean
+  orderDetails: [OrderDetailInput]
+  orderDelivery: [OrderDeliveryInput]
+}
+
+# Input for editOrder Mutation
+input EditOrderInput {
+  id: Int!
+  state: String
+  isActive: Boolean
+  orderDetails: [OrderDetailInput]
+  orderDelivery: [OrderDeliveryInput]
 }
 
 extend type Subscription {
-  subscriptionName: TypeName
+  # Subscription for when editing a order
+  orderUpdated(id: Int!): UpdateOrderPayload
+  # Subscription for order list
+  ordersUpdated(endCursor: Int, filter: FilterListInput): UpdateOrderPayload
+}
+
+# Payload for ordersUpdated Subscription
+type UpdateOrderPayload {
+  mutation: String!
+  id: Int
+  node: Order
 }

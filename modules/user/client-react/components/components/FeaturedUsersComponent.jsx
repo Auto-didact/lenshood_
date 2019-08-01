@@ -8,7 +8,7 @@ import FeaturedUserCardListComponent from './FeaturedUserCardListComponent';
 import { OverPack } from 'rc-scroll-anim';
 import TweenOne from 'rc-tween-one';
 import QueueAnim from 'rc-queue-anim';
-import {Loader} from '@gqlapp/look-client-react';
+import { Loader } from '@gqlapp/look-client-react';
 
 // interface FeaturedUsersComponentProps {
 //   t: TranslateFunction;
@@ -93,7 +93,11 @@ export default class FeaturedUsersComponent extends React.Component
         <br />
         <OverPack>
           <QueueAnim key="queue" leaveReverse>
-            {this.props.loading ?  <Loader/> :   (<FeaturedUserCardListComponent key="b" relatedUser={this.props.featuredUsers} />)}
+            {this.props.loading ? (
+              <Loader />
+            ) : (
+              <FeaturedUserCardListComponent key="b" relatedUser={this.props.featuredUsers} />
+            )}
           </QueueAnim>
         </OverPack>
       </React.Fragment>

@@ -27,6 +27,32 @@
   position: fixed;
   z-index: 1000;
   width:100%;
+  background: linear-gradient(180deg, rgba(0, 255, 206, 0.07) 28.12%, rgba(0, 224, 181, 0) 100%) !important;
+  color: #000 !important;
+}
+/*==========Overriding Ant Design CSS============*/
+.ant-menu{
+  background: transparent;
+}
+.ant-menu-horizontal>.ant-menu-item{
+  border:none;
+}
+.ant-menu-horizontal > .ant-menu-item > a{
+  color:#000 !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected{
+  border-top:4px solid #23b195;
+  
+}
+.ant-menu-horizontal > .ant-menu-item:hover{
+  border-bottom:none;
+}
+.ant-menu-horizontal > .ant-menu-item:hover>a{
+  color:#23b195 !important;
+}
+.ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu{
+  vertical-align: middle !important;
 }
 /* ========= FOOTER =========== */
 
@@ -64,6 +90,12 @@
 /*====== For Navbar and Side Drawer ====*/
 .navbar{
   width:100%;
+}
+.side_logo{
+  padding: 0 !important;
+}
+.screen_width_less_than_700 i>svg{
+  color:#23b195;
 }
 @media only screen and (max-width: 700px) {
   .screen_width_more_than_700 {
@@ -122,6 +154,9 @@
   margin-left: 0 !important;
   margin-right: 10px !important;
   float: left;
+}
+.left>a>img{
+  margin-left: -30px;
 }
 .right {
   float: right;

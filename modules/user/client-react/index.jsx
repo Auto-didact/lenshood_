@@ -127,19 +127,22 @@ export default new ClientModule({
     </IfLoggedIn>
   ],
 
+  navItemAccount: [
+    <IfLoggedIn key="/profile">
+      <MenuItem>
+        <NavLink to="/profile" className="AccDetItem" activeClassName="AccDetItemSelected">
+          <MyProfile />
+        </NavLink>
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+
   navItemRight: [
     <IfNotLoggedIn key="/login">
       <MenuItem>
         <NavLinkLoginWithI18n />
       </MenuItem>
     </IfNotLoggedIn>
-  ],
-  navItemAccount: [
-    <IfLoggedIn key="/profile">
-      <MenuItem>
-        <NavLinkProfileWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
   ],
 
   resolver: [resolvers],

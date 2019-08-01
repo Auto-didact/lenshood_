@@ -18,13 +18,12 @@ const MyOrdersNavItemAccount = () => {
   return (
     <div>
       <Icon type="shopping-cart" />
-      My Orders
     </div>
   );
 };
 
 const NavLinkMyOrdersWithI18n = translate('order')(({ t }) => (
-  <NavLink to="/my-orders" className=" AccDetItem" activeClassName="AccDetItemSelected">
+  <NavLink to="/my-orders" className="AccDetItem" activeClassName="AccDetItemSelected">
     <Icon type="shopping-cart" />
     My Orders
   </NavLink>
@@ -38,21 +37,32 @@ export default new ClientModule({
     <Route path="/checkout-pay" exact component={CheckoutPay} />,
     <Route path="/checkout-order" exact component={CheckoutOrder} />
   ],
-  // navItemUser: [
-  //   <IfLoggedIn key="/my-orders">
-  //     <MenuItem>
-  //       <NavLink to="/my-orders">
-  //         <MyOrdersNavItemAccount />
-  //       </NavLink>
-  //     </MenuItem>
-  //   </IfLoggedIn>
-  // ],
-  // navItemAccount: [
-  //   <IfLoggedIn key="/my-orders">
-  //     <MenuItem>
-  //       <NavLinkMyOrdersWithI18n />
-  //     </MenuItem>
-  //   </IfLoggedIn>
-  // ],
+  navItemRight: [
+    <IfLoggedIn key="/checkout-cart">
+      <MenuItem>
+        <NavLink to="/checkout-cart">
+          <MyOrdersNavItemAccount />
+        </NavLink>
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+  navItemUser: [
+    <IfLoggedIn key="/my-orders">
+      <MenuItem>
+        <NavLink to="/my-orders" className="nav-link" activeClassName="active">
+          <Icon type="shopping-cart" />
+          My Orders
+        </NavLink>
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+  navItemAccount: [
+    <IfLoggedIn key="/my-orders">
+      <MenuItem>
+        <NavLinkMyOrdersWithI18n />
+      </MenuItem>
+    </IfLoggedIn>
+  ],
+
   localization: [{ ns: 'order', resources }]
 });

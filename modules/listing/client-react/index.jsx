@@ -53,6 +53,12 @@ const NavLinkListYourGearWithI18n = translate('listing')(({ t }) => (
   </NavLink>
 ));
 
+const NavLinkBrowseWithI18n = translate('listing')(({ t }) => (
+  <NavLink to="/listing_catalogue" className="nav-link" activeClassName="active">
+    Browse
+  </NavLink>
+));
+
 export default new ClientModule({
   route: [
     <Route exact path="/featured_listings" component={FeaturedListings} />,
@@ -103,6 +109,9 @@ export default new ClientModule({
     </IfLoggedIn>
   ],
   navItemRight: [
+    <MenuItem>
+      <NavLinkBrowseWithI18n />
+    </MenuItem>,
     <IfLoggedIn key="/listing/new">
       <MenuItem>
         <NavLinkListYourGearWithI18n />

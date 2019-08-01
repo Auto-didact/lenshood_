@@ -10,7 +10,7 @@ import { FormError } from "@gqlapp/forms-client-react";
 import { message } from "antd";
 
 const ListingDetail = props => {
-  const onSubmit = async values => {
+  const onShare = async values => {
     try {
       await props.sendListEmail(values);
     } catch (e) {
@@ -20,7 +20,7 @@ const ListingDetail = props => {
     message.info("Email sent!");
   };
 
-  return <ListingDetailView onSubmit={onSubmit} {...props} />;
+  return <ListingDetailView onShare={onShare} {...props} />;
 };
 
 ListingDetail.propTypes = {

@@ -126,20 +126,20 @@ class NavBar extends React.Component {
         <Row gutter={0} className="screen_width_more_than_700">
           <Form layout="inline">
             <Col span={14}>
-              <Col span={8}>
+              <Col span={13}>
                 <Menu
                   onClick={this.handleClick}
                   selectedKeys={[this.props.location.pathname]}
                   mode="horizontal"
                   className="line_height60"
                 >
-                  <MenuItem key="/">
+                  <MenuItem key="/" className="side_logo">
                     <NavLink to="/" className="nav-link">
-                      <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                      <img src={require('../../logo/Lenshood_side.svg')} height="120px" />
                     </NavLink>
                   </MenuItem>
                   {__DEV__ && (
-                    <MenuItem>
+                    <MenuItem className="devitem">
                       <DropDown type="deployment-unit">
                         {ref.modules.navItemsTest}
                         <MenuItem>
@@ -200,7 +200,7 @@ class NavBar extends React.Component {
             {/* <Form layout="inline"> */}
             <div className="left">
               <NavLink to="/" className="nav-link">
-                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                <img src={require('../../logo/Lenshood_side.svg')} height="100px" />
               </NavLink>
             </div>
             {/* <SearchNavbar history={this.props.history} /> */}
@@ -310,7 +310,7 @@ class NavBar extends React.Component {
             {/* <Form layout="inline"> */}
             <div className="left">
               <NavLink to="/" className="nav-link">
-                <img src={require('../../logo/Logo2.png')} height="40" width="40" />
+                <img src={require('../../logo/Lenshood_side.svg')} height="100px" />
               </NavLink>
             </div>
             {/* <SearchNavbar history={this.props.history} /> */}
